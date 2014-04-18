@@ -1,0 +1,29 @@
+{
+  "name": "the-tool",
+  "version": "0.0.0",
+  "description": "the-tool ========",
+  "main": "index.js",
+  "scripts": {
+    "start": "node_modules/.bin/nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/SINFO/the-tool.git"
+  },
+  "author": "Francisco Dias <francisco@baiodias.com> (http://franciscodias.net/)",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/SINFO/the-tool/issues"
+  },
+  "homepage": "https://github.com/SINFO/the-tool",
+  "dependencies": {
+    "hapi": "~3.0.0",
+    "hapi-auth-cookie": "~1.0.2",
+    "fenixedu": "0.0.2",
+    "handlebars": "~2.0.0-alpha.2"
+  },
+  "devDependencies": {
+    "nodemon": "~0.7.10"
+  }
+}
