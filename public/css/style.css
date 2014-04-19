@@ -1,20 +1,23 @@
+.search-box {
+  margin-bottom: 20px;
+}
+
 .company-box {
   padding: 10px;
   margin-bottom: 20px;
   background: #eee;
+  height: 260px;
 }
 
 .company-box img {
-  margin-bottom: 5px;
+  margin-bottom: 0px;
 }
 .company-box h1 {
   font-size: 10px;
 }
-.company-box h4 {
-  font-size: 10px;
-}
 .company-box span {
   font-size: 10px;
+  margin: 0px;
 }
 
 .navigation-buttons {
