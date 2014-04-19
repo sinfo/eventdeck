@@ -5,14 +5,13 @@
   {{#each companies}}
     <div class="column-group horizontal-gutters">
       {{#each cells}}
-      <div class="all-15 small-30 tiny-30">
+      <div class="all-15 medium-30 small-50 tiny-50">
         <div class="company-box">
           <div>
+            <h1><a href="/company/{{ id }}">{{ name }}</a></h1>
             <a href="/company/{{ id }}">
             {{# if img }}
               <img src="{{ img }}" width="100%" />
-            {{else}}
-              <h1><a href="/company/{{ id }}">{{ name }}</a></h1>
             {{/if}}
             </a><br>
             <span>{{ status }}</span><br>
