@@ -40,19 +40,16 @@ var company = function (request, reply) {
      }
   }
 
-  if(company.history) {company.history = company.history.replace(/\n/g, '<br>'); }
-  if(company.contacts) {company.contacts = company.contacts.replace(/\n/g, '<br>'); }
-  if(company.initial_post) {company.initial_post = company.initial_post.replace(/\n/g, '<br>'); }
   reply.view('company.html', {
     id: company.id,
     name: company.name,
     img: company.img,
     status: company.status,
-    history: company.history,
-    contacts: company.contacts,
+    history: convertTextToHtml(company.history),
+    contacts: convertTextToHtml(company.contacts),
     member: company.member,
     forum: company.forum, 
-    post: company.initial_post,
+    post: convertTextToHtml(company.initial_post),
     area: company.area.replace("Área", "<b>Área</b>"),
     description: company.description.replace("Descrição", "<b>Descrição</b>")
   });
@@ -152,4 +149,11 @@ var toGrid = function (data){
     };
 
     return rows;
+}
+
+var convertTextToHtml = function (text){
+  var urlExp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+  var mailExp = /[\w\.\-]+\@([\w\-]+\.)+[\w]{2,4}(?![^<]*>)/ig;
+
+  return text.replace(/\n/g, '<br>').replace(urlExp,"<a href='$1'>$1</a>").replace(mailExp,"<a href='mailto:$&'>$&</a>");    
 }

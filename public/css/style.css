@@ -8,7 +8,7 @@
   margin-bottom: 5px;
 }
 .company-box h1 {
-  font-size: 15px;
+  font-size: 10px;
 }
 .company-box h4 {
   font-size: 10px;
@@ -17,7 +17,9 @@
   font-size: 10px;
 }
 
-
+.navigation-buttons {
+  margin-bottom: 20px;
+}
 
 a, a:visited, a:hover {
     text-decoration: none; 
