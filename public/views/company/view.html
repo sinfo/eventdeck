@@ -1,0 +1,68 @@
+<div class="" id="viewModal" ng-controller="CompanyController">
+
+  <div ng-hide="company">
+    <h1>Loading...</h1>
+  </div>  
+
+  <div ng-show="company">
+    <div class="ink-grid">
+      <div class="column-group horizontal-gutters">
+        <div class="all-30">
+          <h1>{{company.name}}</h1>
+        </div>
+        <div ng-show="buttons">
+          <div class="all-60 small-100 tiny-100">
+            <div class="push-right hide-small hide-tiny">
+              <a class="ink-button red" href="/company/{{company.id}}/go/prev"><i class="fa fa-chevron-left"></i> Previous</a>
+              <a class="ink-button green" href="/company/{{company.id}}/go/next">Next <i class="fa fa-chevron-right"></i></a>
+            </div>
+            <div class="hide-all show-small show-tiny navigation-buttons">
+              <a class="ink-button red" href="/company/{{company.id}}/go/prev"><i class="fa fa-chevron-left"></i> Previous</a>
+              <a class="ink-button green" href="/company/{{company.id}}/go/next">Next <i class="fa fa-chevron-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column-group horizontal-gutters">
+        <div class="all-30 medium-40 small-100 tiny-100">
+          <img ng-show="company.img" src="{{company.img}}" width="100%" />
+          <br>
+          <p>{{company.status}}</p>
+          <p><a href="{{company.forum}}"><i class="fa fa-comments"></i> Go to Forum!</a></p>
+          <p><i class="fa fa-user"></i> {{company.member}}</p>
+          <div ng-bind-html="company.area"></div>
+          <div ng-bind-html="company.description"></div>
+        </div>
+        <div class="all-70 medium-60 small-100 tiny-100">
+          <div ng-show="company.history">
+            <h1>History</h1>
+            <div ng-bind-html="company.history"></div>
+          </div>
+          <div ng-show="company.contacts">
+            <h1>Contacts</h1>
+            <div ng-bind-html="company.contacts"></div>
+          </div>
+          <a class="ink-button blue" href="{{forum}}" target="_blank"><i class="fa fa-comments"></i> Go to Forum!</a>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+  <script type="text/javascript">
+    window.onkeydown = keydown;
+
+    function keydown(e) {
+      var c = e.keyCode;
+      switch (c) {
+        // Controls
+        case 37: // Left
+          window.location = "/company/{{id}}/go/prev";
+          break;
+        case 39: // Right
+          window.location = "/company/{{id}}/go/next";
+          break;
+      };
+    }
+  </script>
+</div>  
