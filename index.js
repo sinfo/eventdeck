@@ -1,28 +1,39 @@
 var Hapi = require('hapi');
 var fenix = require('fenixedu');
 
-var companies = require('./companies')
+var companies = require('./companies');
+var companiesLookup = {};
+for (var i = 0; i < companies.length; i++) {
+    companiesLookup[companies[i].id] = companies[i];
+}
 
 var users = {
-    ist175328: {
-        id: 'ist175328',
-        access_token: '',
-        refresh_token: '',
-    },
-
-    ist175401: {
-        id: 'ist175401',
-        access_token: '',
-        refresh_token: '',
-    }
+  ist175328: {},
+  ist175401: {},
+  ist175993: {}
 };
 
 var home = function (request, reply) {
 
-    reply('<html><head><title>Login page</title></head><body><h3>Welcome '
-      + '!</h3><br/><form method="get" action="/logout">'
-      + '<input type="submit" value="Logout">'
-      + '</form></body></html>');
+  reply.view('home.html', {
+    companies: toGrid(companies)
+  });
+};
+
+var company = function (request, reply) {
+  var company = companiesLookup[request.params.id];
+
+  if(company.history) {company.history = company.history.replace(/\n/g, '<br>'); }
+  if(company.contacts) {company.contacts = company.contacts.replace(/\n/g, '<br>'); }
+  reply.view('company.html', {
+    name: company.name,
+    img: company.img,
+    status: company.status,
+    history: company.history,
+    contacts: company.contacts,
+    member: company.member,
+    forum: company.forum
+  });
 };
 
 var login = function (request, reply) {
@@ -68,40 +79,54 @@ var redirect = function (request, reply) {
 
 var logout = function (request, reply) {
 
-    request.auth.session.clear();
-    return reply().redirect('/');
+  request.auth.session.clear();
+  return reply().redirect('/');
 };
 
 var options = {
-    views: {
-        path: 'templates',
-        engines: {
-            html: 'handlebars'
-        },
-        partialsPath: 'partials'
-    }
+  views: {
+    path: 'templates',
+    engines: {
+      html: 'handlebars'
+    },
+    partialsPath: 'partials'
+  }
 };
 
 var server = new Hapi.Server('0.0.0.0', 8765, options);
 
 server.pack.require('hapi-auth-cookie', function (err) {
 
-    server.auth.strategy('session', 'cookie', {
-        password: 'secret',
-        cookie: 'sid-example',
-        redirectTo: '/login',
-        isSecure: false
-    });
+  server.auth.strategy('session', 'cookie', {
+    password: 'secret',
+    cookie: 'sid-example',
+    redirectTo: '/login',
+    isSecure: false
+  });
 
-    server.route([
-        { method: 'GET', path: '/', config: { handler: home, auth: true } },
-        { method: 'GET', path: '/redirect', config: { handler: redirect, auth: { mode: 'try' } } },
-        { method: ['GET', 'POST'], path: '/login', config: { handler: login, auth: { mode: 'try' } } },
-        { method: 'GET', path: '/logout', config: { handler: logout, auth: true } },
-        { method: 'GET', path: '/{path*}', handler: {
-            directory: { path: './public', listing: true, index: true }
-        } }
-    ]);
+  server.route([
+    { method: 'GET', path: '/', config: { handler: home, auth: true } },
+    { method: 'GET', path: '/company/{id}', handler: company },
+    { method: 'GET', path: '/redirect', config: { handler: redirect, auth: { mode: 'try' } } },
+    { method: ['GET', 'POST'], path: '/login', config: { handler: login, auth: { mode: 'try' } } },
+    { method: 'GET', path: '/logout', config: { handler: logout, auth: true } },
+    { method: 'GET', path: '/{path*}', handler: {
+      directory: { path: './public', listing: true, index: true }
+    } }
+  ]);
 
-    server.start();
+  server.start();
 });
+
+var toGrid = function (data){
+    var rows=[],
+        step=6,
+        i=0,
+        L=data.length;
+    
+    for(; i<L ; i+=step){
+        rows.push({cells:data.slice(i,i+step)});
+    };
+
+    return rows;
+}
