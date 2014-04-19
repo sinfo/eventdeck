@@ -1,5 +1,29 @@
 {{> head}}
+{{> header}}
 
-
+<div class="ink-grid">
+  {{#each companies}}
+    <div class="column-group horizontal-gutters">
+      {{#each cells}}
+      <div class="all-15 small-30 tiny-30">
+        <div class="company-box">
+          <div>
+            <a href="/company/{{ id }}">
+            {{# if img }}
+              <img src="{{ img }}" width="100%" />
+            {{else}}
+              <h1><a href="/company/{{ id }}">{{ name }}</a></h1>
+            {{/if}}
+            </a><br>
+            <span>{{ status }}</span><br>
+            <span><a href="{{forum}}"><i class="fa fa-comments"></i> Go to Forum!</a></span><br>
+            <span><i class="fa fa-user"></i> {{member}}</span><br>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+      </div>
+    {{/each}}
+</div>
 
 {{> footer}}

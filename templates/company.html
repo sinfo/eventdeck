@@ -1,5 +1,25 @@
 {{> head}}
+{{> header}}
 
-
+<div class="ink-grid">
+  <div class="column-group horizontal-gutters">
+    <div class="all-30 small-30 tiny-30">
+      {{# if img }}
+        <img src="{{img}}" width="100%" />
+      {{else}}
+        <h1>{{name}}</h1>
+      {{/if}}
+      <br>
+      <p>{{ status }}</p><br>
+      <p><a href="{{forum}}"><i class="fa fa-comments"></i> Go to Forum!</a></p><br>
+      <p><i class="fa fa-user"></i> {{member}}</p><br>
+    </div>
+    <div class="all-70 small-70 tiny-70">
+      <h1>History</h1>
+      <p>{{{history}}}</p>
+      <h1>Contacts</h1>
+      <p>{{{contacts}}}</p>
+  </div>
+</div>
 
 {{> footer}}
