@@ -10,7 +10,8 @@ for (var i = 0; i < companies.length; i++) {
 var users = {
   ist175328: {},
   ist175401: {},
-  ist175993: {}
+  ist175993: {},
+  ist167024: {}
 };
 
 var home = function (request, reply) {
@@ -21,18 +22,39 @@ var home = function (request, reply) {
 };
 
 var company = function (request, reply) {
+  console.log(request.params);
+
   var company = companiesLookup[request.params.id];
+  
+  if(request.params.which === "next") {
+    var index = companies.indexOf(company);
+    if(index >= 0 && index < companies.length - 1) {
+      company = companies[index + 1];
+      return reply().redirect('/company/'+company.id);
+     }
+  } else if(request.params.which === "prev") {
+    var index = companies.indexOf(company);
+    if(index > 0 && index < companies.length) {
+      company = companies[index - 1];
+      return reply().redirect('/company/'+company.id);
+     }
+  }
 
   if(company.history) {company.history = company.history.replace(/\n/g, '<br>'); }
   if(company.contacts) {company.contacts = company.contacts.replace(/\n/g, '<br>'); }
+  if(company.initial_post) {company.initial_post = company.initial_post.replace(/\n/g, '<br>'); }
   reply.view('company.html', {
+    id: company.id,
     name: company.name,
     img: company.img,
     status: company.status,
     history: company.history,
     contacts: company.contacts,
     member: company.member,
-    forum: company.forum
+    forum: company.forum, 
+    post: company.initial_post,
+    area: company.area.replace("Área", "<b>Área</b>"),
+    description: company.description.replace("Descrição", "<b>Descrição</b>")
   });
 };
 
@@ -107,6 +129,7 @@ server.pack.require('hapi-auth-cookie', function (err) {
   server.route([
     { method: 'GET', path: '/', config: { handler: home, auth: true } },
     { method: 'GET', path: '/company/{id}', handler: company },
+    { method: 'GET', path: '/company/{id}/go/{which}', handler: company },
     { method: 'GET', path: '/redirect', config: { handler: redirect, auth: { mode: 'try' } } },
     { method: ['GET', 'POST'], path: '/login', config: { handler: login, auth: { mode: 'try' } } },
     { method: 'GET', path: '/logout', config: { handler: logout, auth: true } },
