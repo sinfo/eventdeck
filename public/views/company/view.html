@@ -27,10 +27,10 @@
           <img ng-show="company.img" src="{{company.img}}" width="100%" />
           <br>
           <p>{{company.status}}</p>
-          <p><a href="{{company.forum}}"><i class="fa fa-comments"></i> Go to Forum!</a></p>
+          <p><a class="ink-button blue" href="{{company.forum}}" target="_blank"><i class="fa fa-comments"></i> Go to Forum!</a></p>
           <p><i class="fa fa-user"></i> {{company.member}}</p>
           <div ng-bind-html="company.area"></div>
-          <div ng-bind-html="company.description"></div>
+          <div ng-bind-html="convertTextToHtml(company.description)"></div>
         </div>
         <div class="all-70 medium-60 small-100 tiny-100">
           <div ng-show="company.history">
@@ -41,7 +41,6 @@
             <h1>Contacts</h1>
             <div ng-bind-html="convertTextToHtml(company.contacts)"></div>
           </div>
-          <a class="ink-button blue" href="{{company.forum}}" target="_blank"><i class="fa fa-comments"></i> Go to Forum!</a>
         </div>
       </div>
     </div>
