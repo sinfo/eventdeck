@@ -17,28 +17,34 @@ function create(request, reply) {
     ], done);
 
   function checkCompany(cb) {
-    Company.findById(request.payload.id, function(err, company) {
-      if (err) {
-        return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
-      } else if (company.length > 0) {
-        return cb(Hapi.error.conflict('Company ID exists: '+request.payload.id));
-      } else {
-        return cb();
-      }
-    });
+    if(request.payload.id) {
+      Company.findById(request.payload.id, function(err, company) {
+        if (err) {
+          return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
+        } else if (company.length > 0) {
+          return cb(Hapi.error.conflict('Company ID exists: '+request.payload.id));
+        } else {
+          console.log("GOGOGO");
+          return cb();
+        }
+      });
+    } else {
+      return cb(Hapi.error.conflict('You need to specify an Id'));
+    }
   }
 
   function createCompany(cb) {
     company.id   = request.payload.id;
     company.name = request.payload.name;
-    if (request.payload.img)          { company.img         = request.payload.img; }
-    if (request.payload.description)  { company.description = request.payload.description; }
-    if (request.payload.status)       { company.status      = request.payload.status; }
-    if (request.payload.history)      { company.history     = request.payload.history; }
-    if (request.payload.contacts)     { company.contacts    = request.payload.contacts; }
-    if (request.payload.forum)        { company.forum       = request.payload.forum; }
-    if (request.payload.member)       { company.member      = request.payload.member; }
-    if (request.payload.area)         { company.area        = request.payload.area; }
+    if (request.payload.img)           { company.img           = request.payload.img; }
+    if (request.payload.description)   { company.description   = request.payload.description; }
+    if (request.payload.status)        { company.status        = request.payload.status; }
+    if (request.payload.history)       { company.history       = request.payload.history; }
+    if (request.payload.contacts)      { company.contacts      = request.payload.contacts; }
+    if (request.payload.forum)         { company.forum         = request.payload.forum; }
+    if (request.payload.member)        { company.member        = request.payload.member; }
+    if (request.payload.area)          { company.area          = request.payload.area; }
+    if (request.payload.participation) { company.participation = request.payload.area; }
 
     cb();
   }
@@ -60,9 +66,9 @@ function create(request, reply) {
 
   function done(err) {
     if (err) {
-      reply(err);
+      reply({error:"There was an error!"});
     } else {
-      reply(company);
+      reply({message:"Company Updated!"});
     }
   }
 }

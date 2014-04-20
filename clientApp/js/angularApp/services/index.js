@@ -6,12 +6,18 @@ theToolServices
   .factory('CompanyFactory', function($resource) {
     return $resource('/api/company/:id', null, {
       'getAll': {method: 'GET', isArray:true},
-      'update': {method: 'PUT'}
+      'update': {method: 'PUT'},
+      'create': {method: 'POST'}
     });
   })
 
   .factory('MemberFactory', function($resource) {
-    return $resource('/api/member/:id', null, {
-      'getAll': {method: 'GET', isArray:true}
-    });
+    return {
+      Member: $resource('/api/member/:id', null, {
+        'getAll': {method: 'GET', isArray:true}
+      }),
+      Companies: $resource('/api/member/:id/companies', null, {
+        'getAll': {method: 'GET', isArray:true}
+      })
+    }
   });
