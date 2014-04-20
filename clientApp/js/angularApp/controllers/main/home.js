@@ -7,6 +7,8 @@ theToolController
     }
 
     CompanyFactory.getAll(function(response) {
+      $scope.predicate = 'status';
+      $scope.reverse = false;
       $scope.companies = response;
     });
   });

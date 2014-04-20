@@ -10,15 +10,13 @@
         <div class="all-30">
           <h1>{{company.name}}</h1>
         </div>
-        <div ng-show="buttons">
+        <div>
           <div class="all-60 small-100 tiny-100">
             <div class="push-right hide-small hide-tiny">
-              <a class="ink-button red" href="/company/{{company.id}}/go/prev"><i class="fa fa-chevron-left"></i> Previous</a>
-              <a class="ink-button green" href="/company/{{company.id}}/go/next">Next <i class="fa fa-chevron-right"></i></a>
+              <a class="ink-button orange" href="/#/company/{{company.id}}/edit"><i class="fa fa-wrench"></i> Edit</a>
             </div>
             <div class="hide-all show-small show-tiny navigation-buttons">
-              <a class="ink-button red" href="/company/{{company.id}}/go/prev"><i class="fa fa-chevron-left"></i> Previous</a>
-              <a class="ink-button green" href="/company/{{company.id}}/go/next">Next <i class="fa fa-chevron-right"></i></a>
+              <a class="ink-button orange" href="/#/company/{{company.id}}/edit"><i class="fa fa-wrench"></i> Edit</a>
             </div>
           </div>
         </div>
@@ -37,13 +35,13 @@
         <div class="all-70 medium-60 small-100 tiny-100">
           <div ng-show="company.history">
             <h1>History</h1>
-            <div ng-bind-html="company.history"></div>
+            <div ng-bind-html="convertTextToHtml(company.history)"></div>
           </div>
           <div ng-show="company.contacts">
             <h1>Contacts</h1>
-            <div ng-bind-html="company.contacts"></div>
+            <div ng-bind-html="convertTextToHtml(company.contacts)"></div>
           </div>
-          <a class="ink-button blue" href="{{forum}}" target="_blank"><i class="fa fa-comments"></i> Go to Forum!</a>
+          <a class="ink-button blue" href="{{company.forum}}" target="_blank"><i class="fa fa-comments"></i> Go to Forum!</a>
         </div>
       </div>
     </div>
