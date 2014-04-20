@@ -14,9 +14,9 @@ setTimeout(function() {
     if (companies[i].status)       { company.status      = companies[i].status; }
     if (companies[i].history)      { company.history     = companies[i].history; }
     if (companies[i].contacts)     { company.contacts    = companies[i].contacts; }
-    if (companies[i].forum)        { company.forum       = companies[i].forum; }
-    if (companies[i].status)       { company.status      = companies[i].status; }
-    if (companies[i].member)       { company.member      = companies[i].member; }
+    if (companies[i].forum["XXI"]) { company.forum       = companies[i].forum["XXI"]; }
+    if (companies[i].status["XXI"]){ company.status      = companies[i].status["XXI"]; }
+    if (companies[i].member["XXI"]){ company.member      = companies[i].member["XXI"]; }
     if (companies[i].area)         { company.area        = companies[i].area; }
     
     var newCompany = new Company(company);

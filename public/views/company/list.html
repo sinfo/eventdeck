@@ -27,19 +27,16 @@
     <div class="column-group horizontal-gutters">
       <div class="all-15 medium-30 small-50 tiny-50" ng-repeat="company in companies | filter:search:strict | orderBy:predicate:reverse">
         <div class="list-box">
-          <div>
-            <h1><a href="/#/company/{{company.id}}">{{ company.name }}</a></h1>
-            <div ng-show="company.img">
-              <a href="/#/company/{{company.id}}">
-                <img src="{{company.img}}" width="100%" max-height="132px" />
-              </a>
-            </div>
-            <br>
-            <span>{{company.status}}</span><br>
-            <span><a href="{{company.forum}}"><i class="fa fa-comments"></i> Go to Forum!</a></span><br>
-            <span><a href="/#/member/{{company.member}}"><i class="fa fa-user"></i> {{company.member}}</a></span><br>
-            <span><a href="/#/company/{{company.id}}/edit"><i class="fa fa-wrench"></i> Edit Company</a></span><br>
+          <h1><a href="/#/company/{{company.id}}">{{ company.name }}</a></h1>
+          <div ng-show="company.img">
+            <a href="/#/company/{{company.id}}">
+              <img src="{{company.img}}"/>
+            </a>
           </div>
+          <span>{{company.status}}</span><br>
+          <span><a href="{{company.forum}}"><i class="fa fa-comments"></i> Go to Forum!</a></span><br>
+          <span><a href="/#/member/{{company.member}}"><i class="fa fa-user"></i> {{company.member}}</a></span><br>
+          <span><a href="/#/company/{{company.id}}/edit"><i class="fa fa-wrench"></i> Edit Company</a></span><br>
         </div>
       </div>
     </div>

@@ -11,11 +11,16 @@ var companySchema = new mongoose.Schema({
   contacts: String,
   history: String,
   member: String,
+  participation: Object,
   area: String
 });
 
 companySchema.statics.findById = function (id, cb) {
   this.find({ id: id }, cb);
+};
+
+companySchema.statics.findByName = function (id, cb) {
+  this.find({ name: id }, cb);
 };
 
 companySchema.statics.findByMember = function (id, cb) {

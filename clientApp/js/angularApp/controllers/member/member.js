@@ -3,7 +3,11 @@
 theToolController
   .controller('MemberController', function ($scope, $http, $routeParams, $sce, MemberFactory) {
     
-    MemberFactory.get({id: $routeParams.id}, function(response) {
+    MemberFactory.Member.get({id: $routeParams.id}, function(response) {
       $scope.member = response;
+    });
+
+    MemberFactory.Companies.getAll({id: $routeParams.id}, function(response) {
+      $scope.companies = response;
     });
   });

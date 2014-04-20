@@ -11,6 +11,15 @@ server.route({
 });
 
 server.route({ 
+  method: 'POST', 
+  path: '/api/company', 
+  config: { 
+    handler: company.create, 
+    auth: true 
+  } 
+});
+
+server.route({ 
   method: 'GET', 
   path: '/api/company/{id}', 
   config: { 
@@ -27,3 +36,4 @@ server.route({
     auth: true 
   } 
 });
+
