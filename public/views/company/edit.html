@@ -1,0 +1,71 @@
+<div class="" id="viewModal" ng-controller="CompanyController">
+
+  <div ng-hide="company">
+    <h1>Loading...</h1>
+  </div>  
+
+  <div ng-show="company">
+    <div class="ink-grid">
+      <div class="column-group horizontal-gutters">
+        <div class="all-30">
+          <h1>Edit {{company.name}}</h1>
+        </div>
+      </div>
+
+      <form class="ink-form" ng-submit="submit()" >
+        <div class="column-group horizontal-gutters">
+          <div class="all-30 medium-40 small-100 tiny-100">
+            <div class="control-group">
+              <label for="name">Name</label>
+              <div class="control">
+                <input id="name" ng-model="formData.name" type="text">
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="img">Image Url</label>
+              <div class="control">
+                <input id="img" ng-model="formData.img" type="text">
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="area">Area</label>
+              <div class="control">
+                <input id="area" ng-model="formData.area" type="text">
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="description">Description</label>
+              <div class="control">
+                <textarea id="description" ng-model="formData.description" type="text" rows="5"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="all-70 medium-60 small-100 tiny-100">
+            <div class="control-group">
+              <label for="history">History</label>
+              <div class="control">
+                <textarea id="history" ng-model="formData.history" type="text" rows="5"></textarea>
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="contacts">Contacts</label>
+              <div class="control">
+                <textarea id="contacts" ng-model="formData.contacts" type="text" rows="6"></textarea>
+              </div>
+            </div>
+            <div class="control-group">
+              <input type="submit" id="submit" value="Submit" class="ink-button green" />
+              <a class="ink-button blue" ng-click="showForum=!showForum"><i class="fa fa-comments"></i> Show Forum!</a>
+              <a class="ink-button orange" href="/#/company/{{company.id}}"><i class="fa fa-back"></i><i class="fa fa-reply"></i>  Go back...</a>
+            </div>
+          </div>
+        </div>
+        <div class="column-group horizontal-gutters">
+          <div class="all-100">
+            <iframe ng-show="showForum" ng-src="{{trustSrc(company.forum)}}" frameborder="0" width="100%" height="480"></iframe>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div> 
+</div>  
