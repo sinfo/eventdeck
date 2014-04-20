@@ -2,20 +2,25 @@
   margin-bottom: 20px;
 }
 
-.company-box {
+.list-box {
   padding: 10px;
   margin-bottom: 20px;
   background: #eee;
   height: 260px;
 }
 
-.company-box img {
-  margin-bottom: 0px;
+.list-box div {
+  margin-top: 5px;
+  height: 120px;
 }
-.company-box h1 {
+.list-box div img {
+  max-height: 120px;
+}
+.list-box h1 {
   font-size: 10px;
+  margin: 0px;
 }
-.company-box span {
+.list-box span {
   font-size: 10px;
   margin: 0px;
 }

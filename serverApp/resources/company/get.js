@@ -24,16 +24,17 @@ function get(request, reply) {
       }
 
       if (result.length > 0) {
-        if (result[0].id)           { company.id          = result[0].id; }
-        if (result[0].name)         { company.name        = result[0].name; }
-        if (result[0].img)          { company.img         = result[0].img; }
-        if (result[0].description)  { company.description = result[0].description; }
-        if (result[0].status)       { company.status      = result[0].status; }
-        if (result[0].history)      { company.history     = result[0].history; }
-        if (result[0].contacts)     { company.contacts    = result[0].contacts; }
-        if (result[0].forum)        { company.forum       = result[0].forum; }
-        if (result[0].member)       { company.member      = result[0].member; }
-        if (result[0].area)         { company.area        = result[0].area; }
+        if (result[0].id)            { company.id            = result[0].id; }
+        if (result[0].name)          { company.name          = result[0].name; }
+        if (result[0].img)           { company.img           = result[0].img; }
+        if (result[0].description)   { company.description   = result[0].description; }
+        if (result[0].status)        { company.status        = result[0].status; }
+        if (result[0].history)       { company.history       = result[0].history; }
+        if (result[0].contacts)      { company.contacts      = result[0].contacts; }
+        if (result[0].forum)         { company.forum         = result[0].forum; }
+        if (result[0].member)        { company.member        = result[0].member; }
+        if (result[0].area)          { company.area          = result[0].area; }
+        if (result[0].participation) { company.participation = result[0].participation; }
 
         cb();
       }

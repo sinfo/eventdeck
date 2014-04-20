@@ -1,0 +1,41 @@
+<div class="" id="membersModal" ng-controller="MembersController">
+  <div class="column-group horizontal-gutters">
+    <div class="all-50 medium-50 small-100 tiny-100">
+      <form class="ink-form">
+        <div class="control-group">
+            <div class="control"> 
+              <input class="search-box" ng-model="search.$" placeholder="Search members...">
+            </div>
+        </div>
+      </form>
+    </div>
+    <div class="all-40 medium-50 small-100 tiny-100">
+    Order by 
+      <a href="" class="ink-button" ng-click="predicate='name'; reverse=!reverse">Name</a>
+      <a href="" class="ink-button" ng-click="predicate='role'; reverse=!reverse">Team</a>
+    </div>
+  </div>
+  
+  <div ng-hide="members">
+    <br>
+    <h1>Loading...</h1>
+  </div>  
+
+
+  <div ng-show="members">
+    <div class="column-group horizontal-gutters">
+      <div class="all-15 medium-30 small-50 tiny-50" ng-repeat="member in members | filter:search:strict | orderBy:predicate:reverse">
+        <div class="list-box">
+          <h1><a href="/#/member/{{member.id}}">{{ member.name }}</a></h1>
+          <div ng-show="member.facebook">
+            <a href="/#/member/{{member.id}}">
+              <img ng-show="member.facebook" src="https://graph.facebook.com/{{member.facebook}}/picture?type=large" width="100%" />
+            </a>
+          </div>
+          <br>
+          <span><i class="fa fa-users"></i> {{member.role}}</span><br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,14 +1,9 @@
-<div class="" id="viewModal" ng-controller="CompanyController">
+<div class="" id="createModal" ng-controller="CreateCompanyController">
 
-  <div ng-hide="company">
-    <h1>Loading...</h1>
-  </div>  
-
-  <div ng-show="company">
-    <div class="ink-grid">
+  <div class="ink-grid">
       <div class="column-group horizontal-gutters">
         <div class="all-100">
-          <h1>Edit {{company.name}}</h1>
+          <h1>Create {{formData.name}}</h1>
 
           <div class="ink-alert basic success" ng-show="message">
             <!--<button class="ink-dismiss">&times;</button>-->
@@ -18,7 +13,7 @@
           </div>
           <div class="ink-alert basic error" ng-show="error">
             <button class="ink-dismiss">&times;</button>
-            <p><strong>Sucess!</strong>
+            <p><strong>Error!</strong>
               {{error}}
             </p>
           </div>
@@ -54,10 +49,10 @@
                 <input id="area" ng-model="formData.area" type="text">
               </div>
             </div>
-            <div class="control-group">
+            <div class="control-group required">
               <label for="id">Id</label>
               <div class="control">
-                <input id="id" ng-model="formData.id" type="text" disabled>
+                <input id="id" ng-model="formData.id" type="text" required>
               </div>
             </div>
             <div class="control-group">
@@ -95,16 +90,16 @@
             <div class="control-group">
               <input type="submit" id="submit" value="Submit" class="ink-button green" />
               <a class="ink-button blue" ng-click="showForum=!showForum"><i class="fa fa-comments"></i> Show Forum!</a>
-              <a class="ink-button orange" href="/#/company/{{company.id}}"><i class="fa fa-back"></i><i class="fa fa-reply"></i>  Go back...</a>
+              <a class="ink-button orange" href="/#/companies"><i class="fa fa-back"></i><i class="fa fa-reply"></i>  Go back...</a>
             </div>
           </div>
         </div>
         <div class="column-group horizontal-gutters">
           <div class="all-100">
-            <iframe ng-show="showForum" ng-src="{{trustSrc(company.forum)}}" frameborder="0" width="100%" height="480"></iframe>
+            <iframe ng-show="showForum" ng-src="{{trustSrc(formData.forum)}}" frameborder="0" width="100%" height="480"></iframe>
           </div>
         </div>
       </form>
     </div>
-  </div> 
+
 </div>  
