@@ -1,5 +1,6 @@
 var server  = require('./../index.js');
 var member = require('./../resources/member');
+var company = require('./../resources/company');
 
 server.route({ 
   method: 'GET', 
@@ -15,6 +16,15 @@ server.route({
   path: '/api/member/{id}', 
   config: { 
     handler: member.get, 
+    auth: true 
+  } 
+});
+
+server.route({ 
+  method: 'GET', 
+  path: '/api/member/{id}/companies', 
+  config: { 
+    handler: company.getByMember, 
     auth: true 
   } 
 });

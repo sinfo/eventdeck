@@ -18,6 +18,10 @@ companySchema.statics.findById = function (id, cb) {
   this.find({ id: id }, cb);
 };
 
+companySchema.statics.findByMember = function (id, cb) {
+  this.find({ member: id }, cb);
+};
+
 companySchema.statics.findAll = function (cb) {
   this.find({},cb);
 };
