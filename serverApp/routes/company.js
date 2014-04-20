@@ -18,3 +18,12 @@ server.route({
     auth: true 
   } 
 });
+
+server.route({ 
+  method: 'PUT', 
+  path: '/api/company/{id}', 
+  config: { 
+    handler: company.update, 
+    auth: true 
+  } 
+});
