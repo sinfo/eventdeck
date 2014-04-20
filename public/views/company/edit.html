@@ -8,7 +8,21 @@
     <div class="ink-grid">
       <div class="column-group horizontal-gutters">
         <div class="all-100">
-          <h1>Edit {{company.name}}<span ng-show="message"> - {{ message }}</span></h1>
+          <h1>Edit {{company.name}}</h1>
+
+          <div class="ink-alert basic success" ng-show="message">
+            <!--<button class="ink-dismiss">&times;</button>-->
+            <p><strong>Sucess!</strong>
+              {{message}}
+            </p>
+          </div>
+          <div class="ink-alert basic error" ng-show="error">
+            <button class="ink-dismiss">&times;</button>
+            <p><strong>Sucess!</strong>
+              {{error}}
+            </p>
+          </div>
+
         </div>
       </div>
 
