@@ -14,7 +14,13 @@ theToolController
     $scope.submit = function() {
       var companyData = this.formData;
 
-      CompanyFactory.update({ id:$companyData.id }, companyData);
+      CompanyFactory.update({ id:companyData.id }, companyData, function(response) {
+        if(response.error) {
+          $scope.error = response.error;
+        } else {
+          $scope.message = response.message;
+        }
+      });
     };
 
     CompanyFactory.get({id: $routeParams.id}, function(response) {

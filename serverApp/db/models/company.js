@@ -10,7 +10,8 @@ var companySchema = new mongoose.Schema({
   forum: Object,
   contacts: String,
   history: String,
-  member: String
+  member: String,
+  area: String
 });
 
 companySchema.statics.findById = function (id, cb) {
