@@ -41,7 +41,7 @@ function create(request, reply) {
         cb();
       }
       else {
-        cb(Hapi.error.conflict('No bot with the ID: ' + botId));
+        cb(Hapi.error.conflict('No company with the ID: ' + companyId));
       }
     }
   }

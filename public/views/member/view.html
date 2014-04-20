@@ -1,0 +1,37 @@
+<div class="" id="viewModal" ng-controller="MemberController">
+
+  <div ng-hide="member">
+    <h1>Loading...</h1>
+  </div>  
+
+  <div ng-show="member">
+    <div class="ink-grid">
+      <div class="column-group horizontal-gutters">
+        <div class="all-100">
+          <h1>{{member.name}}</h1>
+        </div>
+      </div>
+
+      <div class="column-group horizontal-gutters">
+        <div class="all-40 medium-40 small-100 tiny-100">
+          <img ng-show="member.facebook" src="https://graph.facebook.com/{{member.facebook}}/picture?type=large" width="100%" />
+          <br><br>
+          <h6><i class="fa fa-users"></i> {{member.role}}</h6>
+          <p>
+          <b><i class="fa fa-envelope"></i> Emails</b><br>
+          <span ng-show="member.mails.sinfo"><a href="mailto:{{member.mails.sinfo}}"><i class="fa fa-power-off"></i> {{member.mails.sinfo}}</a></span><br>
+          <span ng-show="member.mails.ist"><a href="mailto:{{member.mails.ist}}"><i class="fa fa-book"></i> {{member.mails.ist}}</a></span><br>
+          <span ng-show="member.mails.google"><a href="mailto:{{member.mails.google}}"><i class="fa fa-google-plus"></i> {{member.mails.google}}</a></span><br>
+          <span ng-show="member.mails.dropbox"><a href="mailto:{{member.mails.dropbox}}"><i class="fa fa-dropbox"></i> {{member.mails.dropbox}}</a></span><br>
+          <span ng-show="member.mails.msn"><a href="mailto:{{member.mails.msn}}"><i class="fa fa-windows"></i> {{member.mails.msn}}</a></span><br>
+          </p>
+          <h6><a href="http://fb.com/{{member.facebook}}" target="_blank"><i class="fa fa-facebook fa-2x"></i></a></h6>
+
+        </div>
+        <div class="all-60 medium-60 small-100 tiny-100">
+
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>  

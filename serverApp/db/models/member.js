@@ -8,7 +8,8 @@ var memberSchema = new mongoose.Schema({
   facebook: String,
   skype: String,
   phones: [String],
-  mails: Object
+  mails: Object,
+  fenixedu: Object
 });
 
 memberSchema.statics.findById = function (id, cb) {
