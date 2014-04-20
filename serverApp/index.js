@@ -1,5 +1,6 @@
 var Hapi = require('hapi');
 var options = require('./options');
+require('./db');
 
 var server = module.exports = new Hapi.Server('0.0.0.0', 8765, options);
 
