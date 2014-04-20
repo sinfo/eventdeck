@@ -16,6 +16,10 @@ function get(request, reply) {
     ], done);
 
   function getMember(cb) {
+    if(memberId == "me") {
+      memberId = request.auth.credentials.id;
+    }
+
     Member.findById(memberId, gotMember);
 
     function gotMember(err, result) {
@@ -36,7 +40,7 @@ function get(request, reply) {
         cb();
       }
       else {
-        cb(Hapi.error.conflict('No bot with the ID: ' + botId));
+        cb(Hapi.error.conflict('No member with the ID: ' + memberId));
       }
     }
   }

@@ -8,4 +8,10 @@ theToolServices
       'getAll': {method: 'GET', isArray:true},
       'update': {method: 'PUT'}
     });
+  })
+
+  .factory('MemberFactory', function($resource) {
+    return $resource('/api/member/:id', null, {
+      'getAll': {method: 'GET', isArray:true}
+    });
   });

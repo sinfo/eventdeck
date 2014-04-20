@@ -1,13 +1,6 @@
 var Hapi = require('hapi');
 var fenix = require('fenixedu');
-
-var users = {
-  ist175328: {},
-  ist175401: {},
-  ist175993: {},
-  ist167024: {},
-  ist170179: {}
-};
+var Member = require('./../../db/models/member.js');
 
 exports = module.exports;
 
@@ -39,15 +32,23 @@ exports.redirect = function redirect(request, reply) {
     fenix.person.getPerson(access_token, function(error, person) { 
       if (error) { return reply.view('error.html', { error: error.error_description }); }
     
-      console.log("PERSON", person);
-      
       var person = JSON.parse(person);
-      account = users[person.username];
 
-      if (!account) { return reply.view('error.html', { error: "Your ist id is not allowed :-(" }); }
-      
-      request.auth.session.set(account);
-      return reply().redirect('/');;
+      Member.findByIstId(person.username, function(error, result) {
+        if (error) { return reply.view('error.html'); }
+
+        if (result.length > 0) {
+          account = result[0];
+
+          console.log("LOG IN", account);
+
+          request.auth.session.set(account);
+          return reply().redirect('/');;    
+        }
+        else {
+          return reply.view('error.html', { error: "Your ist id is not allowed :-(" });
+        }
+      });
     });
   });
 };
