@@ -1,7 +1,7 @@
 'use strict';
  
 theToolController
-  .controller('MemberController', function ($scope, $http, $routeParams, $sce, MemberFactory) {
+  .controller('MemberController', function ($scope, $http, $routeParams, $sce, $location, MemberFactory) {
     $scope.getClassFromKind = function(participation) {
       if(!participation) { return "nope"; }
       if(!participation.kind) { return "sponsor"; }
@@ -13,6 +13,11 @@ theToolController
     }
     
     MemberFactory.Member.get({id: $routeParams.id}, function(response) {
+      if($routeParams.id == "me") {
+        var newPath = "/member/"+response.id;
+        console.log("going to", newPath);
+        $location.path(newPath);        
+      }
       $scope.member = response;
     });
 
