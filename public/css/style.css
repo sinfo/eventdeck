@@ -1,20 +1,85 @@
+.silver {
+  background: #eee;
+  background-image: -webkit-gradient(radial,50% 50%,0,50% 50%,100,color-stop(0%,#eee),color-stop(100%,#aaa));
+  background-image: -webkit-radial-gradient(#eee,#aaa);
+  background-image: -moz-radial-gradient(#eee,#aaa);
+  background-image: -o-radial-gradient(#eee,#aaa);
+  background-image: radial-gradient(#eee,#aaa);
+}
+.ink-button.silver:hover{
+  background: #aaa;
+}
+.bronze {
+  background: #BE926C;
+  background-image: -webkit-gradient(radial,50% 50%,0,50% 50%,100,color-stop(0%,#BE926C),color-stop(100%,#8B5B2F));
+  background-image: -webkit-radial-gradient(#BE926C,#8B5B2F);
+  background-image: -moz-radial-gradient(#BE926C,#8B5B2F);
+  background-image: -o-radial-gradient(#BE926C,#8B5B2F);
+  background-image: radial-gradient(#BE926C,#8B5B2F);
+}
+.ink-button.bronze:hover{
+  background: #8B5B2F;
+}
+.sponsor {
+  background: #709dc7;
+  background-image: -webkit-gradient(radial,50% 50%,0,50% 50%,100,color-stop(0%,#709dc7),color-stop(100%,#4b84b9));
+  background-image: -webkit-radial-gradient(#709dc7,#4b84b9);
+  background-image: -moz-radial-gradient(#709dc7,#4b84b9);
+  background-image: -o-radial-gradient(#709dc7,#4b84b9);
+  background-image: radial-gradient(#709dc7,#4b84b9);
+}
+.ink-button.sponsor:hover{
+  background: #4b84b9;
+}
+.nope {
+  background: #cd6969;
+  background-image: -webkit-gradient(radial,50% 50%,0,50% 50%,100,color-stop(0%,#cd6969),color-stop(100%,#9c3434));
+  background-image: -webkit-radial-gradient(#cd6969,#9c3434);
+  background-image: -moz-radial-gradient(#cd6969,#9c3434);
+  background-image: -o-radial-gradient(#cd6969,#9c3434);
+  background-image: radial-gradient(#cd6969,#9c3434);
+}
+
+.member {
+  background: #eee;
+}
+
 .search-box {
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 
 .list-box {
   padding: 10px;
   margin-bottom: 20px;
-  background: #eee;
   height: 260px;
 }
 
 .list-box div {
   margin-top: 5px;
-  height: 120px;
+  height: 100px;
+}
+.list-box.member div {
+  margin-top: 5px;
+  height: 140px;
+}
+
+.list-box a {
+  color:white;
+}
+.list-box.member a {
+  color:black;
+}
+.list-box a:hover {
+  color:white;
+}
+.list-box.member:hover a {
+  color:black;
 }
 .list-box div img {
-  max-height: 120px;
+  max-height: 100px;
+}
+.list-box.member div img {
+  max-height: 200px;
 }
 .list-box h1 {
   font-size: 10px;
