@@ -1,18 +1,29 @@
 <div class="" id="membersModal" ng-controller="MembersController">
   <div class="column-group horizontal-gutters">
-    <div class="all-50 medium-50 small-100 tiny-100">
+    <div class="all-40 medium-40 small-100 tiny-100">
       <form class="ink-form">
         <div class="control-group">
             <div class="control"> 
               <input class="search-box" ng-model="search.$" placeholder="Search members...">
+              <input class="search-box" ng-model="search.name" placeholder="Search members by name...">
+              <input class="search-box" ng-model="search.role" placeholder="Search members by role...">
             </div>
         </div>
       </form>
     </div>
-    <div class="all-40 medium-50 small-100 tiny-100">
+    <div class="all-60 medium-60 small-100 tiny-100">
     Order by 
-      <a href="" class="ink-button" ng-click="predicate='name'; reverse=!reverse">Name</a>
-      <a href="" class="ink-button" ng-click="predicate='role'; reverse=!reverse">Team</a>
+      <a href="" class="ink-button blue" ng-click="predicate='name'; reverse=!reverse">Name <i class="fa fa-arrows-v"></i></a>
+      <a href="" class="ink-button blue" ng-click="predicate='role'; reverse=!reverse">Team <i class="fa fa-arrows-v"></i></a>
+      <br><br>
+      <a href="" class="ink-button" ng-click="search.role='Coordenação'">Coordenação</a>
+      <a href="" class="ink-button" ng-click="search.role='Development Team'">Dev Team</a>
+      <a href="" class="ink-button" ng-click="search.role='Eventos'">Eventos</a>
+      <a href="" class="ink-button" ng-click="search.role='Marketing'">Marketing</a>
+      <a href="" class="ink-button" ng-click="search.role='Innovation Awards'">IA</a>
+      <a href="" class="ink-button" ng-click="search.role='Relações'">Relações</a>
+      <a href="" class="ink-button" ng-click="search.role='Parcerias'">Parcerias</a>
+      <br><br>
     </div>
   </div>
   
@@ -25,7 +36,7 @@
   <div ng-show="members">
     <div class="column-group horizontal-gutters">
       <div class="all-15 medium-30 small-50 tiny-50" ng-repeat="member in members | filter:search:strict | orderBy:predicate:reverse">
-        <div class="list-box">
+        <div class="list-box member">
           <h1><a href="/#/member/{{member.id}}">{{ member.name }}</a></h1>
           <div ng-show="member.facebook">
             <a href="/#/member/{{member.id}}">
