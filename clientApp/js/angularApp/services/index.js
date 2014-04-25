@@ -11,6 +11,14 @@ theToolServices
     });
   })
 
+  .factory('SpeakerFactory', function($resource) {
+    return $resource('/api/speaker/:id', null, {
+      'getAll': {method: 'GET', isArray:true},
+      'update': {method: 'PUT'},
+      'create': {method: 'POST'}
+    });
+  })
+
   .factory('MemberFactory', function($resource) {
     return {
       Member: $resource('/api/member/:id', null, {
