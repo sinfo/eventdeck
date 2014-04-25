@@ -4,6 +4,7 @@ var mongo_url = 'mongodb://localhost/sinfo';
 
 require('./models/company');
 require('./models/member');
+require('./models/speaker');
 
 mongoose.connect(mongo_url);
 var db = mongoose.connection;

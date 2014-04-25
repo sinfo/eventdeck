@@ -1,3 +1,45 @@
+
+.companies-table tr{
+  border-bottom: #bbb 1px solid;
+  border-top: #bbb 1px solid;
+}
+.companies-table td{
+  min-width: 200px;
+}
+.companies-table td.member-cell{
+  min-width: 300px;
+}
+
+.speakers-table tr{
+  border-bottom: #bbb 1px solid;
+  border-top: #bbb 1px solid;
+}
+.speakers-table td{
+  min-width: 200px;
+}
+.speakers-table td.member-cell{
+  min-width: 300px;
+}
+
+.suggestion {
+  background: #ccc;
+}
+.contacted {
+  background: #783F04;
+}
+.convesations {
+  background: #0000FF;
+}
+.accepted {
+  background: #00FF00;
+}
+.rejected {
+  background: #FF0000;
+}
+.giveup {
+  background: #000;
+}
+
 .silver {
   background: #eee;
   background-image: -webkit-gradient(radial,50% 50%,0,50% 50%,100,color-stop(0%,#eee),color-stop(100%,#aaa));

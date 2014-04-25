@@ -1,7 +1,7 @@
 'use strict';
 
 theToolController
-  .controller('CompaniesController', function ($scope, $http, $sce, CompanyFactory) {
+  .controller('CompaniesController', function ($scope, $http, $sce, CompanyFactory, MemberFactory) {
     $scope.trustSrc = function(src) {
       return $sce.trustAsResourceUrl(src);
     }
@@ -20,6 +20,10 @@ theToolController
       $scope.predicate = 'participation';
       $scope.reverse = false;
       $scope.companies = response;
+    });
+
+    MemberFactory.Member.getAll(function(response) {
+      $scope.members = response;
     });
   });
   
