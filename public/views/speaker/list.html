@@ -1,0 +1,51 @@
+<div class="" id="homeModal" ng-controller="home">
+  <div class="column-group horizontal-gutters">
+    <div class="all-50 medium-50 small-100 tiny-100">
+      <form class="ink-form">
+        <div class="control-group">
+            <div class="control"> 
+              <input class="search-box" ng-model="search.$" placeholder="Search speakers...">
+              <input class="search-box" ng-model="search.name" placeholder="Search speakers by name...">
+              <input class="search-box" ng-model="search.member" placeholder="Search speakers by member...">
+              <input class="search-box" ng-model="search.status" placeholder="Search speakers by status...">
+            </div>
+        </div>
+      </form>
+    </div>
+    <div class="all-50 medium-50 small-100 tiny-100">
+      Order by 
+      <a href="" class="ink-button blue" ng-click="predicate='name'; reverse=!reverse">Name <i class="fa fa-arrows-v"></i></a>
+      <a href="" class="ink-button blue" ng-click="predicate='status'; reverse=!reverse">Status <i class="fa fa-arrows-v"></i></a>
+      <a href="" class="ink-button blue" ng-click="predicate='member'; reverse=!reverse">Member <i class="fa fa-arrows-v"></i></a>
+      <a href="/#/speaker" class="ink-button green"><i class="fa fa-plus"></i> Create New</a>
+      <br><br>
+      <br>
+
+    </div>
+  </div>
+  
+  <div ng-hide="speakers">
+    <br>
+    <h1>Loading...</h1>
+  </div>  
+
+
+  <div ng-show="speakers">
+    <div class="column-group horizontal-gutters">
+      <div class="all-15 medium-30 small-50 tiny-50" ng-repeat="speaker in speakers | filter:search:strict | orderBy:predicate:reverse">
+        <div class="list-box {{getClassFromKind(speaker.status)}}">
+          <h1><a href="/#/speaker/{{speaker.id}}">{{ speaker.name }}</a></h1>
+          <div ng-show="speaker.img">
+            <a href="/#/speaker/{{speaker.id}}">
+              <img src="{{speaker.img}}"/>
+            </a>
+          </div>
+          <span>{{speaker.status}}</span><br>
+          <span><a href="{{speaker.forum}}"><i class="fa fa-comments"></i> Go to Forum!</a></span><br>
+          <span><a href="/#/member/{{speaker.member}}"><i class="fa fa-user"></i> {{speaker.member}}</a></span><br>
+          <span><a href="/#/speaker/{{speaker.id}}/edit"><i class="fa fa-wrench"></i> Edit Speaker</a></span><br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
