@@ -4,3 +4,4 @@ require('./auth.js');
 require('./company.js');
 require('./speaker.js');
 require('./member.js');
+require('./comment.js');
