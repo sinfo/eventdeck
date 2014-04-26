@@ -4,3 +4,4 @@ require('./main');
 require('./company');
 require('./speaker');
 require('./member');
+require('./comment');

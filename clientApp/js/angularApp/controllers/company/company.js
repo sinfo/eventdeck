@@ -11,6 +11,12 @@ theToolController
 
       return text.replace(/\n/g, '<br>').replace(urlExp,"<a href='$1'>$1</a>").replace(mailExp,"<a href='mailto:$&'>$&</a>");  
     }
+    $scope.convertNewLinesToHtml = function(text) {
+      return '<div data-markdown>'+text.replace(/\n/g, '<br>')+'</div>';  
+    }
+    $scope.convertMarkdownToHtml = function(text) {
+      return '<div data-markdown>'+text+'</div>';  
+    }
     $scope.submit = function() {
       var companyData = this.formData;
 
@@ -56,8 +62,13 @@ theToolController
       });
     };
 
+    $scope.quoteComment = function(comment) {
+      $scope.commentData.markdown = '> **'+comment.member+' said**:\n> ' + comment.markdown.split('\n').join('\n> ')+'\n';
+    };
+
     CompanyFactory.get({id: $routeParams.id}, function(response) {
       $scope.company = $scope.formData = response;
+      $scope.commentData = {};
       
       MemberFactory.Member.getAll( function(response) {
         $scope.members = response;

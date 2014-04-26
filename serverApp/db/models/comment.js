@@ -5,6 +5,7 @@ var commentSchema = new mongoose.Schema({
   thread: String,
   member: String,
   markdown: String,
+  html: String,
   posted: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now }
 });
