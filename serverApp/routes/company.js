@@ -1,5 +1,6 @@
 var server  = require('./../index.js');
 var company = require('./../resources/company');
+var comment = require('./../resources/comment');
 
 server.route({ 
   method: 'GET', 
@@ -33,6 +34,15 @@ server.route({
   path: '/api/company/{id}', 
   config: { 
     handler: company.update, 
+    auth: true 
+  } 
+});
+
+server.route({ 
+  method: 'GET', 
+  path: '/api/company/{id}/comments', 
+  config: { 
+    handler: comment.getByThread, 
     auth: true 
   } 
 });
