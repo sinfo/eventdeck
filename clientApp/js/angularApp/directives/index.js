@@ -12,7 +12,7 @@ angular.module('theTool.directives', [])
         restrict: 'A',
         link: function (scope, element, attrs) {
             var htmlText = converter.makeHtml(element.text());
-            element.html(htmlText.replace(/\n/g, '<br>'));
+            element.html(htmlText);
         }
     };
   }])
