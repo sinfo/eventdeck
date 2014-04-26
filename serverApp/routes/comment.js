@@ -36,7 +36,6 @@ server.route({
     auth: true 
   } 
 });
-/*
 
 server.route({ 
   method: 'PUT', 
@@ -46,5 +45,3 @@ server.route({
     auth: true 
   } 
 });
-
-*/
