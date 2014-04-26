@@ -1,7 +1,7 @@
 'use strict';
  
 theToolController
-  .controller('CompanyController', function ($scope, $http, $routeParams, $sce, CompanyFactory, MemberFactory) {
+  .controller('CompanyController', function ($scope, $http, $routeParams, $sce, CompanyFactory, MemberFactory, CommentFactory) {
     $scope.trustSrc = function(src) {
       return $sce.trustAsResourceUrl(src+'#page-body');
     }
@@ -23,6 +23,39 @@ theToolController
       });
     };
 
+    $scope.submitComment = function() {
+      $scope.loading = true;
+
+      var commentData = this.commentData;
+      commentData.thread = 'company-'+this.company.id;
+
+      CommentFactory.Comment.create(commentData, function(data) {
+        // if successful, we'll need to refresh the comment list
+        CommentFactory.Company.getAll({id: $routeParams.id}, function(getData) {
+          $scope.comments = getData;
+          $scope.loading = false;
+        });
+      });
+    };
+
+    $scope.getMemberFacebook = function(id) {
+      return $scope.members.filter(function(e){
+          return e.id == id;
+        })[0].facebook;
+    }
+
+    $scope.deleteComment = function(id) {
+      $scope.loading = true;
+
+      CommentFactory.Comment.delete({id: id}, function(data) {
+        // if successful, we'll need to refresh the comment list
+        CommentFactory.Company.getAll({id: $routeParams.id}, function(getData) {
+          $scope.comments = getData;
+          $scope.loading = false;
+        });
+      });
+    };
+
     CompanyFactory.get({id: $routeParams.id}, function(response) {
       $scope.company = $scope.formData = response;
       
@@ -31,7 +64,11 @@ theToolController
         $scope.member = $scope.members.filter(function(e){
           return e.id == $scope.formData.member;
         })[0];
-        console.log($scope.member);
+      });
+
+      CommentFactory.Company.getAll({id: $routeParams.id}, function(getData) {
+        $scope.comments = getData;
+        $scope.loading = false;
       });
     });
   });
