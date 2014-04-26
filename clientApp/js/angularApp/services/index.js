@@ -28,4 +28,18 @@ theToolServices
         'getAll': {method: 'GET', isArray:true}
       })
     }
+  })
+
+  .factory('CommentFactory', function($resource) {
+    return {
+      Comment: $resource('/api/comment/:id', null, {
+        'getAll': {method: 'GET', isArray:true},
+        'update': {method: 'PUT'},
+        'create': {method: 'POST'},
+        'delete': {method: 'DELETE'}
+      }),
+      Company: $resource('/api/company/:id/comments', null, {
+        'getAll': {method: 'GET', isArray:true}
+      })
+    } 
   });
