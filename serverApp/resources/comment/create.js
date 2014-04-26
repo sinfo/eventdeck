@@ -1,6 +1,7 @@
 var Hapi           = require('hapi');
 var async          = require('async');
 var Comment        = require('./../../db/models/comment.js');
+var markdown       = require( "markdown" ).markdown;
 
 exports = module.exports = create;
 
@@ -42,7 +43,8 @@ function create(request, reply) {
     if (request.payload.id)            { comment.id       = request.payload.id; }
     if (request.payload.thread)        { comment.thread   = request.payload.thread; }
     if (request.payload.member)        { comment.member   = request.payload.member; }
-    if (request.payload.markdown)      { comment.markdown = request.payload.markdown; }
+    if (request.payload.markdown)      { comment.markdown = request.payload.markdown; 
+                                         comment.html     = markdown.toHTML(request.payload.markdown); }
 
     cb();
   }

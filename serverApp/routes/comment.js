@@ -27,7 +27,7 @@ server.route({
     auth: true 
   } 
 });
-/*
+
 server.route({ 
   method: 'GET', 
   path: '/api/comment/{id}', 
@@ -36,6 +36,7 @@ server.route({
     auth: true 
   } 
 });
+/*
 
 server.route({ 
   method: 'PUT', 
