@@ -7,12 +7,11 @@ angular.module('theTool.directives', [])
     }
   }])
   .directive('markdown', ['$compile', function ($compile) {
-    var converter = new Showdown.converter();
     return {
         restrict: 'A',
         link: function (scope, element, attrs) {
-            var htmlText = converter.makeHtml(element.text());
-            element.html(htmlText);
+            var htmlText = markdown.toHTML(element.text());
+            element.html(htmlText.replace(/\n/g, '<br>'));
         }
     };
   }])
