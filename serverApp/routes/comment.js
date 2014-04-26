@@ -1,49 +1,50 @@
 var server  = require('./../index.js');
-var company = require('./../resources/company');
 var comment = require('./../resources/comment');
 
 server.route({ 
   method: 'GET', 
-  path: '/api/company', 
+  path: '/api/comment', 
   config: { 
-    handler: company.list, 
+    handler: comment.list, 
     auth: true 
   } 
 });
 
 server.route({ 
   method: 'POST', 
-  path: '/api/company', 
+  path: '/api/comment', 
   config: { 
-    handler: company.create, 
+    handler: comment.create, 
+    auth: true 
+  } 
+});
+
+server.route({ 
+  method: 'DELETE', 
+  path: '/api/comment/{id}', 
+  config: { 
+    handler: comment.delete, 
     auth: true 
   } 
 });
 
 server.route({ 
   method: 'GET', 
-  path: '/api/company/{id}', 
+  path: '/api/comment/{id}', 
   config: { 
-    handler: company.get, 
+    handler: comment.get, 
     auth: true 
   } 
 });
+/*
 
 server.route({ 
   method: 'PUT', 
-  path: '/api/company/{id}', 
+  path: '/api/comment/{id}', 
   config: { 
-    handler: company.update, 
+    handler: comment.update, 
     auth: true 
   } 
 });
 
-server.route({ 
-  method: 'GET', 
-  path: '/api/company/{id}/comments', 
-  config: { 
-    handler: comment.getByThread, 
-    auth: true 
-  } 
-});
-
+*/
