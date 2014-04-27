@@ -10,7 +10,7 @@ angular.module('theTool', [
   'theTool.controllers'
 ]).
 config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/'                , {templateUrl: 'views/company/list.html',   controller: 'CompaniesController'});
+  $routeProvider.when('/'                , {templateUrl: 'views/home.html',           controller: 'home'});
   $routeProvider.when('/companies/'      , {templateUrl: 'views/company/list.html',   controller: 'CompaniesController'});
   $routeProvider.when('/companies/table/', {templateUrl: 'views/company/table.html',  controller: 'CompaniesController'});
   $routeProvider.when('/company/'        , {templateUrl: 'views/company/create.html', controller: 'CreateCompanyController'});
