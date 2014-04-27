@@ -63,7 +63,7 @@
             <div class="control-group">
               <label for="status">Status</label>
               <div class="control">
-                <input id="status" ng-model="formData.status" type="text">
+                <select id="status" ng-model="formData.status" ng-options="s for s in statuses"></select>
               </div>
             </div>
           </div>
