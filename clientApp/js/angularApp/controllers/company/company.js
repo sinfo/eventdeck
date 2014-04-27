@@ -66,6 +66,8 @@ theToolController
       $scope.commentData.markdown = '> **'+comment.member+' said**:\n> ' + comment.markdown.split('\n').join('\n> ')+'\n';
     };
 
+    $scope.statuses = ['SUGESTÃO','CONTACTADO','EM CONVERSAÇÕES','ACEITOU/EM NEGOCIAÇÕES','NEGOCIO FECHADO','REJEITOU/DESISTIR'];
+    
     CompanyFactory.get({id: $routeParams.id}, function(response) {
       $scope.company = $scope.formData = response;
       $scope.commentData = {};

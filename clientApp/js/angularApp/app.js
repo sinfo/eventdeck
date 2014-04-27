@@ -13,6 +13,7 @@ config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/'                , {templateUrl: 'views/home.html',           controller: 'home'});
   $routeProvider.when('/companies/'      , {templateUrl: 'views/company/list.html',   controller: 'CompaniesController'});
   $routeProvider.when('/companies/table/', {templateUrl: 'views/company/table.html',  controller: 'CompaniesController'});
+  $routeProvider.when('/companies/budget/', {templateUrl: 'views/company/budget.html',  controller: 'CompaniesController'});
   $routeProvider.when('/company/'        , {templateUrl: 'views/company/create.html', controller: 'CreateCompanyController'});
   $routeProvider.when('/company/:id'     , {templateUrl: 'views/company/view.html',   controller: 'CompanyController'});
   $routeProvider.when('/company/:id/edit', {templateUrl: 'views/company/edit.html',   controller: 'CompanyController'});
