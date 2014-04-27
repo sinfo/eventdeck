@@ -3,6 +3,18 @@
   <div class="column-group horizontal-gutters">
     <div class="all-100">
       <h1>Edit Comment {{comment._id}}</h1>    
+      <div class="ink-alert basic success" ng-show="message">
+        <!--<button class="ink-dismiss">&times;</button>-->
+        <p><strong>Sucess!</strong>
+          {{message}}
+        </p>
+      </div>
+      <div class="ink-alert basic error" ng-show="error">
+        <button class="ink-dismiss">&times;</button>
+        <p><strong>Error!</strong>
+          {{error}}
+        </p>
+      </div>
     </div>
   </div>
   <div class="column-group horizontal-gutters">
@@ -18,7 +30,7 @@
           </div>
         </div>
         <div class="control-group">
-          <input type="submit" id="submit" value="Post Comment" class="ink-button green" />
+          <input type="submit" id="submit" value="Save Comment" class="ink-button green" />
         </div>
       </form>
     </div>
