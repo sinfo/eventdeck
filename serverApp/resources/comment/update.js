@@ -58,6 +58,10 @@ function create(request, reply) {
   }
 
   function saveComment(cb) {
+    if(comment.member != request.auth.credentials.id) {
+      return cb("You're not the author");
+    }
+
     var query = {
       _id: comment._id
     };
