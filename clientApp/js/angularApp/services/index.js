@@ -42,4 +42,12 @@ theToolServices
         'getAll': {method: 'GET', isArray:true}
       })
     } 
+  })
+
+  .factory('EmailFactory', function($resource) {
+    return {
+      Company: $resource('/api/company/:id/sendInitialEmail', null, {
+        'send': {method: 'POST'}
+      })
+    }
   });
