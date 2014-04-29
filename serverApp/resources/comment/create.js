@@ -2,7 +2,7 @@ var Hapi        = require('hapi');
 var async       = require('async');
 var Comment     = require('./../../db/models/comment.js');
 var markdown    = require('markdown').markdown;
-var email       = require('./../email')
+var email       = require('./../email');
 
 exports = module.exports = create;
 

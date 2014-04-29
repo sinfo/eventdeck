@@ -72,19 +72,25 @@ function notify(comment) {
   }
 
   function sendEmail(cb) {
-    var message = {
-      text:    "There is a new comment on "+company.name+"'s page. \n\nCheck it out:\nhttp://the-tool.franciscodias.net/#/company/"+company.id, 
-      from:    "The Tool! <thetoolsinfo@gmail.com>",
-      to:       member.name + "<" +member.mails.sinfo + ">",
-      subject: "[SINFO] New comment on "+company.name+"!"
-    };
+    if(member.id != comment.member) {
+      var message = {
+        text:    "There is a new comment on "+company.name+"'s page. \n\nCheck it out:\nhttp://the-tool.franciscodias.net/#/company/"+company.id, 
+        from:    "The Tool! <thetoolsinfo@gmail.com>",
+        to:       member.name + "<" +member.mails.sinfo + ">",
+        subject: "[SINFO] New comment on "+company.name+"!"
+      };
 
-    // send the message and get a callback with an error or details of the message that was sent
-    server.send(message, function(err, message) {
-      if(err) { cb(err); }
-      console.log(err || message); 
-      cb();
-    });
+      // send the message and get a callback with an error or details of the message that was sent
+      server.send(message, function(err, message) {
+        if(err) { cb(err); }
+        console.log(err || message); 
+        cb();
+      });
+    }
+    else {
+      console.log("Commenter is the Company's responsible");
+      cb("Commenter is the Company's responsible");
+    }
   }
 
   function done(err) {
