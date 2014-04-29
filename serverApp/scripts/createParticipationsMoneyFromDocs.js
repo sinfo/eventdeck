@@ -29,9 +29,9 @@ Tabletop.init({
 
             participation.payment = {};
 
-            participation.payment['price']   = row['_cokwr'];
-            participation.payment['iva']     = row['iva'];
-            participation.payment['total']   = row['iva_2'];
+            participation.payment['price']   = eval(row['_cokwr'].split('€ ')[1]);
+            participation.payment['iva']     = eval(row['iva'].split('€ ')[1]);
+            participation.payment['total']   = eval(row['iva_2'].split('€ ')[1]);
             participation.payment['date']    = row['dataemissão'];
             participation.payment['invoice'] = row['factura'];
             participation.payment['status']  = row['estado'];
