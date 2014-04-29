@@ -1,0 +1,6 @@
+{
+  "user": "YOUR PASSWORD",
+  "password": "YOUR USERNAME",
+  "host": "smtp.gmail.com",
+  "ssl": true
+}
