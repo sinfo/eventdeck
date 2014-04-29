@@ -1,3 +1,12 @@
+.red { background: #E41B17; }
+.blue { background: #0000FF; }
+.orange { background: #FFA500; }
+.yellow { background: #FFFF00; }
+.brown { background: #A52A2A; }
+.green { background: #008000; }
+.lime { background: #00FF00; }
+.grey { background: #eee; }
+
 .comment {
   background: #eee;
   margin-top: 5px;
@@ -15,6 +24,17 @@
 }
 .companies-table td.member-cell{
   min-width: 300px;
+}
+
+.budget-table tr{
+  border-bottom: #bbb 1px solid;
+  border-top: #bbb 1px solid;
+}
+.budget-table td{
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: right;
+  min-width: 120px;
 }
 
 .speakers-table tr{

@@ -5,31 +5,47 @@
   </div>  
 
 
-  <div ng-show="companies">
+  <div class="ink-grid" ng-show="companies">
     <div class="column-group horizontal-gutters">
       <h1>Budget</h1>
-      <table class="companies-table">
+      <div class="ink-alert basic success" ng-show="message">
+        <!--<button class="ink-dismiss">&times;</button>-->
+        <p><strong>Sucess!</strong>
+          {{message}}
+        </p>
+      </div>
+      <div class="ink-alert basic error" ng-show="error">
+        <button class="ink-dismiss">&times;</button>
+        <p><strong>Error!</strong>
+          {{error}}
+        </p>
+      </div>
+      <table class="budget-table">
         <thead>
-          <th>Comany</th>
-          <th>Price</th>
-          <th>IVA</th>
-          <th>Total</th>
+          <th ng-click="predicate='name'; reverse=!reverse">Company <i class="fa fa-arrows-v"></i></th>
+          <th>Member</th>
+          <th ng-click="predicate='participation.payment.price'; reverse=!reverse">Price <i class="fa fa-arrows-v"></i></th>
+          <th ng-click="predicate='participation.payment.price'; reverse=!reverse">IVA <i class="fa fa-arrows-v"></i></th>
+          <th ng-click="predicate='participation.payment.price'; reverse=!reverse">Total <i class="fa fa-arrows-v"></i></th>
           <th>Date</th>
           <th>Invoice</th>
           <th>Status</th>
           <th>Via</th>
         </thead>
 
-        <tr ng-repeat="company in companies  | filter:{participation:''}">
-          <td class="{{getClassFromKind(company.participation)}}" style="text-align:center">
+        <tr ng-repeat="company in companies  | filter:{participation.payment:''} | orderBy:predicate:reverse" class="{{getClassFromPaymentStatus(company.participation)}}">
+          <td class="{{getClassFromStatusAndKind(company)}}" style="text-align:center; min-width: 300px;">
             <a style="color:#fff" href="/#/company/{{company.id}}">{{company.name}}</a>
           </td>
-          <td>{{company.participation.payment.price}}</td>
-          <td>{{company.participation.payment.iva}}</td>
-          <td>{{company.participation.payment.total}}</td>
+          <td style="text-align:center"><a href="/#/member/{{company.member}}">{{company.member}}</a></td>
+          <td>€ {{company.participation.payment.price}}</td>
+          <td>€ {{company.participation.payment.iva}}</td>
+          <td>€ {{company.participation.payment.total}}</td>
           <td>{{company.participation.payment.date}}</td>
           <td>{{company.participation.payment.invoice}}</td>
-          <td>{{company.participation.payment.status}}</td>
+          <td class="{{getClassFromStatus(company.participation)}}">
+            <select ng-model="company.participation.payment.status" ng-options="s for s in statuses" ng-change="saveStatus(company)"></select>
+          </td>
           <td>{{company.participation.payment.via}}</td>
         </tr>
       </table>
