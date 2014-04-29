@@ -1,1 +1,2 @@
-exports.comment = require('./commentNotify');
+exports.comment          = require('./commentNotify');
+exports.companyAttribute = require('./companyAttribute');
