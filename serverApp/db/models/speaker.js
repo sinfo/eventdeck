@@ -9,6 +9,7 @@ var speakerSchema = new mongoose.Schema({
   forum: Object,
   contacts: String,
   member: String,
+  updated: { type: Date, default: Date.now }
 });
 
 speakerSchema.statics.findById = function (id, cb) {
