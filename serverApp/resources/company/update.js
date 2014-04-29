@@ -1,6 +1,7 @@
 var Hapi           = require('hapi');
 var async          = require('async');
 var Company        = require('./../../db/models/company.js');
+var email       = require('./../email');
 
 exports = module.exports = create;
 
@@ -89,6 +90,7 @@ function create(request, reply) {
     if (err) {
       reply({error:"There was an error!"});
     } else {
+      if(diffCompany.member) { email.companyAttribute(diffCompany.member, company); }
       reply({message:"Company Updated!"});
     }
   }
