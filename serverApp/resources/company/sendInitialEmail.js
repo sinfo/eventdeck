@@ -65,7 +65,7 @@ function get(request, reply) {
   }
 
   function sendEmail(cb){
-    var email = request.query.email;
+    var email = request.payload.email;
 
     var message = {
        text:    "Convite para a participação da "+company.name+" na SINFO 22", 
