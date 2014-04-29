@@ -35,6 +35,7 @@ function get(request, reply) {
         if (result[0].member)        { company.member        = result[0].member; }
         if (result[0].area)          { company.area          = result[0].area; }
         if (result[0].participation) { company.participation = result[0].participation; }
+        if (result[0].updated)       { company.updated       = result[0].updated; }
 
         cb();
       }

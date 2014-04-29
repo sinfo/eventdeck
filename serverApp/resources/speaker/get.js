@@ -32,7 +32,8 @@ function get(request, reply) {
         if (result[0].contacts)      { speaker.contacts      = result[0].contacts; }
         if (result[0].forum)         { speaker.forum         = result[0].forum; }
         if (result[0].member)        { speaker.member        = result[0].member; }
-
+        if (result[0].updated)       { speaker.updated       = result[0].updated; }
+        
         cb();
       }
       else {

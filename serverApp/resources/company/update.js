@@ -64,6 +64,8 @@ function create(request, reply) {
     if (request.payload.area != company.area)                   { diffCompany.area          = request.payload.area; }
     if (request.payload.participation != company.participation) { diffCompany.participation = request.payload.participation; }
 
+    diffCompany.updated = Date.now();
+
     console.log("DIFF", diffCompany)
 
     cb();
