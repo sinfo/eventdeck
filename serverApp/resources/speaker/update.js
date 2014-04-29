@@ -57,6 +57,8 @@ function create(request, reply) {
     if (request.payload.forum != speaker.forum)                 { diffSpeaker.forum         = request.payload.forum; }
     if (request.payload.member != speaker.member)               { diffSpeaker.member        = request.payload.member; }
 
+    diffSpeaker.updated = Date.now();
+
     console.log("DIFF", diffSpeaker)
 
     cb();

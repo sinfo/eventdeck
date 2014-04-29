@@ -12,7 +12,8 @@ var companySchema = new mongoose.Schema({
   history: String,
   member: String,
   participation: Object,
-  area: String
+  area: String,
+  updated: { type: Date, default: Date.now }
 });
 
 companySchema.statics.findById = function (id, cb) {
