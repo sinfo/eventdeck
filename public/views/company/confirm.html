@@ -1,0 +1,29 @@
+<div>
+
+  <div class="ink-grid">
+      <div class="column-group horizontal-gutters">
+        <div class="all-100">
+          <h1>Are you sure you want to send the initial email to {{email}}?</h1>
+
+          <div class="ink-alert basic success" ng-show="message">
+            <!--<button class="ink-dismiss">&times;</button>-->
+            <p><strong>Sucess!</strong>
+              {{message}}
+            </p>
+          </div>
+          <div class="ink-alert basic error" ng-show="error">
+            <button class="ink-dismiss">&times;</button>
+            <p><strong>Error!</strong>
+              {{error}}
+            </p>
+          </div>
+
+          <p class="text-center" ng-show="loading"><span class="fa fa-meh-o fa-5x fa-spin"></span></p>
+
+        </div>
+      </div>
+
+      <a class="ink-button blue" ng-click="submit()"><i class="fa fa-envelope"></i> Send Email!</a>
+    </div>
+
+</div>  
