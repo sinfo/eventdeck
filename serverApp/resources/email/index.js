@@ -1,0 +1,1 @@
+exports.comment = require('./commentNotify');
