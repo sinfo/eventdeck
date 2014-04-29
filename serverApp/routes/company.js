@@ -47,3 +47,12 @@ server.route({
   } 
 });
 
+server.route({ 
+  method: 'POST', 
+  path: '/api/company/{id}/sendInitialEmail', 
+  config: { 
+    handler: company.sendInitialEmail, 
+    auth: true 
+  } 
+});
+
