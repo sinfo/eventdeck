@@ -1,7 +1,8 @@
-var Hapi           = require('hapi');
-var async          = require('async');
-var Comment        = require('./../../db/models/comment.js');
-var markdown       = require( "markdown" ).markdown;
+var Hapi        = require('hapi');
+var async       = require('async');
+var Comment     = require('./../../db/models/comment.js');
+var markdown    = require('markdown').markdown;
+var email       = require('./../email')
 
 exports = module.exports = create;
 
@@ -12,31 +13,11 @@ function create(request, reply) {
   var comment = {};
 
   async.series([
-      //checkComment,
       createComment,
       saveComment,
     ], done);
 
-  function checkComment(cb) {
-    if(request.payload.id) {
-      Comment.findById(request.payload.id, function(err, comment) {
-        if (err) {
-          return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
-        } else if (comment.length > 0) {
-          return cb(Hapi.error.conflict('Comment ID exists: '+request.payload.id));
-        } else {
-          console.log("GOGOGO");
-          return cb();
-        }
-      });
-    } else {
-      return cb(Hapi.error.conflict('You need to specify an Id'));
-    }
-  }
-
   function createComment(cb) {
-
-    console.log("CREATEEE", request.payload);
 
     comment.member = request.auth.credentials.id;
     
@@ -68,7 +49,7 @@ function create(request, reply) {
     if (err) {
       reply({error:"There was an error!"});
     } else {
-      console.log("SUCCESS");
+      email.comment(comment);
       reply({message:"Comment Updated!"});
     }
   }
