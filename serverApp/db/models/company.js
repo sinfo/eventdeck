@@ -14,7 +14,11 @@ var companySchema = new mongoose.Schema({
   participation: Object,
   area: String,
   access: Object,
-  accesses: [Object],
+  accesses: [{ 
+    date: { type: Date, default: Date.now },
+    userAgent: String,
+    info: Object
+  }],
   updated: { type: Date, default: Date.now }
 });
 

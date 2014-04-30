@@ -26,6 +26,7 @@ function track(request, reply) {
       }
 
       if (result.length > 0) {
+        if (result[0]._id)           { company._id           = result[0]._id; }
         if (result[0].id)            { company.id            = result[0].id; }
         if (result[0].name)          { company.name          = result[0].name; }
         if (result[0].img)           { company.img           = result[0].img; }
@@ -48,9 +49,9 @@ function track(request, reply) {
 
   function addAccess(cb) {
     access = {
-      date: Date.now()
-      //'user-agent': request.headers['user-agent'],
-      //info: request.info
+      date: Date.now(),
+      userAgent: request.headers['user-agent'],
+      info: request.info
     }
 
     accesses[accesses.length] = access;
@@ -59,19 +60,13 @@ function track(request, reply) {
   }
 
   function saveCompany(cb) {
-    var query = {
-      id: company.id
-    };
-    
-    console.log(access);
-
-    Company.update(query, { access: access }, function (err, numAffected){
+    Company.update({ id: company.id }, { accesses: accesses }, function (err, numAffected){
       if (err) {
         console.log(err);
         return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
       }
 
-      console.log("UPDATED", numAffected)
+      console.log("UPDATED", numAffected);
       
       cb();
     });
@@ -79,11 +74,9 @@ function track(request, reply) {
 
   function done(err) {
     if (err) {
-      //console.log(err);
+      console.log(err);
     } 
 
-    //reply(JSON.stringify(request, undefined, 2));
-    //reply(request);
     reply.file("./public/img/logo.jpg");
   }
 

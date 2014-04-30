@@ -36,7 +36,7 @@ function get(request, reply) {
         if (result[0].area)          { company.area          = result[0].area; }
         if (result[0].participation) { company.participation = result[0].participation; }
         if (result[0].updated)       { company.updated       = result[0].updated; }
-        if (result[0].access)      { company.access      = result[0].access; }
+        if (result[0].access)        { company.access        = result[0].access; }
         if (result[0].accesses)      { company.accesses      = result[0].accesses; }
 
         cb();
