@@ -56,3 +56,13 @@ server.route({
   } 
 });
 
+server.route({ 
+  method: 'GET', 
+  path: '/sponsor/{id}/logo.jpg', 
+  config: { 
+    handler: company.imageTracker, 
+    auth: true 
+  } 
+});
+
+

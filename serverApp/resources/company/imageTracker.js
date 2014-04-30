@@ -2,17 +2,19 @@ var Hapi           = require('hapi');
 var async          = require('async');
 var Company        = require('./../../db/models/company.js');
 
-exports = module.exports = get;
+exports = module.exports = track;
 
-/// get Company
-
-function get(request, reply) {
+function track(request, reply) {
 
   var companyId = request.params.id;
-  var company   = {};
+  var company = {};
+  var access;
+  var accesses = [];
 
   async.series([
       getCompany,
+      addAccess,
+      saveCompany,
     ], done);
 
   function getCompany(cb) {
@@ -35,10 +37,7 @@ function get(request, reply) {
         if (result[0].member)        { company.member        = result[0].member; }
         if (result[0].area)          { company.area          = result[0].area; }
         if (result[0].participation) { company.participation = result[0].participation; }
-        if (result[0].updated)       { company.updated       = result[0].updated; }
-        if (result[0].access)      { company.access      = result[0].access; }
-        if (result[0].accesses)      { company.accesses      = result[0].accesses; }
-
+        if (result[0].accesses)      { accesses              = result[0].accesses; }
         cb();
       }
       else {
@@ -47,11 +46,45 @@ function get(request, reply) {
     }
   }
 
+  function addAccess(cb) {
+    access = {
+      date: Date.now()
+      //'user-agent': request.headers['user-agent'],
+      //info: request.info
+    }
+
+    accesses[accesses.length] = access;
+
+    cb();
+  }
+
+  function saveCompany(cb) {
+    var query = {
+      id: company.id
+    };
+    
+    console.log(access);
+
+    Company.update(query, { access: access }, function (err, numAffected){
+      if (err) {
+        console.log(err);
+        return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
+      }
+
+      console.log("UPDATED", numAffected)
+      
+      cb();
+    });
+  }
+
   function done(err) {
     if (err) {
-      reply(Hapi.error.badRequest(err.detail));
-    } else {
-      reply(company);
-    }
+      //console.log(err);
+    } 
+
+    //reply(JSON.stringify(request, undefined, 2));
+    //reply(request);
+    reply.file("./public/img/logo.jpg");
   }
+
 }
