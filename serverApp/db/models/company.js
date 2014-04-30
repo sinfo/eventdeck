@@ -13,6 +13,8 @@ var companySchema = new mongoose.Schema({
   member: String,
   participation: Object,
   area: String,
+  access: Object,
+  accesses: [Object],
   updated: { type: Date, default: Date.now }
 });
 
