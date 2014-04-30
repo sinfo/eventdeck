@@ -3,11 +3,11 @@ var async          = require('async');
 var Company        = require('./../../db/models/company.js');
 var email       = require('./../email');
 
-exports = module.exports = create;
+exports = module.exports = update;
 
-/// create Company
+/// update Company
 
-function create(request, reply) {
+function update(request, reply) {
 
   var companyId = request.params.id;
   var company = {};
