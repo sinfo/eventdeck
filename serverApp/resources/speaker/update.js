@@ -35,8 +35,9 @@ function create(request, reply) {
         if (result[0].contacts)      { speaker.contacts      = result[0].contacts; }
         if (result[0].forum)         { speaker.forum         = result[0].forum; }
         if (result[0].member)        { speaker.member        = result[0].member; }
+        if (result[0].paragraph)     { speaker.paragraph     = result[0].paragraph; }
 
-    
+
         cb();
       }
       else {
@@ -56,6 +57,7 @@ function create(request, reply) {
     if (request.payload.contacts != speaker.contacts)           { diffSpeaker.contacts      = request.payload.contacts; }
     if (request.payload.forum != speaker.forum)                 { diffSpeaker.forum         = request.payload.forum; }
     if (request.payload.member != speaker.member)               { diffSpeaker.member        = request.payload.member; }
+    if (request.payload.paragraph != speaker.paragraph)         { diffSpeaker.paragraph     = request.payload.paragraph; }
 
     diffSpeaker.updated = Date.now();
 

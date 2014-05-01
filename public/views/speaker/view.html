@@ -2,7 +2,7 @@
 
   <div ng-hide="speaker">
     <h1>Loading...</h1>
-  </div>  
+  </div>
 
   <div ng-show="speaker">
     <div class="ink-grid">
@@ -37,10 +37,14 @@
             <div ng-bind-html="convertTextToHtml(speaker.contacts)"></div>
           </div>
           <br>
+          <div ng-show="speaker.paragraph">
+            <h1>Paragraph</h1>
+            <div ng-bind-html="convertTextToHtml(speaker.paragraph)"></div>
+          </div>
         </div>
         <div class="all-30 medium-30 small-100 tiny-100">
         </div>
       </div>
     </div>
-  </div> 
-</div>  
+  </div>
+</div>
