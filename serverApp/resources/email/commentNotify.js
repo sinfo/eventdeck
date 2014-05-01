@@ -6,9 +6,9 @@ var async       = require('async');
 var emailConfig = require('./../../emailConfig');
 
 var server  = email.server.connect({
-  user:     emailConfig.user, 
-  password: emailConfig.password, 
-  host:     emailConfig.host, 
+  user:     emailConfig.user,
+  password: emailConfig.password,
+  host:     emailConfig.host,
   ssl:      emailConfig.ssl
 });
 
@@ -31,7 +31,16 @@ function notify(comment) {
         getCompany,
         getMember,
         sendEmail
-      ], done);    
+      ], done);
+  }
+  else if (comment.thread.indexOf("speaker") != -1) {
+    speakerId = comment.thread.split("speaker-")[1];
+
+    async.series([
+        getSpeaker,
+        getMember,
+        sendEmail
+      ], done);
   }
 
   function getCompany(cb) {
@@ -49,6 +58,25 @@ function notify(comment) {
       }
       else {
         cb(Hapi.error.conflict('No company with the ID: ' + companyId));
+      }
+    }
+  }
+
+  function getSpeaker(cb) {
+    Speaker.findById(speakerId, gotSpeaker);
+
+    function gotSpeaker(err, result) {
+      if (err) {
+        cb(err);
+      }
+
+      if (result.length > 0) {
+        speaker = result[0];
+        memberId = speaker.member;
+        cb();
+      }
+      else {
+        cb(Hapi.error.conflict('No speaker with the ID: ' + speakerId));
       }
     }
   }
@@ -73,23 +101,35 @@ function notify(comment) {
 
   function sendEmail(cb) {
     if(member.id != comment.member) {
-      var message = {
-        text:    "There is a new comment on "+company.name+"'s page. \n\nCheck it out:\nhttp://the-tool.franciscodias.net/#/company/"+company.id, 
-        from:    "The Tool! <thetoolsinfo@gmail.com>",
-        to:       member.name + "<" +member.mails.sinfo + ">",
-        subject: "[SINFO] New comment on "+company.name+"!"
-      };
+      var message = null;
+      if (company.id) {
+        message = {
+          text:    "There is a new comment on "+company.name+"'s page. \n\nCheck it out:\nhttp://the-tool.franciscodias.net/#/company/"+company.id,
+          from:    "The Tool! <thetoolsinfo@gmail.com>",
+          to:       member.name + "<" +member.mails.sinfo + ">",
+          subject: "[SINFO] New comment on "+company.name+"!"
+        };
+      }
+      else if (speaker.id){
+        message = {
+          text:    "There is a new comment on "+speaker.name+"'s page. \n\nCheck it out:\nhttp://the-tool.franciscodias.net/#/speaker/"+speaker.id,
+          from:    "The Tool! <thetoolsinfo@gmail.com>",
+          to:       member.name + "<" +member.mails.sinfo + ">",
+          subject: "[SINFO] New comment on "+speaker.name+"!"
+        };
+      }
+
 
       // send the message and get a callback with an error or details of the message that was sent
       server.send(message, function(err, message) {
         if(err) { cb(err); }
-        console.log(err || message); 
+        console.log(err || message);
         cb();
       });
     }
     else {
-      console.log("Commenter is the Company's responsible");
-      cb("Commenter is the Company's responsible");
+      console.log("Commenter is the responsible");
+      cb("Commenter is the responsible");
     }
   }
 
