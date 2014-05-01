@@ -67,7 +67,7 @@ function track(request, reply) {
       }
 
       console.log("UPDATED", numAffected);
-      
+
       cb();
     });
   }
@@ -75,9 +75,9 @@ function track(request, reply) {
   function done(err) {
     if (err) {
       console.log(err);
-    } 
+    }
 
-    reply.file("./public/img/logo.jpg");
+    reply.file("./public/img/logo.jpg").type("image/jpg");
   }
 
 }
