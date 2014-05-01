@@ -1,7 +1,7 @@
 'use strict';
- 
+
 var theToolServices = angular.module('theTool.services', ['ngResource']);
- 
+
 theToolServices
   .factory('CompanyFactory', function($resource) {
     return $resource('/api/company/:id', null, {
@@ -40,8 +40,11 @@ theToolServices
       }),
       Company: $resource('/api/company/:id/comments', null, {
         'getAll': {method: 'GET', isArray:true}
+      }),
+      Speaker: $resource('/api/speaker/:id/comments', null, {
+        'getAll': {method: 'GET', isArray:true}
       })
-    } 
+    }
   })
 
   .factory('EmailFactory', function($resource) {
