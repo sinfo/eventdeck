@@ -9,6 +9,7 @@ var speakerSchema = new mongoose.Schema({
   forum: Object,
   contacts: String,
   member: String,
+  paragraph: String,
   updated: { type: Date, default: Date.now }
 });
 
@@ -28,5 +29,5 @@ speakerSchema.statics.findAll = function (cb) {
   this.find({},cb);
 };
 
- 
+
 var Speaker = module.exports = mongoose.model('Speaker', speakerSchema);
