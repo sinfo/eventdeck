@@ -46,3 +46,12 @@ server.route({
     auth: true
   }
 });
+
+server.route({
+  method: 'POST',
+  path: '/api/speaker/{id}/sendInitialEmail',
+  config: {
+    handler: speaker.sendInitialEmail,
+    auth: true
+  }
+});
