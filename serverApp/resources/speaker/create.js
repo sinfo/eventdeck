@@ -24,7 +24,6 @@ function create(request, reply) {
         } else if (speaker.length > 0) {
           return cb(Hapi.error.conflict('Speaker ID exists: '+request.payload.id));
         } else {
-          console.log("GOGOGO");
           return cb();
         }
       });
@@ -42,6 +41,7 @@ function create(request, reply) {
     if (request.payload.contacts)      { speaker.contacts      = request.payload.contacts; }
     if (request.payload.forum)         { speaker.forum         = request.payload.forum; }
     if (request.payload.member)        { speaker.member        = request.payload.member; }
+    if (request.payload.paragraph)     { speaker.paragraph     = request.payload.paragraph; }
 
     cb();
   }
@@ -54,7 +54,7 @@ function create(request, reply) {
         return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
       } else if(reply) {
         cb();
-      } else { // same id        
+      } else { // same id
         return cb(Hapi.error.conflict('Speaker ID exists: '+request.payload.id));
       }
       cb();
