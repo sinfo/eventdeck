@@ -36,6 +36,9 @@ theToolController
     }
 
     $scope.submitComment = function() {
+      if (!$scope.commentData.markdown)
+        return;
+
       $scope.loading = true;
 
       var commentData = this.commentData;
