@@ -85,7 +85,7 @@
 
           <br>
 
-          <div class="all-50">
+          <div class="all-45 half-right-space">
 
             <form class="ink-form" ng-submit="submitComment()">
 
@@ -101,9 +101,9 @@
               </div>
             </form>
           </div>
-          <div class="all-50">
+          <div class="all-45">
             <h6>Preview</h6>
-            <div compile="convertMarkdownToHtml(commentData.markdown)"></div>
+            <div compile="convertMarkdownToHtml(commentData.markdown ? commentData.markdown : '')"></div>
           </div>
         </div>
       </div>
