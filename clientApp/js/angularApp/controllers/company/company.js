@@ -1,5 +1,5 @@
 'use strict';
- 
+
 theToolController
   .controller('CompanyController', function ($scope, $http, $routeParams, $sce, CompanyFactory, MemberFactory, CommentFactory) {
     $scope.trustSrc = function(src) {
@@ -9,13 +9,13 @@ theToolController
       var urlExp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
       var mailExp = /[\w\.\-]+\@([\w\-]+\.)+[\w]{2,4}(?![^<]*>)/ig;
 
-      return text.replace(/\n/g, '<br>').replace(urlExp,"<a href='$1'>$1</a>").replace(mailExp,"<a href='/#/company/"+$routeParams.id+"/confirm?email=$&'>$&</a>");  
+      return text.replace(/\n/g, '<br>').replace(urlExp,"<a href='$1'>$1</a>").replace(mailExp,"<a href='/#/company/"+$routeParams.id+"/confirm?email=$&'>$&</a>");
     }
     $scope.convertNewLinesToHtml = function(text) {
-      return '<div data-markdown>'+text.replace(/\n/g, '<br>')+'</div>';  
+      return '<div data-markdown>'+text.replace(/\n/g, '<br>')+'</div>';
     }
     $scope.convertMarkdownToHtml = function(text) {
-      return '<div data-markdown>'+text+'</div>';  
+      return '<div data-markdown>'+text+'</div>';
     }
     $scope.submit = function() {
       var companyData = this.formData;
@@ -36,6 +36,9 @@ theToolController
     }
 
     $scope.submitComment = function() {
+      if (!$scope.commentData.markdown)
+        return;
+
       $scope.loading = true;
 
       var commentData = this.commentData;
@@ -67,11 +70,11 @@ theToolController
     };
 
     $scope.statuses = ['SUGESTÃO','CONTACTADO','EM CONVERSAÇÕES','ACEITOU/EM NEGOCIAÇÕES','NEGOCIO FECHADO','REJEITOU/DESISTIR'];
-    
+
     CompanyFactory.get({id: $routeParams.id}, function(response) {
       $scope.company = $scope.formData = response;
       $scope.commentData = {};
-      
+
       MemberFactory.Member.getAll( function(response) {
         $scope.members = response;
         $scope.member = $scope.members.filter(function(e){
