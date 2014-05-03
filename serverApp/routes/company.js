@@ -61,6 +61,15 @@ server.route({
   path: '/sponsor/{id}/logo.jpg',
   config: {
     handler: company.imageTracker,
-    auth: true
+    auth: false
+  }
+});
+
+server.route({
+  method: 'GET',
+  path: '/sponsor/{id}',
+  config: {
+    handler: company.sponsorPage,
+    auth: false
   }
 });
