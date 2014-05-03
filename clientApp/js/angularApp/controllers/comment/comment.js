@@ -6,7 +6,7 @@ theToolController
       return text.replace(/\n/g, '<br>');
     }
     $scope.convertMarkdownToHtml = function(text) {
-      return '<div data-markdown>' + text + '</div>';
+      return '<div data-markdown>' + (text ? text : '') + '</div>';
     }
 
     $scope.submitComment = function() {
