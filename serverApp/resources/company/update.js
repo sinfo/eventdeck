@@ -95,12 +95,7 @@ function update(request, reply) {
     } else {
       if(diffCompany.member) { email.companyAttribute(diffCompany.member, company); }
 
-      var editionsArray = [];
-      for(var propertyName in diffCompany) {
-        editionsArray.push(propertyName);
-      }
-      var editions = editionsArray.slice(0, -1).join(', ') + ' & ' + editionsArray[editionsArray.length];
-      //notification.notify(request.auth.credentials.id, 'company-'+company.id, 'edited '+editions+' in '+ company.name);
+      notification.update(request.auth.credentials.id, 'company-'+company.id, company.name, request.auth.credentials.name, diffCompany);
       reply({message:'Company Updated!'});
     }
   }
