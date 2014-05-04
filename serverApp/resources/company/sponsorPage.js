@@ -50,7 +50,7 @@ function track(request, reply) {
   function addAccess(cb) {
     access = {
       date: Date.now(),
-      type: 'page'
+      where: 'page'
     }
 
     accesses[accesses.length] = access;
