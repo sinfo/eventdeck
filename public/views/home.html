@@ -1,15 +1,15 @@
-<div class="" id="homeModal" ng-controller="home">
+<div class="column-group" id="homeModal" ng-controller="home">
   <div class="column-group horizontal-gutters">
     <div class="all-50">
       <h1>Companies</h1>
       <h6><a href="/#/companies/">Main list</a></h6>
-      <h6><a href="/#/companies/table/">By Member Table</a></h6>  
-      <h6><a href="/#/companies/budget/">Budget</a></h6>  
+      <h6><a href="/#/companies/table/">By Member Table</a></h6>
+      <h6><a href="/#/companies/budget/">Budget</a></h6>
     </div>
     <div class="all-50">
       <h1>Speakers</h1>
       <h6><a href="/#/speakers/">Main list</a></h6>
-      <h6><a href="/#/speakers/table/">By Member Table</a></h6>  
+      <h6><a href="/#/speakers/table/">By Member Table</a></h6>
     </div>
   </div>
   <br><br>
@@ -17,7 +17,21 @@
     <div class="all-50">
       <h1>Members</h1>
       <h6><a href="/#/members/">Main list</a></h6>
-      <h6><a href="/#/member/me/">My Profile</a></h6>  
+      <h6><a href="/#/member/me/">My Profile</a></h6>
     </div>
+  </div>
+  <div class="column-group all-40">
+    <a href="/#/{{notification.path}}" ng-repeat="notification in notifications">
+      <div class="all-100 ink-label blue half-bottom-space align-center push-middle" style="height: 4em;">
+        <!-- <div ng-show="company.img">
+          <a href="/#/company/{{company.id}}">
+            <img src="{{company.img}}"/>
+          </a>
+        </div> -->
+        <div class="all-10"></div>
+        <span class="all-80" style="line-height: 4em;">{{notification.text}}</span>
+        <div class="all-10"></div>
+      </div>
+    </a>
   </div>
 </div>
