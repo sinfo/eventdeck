@@ -135,7 +135,7 @@ function notify(comment) {
 
   function done(err) {
     if (err) {
-      console.log("There was an error!");
+      console.log("There was an error! "+err);
     } else {
       console.log("Email Sent!");
     }

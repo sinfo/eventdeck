@@ -1,7 +1,8 @@
-var Hapi           = require('hapi');
-var async          = require('async');
-var Company        = require('./../../db/models/company.js');
-var email       = require('./../email');
+var Hapi          = require('hapi');
+var async         = require('async');
+var Company       = require('./../../db/models/company.js');
+var email         = require('./../email');
+var notification  = require('./../notification');
 
 exports = module.exports = update;
 
@@ -93,7 +94,14 @@ function update(request, reply) {
       reply({error:"There was an error!"});
     } else {
       if(diffCompany.member) { email.companyAttribute(diffCompany.member, company); }
-      reply({message:"Company Updated!"});
+
+      var editionsArray = [];
+      for(var propertyName in diffCompany) {
+        editionsArray.push(propertyName);
+      }
+      var editions = editionsArray.slice(0, -1).join(', ') + ' & ' + editionsArray[editionsArray.length];
+      //notification.notify(request.auth.credentials.id, 'company-'+company.id, 'edited '+editions+' in '+ company.name);
+      reply({message:'Company Updated!'});
     }
   }
 }
