@@ -61,7 +61,9 @@ server.route({
   path: '/sponsor/{id}/logo.jpg',
   config: {
     handler: company.imageTracker,
-    auth: false
+    auth: { 
+      mode: 'try' 
+    } 
   }
 });
 
@@ -70,6 +72,8 @@ server.route({
   path: '/sponsor/{id}',
   config: {
     handler: company.sponsorPage,
-    auth: false
+    auth: { 
+      mode: 'try' 
+    } 
   }
 });

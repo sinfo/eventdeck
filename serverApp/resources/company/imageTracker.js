@@ -50,8 +50,7 @@ function track(request, reply) {
   function addAccess(cb) {
     access = {
       date: Date.now(),
-      userAgent: request.headers['user-agent'],
-      info: request.info
+      type: 'email'
     }
 
     accesses[accesses.length] = access;
@@ -60,16 +59,20 @@ function track(request, reply) {
   }
 
   function saveCompany(cb) {
-    Company.update({ id: company.id }, { accesses: accesses }, function (err, numAffected){
-      if (err) {
-        console.log(err);
-        return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
-      }
+    if(!request.auth.isAuthenticated) {
+      Company.update({ id: company.id }, { accesses: accesses }, function (err, numAffected){
+        if (err) {
+          console.log(err);
+          return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
+        }
 
-      console.log("UPDATED", numAffected);
+        console.log("UPDATED", numAffected);
 
-      cb();
-    });
+        cb();
+      });
+    } else {
+      cb('Viewer is a member');
+    }
   }
 
   function done(err) {
