@@ -1,8 +1,9 @@
-var Hapi        = require('hapi');
-var async       = require('async');
-var Comment     = require('./../../db/models/comment.js');
-var markdown    = require('markdown').markdown;
-var email       = require('./../email');
+var Hapi         = require('hapi');
+var async        = require('async');
+var Comment      = require('./../../db/models/comment.js');
+var markdown     = require('markdown').markdown;
+var email        = require('./../email');
+var notification = require('./../notification');
 
 exports = module.exports = create;
 
@@ -40,7 +41,6 @@ function create(request, reply) {
         return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
       } 
 
-
       cb();
     });
   }
@@ -50,6 +50,8 @@ function create(request, reply) {
       reply({error:"There was an error!"});
     } else {
       email.comment(comment);
+      notification.comment(comment.member, comment.thread, request.auth.credentials.name);
+
       reply({message:"Comment Updated!"});
     }
   }
