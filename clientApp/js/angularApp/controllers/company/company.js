@@ -15,7 +15,7 @@ theToolController
       return '<div data-markdown>'+text.replace(/\n/g, '<br>')+'</div>';
     }
     $scope.convertMarkdownToHtml = function(text) {
-      return '<div data-markdown>' + (text ? text : '') + '</div>';
+      return '<div data-markdown>' + text + '</div>';
     }
     $scope.submit = function() {
       var companyData = this.formData;
@@ -36,8 +36,12 @@ theToolController
     }
 
     $scope.submitComment = function() {
-      if (!$scope.commentData.markdown)
+      if ($scope.commentData.markdown == ""){
+        $scope.emptyComment = true;
         return;
+      }
+
+      console.log("Comment: " + $scope.commentData.markdown);
 
       $scope.loading = true;
 
@@ -73,7 +77,6 @@ theToolController
 
     CompanyFactory.get({id: $routeParams.id}, function(response) {
       $scope.company = $scope.formData = response;
-      $scope.commentData = {};
 
       MemberFactory.Member.getAll( function(response) {
         $scope.members = response;
@@ -87,4 +90,13 @@ theToolController
         $scope.loading = false;
       });
     });
+
+    $scope.init = function (){
+      $scope.commentData = {
+        markdown: ""
+      };
+      $scope.emptyComment = false;
+    };
+
+    $scope.init();
   });
