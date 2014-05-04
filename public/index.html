@@ -37,29 +37,44 @@
     <script type="text/javascript" src="/ink/js/autoload.js"></script>
     <script src="/js/vendor/markdown/markdown.js"></script>
   </head>
-  <body>
-    <div class="ink-grid">
-      <header class="vertical-space">
-        <div class="column-group horizontal-gutters">
-          <div class="all-50">
-            <h1><a href="/"><i class="fa fa-wrench fa-2x"></i> The Tool!</a></h1>
-          </div>
-          <div class="all-50">
-            <div class="push-right">
-              <a class="ink-button green" href="/#/speakers"><i class="fa fa-globe"></i> Speakers</a>
-              <a class="ink-button green" href="/#/companies"><i class="fa fa-building-o"></i> Companies</a>
-              <a class="ink-button blue" href="/#/members"><i class="fa fa-users"></i> Members</a>
-              <a class="ink-button orange" href="/#/member/me"><i class="fa fa-user"></i> Me</a>
-              <a class="ink-button red" href="/logout">Logout <i class="fa fa-sign-out"></i></a>
-            </div>
-          </div>
-        </div>
-      </header>
+  <body class="ink-drawer">
+    <div id="topbar">
+      <nav class="ink-navigation ink-grid ie7">
+        <ul class="menu horizontal black push-left small-push-center tiny-push-center">
+          <li class="hide-all show-tiny show-small"><button class="fa fa-bars left-drawer-trigger"></button></li>
+          <li class="logoPlaceholder"><a href="/" class="logoPlaceholder">The Tool!</a></li>
+        </ul>
+        <ul class="menu horizontal black push-right hide-small hide-tiny">
+          <li><a href="/#/speakers"><i class="fa fa-globe"></i> Speakers</a></li>
+          <li><a href="/#/companies"><i class="fa fa-building-o"></i> Companies</a></li>
+          <li><a href="/#/members"><i class="fa fa-users"></i> Members</a></li>
+          <li><a href="/#/member/me"><i class="fa fa-user"></i> Me</a></li>
+          <li><a href="/logout">Out <i class="fa fa-sign-out"></i></a></li>
+        </ul>
+      </nav>
     </div>
-    <div class="ink-grid">
-      <div ng-view></div>
+
+    <div class="left-drawer">
+      <ul>
+        <li><a href="/#/speakers"><i class="fa fa-globe"></i> Speakers</a></li>
+        <li><a href="/#/companies"><i class="fa fa-building-o"></i> Companies</a></li>
+        <li><a href="/#/members"><i class="fa fa-users"></i> Members</a></li>
+        <li><a href="/#/member/me"><i class="fa fa-user"></i> Me</a></li>
+        <li><a href="/logout">Logout <i class="fa fa-sign-out"></i></a></li>
+      </ul>
+    </div>
+
+    <br><br>
+
+    <div class="content-drawer">
+      <div class="ink-grid" ng-view></div>
     </div>
     <footer class="ink-grid">
+      <script>
+      Ink.requireModules(['Ink.UI.Drawer_1'], function(Drawer) {
+        var inkDrawer = new Drawer({ sides: 'left', mode: 'push' });
+      });
+      </script>
       <br><br><br><br>
       <a href="https://github.com/sinfo/the-tool/issues?state=open" target="_blank"><i class="fa fa-github"></i> Leave Feedback or Request new Features</a>
       <br><br><br>
