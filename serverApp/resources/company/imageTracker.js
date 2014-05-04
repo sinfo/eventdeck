@@ -50,10 +50,10 @@ function track(request, reply) {
   function addAccess(cb) {
     access = {
       date: Date.now(),
-      type: 'email'
+      where: 'email'
     }
 
-    accesses[accesses.length] = access;
+    accesses.push(access);
 
     cb();
   }
