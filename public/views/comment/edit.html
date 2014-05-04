@@ -2,7 +2,7 @@
 
   <div class="column-group horizontal-gutters">
     <div class="all-100">
-      <h1>Edit Comment {{comment._id}}</h1>    
+      <h1>Edit Comment {{comment._id}}</h1>
       <div class="ink-alert basic success" ng-show="message">
         <!--<button class="ink-dismiss">&times;</button>-->
         <p><strong>Sucess!</strong>
@@ -19,8 +19,8 @@
   </div>
   <div class="column-group horizontal-gutters">
     <div class="all-50">
-        
-      <form class="ink-form" ng-submit="submitComment()"> 
+
+      <form class="ink-form" ng-submit="submitComment()">
 
         <div class="control-group">
           <label for="markdownfield">Your Comment in Markdown</label>
@@ -31,6 +31,7 @@
         </div>
         <div class="control-group">
           <input type="submit" id="submit" value="Save Comment" class="ink-button green" />
+          <div ng-show="emptyComment" class="ink-alert basic error">You can't post empty comments.</div>
         </div>
       </form>
     </div>
