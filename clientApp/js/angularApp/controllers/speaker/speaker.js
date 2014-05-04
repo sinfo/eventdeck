@@ -15,7 +15,7 @@ theToolController
       return '<div data-markdown>'+text.replace(/\n/g, '<br>')+'</div>';
     }
     $scope.convertMarkdownToHtml = function(text) {
-      return '<div data-markdown>' + (text ? text : '') + '</div>';
+      return '<div data-markdown>' + text + '</div>';
     }
     $scope.submit = function() {
       var speakerData = this.formData;
@@ -36,8 +36,10 @@ theToolController
     }
 
     $scope.submitComment = function() {
-      if (!$scope.commentData.markdown)
+      if ($scope.commentData.markdown == ""){
+        $scope.emptyComment = true;
         return;
+      }
 
       $scope.loading = true;
 
@@ -85,4 +87,13 @@ theToolController
         $scope.loading = false;
       });
     });
+
+    $scope.init = function (){
+      $scope.commentData = {
+        markdown: ""
+      };
+      $scope.emptyComment = false;
+    };
+
+    $scope.init();
   });
