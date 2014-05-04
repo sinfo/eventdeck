@@ -16,8 +16,7 @@ var companySchema = new mongoose.Schema({
   access: Object,
   accesses: [{ 
     date: { type: Date, default: Date.now },
-    userAgent: String,
-    info: Object
+    type: String
   }],
   updated: { type: Date, default: Date.now }
 });
