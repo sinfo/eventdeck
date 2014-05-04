@@ -1,6 +1,7 @@
 var Hapi           = require('hapi');
 var async          = require('async');
 var Speaker        = require('./../../db/models/speaker.js');
+var notification  = require('./../notification');
 
 exports = module.exports = create;
 
