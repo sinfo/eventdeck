@@ -29,9 +29,9 @@ exports.redirect = function redirect(request, reply) {
     var refresh_token = body.refresh_token;
     var access_token = body.access_token;
 
-    fenix.person.getPerson(access_token, function(error, person) { 
+    fenix.person.getPerson(access_token, function(error, person) {
       if (error) { return reply.view('error.html', { error: error.error_description }); }
-    
+
       var person = JSON.parse(person);
 
       Member.findByIstId(person.username, function(error, result) {
@@ -43,7 +43,7 @@ exports.redirect = function redirect(request, reply) {
           console.log("LOG IN", account);
 
           request.auth.session.set(account);
-          return reply().redirect('/');;    
+          return reply().redirect('/');
         }
         else {
           return reply.view('error.html', { error: "Your ist id is not allowed :-(" });
