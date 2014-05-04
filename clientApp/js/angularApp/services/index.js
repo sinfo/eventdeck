@@ -56,4 +56,13 @@ theToolServices
         'send': {method: 'POST'}
       })
     }
+  })
+
+  .factory('NotificationFactory', function($resource) {
+    return $resource('/api/notifications', null, {
+      getAll: {
+        method: 'GET',
+        isArray:true
+      }
+    })
   });
