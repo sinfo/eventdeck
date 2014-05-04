@@ -10,8 +10,10 @@ theToolController
     }
 
     $scope.submitComment = function() {
-      if (!$scope.commentData.markdown)
+      if ($scope.commentData.markdown == ""){
+        $scope.emptyComment = true;
         return;
+      }
 
       $scope.loading = true;
 
@@ -33,4 +35,6 @@ theToolController
       $scope.comment = response;
       $scope.commentData = response;
     });
+
+    $scope.emptyComment = false;
   });
