@@ -5,5 +5,7 @@ var Company        = require('./../../db/models/company.js');
 exports = module.exports = page;
 
 function page(request, reply) {
-	reply("Test");
+	reply.view('sponsor.html', { 
+  
+  });
 }
