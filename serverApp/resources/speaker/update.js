@@ -86,8 +86,11 @@ function create(request, reply) {
   function done(err) {
     if (err) {
       reply({error:"There was an error!"});
-    } else {
-      reply({message:"Speaker Updated!"});
+    }  else {
+      //if(diffCompany.member) { email.companyAttribute(diffCompany.member, company); }
+
+      notification.update(request.auth.credentials.id, 'speaker-'+speaker.id, speaker.name, request.auth.credentials.name, diffSpeaker);
+      reply({message:'Speaker Updated!'});
     }
   }
 }
