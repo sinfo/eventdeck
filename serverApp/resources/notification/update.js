@@ -10,9 +10,16 @@ function notify(memberId, thread, thingName, memberName, diffObject) {
 
   var editionsArray = [];
   for(var propertyName in diffObject) {
-    editionsArray.push(propertyName);
+    if(propertyName != "updated"){
+      editionsArray.push(propertyName);
+    }  
   }
-  var editions = editionsArray.slice(0, -1).join(', ') + ' & ' + editionsArray[editionsArray.length];
+  var editions = editionsArray[0]; 
+  if(editionsArray.length > 1){
+    editions = editionsArray.slice(0, -1).join(', ')+ ' & ' +editionsArray[editionsArray.length -1];
+  } 
+
+  console.log(editionsArray);
 
   var members = [];
   async.series([
@@ -33,23 +40,17 @@ function notify(memberId, thread, thingName, memberName, diffObject) {
   }
 
   function saveNotification(cb) {
-    if(err) { return cb(err); }
-    if(result.length > 0) {
-      var newNotification = new Notification({
-        thread: thread,
-        member: memberId,
-        description: memberName+' edited '+editions+' on '+thingName+'.',
-        unread: members,
-        posted: Date.now()
-      })
-
-      newNotification.save(function (err, reply){
-        if (err) { return cb('Hipcup on the DB' + err);} 
-        cb();
-      });
-    } else {
-      cb('Thing not found!');
-    }
+    var newNotification = new Notification({
+      thread: thread,
+      member: memberId,
+      description: memberName+' edited '+editions+' on '+thingName+'.',
+      unread: members,
+      posted: Date.now()
+    })
+    newNotification.save(function (err, reply){
+      if (err) { return cb('Hipcup on the DB' + err);} 
+      cb();
+    });
   }
 
   function done(err) {
