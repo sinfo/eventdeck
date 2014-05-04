@@ -12,12 +12,12 @@ function notify(memberId, thread, thingName, memberName, diffObject) {
   for(var propertyName in diffObject) {
     if(propertyName != "updated"){
       editionsArray.push(propertyName);
-    }  
+    }
   }
-  var editions = editionsArray[0]; 
+  var editions = editionsArray[0];
   if(editionsArray.length > 1){
-    editions = editionsArray.slice(0, -1).join(', ')+ ' & ' +editionsArray[editionsArray.length -1];
-  } 
+    editions = editionsArray.slice(0, -1).join(', ')+ ' and ' +editionsArray[editionsArray.length -1];
+  }
 
   console.log(editionsArray);
 
@@ -48,7 +48,7 @@ function notify(memberId, thread, thingName, memberName, diffObject) {
       posted: Date.now()
     })
     newNotification.save(function (err, reply){
-      if (err) { return cb('Hipcup on the DB' + err);} 
+      if (err) { return cb('Hipcup on the DB' + err);}
       cb();
     });
   }
