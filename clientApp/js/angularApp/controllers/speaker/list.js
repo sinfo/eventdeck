@@ -23,9 +23,5 @@ theToolController
       $scope.reverse = false;
       $scope.speakers = response;
     });
-
-    MemberFactory.Member.getAll(function(response) {
-      $scope.members = response;
-    });
   });
   
