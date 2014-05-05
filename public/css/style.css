@@ -71,6 +71,99 @@
   clear: both;
 }
 
+body.ink-drawer .left-drawer,
+body.ink-drawer .right-drawer {
+  background: #1e1e1e;
+}
+body.ink-drawer .left-drawer ul,
+body.ink-drawer .right-drawer ul {
+  margin: 59px 0 0 0;
+  padding: 0;
+  list-style-type: none;
+}
+body.ink-drawer .left-drawer li,
+body.ink-drawer .right-drawer li {
+  display: block;
+  margin: 0;
+  font-weight: 300;
+}
+body.ink-drawer .left-drawer li.search,
+body.ink-drawer .right-drawer li.search {
+  position: relative;
+  margin: 15px;
+}
+body.ink-drawer .left-drawer li.search input[type=search],
+body.ink-drawer .right-drawer li.search input[type=search] {
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: .4em .6em .4em 1.9em;
+  width: 100%;
+  border: 1px solid #DDD;
+  font-size: 14px;
+}
+body.ink-drawer .left-drawer li.search .fa-search,
+body.ink-drawer .right-drawer li.search .fa-search {
+  position: absolute;
+  top: .7em;
+  left: .6em;
+  font-size: 14px;
+}
+body.ink-drawer .left-drawer li.search #search-dropdown,
+body.ink-drawer .right-drawer li.search #search-dropdown {
+  width: 100%;
+}
+body.ink-drawer .left-drawer li.search #search-dropdown .dropdown-menu li,
+body.ink-drawer .right-drawer li.search #search-dropdown .dropdown-menu li {
+  float: none;
+  width: 100%;
+}
+body.ink-drawer .left-drawer li.heading,
+body.ink-drawer .right-drawer li.heading {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f0f0f0;
+  text-transform: uppercase;
+  margin-top: .5em;
+  font-weight: 700;
+  padding: 1em 15px .5em;
+}
+body.ink-drawer .left-drawer li > a,
+body.ink-drawer .right-drawer li > a {
+  display: block;
+  padding: 6px 15px;
+  color: #bbb;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: .875em;
+}
+body.ink-drawer .left-drawer li > a:hover,
+body.ink-drawer .right-drawer li > a:hover {
+  background: #333;
+  color: #FFF;
+}
+body.ink-drawer .left-drawer li > a.ink-button,
+body.ink-drawer .right-drawer li > a.ink-button {
+  color: white;
+  padding: 4px 12px;
+  margin: 1em;
+}
+body.ink-drawer .left-drawer li > a.ink-button:hover,
+body.ink-drawer .right-drawer li > a.ink-button:hover {
+  background: #0d68c2;
+}
+body.ink-drawer .left-drawer li.active > a,
+body.ink-drawer .right-drawer li.active > a {
+  background: #333;
+  color: #FFF;
+}
+body.ink-drawer .left-drawer li:last-child,
+body.ink-drawer .right-drawer li:last-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 1em;
+}
+
 .red { background: #E41B17; }
 .blue { background: #0000FF; }
 .orange { background: #FFA500; }
