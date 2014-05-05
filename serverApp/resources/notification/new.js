@@ -6,18 +6,7 @@ var Notification = require('./../../db/models/notification.js');
 
 exports = module.exports = notify;
 
-function notify(memberId, thread, thingName, memberName, diffObject) {
-
-  var editionsArray = [];
-  for(var propertyName in diffObject) {
-    if(propertyName != "updated"){
-      editionsArray.push(propertyName);
-    }
-  }
-  var editions = editionsArray[0];
-  if(editionsArray.length > 1){
-    editions = editionsArray.slice(0, -1).join(', ')+ ' and ' +editionsArray[editionsArray.length -1];
-  }
+function notify(memberId, thread, thingName, thingType, memberName) {
 
   var members = [];
   async.series([
@@ -43,10 +32,11 @@ function notify(memberId, thread, thingName, memberName, diffObject) {
     var newNotification = new Notification({
       thread: thread,
       member: memberId,
-      description: memberName+' edited '+editions+' on '+thingName+'.',
+      description: memberName+' created a new ' +thingType+ ' named ' +thingName+'.',
       unread: members,
       posted: Date.now()
     })
+
     newNotification.save(function (err, reply){
       if (err) { return cb('Hipcup on the DB' + err);}
       cb();

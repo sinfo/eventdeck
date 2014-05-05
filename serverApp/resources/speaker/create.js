@@ -1,6 +1,7 @@
 var Hapi           = require('hapi');
 var async          = require('async');
 var Speaker        = require('./../../db/models/speaker.js');
+var notification  = require('./../notification');
 
 exports = module.exports = create;
 
@@ -65,6 +66,8 @@ function create(request, reply) {
     if (err) {
       reply({error:"There was an error!"});
     } else {
+
+      notification.new(request.auth.credentials.id, 'speaker-'+speaker.id, speaker.name, "speaker",request.auth.credentials.name);
       reply({message:"Speaker Updated!"});
     }
   }
