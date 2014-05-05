@@ -36,17 +36,17 @@ theToolController.controller('NotificationController', function ($scope, $http, 
         $scope.loading = false;
 
         if ($scope.notificationsInfo.number == 0) {
-          $scope.notificationsInfo.text = " No notifications";
+          $scope.notificationsInfo.text = " No Notifications";
         }
         else {
-          $scope.notificationsInfo.text = " " + $scope.notificationsInfo.number + " notification" + ($scope.notificationsInfo.number > 1 ? "s" : "");
+          $scope.notificationsInfo.text = " " + $scope.notificationsInfo.number + " Notification" + ($scope.notificationsInfo.number > 1 ? "s" : "");
         }
       });
 
       var update = function() {
 
         setTimeout(function() {
-          
+
           NotificationFactory.getAll(function(response) {
             $scope.notifications = [];
             $scope.notificationsInfo.number = 0;
@@ -71,10 +71,10 @@ theToolController.controller('NotificationController', function ($scope, $http, 
             $scope.loading = false;
 
             if ($scope.notificationsInfo.number == 0) {
-              $scope.notificationsInfo.text = " No notifications";
+              $scope.notificationsInfo.text = " No Notifications";
             }
             else {
-              $scope.notificationsInfo.text = " " + $scope.notificationsInfo.number + " notification" + ($scope.notificationsInfo.number > 1 ? "s" : "");
+              $scope.notificationsInfo.text = " " + $scope.notificationsInfo.number + " Notification" + ($scope.notificationsInfo.number > 1 ? "s" : "");
             }
           });
 
