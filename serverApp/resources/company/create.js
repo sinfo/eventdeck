@@ -57,11 +57,10 @@ function create(request, reply) {
       if (err) {
         return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
       } else if(reply) {
-        cb();
-      } else { // same id        
+        return cb();
+      } else { // same id
         return cb(Hapi.error.conflict('Company ID exists: '+request.payload.id));
       }
-      cb();
     });
   }
 
@@ -69,7 +68,6 @@ function create(request, reply) {
     if (err) {
       reply({error:"There was an error!"});
     } else {
-
       notification.new(request.auth.credentials.id, 'company-'+company.id, company.name, "company",request.auth.credentials.name);
       reply({message:"Company Updated!"});
     }
