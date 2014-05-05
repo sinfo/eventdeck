@@ -28,7 +28,9 @@ function notify(memberId, thread, memberName) {
     function gotMembers(err, result) {
       if (err) cb(err);
       for(var member in result) {
-        members.push(result[member].id);
+        if(result[member].id != memberId){
+          members.push(result[member].id);
+        }
       }
       cb();
     }
