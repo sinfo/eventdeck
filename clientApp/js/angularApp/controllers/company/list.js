@@ -55,9 +55,5 @@ theToolController
       $scope.reverse = true;
       $scope.companies = response;
     });
-
-    MemberFactory.Member.getAll(function(response) {
-      $scope.members = response;
-    });
   });
   
