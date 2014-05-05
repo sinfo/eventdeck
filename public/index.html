@@ -40,12 +40,19 @@
   <body class="ink-drawer" ng-controller="NotificationController">
     <div id="topbar">
       <nav class="ink-navigation ink-grid ie7">
-        <ul class="menu horizontal black push-left small-push-center tiny-push-center">
-          <li class="hide-all show-tiny show-small"><button class="fa fa-bars left-drawer-trigger"></button></li>
+        <ul class="menu horizontal black push-left medium-push-center small-push-center tiny-push-center">
+          <li class="hide-all show-tiny show-small show-medium"><button class="fa fa-bars left-drawer-trigger"></button></li>
           <li class="logoPlaceholder"><a href="/" class="logoPlaceholder">The Tool!</a></li>
         </ul>
-        <ul class="menu horizontal black push-right hide-small hide-tiny">
-          <li><a id="modalTrigger"><span style="{{notificationsInfo.number == 0 ? '' : 'color: red;'}}"><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a></li>
+        <ul class="menu horizontal black push-right hide-medium hide-small hide-tiny">
+          <li>
+            <a href="#"><span style="{{notificationsInfo.number == 0 ? '' : 'color: red;'}}"><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a>
+            <ul class="submenu" style="max-height:400px; overflow:auto;">
+              <li ng-repeat="notification in notifications" style="width:600px"><a href="/#/{{notification.path}}">
+              <img src="https://graph.facebook.com/{{notification.member}}/picture" style="width:20px"> 
+              {{notification.text}}</a></li>
+            </ul>
+          </li>
           <li><a href="/#/speakers"><i class="fa fa-globe"></i> Speakers</a></li>
           <li><a href="/#/companies"><i class="fa fa-building-o"></i> Companies</a></li>
           <li><a href="/#/members"><i class="fa fa-users"></i> Members</a></li>
@@ -55,44 +62,16 @@
       </nav>
     </div>
 
-    <div class="ink-shade fade">
-      <div id="modal" class="ink-modal fade" data-trigger="#modalTrigger" data-width="80%" data-height="80%">
-        <div class="modal-header">
-          <button class="modal-close ink-dismiss"></button>
-          <h3>Notifications</h3>
-        </div>
-        <div class="modal-body" id="modalContent">
-          <div class="column-group">
-            <div class="all-100">
-              <h2 ng-show="loading">Loading...</h2>
-              <div ng-hide="loading">
-                <a href="/#/{{notification.path}}" ng-repeat="notification in notifications">
-                  <div class="all-100 ink-label half-bottom-space align-left {{notification.color}}" style="height: 4em;">
-                    <div class="all-5 tiny-30 small-20" style="margin-top: 0.5em; height: 3em;">
-                      <img style="border-radius: 3px;" src="https://graph.facebook.com/{{notification.member}}/picture">
-                    </div>
-                    <p class="all-5 tiny-70 small-80" style="line-height: 4em;">{{notification.text}}</p>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script>
-        // Not required if you are using autoload.js.
-        Ink.requireModules(['Ink.Dom.Selector_1','Ink.UI.Modal_1'], function(Selector, Modal){
-          var modalElement = Ink.s('#modal');
-          var modalObj = new Modal(modalElement, {
-            closeOnClick: true,
-            shadeClass: ''
-          });
-        });
-    </script>
-
     <div class="left-drawer">
       <ul>
+        <li>
+          <a href="#"><span style="{{notificationsInfo.number == 0 ? '' : 'color: red;'}}"><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a>
+          <ul class="submenu" style="max-height:200px; overflow:auto; margin: 0px 20px 0px;">
+            <li ng-repeat="notification in notifications"><a href="/#/{{notification.path}}">
+            <img src="https://graph.facebook.com/{{notification.member}}/picture" style="width:20px"> 
+            {{notification.text}}</a></li>
+          </ul>
+        </li>
         <li><a href="/#/speakers"><i class="fa fa-globe"></i> Speakers</a></li>
         <li><a href="/#/companies"><i class="fa fa-building-o"></i> Companies</a></li>
         <li><a href="/#/members"><i class="fa fa-users"></i> Members</a></li>
