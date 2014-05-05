@@ -1,6 +1,6 @@
 'use strict';
 
-theToolController.controller('NotificationController', function ($scope, $http, $routeParams, $sce, $location, $rootScope, NotificationFactory, MemberFactory) {
+theToolController.controller('NotificationController', function ($scope, $http, $routeParams, $sce, $location, $rootScope, NotificationFactory, MemberFactory, CompanyFactory, SpeakerFactory) {
 
   $scope.loading = true;
 
@@ -13,6 +13,8 @@ theToolController.controller('NotificationController', function ($scope, $http, 
 
   $scope.me = {};
   $scope.members = [];
+  $scope.companies = [];
+  $scope.speakers = [];
 
   $scope.update = function() {
     NotificationFactory.getAll(function(response) {
@@ -89,5 +91,17 @@ theToolController.controller('NotificationController', function ($scope, $http, 
         setTimeout($scope.update, 500);
       });
     });
+  });
+
+  CompanyFactory.getAll(function(response) {
+    $scope.predicate = 'participation.payment.price';
+    $scope.reverse = true;
+    $scope.companies = response;
+  });
+
+  SpeakerFactory.getAll(function(response) {
+    $scope.predicate = 'participation';
+    $scope.reverse = false;
+    $scope.speakers = response;
   });
 });
