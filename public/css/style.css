@@ -21,7 +21,7 @@
 #topbar .ink-navigation ul.black li a {
   padding: .7em 1em;
   color: #bbbbbb;
-  text-transform: uppercase;
+  text-transform: none;
   font-weight: 300;
   line-height: 24px;
   *height: auto;
@@ -124,7 +124,7 @@ body.ink-drawer .left-drawer li.heading,
 body.ink-drawer .right-drawer li.heading {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: #f0f0f0;
-  text-transform: uppercase;
+  text-transform: none;
   margin-top: .5em;
   font-weight: 700;
   padding: 1em 15px .5em;
@@ -135,7 +135,7 @@ body.ink-drawer .right-drawer li > a {
   padding: 6px 15px;
   color: #bbb;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: none;
   font-size: .875em;
 }
 body.ink-drawer .left-drawer li > a:hover,
