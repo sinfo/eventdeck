@@ -35,7 +35,7 @@ function notify(memberId, thread, thingName, thingType, memberName) {
       description: memberName+' created a new ' +thingType+ ' named ' +thingName+'.',
       unread: members,
       posted: Date.now()
-    })
+    });
 
     newNotification.save(function (err, reply){
       if (err) { return cb('Hipcup on the DB' + err);}
