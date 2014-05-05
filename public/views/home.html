@@ -1,33 +1,33 @@
 <div class="ink-grid" id="homeModal" ng-controller="home">
   <div class="column-group horizontal-gutters vertical-space">
-    <div class="all-33">
+    <div class="all-33 medium-50 small-100 tiny-100">
       <h1>Companies</h1>
       <h6><a href="/#/companies/">Main list</a></h6>
       <h6><a href="/#/companies/table/">By Member Table</a></h6>
       <h6><a href="/#/companies/budget/">Budget</a></h6>
     </div>
-    <div class="all-33">
+    <div class="all-33 medium-50 small-100 tiny-100">
       <h1>Speakers</h1>
       <h6><a href="/#/speakers/">Main list</a></h6>
       <h6><a href="/#/speakers/table/">By Member Table</a></h6>
     </div>
-    <div class="all-33">
+    <div class="all-33 medium-50 small-100 tiny-100">
       <h1>Members</h1>
       <h6><a href="/#/members/">Main list</a></h6>
       <h6><a href="/#/member/me/">My Profile</a></h6>
     </div>
   </div>
   <div class="column-group">
-    <div class="all-50">
+    <div class="all-100">
       <h1>Timeline</h1>
       <h2 ng-show="loading">Loading...</h2>
       <div ng-hide="loading">
         <a href="/#/{{notification.path}}" ng-repeat="notification in notifications">
-          <div class="all-100 ink-label blue half-bottom-space align-center" style="height: 4em;">
-            <div class="all-10 hide-tiny hide-small hide-medium" style="margin-top: 0.5em; height: 3em;">
+          <div class="all-100 ink-label half-bottom-space align-left {{notification.color}}" style="height: 4em;">
+            <div class="all-5 hide-tiny hide-small hide-medium" style="margin-top: 0.5em; height: 3em;">
               <img style="border-radius: 3px;" src="https://graph.facebook.com/{{notification.member}}/picture">
             </div>
-            <span class="all-90 tiny-100 small-100 medium-100" style="line-height: 4em;">{{notification.text}}</span>
+            <span class="all-95 tiny-100 small-100 medium-100" style="line-height: 4em;">{{notification.text}}</span>
           </div>
         </a>
       </div>
