@@ -2,28 +2,46 @@
 
 theToolController.controller('NotificationController', function ($scope, $http, $routeParams, $sce, NotificationFactory, MemberFactory) {
 
-  $scope.notifications = {
+  $scope.loading = true;
+
+  $scope.notifications = [];
+
+  $scope.notificationsInfo = {
     number: 0,
     text: " Loading..."
   };
 
   MemberFactory.Member.get({id: "me"}, function(me){
 
-    NotificationFactory.getAll(function(response){
-      for (var notification in response){
-        if (response[notification].thread/* && response[notification].member != me.id*/){ //uncomment to hide self-events
-          if (response[notification].unread.indexOf(me.id) != -1){
-            $scope.notifications.number++;
-          }
-        }
-      }
+    MemberFactory.Member.getAll(function(members){
 
-      if ($scope.notifications.number == 0){
-        $scope.notifications.text = " No notifications";
-      }
-      else{
-        $scope.notifications.text = " " + $scope.notifications.number + " notification" + ($scope.notifications.number > 1 ? "s" : "");
-      }
+      NotificationFactory.getAll(function(response){
+        for (var i = 0, j = response.length; i < j; i++){
+          //if (response[i].member != me.id){ //uncomment to hide self-events
+          if (response[i].unread.indexOf(me.id) != -1){
+            $scope.notificationsInfo.number++;
+
+            $scope.notifications.unshift({
+              path: response[i].thread.replace("-", "/"),
+              text: response[i].description,
+              member: members.filter(function(o){
+                        return response[i].member == o.id;
+                      })[0].facebook,
+              color: (response[i].unread.indexOf(me.id) != -1 ? "green" : "grey")
+            });
+          }
+          //}
+        }
+
+        $scope.loading = false;
+
+        if ($scope.notificationsInfo.number == 0){
+          $scope.notificationsInfo.text = " No notifications";
+        }
+        else{
+          $scope.notificationsInfo.text = " " + $scope.notificationsInfo.number + " notification" + ($scope.notificationsInfo.number > 1 ? "s" : "");
+        }
+      });
     });
   });
 });
