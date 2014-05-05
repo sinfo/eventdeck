@@ -1,6 +1,7 @@
 var Hapi           = require('hapi');
 var async          = require('async');
 var Company        = require('./../../db/models/company.js');
+var notification  = require('./../notification');
 
 exports = module.exports = get;
 
@@ -51,6 +52,7 @@ function get(request, reply) {
     if (err) {
       reply(Hapi.error.badRequest(err.detail));
     } else {
+      notification.read(request.auth.credentials.id, 'company-' + companyId);
       reply(company);
     }
   }
