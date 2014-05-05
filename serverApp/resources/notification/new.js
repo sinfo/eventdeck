@@ -40,8 +40,12 @@ function notify(memberId, thread, thingName, thingType, memberName) {
     });
 
     newNotification.save(function (err, reply){
-      if (err) { return cb('Hipcup on the DB' + err);}
-      cb();
+      if (err) {
+        cb('Hipcup on the DB' + err);
+      }
+      else {
+        cb();
+      }
     });
   }
 
