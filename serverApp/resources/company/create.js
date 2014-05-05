@@ -1,6 +1,7 @@
 var Hapi           = require('hapi');
 var async          = require('async');
 var Company        = require('./../../db/models/company.js');
+var notification  = require('./../notification');
 
 exports = module.exports = create;
 
@@ -68,6 +69,8 @@ function create(request, reply) {
     if (err) {
       reply({error:"There was an error!"});
     } else {
+
+      notification.new(request.auth.credentials.id, 'company-'+company.id, company.name, "company",request.auth.credentials.name);
       reply({message:"Company Updated!"});
     }
   }
