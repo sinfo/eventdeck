@@ -28,5 +28,8 @@ notificationSchema.statics.findAll = function (cb) {
   this.find({},cb);
 };
 
- 
+notificationSchema.statics.readThread = function(memberId, thread, cb) {
+  this.update({thread: thread}, { $pull: { unread: memberId } } , { multi: true }, cb);
+};
+
 var Notification = module.exports = mongoose.model('Notification', notificationSchema);
