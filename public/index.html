@@ -47,10 +47,10 @@
         </ul>
         <ul class="menu horizontal black push-right hide-small hide-tiny">
           <li><a><input type="text" ng-model="search.name" ng-change="searchBoxChanged()" ></a>
-            <ul class="submenu">
-              <li ng-show="search.name" ng-repeat="company in companies | filter:search:strict"><a href="/#/company/{{company.id}}"><img src="{{company.img}}" style="width:20px"> {{company.name}}</a></li>
-              <li ng-show="search.name" ng-repeat="speaker in speakers | filter:search:strict"><a href="/#/speaker/{{speaker.id}}"><img src="{{speaker.img}}" style="width:20px"> {{speaker.name}}</a></li>
-              <li ng-show="search.name" ng-repeat="member in members | filter:search:strict"><a href="/#/member/{{member.id}}"><img src="https://graph.facebook.com/{{member.facebook}}/picture" style="width:20px"> {{member.name}}</a></li>
+            <ul class="submenu" style="max-height:400px; overflow:auto;">
+              <li ng-show="search.name" ng-repeat="company in companies | filter:search:strict" style="width:300px"><a href="/#/company/{{company.id}}"><img src="{{company.img}}" style="height:20px; max-width:40px"> {{company.name}}</a></li>
+              <li ng-show="search.name" ng-repeat="speaker in speakers | filter:search:strict" style="width:300px"><a href="/#/speaker/{{speaker.id}}"><img src="{{speaker.img}}" style="height:20px; max-width:40px"> {{speaker.name}}</a></li>
+              <li ng-show="search.name" ng-repeat="member in members | filter:search:strict" style="width:300px"><a href="/#/member/{{member.id}}"><img src="https://graph.facebook.com/{{member.facebook}}/picture" style="height:20px; max-width:40px"> {{member.name}}</a></li>
             </ul> 
           </li>
           <li>
