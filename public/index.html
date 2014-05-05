@@ -40,11 +40,11 @@
   <body class="ink-drawer" ng-controller="NotificationController">
     <div id="topbar">
       <nav class="ink-navigation ink-grid ie7">
-        <ul class="menu horizontal black push-left medium-push-center small-push-center tiny-push-center">
-          <li class="hide-all show-tiny show-small show-medium"><button class="fa fa-bars left-drawer-trigger"></button></li>
+        <ul class="menu horizontal black push-left small-push-center tiny-push-center">
+          <li class="hide-all show-tiny show-small"><button class="fa fa-bars left-drawer-trigger"></button></li>
           <li class="logoPlaceholder"><a href="/" class="logoPlaceholder">The Tool!</a></li>
         </ul>
-        <ul class="menu horizontal black push-right hide-medium hide-small hide-tiny">
+        <ul class="menu horizontal black push-right hide-small hide-tiny">
           <li>
             <a><span style="{{notificationsInfo.number == 0 ? '' : 'color: red;'}}"><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a>
             <ul class="submenu" style="max-height:400px; overflow:auto;">
@@ -53,11 +53,23 @@
               {{notification.text}}</a></li>
             </ul>
           </li>
-          <li><a href="/#/speakers"><i class="fa fa-globe"></i> Speakers</a></li>
-          <li><a href="/#/companies"><i class="fa fa-building-o"></i> Companies</a></li>
-          <li><a href="/#/members"><i class="fa fa-users"></i> Members</a></li>
-          <li><a href="/#/member/me"><i class="fa fa-user"></i> Me</a></li>
-          <li><a href="/logout">Out <i class="fa fa-sign-out"></i></a></li>
+          <li><a href="/#/speakers"><i class="fa fa-globe"></i> Speakers</a>
+            <ul class="submenu">
+              <li><a href="/#/speakers/table/" style="width:200px">By Member Table</a></li>
+            </ul> 
+          </li>
+          <li><a href="/#/companies"><i class="fa fa-building-o"></i> Companies</a>
+            <ul class="submenu">
+              <li><a href="/#/companies/table/" style="width:200px">By Member Table</a></li>
+              <li><a href="/#/companies/budget/" style="width:200px">Budget</a></li>
+            </ul> 
+          </li>
+          <li><a href="/#/members"><i class="fa fa-users"></i> Members</a>
+            <ul class="submenu">
+              <li><a href="/#/member/me" style="width:200px"><i class="fa fa-user"></i> Me</a></li>
+              <li><a href="/logout" style="width:200px">Log Out <i class="fa fa-sign-out"></i></a></li>
+            </ul> 
+          </li>
         </ul>
       </nav>
     </div>
@@ -72,11 +84,23 @@
             {{notification.text}}</a></li>
           </ul>
         </li>
-        <li><a href="/#/speakers"><i class="fa fa-globe"></i> Speakers</a></li>
-        <li><a href="/#/companies"><i class="fa fa-building-o"></i> Companies</a></li>
-        <li><a href="/#/members"><i class="fa fa-users"></i> Members</a></li>
-        <li><a href="/#/member/me"><i class="fa fa-user"></i> Me</a></li>
-        <li><a href="/logout">Logout <i class="fa fa-sign-out"></i></a></li>
+        <li><a href="/#/speakers"><i class="fa fa-globe"></i> Speakers</a>
+          <ul class="submenu" style="margin: 0px 20px 0px;">
+            <li><a href="/#/speakers/table/" style="width:200px">By Member Table</a></li>
+          </ul> 
+        </li>
+        <li><a href="/#/companies"><i class="fa fa-building-o"></i> Companies</a>
+          <ul class="submenu" style="margin: 0px 20px 0px;">
+            <li><a href="/#/companies/table/" style="width:200px">By Member Table</a></li>
+            <li><a href="/#/companies/budget/" style="width:200px">Budget</a></li>
+          </ul> 
+        </li>
+        <li><a href="/#/members"><i class="fa fa-users"></i> Members</a>
+          <ul class="submenu" style="margin: 0px 20px 0px;">
+            <li><a href="/#/member/me" style="width:200px"><i class="fa fa-user"></i> Me</a></li>
+            <li><a href="/logout" style="width:200px">Log Out <i class="fa fa-sign-out"></i></a></li>
+          </ul> 
+        </li>
       </ul>
     </div>
 
