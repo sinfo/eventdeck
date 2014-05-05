@@ -85,14 +85,11 @@
         Ink.requireModules(['Ink.Dom.Selector_1','Ink.UI.Modal_1'], function(Selector, Modal){
           var modalElement = Ink.s('#modal');
           var modalObj = new Modal(modalElement, {
-            options.closeOnClick: true,
             options.disableScroll: false,
-            options.closeOnEscape: true,
-            options.responsive: true
+            options.closeOnClick: true      //not working
           });
         });
     </script>
-
 
     <div class="left-drawer">
       <ul>
