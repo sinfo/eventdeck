@@ -44,7 +44,8 @@
           <li class="hide-all show-tiny show-small"><button class="fa fa-bars left-drawer-trigger"></button></li>
           <li class="logoPlaceholder"><a href="/" class="logoPlaceholder">The Tool!</a></li>
         </ul>
-        <ul class="menu horizontal black push-right hide-small hide-tiny">
+        <ul class="menu horizontal black push-right hide-small hide-tiny" ng-controller="NotificationController">
+          <li><a href="/#/speakers"><i class="fa fa-bell"></i><span style="{{notifications.number == 0 ? '' : 'color: red;'}}">{{notifications.text}}</span></a></li>
           <li><a href="/#/speakers"><i class="fa fa-globe"></i> Speakers</a></li>
           <li><a href="/#/companies"><i class="fa fa-building-o"></i> Companies</a></li>
           <li><a href="/#/members"><i class="fa fa-users"></i> Members</a></li>
