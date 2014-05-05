@@ -14,10 +14,6 @@ theToolController.controller('NotificationController', function ($scope, $http, 
   $scope.me = {};
   $scope.members = [];
 
-  $rootScope.$on("$locationChangeStart", function(event, next, current) { 
-    setTimeout($scope.update, 500);
-  });
-
   $scope.update = function() {
     NotificationFactory.getAll(function(response) {
       $scope.notifications = [];
@@ -88,6 +84,10 @@ theToolController.controller('NotificationController', function ($scope, $http, 
       });
 
       setInterval($scope.update, 10000);
+
+      $rootScope.$on("$locationChangeStart", function(event, next, current) { 
+        setTimeout($scope.update, 500);
+      });
     });
   });
 });
