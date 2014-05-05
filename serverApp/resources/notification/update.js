@@ -29,7 +29,9 @@ function notify(memberId, thread, thingName, memberName, diffObject) {
     Member.findAll(gotMembers);
 
     function gotMembers(err, result) {
-      if (err) cb(err);
+      if (err)
+        return cb(err);
+
       for(var member in result) {
         if(result[member].id != memberId){
           members.push(result[member].id);

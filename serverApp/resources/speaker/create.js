@@ -54,11 +54,10 @@ function create(request, reply) {
       if (err) {
         return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
       } else if(reply) {
-        cb();
+        return cb();
       } else { // same id
         return cb(Hapi.error.conflict('Speaker ID exists: '+request.payload.id));
       }
-      cb();
     });
   }
 
@@ -66,7 +65,6 @@ function create(request, reply) {
     if (err) {
       reply({error:"There was an error!"});
     } else {
-
       notification.new(request.auth.credentials.id, 'speaker-'+speaker.id, speaker.name, "speaker",request.auth.credentials.name);
       reply({message:"Speaker Updated!"});
     }
