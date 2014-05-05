@@ -46,17 +46,11 @@ theToolController.controller('NotificationController', function ($scope, $http, 
       var update = function() {
 
         setTimeout(function() {
-
-          $scope.loading = true;
-
-          $scope.notifications = [];
-
-          $scope.notificationsInfo = {
-            number: 0,
-            text: " Loading..."
-          };
-
+          
           NotificationFactory.getAll(function(response) {
+            $scope.notifications = [];
+            $scope.notificationsInfo.number = 0;
+            
             for (var i = 0, j = response.length; i < j; i++) {
               //if (response[i].member != me.id) { //uncomment to hide self-events
               if (response[i].unread.indexOf(me.id) != -1) {
