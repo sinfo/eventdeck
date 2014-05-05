@@ -20,7 +20,7 @@
 }
 #topbar .ink-navigation ul.black li a {
   padding: .7em 1em;
-  color: #eee;
+  color: #fff;
   text-transform: none;
   font-weight: 300;
   line-height: 24px;
@@ -56,7 +56,7 @@
   font-size: 21px;
   background: none;
   font-size: 1.2em;
-  color: #eee;
+  color: #fff;
   border: none;
   padding: .8em .8em .8em 0;
   float: left;
@@ -125,7 +125,7 @@ body.ink-drawer .right-drawer li.search #search-dropdown .dropdown-menu li {
 }
 body.ink-drawer .left-drawer li.heading,
 body.ink-drawer .right-drawer li.heading {
-  color: #eee;
+  color: #fff;
   text-transform: none;
   margin-top: .5em;
   font-weight: 700;
@@ -135,7 +135,7 @@ body.ink-drawer .left-drawer li > a,
 body.ink-drawer .right-drawer li > a {
   display: block;
   padding: 6px 15px;
-  color: #eee;
+  color: #fff;
   text-decoration: none;
   text-transform: none;
   font-size: .875em;
