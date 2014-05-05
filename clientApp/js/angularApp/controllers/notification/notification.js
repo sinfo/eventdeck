@@ -85,7 +85,7 @@ theToolController.controller('NotificationController', function ($scope, $http, 
           });
 
           update();
-        }, 15000);
+        }, 5000);
 
       };
 

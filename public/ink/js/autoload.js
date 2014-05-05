@@ -19,7 +19,7 @@ Ink.createModule('Ink.Autoload', 1, ['Ink.Dom.Selector_1', 'Ink.Dom.Loaded_1', '
             'DatePicker_1'  : '.ink-datepicker',
             'Dropdown_1'    : '.ink-dropdown',
             'Gallery_1'     : 'ul.ink-gallery-source',
-            'Modal_1'       : '.ink-modal',
+            //'Modal_1'       : '.ink-modal',
             'ProgressBar_1' : '.ink-progress-bar',
             'SortableList_1': '.ink-sortable-list',
             'Spy_1'         : '[data-spy="true"]',

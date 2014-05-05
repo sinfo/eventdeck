@@ -45,7 +45,7 @@
           <li class="logoPlaceholder"><a href="/" class="logoPlaceholder">The Tool!</a></li>
         </ul>
         <ul class="menu horizontal black push-right hide-small hide-tiny">
-          <li><a id="modalTrigger"><i class="fa fa-bell"></i><span style="{{notificationsInfo.number == 0 ? '' : 'color: red;'}}">{{notificationsInfo.text}}</span></a></li>
+          <li><a id="modalTrigger"><span style="{{notificationsInfo.number == 0 ? '' : 'color: red;'}}"><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a></li>
           <li><a href="/#/speakers"><i class="fa fa-globe"></i> Speakers</a></li>
           <li><a href="/#/companies"><i class="fa fa-building-o"></i> Companies</a></li>
           <li><a href="/#/members"><i class="fa fa-users"></i> Members</a></li>
@@ -85,8 +85,7 @@
         Ink.requireModules(['Ink.Dom.Selector_1','Ink.UI.Modal_1'], function(Selector, Modal){
           var modalElement = Ink.s('#modal');
           var modalObj = new Modal(modalElement, {
-            options.disableScroll: false,
-            options.closeOnClick: true      //not working
+            closeOnClick: true
           });
         });
     </script>
