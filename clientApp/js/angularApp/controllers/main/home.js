@@ -13,17 +13,18 @@ theToolController.controller('home', function ($scope, $http, $sce, Notification
     MemberFactory.Member.getAll(function(members){
 
       NotificationFactory.getAll(function(response){
-        for (var notification in response){
-          if (response[notification].thread/* && response[notification].member != me.id*/){ //uncomment to hide self-events
-            $scope.notifications.unshift({
-              path: response[notification].thread.replace("-", "/"),
-              text: response[notification].description,
-              member: members.filter(function(o){
-                        return response[notification].member == o.id;
-                      })[0].facebook,
-              color: (response[notification].unread.indexOf(me.id) != -1 ? "green" : "grey")
-            });
-          }
+        for (var i = 0, j = response.length; i < j; i++){
+          //if (response[i].member != me.id){ //uncomment to hide self-events
+          var date = new Date(response[i].posted);
+          $scope.notifications.unshift({
+            path: response[i].thread.replace("-", "/"),
+            text: date.toLocaleDateString("pt-PT") + " - " + date.getHours() + ":" + date.getMinutes() + " -> " + response[i].description,
+            member: members.filter(function(o){
+                      return response[i].member == o.id;
+                    })[0].facebook,
+            color: (response[i].unread.indexOf(me.id) != -1 ? "green" : "grey")
+          });
+          //}
         }
 
         $scope.loading = false;
