@@ -6,3 +6,4 @@ require('./speaker.js');
 require('./member.js');
 require('./comment.js');
 require('./notification');
+require('./meeting');
