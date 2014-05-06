@@ -20,7 +20,7 @@ theToolController.controller('NotificationController', function ($scope, $http, 
     NotificationFactory.getAll(function(response) {
       $scope.notifications = [];
       $scope.notificationsInfo.number = 0;
-      
+
       for (var i = 0, j = response.length; i < j; i++) {
         //if (response[i].member != me.id) { //uncomment to hide self-events
         if (response[i].unread.indexOf($scope.me.id) != -1) {
@@ -87,7 +87,7 @@ theToolController.controller('NotificationController', function ($scope, $http, 
 
       setInterval($scope.update, 10000);
 
-      $rootScope.$on("$locationChangeStart", function(event, next, current) { 
+      $rootScope.$on("$locationChangeStart", function(event, next, current) {
         setTimeout($scope.update, 500);
       });
     });
@@ -104,4 +104,14 @@ theToolController.controller('NotificationController', function ($scope, $http, 
     $scope.reverse = false;
     $scope.speakers = response;
   });
+
+  $scope.display = false;
+
+  $scope.show = function() {
+    $scope.display = ($scope.search.name ? true : false);
+  };
+
+  $scope.hide = function() {
+    $scope.display = false;
+  };
 });
