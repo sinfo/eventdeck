@@ -1,0 +1,47 @@
+<div class="column-group" ng-controller="CreateMeetingController">
+
+  <div class="all-100">
+    <div class="ink-alert basic success" ng-show="success">
+      <p><strong>Success!</strong> {{success}}</p>
+    </div>
+    <div class="ink-alert basic error" ng-show="error">
+      <button class="ink-dismiss">&times;</button>
+      <p><strong>Error!</strong> {{error}}</p>
+    </div>
+  </div>
+
+  <form class="all-100 ink-form" ng-submit="submit()">
+    <div class="all-100 control-group">
+      <label for="title">Title</label>
+      <div class="control">
+        <input id="title" ng-model="formData.title" type="text">
+      </div>
+    </div>
+    <div class="all-100 control-group">
+      <label for="description">Description</label>
+      <div class="control">
+        <textarea id="description" ng-model="formData.description" type="text" rows="3"></textarea>
+      </div>
+    </div>
+    <div class="all-100 control-group">
+      <label for="attendances">Attendants</label>
+      <p ng-hide="members">Loading...</p>
+      <div ng-show="members" class="control">
+        <ul class="control unstyled" ng-repeat="member in members | orderBy:'id'">
+          <li class="ink-button">
+            <input type="checkbox" id="{{member.id}}" value="{{member.id}}" ng-model="formData.attendant">
+            <label for="{{member.id}}">{{member.name}}</label>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="all-100 column-group">
+      <div class="all-50">
+        <a class="ink-button orange" href="/#/meetings"><i class="fa fa-back"></i><i class="fa fa-reply"></i> Go back...</a>
+      </div>
+      <div class="all-50 control-group align-right">
+        <input type="submit" id="submit" value="Create" class="ink-button green">
+      </div>
+    </div>
+  </form>
+</div>
