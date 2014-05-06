@@ -44,8 +44,8 @@
         <ul class="menu horizontal black push-left small-push-center tiny-push-center">
           <li class="hide-all show-tiny show-small"><button class="fa fa-bars left-drawer-trigger"></button></li>
           <li class="logoPlaceholder"><a href="/" class="logoPlaceholder">THE TOOL!</a></li>
-          <li class="hide-medium hide-small hide-tiny"><a><input type="text" ng-model="search.name" ng-change="searchBoxChanged()" placeholder="Super search!!!" style="width:300px"></a>
-            <ul class="submenu" style="max-height:400px; overflow:auto;">
+          <li class="hide-medium hide-small hide-tiny"><a><input type="text" ng-model="search.name" ng-change="searchBoxChanged()" placeholder="Super search!!!" style="width:300px;"></a>
+            <ul class="submenu" style="max-height:400px; overflow:auto; {{search.name != '' ? 'display: block !important;' : ''}}">
               <li ng-show="search.name" ng-repeat="company in companies | filter:search:strict" style="width:300px"><a href="/#/company/{{company.id}}"><img src="{{company.img}}" style="height:20px; max-width:40px"> {{company.name}}</a></li>
               <li ng-show="search.name" ng-repeat="speaker in speakers | filter:search:strict" style="width:300px"><a href="/#/speaker/{{speaker.id}}"><img src="{{speaker.img}}" style="height:20px; max-width:40px"> {{speaker.name}}</a></li>
               <li ng-show="search.name" ng-repeat="member in members | filter:search:strict" style="width:300px"><a href="/#/member/{{member.id}}"><img src="https://graph.facebook.com/{{member.facebook}}/picture" style="height:20px; max-width:40px"> {{member.name}}</a></li>
