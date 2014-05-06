@@ -65,4 +65,13 @@ theToolServices
         isArray:true
       }
     })
+  })
+
+  .factory('MeetingFactory', function($resource) {
+    return $resource('/api/meetings', null, {
+      getAll: {
+        method: 'GET',
+        isArray:true
+      }
+    })
   });
