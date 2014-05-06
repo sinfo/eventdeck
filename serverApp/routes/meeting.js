@@ -9,3 +9,12 @@ server.route({
     auth: true
   }
 });
+
+server.route({
+  method: 'POST',
+  path: '/api/meeting',
+  config: {
+    handler: meeting.create,
+    auth: true
+  }
+});
