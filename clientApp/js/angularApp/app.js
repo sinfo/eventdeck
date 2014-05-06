@@ -27,6 +27,6 @@ config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/speaker/:id/confirm' , {templateUrl: 'views/speaker/confirm.html', controller: 'SpeakerEmailController'});
   $routeProvider.when('/members/'            , {templateUrl: 'views/member/list.html',     controller: 'MembersController'});
   $routeProvider.when('/member/:id'          , {templateUrl: 'views/member/view.html',     controller: 'MemberController'});
-  $routeProvider.when('/reports'             , {templateUrl: 'views/report/list.html',     controller: 'ReportsController'});
+  $routeProvider.when('/meetings'            , {templateUrl: 'views/meeting/list.html',    controller: 'MeetingsController'});
   $routeProvider.otherwise({redirectTo: '/'});
 }]);
