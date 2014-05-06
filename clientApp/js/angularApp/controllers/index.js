@@ -6,4 +6,4 @@ require('./speaker');
 require('./member');
 require('./comment');
 require('./notification');
-require('./report');
+require('./meeting');
