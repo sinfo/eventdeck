@@ -1,0 +1,18 @@
+<div class="ink-grid" ng-controller="ReportsController">
+  <div class="column-group">
+    <div class="all-100">
+      <h1>Reports</h1>
+      <h2 ng-show="loading">Loading...</h2>
+      <div ng-hide="loading">
+        <a href="/#/{{notification.path}}" ng-repeat="notification in notifications">
+          <div class="all-100 ink-label half-bottom-space align-left {{notification.color}}" style="height: 4em;">
+            <div class="all-5 tiny-30 small-20" style="margin-top: 0.5em; height: 3em;">
+              <img style="border-radius: 3px;" src="https://graph.facebook.com/{{notification.member}}/picture">
+            </div>
+            <p class="all-95 tiny-70 small-80" style="line-height: 4em;">{{notification.description}} <span title="{{notification.date.full}}">({{notification.date.ago}})</span></p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
