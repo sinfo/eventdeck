@@ -63,30 +63,31 @@
         </ul>
         <ul class="menu horizontal black push-right hide-small hide-tiny">
           <li>
-            <a style="{{notificationsInfo.number == 0 ? 'background: FireBrick;' : 'background: OrangeRed;'}}"><span><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a>
-            <ul class="submenu" style="max-height:400px; overflow:auto;">
-              <li ng-repeat="notification in notifications" style="width:600px"><a href="/#/{{notification.path}}">
-              <img src="https://graph.facebook.com/{{notification.member}}/picture" style="width:20px">
-              {{notification.text}}</a></li>
+            <a style="{{notificationsInfo.number == 0 ? 'background: FireBrick;' : 'background: OrangeRed;'}} color: white;"><span><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a>
+            <ul class="submenu" style="max-height: 400px; overflow: auto; {{notificationsInfo.number == 0 ? 'display: none;' : ''}}">
+              <li ng-repeat="notification in notifications" style="width: 600px;">
+                <a href="/#/{{notification.path}}"><img src="https://graph.facebook.com/{{notification.member}}/picture" style="width:20px">{{notification.text}}</a>
+              </li>
             </ul>
           </li>
-          <li><a href="/#/speakers" style="background:LimeGreen"><i class="fa fa-globe"></i> Speakers</a>
+          <li><a href="/#/speakers" style="background: LimeGreen; color: white;"><i class="fa fa-globe"></i> Speakers</a>
             <ul class="submenu">
               <li><a href="/#/speakers/table/" style="width:200px"><i class="fa fa-table"></i> By Member Table</a></li>
             <li><a href="/#/speaker"><i class="fa fa-plus"></i> Create New</a></li>
             </ul>
           </li>
-          <li><a href="/#/companies" style="background:DodgerBlue"><i class="fa fa-building-o"></i> Companies</a>
+          <li><a href="/#/companies" style="background: DodgerBlue; color: white;"><i class="fa fa-building-o"></i> Companies</a>
             <ul class="submenu">
               <li><a href="/#/companies/table/" style="width:200px"><i class="fa fa-table"></i> By Member Table</a></li>
               <li><a href="/#/companies/budget/" style="width:200px"><i class="fa fa-money"></i> Budget</a></li>
             <li><a href="/#/company"><i class="fa fa-plus"></i> Create New</a></li>
             </ul>
           </li>
-          <li><a href="/#/members" style="background:Gold"><i class="fa fa-users"></i> Members</a>
+          <li><a href="/#/members" style="background: Gold; color: white;"><i class="fa fa-users"></i> Members</a>
             <ul class="submenu">
-              <li><a href="/#/member/me" style="width:200px"><i class="fa fa-user"></i> Me</a></li>
-              <li><a href="/logout" style="width:200px">Log Out <i class="fa fa-sign-out"></i></a></li>
+              <li><a href="/#/member/me" style="width: 200px;"><i class="fa fa-user"></i> Me</a></li>
+              <li><a href="/#/meetings" style="width: 200px;"><i class="fa fa-users"></i> Meetings</a></li>
+              <li><a href="/logout" style="width: 200px;">Log Out <i class="fa fa-sign-out"></i></a></li>
             </ul>
           </li>
         </ul>

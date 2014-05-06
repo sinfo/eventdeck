@@ -1,4 +1,3 @@
-var async        = require('async');
 var Notification = require('./../../db/models/notification.js');
 
 exports = module.exports = list;
