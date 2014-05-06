@@ -9,7 +9,7 @@
             <div class="all-5 tiny-30 small-20" style="margin-top: 0.5em; height: 3em;">
               <img style="border-radius: 3px;" src="https://graph.facebook.com/{{notification.member}}/picture">
             </div>
-            <p class="all-95 tiny-70 small-80" style="line-height: 4em;">{{notification.description}} <span title="{{notification.date.full}}">({{notification.date.ago}})</span></p>
+            <p class="all-95 tiny-70 small-80" style="line-height: 4em;">{{notification.description}} <span title="{{notification.date.full}}">({{timeSince(notification.date.data)}})</span></p>
           </div>
         </a>
       </div>
