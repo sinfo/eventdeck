@@ -117,6 +117,7 @@ theToolController.controller('NotificationController', function ($scope, $http, 
 
       $rootScope.$on("$locationChangeStart", function(event, next, current) {
         setTimeout($scope.update, 500);
+        $scope.search.name = '';
       });
     });
   });

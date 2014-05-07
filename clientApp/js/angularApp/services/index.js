@@ -74,4 +74,27 @@ theToolServices
         isArray:true
       }
     })
+  })
+
+ .factory('ChatFactory', function($resource) {
+    return {
+      Chat: $resource('/api/chat/:id', null, {
+        'update': {method: 'PUT'},
+        'create': {method: 'POST'},
+
+      }),
+      Messages: $resource('/api/chat/{id}/messages', null, {
+        'get': {
+          method: 'GET',
+          isArray:true
+        }
+      })
+    }
+  })
+
+  .factory('MessageFactory', function($resource) {
+    return $resource('/api/message/:id', null, {
+        get:    {method: 'GET'},
+        create: {method: 'POST'}
+      })
   });
