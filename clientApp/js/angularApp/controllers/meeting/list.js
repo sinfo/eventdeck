@@ -2,6 +2,6 @@
 
 theToolController.controller('MeetingsController', function ($scope, $http, $routeParams, $sce, $location, $rootScope, MeetingFactory) {
 
-  $scope.loading = true;
+  $scope.loading = false;
 
 });
