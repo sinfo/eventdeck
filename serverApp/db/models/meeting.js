@@ -3,8 +3,9 @@ var mongoose = require('mongoose');
 var meetingSchema = new mongoose.Schema({
   author: String,
   title: String,
+  description: String,
   notes: [Object],
-  members: [String],
+  attendants: [String],
   date: { type: Date, default: Date.now }
 });
 
