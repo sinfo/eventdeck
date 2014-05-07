@@ -1,16 +1,10 @@
 'use strict';
 
-theToolController.controller('home', function ($scope, $http, $sce, NotificationFactory, MemberFactory) {
-  $scope.trustSrc = function(src) {
-    return $sce.trustAsResourceUrl(src);
-  }
-
+theToolController.controller('home', function ($scope, $http, $sce,  $rootScope, NotificationFactory, MemberFactory) {
   $scope.timeSince =function (date) {
     var seconds = Math.floor((Date.now() - date) / 1000);
 
     var interval = Math.floor(seconds / 31536000);
-
-    console.log(date, seconds, interval);
 
     if (interval > 1) {
         return interval + " years ago";
@@ -34,6 +28,19 @@ theToolController.controller('home', function ($scope, $http, $sce, Notification
     return Math.floor(seconds) + " seconds ago";
   }
 
+  $scope.getImageFromThread =function (thread) {
+    if(thread.indexOf('company-') != -1) {
+      return  $scope.companies.filter(function(o) {
+                return thread.split('company-')[1] == o.id;
+              })[0].img;
+    }
+    else if(thread.indexOf('speaker-') != -1) {
+      return $scope.speakers.filter(function(o) {
+                return thread.split('speaker-')[1] == o.id;
+              })[0].img;
+    }
+  }
+
   $scope.loading = true;
   $scope.notifications = [];
 
@@ -52,10 +59,17 @@ theToolController.controller('home', function ($scope, $http, $sce, Notification
               full: date.toString()
             },
             description: response[i].description,
-            member: members.filter(function(o) {
+            thread: response[i].thread,
+            member: {
+              id: response[i].member,
+              name: members.filter(function(o) {
                       return response[i].member == o.id;
-                    })[0].facebook,
-            color: (response[i].unread.indexOf(me.id) != -1 ? "green" : "grey")
+                    })[0].name, 
+              facebook: members.filter(function(o) {
+                      return response[i].member == o.id;
+                    })[0].facebook 
+            },
+            color: (response[i].unread.indexOf(me.id) != -1 ? "unread" : "read")
           });
           //}
         }
