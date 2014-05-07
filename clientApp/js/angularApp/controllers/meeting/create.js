@@ -38,6 +38,10 @@ theToolController.controller('CreateMeetingController', function ($scope, Meetin
     note.showTargets = !note.showTargets;
   };
 
+  $scope.toggleEdition = function(note) {
+    note.editing = !note.editing;
+  };
+
   $scope.toggleTarget = function(target, note) {
     var index = note.targets.indexOf(target);
 
