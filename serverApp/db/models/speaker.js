@@ -10,6 +10,7 @@ var speakerSchema = new mongoose.Schema({
   contacts: String,
   member: String,
   paragraph: String,
+  approved: [String],
   updated: { type: Date, default: Date.now }
 });
 

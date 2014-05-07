@@ -4,7 +4,7 @@
       <h1>Recent Activity</h1>
       <h2 ng-show="loading">Loading...</h2>
       <div ng-hide="loading">
-        <div class="activity {{notification.color}}" ng-repeat="notification in notifications">
+        <div class="activity {{notification.color}}" ng-repeat="notification in notifications | orderBy: 'posted':true">
           <div class="all-100">
             <a href="/#/member/{{notification.member.id}}">
               <img src="https://graph.facebook.com/{{notification.member.facebook}}/picture">
