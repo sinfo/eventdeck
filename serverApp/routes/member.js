@@ -47,6 +47,15 @@ server.route({
     auth: true 
   } 
 });
+
+server.route({
+  method: 'GET', 
+  path: '/api/role/{id}', 
+  config: { 
+    handler: member.getByRole, 
+    auth: true 
+  } 
+});
 /*
 server.route({ 
   method: 'PUT', 
