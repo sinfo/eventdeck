@@ -4,14 +4,20 @@
       <h1>Recent Activity</h1>
       <h2 ng-show="loading">Loading...</h2>
       <div ng-hide="loading">
-        <a href="/#/{{notification.path}}" ng-repeat="notification in notifications">
-          <div class="all-100 ink-label half-bottom-space align-left {{notification.color}}" style="height: 4em;">
-            <div class="all-5 tiny-30 small-20" style="margin-top: 0.5em; height: 3em;">
-              <img style="border-radius: 3px;" src="https://graph.facebook.com/{{notification.member}}/picture">
-            </div>
-            <p class="all-95 tiny-70 small-80" style="line-height: 4em;">{{notification.description}} <span title="{{notification.date.full}}">({{timeSince(notification.date.data)}})</span></p>
+        <div class="activity {{notification.color}}" ng-repeat="notification in notifications">
+          <div class="all-100">
+            <a href="/#/member/{{notification.member.id}}">
+              <img src="https://graph.facebook.com/{{notification.member.facebook}}/picture">
+              <b>{{notification.member.name}}</b>
+            </a>
+            <small title="{{notification.date.full}}">{{timeSince(notification.date.data)}}</small>
           </div>
-        </a>
+          <a href="/#/{{notification.path}}">
+            <p style="color: #444;">{{notification.description}}</p>
+            <img class="image" src="{{getImageFromThread(notification.thread)}}">
+          </a>
+          </a>
+        </div>
       </div>
     </div>
   </div>

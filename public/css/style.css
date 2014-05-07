@@ -161,6 +161,28 @@ body.ink-drawer .right-drawer li.active > a {
   color: #FFF;
 }
 
+.activity {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.activity.read {
+  background: WhiteSmoke;
+}
+.activity.unread {
+  background: Pink;
+}
+.activity img {
+  width:25px;
+}
+.activity img.image {
+  width:100px;
+  margin-top: 10px
+}
+.activity p {
+  margin-top:10px;
+  margin-bottom:0px;
+}
+
 .red { background: #E41B17; }
 .blue { background: #0000FF; }
 .orange { background: #FFA500; }

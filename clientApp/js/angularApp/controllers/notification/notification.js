@@ -32,7 +32,7 @@ theToolController.controller('NotificationController', function ($scope, $http, 
             member: $scope.members.filter(function(o) {
                       return response[i].member == o.id;
                     })[0].facebook,
-            color: (response[i].unread.indexOf($scope.me.id) != -1 ? "green" : "grey")
+            color: (response[i].unread.indexOf($scope.me.id) != -1 ? "LightSkyBlue" : "WhiteSmoke")
           });
         }
         //}
@@ -69,7 +69,7 @@ theToolController.controller('NotificationController', function ($scope, $http, 
               member: members.filter(function(o) {
                         return response[i].member == o.id;
                       })[0].facebook,
-              color: (response[i].unread.indexOf(me.id) != -1 ? "green" : "grey")
+              color: (response[i].unread.indexOf(me.id) != -1 ? "LightSkyBlue" : "WhiteSmoke")
             });
           }
           //}
