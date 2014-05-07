@@ -7,15 +7,15 @@ theToolController.controller('CreateMeetingController', function ($scope, Meetin
   $scope.success  = "";
   $scope.error    = "";
   $scope.formData = {
-    title: new Date().toLocaleDateString("pt-PT") + " - Meeting"
+    title: new Date().toLocaleDateString("pt-PT") + " - Meeting",
+    notes: [],
+    date: new Date()
   };
 
   $scope.noteTypes = ["Info", "To do", "Decision", "Idea"];
 
-  $scope.notes = [];
-
   MemberFactory.Member.get({id: "me"}, function(me) {
-    $scope.author = me;
+    $scope.formData.author = me.id;
   });
 
   MemberFactory.Member.getAll(function(members) {
@@ -35,27 +35,30 @@ theToolController.controller('CreateMeetingController', function ($scope, Meetin
     }
   };
 
-  $scope.addTarget = function(note) {
-    if (!note.targets)
-      note.targets = [];
-
-    note.targets.push({
-      name: "Teste"
-    });
+  $scope.toggleTargets = function(note) {
+    note.showTargets = !note.showTargets;
   };
 
-  $scope.removeTarget = function(target, targets) {
-    targets.splice(targets.indexOf(target), 1);
+  $scope.toggleTarget = function(target, note) {
+    var index = note.targets.indexOf(target);
+
+    if (index == -1) {
+      note.targets.push(target);
+    }
+    else {
+      note.targets.splice(index, 1);
+    }
   };
 
   $scope.addNote = function() {
-    $scope.notes.push({
-      type: "Info"
+    $scope.formData.notes.push({
+      type: "Info",
+      targets: []
     });
   };
 
   $scope.removeNote = function(note) {
-    $scope.notes.splice($scope.notes.indexOf(note), 1);
+    $scope.formData.notes.splice($scope.formData.notes.indexOf(note), 1);
   };
 
   $scope.submit = function() {
@@ -71,15 +74,13 @@ theToolController.controller('CreateMeetingController', function ($scope, Meetin
       return;
     }
 
-    /*MeetingFactory.create($scope.formData, function(response) {
+    MeetingFactory.create($scope.formData, function(response) {
       if(response.error) {
         $scope.error = response.error;
       } else {
         $scope.success = response.message;
       }
-    });*/
-
-    console.log($scope.formData);
+    });
   };
 
 });
