@@ -7,3 +7,5 @@ require('./member.js');
 require('./comment.js');
 require('./notification');
 require('./meeting');
+require('./message');
+require('./chat');
