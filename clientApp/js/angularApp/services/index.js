@@ -68,10 +68,13 @@ theToolServices
   })
 
   .factory('MeetingFactory', function($resource) {
-    return $resource('/api/meetings', null, {
+    return $resource('/api/meeting', null, {
       getAll: {
         method: 'GET',
         isArray:true
+      },
+      create: {
+        method: 'POST'
       }
     })
   });
