@@ -24,5 +24,4 @@ memberSchema.statics.findAll = function (cb) {
   this.find({},cb);
 };
 
- 
 var Member = module.exports = mongoose.model('Member', memberSchema);

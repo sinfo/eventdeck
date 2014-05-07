@@ -3,7 +3,7 @@ var meeting = require('./../resources/meeting');
 
 server.route({
   method: 'GET',
-  path: '/api/meetings',
+  path: '/api/meeting',
   config: {
     handler: meeting.list,
     auth: true
