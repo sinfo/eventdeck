@@ -38,6 +38,15 @@ server.route({
     auth: true 
   } 
 });
+
+server.route({
+  method: 'GET', 
+  path: '/api/role', 
+  config: { 
+    handler: member.roles, 
+    auth: true 
+  } 
+});
 /*
 server.route({ 
   method: 'PUT', 
