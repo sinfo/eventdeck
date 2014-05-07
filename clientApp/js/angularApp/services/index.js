@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 'use strict';
 
 var theToolServices = angular.module('theTool.services', ['ngResource']);
@@ -78,7 +77,7 @@ theToolServices
         method: 'POST'
       }
     })
-  });
+  })
 
   .factory('ChatFactory', function($resource) {
     return {
