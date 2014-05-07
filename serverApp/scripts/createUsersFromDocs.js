@@ -27,7 +27,8 @@ Tabletop.init({
             for(var r in commission[i].cargo.split('/')) {
               r = commission[i].cargo.split('/')[r]
               var role = {
-                name: r.replace(' (TL)', '').toString(),
+                id: createId(r.replace(' (TL)', '')),
+                name: r.replace(' (TL)', ''),
                 isTeamLeader: r.indexOf('(TL)') != -1 || r.indexOf('Manager') != -1 
               }
               roles.push(role);
@@ -62,3 +63,7 @@ Tabletop.init({
     simpleSheet: false 
 });
 }, 3000);
+
+function createId(text) {
+  return text.toLowerCase().replace(/ç/g, 'c').replace(/á|à|ã/g, 'a').replace(/é|è|ê/g, 'e').replace(/í|ì|î/g, 'i').replace(/ó|ò|õ|ô/g, 'o').replace(/[^a-zA-Z ]/g, '').replace(/\s/g, '-');
+}
