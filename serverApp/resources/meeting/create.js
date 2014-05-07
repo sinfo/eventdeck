@@ -17,8 +17,11 @@ function create(request, reply) {
     }
     else {
       //notification.new(request.auth.credentials.id, 'meeting-'+meeting.id, meeting.name, "meeting",request.auth.credentials.name);
-      console.log("Meeting created!");
-      reply({success: "Meeting created!"});
+      console.log("Meeting created: " + meeting._id);
+      reply({
+        success: "Meeting created!",
+        id: meeting._id
+      });
     }
   });
 }
