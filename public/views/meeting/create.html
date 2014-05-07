@@ -14,27 +14,53 @@
     <div class="all-100 control-group required {{formData.title ? '' : 'validation error'}}">
       <label for="title">Title</label>
       <div class="control">
-        <input id="title" ng-model="formData.title" type="text" placeholder="Please enter a title">
+        <input id="title" ng-model="formData.title" type="text" placeholder="Please enter a title.">
       </div>
       <p ng-hide="formData.title" class="tip">This field is required.</p>
     </div>
     <div class="all-100 control-group">
       <label for="description">Description</label>
       <div class="control">
-        <textarea id="description" ng-model="formData.description" type="text" rows="3"></textarea>
+        <textarea id="description" ng-model="formData.description" type="text" rows="3" placeholder="Write a description."></textarea>
       </div>
     </div>
+
     <div class="all-100  control-group">
-      <label>Attendants</label>
+      <label ng-click="toggleAttendants()">Attendants </label><span ng-show="members"><i class="fa fa-long-arrow-left"></i><small> Click to toggle all.</small></span>
       <p ng-hide="members">Loading...</p>
       <div>
-        <div ng-show="members" class="ink-button {{member.attending ? 'green' : 'red'}}" style="margin-bottom: 0.5em;" ng-repeat="member in members | orderBy:'id'">
-          <input type="checkbox" id="{{member.id}}" value="{{member.id}}" ng-model="member.attending">
-          <label for="{{member.id}}">{{member.name}}</label>
+        <div ng-show="members" class="ink-button {{member.attending ? 'green' : 'red'}}" style="margin-bottom: 0.5em;" ng-repeat="member in members | orderBy:'id'" ng-click="toggleAttendant(member)">
+          <img ng-show="member.facebook" src="https://graph.facebook.com/{{member.facebook}}/picture?width=30&height=30" width="100%">
+          <label for="{{member.id}}" style="line-height: 30px;">{{member.name}}</label>
         </div>
       </div>
     </div>
+
     <div class="all-100 control-group">
+      <label>Notes</label>
+      <div class="all-100 gutters bottom-space" ng-repeat="note in formData.notes">
+        <div class="all-100 {{note.showTargets ? '' : 'quarter-bottom-space'}}">
+          <select ng-model="note.type" ng-options="value for value in noteTypes"></select>
+          <div class="ink-button blue" ng-click="toggleTargets(note)"><i class="fa fa-users"></i> {{note.showTargets ? 'Hide targets' : 'Show targets'}}</div>
+          <div class="ink-button red" ng-click="removeNote(note)"><i class="fa fa-times"></i> Remove note</div>
+        </div>
+        <div ng-show="note.showTargets" class="all-100">
+          <label>Targets</label>
+          <div class="all-100">
+            <p ng-hide="members">Loading...</p>
+            <div ng-show="members" class="ink-button small {{note.targets && note.targets.indexOf(member.id) != -1 ? 'blue' : ''}}" style="margin-bottom: 0.5em;" ng-click="toggleTarget(member.id, note)" ng-repeat="member in members | orderBy:'id'">{{member.name}}</div>
+          </div>
+        </div>
+        <div class="all-100 control">
+          <textarea ng-model="note.text" type="text" rows="2" placeholder="Write a note."></textarea>
+        </div>
+      </div>
+      <div class="all-100">
+        <div class="ink-button green" ng-click="addNote()"><i class="fa fa-plus"></i> Add note</div>
+      </div>
+    </div>
+
+    <div class="all-100 control-group double-top-space">
       <a class="ink-button orange" href="/#/meetings"><i class="fa fa-back"></i><i class="fa fa-reply"></i> Go back...</a>
       <input type="submit" id="submit" value="Create" class="ink-button green">
     </div>
