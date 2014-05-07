@@ -27,7 +27,7 @@ function get(request, reply) {
   async.series([
       getSpeaker,
       getMember,
-      sendEmail,
+      //sendEmail,
     ], done);
 
   function getSpeaker(cb) {
@@ -90,9 +90,12 @@ function get(request, reply) {
 
   function done(err) {
     if (err) {
-      reply({error:"There was an error!"});
+      return reply.view('error.html', { error: "There was an error :-(" });
     } else {
-      reply({message:"Email Sent!"});
+      reply.view('speakerTemplate.html', { 
+        signature: signature,
+        speaker: speaker
+      });
     }
   }
 }
