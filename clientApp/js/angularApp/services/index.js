@@ -68,10 +68,13 @@ theToolServices
   })
 
   .factory('MeetingFactory', function($resource) {
-    return $resource('/api/meetings', null, {
+    return $resource('/api/meeting', null, {
       getAll: {
         method: 'GET',
         isArray:true
+      },
+      create: {
+        method: 'POST'
       }
     })
   })
@@ -84,7 +87,7 @@ theToolServices
       }
   })
 
- .factory('ChatFactory', function($resource) {
+  .factory('ChatFactory', function($resource) {
     return {
       Chat: $resource('/api/chat/:id', null, {
         'update': {method: 'PUT'},

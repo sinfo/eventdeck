@@ -1,7 +1,7 @@
-<div class="column-group vertical-space" ng-controller="MeetingsController">
+<div class="column-group" ng-controller="MeetingsController">
   <div class="all-100">
-    <h2 ng-show="loading">Loading...</h2>
-    <div ng-hide="loading" class="column-group">
+    <h2 ng-hide="meetings">Loading...</h2>
+    <div ng-show="meetings" class="column-group">
       <h1 class="all-50">Meetings</h1>
       <div class="all-50 align-right">
         <a href="/#/meeting" class="ink-button green"><i class="fa fa-plus"></i> Create New</a>
