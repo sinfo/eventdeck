@@ -65,7 +65,7 @@
           <li>
             <a style="{{notificationsInfo.number == 0 ? 'background: FireBrick;' : 'background: OrangeRed;'}} color: white;"><span><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a>
             <ul class="submenu" style="max-height: 400px; overflow: auto; {{notificationsInfo.number == 0 ? 'display: none;' : ''}}">
-              <li ng-repeat="notification in notifications" style="width: 600px;">
+              <li ng-repeat="notification in notifications | orderBy: 'posted':false" style="width: 600px;">
                 <a href="/#/{{notification.path}}"><img src="https://graph.facebook.com/{{notification.member}}/picture" style="width:20px"> {{notification.text}}</a>
               </li>
             </ul>
@@ -106,7 +106,7 @@
         <li>
           <a style="{{notificationsInfo.number == 0 ? 'background: FireBrick;' : 'background: OrangeRed;'}}"><span><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a>
           <ul class="submenu" style="max-height:200px; overflow:auto; margin: 0px 20px 0px;">
-            <li ng-repeat="notification in notifications"><a href="/#/{{notification.path}}">
+            <li ng-repeat="notification in notifications | orderBy: 'posted':false"><a href="/#/{{notification.path}}">
             <img src="https://graph.facebook.com/{{notification.member}}/picture" style="width:20px"> 
             {{notification.text}}</a></li>
           </ul>
