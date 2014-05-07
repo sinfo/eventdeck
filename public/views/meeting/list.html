@@ -1,17 +1,17 @@
 <div class="column-group" ng-controller="MeetingsController">
   <div class="all-100">
-    <h2 ng-hide="meetings">Loading...</h2>
-    <div ng-show="meetings" class="column-group">
-      <h1 class="all-50">Meetings</h1>
-      <div class="all-50 align-right">
-        <a href="/#/meeting" class="ink-button green"><i class="fa fa-plus"></i> Create New</a>
-      </div>
-      <a href="/#/{{meeting.path}}" ng-repeat="meeting in meetings">
+    <h1 class="all-50">Meetings</h1>
+    <div class="all-50 align-right">
+      <a href="/#/meeting/create" class="ink-button green"><i class="fa fa-plus"></i> Create New</a>
+    </div>
+    <h2 ng-hide="meetings" class="all-100">Loading...</h2>
+    <div ng-show="meetings" class="all-100 column-group">
+      <a href="/#/meeting/{{meeting._id}}" ng-repeat="meeting in meetings">
         <div class="all-100 ink-label half-bottom-space align-left grey" style="height: 4em;">
-          <div class="all-5 tiny-30 small-20" style="margin-top: 0.5em; height: 3em;">
-            <img style="border-radius: 3px;" src="https://graph.facebook.com/{{meeting.author}}/picture">
+          <div class="all-5 tiny-30 small-20" style="margin-top: 0.5em; height: 3em;" ng-show="meeting.facebook">
+            <img style="border-radius: 3px;" src="https://graph.facebook.com/{{meeting.facebook}}/picture">
           </div>
-          <p class="all-95 tiny-70 small-80" style="line-height: 4em;">{{meeting.title}} <span title="{{meeting.date.full}}">({{meeting.date.ago}})</span></p>
+          <p class="all-95 tiny-70 small-80" style="line-height: 4em;">{{meeting.title}} <span title="{{meeting.date}}">({{time(meeting.date)}})</span></p>
         </div>
       </a>
     </div>
