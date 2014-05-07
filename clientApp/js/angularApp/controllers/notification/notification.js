@@ -2,6 +2,32 @@
 
 theToolController.controller('NotificationController', function ($scope, $http, $routeParams, $sce, $location, $rootScope, NotificationFactory, MemberFactory, CompanyFactory, SpeakerFactory) {
 
+  $scope.timeSince =function (date) {
+    var seconds = Math.floor((Date.now() - date) / 1000);
+
+    var interval = Math.floor(seconds / 31536000);
+    if (interval > 1) {
+        return interval + " years ago";
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) {
+        return interval + " months ago";
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) {
+        return interval + " days ago";
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) {
+        return interval + " hours ago";
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval > 1) {
+        return interval + " minutes ago";
+    }
+    return Math.floor(seconds) + " seconds ago";
+  };
+
   $scope.loading = true;
 
   $scope.notifications = [];
@@ -28,7 +54,7 @@ theToolController.controller('NotificationController', function ($scope, $http, 
 
           $scope.notifications.unshift({
             path: response[i].thread.replace("-", "/"),
-            text: response[i].description,
+            text: response[i].description + " (" + $scope.timeSince(new Date(response[i].posted))+")",
             member: $scope.members.filter(function(o) {
                       return response[i].member == o.id;
                     })[0].facebook,
@@ -63,9 +89,11 @@ theToolController.controller('NotificationController', function ($scope, $http, 
           if (response[i].unread.indexOf(me.id) != -1) {
             $scope.notificationsInfo.number++;
 
+            console.log(response[i], response[i].posted);
+
             $scope.notifications.unshift({
               path: response[i].thread.replace("-", "/"),
-              text: response[i].description,
+              text: response[i].description + " (" + $scope.timeSince(new Date(response[i].posted))+")",
               member: members.filter(function(o) {
                         return response[i].member == o.id;
                       })[0].facebook,
@@ -89,6 +117,7 @@ theToolController.controller('NotificationController', function ($scope, $http, 
 
       $rootScope.$on("$locationChangeStart", function(event, next, current) {
         setTimeout($scope.update, 500);
+        $scope.search.name = '';
       });
     });
   });

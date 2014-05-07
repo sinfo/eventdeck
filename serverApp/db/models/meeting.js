@@ -3,9 +3,10 @@ var mongoose = require('mongoose');
 var meetingSchema = new mongoose.Schema({
   author: String,
   title: String,
-  notes: [Object],
-  members: [String],
-  date: { type: Date, default: Date.now }
+  description: String,
+  attendants: [String],
+  notes: [{type: String, text: String, targets: [String]}],
+  date: {type: Date, default: Date.now}
 });
 
 meetingSchema.statics.findById = function (id, cb) {

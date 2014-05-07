@@ -1,7 +1,10 @@
 'use strict';
 
-theToolController.controller('MeetingsController', function ($scope, $http, $routeParams, $sce, $location, $rootScope, MeetingFactory) {
+theToolController.controller('MeetingsController', function ($scope, MeetingFactory) {
 
-  $scope.loading = false;
+  MeetingFactory.getAll(function(result) {
+  	console.log(result);
+  	$scope.meetings = result;
+  });
 
 });
