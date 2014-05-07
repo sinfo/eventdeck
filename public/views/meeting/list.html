@@ -6,7 +6,7 @@
     </div>
     <h2 ng-hide="meetings" class="all-100">Loading...</h2>
     <div ng-show="meetings" class="all-100 column-group">
-      <a href="/#/meeting/{{meeting._id}}" ng-repeat="meeting in meetings">
+      <a href="/#/meeting/{{meeting._id}}" ng-repeat="meeting in meetings | orderBy:'date':true">
         <div class="all-100 ink-label half-bottom-space align-left grey" style="height: 4em;">
           <div class="all-5 tiny-30 small-20" style="margin-top: 0.5em; height: 3em;" ng-show="meeting.facebook">
             <img style="border-radius: 3px;" src="https://graph.facebook.com/{{meeting.facebook}}/picture">
