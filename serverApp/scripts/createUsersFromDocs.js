@@ -22,7 +22,18 @@ Tabletop.init({
           member.id = commission[i].mailsinfo.split('@')[0];
           if (commission[i].nome)        { member.name          = commission[i].nome; }
           if (commission[i].naluno)      { member.istId         = 'ist1'+commission[i].naluno; }
-          if (commission[i].cargo)       { member.role          = commission[i].cargo; }
+          if (commission[i].cargo)       { 
+            var roles = [];
+            for(var r in commission[i].cargo.split('/')) {
+              r = commission[i].cargo.split('/')[r]
+              var role = {
+                name: r.replace(' (TL)', '').toString(),
+                isTeamLeader: r.indexOf('(TL)') != -1 || r.indexOf('Manager') != -1 
+              }
+              roles.push(role);
+            }
+            member.roles = roles; 
+          }
           if (commission[i].facebook)    { member.facebook      = commission[i].facebook; }
           if (commission[i].skype)       { member.skype         = commission[i].skype; }
           member.mails = {};
@@ -38,16 +49,13 @@ Tabletop.init({
 
           var newMember = new Member(member);
 
-          console.log(newMember);
-          
           newMember.save(function (err, reply){
             if (err) {
-              console.log("ERROR", err);
+              console.log("ERROR", err, reply);
             } 
 
-            console.log("SUCCESS", reply);
+            //console.log("SUCCESS", reply);
           });
-          
         }
       }
     },
