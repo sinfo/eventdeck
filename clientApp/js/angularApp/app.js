@@ -28,7 +28,7 @@ config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/members/'            , {templateUrl: 'views/member/list.html',     controller: 'MembersController'});
   $routeProvider.when('/member/:id'          , {templateUrl: 'views/member/view.html',     controller: 'MemberController'});
   $routeProvider.when('/meetings'            , {templateUrl: 'views/meeting/list.html',    controller: 'MeetingsController'});
-  $routeProvider.when('/meeting'             , {templateUrl: 'views/meeting/create.html',  controller: 'CreateMeetingController'});
+  $routeProvider.when('/meeting/create'      , {templateUrl: 'views/meeting/create.html',  controller: 'CreateMeetingController'});
   $routeProvider.when('/chats'               , {templateUrl: 'views/chat/list.html',       controller: 'ChatController'});
   $routeProvider.when('/chat'                , {templateUrl: 'views/chat/view.html',       controller: 'MessageController'});
   $routeProvider.otherwise({redirectTo: '/'});

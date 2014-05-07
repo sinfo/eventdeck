@@ -8,8 +8,7 @@ theToolController.controller('CreateMeetingController', function ($scope, Meetin
   $scope.error    = "";
   $scope.formData = {
     title: new Date().toLocaleDateString("pt-PT") + " - Meeting",
-    notes: [],
-    date: new Date()
+    notes: []
   };
 
   $scope.noteTypes = ["Info", "To do", "Decision", "Idea"];
@@ -52,7 +51,7 @@ theToolController.controller('CreateMeetingController', function ($scope, Meetin
 
   $scope.addNote = function() {
     $scope.formData.notes.push({
-      type: "Info",
+      noteType: "Info",
       targets: []
     });
   };
@@ -70,15 +69,20 @@ theToolController.controller('CreateMeetingController', function ($scope, Meetin
     }
 
     if (!$scope.formData.title){
+      $scope.success = "";
       $scope.error = "Please enter a title.";
       return;
     }
 
+    $scope.formData.date = new Date();
+
     MeetingFactory.create($scope.formData, function(response) {
       if(response.error) {
-        $scope.error = response.error;
-      } else {
-        $scope.success = response.message;
+        $scope.success = "";
+        $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
+      } else if (response.success) {
+        $scope.error = "";
+        $scope.success = response.success;
       }
     });
   };
