@@ -1,15 +1,5 @@
 <div class="column-group" ng-controller="CreateMeetingController">
 
-  <div class="all-100">
-    <div class="ink-alert basic success" ng-show="success">
-      <p><strong>Success!</strong> {{success}}</p>
-    </div>
-    <div class="ink-alert basic error" ng-show="error">
-      <button class="ink-dismiss">&times;</button>
-      <p><strong>Error:</strong> {{error}}</p>
-    </div>
-  </div>
-
   <form class="all-100 ink-form" ng-submit="submit()">
     <div class="all-100 control-group required {{formData.title ? '' : 'validation error'}}">
       <label for="title">Title</label>
@@ -40,7 +30,7 @@
       <label>Notes</label>
       <div class="all-100 gutters bottom-space" ng-repeat="note in formData.notes">
         <div class="all-100 {{note.showTargets ? '' : 'quarter-bottom-space'}}">
-          <select ng-model="note.type" ng-options="value for value in noteTypes"></select>
+          <select ng-model="note.noteType" ng-options="value for value in noteTypes"></select>
           <div class="ink-button blue" ng-click="toggleTargets(note)"><i class="fa fa-users"></i> {{note.showTargets ? 'Hide targets' : 'Show targets'}}</div>
           <div class="ink-button red" ng-click="removeNote(note)"><i class="fa fa-times"></i> Remove note</div>
         </div>
@@ -63,6 +53,14 @@
     <div class="all-100 control-group double-top-space">
       <a class="ink-button orange" href="/#/meetings"><i class="fa fa-back"></i><i class="fa fa-reply"></i> Go back...</a>
       <input type="submit" id="submit" value="Create" class="ink-button green">
+      <div class="ink-alert basic success" ng-show="success">
+        <button class="ink-dismiss">&times;</button>
+        <p><strong>Success!</strong> {{success}}</p>
+      </div>
+      <div class="ink-alert basic error" ng-show="error">
+        <button class="ink-dismiss">&times;</button>
+        <p><strong>Error!</strong> {{error}}</p>
+      </div>
     </div>
   </form>
 </div>
