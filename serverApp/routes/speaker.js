@@ -48,7 +48,7 @@ server.route({
 });
 
 server.route({
-  method: 'POST',
+  method: 'GET',
   path: '/api/speaker/{id}/sendInitialEmail',
   config: {
     handler: speaker.sendInitialEmail,
