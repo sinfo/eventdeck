@@ -85,6 +85,7 @@ theToolServices
         method: 'GET',
         isArray:true
       }
+    })
   })
 
   .factory('ChatFactory', function($resource) {
