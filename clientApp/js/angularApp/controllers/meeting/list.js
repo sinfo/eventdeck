@@ -9,8 +9,6 @@ theToolController.controller('MeetingsController', function ($scope, $location, 
   init();
 
   function init() {
-    console.log("Running init.");
-
     setTimeout(function() {
       if ($scope.loading) {
         init();
