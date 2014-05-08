@@ -1,24 +1,16 @@
 'use strict';
 
-theToolController.controller('CreateMeetingController', function ($scope, MeetingFactory, MemberFactory) {
+theToolController.controller('MeetingEditController', function ($scope, $routeParams, MeetingFactory) {
 
   //================================INITIALIZATION================================
 
-  $scope.success  = "";
-  $scope.error    = "";
-  $scope.formData = {
-    title: new Date().toLocaleDateString("pt-PT") + " - Meeting",
-    notes: []
-  };
+  $scope.success = "";
+  $scope.error   = "";
 
   $scope.noteTypes = ["Info", "To do", "Decision", "Idea"];
 
-  MemberFactory.Member.get({id: "me"}, function(me) {
-    $scope.formData.author = me.id;
-  });
-
-  MemberFactory.Member.getAll(function(members) {
-    $scope.members = members;
+  MeetingFactory.get({_id: $routeParams.id}, function(meeting) {
+    $scope.meeting = meeting;
   });
 
 
@@ -50,33 +42,31 @@ theToolController.controller('CreateMeetingController', function ($scope, Meetin
   };
 
   $scope.addNote = function() {
-    $scope.formData.notes.push({
+    $scope.meeting.notes.push({
       noteType: "Info",
       targets: []
     });
   };
 
   $scope.removeNote = function(note) {
-    $scope.formData.notes.splice($scope.formData.notes.indexOf(note), 1);
+    $scope.meeting.notes.splice($scope.meeting.notes.indexOf(note), 1);
   };
 
   $scope.submit = function() {
-    $scope.formData.attendants = [];
+    $scope.meeting.attendants = [];
     for (var i = 0, j = $scope.members.length; i < j; i++) {
       if ($scope.members[i].attending) {
-        $scope.formData.attendants.push($scope.members[i].id);
+        $scope.meeting.attendants.push($scope.members[i].id);
       }
     }
 
-    if (!$scope.formData.title){
+    if (!$scope.meeting.title){
       $scope.success = "";
       $scope.error = "Please enter a title.";
       return;
     }
 
-    $scope.formData.date = new Date();
-
-    MeetingFactory.create($scope.formData, function(response) {
+    MeetingFactory.update($scope.meeting, function(response) {
       if(response.error) {
         $scope.success = "";
         $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";

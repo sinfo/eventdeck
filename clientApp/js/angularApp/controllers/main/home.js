@@ -19,6 +19,7 @@ theToolController.controller('home', function ($scope, $http, $sce,  $rootScope,
   $scope.notifications = [];
 
   MemberFactory.Member.get({id: "me"}, function(me) {
+    $scope.me = me;
 
     MemberFactory.Member.getAll(function(members) {
 
@@ -38,10 +39,10 @@ theToolController.controller('home', function ($scope, $http, $sce,  $rootScope,
               id: response[i].member,
               name: members.filter(function(o) {
                       return response[i].member == o.id;
-                    })[0].name, 
+                    })[0].name,
               facebook: members.filter(function(o) {
                       return response[i].member == o.id;
-                    })[0].facebook 
+                    })[0].facebook
             },
             color: (response[i].unread.indexOf(me.id) != -1 ? "unread" : "read")
           });
