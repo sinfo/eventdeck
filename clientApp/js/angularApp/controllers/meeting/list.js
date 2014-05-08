@@ -6,19 +6,29 @@ theToolController.controller('MeetingsController', function ($scope, $location, 
 
   $scope.loading = true;
 
-  MeetingFactory.getAll(function(meetings) {
-    $scope.meetings = meetings;
+  init();
 
-    while (!$scope.members);
+  function init() {
+    console.log("Running init.");
 
-    for (var i = 0, j = $scope.meetings.length; i < j; i++) {
-      $scope.meetings[i].facebook = $scope.members.filter(function(o) {
-        return $scope.meetings[i].author == o.id;
-      })[0].facebook;
-    }
+    setTimeout(function() {
+      if ($scope.loading) {
+        init();
+      }
+    }, 1000);
 
-    $scope.loading = false;
-  });
+    MeetingFactory.getAll(function(meetings) {
+      $scope.meetings = meetings;
+
+      for (var i = 0, j = $scope.meetings.length; i < j; i++) {
+        $scope.meetings[i].facebook = $scope.members.filter(function(o) {
+          return $scope.meetings[i].author == o.id;
+        })[0].facebook;
+      }
+
+      $scope.loading = false;
+    });
+  }
 
 
   //===================================FUNCTIONS===================================
