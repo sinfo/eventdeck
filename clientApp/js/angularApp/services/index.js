@@ -84,9 +84,10 @@ theToolServices
       Chat: $resource('/api/chat/:id', null, {
         'update': {method: 'PUT'},
         'create': {method: 'POST'},
+        'get':    {method: 'GET'}
 
       }),
-      Messages: $resource('/api/chat/{id}/messages', null, {
+      Messages: $resource('/api/chat/:id/messages', null, {
         'get': {
           method: 'GET',
           isArray:true
