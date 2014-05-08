@@ -30,6 +30,10 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
     note.showTargets = !note.showTargets;
   };
 
+  $scope.toggleEdition = function(note) {
+    note.editing = !note.editing;
+  };
+
   $scope.toggleTarget = function(target, note) {
     var index = note.targets.indexOf(target);
 
