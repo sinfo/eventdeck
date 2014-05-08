@@ -18,3 +18,12 @@ server.route({
     auth: true
   }
 });
+
+server.route({
+  method: 'PUT',
+  path: '/api/meetings',
+  config: {
+    handler: meeting.update,
+    auth: true
+  }
+});
