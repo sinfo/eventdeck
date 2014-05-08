@@ -25,16 +25,6 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
         return o._id == $routeParams.id;
       })[0];
 
-      for (var i = 0, j = $scope.members.length; i < j; i++) {
-        $scope.members[i].attending = false;
-        for (var k = 0, l = $scope.meeting.attendants.length; k < l; k++) {
-          if ($scope.members[i].id == $scope.meeting.attendants[k]){
-            $scope.members[i].attending = true;
-            break;
-          }
-        }
-      }
-
       $scope.loading = false;
     });
   }
@@ -43,17 +33,20 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
   //===================================FUNCTIONS===================================
 
   $scope.toggleAttendant = function(member) {
-    member.attending = !member.attending;
+    var index = $scope.meeting.attendants.indexOf(member);
+
+    if (index == -1) {
+      $scope.meeting.attendants.push(member);
+    }
+    else {
+      $scope.meeting.attendants.splice(index, 1);
+    }
   };
 
   $scope.toggleAttendants = function() {
     for (var i = 0, j = $scope.members.length; i < j; i++) {
-      $scope.toggleAttendant($scope.members[i]);
+      $scope.toggleAttendant($scope.members[i].id);
     }
-  };
-
-  $scope.toggleTargets = function(note) {
-    note.showTargets = !note.showTargets;
   };
 
   $scope.toggleTarget = function(target, note) {
@@ -65,6 +58,10 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
     else {
       note.targets.splice(index, 1);
     }
+  };
+
+  $scope.toggleTargets = function(note) {
+    note.showTargets = !note.showTargets;
   };
 
   $scope.toggleEdition = function(note) {
@@ -86,25 +83,15 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
     $scope.success = "";
     $scope.error   = "";
 
-    $scope.meeting.attendants = [];
-    for (var i = 0, j = $scope.members.length; i < j; i++) {
-      if ($scope.members[i].attending) {
-        $scope.meeting.attendants.push($scope.members[i].id);
-      }
-    }
-
     if (!$scope.meeting.title){
-      $scope.success = "";
       $scope.error = "Please enter a title.";
       return;
     }
 
     MeetingFactory.update($scope.meeting, function(response) {
       if(response.error) {
-        $scope.success = "";
         $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
       } else if (response.success) {
-        $scope.error = "";
         $scope.success = response.success;
       }
     });
