@@ -11,23 +11,13 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
 
   $scope.noteTypes = ["Info", "To do", "Decision", "Idea"];
 
-  init();
+  MeetingFactory.getAll(function(result) {
+    $scope.meeting = result.filter(function(o) {
+      return o._id == $routeParams.id;
+    })[0];
 
-  function init() {
-    setTimeout(function() {
-      if ($scope.loading) {
-        init();
-      }
-    }, 1000);
-
-    MeetingFactory.getAll(function(result) {
-      $scope.meeting = result.filter(function(o) {
-        return o._id == $routeParams.id;
-      })[0];
-
-      $scope.loading = false;
-    });
-  }
+    $scope.loading = false;
+  });
 
 
   //===================================FUNCTIONS===================================
@@ -64,19 +54,33 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
     note.showTargets = !note.showTargets;
   };
 
-  $scope.toggleEdition = function(note) {
-    note.editing = !note.editing;
+  $scope.focusNote = function(note) {
+    for (var i = 0, j = $scope.meeting.notes.length; i < j; i++) {
+      $scope.meeting.notes[i].editing = false;
+    }
+
+    note.editing = true;
   };
 
   $scope.addNote = function() {
-    $scope.meeting.notes.push({
+    var note = {
       noteType: "Info",
       targets: []
-    });
+    };
+
+    $scope.meeting.notes.push(note);
+
+    $scope.focusNote(note);
   };
 
   $scope.removeNote = function(note) {
     $scope.meeting.notes.splice($scope.meeting.notes.indexOf(note), 1);
+  };
+
+  $scope.getName = function (member) {
+    return $scope.members.filter(function(o) {
+      return o.id == member;
+    })[0].name;
   };
 
   $scope.save = function() {
