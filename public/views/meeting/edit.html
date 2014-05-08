@@ -1,17 +1,18 @@
-<div class="column-group" ng-controller="CreateMeetingController">
+<div class="column-group" ng-controller="MeetingEditController">
 
-  <form class="all-100 ink-form" ng-submit="submit()">
-    <div class="all-100 control-group required {{formData.title ? '' : 'validation error'}}">
+  <h1 ng-hide="meeting">Loading...</h1>
+  <form ng-show="meeting" class="all-100 ink-form">
+    <div class="all-100 control-group required {{meeting.title ? '' : 'validation error'}}">
       <label for="title">Title</label>
       <div class="control">
-        <input id="title" ng-model="formData.title" type="text" placeholder="Please enter a title.">
+        <input id="title" ng-model="meeting.title" type="text" placeholder="Please enter a title.">
       </div>
-      <p ng-hide="formData.title" class="tip">This field is required.</p>
+      <p ng-hide="meeting.title" class="tip">This field is required.</p>
     </div>
     <div class="all-100 control-group">
       <label for="description">Description</label>
       <div class="control">
-        <textarea id="description" ng-model="formData.description" type="text" rows="3" placeholder="Write a description."></textarea>
+        <textarea id="description" ng-model="meeting.description" type="text" rows="3" placeholder="Write a description."></textarea>
       </div>
     </div>
 
@@ -28,7 +29,7 @@
 
     <div class="all-100 control-group">
       <label>Notes</label>
-      <div class="all-100 gutters bottom-space" ng-repeat="note in formData.notes">
+      <div class="all-100 gutters bottom-space" ng-repeat="note in meeting.notes">
         <div ng-hide="note.editing">
           <div class="all-100 {{note.showTargets ? '' : 'quarter-bottom-space'}}">
             <select ng-model="note.noteType" ng-options="value for value in noteTypes"></select>
@@ -45,6 +46,7 @@
           </div>
           <div class="all-100 control">
             <textarea ng-model="note.text" type="text" rows="2" placeholder="Write a note."></textarea>
+            </div>
           </div>
         </div>
         <div ng-show="note.editing" ng-click="toggleEdition(note)">
@@ -59,7 +61,7 @@
 
     <div class="all-100 control-group double-top-space">
       <a class="ink-button orange" href="/#/meetings"><i class="fa fa-back"></i><i class="fa fa-reply"></i> Go back...</a>
-      <input type="submit" id="submit" value="Create" class="ink-button green">
+      <div class="ink-button green" ng-click="save()"><i class="fa fa-check"></i> Save</div>
       <div class="ink-alert basic success" ng-show="success">
         <button class="ink-dismiss">&times;</button>
         <p><strong>Success!</strong> {{success}}</p>
