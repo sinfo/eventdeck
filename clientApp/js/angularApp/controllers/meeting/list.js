@@ -9,6 +9,8 @@ theToolController.controller('MeetingsController', function ($scope, $location, 
   MeetingFactory.getAll(function(meetings) {
     $scope.meetings = meetings;
 
+    while (!$scope.members);
+
     for (var i = 0, j = $scope.meetings.length; i < j; i++) {
       $scope.meetings[i].facebook = $scope.members.filter(function(o) {
         return $scope.meetings[i].author == o.id;
