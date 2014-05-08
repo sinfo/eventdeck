@@ -30,20 +30,28 @@
     <div class="all-100 control-group">
       <label>Notes</label>
       <div class="all-100 gutters bottom-space" ng-repeat="note in meeting.notes">
-        <div class="all-100 {{note.showTargets ? '' : 'quarter-bottom-space'}}">
-          <select ng-model="note.noteType" ng-options="value for value in noteTypes"></select>
-          <div class="ink-button blue" ng-click="toggleTargets(note)"><i class="fa fa-users"></i> {{note.showTargets ? 'Hide targets' : 'Show targets'}}</div>
-          <div class="ink-button red" ng-click="removeNote(note)"><i class="fa fa-times"></i> Remove note</div>
-        </div>
-        <div ng-show="note.showTargets" class="all-100">
-          <label>Targets</label>
-          <div class="all-100">
-            <p ng-hide="members">Loading...</p>
-            <div ng-show="members" class="ink-button small {{note.targets && note.targets.indexOf(member.id) != -1 ? 'blue' : ''}}" style="margin-bottom: 0.5em;" ng-click="toggleTarget(member.id, note)" ng-repeat="member in members | orderBy:'id'">{{member.name}}</div>
+        <div ng-hide="note.editing">
+          <div class="all-100 {{note.showTargets ? '' : 'quarter-bottom-space'}}">
+            <select ng-model="note.noteType" ng-options="value for value in noteTypes"></select>
+            <div class="ink-button blue" ng-click="toggleTargets(note)"><i class="fa fa-users"></i> {{note.showTargets ? 'Hide targets' : 'Show targets'}}</div>
+            <div class="ink-button red" ng-click="removeNote(note)"><i class="fa fa-times"></i> Remove note</div>
+            <div class="ink-button green" ng-click="toggleEdition(note)"><i class="fa fa-submit"></i> Done</div>
+          </div>
+          <div ng-show="note.showTargets" class="all-100">
+            <label>Targets</label>
+            <div class="all-100">
+              <p ng-hide="members">Loading...</p>
+              <div ng-show="members" class="ink-button small {{note.targets && note.targets.indexOf(member.id) != -1 ? 'blue' : ''}}" style="margin-bottom: 0.5em;" ng-click="toggleTarget(member.id, note)" ng-repeat="member in members | orderBy:'id'">{{member.name}}</div>
+            </div>
+          </div>
+          <div class="all-100 control">
+            <textarea ng-model="note.text" type="text" rows="2" placeholder="Write a note."></textarea>
+            </div>
           </div>
         </div>
-        <div class="all-100 control">
-          <textarea ng-model="note.text" type="text" rows="2" placeholder="Write a note."></textarea>
+        <div ng-show="note.editing" ng-click="toggleEdition(note)">
+          <p><b>{{note.noteType}}</b> {{note.text}}</p>
+          <small><span ng-repeat="member in note.targets | orderBy:'id'">{{member}} </span></small>
         </div>
       </div>
       <div class="all-100">
