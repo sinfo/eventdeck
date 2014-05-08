@@ -9,7 +9,7 @@ var messageSchema = new mongoose.Schema({
 });
 
 messageSchema.statics.findById = function (id, cb) {
-  this.find({ id: id }, cb);
+  this.find({ _id: id }, cb);
 };
 
 messageSchema.statics.findByChatId = function (id, cb) {
