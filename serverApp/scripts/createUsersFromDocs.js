@@ -55,7 +55,7 @@ Tabletop.init({
               console.log("ERROR", err, reply);
             } 
 
-            //console.log("SUCCESS", reply);
+            console.log("SUCCESS", reply.name);
           });
         }
       }
