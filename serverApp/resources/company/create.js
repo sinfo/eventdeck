@@ -18,14 +18,13 @@ function create(request, reply) {
     ], done);
 
   function checkCompany(cb) {
-    if(request.payload.id) {
-      Company.findById(request.payload.id, function(err, company) {
+    if(request.payload.name) {
+      Company.findById(createId(request.payload.name), function(err, company) {
         if (err) {
           return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
         } else if (company.length > 0) {
-          return cb(Hapi.error.conflict('Company ID exists: '+request.payload.id));
+          return cb(Hapi.error.conflict('Company ID exists: '+createId(request.payload.id)));
         } else {
-          console.log("GOGOGO");
           return cb();
         }
       });
@@ -35,7 +34,7 @@ function create(request, reply) {
   }
 
   function createCompany(cb) {
-    company.id   = request.payload.id;
+    company.id   = createId(request.payload.name);
     company.name = request.payload.name;
     if (request.payload.img)           { company.img           = request.payload.img; }
     if (request.payload.description)   { company.description   = request.payload.description; }
@@ -59,7 +58,7 @@ function create(request, reply) {
       } else if(reply) {
         return cb();
       } else { // same id
-        return cb(Hapi.error.conflict('Company ID exists: '+request.payload.id));
+        return cb(Hapi.error.conflict('Company ID exists: '+company.id));
       }
     });
   }
@@ -73,3 +72,8 @@ function create(request, reply) {
     }
   }
 }
+
+function createId(text) {
+  return text.toLowerCase().replace(/ç/g, 'c').replace(/á|à|ã/g, 'a').replace(/é|è|ê/g, 'e').replace(/í|ì|î/g, 'i').replace(/ó|ò|õ|ô/g, 'o').replace(/[^a-zA-Z ]/g, '').replace(/\s/g, '-');
+}
+
