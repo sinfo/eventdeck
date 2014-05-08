@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <div class="all-100  control-group">
+    <div class="all-100 control-group">
       <label ng-click="toggleAttendants()">Attendants </label><i class="fa fa-long-arrow-left"></i><small> Click to toggle all.</small>
       <div class="all-100">
         <div class="ink-button {{meeting.attendants.indexOf(member.id) != -1 ? 'green' : 'red'}}" style="margin-bottom: 0.5em;" ng-repeat="member in members | orderBy:'id'" ng-click="toggleAttendant(member.id)">
@@ -29,7 +29,7 @@
     <div class="all-100 control-group">
       <label>Notes</label>
       <div class="all-100 gutters bottom-space" ng-repeat="note in meeting.notes">
-        <div ng-hide="note.editing">
+        <div ng-show="note.editing">
           <div class="all-100 {{note.showTargets ? '' : 'quarter-bottom-space'}}">
             <select ng-model="note.noteType" ng-options="value for value in noteTypes"></select>
             <div class="ink-button blue" ng-click="toggleTargets(note)"><i class="fa fa-users"></i> {{note.showTargets ? 'Hide targets' : 'Show targets'}}</div>
@@ -57,9 +57,9 @@
       </div>
     </div>
 
-    <div class="all-100 control-group double-top-space">
+    <div class="all-100 control-group double-top-space half-bottom-space">
       <a class="ink-button orange" href="/#/meetings"><i class="fa fa-back"></i><i class="fa fa-reply"></i> Go back...</a>
-      <div class="ink-button green" ng-click="save()"><i class="fa fa-check"></i> Save</div>
+      <div class="ink-button green" ng-click="save()" ng-hide="loading"><i class="fa fa-check"></i> Save</div>
       <div class="ink-alert basic success" ng-show="success">
         <button class="ink-dismiss">&times;</button>
         <p><strong>Success!</strong> {{success}}</p>
