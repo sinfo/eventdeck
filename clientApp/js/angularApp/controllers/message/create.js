@@ -24,6 +24,7 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
       }
     });
 
+
     ChatFactory.Messages.get({ id:messageData.chatId }, function(response) {
       console.log(response);
 
