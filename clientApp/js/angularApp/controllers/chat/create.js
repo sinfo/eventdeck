@@ -1,6 +1,6 @@
 'use strict';
 
-theToolController.controller('ChatController', function ($scope, $http, $routeParams, $sce, MessageFactory, ChatFactory, MemberFactory) {
+/*theToolController.controller('ChatController', function ($scope, $http, $routeParams, $sce, MessageFactory, ChatFactory, MemberFactory) {
   $scope.newChat = function() {
     if ($scope.chatData == ""){
       //$scope.empty = true;
@@ -26,4 +26,4 @@ theToolController.controller('ChatController', function ($scope, $http, $routePa
   };
 
   //$scope.emptyComment = false;
-});
+});*/
