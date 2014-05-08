@@ -16,6 +16,17 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
       return o._id == $routeParams.id;
     })[0];
 
+    while (!$scope.members);
+
+    for (var i = 0, j = $scope.members.length; i < j; i++) {
+      $scope.members[i].attending = false;
+      for (var k = 0, l = $scope.meeting.attendants.length; k < l; k++) {
+        if ($scope.members[i].id == $scope.meeting.attendants[k]){
+          $scope.members[i].attending = true;
+        }
+      }
+    }
+
     $scope.loading = false;
   });
 
@@ -63,15 +74,15 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
   };
 
   $scope.save = function() {
+    $scope.success = "";
+    $scope.error   = "";
+
     $scope.meeting.attendants = [];
     for (var i = 0, j = $scope.members.length; i < j; i++) {
       if ($scope.members[i].attending) {
         $scope.meeting.attendants.push($scope.members[i].id);
       }
     }
-
-    console.log($scope.meeting);
-    return;
 
     if (!$scope.meeting.title){
       $scope.success = "";
