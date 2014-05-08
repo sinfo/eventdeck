@@ -72,6 +72,8 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
       return;
     }
 
+    console.log($scope.meeting);
+
     MeetingFactory.update($scope.meeting, function(response) {
       if(response.error) {
         $scope.success = "";
