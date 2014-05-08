@@ -18,12 +18,12 @@ function create(request, reply) {
     ], done);
 
   function checkSpeaker(cb) {
-    if(request.payload.id) {
-      Speaker.findById(request.payload.id, function(err, speaker) {
+    if(request.payload.name) {
+      Speaker.findById(createId(request.payload.name), function(err, speaker) {
         if (err) {
           return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
         } else if (speaker.length > 0) {
-          return cb(Hapi.error.conflict('Speaker ID exists: '+request.payload.id));
+          return cb(Hapi.error.conflict('Speaker ID exists: '+createId(request.payload.name)));
         } else {
           return cb();
         }
@@ -34,7 +34,7 @@ function create(request, reply) {
   }
 
   function createSpeaker(cb) {
-    speaker.id   = request.payload.id;
+    speaker.id   = createId(request.payload.name);
     speaker.name = request.payload.name;
     if (request.payload.img)           { speaker.img           = request.payload.img; }
     if (request.payload.description)   { speaker.description   = request.payload.description; }
@@ -56,7 +56,7 @@ function create(request, reply) {
       } else if(reply) {
         return cb();
       } else { // same id
-        return cb(Hapi.error.conflict('Speaker ID exists: '+request.payload.id));
+        return cb(Hapi.error.conflict('Speaker ID exists: '+speaker.id));
       }
     });
   }
@@ -69,4 +69,8 @@ function create(request, reply) {
       reply({message:"Speaker Updated!"});
     }
   }
+}
+
+function createId(text) {
+  return text.toLowerCase().replace(/ç/g, 'c').replace(/á|à|ã/g, 'a').replace(/é|è|ê/g, 'e').replace(/í|ì|î/g, 'i').replace(/ó|ò|õ|ô/g, 'o').replace(/[^a-zA-Z ]/g, '').replace(/\s/g, '-');
 }
