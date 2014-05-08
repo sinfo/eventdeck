@@ -23,6 +23,7 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
       for (var k = 0, l = $scope.meeting.attendants.length; k < l; k++) {
         if ($scope.members[i].id == $scope.meeting.attendants[k]){
           $scope.members[i].attending = true;
+          break;
         }
       }
     }
