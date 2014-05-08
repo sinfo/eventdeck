@@ -9,8 +9,10 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
 
   $scope.noteTypes = ["Info", "To do", "Decision", "Idea"];
 
-  MeetingFactory.get({_id: $routeParams.id}, function(meeting) {
-    $scope.meeting = meeting;
+  MeetingFactory.getAll(function(result) {
+    $scope.meeting = result.filter(function(o) {
+      return $routeParams.id == o._id;
+    })[0];
   });
 
 
@@ -56,7 +58,7 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
     $scope.meeting.notes.splice($scope.meeting.notes.indexOf(note), 1);
   };
 
-  $scope.submit = function() {
+  $scope.save = function() {
     $scope.meeting.attendants = [];
     for (var i = 0, j = $scope.members.length; i < j; i++) {
       if ($scope.members[i].attending) {

@@ -1,7 +1,7 @@
 <div class="column-group" ng-controller="MeetingEditController">
 
   <h1 ng-hide="meeting">Loading...</h1>
-  <form ng-show="meeting" class="all-100 ink-form" ng-submit="submit()">
+  <form ng-show="meeting" class="all-100 ink-form">
     <div class="all-100 control-group required {{meeting.title ? '' : 'validation error'}}">
       <label for="title">Title</label>
       <div class="control">
@@ -61,7 +61,7 @@
 
     <div class="all-100 control-group double-top-space">
       <a class="ink-button orange" href="/#/meetings"><i class="fa fa-back"></i><i class="fa fa-reply"></i> Go back...</a>
-      <div class="ink-button green"><i class="fa fa-check"></i> Save</div>
+      <div class="ink-button green" ng-click="save()"><i class="fa fa-check"></i> Save</div>
       <div class="ink-alert basic success" ng-show="success">
         <button class="ink-dismiss">&times;</button>
         <p><strong>Success!</strong> {{success}}</p>
