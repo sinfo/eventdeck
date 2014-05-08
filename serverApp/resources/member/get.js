@@ -31,7 +31,7 @@ function get(request, reply) {
         if (result[0].id)       { member.id       = result[0].id; }
         if (result[0].istId)    { member.istId    = result[0].istId; }
         if (result[0].name)     { member.name     = result[0].name; }
-        if (result[0].role)     { member.role     = result[0].role; }
+        if (result[0].roles)    { member.roles   = result[0].roles; }
         if (result[0].facebook) { member.facebook = result[0].facebook; }
         if (result[0].skype)    { member.skype    = result[0].skype; }
         if (result[0].phones)   { member.phones   = result[0].phones; }
