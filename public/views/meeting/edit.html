@@ -17,10 +17,10 @@
     </div>
 
     <div class="all-100  control-group">
-      <label ng-click="toggleAttendants()">Attendants </label><span ng-show="members"><i class="fa fa-long-arrow-left"></i><small> Click to toggle all.</small></span>
+      <label ng-click="toggleAttendants()">Attendants </label><i class="fa fa-long-arrow-left"></i><small> Click to toggle all.</small>
       <div class="all-100">
-        <div class="ink-button {{member.attending ? 'green' : 'red'}}" style="margin-bottom: 0.5em;" ng-repeat="member in members | orderBy:'id'" ng-click="toggleAttendant(member)">
-          <img ng-show="member.facebook" src="https://graph.facebook.com/{{member.facebook}}/picture?width=30&height=30" width="100%">
+        <div class="ink-button {{meeting.attendants.indexOf(member.id) != -1 ? 'green' : 'red'}}" style="margin-bottom: 0.5em;" ng-repeat="member in members | orderBy:'id'" ng-click="toggleAttendant(member.id)">
+          <img src="https://graph.facebook.com/{{member.facebook}}/picture?width=30&height=30" width="100%">
           <label for="{{member.id}}" style="line-height: 30px;">{{member.name}}</label>
         </div>
       </div>
@@ -39,8 +39,7 @@
           <div ng-show="note.showTargets" class="all-100">
             <label>Targets</label>
             <div class="all-100">
-              <p ng-hide="members">Loading...</p>
-              <div ng-show="members" class="ink-button small {{note.targets && note.targets.indexOf(member.id) != -1 ? 'blue' : ''}}" style="margin-bottom: 0.5em;" ng-click="toggleTarget(member.id, note)" ng-repeat="member in members | orderBy:'id'">{{member.name}}</div>
+              <div class="ink-button small {{note.targets.indexOf(member.id) != -1 ? 'blue' : ''}}" style="margin-bottom: 0.5em;" ng-click="toggleTarget(member.id, note)" ng-repeat="member in members | orderBy:'id'">{{member.name}}</div>
             </div>
           </div>
           <div class="all-100 control">
