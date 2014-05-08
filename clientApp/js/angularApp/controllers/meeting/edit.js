@@ -9,9 +9,11 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
 
   $scope.noteTypes = ["Info", "To do", "Decision", "Idea"];
 
+  $scope.formData = {};
+
   MeetingFactory.getAll(function(result) {
     $scope.meeting = result.filter(function(o) {
-      return $routeParams.id == o._id;
+      return o._id == $routeParams.id;
     })[0];
   });
 
@@ -32,10 +34,6 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
     note.showTargets = !note.showTargets;
   };
 
-  $scope.toggleEdition = function(note) {
-    note.editing = !note.editing;
-  };
-
   $scope.toggleTarget = function(target, note) {
     var index = note.targets.indexOf(target);
 
@@ -47,34 +45,38 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
     }
   };
 
+  $scope.toggleEdition = function(note) {
+    note.editing = !note.editing;
+  };
+
   $scope.addNote = function() {
-    $scope.meeting.notes.push({
+    $scope.formData.notes.push({
       noteType: "Info",
       targets: []
     });
   };
 
   $scope.removeNote = function(note) {
-    $scope.meeting.notes.splice($scope.meeting.notes.indexOf(note), 1);
+    $scope.formData.notes.splice($scope.formData.notes.indexOf(note), 1);
   };
 
   $scope.save = function() {
-    $scope.meeting.attendants = [];
+    $scope.formData.attendants = [];
     for (var i = 0, j = $scope.members.length; i < j; i++) {
       if ($scope.members[i].attending) {
-        $scope.meeting.attendants.push($scope.members[i].id);
+        $scope.formData.attendants.push($scope.members[i].id);
       }
     }
 
-    if (!$scope.meeting.title){
+    if (!$scope.formData.title){
       $scope.success = "";
       $scope.error = "Please enter a title.";
       return;
     }
 
-    console.log($scope.meeting);
+    console.log($scope.formData);
 
-    MeetingFactory.update($scope.meeting, function(response) {
+    /*MeetingFactory.update($scope.meeting, function(response) {
       if(response.error) {
         $scope.success = "";
         $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
@@ -82,7 +84,7 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
         $scope.error = "";
         $scope.success = response.success;
       }
-    });
+    });*/
   };
 
 });
