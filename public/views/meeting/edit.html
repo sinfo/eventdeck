@@ -28,12 +28,12 @@
 
     <div class="all-100 control-group">
       <label>Notes</label>
-      <div class="all-100 gutters bottom-space" ng-repeat="note in meeting.notes">
+      <div class="all-100 gutters half-bottom-space" ng-repeat="note in meeting.notes">
         <div ng-show="note.editing">
           <div class="all-100 {{note.showTargets ? '' : 'quarter-bottom-space'}}">
             <select ng-model="note.noteType" ng-options="value for value in noteTypes"></select>
             <div class="ink-button blue" ng-click="toggleTargets(note)"><i class="fa fa-users"></i> {{note.showTargets ? 'Hide targets' : 'Show targets'}}</div>
-            <div class="ink-button green" ng-click="toggleEdition(note)"><i class="fa fa-check"></i> Save note</div>
+            <div class="ink-button green" ng-click="focusNote()"><i class="fa fa-check"></i> Save note</div>
             <div class="ink-button red" ng-click="removeNote(note)"><i class="fa fa-times"></i> Remove note</div>
           </div>
           <div ng-show="note.showTargets" class="all-100">
@@ -44,12 +44,13 @@
           </div>
           <div class="all-100 control">
             <textarea ng-model="note.text" type="text" rows="2" placeholder="Write a note."></textarea>
-            </div>
           </div>
         </div>
-        <div ng-show="note.editing" ng-click="toggleEdition(note)">
-          <p><b>{{note.noteType}}</b> {{note.text}}</p>
-          <small><span ng-repeat="member in note.targets | orderBy:'id'">{{member}} </span></small>
+        <div class="all-100" ng-hide="note.editing" ng-click="focusNote(note)" style="background: #ccc; border-radius: 5px;">
+          <p style="margin-left: 5px;"><b>{{note.noteType}}: </b>{{note.text}}</p>
+          <div ng-show="note.targets.length > 0" style="margin-left: 5px;">
+            <small ng-repeat="target in note.targets" style="margin-right: 10px;">{{getName(target)}}</small>
+          </div>
         </div>
       </div>
       <div class="all-100">
@@ -57,9 +58,9 @@
       </div>
     </div>
 
-    <div class="all-100 control-group double-top-space half-bottom-space">
+    <div class="all-100 control-group top-space half-bottom-space">
       <a class="ink-button orange" href="/#/meetings"><i class="fa fa-back"></i><i class="fa fa-reply"></i> Go back...</a>
-      <div class="ink-button green" ng-click="save()" ng-hide="loading"><i class="fa fa-check"></i> Save</div>
+      <div class="ink-button green" ng-click="save()"><i class="fa fa-check"></i> Save</div>
       <div class="ink-alert basic success" ng-show="success">
         <button class="ink-dismiss">&times;</button>
         <p><strong>Success!</strong> {{success}}</p>
