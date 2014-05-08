@@ -15,7 +15,7 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
     });
 
     MessageFactory.create(messageData, function(response){
-      
+
       console.log(response);
       if(response.error) {
         $scope.error = response.error;
@@ -24,7 +24,8 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
       }
     });
 
-    ChatFactory.Messages.get({ id:messageData.chatId }, function(response)) {
+
+    ChatFactory.Messages.get({ id:messageData.chatId }, function(response) {
       console.log(response);
 
       if(response.error) {
