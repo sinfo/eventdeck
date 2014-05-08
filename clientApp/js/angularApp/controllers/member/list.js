@@ -7,9 +7,9 @@ theToolController
     }
 
     MemberFactory.Member.getAll(function(response) {
-      $scope.predicate = 'role';
+      $scope.predicate = 'name';
       $scope.reverse = false;
       $scope.members = response;
     });
   });
-  
+
