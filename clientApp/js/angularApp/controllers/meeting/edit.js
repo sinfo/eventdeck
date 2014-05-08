@@ -4,17 +4,19 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
 
   //================================INITIALIZATION================================
 
+  $scope.loading = true;
+
   $scope.success = "";
   $scope.error   = "";
 
   $scope.noteTypes = ["Info", "To do", "Decision", "Idea"];
 
-  $scope.formData = {};
-
   MeetingFactory.getAll(function(result) {
     $scope.meeting = result.filter(function(o) {
       return o._id == $routeParams.id;
     })[0];
+
+    $scope.loading = false;
   });
 
 
@@ -50,33 +52,34 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
   };
 
   $scope.addNote = function() {
-    $scope.formData.notes.push({
+    $scope.meeting.notes.push({
       noteType: "Info",
       targets: []
     });
   };
 
   $scope.removeNote = function(note) {
-    $scope.formData.notes.splice($scope.formData.notes.indexOf(note), 1);
+    $scope.meeting.notes.splice($scope.meeting.notes.indexOf(note), 1);
   };
 
   $scope.save = function() {
-    $scope.formData.attendants = [];
+    $scope.meeting.attendants = [];
     for (var i = 0, j = $scope.members.length; i < j; i++) {
       if ($scope.members[i].attending) {
-        $scope.formData.attendants.push($scope.members[i].id);
+        $scope.meeting.attendants.push($scope.members[i].id);
       }
     }
 
-    if (!$scope.formData.title){
+    console.log($scope.meeting);
+    return;
+
+    if (!$scope.meeting.title){
       $scope.success = "";
       $scope.error = "Please enter a title.";
       return;
     }
 
-    console.log($scope.formData);
-
-    /*MeetingFactory.update($scope.meeting, function(response) {
+    MeetingFactory.update($scope.meeting, function(response) {
       if(response.error) {
         $scope.success = "";
         $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
@@ -84,7 +87,7 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
         $scope.error = "";
         $scope.success = response.success;
       }
-    });*/
+    });
   };
 
 });
