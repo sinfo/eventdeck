@@ -11,25 +11,35 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
 
   $scope.noteTypes = ["Info", "To do", "Decision", "Idea"];
 
-  MeetingFactory.getAll(function(result) {
-    $scope.meeting = result.filter(function(o) {
-      return o._id == $routeParams.id;
-    })[0];
+  init();
 
-    while (!$scope.members);
+  function init() {
+    console.log("Running init.");
 
-    for (var i = 0, j = $scope.members.length; i < j; i++) {
-      $scope.members[i].attending = false;
-      for (var k = 0, l = $scope.meeting.attendants.length; k < l; k++) {
-        if ($scope.members[i].id == $scope.meeting.attendants[k]){
-          $scope.members[i].attending = true;
-          break;
+    setTimeout(function() {
+      if ($scope.loading) {
+        init();
+      }
+    }, 1000);
+
+    MeetingFactory.getAll(function(result) {
+      $scope.meeting = result.filter(function(o) {
+        return o._id == $routeParams.id;
+      })[0];
+
+      for (var i = 0, j = $scope.members.length; i < j; i++) {
+        $scope.members[i].attending = false;
+        for (var k = 0, l = $scope.meeting.attendants.length; k < l; k++) {
+          if ($scope.members[i].id == $scope.meeting.attendants[k]){
+            $scope.members[i].attending = true;
+            break;
+          }
         }
       }
-    }
 
-    $scope.loading = false;
-  });
+      $scope.loading = false;
+    });
+  }
 
 
   //===================================FUNCTIONS===================================
