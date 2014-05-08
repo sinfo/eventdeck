@@ -75,6 +75,9 @@ theToolServices
       },
       create: {
         method: 'POST'
+      },
+      update: {
+        method: 'PUT'
       }
     })
   })
