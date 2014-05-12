@@ -30,6 +30,15 @@ server.route({
 });
 
 server.route({
+  method: 'POST',
+  path: '/api/chat/{id}',
+  config: {
+    handler: chat.post,
+    auth: true
+  }
+});
+
+server.route({
   method: 'GET',
   path: '/api/chat/{id}',
   config: {

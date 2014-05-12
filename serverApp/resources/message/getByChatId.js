@@ -14,7 +14,7 @@ function list(request, reply) {
     ], done);
 
   function getMessage(cb) {
-    Message.findByChatId(memberId, gotMessage);
+    Message.findByChatId(chatId, gotMessage);
 
     function gotMessage(err, result) {
       if (err) cb(err);
