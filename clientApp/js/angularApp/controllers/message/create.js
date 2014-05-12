@@ -1,18 +1,38 @@
 'use strict';
 
 theToolController.controller('MessageController', function ($scope, $http, $routeParams, $sce, MessageFactory, ChatFactory, MemberFactory) {
+
+  $scope.error = {};
+
+  $scope.loading = true;
+
+  ChatFactory.Chat.get({id: $routeParams.id}, function(result) {
+    console.log(result);
+    $scope.chat = result;
+    $scope.loading = false;
+  });
+
+  ChatFactory.Messages.get({id: $routeParams.id}, function(response) {
+    console.log(response);
+    if(response.error) {
+      $scope.error = response.error;
+    } else {
+      $scope.messages = response.message;
+    }
+
+  });
+
   $scope.submit = function() {
-    if ($scope.messageData == ""){
+    if ($scope.messageText == ""){
       //$scope.empty = true;
       return;
     }
 
-    var messageData = this.messageData;
-    var messages;
-
-    MemberFactory.Member.get({id: "me"}, function(me) {
-      messageData.member = $scope.author = me;
-    });
+    var messageData = {
+      text   : $scope.messageText,
+      chatId : $routeParams.id,
+      member : $scope.me.id,
+    }
 
     MessageFactory.create(messageData, function(response){
 
@@ -24,19 +44,8 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
       }
     });
 
-
-    ChatFactory.Messages.get({ id:messageData.chatId }, function(response) {
-      console.log(response);
-
-      if(response.error) {
-        $scope.error = response.error;
-      } else {
-        chatData.messages = response.message;
-      }
-
-    });
-
-    ChatFactory.Chat.update({ id:messageData.chatId }, {messages:chatData.messages}, function(response) {
+    console.log($scope.message);
+    ChatFactory.Chat.update({ id:$routeParams.id }, {message:$scope.message._id}, function(response) {
       // if successful, we'll need to refresh the chat list
       console.log(response);
 
@@ -47,6 +56,5 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
       }
     });
   };
-
   //$scope.emptyComment = false;
 });

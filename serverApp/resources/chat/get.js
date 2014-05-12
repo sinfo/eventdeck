@@ -16,18 +16,15 @@ function get(request, reply) {
     ], done);
 
   function getChat(cb) {
+    console.log("ID: " + chatId);
     Chat.findById(chatId, gotChat);
 
     function gotChat(err, result) {
       if (err) {
         cb(err);
       }
-
       if (result.length > 0) {
-        if (result[0].id)            { chat.id        = result[0].id; }
-        if (result[0].members)       { chat.members   = result[0].members; }
-        if (result[0].messages)      { chat.messages  = result[0].messages; }
-        if (result[0].date)          { chat.date      = result[0].date; }
+        if (result[0].id)            { chat        = result[0]; }
         cb();
       }
       else {
@@ -40,6 +37,7 @@ function get(request, reply) {
     if (err) {
       reply(Hapi.error.badRequest(err.detail));
     } else {
+      console.log(chat);
       reply(chat);
     }
   }

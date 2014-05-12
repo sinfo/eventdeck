@@ -14,7 +14,6 @@ function create(request, reply) {
     ], done);
 
   function createMessage(cb) {
-    if (message.id)               { message.id      = request.payload.id; }
     if (request.payload.chatId)   { message.chatId  = request.payload.chatId; }
     if (request.payload.member)   { message.member  = request.payload.member; }
     if (request.payload.text)     { message.text    = request.payload.text; }

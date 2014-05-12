@@ -31,6 +31,6 @@ config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/meeting/:id'         , {templateUrl: 'views/meeting/view.html',    controller: 'MeetingController'});
   $routeProvider.when('/meeting/:id/edit'    , {templateUrl: 'views/meeting/edit.html',    controller: 'MeetingEditController'});
   $routeProvider.when('/chats'               , {templateUrl: 'views/chat/list.html',       controller: 'ChatController'});
-  $routeProvider.when('/chat'                , {templateUrl: 'views/chat/view.html',       controller: 'MessageController'});
+  $routeProvider.when('/chat/:id'            , {templateUrl: 'views/chat/view.html',       controller: 'MessageController'});
   $routeProvider.otherwise({redirectTo: '/'});
 }]);
