@@ -1,7 +1,22 @@
-<div class="" ng-controller="ChatController" style="background-color: red">
-  <ul>
-    <li ng-repeat="message in messages">
-      {{message.text}}
-    </li>
-  </ul>
+<div class="column-group horizontal-gutters">
+  <div class="all-100">
+    <h1>Chat {{chat.name}}</h1>
+    <ul>
+      <li ng-repeat="message in messages | orderBy:'date':true">
+        <p class="all-95 tiny-70 small-80" style="line-height: 4em;">{{message.text}} <span title="{{meeting.date}}">({{time(meeting.date)}})</span></p>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="column-group horizontal-gutters">
+  <div class="all-100">
+
+    <form class="ink-form" ng-submit="submit()">
+
+      <div class="control-group">
+        <input type="submit" id="submit" value="Save Message" class="ink-button green" />
+        <textarea ng-model="chat.text" type="text" rows="3" placeholder="Post message on chat."></textarea>
+      </div>
+    </form>
+  </div>
 </div>

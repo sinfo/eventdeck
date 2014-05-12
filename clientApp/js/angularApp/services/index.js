@@ -85,10 +85,15 @@ theToolServices
   .factory('ChatFactory', function($resource) {
     return {
       Chat: $resource('/api/chat/:id', null, {
-        'update': {method: 'PUT'},
-        'create': {method: 'POST'},
+        'update': {method: 'POST'},
         'get':    {method: 'GET'}
 
+      }),
+      Chats: $resource('/api/chats', null, {
+        'getAll': {
+          method: 'GET',
+          isArray:true
+        }
       }),
       Messages: $resource('/api/chat/:id/messages', null, {
         'get': {

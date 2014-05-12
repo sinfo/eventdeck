@@ -3,13 +3,13 @@ var mongoose = require('mongoose');
 var chatSchema = new mongoose.Schema({
   id: {type: String, unique: true},
   name: String,
-  members: [Object],
-  messages: [Object],
+  members: [String],
+  messages: [String],
   date: { type: Date, default: Date.now }
 });
 
 chatSchema.statics.findById = function (id, cb) {
-  this.find({ id: id }, cb);
+  this.find({ _id: id }, cb);
 };
 
 chatSchema.statics.findByName = function (id, cb) {
