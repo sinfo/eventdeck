@@ -29,23 +29,24 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
     }
 
     var messageData = {
-      text   : $scope.messageText,
-      chatId : $routeParams.id,
+      text   : $scope.text,
+      chatId : $scope.chat.id,
       member : $scope.me.id,
     }
+    console.log(messageData);
 
     MessageFactory.create(messageData, function(response){
 
-      console.log(response);
       if(response.error) {
         $scope.error = response.error;
       } else {
-        $scope.message = response.message;
+        console.log(response);
+        messageData.id = response.messageId;
       }
     });
 
-    console.log($scope.message);
-    ChatFactory.Chat.update({ id:$routeParams.id }, {message:$scope.message._id}, function(response) {
+    console.log(messageData.id);
+    ChatFactory.Chat.update({ id:$routeParams.id }, {message:messageData.id}, function(response) {
       // if successful, we'll need to refresh the chat list
       console.log(response);
 
