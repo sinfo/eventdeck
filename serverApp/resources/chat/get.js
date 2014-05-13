@@ -16,7 +16,7 @@ function get(request, reply) {
     ], done);
 
   function getChat(cb) {
-    console.log("ID: " + chatId);
+    console.log("chatID: " + chatId);
     Chat.findById(chatId, gotChat);
 
     function gotChat(err, result) {
@@ -37,7 +37,6 @@ function get(request, reply) {
     if (err) {
       reply(Hapi.error.badRequest(err.detail));
     } else {
-      console.log(chat);
       reply(chat);
     }
   }
