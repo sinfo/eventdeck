@@ -6,7 +6,8 @@ exports = module.exports = create;
 
 function create(request, reply) {
 
-  var message = {};
+  var message    = {};
+  var id;
 
   async.series([
       createMessage,
@@ -17,28 +18,33 @@ function create(request, reply) {
     if (request.payload.chatId)   { message.chatId  = request.payload.chatId; }
     if (request.payload.member)   { message.member  = request.payload.member; }
     if (request.payload.text)     { message.text    = request.payload.text; }
+    //message._id = DB.Types.ObjectId();
+    //console.log(message._id);
     cb();
   }
 
   function saveMessage(cb) {
     var newMessage = new Message(message);
-
+    id = newMessage._id;
+    console.log("Create " + newMessage);
     newMessage.save(function (err, reply){
       if (err) {
         return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
       } else if(reply) {
         return cb();
       } else { // same id
-        return cb(Hapi.error.conflict('Message ID exists: '+request.payload.id));
+        return cb(Hapi.error.conflict('Message ID exists: '+request.payload._id));
       }
     });
   }
 
   function done(err) {
     if (err) {
+      console.log(err);
       reply({error:"There was an error!"});
     } else {
-      reply({message:"Message Updated!"});
+      console.log("Message Updated! " + id);
+      reply({message:"Message Updated!", messageId:id});
     }
   }
 }
