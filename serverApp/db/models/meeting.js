@@ -5,8 +5,8 @@ var meetingSchema = new mongoose.Schema({
   title: String,
   description: String,
   attendants: [String],
-  notes: [{noteType: String, text: String, targets: [String]}],
-  date: {type: Date, default: Date.now}
+  notes: [String],
+  date: {type: Date}
 });
 
 meetingSchema.statics.findById = function (id, cb) {

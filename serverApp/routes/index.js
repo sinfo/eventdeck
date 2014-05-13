@@ -9,3 +9,4 @@ require('./notification');
 require('./meeting');
 require('./message');
 require('./chat');
+require('./topic');
