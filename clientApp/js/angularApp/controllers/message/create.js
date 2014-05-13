@@ -8,7 +8,6 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
   $scope.messages = [];
 
   ChatFactory.Chat.get({id: $routeParams.id}, function(result) {
-    console.log(result);
     $scope.chat = result;
     $scope.loading = false;
   });
@@ -18,12 +17,14 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
       if(response.error) {
         $scope.error = response.error;
       } else {
-        for(var i= 0; i < response.length; i++){
-          $scope.messages[i] = response[i];
-        }   
+        if($scope.messages.length < response.length){
+          for(var i= $scope.messages.length; i < response.length; i++){
+            $scope.messages[i] = response[i];
+          }  
+        } 
       }
     });
-  },1000);
+  },4000);
 
   $scope.submit = function() {
     if ($scope.messageText == ""){
