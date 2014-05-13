@@ -36,26 +36,23 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
     console.log(messageData);
 
     MessageFactory.create(messageData, function(response){
-
       if(response.error) {
         $scope.error = response.error;
       } else {
-        console.log(response);
         messageData.id = response.messageId;
-      }
-    });
+        
+        console.log(messageData.id);
+        ChatFactory.Chat.update({ id:$routeParams.id }, {message:messageData.id}, function(response) {
+          // if successful, we'll need to refresh the chat list
+          console.log(response);
 
-    console.log(messageData.id);
-    ChatFactory.Chat.update({ id:$routeParams.id }, {message:messageData.id}, function(response) {
-      // if successful, we'll need to refresh the chat list
-      console.log(response);
-
-      if(response.error) {
-        $scope.error = response.error;
-      } else {
-        $scope.chat = response.message;
+          if(response.error) {
+            $scope.error = response.error;
+          } else {
+            $scope.chat = response.message;
+          }
+        });
       }
     });
   };
-  //$scope.emptyComment = false;
 });
