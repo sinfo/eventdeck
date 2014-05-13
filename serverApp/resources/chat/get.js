@@ -16,7 +16,6 @@ function get(request, reply) {
     ], done);
 
   function getChat(cb) {
-    console.log("chatID: " + chatId);
     Chat.findById(chatId, gotChat);
 
     function gotChat(err, result) {
