@@ -2,20 +2,31 @@
   <div class="all-100">
     <h1>Chat {{chat.name}}</h1>
     <ul>
-      <li ng-repeat="message in messages | orderBy:'date':true">
-        <p class="all-95 tiny-70 small-80" style="line-height: 4em;">{{message.text}} <span title="{{message.date}}">({{message.date}})</span></p>
-      </li>
+      <div class="comment" ng-repeat="message in messages | orderBy:'date':false">
+        <div class="column-group horizontal-gutters">
+          <div class="all-10">
+            <a href="/#/member/{{message.member}}"><img src="https://graph.facebook.com/{{getMemberFacebook(message.member)}}/picture" style="width:25px; margin-left:15px;"/></a>
+          </div>
+          <div class="all-70">
+            {{message.text}}
+          </div>
+          <div class="all-20" style="text-align: right; padding-right:15px;">
+            <small>{{timeSince(message.date)}}</small>
+          </div>
+        </div>
+      </div>
     </ul>
   </div>
 </div>
+
 <div class="column-group horizontal-gutters">
   <div class="all-100">
-
     <form class="ink-form" ng-submit="submit()">
-
       <div class="control-group">
-        <input type="submit" id="submit" value="Save Message" class="ink-button green" />
         <textarea ng-model="text" type="text" rows="3" placeholder="Post message on chat."></textarea>
+      </div>
+      <div class="control-group">
+        <input type="submit" id="submit" value="Post Message" class="ink-button green" />
       </div>
     </form>
   </div>

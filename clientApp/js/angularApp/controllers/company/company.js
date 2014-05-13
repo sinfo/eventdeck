@@ -29,12 +29,6 @@ theToolController
       });
     };
 
-    $scope.getMemberFacebook = function(id) {
-      return $scope.members.filter(function(e){
-          return e.id == id;
-        })[0].facebook;
-    }
-
     $scope.submitComment = function() {
       if ($scope.commentData.markdown == ""){
         $scope.emptyComment = true;

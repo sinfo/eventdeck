@@ -3,6 +3,7 @@
 theToolController.controller('NotificationController', function ($scope, $http, $routeParams, $sce, $location, $rootScope, NotificationFactory, MemberFactory, CompanyFactory, SpeakerFactory) {
 
   $scope.timeSince =function (date) {
+    date = new Date(date);
     var seconds = Math.floor((Date.now() - date) / 1000);
 
     var interval = Math.floor(seconds / 31536000);
@@ -27,6 +28,13 @@ theToolController.controller('NotificationController', function ($scope, $http, 
     }
     return Math.floor(seconds) + " seconds ago";
   };
+
+  $scope.getMemberFacebook = function(id) {
+    return $scope.members.filter(function(e){
+        return e.id == id;
+      })[0].facebook;
+  }
+
 
   $scope.loading = true;
 
