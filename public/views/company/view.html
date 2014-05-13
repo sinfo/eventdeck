@@ -43,6 +43,13 @@
             <div ng-bind-html="convertTextToHtml(company.contacts)"></div>
           </div>
           <br>
+          <div ng-show="company.accesses">
+            <h1>Acesses</h1>
+            <ul>
+              <li ng-repeat="access in company.accesses">Someone accessed {{access.where}} {{timeSince(access.date)}}.</li>
+            </ul>
+          </div>
+          <br>
         </div>
         <div class="all-30 medium-30 small-100 tiny-100">
           <div ng-show="company.participation">
