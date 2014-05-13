@@ -40,11 +40,8 @@ function update(request, reply) {
   function updateChat(cb) {
     //console.log(request.payload.members, chat.members, request.payload.member != chat.member)
     diffChat = chat;
-    console.log(request.payload.message);
     diffChat.messages.push(request.payload.message);    
     diffChat.updated = Date.now();
-    console.log("DIFF", diffChat);
-
     cb();
   }
 
@@ -52,11 +49,9 @@ function update(request, reply) {
     var query = {
       id: chat.id
     };
-    if(diffChat.id) {
-      query = chat;
-    }
-    Chat.update(query, diffChat, {}, function (err, numAffected){
+    Chat.update(query, {messages: diffChat.messages, date: diffChat.updated}, {}, function (err, numAffected){
       if (err) {
+        console.log(err);
         return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
       }
 
