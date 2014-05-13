@@ -11,7 +11,41 @@ var companySchema = new mongoose.Schema({
   contacts: String,
   history: String,
   member: String,
-  participation: Object,
+  participation: {
+    kind: String,
+    payment: {
+      price: Number,
+      iva: Number,
+      total: Number,
+      date: String,
+      invoice: String,
+      status: String,
+      via: String
+    },
+    items: {
+      logos: {
+        site: String,
+        pens: String,
+        tshirts: String,
+        merchandise: String,
+        banners: String,
+        posters: String,
+        flyers: String,
+        folders: String,
+        pens: String,
+        individuals: String,
+        rollups: String,
+        showcase: String
+      },
+      stand: Number,
+      presentation: Boolean,
+      documentation: Boolean,
+      posts: Number,
+      workshop: Boolean,
+      keynote: Boolean,
+      innovationAwards: Boolean
+    }
+  },
   area: String,
   accesses: [{ 
     date: { type: Date, default: Date.now },
