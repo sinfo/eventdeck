@@ -27,8 +27,8 @@ function update(request, reply) {
       }
 
       if (result.length > 0) {
+        console.log(result[0]);
         if (result[0].id)            { chat = result[0]; }
-        console.log(chat);
         cb();
       }
       else {
