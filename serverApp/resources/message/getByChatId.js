@@ -6,7 +6,7 @@ module.exports = list;
 
 function list(request, reply) {
 
-  var chatId = request.params.chatId;
+  var chatId = request.params.id;
   var messages;
 
   async.series([

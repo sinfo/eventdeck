@@ -23,7 +23,7 @@ function get(request, reply) {
       if (err) {
         cb(err);
       }
-      if (result.length > 0) {
+      if (result && result.length > 0) {
         if (result[0].id)            { chat        = result[0]; }
         cb();
       }
