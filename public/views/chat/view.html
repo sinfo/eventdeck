@@ -3,7 +3,7 @@
     <h1>Chat {{chat.name}}</h1>
     <ul>
       <li ng-repeat="message in messages | orderBy:'date':true">
-        <p class="all-95 tiny-70 small-80" style="line-height: 4em;">{{message.text}} <span title="{{meeting.date}}">({{time(meeting.date)}})</span></p>
+        <p class="all-95 tiny-70 small-80" style="line-height: 4em;">{{message.text}} <span title="{{message.date}}">({{message.date}})</span></p>
       </li>
     </ul>
   </div>

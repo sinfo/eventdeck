@@ -12,6 +12,7 @@ messageSchema.statics.findById = function (id, cb) {
 };
 
 messageSchema.statics.findByChatId = function (id, cb) {
+	console.log("chatId: " + id);
   this.find({ chatId: id }, cb);
 };
 

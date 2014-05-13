@@ -5,6 +5,7 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
   $scope.error = {};
 
   $scope.loading = true;
+  $scope.messages = [];
 
   ChatFactory.Chat.get({id: $routeParams.id}, function(result) {
     console.log(result);
@@ -12,15 +13,17 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
     $scope.loading = false;
   });
 
-  ChatFactory.Messages.get({id: $routeParams.id}, function(response) {
-    console.log(response);
-    if(response.error) {
-      $scope.error = response.error;
-    } else {
-      $scope.messages = response.message;
-    }
-
-  });
+  setInterval(function(){
+    ChatFactory.Messages.get({id: $routeParams.id}, function(response) {
+      if(response.error) {
+        $scope.error = response.error;
+      } else {
+        for(var i= 0; i < response.length; i++){
+          $scope.messages[i] = response[i];
+        }   
+      }
+    });
+  },1000);
 
   $scope.submit = function() {
     if ($scope.messageText == ""){
@@ -30,7 +33,7 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
 
     var messageData = {
       text   : $scope.text,
-      chatId : $scope.chat.id,
+      chatId : $routeParams.id,
       member : $scope.me.id,
     }
     console.log(messageData);
@@ -40,7 +43,7 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
         $scope.error = response.error;
       } else {
         messageData.id = response.messageId;
-        
+
         console.log(messageData.id);
         ChatFactory.Chat.update({ id:$routeParams.id }, {message:messageData.id}, function(response) {
           // if successful, we'll need to refresh the chat list
