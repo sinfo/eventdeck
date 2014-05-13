@@ -65,6 +65,9 @@ function update(request, reply) {
     if (request.payload.area != company.area)                          { diffCompany.area          = request.payload.area; }
     if (!equals(request.payload.participation, company.participation)) { diffCompany.participation = request.payload.participation; }
 
+    if (isEmpty(diffCompany))
+      return cb("Nothing changed.");
+
     diffCompany.updated = Date.now();
 
     console.log("DIFF", diffCompany)
@@ -91,7 +94,10 @@ function update(request, reply) {
 
   function done(err) {
     if (err) {
-      reply({error:"There was an error!"});
+      if (err == "Nothing changed.")
+        reply({error: "Nothing changed."})
+      else
+        reply({error: "There was an error!"});
     } else {
       if(diffCompany.member) { email.companyAttribute(diffCompany.member, company); }
 
@@ -114,5 +120,11 @@ function equals(o1, o2) {
     }
   }
 
+  return true;
+}
+
+function isEmpty(o) {
+  for (key in o)
+    return false;
   return true;
 }
