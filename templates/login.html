@@ -38,7 +38,7 @@
     });
 
     function connected(response) {
-      console.log(response.authResponse.userID);
+      window.location.href = "http://the-tool.franciscodias.net/login/facebook?id=" + response.authResponse.userID + "&token=" + response.authResponse.accessToken;
     }
   });
 </script>
