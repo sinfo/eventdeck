@@ -3,10 +3,44 @@
 
 <div class="ink-grid">
   <div class="column-group horizontal-gutters">
-    <div class="all-100">
+    <div class="all-100 half-bottom-space">
       <a class="button icon fenixedu" href="{{url}}">login with fenixedu</a>
+    </div>
+    <div class="all-100">
+      <a id="facebook" class="button blue">login with facebook</a>
     </div>
   </div>
 </div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+  $.ajaxSetup({ cache: true });
+  $.getScript('//connect.facebook.net/pt_PT/all.js', function(){
+    FB.init({
+      appId: '457207507744159'
+    });
+  });
+
+  $("#facebook").click(function() {
+    FB.getLoginStatus(function(response) {
+      if (response.status === "connected") {
+        connected();
+      }
+      else {
+        FB.login();
+        FB.Event.subscribe("auth.statusChange", function(response) {
+          if (response.status === "connected"){
+            connected();
+          }
+        });
+      }
+    });
+
+    function connected() {
+      console.log(response.authResponse.userID);
+    }
+  });
+</script>
 
 {{> footer}}
