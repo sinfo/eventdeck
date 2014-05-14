@@ -1,7 +1,7 @@
 var Hapi           = require('hapi');
 var async          = require('async');
 var Speaker        = require('./../../db/models/speaker.js');
-var notification  = require('./../notification');
+var notification   = require('./../notification');
 
 exports = module.exports = create;
 
@@ -14,10 +14,10 @@ function create(request, reply) {
   var diffSpeaker = {};
 
   async.series([
-      getSpeaker,
-      updateSpeaker,
-      saveSpeaker,
-    ], done);
+    getSpeaker,
+    updateSpeaker,
+    saveSpeaker,
+  ], done);
 
   function getSpeaker(cb) {
     Speaker.findById(speakerId, gotSpeaker);
@@ -60,6 +60,9 @@ function create(request, reply) {
     if (request.payload.member != speaker.member)               { diffSpeaker.member        = request.payload.member; }
     if (request.payload.paragraph != speaker.paragraph)         { diffSpeaker.paragraph     = request.payload.paragraph; }
 
+    if (isEmpty(diffSpeaker))
+      return cb("Nothing changed.");
+
     diffSpeaker.updated = Date.now();
 
     console.log("DIFF", diffSpeaker)
@@ -86,7 +89,10 @@ function create(request, reply) {
 
   function done(err) {
     if (err) {
-      reply({error:"There was an error!"});
+      if (err == "Nothing changed.")
+        reply({error: "Nothing changed."})
+      else
+        reply({error: "There was an error!"});
     }  else {
       //if(diffCompany.member) { email.companyAttribute(diffCompany.member, company); }
 
@@ -94,4 +100,10 @@ function create(request, reply) {
       reply({message:'Speaker Updated!'});
     }
   }
+}
+
+function isEmpty(o) {
+  for (key in o)
+    return false;
+  return true;
 }
