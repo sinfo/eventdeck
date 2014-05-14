@@ -25,19 +25,19 @@
   $("#facebook").click(function() {
     FB.getLoginStatus(function(response) {
       if (response.status === "connected") {
-        connected();
+        connected(response);
       }
       else {
         FB.login();
         FB.Event.subscribe("auth.statusChange", function(response) {
           if (response.status === "connected"){
-            connected();
+            connected(response);
           }
         });
       }
     });
 
-    function connected() {
+    function connected(response) {
       console.log(response.authResponse.userID);
     }
   });
