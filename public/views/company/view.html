@@ -50,6 +50,13 @@
             </ul>
           </div>
           <br>
+          <div>
+            <h1>Last Changes</h1>
+            <ul ng-show="company.notifications">
+              <li ng-repeat="notification in company.notifications | orderBy: 'posted':true | limitTo: 5">{{notification.description}} <small>{{timeSince(notification.posted)}}</small>.</li>
+            </ul>
+          </div>
+          <br>
         </div>
         <div class="all-30 medium-30 small-100 tiny-100">
           <div ng-show="company.participation">
