@@ -13,6 +13,10 @@ exports.login = function login(request, reply) {
   return reply.view('login.html', { url: fenix.auth.getAuthUrl() });
 };
 
+exports.facebook = function facebook(request, reply) {
+
+}
+
 exports.redirect = function redirect(request, reply) {
 
   if (request.auth.isAuthenticated) {
