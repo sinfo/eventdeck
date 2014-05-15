@@ -26,3 +26,5 @@ node_modules
 
 serverApp/emailConfig.json
 sftp-config.json
+
+chromeExtension.*

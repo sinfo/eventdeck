@@ -18,13 +18,13 @@
             <a class="ink-button blue" href="{{speaker.forum}}" target="_blank"><i class="fa fa-comments"></i> Go to Forum!</a>
             <a class="ink-button orange" href="/#/speaker/{{speaker.id}}/edit"><i class="fa fa-wrench"></i> Edit Speaker</a>
           </p>
-          <img ng-show="speaker.img" src="{{speaker.img}}" width="100%" />
+          <img ng-show="speaker.img" ng-src="{{speaker.img}}" width="100%" />
           <br><br>
           <p><b>Status: </b>{{speaker.status}}</p>
           <p>
             <a href="/#/member/{{member.id}}">
             <i ng-hide="member.facebook" class="fa fa-user"></i>
-            <img ng-show="member.facebook" src="https://graph.facebook.com/{{member.facebook}}/picture"/>
+            <img ng-show="member.facebook" ng-src="{{'https://graph.facebook.com/'+member.facebook+'/picture'}}"/>
             <b style="font-size: 20px; margin-left:12px;"> {{member.name}}</b>
             </a>
           </p>
@@ -56,7 +56,7 @@
           <div class="comment" ng-hide="loading" ng-repeat="comment in comments | orderBy: 'posted':false">
             <div class="column-group horizontal-gutters">
               <div class="all-10">
-                <a href="/#/member/{{comment.member}}"><img src="https://graph.facebook.com/{{getMemberFacebook(comment.member)}}/picture"/></a>
+                <a href="/#/member/{{comment.member}}"><img ng-src="{{'https://graph.facebook.com/'+getMemberFacebook(comment.member)+'/picture'}}"/></a>
               </div>
               <div class="all-70" ng-bind-html="convertNewLinesToHtml(comment.html)">
               </div>
