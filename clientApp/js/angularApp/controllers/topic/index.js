@@ -1,2 +1,2 @@
 require('./list');
-require('./edit');
+require('./topic');
