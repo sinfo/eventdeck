@@ -1,6 +1,7 @@
-var server  = require('./../index.js');
-var speaker = require('./../resources/speaker');
-var comment = require('./../resources/comment');
+var server       = require('./../index.js');
+var speaker      = require('./../resources/speaker');
+var comment      = require('./../resources/comment');
+var notification = require('./../resources/notification');
 
 server.route({
   method: 'GET',
@@ -52,6 +53,15 @@ server.route({
   path: '/api/speaker/{id}/sendInitialEmail',
   config: {
     handler: speaker.sendInitialEmail,
+    auth: true
+  }
+});
+
+server.route({
+  method: 'GET',
+  path: '/api/speaker/{id}/notifications',
+  config: {
+    handler: notification.getByThread,
     auth: true
   }
 });
