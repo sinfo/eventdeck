@@ -23,7 +23,7 @@ theToolController.controller('home', function ($scope, $http, $sce,  $rootScope,
 
     MemberFactory.Member.getAll(function(members) {
 
-      NotificationFactory.getAll(function(response) {
+      NotificationFactory.Notification.getAll(function(response) {
         for (var i = 0, j = response.length; i < j; i++) {
           //if (response[i].member != me.id){ //uncomment to hide self-events
           var date = new Date(response[i].posted);

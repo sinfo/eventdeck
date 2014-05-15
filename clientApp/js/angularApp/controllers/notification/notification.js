@@ -51,7 +51,7 @@ theToolController.controller('NotificationController', function ($scope, $http, 
   $scope.speakers = [];
 
   $scope.update = function() {
-    NotificationFactory.getAll(function(response) {
+    NotificationFactory.Notification.getAll(function(response) {
       $scope.notifications = [];
       $scope.notificationsInfo.number = 0;
 
@@ -91,7 +91,7 @@ theToolController.controller('NotificationController', function ($scope, $http, 
 
     $scope.members = members;
 
-      NotificationFactory.getAll(function(response) {
+      NotificationFactory.Notification.getAll(function(response) {
         for (var i = 0, j = response.length; i < j; i++) {
           //if (response[i].member != me.id) { //uncomment to hide self-events
           if (response[i].unread.indexOf(me.id) != -1) {
