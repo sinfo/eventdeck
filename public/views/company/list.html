@@ -49,7 +49,7 @@
           <h1><a href="/#/company/{{company.id}}">{{ company.name }}</a></h1>
           <div ng-show="company.img">
             <a href="/#/company/{{company.id}}">
-              <img src="{{company.img}}"/>
+              <img ng-src="{{company.img}}"/>
             </a>
           </div>
           <span ng-show="company.participation">Patrocinou {{company.participation.kind}}</a></span>
