@@ -252,6 +252,18 @@ body.ink-drawer .right-drawer li.active > a {
   background: #000;
 }
 
+.gold {
+  background: #ffcd19;
+  background-image: -webkit-gradient(radial,50% 50%,0,50% 50%,100,color-stop(0%,#ffcd19),color-stop(100%,#ffcd19));
+  background-image: -webkit-radial-gradient(#ffcd19,#ffcd19);
+  background-image: -moz-radial-gradient(#ffcd19,#ffcd19);
+  background-image: -o-radial-gradient(#ffcd19,#ffcd19);
+  background-image: radial-gradient(#ffcd19,#ffcd19);
+}
+.ink-button.gold:hover{
+  background: #ffcd19;
+}
+
 .silver {
   background: #eee;
   background-image: -webkit-gradient(radial,50% 50%,0,50% 50%,100,color-stop(0%,#eee),color-stop(100%,#aaa));
