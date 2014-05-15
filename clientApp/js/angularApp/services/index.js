@@ -109,4 +109,20 @@ theToolServices
         get:    {method: 'GET'},
         create: {method: 'POST'}
       })
+  })
+
+  .factory('TopicFactory', function($resource) {
+    return {
+      Topic: $resource('/api/topic/:id', null, {
+        'update': {method: 'PUT'},
+        'get'   : {method: 'GET'}
+      }),
+      Topics: $resource('/api/topics', null, {
+        'create': {method: 'POST'},
+        'getAll': {
+          method: 'GET',
+          isArray:true
+        }
+      })
+    }
   });
