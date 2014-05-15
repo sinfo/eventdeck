@@ -15,10 +15,10 @@ function update(request, reply) {
   var diffCompany = {};
 
   async.series([
-      getCompany,
-      updateCompany,
-      saveCompany,
-    ], done);
+    getCompany,
+    updateCompany,
+    saveCompany,
+  ], done);
 
   function getCompany(cb) {
     Company.findById(companyId, gotCompany);
