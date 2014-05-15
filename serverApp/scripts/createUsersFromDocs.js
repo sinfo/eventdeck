@@ -1,5 +1,5 @@
 var Tabletop = require('tabletop');
-var request  = require('request');
+var Request  = require('request');
 var async    = require('async');
 var Member   = require('./../db/models/member.js');
 require('./../db');
@@ -53,7 +53,7 @@ Tabletop.init({
         if (commission[i]['telem.1'])  { member.phones.push(commission[i]['telem.1']);     }
         if (commission[i]['telem.2'])  { member.phones.push(commission[i]['telem.2']);     }
 
-        request("http://graph.facebook.com/" + member.facebook, {
+        Request("http://graph.facebook.com/" + member.facebook, {
           method: "GET",
           json: true
         }, function (error, response, result) {
