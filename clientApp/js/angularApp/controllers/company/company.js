@@ -1,7 +1,7 @@
 'use strict';
 
 theToolController
-  .controller('CompanyController', function ($scope, $http, $routeParams, $sce, CompanyFactory, MemberFactory, CommentFactory) {
+  .controller('CompanyController', function ($scope, $http, $routeParams, $sce, CompanyFactory, MemberFactory, CommentFactory, NotificationFactory) {
     $scope.trustSrc = function(src) {
       return $sce.trustAsResourceUrl(src+'#page-body');
     }
@@ -85,6 +85,11 @@ theToolController
       CommentFactory.Company.getAll({id: $routeParams.id}, function(getData) {
         $scope.comments = getData;
         $scope.loading = false;
+      });
+
+      NotificationFactory.Company.getAll({id: $routeParams.id}, function(getData) {
+        $scope.company.notifications = getData;
+        console.log(getData);
       });
     });
 

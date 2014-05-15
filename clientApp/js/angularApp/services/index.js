@@ -59,12 +59,17 @@ theToolServices
   })
 
   .factory('NotificationFactory', function($resource) {
-    return $resource('/api/notifications', null, {
-      getAll: {
-        method: 'GET',
-        isArray:true
-      }
-    })
+    return {
+      Notification: $resource('/api/notifications', null, {
+        'getAll': {method: 'GET', isArray:true},
+      }),
+      Company: $resource('/api/company/:id/notifications', null, {
+        'getAll': {method: 'GET', isArray:true}
+      }),
+      Speaker: $resource('/api/speaker/:id/notifications', null, {
+        'getAll': {method: 'GET', isArray:true}
+      })
+    }
   })
 
   .factory('MeetingFactory', function($resource) {
