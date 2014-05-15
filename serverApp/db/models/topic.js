@@ -6,10 +6,12 @@ var topicSchema = new mongoose.Schema({
   targets: [String],
   kind: String,
   closed: Boolean,
+  result: String,
   votes: [String],
   duedate: {type: Date},
   meeting: [String],
-  posted: {type: Date, default: Date.now}
+  root: String,
+  posted: {type: Date}
 });
 
 topicSchema.statics.findById = function (id, cb) {
