@@ -8,7 +8,7 @@ theToolController.controller('TopicsController', function ($scope, $location, To
 
   $scope.kinds = ["Info", "To do", "Decision", "Idea"];
 
-  TopicFactory.getAll(function(topics) {
+  TopicFactory.Topics.getAll(function(topics) {
     $scope.topics = topics;
 
     for (var i = 0, j = $scope.topics.length; i < j; i++) {
@@ -27,16 +27,15 @@ theToolController.controller('TopicsController', function ($scope, $location, To
     return $scope.timeSince(new Date(date));
   };
 
-  $scope.createTopic = function() {
+  $scope.createTopic = function(kind) {
     var date = new Date();
-    conso.log("I'm in yolo!");
-    TopicFactory.create({
+    TopicFactory.Topics.create({
       author: $scope.me.id,
-      /*kind: $scope.kind*/
+      kind: kind
     }, function(response) {
       console.log(response);
       if (response.success) {
-        $location.path("/topic/" + response._id + "/edit");
+        $location.path("/topic/" + response.id + "/edit");
       }
     });
   };

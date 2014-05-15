@@ -5,9 +5,9 @@
       <nav class="ink-navigation">
         <ul class="menu vertical green" style="width:150px">
           <li>
-            <a ng-click="createTopic()"><i class="fa fa-plus"></i> Create topic</a>
+            <a><i class="fa fa-plus"></i> Create topic</a>
             <ul class="submenu" style="overflow: auto">
-              <li ng-repeat="kind as kind in kinds">{{kinds}}</li>
+              <li ng-repeat="kind in kinds"><a ng-click="createTopic(kind)">{{kind}}</a></li>
             </ul>
           </li>
         </ul>
