@@ -50,15 +50,10 @@ var notificationGenerator = {
     }
     catch(err)
     {
-      var a = document.createElement('a');
-      var p = document.createElement('p');
-      a.setAttribute("href", "http://the-tool.franciscodias.net/login");
-      a.setAttribute("target", "_blank");
-      a.innerHTML = "Login on THE TOOL!"
-      p.appendChild(a);
-      document.body.appendChild(a);
+      chrome.browserAction.setBadgeText({ text: "OUT!"});
     } 
   },
+
 
   /**
    * Handle the 'onload' event of our notification XHR request, generated in
@@ -72,29 +67,11 @@ var notificationGenerator = {
     var notifications = JSON.parse(e.target.responseText);
     console.log(notifications);
 
-    notifications.sort(function(a, b){
-      return new Date(b.posted) - new Date(a.posted);
-    });
+    notifications = notifications.filter(function(e){
+      return e.unread.indexOf(member.id) != -1;
+    })
 
-    for (var i = 0; i < notifications.length; i++) {
-      var p = document.createElement('p');
-      var a = document.createElement('a');
-
-      a.setAttribute("href", "http://the-tool.franciscodias.net/#/"+notifications[i].thread.replace("-", "/"));
-      a.setAttribute("target", "_blank");
-      a.setAttribute("class", "activity");
-
-      if(notifications[i].unread.indexOf(member.id) != -1) {
-        a.innerHTML = '<b>' + notifications[i].description + '</b>';
-      } else {
-        a.innerHTML = notifications[i].description;
-      }
-      var small = document.createElement('small');
-      small.innerHTML = ' ('+timeSince(notifications[i].posted)+')';
-      a.appendChild(small);
-      p.appendChild(a);
-      document.body.appendChild(p);
-    }
+    chrome.browserAction.setBadgeText({ text: notifications.length.toString()});
   }
 };
 
@@ -103,29 +80,9 @@ document.addEventListener('DOMContentLoaded', function () {
   notificationGenerator.requestNotifications();
 });
 
-function timeSince(date) {
-    date = new Date(date);
-    var seconds = Math.floor((Date.now() - date) / 1000);
 
-    var interval = Math.floor(seconds / 31536000);
-    if (interval > 1) {
-        return interval + " years ago";
-    }
-    interval = Math.floor(seconds / 2592000);
-    if (interval > 1) {
-        return interval + " months ago";
-    }
-    interval = Math.floor(seconds / 86400);
-    if (interval > 1) {
-        return interval + " days ago";
-    }
-    interval = Math.floor(seconds / 3600);
-    if (interval > 1) {
-        return interval + " hours ago";
-    }
-    interval = Math.floor(seconds / 60);
-    if (interval > 1) {
-        return interval + " minutes ago";
-    }
-    return Math.floor(seconds) + " seconds ago";
-  };
+window.setInterval(function () {
+  notificationGenerator.requestNotifications();
+}, 5000);
+
+notificationGenerator.requestNotifications();
