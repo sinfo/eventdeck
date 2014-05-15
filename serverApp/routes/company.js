@@ -1,6 +1,7 @@
-var server  = require('./../index.js');
-var company = require('./../resources/company');
-var comment = require('./../resources/comment');
+var server       = require('./../index.js');
+var company      = require('./../resources/company');
+var comment      = require('./../resources/comment');
+var notification = require('./../resources/notification');
 
 server.route({
   method: 'GET',
@@ -75,5 +76,14 @@ server.route({
     auth: { 
       mode: 'try' 
     } 
+  }
+});
+
+server.route({
+  method: 'GET',
+  path: '/api/company/{id}/notifications',
+  config: {
+    handler: notification.getByThread,
+    auth: true
   }
 });
