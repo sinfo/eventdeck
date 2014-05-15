@@ -1,7 +1,7 @@
 'use strict';
 
 theToolController
-  .controller('SpeakerController', function ($scope, $http, $routeParams, $sce, SpeakerFactory, MemberFactory, CommentFactory) {
+  .controller('SpeakerController', function ($scope, $http, $routeParams, $sce, SpeakerFactory, MemberFactory, CommentFactory, NotificationFactory) {
     $scope.trustSrc = function(src) {
       return $sce.trustAsResourceUrl(src+'#page-body');
     }
@@ -79,6 +79,10 @@ theToolController
       CommentFactory.Speaker.getAll({id: $routeParams.id}, function(getData) {
         $scope.comments = getData;
         $scope.loading = false;
+      });
+
+      NotificationFactory.Speaker.getAll({id: $routeParams.id}, function(getData) {
+        $scope.speaker.notifications = getData;
       });
     });
 

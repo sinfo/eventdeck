@@ -52,8 +52,8 @@
           <br>
           <div>
             <h1>Last Changes</h1>
-            <ul>
-              <li ng-repeat="notification in notifications">{{notification.text}} {{timeSince(notification.date)}}.</li>
+            <ul ng-show="company.notifications">
+              <li ng-repeat="notification in company.notifications | orderBy: 'posted':true | limitTo: 5">{{notification.description}} <small>{{timeSince(notification.posted)}}</small>.</li>
             </ul>
           </div>
           <br>
