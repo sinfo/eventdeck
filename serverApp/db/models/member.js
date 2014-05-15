@@ -25,6 +25,10 @@ memberSchema.statics.findByIstId = function (id, cb) {
   this.find({ istId: id }, cb);
 };
 
+memberSchema.statics.findByFacebookId = function (id, cb) {
+  this.find({ facebookId: id }, cb);
+};
+
 memberSchema.statics.findByRole = function (id, cb) {
   this.find({ 'roles.id': id},cb);
 };
