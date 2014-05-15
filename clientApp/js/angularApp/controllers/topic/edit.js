@@ -24,11 +24,13 @@ theToolController.controller('TopicEditController', function ($scope, $routePara
     this.poll      = false;
     this.duedate   = false;
     this.meeting   = true;
+    this.closed    = false;
     if(kind === 'To do'){
       this.duedate = true;
     }
     else if(kind === 'Decision'){
-      this.pole = true;
+      this.closed  = true;
+      this.poll = true;
     }
   }
 
@@ -49,12 +51,12 @@ theToolController.controller('TopicEditController', function ($scope, $routePara
     note.showTargets = !note.showTargets;
   };
 
-  $scope.getName = function (member) {
+  /*$scope.getName = function (member) {
     return $scope.members.filter(function(o) {
       return o.id == member;
     })[0].name;
-  };
-
+  };*/
+  
   $scope.save = function() {
     $scope.success = "";
     $scope.error   = "";
