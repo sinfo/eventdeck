@@ -7,9 +7,15 @@ var topicSchema = new mongoose.Schema({
   kind: String,
   closed: Boolean,
   result: String,
-  votes: [String],
+  poll: {
+    kind: String,
+    options: [{
+      content: String,
+      votes: [String]
+    }]
+  },
   duedate: {type: Date},
-  meeting: [String],
+  meetings: [String],
   root: String,
   posted: {type: Date}
 });
