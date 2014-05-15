@@ -1,0 +1,20 @@
+<div class="column-group">
+  <div class="all-100">
+    <h1 class="all-50">Topics</h1>
+    <div class="all-50 align-right">
+      <div class="ink-button green" ng-click="createTopic()"><i class="fa fa-plus"></i> Create topic</div>
+    </div>
+    <h3 ng-show="loading" class="all-100">Loading...</h3>
+    <div ng-hide="loading" class="all-100 column-group">
+      <h3 ng-hide="topics" class="all-100">No topics created yet.</h3>
+      <a href="/#/topic/{{topic._id}}/edit" ng-repeat="topic in topics | orderBy:'date':true">
+        <div class="all-100 half-bottom-space align-left" style="height: 4em; background: #ccc; border-radius: 5px;">
+          <div class="all-5 tiny-30 small-20" style="margin-top: 0.5em; height: 3em;" ng-show="topic.facebook">
+            <img style="border-radius: 3px; margin-left: 0.5em;" src="https://graph.facebook.com/{{topic.facebook}}/picture">
+          </div>
+          <p class="all-95 tiny-70 small-80" style="line-height: 4em;">{{topic.kind}} <span title="{{topic.date}}">({{time(meeting.date)}})</span></p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

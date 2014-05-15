@@ -1,0 +1,52 @@
+<div class="column-group">
+
+  <h1 ng-show="loading">Loading...</h1>
+  <h1>{{topic.kind}}</h1>
+  <form ng-hide="loading" class="all-100 ink-form">
+    <div class="all-100 control-group">
+      <label for="text">Text</label>
+      <div class="control">
+        <textarea id="text" ng-model="topic.text" type="text" rows="3" placeholder="Write your topic contents."></textarea>
+      </div>
+    </div>
+
+
+    <div class="all-100 control-group">
+    
+          <div ng-show="note.showTargets" class="all-100">
+            <label>Targets</label>
+            <div class="all-100">
+              <div class="ink-button small {{note.targets.indexOf(member.id) != -1 ? 'blue' : ''}}" style="margin-bottom: 0.5em;" ng-click="toggleTarget(member.id, note)" ng-repeat="member in members | orderBy:'id'">{{member.name}}</div>
+            </div>
+          </div>
+          <div class="all-100 control">
+            <textarea ng-model="note.text" type="text" rows="2" placeholder="Write a note."></textarea>
+          </div>
+        </div>
+        <div class="all-100" ng-hide="note.editing" ng-click="focusNote(note)" style="background: #ccc; border-radius: 5px;">
+          <p style="margin-left: 5px;"><b>{{note.noteType}}: </b>{{note.text}}</p>
+          <div ng-show="note.targets.length > 0" style="margin-left: 5px;">
+            <small ng-repeat="target in note.targets" style="margin-right: 10px;">{{getName(target)}}</small>
+          </div>
+        </div>
+      </div>
+      <div class="all-100">
+        <div class="ink-button green" ng-click="addNote()"><i class="fa fa-plus"></i> Add note</div>
+      </div>
+    </div>
+
+    <div class="all-100 control-group top-space half-bottom-space">
+      <a class="ink-button orange" href="/#/meetings"><i class="fa fa-back"></i><i class="fa fa-reply"></i> Go back...</a>
+      <div class="ink-button green" ng-click="save()"><i class="fa fa-check"></i> Save</div>
+      <div class="ink-alert basic success" ng-show="success">
+        <button class="ink-dismiss">&times;</button>
+        <p><strong>Success!</strong> {{success}}</p>
+      </div>
+      <div class="ink-alert basic error" ng-show="error">
+        <button class="ink-dismiss">&times;</button>
+        <p><strong>Error!</strong> {{error}}</p>
+      </div>
+    </div>
+  </form>
+
+</div>
