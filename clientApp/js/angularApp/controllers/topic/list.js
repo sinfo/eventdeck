@@ -1,6 +1,6 @@
 'use strict';
 
-theToolController.controller('TopicController', function ($scope, $location, TopicFactory) {
+theToolController.controller('TopicsController', function ($scope, $location, TopicFactory) {
 
   //================================INITIALIZATION================================
 
@@ -8,27 +8,17 @@ theToolController.controller('TopicController', function ($scope, $location, Top
 
   $scope.kinds = ["Info", "To do", "Decision", "Idea"];
 
-  init();
+  TopicFactory.getAll(function(topics) {
+    $scope.topics = topics;
 
-  function init() {
-    setTimeout(function() {
-      if ($scope.loading) {
-        init();
-      }
-    }, 1000);
+    for (var i = 0, j = $scope.topics.length; i < j; i++) {
+      $scope.topics[i].facebook = $scope.members.filter(function(o) {
+        return $scope.topics[i].author == o.id;
+      })[0].facebook;
+    }
 
-    MeetingFactory.getAll(function(topics) {
-      $scope.topics = topics;
-
-      for (var i = 0, j = $scope.topics.length; i < j; i++) {
-        $scope.topics[i].facebook = $scope.members.filter(function(o) {
-          return $scope.topics[i].author == o.id;
-        })[0].facebook;
-      }
-
-      $scope.loading = false;
-    });
-  }
+    $scope.loading = false;
+  });
 
 
   //===================================FUNCTIONS===================================
@@ -39,10 +29,10 @@ theToolController.controller('TopicController', function ($scope, $location, Top
 
   $scope.createTopic = function() {
     var date = new Date();
-
+    conso.log("I'm in yolo!");
     TopicFactory.create({
       author: $scope.me.id,
-      kind: $scope.kind
+      /*kind: $scope.kind*/
     }, function(response) {
       console.log(response);
       if (response.success) {

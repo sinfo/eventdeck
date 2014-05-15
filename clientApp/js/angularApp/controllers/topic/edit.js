@@ -20,7 +20,7 @@ theToolController.controller('TopicEditController', function ($scope, $routePara
 
   function kindModel(kind){
     this.text      = true;
-    this.targeting = true;
+    this.targets = true;
     this.poll      = false;
     this.duedate   = false;
     this.meeting   = true;
@@ -36,19 +36,19 @@ theToolController.controller('TopicEditController', function ($scope, $routePara
 
   //===================================FUNCTIONS===================================
 
-  $scope.toggleTarget = function(target, note) {
-    var index = note.targets.indexOf(target);
+  $scope.toggleTarget = function(target) {
+    var index = topic.targets.indexOf(target);
 
     if (index == -1) {
-      note.targets.push(target);
+      topic.targets.push(target);
     }
     else {
-      note.targets.splice(index, 1);
+      topic.targets.splice(index, 1);
     }
   };
 
-  $scope.toggleTargets = function(note) {
-    note.showTargets = !note.showTargets;
+  $scope.toggleTargets = function(topic) {
+    topic.showTargets = !topic.showTargets;
   };
 
   /*$scope.getName = function (member) {
@@ -56,7 +56,9 @@ theToolController.controller('TopicEditController', function ($scope, $routePara
       return o.id == member;
     })[0].name;
   };*/
-  
+
+
+
   $scope.save = function() {
     $scope.success = "";
     $scope.error   = "";
