@@ -7,14 +7,14 @@
         <div class="activity {{notification.color}}" ng-repeat="notification in notifications | limitTo: 10 | orderBy: 'date.data':true">
           <div class="all-100">
             <a href="/#/member/{{notification.member.id}}">
-              <img src="https://graph.facebook.com/{{notification.member.facebook}}/picture">
+              <img ng-src="{{'https://graph.facebook.com/'+notification.member.facebook+'/picture'}}">
               <b>{{notification.member.name}}</b>
             </a>
             <small title="{{notification.date.full}}">{{timeSince(notification.date.data)}}</small>
           </div>
           <a href="/#/{{notification.path}}">
             <p style="color: #444;">{{notification.description}}</p>
-            <img class="image" src="{{getImageFromThread(notification.thread)}}">
+            <img class="image" ng-src="{{getImageFromThread(notification.thread)}}">
           </a>
         </div>
       </div>
