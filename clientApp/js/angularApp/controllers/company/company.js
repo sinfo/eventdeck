@@ -68,6 +68,9 @@ theToolController
     };
 
     $scope.statuses = ['SUGESTÃO','CONTACTADO','EM CONVERSAÇÕES','ACEITOU/EM NEGOCIAÇÕES','NEGOCIO FECHADO','REJEITOU/DESISTIR'];
+    $scope.logoSizes = [null, 'S','M','L'];
+    $scope.standDays = [null, 1,2,3,4,5];
+    $scope.postsNumbers = [null, 1,2,3,4,5];
 
     CompanyFactory.get({id: $routeParams.id}, function(response) {
       $scope.company = $scope.formData = response;

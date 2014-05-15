@@ -32,7 +32,6 @@ var companySchema = new mongoose.Schema({
         posters: String,
         flyers: String,
         folders: String,
-        pens: String,
         individuals: String,
         rollups: String,
         showcase: String
