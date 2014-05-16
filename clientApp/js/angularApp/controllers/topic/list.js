@@ -1,6 +1,6 @@
 'use strict';
 
-theToolController.controller('TopicsController', function ($scope, $location, TopicFactory) {
+theToolController.controller('TopicsController', function ($scope, $rootScope, $location, TopicFactory) {
 
   //================================INITIALIZATION================================
 
@@ -16,6 +16,8 @@ theToolController.controller('TopicsController', function ($scope, $location, To
         return $scope.topics[i].author == o.id;
       })[0].facebook;
     }
+
+    console.log($scope.topics);
 
     $scope.loading = false;
   });

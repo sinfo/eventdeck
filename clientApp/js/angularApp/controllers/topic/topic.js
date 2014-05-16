@@ -9,10 +9,16 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
   $scope.success = "";
   $scope.error   = "";
 
+  $scope.pollKinds = ['text','images'];
+
   TopicFactory.Topic.get({id: $routeParams.id}, function(result) {
     $scope.topic = result;
     $scope.loading = false;
     $scope.model = kindModel(result.kind);
+
+    if(!result.topic.poll.kind) {
+      $scope.topic.poll.kind = $scope.pollKinds[0];
+    }
   });
 
 
