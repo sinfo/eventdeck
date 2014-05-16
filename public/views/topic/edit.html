@@ -38,6 +38,7 @@
 
     <div ng-show="show.poll" class="all-100 gutters half-bottom-space">
       <label>Poll</label>
+      <select ng-model="topic.poll.kind" ng-options="value for value in pollKinds"></select>
       <ul>
         <li ng-repeat="option in topic.poll.options">
           <div ng-show="option.editing">
@@ -45,11 +46,23 @@
               <input type="text" ng-model="option.content">
               <div class="ink-button green" ng-click="focusOption()"><i class="fa fa-check"></i> Save option</div>
               <div class="ink-button red" ng-click="removeOption(option)"><i class="fa fa-times"></i> Remove option</div>
+              <p ng-show="topic.poll.kind == pollKinds[1]" style="margin-left: 5px;">
+                <img ng-src="{{option.content}}"> 
+              </p>
+
             </div>
           </div>
 
           <div class="all-100" ng-hide="option.editing" ng-click="focusOption(option)">
-            <p style="margin-left: 5px;">{{option.content}} <i class="fa fa-wrench ink-button"></i></p>
+
+            <p ng-show="topic.poll.kind == pollKinds[0]" style="margin-left: 5px;">
+              {{option.content}} 
+              <i class="fa fa-wrench ink-button"></i>
+            </p>
+            <p ng-show="topic.poll.kind == pollKinds[1]" style="margin-left: 5px;">
+              <img ng-src="{{option.content}}"> 
+              <i class="fa fa-wrench ink-button"></i>
+            </p>
           </div>
         </li>
       </ul>
