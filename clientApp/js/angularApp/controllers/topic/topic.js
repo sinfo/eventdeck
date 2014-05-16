@@ -52,6 +52,30 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
     topic.showTargets = !topic.showTargets;
   };
 
+  $scope.focusOption = function(option) {
+    for (var i = 0, j = $scope.topic.poll.options.length; i < j; i++) {
+      $scope.topic.poll.options[i].editing = false;
+    }
+
+    option.editing = true;
+  };
+
+  $scope.addOption = function() {
+    var option = {
+      optionType: "Info",
+      targets: []
+    };
+
+    $scope.topic.poll.options.push(option);
+
+    $scope.focusOption(option);
+  };
+
+  $scope.removeOption = function(option) {
+    $scope.topic.poll.options.splice($scope.topic.poll.options.indexOf(option), 1);
+  };
+
+
   /*$scope.getName = function (member) {
     return $scope.members.filter(function(o) {
       return o.id == member;
