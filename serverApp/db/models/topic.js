@@ -8,7 +8,7 @@ var topicSchema = new mongoose.Schema({
   closed: Boolean,
   result: String,
   poll: {
-    kind: String,
+    kind: {type: String, default: 'text'},
     options: [{
       content: String,
       votes: [String]
