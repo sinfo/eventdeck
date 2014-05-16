@@ -26,6 +26,7 @@ theToolController.controller('TopicsController', function ($scope, $rootScope, $
   //===================================FUNCTIONS===================================
 
   $scope.time = function(date) {
+    console.log(date)
     return $scope.timeSince(new Date(date));
   };
 
