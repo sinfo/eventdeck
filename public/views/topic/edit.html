@@ -36,6 +36,29 @@
       </div>
     </div>
 
+    <div ng-show="show.poll" class="all-100 gutters half-bottom-space">
+      <label>Poll</label>
+      <ul>
+        <li ng-repeat="option in topic.poll.options">
+          <div ng-show="option.editing">
+            <div class="all-100">
+              <input type="text" ng-model="option.content">
+              <div class="ink-button green" ng-click="focusOption()"><i class="fa fa-check"></i> Save option</div>
+              <div class="ink-button red" ng-click="removeOption(option)"><i class="fa fa-times"></i> Remove option</div>
+            </div>
+          </div>
+
+          <div class="all-100" ng-hide="option.editing" ng-click="focusOption(option)">
+            <p style="margin-left: 5px;">{{option.content}} <i class="fa fa-wrench ink-button"></i></p>
+          </div>
+        </li>
+      </ul>
+      <br>
+      <div class="all-100">
+        <div class="ink-button green" ng-click="addOption()"><i class="fa fa-plus"></i> Add option</div>
+      </div>
+    </div>
+
     <div class="all-100 control-group top-space half-bottom-space">
       <a class="ink-button orange" href="/#/topics"><i class="fa fa-back"></i><i class="fa fa-reply"></i> Go back...</a>
       <div class="ink-button green" ng-click="save()"><i class="fa fa-check"></i> Save</div>
