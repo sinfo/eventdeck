@@ -30,7 +30,7 @@ server.route({
 
 server.route({
   method: 'PUT',
-  path: '/api/topics',
+  path: '/api/topic/{id}',
   config: {
     handler: topic.update,
     auth: true
