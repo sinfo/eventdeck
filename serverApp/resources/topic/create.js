@@ -16,7 +16,7 @@ function create(request, reply) {
     if (err) {
       reply({error:"There was an error!"});
     } else {
-      //notification.new(request.auth.credentials.id, 'company-'+company.id, company.name, "company",request.auth.credentials.name);
+      notification.new(request.auth.credentials.id, 'topic-'+newTopic.id, null, '['+newTopic.kind+']',request.auth.credentials.name);
       reply({success:"New topic!", id:newTopic._id});
     }
   });

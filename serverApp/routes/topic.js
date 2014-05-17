@@ -59,7 +59,7 @@ server.route({
 
 server.route({
   method: 'GET',
-  path: '/api/company/{id}/notifications',
+  path: '/api/topic/{id}/notifications',
   config: {
     handler: notification.getByThread,
     auth: true
