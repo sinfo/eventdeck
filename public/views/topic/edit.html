@@ -9,21 +9,18 @@
         <textarea id="text" ng-model="topic.text" type="text" rows="3" placeholder="Write your topic contents."></textarea>
       </div>
     </div>
-      
+
     <div ng-show="show.duedate" class="all-100 control-group">
       <label for="text">Due Date</label>
       <div class="control">
-        <input type="text" id="myDatePicker2"
-                class="ink-datepicker"
-                data-date-range="2012-11-15:NOW"
-                data-initial-date="2013-12-31" />
+        <input type="text" id="myDatePicker" class="ink-datepicker" data-date-range="2012-11-15:NOW" data-initial-date="2013-12-31">
       </div>
     </div>
 
     <script>
       // Not required if you're using autoload.js
-      Ink.requireModules(['Ink.UI.DatePicker_1'],function(DatePicker) {
-        var datePickerObj = new DatePicker( '#myDatePicker2');
+      Ink.requireModules(['Ink.Dom.Selector_1','Ink.UI.DatePicker_1'], function(Selector, DatePicker) {
+        var datePickerObj = new DatePicker('#myDatePicker');
       });
     </script>
 
@@ -47,7 +44,7 @@
               <div class="ink-button green" ng-click="focusOption()"><i class="fa fa-check"></i> Save option</div>
               <div class="ink-button red" ng-click="removeOption(option)"><i class="fa fa-times"></i> Remove option</div>
               <p ng-show="topic.poll.kind == pollKinds[1]" style="margin-left: 5px;">
-                <img ng-src="{{option.content}}"> 
+                <img ng-src="{{option.content}}">
               </p>
 
             </div>
@@ -56,11 +53,11 @@
           <div class="all-100" ng-hide="option.editing" ng-click="focusOption(option)">
 
             <p ng-show="topic.poll.kind == pollKinds[0]" style="margin-left: 5px;">
-              {{option.content}} 
+              {{option.content}}
               <i class="fa fa-wrench ink-button"></i>
             </p>
             <p ng-show="topic.poll.kind == pollKinds[1]" style="margin-left: 5px;">
-              <img ng-src="{{option.content}}"> 
+              <img ng-src="{{option.content}}">
               <i class="fa fa-wrench ink-button"></i>
             </p>
           </div>
