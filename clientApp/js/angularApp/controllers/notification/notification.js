@@ -6,27 +6,34 @@ theToolController.controller('NotificationController', function ($scope, $http, 
     date = new Date(date);
     var seconds = Math.floor((Date.now() - date) / 1000);
 
+    var suffix = 'ago';
+    if(seconds < 0){
+      seconds = Math.abs(seconds);
+      suffix = 'to go';
+    }
+
     var interval = Math.floor(seconds / 31536000);
+
     if (interval > 1) {
-        return interval + " years ago";
+        return interval + " years " + suffix;
     }
     interval = Math.floor(seconds / 2592000);
     if (interval > 1) {
-        return interval + " months ago";
+        return interval + " months " + suffix;
     }
     interval = Math.floor(seconds / 86400);
     if (interval > 1) {
-        return interval + " days ago";
+        return interval + " days " + suffix;
     }
     interval = Math.floor(seconds / 3600);
     if (interval > 1) {
-        return interval + " hours ago";
+        return interval + " hours " + suffix;
     }
     interval = Math.floor(seconds / 60);
     if (interval > 1) {
-        return interval + " minutes ago";
+        return interval + " minutes " + suffix;
     }
-    return Math.floor(seconds) + " seconds ago";
+    return Math.floor(seconds) + " seconds " + suffix;
   };
 
   $scope.getMemberFacebook = function(id) {
