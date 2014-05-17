@@ -30,6 +30,12 @@ theToolController.controller('TopicsController', function ($scope, $rootScope, $
     return $scope.timeSince(new Date(date));
   };
 
+  $scope.getName = function (member) {
+    return $scope.members.filter(function(o) {
+      return o.id == member;
+    })[0].name;
+  };
+
   $scope.createTopic = function(kind) {
     var date = new Date();
     TopicFactory.Topics.create({
