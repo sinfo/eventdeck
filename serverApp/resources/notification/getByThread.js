@@ -15,6 +15,9 @@ function list(request, reply) {
   else if(request.path.indexOf('/api/speaker/') != -1) {
     threadId = 'speaker-'+request.params.id;
   }
+  else if(request.path.indexOf('/api/topic/') != -1) {
+    threadId = 'topic-'+request.params.id;
+  }
 
   async.series([
       getNotifications,
