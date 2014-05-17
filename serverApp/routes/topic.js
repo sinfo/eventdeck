@@ -36,3 +36,12 @@ server.route({
     auth: true
   }
 });
+
+server.route({
+  method: 'DELETE',
+  path: '/api/topic/{id}',
+  config: {
+    handler: topic.delete,
+    auth: true
+  }
+});
