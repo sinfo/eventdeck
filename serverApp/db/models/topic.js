@@ -20,6 +20,10 @@ var topicSchema = new mongoose.Schema({
   posted: {type: Date}
 });
 
+topicSchema.statics.del = function (id, cb) {
+  this.remove({ _id: id }, cb);
+};
+
 topicSchema.statics.findById = function (id, cb) {
   this.find({ _id: id }, cb);
 };
