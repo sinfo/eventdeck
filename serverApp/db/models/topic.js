@@ -5,7 +5,7 @@ var topicSchema = new mongoose.Schema({
   text: String,
   targets: [String],
   kind: String,
-  closed: Boolean,
+  closed: {type:Boolean, default: false},
   result: String,
   poll: {
     kind: {type: String, default: 'text'},

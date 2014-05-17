@@ -82,6 +82,23 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
     $scope.topic.poll.options.splice($scope.topic.poll.options.indexOf(option), 1);
   };
 
+  this.selectOption = function(topic, option) {
+    var updatedTopic = topic;
+
+    if(option.votes.indexOf($scope.me.id) != -1) {
+      updatedTopic.poll.options[updatedTopic.poll.options.indexOf(option)].votes.splice(updatedTopic.poll.options[updatedTopic.poll.options.indexOf(option)].votes.indexOf($scope.me.id),1);
+    } else {
+      updatedTopic.poll.options[updatedTopic.poll.options.indexOf(option)].votes.push($scope.me.id);
+    }
+
+    TopicFactory.Topic.update({id: updatedTopic._id}, updatedTopic, function(response) {
+      if(response.error) {
+        console.log("There was an error. Please contact the Dev Team and give them the details about the error.");
+      } else if (response.success) {
+        console.log(response.success);
+      }
+    });
+  };
 
   /*$scope.getName = function (member) {
     return $scope.members.filter(function(o) {
