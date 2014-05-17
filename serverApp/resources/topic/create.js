@@ -11,6 +11,7 @@ function create(request, reply) {
 
   var newTopic = new Topic(request.payload);
   newTopic.posted = Date.now();
+  newTopic.author = request.auth.credentials.id;
   newTopic.save(function (err){
     if (err) {
       reply({error:"There was an error!"});
