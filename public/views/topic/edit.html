@@ -12,17 +12,9 @@
 
     <div ng-show="show.duedate" class="all-100 control-group">
       <label for="text">Due Date</label>
-      <div class="control">
-        <input type="text" id="myDatePicker" class="ink-datepicker" data-date-range="2012-11-15:NOW" data-initial-date="2013-12-31">
+      <div class="control"><input date-input ng-model="topic.duedate"></p>
       </div>
     </div>
-
-    <script>
-      // Not required if you're using autoload.js
-      Ink.requireModules(['Ink.Dom.Selector_1','Ink.UI.DatePicker_1'], function(Selector, DatePicker) {
-        var datePickerObj = new DatePicker('#myDatePicker');
-      });
-    </script>
 
     <div ng-show="show.targets" class="all-100 control-group">
       <div class="all-100">

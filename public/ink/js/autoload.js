@@ -16,7 +16,7 @@ Ink.createModule('Ink.Autoload', 1, ['Ink.Dom.Selector_1', 'Ink.Dom.Loaded_1', '
              * which get the UI modules instantiated automatically. */
             'Animate_1'     : '.ink-animate',
             'Carousel_1'    : '.ink-carousel',
-            'DatePicker_1'  : '.ink-datepicker',
+            //'DatePicker_1'  : '.ink-datepicker',
             'Dropdown_1'    : '.ink-dropdown',
             'Gallery_1'     : 'ul.ink-gallery-source',
             //'Modal_1'       : '.ink-modal',
