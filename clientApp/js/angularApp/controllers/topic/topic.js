@@ -33,6 +33,7 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
     $scope.show.closed    = false;
     if(kind === 'To do'){
       $scope.show.duedate = true;
+      $scope.show.closed  = true;
     }
     else if(kind === 'Decision'){
       $scope.show.duedate = true;

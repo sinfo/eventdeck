@@ -72,6 +72,15 @@
       </div>
     </div>
 
+    <div ng-show="show.closed" class="all-100 gutters half-bottom-space">
+      <label>Is it done?</label>
+      <div class="control-group">
+        <ul class="control unstyled">
+          <li><input type="checkbox" ng-model="topic.closed" id="close" name="close" value="true"><label for="close">Close</label></li>
+        </ul>
+      </div>
+    </div>
+
     <div class="all-100 control-group top-space half-bottom-space">
       <a class="ink-button orange" href="/#/topics"><i class="fa fa-back"></i><i class="fa fa-reply"></i> Go back...</a>
       <div class="ink-button green" ng-click="save()"><i class="fa fa-check"></i> Save</div>
