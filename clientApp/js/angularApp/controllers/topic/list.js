@@ -36,6 +36,12 @@ theToolController.controller('TopicsController', function ($scope, $rootScope, $
     })[0].name;
   };
 
+  $scope.getFacebook = function (member) {
+    return $scope.members.filter(function(o) {
+      return o.id == member;
+    })[0].facebook;
+  };
+
   $scope.createTopic = function(kind) {
     var date = new Date();
     TopicFactory.Topics.create({
