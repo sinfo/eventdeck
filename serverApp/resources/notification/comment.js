@@ -2,6 +2,7 @@ var async        = require('async');
 var Member       = require('./../../db/models/member.js');
 var Company      = require('./../../db/models/company.js');
 var Speaker      = require('./../../db/models/speaker.js');
+var Topic        = require('./../../db/models/topic.js');
 var Notification = require('./../../db/models/notification.js');
 
 exports = module.exports = notify;
@@ -19,6 +20,11 @@ function notify(memberId, thread, memberName) {
     async.series([
       getMembers,
       getSpeaker
+    ], done);
+  } else if(thread.indexOf('topic-') != -1) {
+    async.series([
+      getMembers,
+      getTopic
     ], done);
   }
 
@@ -80,6 +86,30 @@ function notify(memberId, thread, memberName) {
         });
       } else {
         cb('Speaker not found!');
+      }
+    }
+  }
+
+  function getTopic(cb) {
+    Topic.findById(thread.split('topic-')[1], gotTopic);
+
+    function gotTopic(err, result) {
+      if(err) { return cb(err); }
+      if(result.length > 0) {
+        var newNotification = new Notification({
+          thread: thread,
+          member: memberId,
+          description: memberName+' posted a comment on '+result[0].description+'.',
+          unread: members,
+          posted: Date.now()
+        })
+
+        newNotification.save(function (err, reply){
+          if (err) { return cb('Hipcup on the DB' + err);} 
+          cb();
+        });
+      } else {
+        cb('Topic not found!');
       }
     }
   }
