@@ -8,7 +8,7 @@
         <div class="activity grey" ng-repeat="topic in topics | orderBy: 'date':true">
           <div class="all-100">
             <a href="/#/member/{{topic.author}}">
-              <img ng-src="{{'https://graph.facebook.com/'+topic.facebook+'/picture'}}">
+              <img ng-src="{{'https://graph.facebook.com/'+getFacebook(topic.author)+'/picture'}}">
               <b>{{getName(topic.author)}}</b>
             </a>
             <small title="{{topic.date.full}}">{{timeSince(topic.posted)}}</small>
