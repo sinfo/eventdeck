@@ -109,14 +109,6 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
     });
   };
 
-  /*$scope.getName = function (member) {
-    return $scope.members.filter(function(o) {
-      return o.id == member;
-    })[0].name;
-  };*/
-
-
-
   $scope.save = function() {
     $scope.success = "";
     $scope.error   = "";
