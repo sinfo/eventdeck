@@ -7,22 +7,27 @@
         <h3 ng-hide="topics">No topics created yet.</h3>
         <div class="activity grey" ng-repeat="topic in topics | orderBy: 'date':true">
           <div class="all-100">
-            <a href="/#/member/{{topic.member.id}}">
+            <a href="/#/member/{{topic.author}}">
               <img ng-src="{{'https://graph.facebook.com/'+topic.facebook+'/picture'}}">
-              <b>{{topic.member.name}}</b>
+              <b>{{getName(topic.author)}}</b>
             </a>
             <small title="{{topic.date.full}}">{{timeSince(topic.posted)}}</small>
           </div>
           <a href="/#/topic/{{topic._id}}/edit">
-            <p style="color: #444;"><b>[{{topic.kind}}]</b> {{topic.text}}</p>
+            <p style="color: #444;">
+              <b>[{{topic.kind}}]</b> {{topic.text}}
+              <i ng-show="topic.closed">[Closed!]</i>
+              <i ng-hide="topic.closed || !topic.duedate">[{{timeSince(topic.duedate)}}!]</i>
+
+            </p>
           </a>
           <form ng-show="topic.kind == 'Decision'" ng-controller="TopicController as tc">
             <div class="control-group">
               <ul class="control unstyled">
                 <li ng-repeat="option in topic.poll.options">
-                  <input type="checkbox" value="true" ng-click="tc.selectOption(topic,option)" ng-checked="option.votes.indexOf(me.id) != -1">
+                  <input type="checkbox" value="true" ng-click="tc.selectOption(topic,option)" ng-checked="option.votes.indexOf(me.id) != -1" ng-disabled="{{topic.closed}}">
                   <span ng-show="topic.poll.kind == 'text'">{{option.content}}</span>
-                  <img ng-show="topic.poll.kind == 'images'" ng-src="{{option.content}}"> 
+                  <img ng-show="topic.poll.kind == 'images'" ng-src="{{option.content}}" style="width:30% "> 
                   <small>{{option.votes.length}} votes</small>
                 </li>
               </ul>
