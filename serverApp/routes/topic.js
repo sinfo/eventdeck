@@ -1,5 +1,7 @@
 var server  = require('./../index.js');
 var topic = require('./../resources/topic');
+var comment      = require('./../resources/comment');
+var notification = require('./../resources/notification');
 
 server.route({
   method: 'GET',
@@ -42,6 +44,24 @@ server.route({
   path: '/api/topic/{id}',
   config: {
     handler: topic.delete,
+    auth: true
+  }
+});
+
+server.route({
+  method: 'GET',
+  path: '/api/topic/{id}/comments',
+  config: {
+    handler: comment.getByThread,
+    auth: true
+  }
+});
+
+server.route({
+  method: 'GET',
+  path: '/api/company/{id}/notifications',
+  config: {
+    handler: notification.getByThread,
     auth: true
   }
 });
