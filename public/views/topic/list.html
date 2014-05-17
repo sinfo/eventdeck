@@ -8,7 +8,7 @@
         <div class="activity grey" ng-repeat="topic in topics | orderBy: 'date':true">
           <div class="all-100">
             <a href="/#/member/{{topic.member.id}}">
-              <img ng-src="https://graph.facebook.com/{{topic.facebook}}/picture">
+              <img ng-src="{{'https://graph.facebook.com/'+topic.facebook+'/picture'}}">
               <b>{{topic.member.name}}</b>
             </a>
             <small title="{{topic.date.full}}">{{timeSince(topic.posted)}}</small>
@@ -16,17 +16,22 @@
           <a href="/#/topic/{{topic._id}}/edit">
             <p style="color: #444;"><b>[{{topic.kind}}]</b> {{topic.text}}</p>
           </a>
-          <form ng-show="topic.kind == 'Decision'">
+          <form ng-show="topic.kind == 'Decision'" ng-controller="TopicController as tc">
             <div class="control-group">
               <ul class="control unstyled">
                 <li ng-repeat="option in topic.poll.options">
-                  <input type="checkbox" value="true">
+                  <input type="checkbox" value="true" ng-click="tc.selectOption(topic,option)" ng-checked="option.votes.indexOf(me.id) != -1">
                   <span ng-show="topic.poll.kind == 'text'">{{option.content}}</span>
                   <img ng-show="topic.poll.kind == 'images'" ng-src="{{option.content}}"> 
+                  <small>{{option.votes.length}} votes</small>
                 </li>
               </ul>
             </div>
           </form>
+
+          <div ng-show="topic.targets.length > 0" style="margin-left: 5px;">
+            <small ng-repeat="target in topic.targets" style="margin-right: 10px;">{{getName(target)}}</small>
+          </div>
 
         </div>
       </div>
