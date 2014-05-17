@@ -31,10 +31,14 @@ function notify(memberId, thread, thingName, thingType, memberName) {
   }
 
   function saveNotification(cb) {
+    var description = memberName+' created a new ' +thingType;
+    if(thingName) {
+      description += ' named ' +thingName+'.';
+    }
     var newNotification = new Notification({
       thread: thread,
       member: memberId,
-      description: memberName+' created a new ' +thingType+ ' named ' +thingName+'.',
+      description: description,
       unread: members,
       posted: Date.now()
     });
