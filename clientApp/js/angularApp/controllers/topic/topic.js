@@ -1,6 +1,6 @@
 'use strict';
 
-theToolController.controller('TopicController', function ($scope, $routeParams, TopicFactory) {
+theToolController.controller('TopicController', function ($scope, $routeParams, $location, $window, TopicFactory) {
 
   //================================INITIALIZATION================================
 
@@ -43,6 +43,15 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
   }
 
   //===================================FUNCTIONS===================================
+
+  $scope.deleteTopic = function() {
+    var answer = confirm("Are you sure you want to delete this topic?")
+    if (answer) {
+      TopicFactory.Topic.delete({id: $routeParams.id}, function(result) {
+        $location.path("/topics/");
+      })
+    }
+  };
 
   $scope.toggleTarget = function(target) {
     var index = $scope.topic.targets.indexOf(target);

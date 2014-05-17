@@ -120,7 +120,8 @@ theToolServices
     return {
       Topic: $resource('/api/topic/:id', null, {
         'update': {method: 'PUT'},
-        'get'   : {method: 'GET'}
+        'get'   : {method: 'GET'},
+        'delete': {method: 'DELETE'}
       }),
       Topics: $resource('/api/topics', null, {
         'create': {method: 'POST'},
