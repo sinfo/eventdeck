@@ -13,7 +13,7 @@
             </a>
             <small title="{{topic.date.full}}">{{timeSince(topic.posted)}}</small>
           </div>
-          <a href="/#/topic/{{topic._id}}/edit">
+          <a href="/#/topic/{{topic._id}}">
             <p style="color: #444;">
               <b>[{{topic.kind}}]</b> {{topic.text}}
               <i ng-show="topic.closed">[Closed!]</i>
@@ -27,7 +27,7 @@
                 <li ng-repeat="option in topic.poll.options">
                   <input type="checkbox" value="true" ng-click="tc.selectOption(topic,option)" ng-checked="option.votes.indexOf(me.id) != -1" ng-disabled="{{topic.closed}}">
                   <span ng-show="topic.poll.kind == 'text'">{{option.content}}</span>
-                  <img ng-show="topic.poll.kind == 'images'" ng-src="{{option.content}}" style="width:30% "> 
+                  <img ng-show="topic.poll.kind == 'images'" ng-src="{{option.content}}" style="width:30% ">
                   <small>{{option.votes.length}} votes</small>
                 </li>
               </ul>
