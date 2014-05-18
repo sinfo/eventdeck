@@ -1,6 +1,6 @@
 'use strict';
 
-theToolController.controller('TopicController', function ($scope, $routeParams, $location, $window, TopicFactory) {
+theToolController.controller('TopicController', function ($scope, $routeParams, $location, $window, TopicFactory, CommentFactory, NotificationFactory) {
 
   //================================INITIALIZATION================================
 
@@ -121,5 +121,69 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
       }
     });
   };
+
+  //===================================COMMENT STUFF===================================
+  $scope.convertNewLinesToHtml = function(text) {
+    return '<div data-markdown>'+text.replace(/\n/g, '<br>')+'</div>';
+  }
+  $scope.convertMarkdownToHtml = function(text) {
+    return '<div data-markdown>' + text + '</div>';
+  }
+
+  $scope.submitComment = function() {
+    if ($scope.commentData.markdown == ""){
+      $scope.emptyComment = true;
+      return;
+    }
+
+    $scope.commentsLoading = true;
+
+    var commentData = this.commentData;
+    commentData.thread = 'topic-'+$routeParams.id;
+
+    CommentFactory.Comment.create(commentData, function(data) {
+      // if successful, we'll need to refresh the comment list
+      CommentFactory.Topic.getAll({id: $routeParams.id}, function(getData) {
+        $scope.comments = getData;
+        $scope.commentsLoading = false;
+      });
+    });
+  };
+
+  $scope.deleteComment = function(id) {
+    $scope.commentsLoading = true;
+
+    CommentFactory.Comment.delete({id: id}, function(data) {
+      // if successful, we'll need to refresh the comment list
+      CommentFactory.Topic.getAll({id: $routeParams.id}, function(getData) {
+        $scope.comments = getData;
+        $scope.commentsLoading = false;
+      });
+    });
+  };
+
+  $scope.quoteComment = function(comment) {
+    $scope.commentData.markdown = '> **'+comment.member+' said**:\n> ' + comment.markdown.split('\n').join('\n> ')+'\n';
+  };
+
+  $scope.init = function (){
+    $scope.commentData = {
+      markdown: ""
+    };
+    $scope.emptyComment = false;
+
+    CommentFactory.Topic.getAll({id: $routeParams.id}, function(getData) {
+      console.log(getData);
+      $scope.comments = getData;
+      $scope.loading = false;
+    });
+
+    NotificationFactory.Topic.getAll({id: $routeParams.id}, function(getData) {
+      $scope.topic.notifications = getData;
+    });
+  };
+
+  $scope.init();
+
 
 });

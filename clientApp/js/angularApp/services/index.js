@@ -43,6 +43,9 @@ theToolServices
       }),
       Speaker: $resource('/api/speaker/:id/comments', null, {
         'getAll': {method: 'GET', isArray:true}
+      }),
+      Topic: $resource('/api/topic/:id/comments', null, {
+        'getAll': {method: 'GET', isArray:true}
       })
     }
   })
@@ -67,6 +70,9 @@ theToolServices
         'getAll': {method: 'GET', isArray:true}
       }),
       Speaker: $resource('/api/speaker/:id/notifications', null, {
+        'getAll': {method: 'GET', isArray:true}
+      }),
+      Topic: $resource('/api/topic/:id/notifications', null, {
         'getAll': {method: 'GET', isArray:true}
       })
     }
