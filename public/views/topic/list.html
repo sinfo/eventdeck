@@ -5,7 +5,7 @@
       <h3 ng-show="loading">Loading...</h3>
       <div ng-hide="loading" class="column-group">
         <h3 ng-hide="topics">No topics created yet.</h3>
-        <div class="activity grey" ng-repeat="topic in topics | orderBy: 'date':true">
+        <div class="activity grey" ng-repeat="topic in topics | orderBy: 'posted':false">
           <div class="all-100">
             <a href="/#/member/{{topic.author}}">
               <img ng-src="{{'https://graph.facebook.com/'+getFacebook(topic.author)+'/picture'}}">
@@ -18,7 +18,6 @@
               <b>[{{topic.kind}}]</b> {{topic.text}}
               <i ng-show="topic.closed">[Closed!]</i>
               <i ng-hide="topic.closed || !topic.duedate">[{{timeSince(topic.duedate)}}!]</i>
-
             </p>
           </a>
           <form ng-show="topic.kind == 'Decision'" ng-controller="TopicController as tc">
@@ -33,11 +32,9 @@
               </ul>
             </div>
           </form>
-
           <div ng-show="topic.targets.length > 0" style="margin-left: 5px;">
             <small ng-repeat="target in topic.targets" style="margin-right: 10px;">{{getName(target)}}</small>
           </div>
-
         </div>
       </div>
     </div>
