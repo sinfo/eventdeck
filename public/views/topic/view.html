@@ -16,9 +16,9 @@
       <div class="all-100">
         <h1>Comments</h1>
 
-        <p class="text-center" ng-show="loading"><span class="fa fa-meh-o fa-5x fa-spin"></span></p>
+        <p class="text-center" ng-show="commentsLoading"><span class="fa fa-meh-o fa-5x fa-spin"></span></p>
 
-        <div class="comment" ng-hide="loading" ng-repeat="comment in comments | orderBy: 'posted':false">
+        <div class="comment" ng-hide="commentsLoading" ng-repeat="comment in comments | orderBy: 'posted':false">
           <div class="column-group horizontal-gutters">
             <div class="all-10">
               <a href="/#/member/{{comment.member}}"><img ng-src="{{'https://graph.facebook.com/' + getMemberFacebook(comment.member) + '/picture'}}"/></a>
