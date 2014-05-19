@@ -4,18 +4,58 @@
   </div>
 
   <div ng-hide="loading" class="all-100">
-    <div class="all-100 half-bottom-space">
-      <a class="ink-button orange" href="/#/topic/{{topic._id}}/edit"><i class="fa fa-wrench"></i> Edit topic</a>
+    <div class="column-group horizontal-gutters">
+      <div class="all-100">
+        <h1>[
+          {{topic.kind}}]
+          {{topic.text}}
+          <i ng-show="topic.closed">[Closed!]</i>
+          <i ng-hide="topic.closed || !topic.duedate">[{{timeSince(topic.duedate)}}!]</i>
+        </h1>
+      </div>
     </div>
 
-    <div class="all-100">
-      <h1><strong>[{{topic.kind}}] </strong>{{topic.text}}</h1>
+    <div class="column-group horizontal-gutters">
+      <div class="all-20 medium-20 small-100 tiny-100">
+        <p>
+          <a class="ink-button orange" href="/#/topic/{{topic._id}}/edit"><i class="fa fa-wrench"></i> Edit topic</a>
+        </p>
+        <p><small>{{timeSince(topic.posted)}}</small></p>
+        <p>
+          <a href="/#/member/{{topic.author}}">
+            <img ng-src="{{'https://graph.facebook.com/'+getFacebook(topic.author)+'/picture'}}">
+            <b style="font-size: 20px; margin-left:12px;"> {{getName(topic.author)}}</b>
+          </a>
+        </p>
+      </div>
+      <div class="all-80 medium-80 small-100 tiny-100">
+        <form ng-show="topic.kind == 'Decision'" ng-controller="TopicController as tc">
+          <div class="control-group">
+            <ul class="control unstyled">
+              <li ng-repeat="option in topic.poll.options">
+                <input type="checkbox" value="true" ng-click="tc.selectOption(topic,option)" ng-checked="option.votes.indexOf(me.id) != -1" ng-disabled="{{topic.closed}}">
+                <span ng-show="topic.poll.kind == 'text'">{{option.content}}</span>
+                <img ng-show="topic.poll.kind == 'images'" ng-src="{{option.content}}" style="width:30% ">
+                <small>{{option.votes.length}} votes</small>
+              </li>
+            </ul>
+          </div>
+        </form>
+        <div ng-show="topic.targets.length > 0" style="margin-left: 5px;">
+          <small>Targets: <span ng-repeat="target in topic.targets" style="margin-right: 10px;">{{getName(target)}}</span></small>
+        </div>
+        <br>
+        <div ng-show="topic.notifications">
+          <h3>Last Changes</h3>
+          <ul>
+            <li ng-repeat="notification in topic.notifications | orderBy: 'posted':true | limitTo: 5">{{notification.description}} <small>{{timeSince(notification.posted)}}</small>.</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div class="column-group horizontal-gutters">
       <div class="all-100">
-        <h1>Comments</h1>
-
         <p class="text-center" ng-show="commentsLoading"><span class="fa fa-meh-o fa-5x fa-spin"></span></p>
 
         <div class="comment" ng-hide="commentsLoading" ng-repeat="comment in comments | orderBy: 'posted':false">

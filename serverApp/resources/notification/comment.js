@@ -99,7 +99,7 @@ function notify(memberId, thread, memberName) {
         var newNotification = new Notification({
           thread: thread,
           member: memberId,
-          description: memberName+' posted a comment on '+result[0].description+'.',
+          description: memberName+' posted a comment on ['+result[0].kind+'] '+result[0].text+'.',
           unread: members,
           posted: Date.now()
         })
