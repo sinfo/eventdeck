@@ -41,6 +41,18 @@ theToolController.controller('NotificationController', function ($scope, $http, 
         return e.id == id;
       })[0].facebook;
   }
+  
+  $scope.getName = function (member) {
+    return $scope.members.filter(function(o) {
+      return o.id == member;
+    })[0].name;
+  };
+
+  $scope.getFacebook = function (member) {
+    return $scope.members.filter(function(o) {
+      return o.id == member;
+    })[0].facebook;
+  };
 
 
   $scope.loading = true;
