@@ -32,10 +32,12 @@ topicSchema.statics.findByMeeting = function (id, cb) {
   this.find({ meeting: id }, cb);
 };
 
+topicSchema.statics.findByTarget = function (id, cb) {
+  this.find({ targets: {$in: [id]} }, cb);
+};
+
 topicSchema.statics.findAll = function (cb) {
   this.find({},cb);
 };
-
-
 
 var Topic = module.exports = mongoose.model('Topic', topicSchema);
