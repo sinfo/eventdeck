@@ -5,7 +5,7 @@
       <h3 ng-show="loading">Loading...</h3>
       <div ng-hide="loading" class="column-group">
         <h3 ng-hide="topics">No topics created yet.</h3>
-        <div class="activity grey" ng-repeat="topic in topics | orderBy: 'posted':false">
+        <div class="activity grey" ng-repeat="topic in topics | orderBy: 'posted':'true'">
           <div class="all-100">
             <a href="/#/member/{{topic.author}}">
               <img ng-src="{{'https://graph.facebook.com/'+getFacebook(topic.author)+'/picture'}}">
