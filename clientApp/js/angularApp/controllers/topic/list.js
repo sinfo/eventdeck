@@ -21,6 +21,11 @@ theToolController.controller('TopicsController', function ($scope, $location, $r
   }
 
   function gotTopics (topics) {
+    setTimeout(function () {
+      if ($scope.loading)
+        gotTopics(topics);
+    }, 1000);
+
     $scope.topics = topics;
 
     for (var i = 0, j = $scope.topics.length; i < j; i++) {
