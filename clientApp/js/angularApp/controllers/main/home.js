@@ -15,13 +15,14 @@ theToolController.controller('home', function ($scope, $http, $sce,  $rootScope,
     }
   }
 
+  $scope.getInfoFromTopic = function (thread) {
+    return $scope.topics.filter(function(o) {
+      return thread.split('topic-')[1] == o.id;
+    }[0]
+  }
+
   $scope.loading = true;
   $scope.notifications = [];
-
-  MemberFactory.Member.get({id: "me"}, function(me) {
-    $scope.me = me;
-
-    MemberFactory.Member.getAll(function(members) {
 
       NotificationFactory.Notification.getAll(function(response) {
         for (var i = 0, j = response.length; i < j; i++) {
@@ -37,10 +38,10 @@ theToolController.controller('home', function ($scope, $http, $sce,  $rootScope,
             thread: response[i].thread,
             member: {
               id: response[i].member,
-              name: members.filter(function(o) {
+              name: $scope.members.filter(function(o) {
                       return response[i].member == o.id;
                     })[0].name,
-              facebook: members.filter(function(o) {
+              facebook: $scope.members.filter(function(o) {
                       return response[i].member == o.id;
                     })[0].facebook
             },
@@ -51,6 +52,4 @@ theToolController.controller('home', function ($scope, $http, $sce,  $rootScope,
 
         $scope.loading = false;
       });
-    });
-  });
 });
