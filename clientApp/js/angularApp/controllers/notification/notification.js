@@ -1,6 +1,6 @@
 'use strict';
 
-theToolController.controller('NotificationController', function ($scope, $http, $routeParams, $sce, $location, $rootScope, NotificationFactory, MemberFactory, CompanyFactory, SpeakerFactory) {
+theToolController.controller('NotificationController', function ($scope, $http, $routeParams, $sce, $location, $rootScope, NotificationFactory, MemberFactory, CompanyFactory, SpeakerFactory, TopicFactory) {
 
   $scope.timeSince =function (date) {
     date = new Date(date);
@@ -159,6 +159,10 @@ theToolController.controller('NotificationController', function ($scope, $http, 
     $scope.predicate = 'participation';
     $scope.reverse = false;
     $scope.speakers = response;
+  });
+
+  TopicFactory.Topics.getAll(function(response) {
+    $scope.topics = response;
   });
 
   $scope.display = false;
