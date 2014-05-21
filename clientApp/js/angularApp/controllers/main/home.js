@@ -2,27 +2,9 @@
 
 theToolController.controller('home', function ($scope, $http, $sce,  $rootScope, NotificationFactory, MemberFactory) {
 
-  $scope.getImageFromThread =function (thread) {
-    if(thread.indexOf('company-') != -1) {
-      return  $scope.companies.filter(function(o) {
-                return thread.split('company-')[1] == o.id;
-              })[0].img;
-    }
-    else if(thread.indexOf('speaker-') != -1) {
-      return $scope.speakers.filter(function(o) {
-                return thread.split('speaker-')[1] == o.id;
-              })[0].img;
-    }
-  }
-
-  $scope.getInfoFromTopic = function (thread) {
-    return $scope.topics.filter(function(o) {
-      return thread.split('topic-')[1] == o.id;
-    })[0];
-  }
-
   $scope.loading = true;
   $scope.notifications = [];
+  $scope.limit = 10;
 
   init();
 
@@ -61,5 +43,29 @@ theToolController.controller('home', function ($scope, $http, $sce,  $rootScope,
       $scope.loading = false;
     });
   }
+
+  $scope.getImageFromThread = function (thread) {
+    if(thread.indexOf('company-') != -1) {
+      return  $scope.companies.filter(function(o) {
+                return thread.split('company-')[1] == o.id;
+              })[0].img;
+    }
+    else if(thread.indexOf('speaker-') != -1) {
+      return $scope.speakers.filter(function(o) {
+                return thread.split('speaker-')[1] == o.id;
+              })[0].img;
+    }
+  };
+
+  $scope.getInfoFromTopic = function (thread) {
+    return $scope.topics.filter(function(o) {
+      return thread.split('topic-')[1] == o.id;
+    })[0];
+  };
+
+  $scope.scroll = function() {
+    if ($scope.limit < $scope.notifications.length)
+      $scope.limit += 10;
+  };
 
 });
