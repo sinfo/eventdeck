@@ -2,23 +2,33 @@
 
 theToolController.controller('home', function ($scope, $http, $sce,  $rootScope, NotificationFactory, MemberFactory) {
 
-  $scope.getImageFromThread =function (thread) {
+  function getImageFromThread (thread) {
     if(thread.indexOf('company-') != -1) {
-      return  $scope.companies.filter(function(o) {
-                return thread.split('company-')[1] == o.id;
-              })[0].img;
+      return $scope.companies.filter(function(o) {
+        return thread.split('company-')[1] == o.id;
+      })[0].img;
     }
     else if(thread.indexOf('speaker-') != -1) {
       return $scope.speakers.filter(function(o) {
-                return thread.split('speaker-')[1] == o.id;
-              })[0].img;
+        return thread.split('speaker-')[1] == o.id;
+      })[0].img;
+    }
+    return undefined;
+  }
+
+  function getInfoFromTopic (thread) {
+    if(thread.indexOf('topic-') != -1) {
+      return $scope.topics.filter(function(o) {
+        return thread.split('topic-')[1] == o._id;
+      })[0];
     }
   }
 
-  $scope.getInfoFromTopic = function (thread) {
-    return $scope.topics.filter(function(o) {
-      return thread.split('topic-')[1] == o.id;
-    })[0];
+  function validateDescription (thread, description) {
+    if(thread.indexOf('topic-') != -1 && description.indexOf('comment') != -1) {
+      description = description.split('[')[0];
+    }
+    return description;
   }
 
   $scope.loading = true;
@@ -42,7 +52,7 @@ theToolController.controller('home', function ($scope, $http, $sce,  $rootScope,
             data: date,
             full: date.toString()
           },
-          description: response[i].description,
+          description: validateDescription(response[i].thread, response[i].description),
           thread: response[i].thread,
           member: {
             id: response[i].member,
@@ -53,11 +63,12 @@ theToolController.controller('home', function ($scope, $http, $sce,  $rootScope,
                     return response[i].member == o.id;
                   })[0].facebook
           },
-          color: (response[i].unread.indexOf($scope.me.id) != -1 ? "unread" : "read")
+          color: (response[i].unread.indexOf($scope.me.id) != -1 ? "unread" : "read"),
+          image: getImageFromThread(response[i].thread),
+          topic: getInfoFromTopic(response[i].thread)
         });
         //}
       }
-
       $scope.loading = false;
     });
   }
