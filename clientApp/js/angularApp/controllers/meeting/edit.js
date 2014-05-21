@@ -109,7 +109,7 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
     }
 
     for (var i = 0, j = $scope.topics.length; i < j; i++) {
-      TopicFactory.Topic.update($scope.topics[i], function(response) {
+      TopicFactory.Topic.update({id:$scope.topics[i]}, $scope.topics[i], function(response) {
         console.log(response);
       });
     }
