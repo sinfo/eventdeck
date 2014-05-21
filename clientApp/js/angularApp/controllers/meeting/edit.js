@@ -108,10 +108,17 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
       return;
     }
 
+    for (var i = 0, j = $scope.topics.length; i < j; i++) {
+      TopicFactory.Topic.update($scope.topics[i], function(response) {
+        console.log(response);
+      });
+    }
+
     MeetingFactory.update($scope.meeting, function(response) {
       if(response.error) {
         $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
-      } else if (response.success) {
+      }
+      else if (response.success) {
         $scope.success = response.success;
       }
     });
