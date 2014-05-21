@@ -23,6 +23,15 @@ server.route({
 
 server.route({
   method: 'GET',
+  path: '/api/topics/{id}',
+  config: {
+    handler: topic.targetGet,
+    auth: true
+  }
+});
+
+server.route({
+  method: 'GET',
   path: '/api/topic/{id}',
   config: {
     handler: topic.get,

@@ -21,6 +21,18 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
     }
   });
 
+  $scope.emptyComment = false;
+
+  CommentFactory.Topic.getAll({id: $routeParams.id}, function(getData) {
+    //console.log(getData);
+    $scope.comments = getData;
+    $scope.loading = false;
+  });
+
+  NotificationFactory.Topic.getAll({id: $routeParams.id}, function(getData) {
+    $scope.topic.notifications = getData;
+  });
+
 
   //=================================AUXFUNCTIONS==================================
 
@@ -166,24 +178,8 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
     $scope.commentData.markdown = '> **'+comment.member+' said**:\n> ' + comment.markdown.split('\n').join('\n> ')+'\n';
   };
 
-  $scope.init = function (){
-    $scope.commentData = {
-      markdown: ""
-    };
-    $scope.emptyComment = false;
-
-    CommentFactory.Topic.getAll({id: $routeParams.id}, function(getData) {
-      console.log(getData);
-      $scope.comments = getData;
-      $scope.loading = false;
-    });
-
-    NotificationFactory.Topic.getAll({id: $routeParams.id}, function(getData) {
-      $scope.topic.notifications = getData;
-    });
+  $scope.commentData = {
+    markdown: ""
   };
-
-  $scope.init();
-
 
 });

@@ -135,6 +135,12 @@ theToolServices
           method: 'GET',
           isArray:true
         }
+      }),
+      TargetTopics: $resource('/api/topics/:id', null, {
+        'getAll': {
+          method: 'GET',
+          isArray: true
+        }
       })
     }
   });

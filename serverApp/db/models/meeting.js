@@ -5,7 +5,7 @@ var meetingSchema = new mongoose.Schema({
   title: String,
   description: String,
   attendants: [String],
-  notes: [String],
+  topics: [String],
   date: {type: Date}
 });
 
