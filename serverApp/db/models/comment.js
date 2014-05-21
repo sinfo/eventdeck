@@ -26,5 +26,9 @@ commentSchema.statics.findAll = function (cb) {
   this.find({},cb);
 };
 
+commentSchema.statics.removeByThread = function (id, cb) {
+  this.remove({ thread: id }, cb);
+};
+
  
 var Comment = module.exports = mongoose.model('Comment', commentSchema);
