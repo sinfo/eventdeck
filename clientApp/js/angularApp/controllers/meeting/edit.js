@@ -11,12 +11,25 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
 
   $scope.kinds = ["Info", "To do", "Decision", "Idea"];
 
-  MeetingFactory.getAll(function(result) {
-    $scope.meeting = result.filter(function(o) {
+  $scope.topics = [];
+
+  MeetingFactory.getAll(function(meetings) {
+    $scope.meeting = meetings.filter(function(o) {
       return o._id == $routeParams.id;
     })[0];
 
-    $scope.loading = false;
+    TopicFactory.Topics.getAll(function(topics) {
+      for (var i = 0, j = topics.length; i < j; i++) {
+        for (var k = 0, l = $scope.meeting.topics.length; k < l; k++) {
+          if (topics[i]._id == $scope.meeting.topics[k]) {
+            $scope.topics.push(topics[i]);
+            break;
+          }
+        }
+      }
+
+      $scope.loading = false;
+    });
   });
 
 
@@ -72,7 +85,12 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
       posted: new Date()
     };
 
-    $scope.meeting.topics.push(topic);
+    TopicFactory.Topics.create(topic, function(response) {
+      if (response.success) {
+        $scope.meeting.topics.push(response.id);
+        $scope.topics.push(topic);
+      }
+    });
   };
 
   $scope.getName = function (member) {
