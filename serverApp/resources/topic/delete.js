@@ -20,8 +20,6 @@ function del(request, reply) {
     function deletedTopic(err, result) {
       if (err) cb(err);
 
-      console.log("Let's remove ", 'topic-'+id);
-
       Notification.removeByThread('topic-'+id, function(err, result) {
         console.log("Notifications removed", result);
 
