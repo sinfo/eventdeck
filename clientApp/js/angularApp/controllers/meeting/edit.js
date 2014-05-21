@@ -1,6 +1,6 @@
 'use strict';
 
-theToolController.controller('MeetingEditController', function ($scope, $routeParams, MeetingFactory) {
+theToolController.controller('MeetingEditController', function ($scope, $routeParams, MeetingFactory, TopicFactory) {
 
   //================================INITIALIZATION================================
 
@@ -9,14 +9,27 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
   $scope.success = "";
   $scope.error   = "";
 
-  $scope.noteTypes = ["Info", "To do", "Decision", "Idea"];
+  $scope.kinds = ["Info", "To do", "Decision", "Idea"];
 
-  MeetingFactory.getAll(function(result) {
-    $scope.meeting = result.filter(function(o) {
+  $scope.topics = [];
+
+  MeetingFactory.getAll(function(meetings) {
+    $scope.meeting = meetings.filter(function(o) {
       return o._id == $routeParams.id;
     })[0];
 
-    $scope.loading = false;
+    TopicFactory.Topics.getAll(function(topics) {
+      for (var i = 0, j = topics.length; i < j; i++) {
+        for (var k = 0, l = $scope.meeting.topics.length; k < l; k++) {
+          if (topics[i]._id == $scope.meeting.topics[k]) {
+            $scope.topics.push(topics[i]);
+            break;
+          }
+        }
+      }
+
+      $scope.loading = false;
+    });
   });
 
 
@@ -39,42 +52,45 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
     }
   };
 
-  $scope.toggleTarget = function(target, note) {
-    var index = note.targets.indexOf(target);
+  $scope.toggleTargets = function(topic) {
+    topic.showTargets = !topic.showTargets;
+  };
+
+  $scope.toggleTarget = function(member, topic) {
+    var index = topic.targets.indexOf(member);
 
     if (index == -1) {
-      note.targets.push(target);
+      topic.targets.push(member);
     }
     else {
-      note.targets.splice(index, 1);
+      topic.targets.splice(index, 1);
     }
   };
 
-  $scope.toggleTargets = function(note) {
-    note.showTargets = !note.showTargets;
-  };
-
-  $scope.focusNote = function(note) {
-    for (var i = 0, j = $scope.meeting.notes.length; i < j; i++) {
-      $scope.meeting.notes[i].editing = false;
-    }
-
-    note.editing = true;
-  };
-
-  $scope.addNote = function() {
-    var note = {
-      noteType: "Info",
-      targets: []
+  $scope.createTopic = function(kind) {
+    var topic = {
+      author: $scope.me.id,
+      text: "",
+      targets: [],
+      kind: kind,
+      closed: false,
+      result: "",
+      poll: {
+        kind: "text",
+        options: []
+      },
+      duedate: null,
+      meetings: [$scope.meeting._id],
+      root: null,
+      posted: new Date()
     };
 
-    $scope.meeting.notes.push(note);
-
-    $scope.focusNote(note);
-  };
-
-  $scope.removeNote = function(note) {
-    $scope.meeting.notes.splice($scope.meeting.notes.indexOf(note), 1);
+    TopicFactory.Topics.create(topic, function(response) {
+      if (response.success) {
+        $scope.meeting.topics.push(response.id);
+        $scope.topics.push(topic);
+      }
+    });
   };
 
   $scope.getName = function (member) {
@@ -92,10 +108,17 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
       return;
     }
 
+    for (var i = 0, j = $scope.topics.length; i < j; i++) {
+      TopicFactory.Topic.update($scope.topics[i], function(response) {
+        console.log(response);
+      });
+    }
+
     MeetingFactory.update($scope.meeting, function(response) {
       if(response.error) {
         $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
-      } else if (response.success) {
+      }
+      else if (response.success) {
         $scope.success = response.success;
       }
     });

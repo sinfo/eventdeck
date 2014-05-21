@@ -6,11 +6,8 @@
   <div ng-hide="loading" class="all-100">
     <div class="column-group horizontal-gutters">
       <div class="all-100">
-        <h1>[
-          {{topic.kind}}]
-          {{topic.text}}
-          <i ng-show="topic.closed">[Closed!]</i>
-          <i ng-hide="topic.closed || !topic.duedate">[{{timeSince(topic.duedate)}}!]</i>
+        <h1>
+          [{{topic.kind}}] {{topic.text}}<i ng-show="topic.closed"> [Closed!]</i><i ng-hide="topic.closed || !topic.duedate"> [{{timeSince(topic.duedate)}}!]</i>
         </h1>
       </div>
     </div>
