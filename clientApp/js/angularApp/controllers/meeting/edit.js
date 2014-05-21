@@ -99,6 +99,15 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
     })[0].name;
   };
 
+  $scope.saveTopic = function(topic) {
+    TopicFactory.Topic.update({id: topic._id}, topic);
+  };
+
+  $scope.removeTopic = function(topic) {
+    $scope.meeting.topics.splice($scope.meeting.topics.indexOf(topic._id), 1);
+    $scope.topics.splice($scope.topics.indexOf(topic), 1);
+  };
+
   $scope.save = function() {
     $scope.success = "";
     $scope.error   = "";
@@ -109,9 +118,7 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
     }
 
     for (var i = 0, j = $scope.topics.length; i < j; i++) {
-      TopicFactory.Topic.update({id:$scope.topics[i]}, $scope.topics[i], function(response) {
-        console.log(response);
-      });
+      TopicFactory.Topic.update({id: $scope.topics[i]._id}, $scope.topics[i]);
     }
 
     MeetingFactory.update($scope.meeting, function(response) {
