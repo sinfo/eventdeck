@@ -4,7 +4,7 @@ theToolController.controller('TopicsController', function ($scope, $location, $r
 
   //================================INITIALIZATION================================
 
-  if($routeParams.id == "me") {
+  if($location.path() != '/topics' && $routeParams.id == "me") {
     $location.path('/topics/' + $scope.me.id);
     return;
   }
@@ -17,7 +17,7 @@ theToolController.controller('TopicsController', function ($scope, $location, $r
     TopicFactory.Topics.getAll(gotTopics);
   }
   else {
-    TopicFactory.TargetTopics.getAll({id: $scope.me.id}, gotTopics);
+    TopicFactory.TargetTopics.getAll({id: $routeParams.id}, gotTopics);
   }
 
   function gotTopics (topics) {
