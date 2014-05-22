@@ -14,32 +14,36 @@
           </div>
           <a href="/#/{{notification.path}}">
             <p style="color: #444;">{{notification.description}}</p>
-            <div >
+          </a>
+          <div >
+            <a href="/#/{{notification.path}}">
               <img class="image" ng-show="notification.image" ng-src="{{notification.image}}">
-              <div ng-show="notification.topic">
-                  <p style="color: #444;">
-                    <b>[{{notification.topic.kind}}]</b> {{notification.topic.text}}
-                    <i ng-show="notification.topic.closed">[Closed!]</i>
-                    <i ng-hide="notification.topic.closed || !notification.topic.duedate">[{{timeSince(notification.topic.duedate)}}!]</i>
-                  </p>
-                  <form ng-show="notification.topic.kind == 'Decision'" ng-controller="TopicController as tc">
-                    <div class="control-group">
-                      <ul class="control unstyled">
-                        <li ng-repeat="option in notification.topic.poll.options">
-                          <input type="checkbox" value="true" ng-click="tc.selectOption(notification.topic,option)" ng-checked="option.votes.indexOf(me.id) != -1" ng-disabled="{{notification.topic.closed}}">
-                          <span ng-show="notification.topic.poll.kind == 'text'">{{option.content}}</span>
-                          <img ng-show="notification.topic.poll.kind == 'images'" ng-src="{{option.content}}" style="width:30% ">
-                          <small>{{option.votes.length}} votes</small>
-                        </li>
-                      </ul>
-                    </div>
-                  </form>
-                  <div ng-show="notification.topic.targets.length > 0" style="margin-left: 5px;">
-                    <small ng-repeat="target in notification.topic.targets" style="margin-right: 10px;">{{getName(target)}}</small>
-                  </div>
+            </a>
+            <div ng-show="notification.topic">
+              <a href="/#/{{notification.path}}">
+                <p style="color: #444;">
+                  <b>[{{notification.topic.kind}}]</b> {{notification.topic.text}}
+                  <i ng-show="notification.topic.closed">[Closed!]</i>
+                  <i ng-hide="notification.topic.closed || !notification.topic.duedate">[{{timeSince(notification.topic.duedate)}}!]</i>
+                </p>
+              </a>
+              <form ng-show="notification.topic.kind == 'Decision'" ng-controller="TopicController as tc">
+                <div class="control-group">
+                  <ul class="control unstyled">
+                    <li ng-repeat="option in notification.topic.poll.options">
+                      <input type="checkbox" value="true" ng-click="tc.selectOption(notification.topic,option)" ng-checked="option.votes.indexOf(me.id) != -1" ng-disabled="{{notification.topic.closed}}">
+                      <span ng-show="notification.topic.poll.kind == 'text'">{{option.content}}</span>
+                      <img ng-show="notification.topic.poll.kind == 'images'" ng-src="{{option.content}}" style="width:30% ">
+                      <small>{{option.votes.length}} votes</small>
+                    </li>
+                  </ul>
+                </div>
+              </form>
+              <div ng-show="notification.topic.targets.length > 0" style="margin-left: 5px;">
+                <small ng-repeat="target in notification.topic.targets" style="margin-right: 10px;">{{getName(target)}}</small>
               </div>
             </div>
-          </a>
+          </div>
         </div>
       </div>
     </div>
