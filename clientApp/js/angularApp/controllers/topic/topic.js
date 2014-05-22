@@ -8,6 +8,7 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
 
   $scope.success = "";
   $scope.error   = "";
+  $scope.showTargets = false;
 
   $scope.pollKinds = ['text','images'];
 
@@ -76,8 +77,9 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
     }
   };
 
-  $scope.toggleTargets = function(topic) {
-    topic.showTargets = !topic.showTargets;
+  $scope.toggleTargets = function() {
+    console.log($scope.showTargets);
+    $scope.showTargets = !$scope.showTargets;
   };
 
   $scope.focusOption = function(option) {
