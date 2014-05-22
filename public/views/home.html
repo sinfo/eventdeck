@@ -27,20 +27,27 @@
                   <i ng-hide="notification.topic.closed || !notification.topic.duedate">[{{timeSince(notification.topic.duedate)}}!]</i>
                 </p>
               </a>
-              <form ng-show="notification.topic.kind == 'Decision'" ng-controller="TopicController as tc">
-                <div class="control-group">
-                  <ul class="control unstyled">
-                    <li ng-repeat="option in notification.topic.poll.options">
-                      <input type="checkbox" value="true" ng-click="tc.selectOption(notification.topic,option)" ng-checked="option.votes.indexOf(me.id) != -1" ng-disabled="{{notification.topic.closed}}">
-                      <span ng-show="notification.topic.poll.kind == 'text'">{{option.content}}</span>
-                      <img ng-show="notification.topic.poll.kind == 'images'" ng-src="{{option.content}}" style="width:30% ">
-                      <small>{{option.votes.length}} votes</small>
-                    </li>
-                  </ul>
+              <div ng-controller="TopicController as tc">
+                <form ng-show="notification.topic.kind == 'Decision'">
+                  <div class="control-group">
+                    <ul class="control unstyled">
+                      <li ng-repeat="option in notification.topic.poll.options">
+                        <input type="checkbox" value="true" ng-click="tc.selectOption(notification.topic,option)" ng-checked="option.votes.indexOf(me.id) != -1" ng-disabled="{{notification.topic.closed}}">
+                        <span ng-show="notification.topic.poll.kind == 'text'">{{option.content}}</span>
+                        <img ng-show="notification.topic.poll.kind == 'images'" ng-src="{{option.content}}" style="width:30% ">
+                        <small>{{option.votes.length}} votes</small>
+                      </li>
+                    </ul>
+                  </div>
+                </form>
+              </div>
+              <div ng-show="notification.topic.targets.length > 0" ng-controller="TopicController">
+                <div class="ink-button blue" ng-click="toggleTargets()"><i class="fa fa-users"></i> {{showTargets ? 'Hide' : 'Show'}} targets</div>
+                <div ng-show="showTargets" style="margin-left: 5px;">
+                  <small ng-repeat="target in notification.topic.targets" href="/#/member/{{target}}">
+                    <a style="margin-right: 10px;">{{getName(target)}}</a>
+                  </small>
                 </div>
-              </form>
-              <div ng-show="notification.topic.targets.length > 0" style="margin-left: 5px;">
-                <small ng-repeat="target in notification.topic.targets" style="margin-right: 10px;">{{getName(target)}}</small>
               </div>
             </div>
           </div>
