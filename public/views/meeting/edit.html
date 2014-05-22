@@ -34,9 +34,9 @@
             <h3>{{topic.kind}}</h3>
           </div>
           <div class="all-50 align-right">
-            <div class="ink-button blue" ng-click="toggleTargets(topic)"><i class="fa fa-users"></i> Show targets</div>
-            <div class="ink-button green"><i class="fa fa-check"></i> Save topic</div>
-            <div class="ink-button red"><i class="fa fa-times"></i> Remove topic</div>
+            <div class="ink-button blue" ng-click="toggleTargets(topic)"><i class="fa fa-users"></i> {{topic.showTargets ? 'Hide' : 'Show'}} targets</div>
+            <div class="ink-button green" ng-click="saveTopic(topic)"><i class="fa fa-check"></i> Save topic</div>
+            <div class="ink-button red" ng-click="removeTopic(topic)"><i class="fa fa-times"></i> Remove topic</div>
           </div>
         </div>
         <div ng-show="topic.showTargets" class="all-100">
