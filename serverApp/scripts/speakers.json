@@ -1,5 +1,584 @@
 [
   {
+    "name": "Brad Green",
+    "institution": "AngularJS",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2126"
+    },
+    "id": "brad-green",
+    "img": "https://pbs.twimg.com/profile_images/2344189796/o5u8bz6cep1bfkasvsm1.jpeg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "francisco.dias"
+    },
+    "description": "I'm an engineering director at Google. I manage development of the AngularJS framework and Google's internal sales productivity products. I'm also author of the O'Reilly book titled 'AngularJS' available at http://www.amazon.com/AngularJS-Brad-Gr ... 1449344852.\nBragging rights\nWorked for Steve Jobs, sold a company, know how to roast whole animals\n",
+    "contacts": "\nhttps://twitter.com/bradlygreen\nhttps://plus.google.com/+BradGreen\nhttps://github.com/bradlygreen\nhttps://www.linkedin.com/in/bradlykgreen",
+    "area": "",
+    "history": [],
+    "initial_post": "\n\nI'm an engineering director at Google. I manage development of the AngularJS framework and Google's internal sales productivity products. I'm also author of the O'Reilly book titled 'AngularJS' available at http://www.amazon.com/AngularJS-Brad-Gr ... 1449344852.\nBragging rights\nWorked for Steve Jobs, sold a company, know how to roast whole animals\n\n\nContactos:\nhttps://twitter.com/bradlygreen\nhttps://plus.google.com/+BradGreen\nhttps://github.com/bradlygreen\nhttps://www.linkedin.com/in/bradlykgreen"
+  },
+  {
+    "name": "Alexandre Stroukoff",
+    "institution": "Ubisoft",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2114"
+    },
+    "id": "alexandre-stroukoff",
+    "img": null,
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "frederico.carvalho"
+    },
+    "description": "Mariana.Paulo wrote:\nAdorei o toque do \"até stalkei o facebook da irmã\"! ahahah Melhor que esse só o Zuckerberg, sem contactos em lado nenhum!\n",
+    "contacts": "\nhttps://www.linkedin.com/pub/alexandre- ... 30/b68/218\n\nhttp://alexandrestroukoff.blogspot.pt/\n\nEmail: alexandrestroukoff@gmail.com\n\nVimeo: http://vimeo.com/astroukoff\n\nCV: http://dl.dropboxusercontent.com/u/4690 ... _05-12.pdf",
+    "area": "",
+    "history": [],
+    "initial_post": "Alexandre Stroukoff \n\n3D Artist @ Ubisoft\n\nContactos e Portfólio\nhttps://www.linkedin.com/pub/alexandre- ... 30/b68/218\n\nhttp://alexandrestroukoff.blogspot.pt/\n\nEmail: alexandrestroukoff@gmail.com\n\nVimeo: http://vimeo.com/astroukoff\n\nCV: http://dl.dropboxusercontent.com/u/4690 ... _05-12.pdf"
+  },
+  {
+    "name": "Luis von Ahn",
+    "institution": "reCAPTCHA",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2124"
+    },
+    "id": "luis-von-ahn",
+    "img": "http://www.tedxriodelaplata.org/sites/default/files/oradores/luis%20von%20ahn%202.jpg?1316447895",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "carina.antunes"
+    },
+    "description": null,
+    "contacts": "",
+    "area": "",
+    "history": [],
+    "initial_post": "\n\nLuis von Ahn (born 1979) is a Guatemalan entrepreneur and an associate professor in the Computer Science Department at Carnegie Mellon University.He is known as one of the pioneers of crowdsourcing. He is the founder of the company reCAPTCHA, which was sold to Google in 2009. As a professor, his research includes CAPTCHAs and human computation, and has earned him international recognition and numerous honors. He was awarded a MacArthur Fellowship (a.k.a., the \"genius grant\") in 2006, the David and Lucile Packard Foundation Fellowship in 2009, a Sloan Fellowship in 2009, and a Microsoft New Faculty Fellowship in 2007, and the Presidential Early Career Award for Scientists and Engineers in 2012. He has also been named one of the 50 Best Brains in Science by Discover Magazine, and has made it to many recognition lists that include Popular Science Magazine's Brilliant 10, Silicon.com's 50 Most Influential People in Technology, Technology Review's TR35: Young Innovators Under 35, and FastCompany's 100 Most Innovative People in Business.\n\nSiglo Veintiuno, one of the biggest newspapers in Guatemala, chose him as the person of the year in 2009. In 2011, Foreign Policy Magazine in Spanish named him the most influential intellectual of Latin America and Spain.\n\nPast projects: CAPTCHA, The ESP Game (acquired by Google), GWAP, and reCAPTCHA (acquired by Google).\nHis new project is Duolingo, which aims to get 100 million people translating the Web in every major language.\nCV: http://www.cs.cmu.edu/~biglou/LuisvonAhn_CV.pdf\n\nhttp://www.cs.cmu.edu/~biglou/\nhttps://www.facebook.com/luisvonahn\nhttps://twitter.com/luisvonahn\nbiglou@cs.cmu.edu"
+  },
+  {
+    "name": "Stephen Wolfram",
+    "institution": "Wolfram Research",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2100"
+    },
+    "id": "stephen-wolfram",
+    "img": "http://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Stephen_Wolfram_PR.jpg/200px-Stephen_Wolfram_PR.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "nuno.pires"
+    },
+    "description": null,
+    "contacts": "",
+    "area": "",
+    "history": [],
+    "initial_post": "\n\n\"Stephen Wolfram is the creator of Mathematica, the author of A New Kind of Science, the creator of Wolfram|Alpha, and the founder and CEO of Wolfram Research. Over the course of his career, he has been responsible for many discoveries, inventions and innovations in science, technology and business.\"\n\n\"In recognition of his early work in physics and computing, Wolfram became in 1981 the youngest recipient of a MacArthur Fellowship. Late in 1981 Wolfram then set out on an ambitious new direction in science aimed at understanding the origins of complexity in nature. Wolfram's first key idea was to use computer experiments to study the behavior of simple computer programs known as cellular automata. And starting in 1982, this allowed him to make a series of startling discoveries about the origins of complexity. The papers Wolfram published quickly had a major impact, and laid the groundwork for the emerging field that Wolfram called \"complex systems research.\"\n\n\"Wolfram began the development of Mathematica in late 1986. The first version of Mathematica was released on June 23, 1988, and was immediately hailed as a major advance in computing. In the years that followed, the popularity of Mathematica grew rapidly, and Wolfram Research became established as a world leader in the software industry, widely recognized for excellence in both technology and business. \"\n\n\"In recent years, Wolfram's penchant for innovation has been applied ever more widely. Building on the deep technology stacks associated with Mathematica and Wolfram|Alpha, the advances of A New Kind of Science, and the success of his business endeavors, Wolfram is now developing technology and products in several important new directions.\"\n\nSite: http://www.stephenwolfram.com/\nBlog: http://blog.stephenwolfram.com/\nTwitter: https://twitter.com/stephen_wolfram\nLinkedin: http://www.linkedin.com/in/stephenwolfram\nSpeaking enquiries: sw-staff@wolfram.com"
+  },
+  {
+    "name": "Tim Oriol",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2121"
+    },
+    "id": "tim-oriol",
+    "img": "http://m.c.lnkd.licdn.com/mpr/mpr/shrink_200_200/p/2/000/1b7/051/16db041.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "francisco.goncalves"
+    },
+    "description": "Timothy Oriol is a Graphics Software Engineer at Apple in Cupertino, CA. His main areas of interest include graphics, games, parallel computing, and mobile software development.\n",
+    "contacts": "\nhttp://www.linkedin.com/in/toriol\nhttp://www.timoriol.com\nhttps://www.facebook.com/toriol",
+    "area": "",
+    "history": [],
+    "initial_post": "\n\nBiografia: \nTimothy Oriol is a Graphics Software Engineer at Apple in Cupertino, CA. His main areas of interest include graphics, games, parallel computing, and mobile software development.\n\n\nNota: Foi o Principal architect and engineer do \"Sprite Kit\" que foi lançado na WWDC de 2013.\n\nContactos:\nhttp://www.linkedin.com/in/toriol\nhttp://www.timoriol.com\nhttps://www.facebook.com/toriol"
+  },
+  {
+    "name": "John Mcafee",
+    "institution": "Macfee Antivirus",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2060"
+    },
+    "id": "john-mcafee",
+    "img": "http://msnbcmedia.msn.com/j/MSNBC/Components/Photo/_new/1c5064560-121205-john-mcafee-kb-1029a.photoblog600.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "mike.duarte"
+    },
+    "description": "McAfee was employed as a programmer by NASA's Institute for Space Studies in New York City from 1968 to 1970. From there, he went to Univac as a software designer and later to Xerox as an operating system architect. In 1978 he joined Computer Sciences Corporation as a software consultant. Later, while employed by Lockheed in the 1980s, McAfee received a copy of the Pakistani Brain computer virus and began developing software to combat viruses.\nIn 1987 McAfee founded McAfee Associates, a computer anti-virus company. He was the first to distribute anti-virus software using the shareware business model. In 1989, he quit Lockheed and began working full-time at McAfee Associates, which he initially operated from his home in Santa Clara, California. The company was incorporated in Delaware in 1992, and McAfee resigned from the company in 1994. Two years after McAfee Associates went public, McAfee sold his remaining stake in the company. Network Associates was formed in 1997 as a merger of McAfee Associates and Network General. This company later became Network Associates, a name it retained for seven years until it was renamed McAfee. Now a subsidiary of Intel corporation, McAfee remains today as one of the largest anti-virus companies in the world.\n",
+    "contacts": "\n\nPágina de Facebook: https://www.facebook.com/pages/John-McAfee/126046108190\nTwitter: https://twitter.com/officialmcafee\nWebsite: http://www.whoismcafee.com/contact/\n\nDraft\n\nIn a world full of computer dangers, it becomes increasingly important to keep our computer protected from the dangers of the internet. From the day that the first computer viruses began to appear, much has changed in this area, mainly the permanent creation and updating of the software that we have on our computers.\nWe would like to have someone on our campus so distinguished and recognized in this area, that created one of the most popular antivirus in the world. Since you were the first to use a shareware business model based on antivirus distribution , it would be great to listen to your opinion and your actual point of view and share it to our colleagues at the XXI SINFO.\n\n\nTentarei usar primeiro o website, tem lá um formulário de contacto para palestras, depois tentarei os outros métodos se este não trouxer resultados rápidos ",
+    "area": "",
+    "history": [],
+    "initial_post": "John Mcafee\n\n\n\nMcAfee was employed as a programmer by NASA's Institute for Space Studies in New York City from 1968 to 1970. From there, he went to Univac as a software designer and later to Xerox as an operating system architect. In 1978 he joined Computer Sciences Corporation as a software consultant. Later, while employed by Lockheed in the 1980s, McAfee received a copy of the Pakistani Brain computer virus and began developing software to combat viruses.\nIn 1987 McAfee founded McAfee Associates, a computer anti-virus company. He was the first to distribute anti-virus software using the shareware business model. In 1989, he quit Lockheed and began working full-time at McAfee Associates, which he initially operated from his home in Santa Clara, California. The company was incorporated in Delaware in 1992, and McAfee resigned from the company in 1994. Two years after McAfee Associates went public, McAfee sold his remaining stake in the company. Network Associates was formed in 1997 as a merger of McAfee Associates and Network General. This company later became Network Associates, a name it retained for seven years until it was renamed McAfee. Now a subsidiary of Intel corporation, McAfee remains today as one of the largest anti-virus companies in the world.\n\n\nContactos\n\nPágina de Facebook: https://www.facebook.com/pages/John-McAfee/126046108190\nTwitter: https://twitter.com/officialmcafee\nWebsite: http://www.whoismcafee.com/contact/\n\nDraft\n\nIn a world full of computer dangers, it becomes increasingly important to keep our computer protected from the dangers of the internet. From the day that the first computer viruses began to appear, much has changed in this area, mainly the permanent creation and updating of the software that we have on our computers.\nWe would like to have someone on our campus so distinguished and recognized in this area, that created one of the most popular antivirus in the world. Since you were the first to use a shareware business model based on antivirus distribution , it would be great to listen to your opinion and your actual point of view and share it to our colleagues at the XXI SINFO.\n\n\nTentarei usar primeiro o website, tem lá um formulário de contacto para palestras, depois tentarei os outros métodos se este não trouxer resultados rápidos "
+  },
+  {
+    "name": "Steve Huffman",
+    "institution": "Reddit/Hipmunk",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2118"
+    },
+    "id": "steve-huffman",
+    "img": "http://press.hipmunk.com/headshots/steve_huffman-hipmunk.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "claudia.filipe"
+    },
+    "description": "Biografia: Steve Huffman (born November 12, 1983) is an American web developer and co-founder of the website reddit.[1] More recently, he co-founded the airfare search site, Hipmunk.\nIn 2010, Huffman teamed up with Adam Goldstein to create the travel site, Hipmunk, with funding also from Y Combinator.[2][3] In 2011, Steve was named to Inc. magazine's 30 under 30 list.[6] Steve is also the instructor for \"CS253: Web Application Engineering\", an e-learning course begun in April 2012 by online education provider, Udacity.[7] He commonly appears at talks, giving advice to startup companies.\n",
+    "contacts": "\nLinkedin: https://www.linkedin.com/in/shuffman56\nFacebook: https://www.facebook.com/steve.huffman.37",
+    "area": "",
+    "history": [],
+    "initial_post": "\n\nBiografia: Steve Huffman (born November 12, 1983) is an American web developer and co-founder of the website reddit.[1] More recently, he co-founded the airfare search site, Hipmunk.\nIn 2010, Huffman teamed up with Adam Goldstein to create the travel site, Hipmunk, with funding also from Y Combinator.[2][3] In 2011, Steve was named to Inc. magazine's 30 under 30 list.[6] Steve is also the instructor for \"CS253: Web Application Engineering\", an e-learning course begun in April 2012 by online education provider, Udacity.[7] He commonly appears at talks, giving advice to startup companies.\n\n\n\nNota: Recentemente o projecto onde o Steve está inserido, faz parte da incubadora de start up Y Combinator\n\nContactos:\nLinkedin: https://www.linkedin.com/in/shuffman56\nFacebook: https://www.facebook.com/steve.huffman.37"
+  },
+  {
+    "name": "Jack Dorsey",
+    "institution": "Twitter",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2117"
+    },
+    "id": "jack-dorsey",
+    "img": "http://www.digitalafro.com/content/wp-content/uploads/2013/05/jackdorsey.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "claudia.filipe"
+    },
+    "description": "Jack Dorsey (born November 19, 1976) is an American web developer and businessman widely known as a co-founder and co-creator of Twitter, and as the founder and CEO of Square, a mobile payments company. In 2008, he was named to the MIT Technology Review TR35 as one of the top 35 innovators in the world under the age of 35. For 2012, The Wall Street Journal gave him the \"Innovator of the Year Award\" for technology.\n",
+    "contacts": "\nTwitter: https://twitter.com/jack\nFacebook: https://www.facebook.com/jackdorsey",
+    "area": "",
+    "history": [],
+    "initial_post": "\n\nJack Dorsey (born November 19, 1976) is an American web developer and businessman widely known as a co-founder and co-creator of Twitter, and as the founder and CEO of Square, a mobile payments company. In 2008, he was named to the MIT Technology Review TR35 as one of the top 35 innovators in the world under the age of 35. For 2012, The Wall Street Journal gave him the \"Innovator of the Year Award\" for technology.\n\n\nContactos:\nTwitter: https://twitter.com/jack\nFacebook: https://www.facebook.com/jackdorsey"
+  },
+  {
+    "name": "Evan Spiegel",
+    "institution": "Snapchat",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2115"
+    },
+    "id": "evan-spiegel",
+    "img": "https://media.licdn.com/media/p/3/005/00a/10a/3ecbbb1.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "frederico.carvalho"
+    },
+    "description": "Evan Thomas Spiegel is an American internet entrepreneur who co-founded the mobile application Snapchat along with Robert Murphy and is CEO of the company.\n",
+    "contacts": "\n\nEmail: evan@snapchat.com\n\nTwitter: https://twitter.com/evanspiegel\n\nLinkedIn: https://www.linkedin.com/in/evanspiegel",
+    "area": "",
+    "history": [],
+    "initial_post": "\nEVAN SPIEGEL\nEvan Thomas Spiegel is an American internet entrepreneur who co-founded the mobile application Snapchat along with Robert Murphy and is CEO of the company.\n\n\nContactos\n\nEmail: evan@snapchat.com\n\nTwitter: https://twitter.com/evanspiegel\n\nLinkedIn: https://www.linkedin.com/in/evanspiegel"
+  },
+  {
+    "name": "Mike Krieger",
+    "institution": "Instagram",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2074"
+    },
+    "id": "mike-krieger",
+    "img": "http://data.amirite.net/quote_author_images/52f3ac092f849.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "mike.duarte"
+    },
+    "description": "Michel \"Mike\" Krieger is a Brazilian entrepreneur and software engineer, who is probably best known as the co-founder of Instagram, along with Kevin Systrom. Born in São Paulo, São Paulo, Brazil, Krieger moved to California in 2004 to attend Stanford University. At Stanford, where he studied symbolic systems, he met Kevin Systrom. The two of them co-founded Instagram in 2010.\n",
+    "contacts": "\nhttps://twitter.com/mikeyk\n@mikeyk\nhttps://www.linkedin.com/in/mikekrieger\nhttps://www.facebook.com/mikeyk?fref=ts",
+    "area": "",
+    "history": [],
+    "initial_post": "Mike Krieger\n\n\n\nBio:\n\nMichel \"Mike\" Krieger is a Brazilian entrepreneur and software engineer, who is probably best known as the co-founder of Instagram, along with Kevin Systrom. Born in São Paulo, São Paulo, Brazil, Krieger moved to California in 2004 to attend Stanford University. At Stanford, where he studied symbolic systems, he met Kevin Systrom. The two of them co-founded Instagram in 2010.\n\n\nOu trazer ele, ou o Kevin Systrom, o outro fundador do Instagram.\n\nContactos: \nhttps://twitter.com/mikeyk\n@mikeyk\nhttps://www.linkedin.com/in/mikekrieger\nhttps://www.facebook.com/mikeyk?fref=ts"
+  },
+  {
+    "name": "Jade Raymond",
+    "institution": "Ubisoft",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2090"
+    },
+    "id": "jade-raymond",
+    "img": "http://www.wired.com/images_blogs/gamelife/2011/02/JADE-RAYMOND05.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "claudia.filipe"
+    },
+    "description": "Jade Raymond (born 28 August 1975 in Montreal, Canada[1][2]) is a Canadian video game executive and Managing Director of Ubisoft Toronto.\nIn 2004, she started working for Ubisoft Montreal, where she joined as the producer of Assassin's Creed. Raymond went on to become executive producer on Assassin’s Creed II, and was executive producer of new projects at Ubisoft Montreal, which included Watch Dogs and The Mighty Quest for Epic Loot.\n",
+    "contacts": "\nTwitter: https://twitter.com/ibjade\nLinkedin: ca.linkedin.com/pub/jade-raymond/0/395/121",
+    "area": "",
+    "history": [],
+    "initial_post": "\n\nJade Raymond (born 28 August 1975 in Montreal, Canada[1][2]) is a Canadian video game executive and Managing Director of Ubisoft Toronto.\nIn 2004, she started working for Ubisoft Montreal, where she joined as the producer of Assassin's Creed. Raymond went on to become executive producer on Assassin’s Creed II, and was executive producer of new projects at Ubisoft Montreal, which included Watch Dogs and The Mighty Quest for Epic Loot.\n\n\nContactos: \nTwitter: https://twitter.com/ibjade\nLinkedin: ca.linkedin.com/pub/jade-raymond/0/395/121"
+  },
+  {
+    "name": "Peter Sunde",
+    "institution": "The Pirate Bay/Flattr/Heml.is",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2105"
+    },
+    "id": "peter-sunde",
+    "img": "http://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Peter_sunde_close_up.jpg/180px-Peter_sunde_close_up.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "francisco.dias"
+    },
+    "description": "Peter Sunde - Wikipedia wrote wrote:\nPeter Sunde Kolmisoppi (alias brokep) (born 13 September 1978 Uddevalla, Sweden) is a computer expert with Norwegian and Finnish roots. He is best known for being a co-founder and ex-spokesperson of The Pirate Bay, a BitTorrent search engine.\n",
+    "contacts": "\nE-mail de contacto directo para eventos: event@brokep.com\nE-mail pessoal: peter@brokep.com\nBlog pessoal: http://blog.brokep.com\nTwitter: @brokep",
+    "area": "",
+    "history": [],
+    "initial_post": "\nPeter Sunde - Wikipedia wrote wrote:\nPeter Sunde Kolmisoppi (alias brokep) (born 13 September 1978 Uddevalla, Sweden) is a computer expert with Norwegian and Finnish roots. He is best known for being a co-founder and ex-spokesperson of The Pirate Bay, a BitTorrent search engine.\n\n\nNo ano passado rejeitou devido a legal issues, mas disse que gostava de vir. Pode ser que este ano as coisas já estejam melhores para os lados dele.\nhttps://private.sinfo.org/forum/viewtop ... nde#p27310\n\nContactos:\nE-mail de contacto directo para eventos: event@brokep.com\nE-mail pessoal: peter@brokep.com\nBlog pessoal: http://blog.brokep.com\nTwitter: @brokep"
+  },
+  {
+    "name": "Cevat Yerli",
+    "institution": "CRYTEK",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2095"
+    },
+    "id": "cevat-yerli",
+    "img": "http://static.giantbomb.com/uploads/scale_small/0/1677/295895-cevat_yerli.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "rodrigo.martins"
+    },
+    "description": null,
+    "contacts": "\nÀ procura ...",
+    "area": "",
+    "history": [],
+    "initial_post": "\n\nCevat Yerli is a Turkish-German computer game developer. He is the co-founder, CEO and President of Crytek, one of the largest video game developers in Germany. Yerli is the son of Turkish immigrants in Germany. He founded Crytek in 1997 and formally turned it into a company in 1999. His brothers, Faruk and Avni, joined Crytek in 2000 and 2001, respectively. The company developed games such as Far Cry and the Crysis series. Cevat Yerli has been the director and executive producer on nearly all of the company's games.\n\nContactos:\nÀ procura ..."
+  },
+  {
+    "name": "Mikko Hypponen",
+    "institution": "F-Secure",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2112"
+    },
+    "id": "mikko-hypponen",
+    "img": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR-yBNNjG_amJN5i_X8kS5q0O-Ca33Y9HCWtRuCTC5uiUH0yoi7",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "diogo.nicolau"
+    },
+    "description": "Mikko Hypponen is the Chief Research Officer for F-Secure. He has worked with F-Secure in Finland since 1991. He's also a TED Speaker.\nMr. Hypponen has led his team through the largest outbreaks in history. He named the infamous Storm Worm, was part of the Conficker Working Group and he has done classified briefings on the Stuxnet worm.\nMr. Hypponen has assisted law enforcement in USA, Europe and Asia on cybercrime cases. He has written for magazines such as Scientific American, Wired and Foreign Policy and for newspapers like The New York Times.\nMr. Hypponen has addressed the most important security-related conferences worldwide. He has been the subject of hundreds of interviews in global media, including a 9-page profile in Vanity Fair.\nMr. Hypponen, born in 1969, was selected among the 50 most important people on the web by the PC World magazine and was included in the FP Global 100 Thinkers list. He also received the Virus Bulletin Award, awarded every ten years, as the \"Best educator in industry\". Mr. Hypponen sits in the advisory boards of ISF and The Lifeboat Foundation.\n",
+    "contacts": "\n\nhttp://mikko.hypponen.com/\nmikko.hypponen@f-secure.com\n\nO ano passado respondeu-me isto:\nThank you for your kind invitation!\n\nUnforunately I need to be elsewhere at the time and I can't make it.\n\nAll the best,\nMikko Hypponen\n\n\nI shall strike again",
+    "area": "",
+    "history": [],
+    "initial_post": "\n\nMikko Hypponen is the Chief Research Officer for F-Secure. He has worked with F-Secure in Finland since 1991. He's also a TED Speaker.\nMr. Hypponen has led his team through the largest outbreaks in history. He named the infamous Storm Worm, was part of the Conficker Working Group and he has done classified briefings on the Stuxnet worm.\nMr. Hypponen has assisted law enforcement in USA, Europe and Asia on cybercrime cases. He has written for magazines such as Scientific American, Wired and Foreign Policy and for newspapers like The New York Times.\nMr. Hypponen has addressed the most important security-related conferences worldwide. He has been the subject of hundreds of interviews in global media, including a 9-page profile in Vanity Fair.\nMr. Hypponen, born in 1969, was selected among the 50 most important people on the web by the PC World magazine and was included in the FP Global 100 Thinkers list. He also received the Virus Bulletin Award, awarded every ten years, as the \"Best educator in industry\". Mr. Hypponen sits in the advisory boards of ISF and The Lifeboat Foundation.\n\n\nContactos\n\nhttp://mikko.hypponen.com/\nmikko.hypponen@f-secure.com\n\nO ano passado respondeu-me isto:\nThank you for your kind invitation!\n\nUnforunately I need to be elsewhere at the time and I can't make it.\n\nAll the best,\nMikko Hypponen\n\n\nI shall strike again"
+  },
+  {
+    "name": "Mike Bostock",
+    "institution": "D3.JS *amen*",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2111"
+    },
+    "id": "mike-bostock",
+    "img": "https://0.gravatar.com/avatar/005a27e09fe946ebef64bf4d134efc0a?d=https%3A%2F%2Fidenticons.github.com%2Fbccfec69c12f4875927673c36fb63cf4.png&s=420",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "bruno.dias"
+    },
+    "description": "Bruno.Dias wrote:\n\n\nCo-criador da linguagem Processing. Actualmente, trabalha no New York Times, como responsável pelo design de gráficos interactivos, para sumarização de grandes conjuntos de dados.\n\nGithub: https://github.com/mbostock\nBlog: http://bl.ocks.org/mbostock, http://bost.ocks.org/mike/\nTwitter: https://twitter.com/mbostock\nEmail: mike@ocks.org",
+    "contacts": "",
+    "area": "",
+    "history": [],
+    "initial_post": "Bruno.Dias wrote:\n\n\nCo-criador da linguagem Processing. Actualmente, trabalha no New York Times, como responsável pelo design de gráficos interactivos, para sumarização de grandes conjuntos de dados.\n\nGithub: https://github.com/mbostock\nBlog: http://bl.ocks.org/mbostock, http://bost.ocks.org/mike/\nTwitter: https://twitter.com/mbostock\nEmail: mike@ocks.org\n"
+  },
+  {
+    "name": "Elon Musk",
+    "institution": "SpaceX/Tesla",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2108"
+    },
+    "id": "elon-musk",
+    "img": "http://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Elon_Musk_-_The_Summit_2013.jpg/440px-Elon_Musk_-_The_Summit_2013.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "francisco.dias"
+    },
+    "description": "Elon R. Musk (born June 28, 1971) is a South African-born Canadian-American business magnate, inventor and investor. He is currently the CEO & CTO of SpaceX and CEO & Chief Product Architect of Tesla Motors. He was an early investor in SpaceX, PayPal, Inc. Tesla Motors, and Zip2, and is widely considered a co-founder of each. He invented the Hyperloop, a high-speed transportation system.\n",
+    "contacts": "\nhttp://www.twitter.com/elonmusk\nhttp://about.me/elonmusk",
+    "area": "",
+    "history": [],
+    "initial_post": "\n\nElon R. Musk (born June 28, 1971) is a South African-born Canadian-American business magnate, inventor and investor. He is currently the CEO & CTO of SpaceX and CEO & Chief Product Architect of Tesla Motors. He was an early investor in SpaceX, PayPal, Inc. Tesla Motors, and Zip2, and is widely considered a co-founder of each. He invented the Hyperloop, a high-speed transportation system.\n\n\nJust because.\n\nContactos:\nhttp://www.twitter.com/elonmusk\nhttp://about.me/elonmusk"
+  },
+  {
+    "name": "Edmund McMillen",
+    "institution": "Super Meat Boy/The Binding of Isaac",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2110"
+    },
+    "id": "edmund-mcmillen",
+    "img": "http://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Edmund_McMillen_-_Game_Developers_Conference_2010_-_Day_2_cropped.jpg/516px-Edmund_McMillen_-_Game_Developers_Conference_2010_-_Day_2_cropped.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "diogo.pais"
+    },
+    "description": "Edmund McMillen (born March 2, 1980) is an American video game designer known for his flash-game visual style.\n\nMcMillen and programmer Tommy Refenes established Team Meat, an independent game production company, with the intent that they would never utilize a third-party publisher. Their first game, Super Meat Boy, was released on October 20, 2010 on the Xbox 360 via Xbox Live Arcade, and on Valve Corporation's digital distribution system Steam on November 30, 2010.\n\nMcMillen and Refenes' development of Super Meat Boy was featured in the film Indie Game: The Movie.\n",
+    "contacts": "\nMail: gishgame@aol.com\nTwitter: @EdmundMcMillenn\nFacebook: https://www.facebook.com/theedmundmcmillen",
+    "area": "",
+    "history": [],
+    "initial_post": "\nEdmund McMillen (born March 2, 1980) is an American video game designer known for his flash-game visual style.\n\nMcMillen and programmer Tommy Refenes established Team Meat, an independent game production company, with the intent that they would never utilize a third-party publisher. Their first game, Super Meat Boy, was released on October 20, 2010 on the Xbox 360 via Xbox Live Arcade, and on Valve Corporation's digital distribution system Steam on November 30, 2010.\n\nMcMillen and Refenes' development of Super Meat Boy was featured in the film Indie Game: The Movie.\n\n\nContactos:\nMail: gishgame@aol.com\nTwitter: @EdmundMcMillenn\nFacebook: https://www.facebook.com/theedmundmcmillen"
+  },
+  {
+    "name": "Dan Wahlin",
+    "institution": "AngularJS",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2109"
+    },
+    "id": "dan-wahlin",
+    "img": "http://jesseliberty.com/wp-content/uploads/2013/11/DanWahlinHeadShot2012Larger.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "diogo.pais"
+    },
+    "description": "Dan Wahlin founded The Wahlin Group (http://www.TheWahlinGroup.com) which provides consulting and training services on Web technologies such as JavaScript, jQuery, AngularJS, SPAs, HTML5, ASP.NET and SharePoint. He’s also one of the top authors at Pluralsight.com and has published several courses covering a range of technologies. Dan is a Microsoft Regional Director and has been awarded Microsoft's MVP award multiple times for ASP.NET, Connected Systems and Silverlight. Dan is on the INETA Speaker's Bureau, speaks at conferences and user groups around the world and has written several books on Web technologies. Dan blogs at http://weblogs.asp.net/dwahlin and writes regular columns for various technical magazines.\n",
+    "contacts": "\nLinkedIn: http://www.linkedin.com/pub/dan-wahlin/1/547/46b\nBlog pessoal: http://weblogs.asp.net/dwahlin\nTwitter: @DanWahlin",
+    "area": "",
+    "history": [],
+    "initial_post": "\nDan Wahlin founded The Wahlin Group (http://www.TheWahlinGroup.com) which provides consulting and training services on Web technologies such as JavaScript, jQuery, AngularJS, SPAs, HTML5, ASP.NET and SharePoint. He’s also one of the top authors at Pluralsight.com and has published several courses covering a range of technologies. Dan is a Microsoft Regional Director and has been awarded Microsoft's MVP award multiple times for ASP.NET, Connected Systems and Silverlight. Dan is on the INETA Speaker's Bureau, speaks at conferences and user groups around the world and has written several books on Web technologies. Dan blogs at http://weblogs.asp.net/dwahlin and writes regular columns for various technical magazines.\n\n\nContactos:\nLinkedIn: http://www.linkedin.com/pub/dan-wahlin/1/547/46b\nBlog pessoal: http://weblogs.asp.net/dwahlin\nTwitter: @DanWahlin"
+  },
+  {
+    "name": "Sean Parker",
+    "institution": "Napster/Facebook/Spotify",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2106"
+    },
+    "id": "sean-parker",
+    "img": "http://upload.wikimedia.org/wikipedia/en/thumb/0/04/Sean_Parker_2011.jpg/400px-Sean_Parker_2011.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "francisco.dias"
+    },
+    "description": "Sean Parker (born 1979) is an American entrepreneur who cofounded the file-sharing computer service Napster and served as the first president of the social networking website Facebook. He also cofounded Plaxo, Causes, and Airtime. As of March 2012, Parker's net worth was estimated to be US$2.1 billion.\n",
+    "contacts": "\nsean@foundersfund.com\nhttps://www.facebook.com/Sean\nhttps://twitter.com/sparker\nhttps://www.linkedin.com/profile/view?id=2910",
+    "area": "",
+    "history": [],
+    "initial_post": "\n\nSean Parker (born 1979) is an American entrepreneur who cofounded the file-sharing computer service Napster and served as the first president of the social networking website Facebook. He also cofounded Plaxo, Causes, and Airtime. As of March 2012, Parker's net worth was estimated to be US$2.1 billion.\n\n\nContactos:\nsean@foundersfund.com\nhttps://www.facebook.com/Sean\nhttps://twitter.com/sparker\nhttps://www.linkedin.com/profile/view?id=2910"
+  },
+  {
+    "name": "Ben Chestnut",
+    "institution": "Mailchimp",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2104"
+    },
+    "id": "ben-chestnut",
+    "img": "http://b-i.forbesimg.com/alexkantrowitz/files/2013/12/ben-chestnut.jpeg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "francisco.dias"
+    },
+    "description": "Co-founder and CEO of MailChimp. Loves monkeys, cars, & technology (in that order). Serial anti-preneur, trying to build something great.\n",
+    "contacts": "\nTwitter: https://twitter.com/benchestnut\nAboutme: http://about.me/benchestnut\nLinkedin: https://www.linkedin.com/in/mailchimp\nEmail: ben@mailchimp.com",
+    "area": "",
+    "history": [],
+    "initial_post": "\n\nCo-founder and CEO of MailChimp. Loves monkeys, cars, & technology (in that order). Serial anti-preneur, trying to build something great.\n\n\nLi este artigo e pareceu-me brutal: https://zapier.com/blog/mailchimp-creative-company/\n\nContactos:\nTwitter: https://twitter.com/benchestnut\nAboutme: http://about.me/benchestnut\nLinkedin: https://www.linkedin.com/in/mailchimp\nEmail: ben@mailchimp.com"
+  },
+  {
+    "name": "Steve Wozniak",
+    "institution": "Co-Founder Apple",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2102"
+    },
+    "id": "steve-wozniak",
+    "img": "http://s3.amazonaws.com/rapgenius/1348954053_steve-jobs-and-wozniak-1977_1024x796_91966.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "claudia.filipe"
+    },
+    "description": "Stephen Gary \"Steve\" Wozniak (born August 11, 1950),[3] known as \"Woz\", is an American inventor, electronics engineer, and computer programmer who co-founded Apple Computer (now Apple Inc.) with Steve Jobs and Ronald Wayne. Wozniak single-handedly designed both the Apple I and Apple II computers in the late 1970s. These computers contributed significantly to the microcomputer revolution.\n",
+    "contacts": "\nTwitter: https://twitter.com/stevewoz\nSite da Fundação: http://www.woz.org/\nE-mail de contacto através da Fundação: Inquiry@Woz.org\nE-mail: steve@woz.org\nLinkedin: http://www.linkedin.com/in/wozniak \n\nEu sei que é muito dificil  Mas ERA TAO AWESOME!!!!! \n\nLink para contacto anterior na SINFO: https://private.sinfo.org/forum/viewtop ... iak#p11071",
+    "area": "",
+    "history": [],
+    "initial_post": "STEVE WOZNIAK\n\n\n\nStephen Gary \"Steve\" Wozniak (born August 11, 1950),[3] known as \"Woz\", is an American inventor, electronics engineer, and computer programmer who co-founded Apple Computer (now Apple Inc.) with Steve Jobs and Ronald Wayne. Wozniak single-handedly designed both the Apple I and Apple II computers in the late 1970s. These computers contributed significantly to the microcomputer revolution.\n\n\nContactos:\nTwitter: https://twitter.com/stevewoz\nSite da Fundação: http://www.woz.org/\nE-mail de contacto através da Fundação: Inquiry@Woz.org\nE-mail: steve@woz.org\nLinkedin: http://www.linkedin.com/in/wozniak \n\nEu sei que é muito dificil  Mas ERA TAO AWESOME!!!!! \n\nLink para contacto anterior na SINFO: https://private.sinfo.org/forum/viewtop ... iak#p11071"
+  },
+  {
+    "name": "Drew Houston",
+    "institution": "Dropbox",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2093"
+    },
+    "id": "drew-houston",
+    "img": "https://pbs.twimg.com/profile_images/2200590822/drew.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "nuno.pires"
+    },
+    "description": "Francisco.Dias wrote:\nTens este mail também: drew@dropbox.com",
+    "contacts": "",
+    "area": "",
+    "history": [],
+    "initial_post": " \n\nDrew Houston is CEO and Co-Founder of Dropbox, and has led Dropbox's growth from a simple idea to a service used by millions around the world.\n\nBefore founding Dropbox, Drew received his bachelor’s degree in electrical engineering and computer science from MIT in 2006. He took a quick leave from school to form Accolade, an online SAT prep startup, and also worked as a software engineer at various startups.\n\nAfter graduating, Drew was endlessly frustrated by carrying USB drives and emailing himself files. In early 2007, he teamed up with fellow MIT student Arash Ferdowsi and the two began working on the project that would eventually become Dropbox.\n\nIn 2012, Drew was named to MIT Technology Review’s TR35 list honoring the world’s top innovators under 35. He was also included in Fortune’s “40 Under 40.”\n\n\nFacebook: https://www.facebook.com/houston\nLinkedin: https://www.linkedin.com/in/drewhouston\nTwitter: https://twitter.com/drewhouston\nmail: drew@dropbox.com"
+  },
+  {
+    "name": "Todd Howard",
+    "institution": "Bethesda Game Studios",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2098"
+    },
+    "id": "todd-howard",
+    "img": "http://www.gamer.ru/system/attached_images/images/000/566/905/original/6.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "rodrigo.martins"
+    },
+    "description": null,
+    "contacts": "\nÀ procura ...",
+    "area": "",
+    "history": [],
+    "initial_post": "\n\nTodd Howard is an American video game designer, director, and producer. He currently serves as Game Director and Executive Producer at Bethesda Game Studios, where he has led the creation of Fallout 3 and The Elder Scrolls video game series. GamePro magazine named him to the Top 20 Most Influential People in Gaming over the last 20 years. He has also been named one of IGN’s Top Game Creators of All Time. He received one of the industry’s highest awards by being named Best Game Director by the Academy of Interactive Arts and Sciences in 2012. Howard is one of the only developers to create four Game of the Year winners in a row with Morrowind, Oblivion, Fallout 3, and Skyrim.\n\nContactos:\nÀ procura ..."
+  },
+  {
+    "name": "Jason Hall",
+    "institution": "Monolith Productions",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2097"
+    },
+    "id": "jason-hall",
+    "img": "http://www.blogcdn.com/news.bigdownload.com/media/2009/11/jason_hallnov11.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "rodrigo.martins"
+    },
+    "description": "Bom era que ele viesse falar sobre o novo jogo que vai sair em Outubro (Middle-earth: Shadow of Mordor).\n",
+    "contacts": "\nÀ procura ...",
+    "area": "",
+    "history": [],
+    "initial_post": "\n\nJason \"Jace\" Hall (born May 20, 1971 in Buffalo, New York) is an American film, television and video game producer, best known for being founder and CEO of Monolith Productions Inc and President of HDFILMS, INC.\n\nHe is also the star, producer, and writer of the online reality series The Jace Hall Show and currently serves as the executive producer of web series The Morning After, having previously done so on ABC's TV series V.\n\nAfter becoming the Senior Vice President and General Manager of Warner Bros. Interactive Entertainment (WBIE) in 2004, Hall produced and released video games including The Matrix Online, F.E.A.R., Condemned: Criminal Origins, 300: March to Glory, Justice League Heroes, Happy Feet, Harry Potter and the Goblet of Fire, Batman Begins and Friends: The One with All the Trivia video game. One of his most notable roles inside a video game is as the voice of Tchernobog in Blood and Blood II: The Chosen as well as The Voice, the BloodBath commentator.And the up and coming adventures of where's Waldo.\n\nIn 2007, Hall founded HDFILMS INC., a production company that produces film, television, videogame and online content. The company is best known for its original reality show, The Jace Hall Show, which debuted on Crackle.com and reached over 4 million viewers. In 2010, the show switched to IGN and is currently airing its 5th season online at IGN START.\n\nBom era que ele viesse falar sobre o novo jogo que vai sair em Outubro (Middle-earth: Shadow of Mordor).\n\n\nContactos:\nÀ procura ..."
+  },
+  {
+    "name": "Salman Khan",
+    "institution": "Khan Academy",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2096"
+    },
+    "id": "salman-khan",
+    "img": "http://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Salman_Khan_TED_2011.jpg/220px-Salman_Khan_TED_2011.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "rodrigo.martins"
+    },
+    "description": "Jorge.Palma wrote:\nSalman \"Sal\" Khan\n\n\nHe is the founder of the Khan Academy, a free online education platform and nonprofit organization. From a small office in his home, Khan has produced more than 4,000 video lessons teaching a wide spectrum of academic subjects, mainly focusing on mathematics and the sciences. As of May 2013, the Khan Academy channel on YouTube attracted 1,000,000 subscribers and the Khan Academy videos have been viewed over 268 million times. In 2012, Time named Salman Khan in its annual list of the 100 most influential people in the world. Forbes magazine put Salman Khan on its cover with the story \"$1 Trillion Opportunity\".\n\n\nHe was a senior analyst at a hedge fund and had also worked in technology and venture capital. He holds an MBA from Harvard Business School, an M.Eng and B.S. in electrical engineering and computer science from MIT, and a B.S. in mathematics from MIT.\n\nkhanacademy.org\n\nContactos:\n\nTwitter: @khanacademy\n\nPretty straight forward\nhttps://khanacademy.wufoo.com/forms/kha ... r-request/\n\nO form é bastante completo e dá boas perspectivas, apenas um bocado longo mas penso que podemos responder a tudo.\n",
+    "contacts": "\n\nTwitter: @khanacademy\n\nPretty straight forward\nhttps://khanacademy.wufoo.com/forms/kha ... r-request/\n\nO form é bastante completo e dá boas perspectivas, apenas um bocado longo mas penso que podemos responder a tudo.\n",
+    "area": "",
+    "history": [],
+    "initial_post": "Thread criada pelo Jorge à 2 anos.\n\nJorge.Palma wrote:\nSalman \"Sal\" Khan\n\n\nHe is the founder of the Khan Academy, a free online education platform and nonprofit organization. From a small office in his home, Khan has produced more than 4,000 video lessons teaching a wide spectrum of academic subjects, mainly focusing on mathematics and the sciences. As of May 2013, the Khan Academy channel on YouTube attracted 1,000,000 subscribers and the Khan Academy videos have been viewed over 268 million times. In 2012, Time named Salman Khan in its annual list of the 100 most influential people in the world. Forbes magazine put Salman Khan on its cover with the story \"$1 Trillion Opportunity\".\n\n\nHe was a senior analyst at a hedge fund and had also worked in technology and venture capital. He holds an MBA from Harvard Business School, an M.Eng and B.S. in electrical engineering and computer science from MIT, and a B.S. in mathematics from MIT.\n\nkhanacademy.org\n\nContactos:\n\nTwitter: @khanacademy\n\nPretty straight forward\nhttps://khanacademy.wufoo.com/forms/kha ... r-request/\n\nO form é bastante completo e dá boas perspectivas, apenas um bocado longo mas penso que podemos responder a tudo.\n"
+  },
+  {
+    "name": "James Patten",
+    "institution": "Patten Studios",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2094"
+    },
+    "id": "james-patten",
+    "img": "https://pbs.twimg.com/profile_images/894818198/patten-headshot-small.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "joao.chitas"
+    },
+    "description": "James Patten is an interaction designer, inventor and visual artist working at the intersection of the physical and digital worlds. Patten is a TED Fellow and the founder and principal of the design firm Patten Studio, where his clients have included Björk, Barneys New York, General Electric, Steelcase and Autodesk. Patten earned his doctorate at the MIT Media Lab where he studied in the Tangible Media Group under Hiroshi Ishii. His work has been exhibited or performed in venues such as the Museum of Modern Art, the Transmediale festival in Berlin, the Museo Guggenheim Bilbao and the Ars Electronica Center in Linz, Austria. Patten's work has been recognized in several international design competitions including the International Design Magazine's Annual Design Review, and the International Design Excellence Awards.\n",
+    "contacts": "",
+    "area": "",
+    "history": [],
+    "initial_post": "\n\nJames Patten is an interaction designer, inventor and visual artist working at the intersection of the physical and digital worlds. Patten is a TED Fellow and the founder and principal of the design firm Patten Studio, where his clients have included Björk, Barneys New York, General Electric, Steelcase and Autodesk. Patten earned his doctorate at the MIT Media Lab where he studied in the Tangible Media Group under Hiroshi Ishii. His work has been exhibited or performed in venues such as the Museum of Modern Art, the Transmediale festival in Berlin, the Museo Guggenheim Bilbao and the Ars Electronica Center in Linz, Austria. Patten's work has been recognized in several international design competitions including the International Design Magazine's Annual Design Review, and the International Design Excellence Awards.\n\n\n\nCONTACTOS:\nemail: james@pattenstudio.com\ntwitter: https://twitter.com/jamesmpatten\nfacebook: https://www.facebook.com/jamesmpatten\nTED profile: http://www.ted.com/speakers/james_patten\nwebsite: http://www.jamespatten.com/\nwebsite (empresa): http://www.pattenstudio.com/"
+  },
+  {
+    "name": "Dan Houser",
+    "institution": "Rockstar Games",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2089"
+    },
+    "id": "dan-houser",
+    "img": "http://static.guim.co.uk/sys-images/Technology/Pix/columnists/2012/11/16/1353091617772/Dan-Houser-Rockstar-Games-008.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "claudia.filipe"
+    },
+    "description": "Dan Houser (born 1974) is an English[2] video game producer as well the co-founder (along with his brother Sam) and vice president of creativity for Rockstar Games.[3] As well as producing video games, Houser has written most of the Grand Theft Auto games[4][5] since London, 1969 with the exception of Advance.[citation needed] He is also the head writer for Rockstar Games,[5] being the lead for Bully, Red Dead Redemption and Max Payne 3.\n",
+    "contacts": "\nEstá tramado",
+    "area": "",
+    "history": [],
+    "initial_post": "\n\nDan Houser (born 1974) is an English[2] video game producer as well the co-founder (along with his brother Sam) and vice president of creativity for Rockstar Games.[3] As well as producing video games, Houser has written most of the Grand Theft Auto games[4][5] since London, 1969 with the exception of Advance.[citation needed] He is also the head writer for Rockstar Games,[5] being the lead for Bully, Red Dead Redemption and Max Payne 3.\n\n\nContactos:\nEstá tramado"
+  },
+  {
+    "name": "Jens Bergensten",
+    "institution": "Minecraft",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2091"
+    },
+    "id": "jens-bergensten",
+    "img": "http://upload.wikimedia.org/wikipedia/commons/6/6b/Jens_Bergensten_Minecon.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "joao.chitas"
+    },
+    "description": "Jens Peder Bergensten, also known as Jeb, or jeb_ by his in-game nickname, is a Swedish video game designer. Since December 2010, he has worked for the game developer Mojang as a programmer and game designer. He became the lead designer and lead developer of the popular indie sandbox game Minecraft, after Markus \"Notch\" Persson stepped down from the positions in December 2011.\n",
+    "contacts": "",
+    "area": "",
+    "history": [],
+    "initial_post": "\n\nJens Peder Bergensten, also known as Jeb, or jeb_ by his in-game nickname, is a Swedish video game designer. Since December 2010, he has worked for the game developer Mojang as a programmer and game designer. He became the lead designer and lead developer of the popular indie sandbox game Minecraft, after Markus \"Notch\" Persson stepped down from the positions in December 2011.\n\n\n\nCONTACTOS:\n\ntwitter: https://twitter.com/jeb_"
+  },
+  {
+    "name": "Blaise Aguera y Arcas",
+    "institution": "Software Architect, Google",
+    "forum": {
+      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2088"
+    },
+    "id": "blaise-aguera-y-arcas",
+    "img": "http://www.technologyreview.com/sites/default/files/legacy/blaise_x220.jpg",
+    "status": {
+      "22": "SUGESTÃO"
+    },
+    "member": {
+      "22": "jorge.palma"
+    },
+    "description": "Blaise Agüera y Arcas works on machine learning at Google. Previously a Distinguished Engineer at Microsoft, he has worked on augmented reality, mapping, wearable computing and natural user interfaces. He was the co-creator of Photosynth, software that assembles photos into 3D environments.\n",
+    "contacts": "\n\nhttps://twitter.com/blaiseaguera",
+    "area": "",
+    "history": [],
+    "initial_post": "Blaise Aguera y Arcas\n\n\n\nBio:\n\nBlaise Agüera y Arcas works on machine learning at Google. Previously a Distinguished Engineer at Microsoft, he has worked on augmented reality, mapping, wearable computing and natural user interfaces. He was the co-creator of Photosynth, software that assembles photos into 3D environments.\n\n\nBlaise Aguera y Arcas is a Distinguished Engineer at Microsoft. He works in a variety of roles, from designer and coder to strategist, and he leads an Advanced Engineering team of researchers and engineers with strengths in social media, computer vision and graphics. He joined Microsoft when his startup company, Seadragon, was acquired by Live Labs in 2006. Shortly after the acquisition of Seadragon, Blaise directed his team in a collaboration with Microsoft Research and the University of Washington, leading to the first public previews of Photosynth several months later. His TED talk on Seadragon and Photosynth in 2007 is still rated “most jaw-dropping”.\n\nBlaise has a broad background in computer science and applied math, and has worked in a variety of fields, including computational neuroscience, computational drug design, data compression and others. In 2001 he received press coverage for his discovery, using computational methods, of the printing technology used by Johann Gutenberg. Blaise’s work on early printing was the subject of a BBC Open University documentary, “What Did Gutenberg Invent?”. He has published essays and research papers in theoretical biology, neuroscience and history in The EMBO Journal, Neural Computation and Nature. In 2008-9 he was a recipient of MIT Technology Review’s TR35 award (35 top innovators under 35) and Fast Company’s MCP100 (“100 most creative people in business”).\n\n\nSince 2013 Blaise Agüera y Arcas is a software architect, designer, and imagery authority at Google.\n\n\nContactos:\n\nhttps://twitter.com/blaiseaguera"
+  },
+  {
     "name": "Jane McGonigal",
     "institution": "Game Designer, Institute for the Future",
     "forum": {
@@ -37,7 +616,7 @@
     "contacts": "\ntwitter: https://twitter.com/amy_hennig\n\nSei que já tivemos uma pessoa da Naughty Dog na edição passada, mas ela neste momento está na Visceral a trabalhar num novo jogo do Star Wars. Seria interessante ouvir o que ela tem a dizer acerca da escrita de guiões para jogos e também para mostrar que o preconceito de que os video-jogos são coisa de homens, é algo do passado.\nAinda só encontrei o twitter dela, mas vou actualizando a lista de contactos assim que encontrar algo de novo ",
     "area": "",
     "history": [],
-    "initial_post": "\namy_hennig.jpg (32.43 KiB) Viewed 28 times\n\n\n\"Amy Hennig (born 1964/65) is a video game director and script writer, formerly for the video game company Naughty Dog. She began her work in the industry on the Nintendo Entertainment System, with her design debut on the Super Nintendo Entertainment System game Michael Jordan: Chaos in the Windy City. She later went to work for Crystal Dynamics, working primarily on the Legacy of Kain series. With Naughty Dog, her work has been on two primary series: Jak and Daxter and Uncharted.\n\nWith her writing style, Hennig believes that the creative direction of a script holds more importance than the graphics of the game. She has been called one of the most influential women in the video game industry by Edge magazine, and has been cited as an example of how more women are becoming involved in a previously male dominated field.\"\n\nContactos\ntwitter: https://twitter.com/amy_hennig\n\nSei que já tivemos uma pessoa da Naughty Dog na edição passada, mas ela neste momento está na Visceral a trabalhar num novo jogo do Star Wars. Seria interessante ouvir o que ela tem a dizer acerca da escrita de guiões para jogos e também para mostrar que o preconceito de que os video-jogos são coisa de homens, é algo do passado.\nAinda só encontrei o twitter dela, mas vou actualizando a lista de contactos assim que encontrar algo de novo "
+    "initial_post": "\namy_hennig.jpg (32.43 KiB) Viewed 35 times\n\n\n\"Amy Hennig (born 1964/65) is a video game director and script writer, formerly for the video game company Naughty Dog. She began her work in the industry on the Nintendo Entertainment System, with her design debut on the Super Nintendo Entertainment System game Michael Jordan: Chaos in the Windy City. She later went to work for Crystal Dynamics, working primarily on the Legacy of Kain series. With Naughty Dog, her work has been on two primary series: Jak and Daxter and Uncharted.\n\nWith her writing style, Hennig believes that the creative direction of a script holds more importance than the graphics of the game. She has been called one of the most influential women in the video game industry by Edge magazine, and has been cited as an example of how more women are becoming involved in a previously male dominated field.\"\n\nContactos\ntwitter: https://twitter.com/amy_hennig\n\nSei que já tivemos uma pessoa da Naughty Dog na edição passada, mas ela neste momento está na Visceral a trabalhar num novo jogo do Star Wars. Seria interessante ouvir o que ela tem a dizer acerca da escrita de guiões para jogos e também para mostrar que o preconceito de que os video-jogos são coisa de homens, é algo do passado.\nAinda só encontrei o twitter dela, mas vou actualizando a lista de contactos assim que encontrar algo de novo "
   },
   {
     "name": "Sarah Northway",
@@ -45,7 +624,7 @@
       "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2084"
     },
     "id": "sarah-northway",
-    "img": "https://private.sinfo.org/forum/download/file.php?id=93",
+    "img": "http://w3llfpm0ewtiylb8.zippykid.netdna-cdn.com/wp-content/upLoads/2014/12/sarah-northway-hardcore-droid.jpg",
     "status": {
       "22": "SUGESTÃO"
     },
@@ -56,27 +635,7 @@
     "contacts": "\nTwitter: @sarah_northway\nLinkedin: http://www.linkedin.com/pub/sarah-northway/2/426/420\nGmail: sarahnorthway@gmail.com\nOther: northwaygames.com",
     "area": "",
     "history": [],
-    "initial_post": "\nimage.jpg (44.22 KiB) Viewed 36 times\n\n\n'Hi, I'm Sarah Northway!\n\nWhat do you work on?\nI design and program indie video games. My most well known one is Rebuild, a post-apocalyptic strategy game for browsers and mobile phones. It's not your usual shoot-the-zombies-in-the-head kind of game; instead you manage a city of survivors and have to make tough decisions to keep them alive. It's written in Adobe Flash (AS3 / AIR) and took me about a year to make. I'm currently working on Rebuild 3, which I raised money for on Kickstarter.\n\n(...) \nHow did you learn to program?\nI loved computers from a young age in the 80s and 90s, because I loved the games you could play on them. I learned shell scripting so I could run games, learned how to use BBSes so I could download games, then learned HTML so I could make websites about... I'll let you guess. I did my earliest real programming in first year college and fell in love with the world of puzzles and language that sits inside every piece of software. To me, programming is a game.\nI majored in computer science, which involved far too much math and theory and circuit boards for my liking. I learned the most from working on projects that interested me, not from books or teachers. (...) '\n\n\n\nContactos:\nTwitter: @sarah_northway\nLinkedin: http://www.linkedin.com/pub/sarah-northway/2/426/420\nGmail: sarahnorthway@gmail.com\nOther: northwaygames.com"
-  },
-  {
-    "name": "John Mcafee",
-    "institution": "Macfee Antivirus",
-    "forum": {
-      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2060"
-    },
-    "id": "john-mcafee",
-    "img": "http://msnbcmedia.msn.com/j/MSNBC/Components/Photo/_new/1c5064560-121205-john-mcafee-kb-1029a.photoblog600.jpg",
-    "status": {
-      "22": "SUGESTÃO"
-    },
-    "member": {
-      "22": "mike.duarte"
-    },
-    "description": "McAfee was employed as a programmer by NASA's Institute for Space Studies in New York City from 1968 to 1970. From there, he went to Univac as a software designer and later to Xerox as an operating system architect. In 1978 he joined Computer Sciences Corporation as a software consultant. Later, while employed by Lockheed in the 1980s, McAfee received a copy of the Pakistani Brain computer virus and began developing software to combat viruses.\nIn 1987 McAfee founded McAfee Associates, a computer anti-virus company. He was the first to distribute anti-virus software using the shareware business model. In 1989, he quit Lockheed and began working full-time at McAfee Associates, which he initially operated from his home in Santa Clara, California. The company was incorporated in Delaware in 1992, and McAfee resigned from the company in 1994. Two years after McAfee Associates went public, McAfee sold his remaining stake in the company. Network Associates was formed in 1997 as a merger of McAfee Associates and Network General. This company later became Network Associates, a name it retained for seven years until it was renamed McAfee. Now a subsidiary of Intel corporation, McAfee remains today as one of the largest anti-virus companies in the world.\n",
-    "contacts": "\n\nPágina de Facebook: https://www.facebook.com/pages/John-McAfee/126046108190\nTwitter: https://twitter.com/officialmcafee\nWebsite: http://www.whoismcafee.com/contact/\n\nDraft\n\nIn a world full of computer dangers, it becomes increasingly important to keep our computer protected from the dangers of the internet. From the day that the first computer viruses began to appear, much has changed in this area, mainly the permanent creation and updating of the software that we have on our computers.\nWe would like to have someone on our campus so distinguished and recognized in this area, that created one of the most popular antivirus in the world. Since you were the first to use a shareware business model based on antivirus distribution , it would be great to listen to your opinion and your actual point of view and share it to our colleagues at the XXI SINFO.\n\n\nTentarei usar primeiro o website, tem lá um formulário de contacto para palestras, depois tentarei os outros métodos se este não trouxer resultados rápidos ",
-    "area": "",
-    "history": [],
-    "initial_post": "John Mcafee\n\n\n\nMcAfee was employed as a programmer by NASA's Institute for Space Studies in New York City from 1968 to 1970. From there, he went to Univac as a software designer and later to Xerox as an operating system architect. In 1978 he joined Computer Sciences Corporation as a software consultant. Later, while employed by Lockheed in the 1980s, McAfee received a copy of the Pakistani Brain computer virus and began developing software to combat viruses.\nIn 1987 McAfee founded McAfee Associates, a computer anti-virus company. He was the first to distribute anti-virus software using the shareware business model. In 1989, he quit Lockheed and began working full-time at McAfee Associates, which he initially operated from his home in Santa Clara, California. The company was incorporated in Delaware in 1992, and McAfee resigned from the company in 1994. Two years after McAfee Associates went public, McAfee sold his remaining stake in the company. Network Associates was formed in 1997 as a merger of McAfee Associates and Network General. This company later became Network Associates, a name it retained for seven years until it was renamed McAfee. Now a subsidiary of Intel corporation, McAfee remains today as one of the largest anti-virus companies in the world.\n\n\nContactos\n\nPágina de Facebook: https://www.facebook.com/pages/John-McAfee/126046108190\nTwitter: https://twitter.com/officialmcafee\nWebsite: http://www.whoismcafee.com/contact/\n\nDraft\n\nIn a world full of computer dangers, it becomes increasingly important to keep our computer protected from the dangers of the internet. From the day that the first computer viruses began to appear, much has changed in this area, mainly the permanent creation and updating of the software that we have on our computers.\nWe would like to have someone on our campus so distinguished and recognized in this area, that created one of the most popular antivirus in the world. Since you were the first to use a shareware business model based on antivirus distribution , it would be great to listen to your opinion and your actual point of view and share it to our colleagues at the XXI SINFO.\n\n\nTentarei usar primeiro o website, tem lá um formulário de contacto para palestras, depois tentarei os outros métodos se este não trouxer resultados rápidos "
+    "initial_post": "\n\n'Hi, I'm Sarah Northway!\n\nWhat do you work on?\nI design and program indie video games. My most well known one is Rebuild, a post-apocalyptic strategy game for browsers and mobile phones. It's not your usual shoot-the-zombies-in-the-head kind of game; instead you manage a city of survivors and have to make tough decisions to keep them alive. It's written in Adobe Flash (AS3 / AIR) and took me about a year to make. I'm currently working on Rebuild 3, which I raised money for on Kickstarter.\n\n(...) \nHow did you learn to program?\nI loved computers from a young age in the 80s and 90s, because I loved the games you could play on them. I learned shell scripting so I could run games, learned how to use BBSes so I could download games, then learned HTML so I could make websites about... I'll let you guess. I did my earliest real programming in first year college and fell in love with the world of puzzles and language that sits inside every piece of software. To me, programming is a game.\nI majored in computer science, which involved far too much math and theory and circuit boards for my liking. I learned the most from working on projects that interested me, not from books or teachers. (...) '\n\n\n\nContactos:\nTwitter: @sarah_northway\nLinkedin: http://www.linkedin.com/pub/sarah-northway/2/426/420\nGmail: sarahnorthway@gmail.com\nOther: northwaygames.com"
   },
   {
     "name": "Massimo Banzi",
@@ -137,26 +696,6 @@
     "area": "",
     "history": [],
     "initial_post": "James Lyne\n\n\nCybersecurity specialist\n\n\n\"I take the security threat as a direct affront to the purpose of the web.\"\n\n—James Lyne\n\nJames Lyne is focused on the 5-year technology strategy at Sophos in the Office of the CTO. Working with key business and technology trends and combining a detailed knowledge of threats, James extrapolates from the modern world of threat protection to explore the future security and technology requirements. Aside from technology strategy, James frequently engages with customers and industry forums to evangelize the security problem domains.\n\nBackground\n\nWith a background as a mathematician and a strong focus on cryptography, James Lyne's knowledge of security is informed by a detailed understanding of practicalities. James has worked with some of the world's largest and most paranoid enterprises to implement risk-oriented security strategies. With a collection of academic awards and industry certifications James also works with educational bodies to improve awareness, which is the most important component of security.\n\nhttp://www.sophos.com/en-us/press-offic ... -lyne.aspx\n\n\n\n\nContactos\nhttps://twitter.com/jameslyne"
-  },
-  {
-    "name": "Mike Krieger",
-    "institution": "Instagram",
-    "forum": {
-      "22": "https://private.sinfo.org/forum/viewtopic.php?f=131&t=2074"
-    },
-    "id": "mike-krieger",
-    "img": "http://data.amirite.net/quote_author_images/52f3ac092f849.jpg",
-    "status": {
-      "22": "SUGESTÃO"
-    },
-    "member": {
-      "22": "mike.duarte"
-    },
-    "description": "Michel \"Mike\" Krieger is a Brazilian entrepreneur and software engineer, who is probably best known as the co-founder of Instagram, along with Kevin Systrom. Born in São Paulo, São Paulo, Brazil, Krieger moved to California in 2004 to attend Stanford University. At Stanford, where he studied symbolic systems, he met Kevin Systrom. The two of them co-founded Instagram in 2010.\n",
-    "contacts": "\nhttps://twitter.com/mikeyk\n@mikeyk\nhttps://www.linkedin.com/in/mikekrieger\nhttps://www.facebook.com/mikeyk?fref=ts",
-    "area": "",
-    "history": [],
-    "initial_post": "Mike Krieger\n\n\n\nBio:\n\nMichel \"Mike\" Krieger is a Brazilian entrepreneur and software engineer, who is probably best known as the co-founder of Instagram, along with Kevin Systrom. Born in São Paulo, São Paulo, Brazil, Krieger moved to California in 2004 to attend Stanford University. At Stanford, where he studied symbolic systems, he met Kevin Systrom. The two of them co-founded Instagram in 2010.\n\n\nOu trazer ele, ou o Kevin Systrom, o outro fundador do Instagram.\n\nContactos: \nhttps://twitter.com/mikeyk\n@mikeyk\nhttps://www.linkedin.com/in/mikekrieger\nhttps://www.facebook.com/mikeyk?fref=ts"
   },
   {
     "name": "Rui Pereira(CTO) / David Perry(CEO)",
