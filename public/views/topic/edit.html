@@ -18,7 +18,7 @@
 
     <div ng-show="show.targets" class="all-100 control-group">
       <div class="all-100">
-        <label>Targets</label>
+      <label ng-click="toggleAllTargets()"><a>Targets</a></label><i class="fa fa-long-arrow-left"></i><small> Click to toggle all.</small>
         <div class="all-100">
           <div class="ink-button small {{topic.targets.indexOf(member.id) != -1 ? 'blue' : ''}}" style="margin-bottom: 0.5em;" ng-click="toggleTarget(member.id)" ng-repeat="member in members | orderBy:'id'">{{member.name}}</div>
         </div>
