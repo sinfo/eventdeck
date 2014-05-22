@@ -77,6 +77,12 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
     }
   };
 
+  $scope.toggleAllTargets = function() {
+    for (var i = 0, j = $scope.members.length; i < j; i++) {
+      $scope.toggleTarget($scope.members[i].id);
+    }
+  };
+
   $scope.toggleTargets = function() {
     console.log($scope.showTargets);
     $scope.showTargets = !$scope.showTargets;
