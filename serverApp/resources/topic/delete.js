@@ -1,13 +1,14 @@
 var async          = require('async');
-var Topic        = require('./../../db/models/topic.js');
+var Topic          = require('./../../db/models/topic.js');
 var Hapi           = require('hapi');
+var Notification   = require('./../../db/models/notification.js');
+var Comment        = require('./../../db/models/comment.js');
 
 module.exports = del;
 
 function del(request, reply) {
 
   var id = request.params.id;
-  var topics;
 
   async.series([
       delTopic,
@@ -17,9 +18,17 @@ function del(request, reply) {
     Topic.del(id, deletedTopic);
 
     function deletedTopic(err, result) {
-      console.log(err);
       if (err) cb(err);
-      console.log(result);
+
+      Notification.removeByThread('topic-'+id, function(err, result) {
+        console.log("Notifications removed", result);
+
+      });
+      
+      Comment.removeByThread('topic-'+id, function(err, result) {
+        console.log("Comments removed", result);
+      });
+
       cb();
     }
   }

@@ -4,6 +4,7 @@ angular.module('theTool', [
   'ng',
   'ngRoute',
   'ngSanitize',
+  'infinite-scroll',
   'theTool.filters',
   'theTool.services',
   'theTool.directives',
