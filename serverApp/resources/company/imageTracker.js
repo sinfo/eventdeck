@@ -58,7 +58,7 @@ function track(request, reply) {
 
   function done(err) {
     if (err) {
-      console.log("Error in tracker for '" + request.params.id + "'.");
+      console.log("Error in email tracker for '" + request.params.id + "'.");
     }
 
     reply.file("./public/img/logo.jpg").type("image/jpg");
