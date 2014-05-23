@@ -1,33 +1,16 @@
-var async          = require('async');
-var Comment        = require('./../../db/models/comment.js');
-var Hapi           = require('hapi');
+var Comment = require('./../../db/models/comment.js');
 
 module.exports = get;
 
 function get(request, reply) {
 
-  var id = request.params.id;
-  var comment;
-
-  async.series([
-      getComment,
-    ], done);
-
-  function getComment(cb) {
-    Comment.findById(id, gotComment);
-
-    function gotComment(err, result) {
-      if (err) cb(err);
-      comments = result[0];
-      cb();
+  Comment.findById(request.params.id, function(err, result) {
+    if (!err && result && result.length > 0) {
+      reply(result[0]);
     }
-  }
-
-  function done(err) {
-    if (err) {
-      reply(Hapi.error.badRequest(err.detail));
-    } else {
-      reply(comments);
+    else {
+      reply({error: "Unable to find comment with id '" + request.params.id + "'."});
     }
-  }
+  });
+
 }

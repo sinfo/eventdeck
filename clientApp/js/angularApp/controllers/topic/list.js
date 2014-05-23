@@ -37,6 +37,8 @@ theToolController.controller('TopicsController', function ($scope, $location, $r
     $scope.loading = false;
   }
 
+  $scope.showOpen = true;
+
 
   //===================================FUNCTIONS===================================
 
@@ -54,6 +56,12 @@ theToolController.controller('TopicsController', function ($scope, $location, $r
       if (response.success) {
         $location.path("/topic/" + response.id + "/edit");
       }
+    });
+  };
+
+  $scope.shownTopics = function (showOpen) {
+    return $scope.topics.filter(function(o) {
+      return (showOpen ? !o.closed : o.closed);
     });
   };
 
