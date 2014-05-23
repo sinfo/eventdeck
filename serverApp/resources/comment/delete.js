@@ -1,34 +1,16 @@
-var async          = require('async');
-var Comment        = require('./../../db/models/comment.js');
-var Hapi           = require('hapi');
+var Comment = require('./../../db/models/comment.js');
 
-module.exports = del;
+module.exports = remove;
 
-function del(request, reply) {
+function remove(request, reply) {
 
-  var id = request.params.id;
-  var comments;
-
-  async.series([
-      delComment,
-    ], done);
-
-  function delComment(cb) {
-    Comment.del(id, deletedComment);
-
-    function deletedComment(err, result) {
-      console.log(err);
-      if (err) cb(err);
-      console.log(result);
-      cb();
-    }
-  }
-
-  function done(err) {
+  Comment.del(request.params.id, function(err) {
     if (err) {
-      reply(Hapi.error.badRequest(err.detail));
-    } else {
-      reply();
+      reply({error: "There was an error deleting the comment."});
     }
-  }
+    else {
+      reply({success: "Comment deleted."});
+    }
+  });
+
 }

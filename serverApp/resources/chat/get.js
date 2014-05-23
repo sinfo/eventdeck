@@ -7,8 +7,8 @@ exports = module.exports = get;
 function get(request, reply) {
 
   if (request.params.id) {
-    Chat.findById(request.params.id, function(result) {
-      if (result && result.length > 0) {
+    Chat.findById(request.params.id, function(err, result) {
+      if (!err && result && result.length > 0) {
         reply(result[0]);
       }
       else {
@@ -17,12 +17,12 @@ function get(request, reply) {
     });
   }
   else {
-    Chat.findAll(function(result) {
-      if (result && result.length > 0) {
+    Chat.findAll(function(err, result) {
+      if (!err && result && result.length > 0) {
         reply(result);
       }
       else {
-        reply({error: "There was an error getting all chats.", result: result});
+        reply("There was an error getting all chats.");
       }
     });
   }
