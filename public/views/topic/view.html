@@ -39,7 +39,7 @@
           </div>
         </form>
         <div ng-show="topic.targets.length > 0" style="margin-left: 5px;">
-          <div class="ink-button blue" ng-click="toggleTargets()"><i class="fa fa-users"></i> {{showTargets ? 'Hide' : 'Show'}} targets</div>
+          <div class="ink-button blue" ng-click="toggleTargets()"><i class="fa fa-users"></i> {{showTargets ? 'Hide' : 'Show'}} {{topic.targets.length}} targets</div>
           <div ng-show="showTargets" style="margin-left: 5px;">
             <small ng-repeat="target in topic.targets">
               <a href="/#/member/{{target}}" style="margin-right: 10px;">
