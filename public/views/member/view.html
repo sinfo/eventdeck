@@ -11,7 +11,7 @@
           <h1>{{member.name}}</h1>
           <img ng-show="member.facebook" src="https://graph.facebook.com/{{member.facebook}}/picture?width=300&height=300" width="70%" />
           <br><br>
-          <h6><i class="fa fa-users"></i> {{member.role}}</h6>
+          <h6><i class="fa fa-users"></i> {{member.roles[0].name}}</h6>
           <p>
           <b><i class="fa fa-envelope"></i> Emails</b><br>
           <span ng-show="member.mails.sinfo"><a href="mailto:{{member.mails.sinfo}}"><i class="fa fa-power-off"></i> {{member.mails.sinfo}}</a></span><br>
