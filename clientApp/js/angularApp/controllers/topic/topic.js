@@ -12,6 +12,8 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
 
   $scope.pollKinds = ['text','images'];
 
+  console.log($routeParams.id);
+
   TopicFactory.Topic.get({id: $routeParams.id}, function(result) {
     $scope.topic = result;
     $scope.loading = false;
