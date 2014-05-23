@@ -1,42 +1,29 @@
-var Hapi   = require('hapi');
-var async  = require('async');
-var Chat   = require('./../../db/models/chat.js');
+var Hapi  = require('hapi');
+var async = require('async');
+var Chat  = require('./../../db/models/chat.js');
 
 exports = module.exports = get;
 
-/// get Company
-
 function get(request, reply) {
 
-  var chatId = request.params.id;
-  var chat   = {};
-
-  async.series([
-      getChat,
-    ], done);
-
-  function getChat(cb) {
-    Chat.findById(chatId, gotChat);
-
-    function gotChat(err, result) {
-      if (err) {
-        cb(err);
-      }
-      if (result && result.length > 0) {
-        if (result[0].id)            { chat        = result[0]; }
-        cb();
+  if (request.params.id) {
+    Chat.findById(request.params.id, function(err, result) {
+      if (!err && result && result.length > 0) {
+        reply(result[0]);
       }
       else {
-        cb(Hapi.error.conflict('No chat with the ID: ' + chatId));
+        reply("There was an error.");
       }
-    }
+    });
   }
-
-  function done(err) {
-    if (err) {
-      reply(Hapi.error.badRequest(err.detail));
-    } else {
-      reply(chat);
-    }
+  else {
+    Chat.findAll(function(err, result) {
+      if (!err && result && result.length > 0) {
+        reply(result);
+      }
+      else {
+        reply("There was an error getting all chats.");
+      }
+    });
   }
 }

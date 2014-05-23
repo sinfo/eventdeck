@@ -8,8 +8,11 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
 
   $scope.success = "";
   $scope.error   = "";
+  $scope.showTargets = false;
 
   $scope.pollKinds = ['text','images'];
+
+  console.log($routeParams.id);
 
   TopicFactory.Topic.get({id: $routeParams.id}, function(result) {
     $scope.topic = result;
@@ -76,8 +79,15 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
     }
   };
 
-  $scope.toggleTargets = function(topic) {
-    topic.showTargets = !topic.showTargets;
+  $scope.toggleAllTargets = function() {
+    for (var i = 0, j = $scope.members.length; i < j; i++) {
+      $scope.toggleTarget($scope.members[i].id);
+    }
+  };
+
+  $scope.toggleTargets = function() {
+    console.log($scope.showTargets);
+    $scope.showTargets = !$scope.showTargets;
   };
 
   $scope.focusOption = function(option) {
