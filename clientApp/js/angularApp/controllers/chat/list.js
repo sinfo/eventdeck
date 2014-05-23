@@ -1,7 +1,8 @@
 'use strict';
 
-theToolController.controller('ChatController', function ($scope, $http, $routeParams, $sce, MessageFactory, ChatFactory, MemberFactory) {
-    $scope.loading = true;
+theToolController.controller('ChatController', function ($scope, ChatFactory) {
+
+  $scope.loading = true;
 
   ChatFactory.Chats.getAll(function(chats) {
     $scope.chats = chats;
