@@ -50,11 +50,6 @@ var companySchema = new mongoose.Schema({
     date: { type: Date, default: Date.now },
     where: String
   }],
-  communications: [{
-    kind: String,
-    text: String,
-    approved: Boolean
-  }],
   updated: { type: Date, default: Date.now }
 });
 
