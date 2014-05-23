@@ -22,8 +22,8 @@ function get(request, reply) {
         reply(result);
       }
       else {
-        reply("There was an error.");
+        reply({error: "There was an error getting all chats.", result: result});
       }
-    })
+    });
   }
 }
