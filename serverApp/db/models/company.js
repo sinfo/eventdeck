@@ -46,7 +46,7 @@ var companySchema = new mongoose.Schema({
     }
   },
   area: String,
-  accesses: [{ 
+  accesses: [{
     date: { type: Date, default: Date.now },
     where: String
   }],
@@ -69,5 +69,4 @@ companySchema.statics.findAll = function (cb) {
   this.find({},cb);
 };
 
- 
 var Company = module.exports = mongoose.model('Company', companySchema);

@@ -1,74 +1,59 @@
-var Hapi           = require('hapi');
-var async          = require('async');
-var Company        = require('./../../db/models/company.js');
-var notification  = require('./../notification');
+var async        = require('async');
+var Company      = require('./../../db/models/company.js');
+var notification = require('./../notification');
 
-exports = module.exports = create;
-
-/// create Company
+module.exports = create;
 
 function create(request, reply) {
 
-  var company = {};
+  var company = request.payload;
 
   async.series([
-      checkCompany,
-      createCompany,
-      saveCompany,
-    ], done);
+    checkCompany,
+    saveCompany
+  ], done);
 
   function checkCompany(cb) {
-    if(request.payload.name) {
-      Company.findById(createId(request.payload.name), function(err, company) {
+    if(company.name) {
+      company.id = createId(company.name);
+
+      Company.findById(company.id, function(err, result) {
         if (err) {
-          return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
-        } else if (company.length > 0) {
-          return cb(Hapi.error.conflict('Company ID exists: '+createId(request.payload.id)));
-        } else {
-          return cb();
+          cb(err);
+        }
+        else if (result && result.length > 0) {
+          cb("Company id '" + company.id + "'already exists.");
+        }
+        else {
+          cb();
         }
       });
-    } else {
-      return cb(Hapi.error.conflict('You need to specify an Id'));
     }
-  }
-
-  function createCompany(cb) {
-    company.id   = createId(request.payload.name);
-    company.name = request.payload.name;
-    if (request.payload.img)           { company.img           = request.payload.img; }
-    if (request.payload.description)   { company.description   = request.payload.description; }
-    if (request.payload.status)        { company.status        = request.payload.status; }
-    if (request.payload.history)       { company.history       = request.payload.history; }
-    if (request.payload.contacts)      { company.contacts      = request.payload.contacts; }
-    if (request.payload.forum)         { company.forum         = request.payload.forum; }
-    if (request.payload.member)        { company.member        = request.payload.member; }
-    if (request.payload.area)          { company.area          = request.payload.area; }
-    if (request.payload.participation) { company.participation = request.payload.area; }
-
-    cb();
+    else {
+      cb("Company name was not specified.");
+    }
   }
 
   function saveCompany(cb) {
     var newCompany = new Company(company);
 
-    newCompany.save(function (err, reply){
+    newCompany.save(function (err){
       if (err) {
-        return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
-      } else if(reply) {
-        return cb();
-      } else { // same id
-        return cb(Hapi.error.conflict('Company ID exists: '+company.id));
+        cb(err);
+      }
+      else {
+        cb();
       }
     });
   }
 
   function done(err) {
     if (err) {
-      reply({error:"There was an error!"});
-    } else {
+      reply({error: "Error creating the company."});
+    }
+    else {
       notification.new(request.auth.credentials.id, 'company-'+company.id, company.name, "company",request.auth.credentials.name);
-      reply({message:"Company Updated!"});
+      reply({success: "Company created."});
     }
   }
 }
