@@ -1,8 +1,8 @@
 var Meeting = require('./../../db/models/meeting');
 
-module.exports = update;
+module.exports = del;
 
-function update(request, reply) {
+function del(request, reply) {
 
   Meeting.update({_id: request.payload._id}, request.payload, function (err){
     if (err) {
