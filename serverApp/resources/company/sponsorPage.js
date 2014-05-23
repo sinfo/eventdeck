@@ -1,48 +1,32 @@
-var Hapi           = require('hapi');
-var async          = require('async');
-var Company        = require('./../../db/models/company.js');
+var async   = require('async');
+var Company = require('./../../db/models/company.js');
 
-exports = module.exports = track;
+module.exports = track;
 
 function track(request, reply) {
 
-  var companyId = request.params.id;
-  var company = {};
+  var company;
   var access;
-  var accesses = [];
 
   async.series([
-      getCompany,
-      addAccess,
-      saveCompany,
-    ], done);
+    getCompany,
+    addAccess,
+    saveCompany
+  ], done);
 
   function getCompany(cb) {
-    Company.findById(companyId, gotCompany);
+    Company.findById(request.params.id, gotCompany);
 
     function gotCompany(err, result) {
       if (err) {
         cb(err);
       }
-
-      if (result.length > 0) {
-        if (result[0]._id)           { company._id           = result[0]._id; }
-        if (result[0].id)            { company.id            = result[0].id; }
-        if (result[0].name)          { company.name          = result[0].name; }
-        if (result[0].img)           { company.img           = result[0].img; }
-        if (result[0].description)   { company.description   = result[0].description; }
-        if (result[0].status)        { company.status        = result[0].status; }
-        if (result[0].history)       { company.history       = result[0].history; }
-        if (result[0].contacts)      { company.contacts      = result[0].contacts; }
-        if (result[0].forum)         { company.forum         = result[0].forum; }
-        if (result[0].member)        { company.member        = result[0].member; }
-        if (result[0].area)          { company.area          = result[0].area; }
-        if (result[0].participation) { company.participation = result[0].participation; }
-        if (result[0].accesses)      { accesses              = result[0].accesses; }
+      else if (result && result.length > 0) {
+        company = result[0];
         cb();
       }
       else {
-        cb(Hapi.error.conflict('No company with the ID: ' + companyId));
+        cb("Could not find company '" + request.params.id + "'.");
       }
     }
   }
@@ -51,37 +35,33 @@ function track(request, reply) {
     access = {
       date: Date.now(),
       where: 'page'
-    }
-
-    accesses[accesses.length] = access;
-
+    };
     cb();
   }
 
   function saveCompany(cb) {
     if(!request.auth.isAuthenticated) {
-      Company.update({ id: company.id }, { accesses: accesses }, function (err, numAffected){
+      Company.update({ id: company.id }, { $push: {accesses: access} }, function (err){
         if (err) {
-          console.log(err);
-          return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
+          cb(err);
         }
-
-        console.log("UPDATED", numAffected);
-
-        cb();
+        else {
+          cb();
+        }
       });
-    } else {
-      cb('Viewer is a member');
+    }
+    else {
+      cb("Viewer is a member.");
     }
   }
 
   function done(err) {
     if (err) {
-      console.log(err);
+      console.log("Error in page tracker for '" + request.params.id + "'.");
     }
 
-    reply.view('sponsor.html', { 
-      name: company.name 
+    reply.view('sponsor.html', {
+      name: company.name
     });
   }
 }
