@@ -17,8 +17,7 @@ chatSchema.statics.findByName = function (id, cb) {
 };
 
 chatSchema.statics.findAll = function (cb) {
-  this.find({},cb);
+  this.find({}, cb);
 };
 
- 
 var Chat = module.exports = mongoose.model('Chat', chatSchema);

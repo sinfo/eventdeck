@@ -5,7 +5,12 @@
       <h3 ng-show="loading">Loading...</h3>
       <div ng-hide="loading" class="column-group">
         <h3 ng-hide="topics">No topics created yet.</h3>
-        <div class="activity grey" ng-repeat="topic in topics | orderBy: 'posted':'true'">
+        <div class="half-bottom-space">
+          <div class="ink-button green" ng-click="showOpen = true;">{{shownTopics(true).length}} Open</div>
+          <div class="ink-button red" ng-click="showOpen = false;">{{shownTopics(false).length}} Closed</div>
+        </div>
+        <h3>{{showOpen ? 'Open' : 'Closed'}} topics</h3>
+        <div class="activity grey" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true'">
           <div class="all-100">
             <a href="/#/member/{{topic.author}}">
               <img ng-src="{{'https://graph.facebook.com/'+getFacebook(topic.author)+'/picture'}}">
@@ -32,8 +37,13 @@
               </ul>
             </div>
           </form>
-          <div ng-show="topic.targets.length > 0" style="margin-left: 5px;">
-            <small ng-repeat="target in topic.targets" style="margin-right: 10px;">{{getName(target)}}</small>
+          <div ng-show="topic.targets.length > 0" ng-controller="TopicController">
+            <div class="ink-button blue" ng-click="toggleTargets()"><i class="fa fa-users"></i> {{showTargets ? 'Hide' : 'Show'}} {{topic.targets.length}} targets</div>
+            <div ng-show="showTargets" style="margin-left: 5px;">
+              <small ng-repeat="target in topic.targets" href="/#/member/{{target}}">
+                <a style="margin-right: 10px;">{{getName(target)}}</a>
+              </small>
+            </div>
           </div>
         </div>
       </div>
