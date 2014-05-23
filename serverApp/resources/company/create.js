@@ -17,7 +17,7 @@ function create(request, reply) {
     if(company.name) {
       company.id = createId(company.name);
 
-      Company.findById(company.id, function(err, result) {
+      Company.findById(company.id, function (err, result) {
         if (err) {
           cb(err);
         }
