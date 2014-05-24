@@ -11,3 +11,4 @@ require('./message');
 require('./chat');
 require('./topic');
 require('./communication');
+require('./session');

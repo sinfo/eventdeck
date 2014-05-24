@@ -3,6 +3,7 @@ var speaker       = require('./../resources/speaker');
 var comment       = require('./../resources/comment');
 var notification  = require('./../resources/notification');
 var communication = require('./../resources/communication');
+var session       = require('./../resources/session');
 
 server.route({
   method: 'GET',
@@ -72,6 +73,15 @@ server.route({
   path: '/api/speaker/{id}/communications',
   config: {
     handler: communication.getByThread,
+    auth: true
+  }
+});
+
+server.route({
+  method: 'GET',
+  path: '/api/speaker/{id}/sessions',
+  config: {
+    handler: session.getByThread,
     auth: true
   }
 });
