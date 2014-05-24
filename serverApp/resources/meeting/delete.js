@@ -4,7 +4,7 @@ module.exports = del;
 
 function del(request, reply) {
 
-  Meeting.remove({_id: request.payload._id}, true, function (err){
+  Meeting.remove({_id: request.params.id}, function (err){
     if (err) {
       reply({error: "There was an error deleting the meeting."});
     }

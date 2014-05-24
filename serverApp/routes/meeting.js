@@ -30,7 +30,7 @@ server.route({
 
 server.route({
   method: 'PUT',
-  path: '/api/meeting',
+  path: '/api/meeting/{id}',
   config: {
     handler: meeting.update,
     auth: true
@@ -39,7 +39,7 @@ server.route({
 
 server.route({
   method: 'DELETE',
-  path: '/api/meeting',
+  path: '/api/meeting/{id}',
   config: {
     handler: meeting.delete,
     auth: true
