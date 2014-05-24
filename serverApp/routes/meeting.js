@@ -3,7 +3,7 @@ var meeting = require('./../resources/meeting');
 
 server.route({
   method: 'GET',
-  path: '/api/meetings',
+  path: '/api/meeting',
   config: {
     handler: meeting.list,
     auth: true
@@ -11,8 +11,17 @@ server.route({
 });
 
 server.route({
+  method: 'GET',
+  path: '/api/meeting/{id}',
+  config: {
+    handler: meeting.get,
+    auth: true
+  }
+});
+
+server.route({
   method: 'POST',
-  path: '/api/meetings',
+  path: '/api/meeting',
   config: {
     handler: meeting.create,
     auth: true
@@ -21,9 +30,18 @@ server.route({
 
 server.route({
   method: 'PUT',
-  path: '/api/meetings',
+  path: '/api/meeting',
   config: {
     handler: meeting.update,
+    auth: true
+  }
+});
+
+server.route({
+  method: 'DELETE',
+  path: '/api/meeting',
+  config: {
+    handler: meeting.delete,
     auth: true
   }
 });
