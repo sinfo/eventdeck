@@ -45,3 +45,12 @@ server.route({
     auth: true
   }
 });
+
+server.route({
+  method: 'POST',
+  path: '/api/communication/{id}',
+  config: {
+    handler: communication.approve,
+    auth: true
+  }
+});
