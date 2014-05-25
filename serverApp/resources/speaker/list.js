@@ -1,32 +1,19 @@
-var async          = require('async');
-var Speaker        = require('./../../db/models/speaker.js');
-var Hapi           = require('hapi');
+var Speaker = require('./../../db/models/speaker.js');
 
 module.exports = list;
 
 function list(request, reply) {
 
-  var companies;
-
-  async.series([
-      getSpeakers,
-    ], done);
-
-  function getSpeakers(cb) {
-    Speaker.findAll(gotSpeakers);
-
-    function gotSpeakers(err, result) {
-      if (err) cb(err);
-      companies = result;
-      cb();
+  Speaker.findAll(function (err, result) {
+    if (err){
+      reply({error: "There was an error getting all speakers."});
     }
-  }
-
-  function done(err) {
-    if (err) {
-      reply(Hapi.error.badRequest(err.detail));
-    } else {
-      reply(companies);
+    else if (result && result.length > 0) {
+      reply(result);
     }
-  }
+    else {
+      reply({error: "There are no speakers."});
+    }
+  });
+
 }
