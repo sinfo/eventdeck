@@ -6,46 +6,17 @@ module.exports = get;
 function get(request, reply) {
 
   var speakerId = request.params.id;
-  var speaker   = {};
 
-  async.series([
-      getSpeaker,
-    ], done);
-
-  function getSpeaker(cb) {
-    Speaker.findById(speakerId, gotSpeaker);
-
-    function gotSpeaker(err, result) {
-      if (err) {
-        cb(err);
-      }
-
-      if (result.length > 0) {
-        if (result[0].id)            { speaker.id            = result[0].id; }
-        if (result[0].name)          { speaker.name          = result[0].name; }
-        if (result[0].img)           { speaker.img           = result[0].img; }
-        if (result[0].description)   { speaker.description   = result[0].description; }
-        if (result[0].status)        { speaker.status        = result[0].status; }
-        if (result[0].contacts)      { speaker.contacts      = result[0].contacts; }
-        if (result[0].forum)         { speaker.forum         = result[0].forum; }
-        if (result[0].member)        { speaker.member        = result[0].member; }
-        if (result[0].paragraph)     { speaker.paragraph     = result[0].paragraph; }
-        if (result[0].updated)       { speaker.updated       = result[0].updated; }
-
-        cb();
-      }
-      else {
-        cb(Hapi.error.conflict('No speaker with the ID: ' + speakerId));
-      }
-    }
-  }
-
-  function done(err) {
+  Speaker.findById(speakerId, function (err, result) {
     if (err) {
-      reply(Hapi.error.badRequest(err.detail));
-    } else {
-      notification.read(request.auth.credentials.id, 'speaker-' + speakerId);
-      reply(speaker);
+      reply({error: "There was an error getting the speaker."});
     }
-  }
+    else if (result && result.length > 0) {
+      reply(result);
+    }
+    else {
+      reply({error: "Could not find speaker with id '" + speakerId + "'."})
+    }
+  });
+
 }
