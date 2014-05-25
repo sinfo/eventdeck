@@ -1,72 +1,59 @@
-var Hapi           = require('hapi');
-var async          = require('async');
-var Speaker        = require('./../../db/models/speaker.js');
-var notification  = require('./../notification');
+var async        = require('async');
+var Speaker      = require('./../../db/models/speaker.js');
+var notification = require('./../notification');
 
-exports = module.exports = create;
-
-/// create Speaker
+module.exports = create;
 
 function create(request, reply) {
 
-  var speaker = {};
+  var speaker = request.payload;
 
   async.series([
-      checkSpeaker,
-      createSpeaker,
-      saveSpeaker,
-    ], done);
+    checkSpeaker,
+    saveSpeaker
+  ], done);
 
   function checkSpeaker(cb) {
-    if(request.payload.name) {
-      Speaker.findById(createId(request.payload.name), function(err, speaker) {
+    if (speaker.name) {
+      speaker.id = createId(request.payload.name);
+
+      Speaker.findById(speaker.id, function (err, result) {
         if (err) {
-          return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
-        } else if (speaker.length > 0) {
-          return cb(Hapi.error.conflict('Speaker ID exists: '+createId(request.payload.name)));
-        } else {
+          return cb(err);
+        }
+        else if (result && result.length > 0) {
+          return cb("Speaker id '" + speaker.id + "' already exists.");
+        }
+        else {
           return cb();
         }
       });
-    } else {
-      return cb(Hapi.error.conflict('You need to specify an Id'));
     }
-  }
-
-  function createSpeaker(cb) {
-    speaker.id   = createId(request.payload.name);
-    speaker.name = request.payload.name;
-    if (request.payload.img)           { speaker.img           = request.payload.img; }
-    if (request.payload.description)   { speaker.description   = request.payload.description; }
-    if (request.payload.status)        { speaker.status        = request.payload.status; }
-    if (request.payload.contacts)      { speaker.contacts      = request.payload.contacts; }
-    if (request.payload.forum)         { speaker.forum         = request.payload.forum; }
-    if (request.payload.member)        { speaker.member        = request.payload.member; }
-    if (request.payload.paragraph)     { speaker.paragraph     = request.payload.paragraph; }
-
-    cb();
+    else {
+      return cb("No name specified.");
+    }
   }
 
   function saveSpeaker(cb) {
     var newSpeaker = new Speaker(speaker);
 
-    newSpeaker.save(function (err, reply){
+    newSpeaker.save(function (err) {
       if (err) {
-        return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
-      } else if(reply) {
+        return cb(err);
+      }
+      else {
         return cb();
-      } else { // same id
-        return cb(Hapi.error.conflict('Speaker ID exists: '+speaker.id));
       }
     });
   }
 
   function done(err) {
     if (err) {
-      reply({error:"There was an error!"});
-    } else {
-      notification.new(request.auth.credentials.id, 'speaker-'+speaker.id, speaker.name, "speaker",request.auth.credentials.name);
-      reply({message:"Speaker Updated!"});
+      reply({error: "There was an error creating the speaker."});
+    }
+    else {
+      notification.new(request.auth.credentials.id, "speaker-" + speaker.id, speaker.name, "speaker", request.auth.credentials.name);
+      reply({success: "Speaker created."});
     }
   }
 }
