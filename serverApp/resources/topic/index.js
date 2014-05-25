@@ -1,6 +1,5 @@
 exports.list      = require('./list');
 exports.create    = require('./create');
-exports.update    = require('./update');
 exports.get       = require('./get');
+exports.update    = require('./update');
 exports.delete    = require('./delete');
-exports.targetGet = require('./targetGet');

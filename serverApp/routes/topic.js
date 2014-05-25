@@ -1,11 +1,11 @@
-var server  = require('./../index.js');
-var topic = require('./../resources/topic');
+var server       = require('./../index.js');
+var topic        = require('./../resources/topic');
 var comment      = require('./../resources/comment');
 var notification = require('./../resources/notification');
 
 server.route({
   method: 'GET',
-  path: '/api/topics',
+  path: '/api/topic',
   config: {
     handler: topic.list,
     auth: true
@@ -14,18 +14,9 @@ server.route({
 
 server.route({
   method: 'POST',
-  path: '/api/topics',
+  path: '/api/topic',
   config: {
     handler: topic.create,
-    auth: true
-  }
-});
-
-server.route({
-  method: 'GET',
-  path: '/api/topics/{id}',
-  config: {
-    handler: topic.targetGet,
     auth: true
   }
 });
