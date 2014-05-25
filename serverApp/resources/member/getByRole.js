@@ -1,39 +1,21 @@
-var Hapi           = require('hapi');
-var async          = require('async');
-var Member        = require('./../../db/models/member.js');
+var Member = require('./../../db/models/member.js');
 
-exports = module.exports = get;
-
-/// get member
+module.exports = get;
 
 function get(request, reply) {
 
   var roleId = request.params.id;
-  var members   = [];
 
-  async.series([
-      getMembers,
-    ], done);
-
-  function getMembers(cb) {
-    Member.findByRole(roleId, gotMembers);
-
-    function gotMembers(err, result) {
-      if (err) {
-        cb(err);
-      }
-
-      members = result;
-
-      cb();
-    }
-  }
-
-  function done(err) {
+  Member.findByRole(roleId, function (err, result) {
     if (err) {
-      reply(Hapi.error.badRequest(err.detail));
-    } else {
-      reply(members);
+      reply({error: "There was an error getting the members by role."});
     }
-  }
+    else if (result && result.length > 0) {
+      reply(result);
+    }
+    else {
+      reply({error: "Could not find members with role '" + roleId + "'."});
+    }
+  });
+
 }
