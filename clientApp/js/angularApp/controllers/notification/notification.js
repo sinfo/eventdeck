@@ -161,7 +161,7 @@ theToolController.controller('NotificationController', function ($scope, $http, 
     $scope.speakers = response;
   });
 
-  TopicFactory.Topics.getAll(function(response) {
+  TopicFactory.Topic.getAll(function(response) {
     $scope.topics = response;
   });
 
