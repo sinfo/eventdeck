@@ -1,32 +1,19 @@
-var async          = require('async');
-var Member        = require('./../../db/models/member.js');
-var Hapi           = require('hapi');
+var Member = require('./../../db/models/member.js');
 
 module.exports = list;
 
 function list(request, reply) {
 
-  var roles;
-
-  async.series([
-      getRoles,
-    ], done);
-
-  function getRoles(cb) {
-    Member.findAllRoles(gotRoles);
-
-    function gotRoles(err, result) {
-      if (err) cb(err);
-      roles = result;
-      cb();
-    }
-  }
-
-  function done(err) {
+  Member.findAllRoles(function (err, result) {
     if (err) {
-      reply(Hapi.error.badRequest(err.detail));
-    } else {
-      reply(roles);
+      reply({error: "There was an error getting all the roles."});
     }
-  }
+    else if (result && result.length > 0) {
+      reply(result);
+    }
+    else {
+      reply({error: "There are no roles."});
+    }
+  });
+
 }
