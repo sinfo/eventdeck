@@ -7,7 +7,8 @@ theToolServices
     return $resource('/api/company/:id', null, {
       'getAll': {method: 'GET', isArray:true},
       'update': {method: 'PUT'},
-      'create': {method: 'POST'}
+      'create': {method: 'POST'},
+      'delete': {method: 'DELETE'}
     });
   })
 
@@ -15,17 +16,27 @@ theToolServices
     return $resource('/api/speaker/:id', null, {
       'getAll': {method: 'GET', isArray:true},
       'update': {method: 'PUT'},
-      'create': {method: 'POST'}
+      'create': {method: 'POST'},
+      'delete': {method: 'DELETE'}
     });
   })
 
   .factory('MemberFactory', function($resource) {
     return {
       Member: $resource('/api/member/:id', null, {
-        'getAll': {method: 'GET', isArray:true}
+        'getAll': {method: 'GET', isArray:true},
+        'update': {method: 'PUT'},
+        'create': {method: 'POST'},
+        'delete': {method: 'DELETE'}
       }),
       Companies: $resource('/api/member/:id/companies', null, {
         'getAll': {method: 'GET', isArray:true}
+      }),
+      Speakers: $resource('/api/member/:id/speakers', null, {
+        'getAll': {method: 'GET', isArray:true}
+      }),
+      Topics: $resource('/api/member/:id/topics', null, {
+        'getAll': { method: 'GET', isArray: true }
       })
     }
   })
@@ -63,7 +74,7 @@ theToolServices
 
   .factory('NotificationFactory', function($resource) {
     return {
-      Notification: $resource('/api/notifications', null, {
+      Notification: $resource('/api/notification', null, {
         'getAll': {method: 'GET', isArray:true},
       }),
       Company: $resource('/api/company/:id/notifications', null, {
@@ -78,18 +89,23 @@ theToolServices
     }
   })
 
+  .factory('TopicFactory', function($resource) {
+    return {
+      Topic: $resource('/api/topic/:id', null, {
+        'getAll': {method: 'GET', isArray:true},
+        'create': {method: 'POST'},
+        'update': {method: 'PUT'},
+        'delete': {method: 'DELETE'}
+      })
+    }
+  })
+
   .factory('MeetingFactory', function($resource) {
     return $resource('/api/meetings', null, {
-      getAll: {
-        method: 'GET',
-        isArray:true
-      },
-      create: {
-        method: 'POST'
-      },
-      update: {
-        method: 'PUT'
-      }
+      'getAll': {method: 'GET', isArray:true},
+      'create': {method: 'POST'},
+      'update': {method: 'PUT'},
+      'delete': {method: 'DELETE'}
     })
   })
 
@@ -98,7 +114,6 @@ theToolServices
       Chat: $resource('/api/chat/:id', null, {
         'update': {method: 'POST'},
         'get':    {method: 'GET'}
-
       }),
       Chats: $resource('/api/chats', null, {
         'getAll': {
@@ -120,27 +135,4 @@ theToolServices
         get:    {method: 'GET'},
         create: {method: 'POST'}
       })
-  })
-
-  .factory('TopicFactory', function($resource) {
-    return {
-      Topic: $resource('/api/topic/:id', null, {
-        'update': {method: 'PUT'},
-        'get'   : {method: 'GET'},
-        'delete': {method: 'DELETE'}
-      }),
-      Topics: $resource('/api/topics', null, {
-        'create': {method: 'POST'},
-        'getAll': {
-          method: 'GET',
-          isArray:true
-        }
-      }),
-      TargetTopics: $resource('/api/topics/:id', null, {
-        'getAll': {
-          method: 'GET',
-          isArray: true
-        }
-      })
-    }
   });
