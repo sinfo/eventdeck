@@ -56,7 +56,7 @@ function update(request, reply) {
   }
 
   function saveCompany(cb) {
-    Company.update({id: company.id}, diffCompany, function (err, numAffected){
+    Company.update({id: company.id}, company, function (err){
       if (err) {
         cb(err);
       }
@@ -80,8 +80,8 @@ function update(request, reply) {
         email.companyAttribute(diffCompany.member, company);
       }
 
-      notification.update(request.auth.credentials.id, 'company-'+company.id, company.name, request.auth.credentials.name, diffCompany);
-      reply({message: 'Company updated.'});
+      notification.update(request.auth.credentials.id, "company-" + company.id, company.name, request.auth.credentials.name, diffCompany);
+      reply({success: "Company updated."});
     }
   }
 }
