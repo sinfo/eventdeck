@@ -1,6 +1,8 @@
 var server  = require('./../index.js');
 var member  = require('./../resources/member');
 var company = require('./../resources/company');
+var speaker = require('./../resources/speaker');
+var topic   = require('./../resources/topic');
 var message = require('./../resources/message');
 
 server.route({
@@ -53,6 +55,24 @@ server.route({
   path: '/api/member/{id}/companies',
   config: {
     handler: company.getByMember,
+    auth: true
+  }
+});
+
+server.route({
+  method: 'GET',
+  path: '/api/member/{id}/speakers',
+  config: {
+    handler: speaker.getByMember,
+    auth: true
+  }
+});
+
+server.route({
+  method: 'GET',
+  path: '/api/member/{id}/topics',
+  config: {
+    handler: topic.getByMember,
     auth: true
   }
 });
