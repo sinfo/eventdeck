@@ -3,9 +3,18 @@ var notification = require('./../resources/notification');
 
 server.route({
   method: 'GET',
-  path: '/api/notifications',
+  path: '/api/notification',
   config: {
     handler: notification.list,
+    auth: true
+  }
+});
+
+server.route({
+  method: 'GET',
+  path: '/api/notification/{id}',
+  config: {
+    handler: notification.get,
     auth: true
   }
 });

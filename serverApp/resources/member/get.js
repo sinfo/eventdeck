@@ -1,55 +1,25 @@
-var Hapi           = require('hapi');
-var async          = require('async');
-var Member        = require('./../../db/models/member.js');
+var Member = require('./../../db/models/member.js');
 
-exports = module.exports = get;
-
-/// get member
+module.exports = get;
 
 function get(request, reply) {
 
   var memberId = request.params.id;
-  var member   = {};
 
-  async.series([
-      getMember,
-    ], done);
-
-  function getMember(cb) {
-    if(memberId == "me") {
-      memberId = request.auth.credentials.id;
-    }
-
-    Member.findById(memberId, gotMember);
-
-    function gotMember(err, result) {
-      if (err) {
-        cb(err);
-      }
-
-      if (result.length > 0) {
-        if (result[0].id)       { member.id       = result[0].id; }
-        if (result[0].istId)    { member.istId    = result[0].istId; }
-        if (result[0].name)     { member.name     = result[0].name; }
-        if (result[0].roles)    { member.roles   = result[0].roles; }
-        if (result[0].facebook) { member.facebook = result[0].facebook; }
-        if (result[0].skype)    { member.skype    = result[0].skype; }
-        if (result[0].phones)   { member.phones   = result[0].phones; }
-        if (result[0].mails)    { member.mails    = result[0].mails; }
-
-        cb();
-      }
-      else {
-        cb(Hapi.error.conflict('No member with the ID: ' + memberId));
-      }
-    }
+  if (memberId === "me") {
+    memberId = request.auth.credentials.id;
   }
 
-  function done(err) {
+  Member.findById(memberId, function (err, result) {
     if (err) {
-      reply(Hapi.error.badRequest(err.detail));
-    } else {
-      reply(member);
+      reply({error: "There was an error getting the member."});
     }
-  }
+    else if (result && result.length > 0) {
+      reply(result[0]);
+    }
+    else {
+      reply({error: "Could not find member '" + memberId + "'."});
+    }
+  });
+
 }
