@@ -33,8 +33,8 @@
                     <ul class="control unstyled">
                       <li ng-repeat="option in notification.topic.poll.options">
                         <input type="checkbox" value="true" ng-click="tc.selectOption(notification.topic,option)" ng-checked="option.votes.indexOf(me.id) != -1" ng-disabled="{{notification.topic.closed}}">
-                        <span ng-show="notification.topic.poll.kind == 'text'">{{option.content}}</span>
-                        <img ng-show="notification.topic.poll.kind == 'images'" ng-src="{{option.content}}" style="width:30% ">
+                        <span ng-if="notification.topic.poll.kind == 'text'">{{option.content}}</span>
+                        <img ng-if="notification.topic.poll.kind == 'images'" ng-src="{{option.content}}" style="width:30% ">
                         <small>{{option.votes.length}} votes</small>
                       </li>
                     </ul>
@@ -45,7 +45,7 @@
                 <div class="ink-button blue" ng-click="toggleTargets()"><i class="fa fa-users"></i> {{showTargets ? 'Hide' : 'Show'}} {{notification.topic.targets.length}} targets</div>
                 <div ng-show="showTargets" style="margin-left: 5px;">
                   <small ng-repeat="target in notification.topic.targets" href="/#/member/{{target}}">
-                    <a style="margin-right: 10px;">{{getName(target)}}</a>
+                    <a style="margin-right: 10px;">{{getMember(target).name}}</a>
                   </small>
                 </div>
               </div>

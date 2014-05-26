@@ -13,8 +13,8 @@
         <div class="activity grey" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true'">
           <div class="all-100">
             <a href="/#/member/{{topic.author}}">
-              <img ng-src="{{'https://graph.facebook.com/'+getFacebook(topic.author)+'/picture'}}">
-              <b>{{getName(topic.author)}}</b>
+              <img ng-src="{{'https://graph.facebook.com/'+getMember(topic.author).facebook+'/picture'}}">
+              <b>{{getMember(topic.author).name}}</b>
             </a>
             <small title="{{topic.date.full}}">{{timeSince(topic.posted)}}</small>
           </div>
@@ -30,8 +30,8 @@
               <ul class="control unstyled">
                 <li ng-repeat="option in topic.poll.options">
                   <input type="checkbox" value="true" ng-click="tc.selectOption(topic,option)" ng-checked="option.votes.indexOf(me.id) != -1" ng-disabled="{{topic.closed}}">
-                  <span ng-show="topic.poll.kind == 'text'">{{option.content}}</span>
-                  <img ng-show="topic.poll.kind == 'images'" ng-src="{{option.content}}" style="width:30% ">
+                  <span ng-if="topic.poll.kind == 'text'">{{option.content}}</span>
+                  <img ng-if="topic.poll.kind == 'images'" ng-src="{{option.content}}" style="width:30% ">
                   <small>{{option.votes.length}} votes</small>
                 </li>
               </ul>
@@ -41,7 +41,7 @@
             <div class="ink-button blue" ng-click="toggleTargets()"><i class="fa fa-users"></i> {{showTargets ? 'Hide' : 'Show'}} {{topic.targets.length}} targets</div>
             <div ng-show="showTargets" style="margin-left: 5px;">
               <small ng-repeat="target in topic.targets" href="/#/member/{{target}}">
-                <a style="margin-right: 10px;">{{getName(target)}}</a>
+                <a style="margin-right: 10px;">{{getMember(target).name}}</a>
               </small>
             </div>
           </div>
