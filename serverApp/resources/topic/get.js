@@ -1,44 +1,26 @@
-var Hapi   = require('hapi');
-var async  = require('async');
 var Topic  = require('./../../db/models/topic.js');
 var notification  = require('./../notification');
 
-exports = module.exports = get;
-
-/// get Company
+module.exports = get;
 
 function get(request, reply) {
 
-  var id = request.params.id;
-  var topic   = {};
-
-  async.series([
-      getTopic,
-    ], done);
+  var topicId = request.params.id;
 
   function getTopic(cb) {
-    Topic.findById(id, gotTopic);
+    Topic.findById(topicId, gotTopic);
 
     function gotTopic(err, result) {
       if (err) {
-        cb(err);
+        reply({error: "There was an error getting topic with id '" + topicId + "'."});
       }
-      if (result && result.length > 0) {
-        if (result[0].id)            { topic = result[0]; }
-        cb();
+      else if (result && result.length > 0) {
+        reply(result[0]);
       }
       else {
-        cb(Hapi.error.conflict('No topic with the ID: ' + id));
+        reply({error: "Could not find topic with id '" + topicId + "'."});
       }
     }
   }
 
-  function done(err) {
-    if (err) {
-      reply(Hapi.error.badRequest(err.detail));
-    } else {
-      notification.read(request.auth.credentials.id, 'topic-' + id);
-      reply(topic);
-    }
-  }
 }

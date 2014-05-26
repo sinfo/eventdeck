@@ -5,18 +5,20 @@ module.exports = create;
 
 function create(request, reply) {
 
-  var newTopic = new Topic(request.payload);
+  var topic = request.payload;
 
-  newTopic.posted = Date.now();
-  newTopic.author = request.auth.credentials.id;
+  topic.posted = Date.now();
+  topic.author = request.auth.credentials.id;
+
+  var newTopic = new Topic(topic);
 
   newTopic.save(function (err){
     if (err) {
-      reply({error: "There was an error!"});
+      reply({error: "There was an error creating the topic."});
     }
     else {
-      notification.new(request.auth.credentials.id, 'topic-'+newTopic.id, null, '['+newTopic.kind+']',request.auth.credentials.name);
-      reply({success: "New topic!", id: newTopic._id});
+      notification.new(request.auth.credentials.id, "topic-"+newTopic.id, null, "["+newTopic.kind+"]", request.auth.credentials.name);
+      reply({success: "Topic created.", id: newTopic._id});
     }
   });
 
