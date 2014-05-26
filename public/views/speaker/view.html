@@ -27,18 +27,18 @@
             <b style="font-size: 20px; margin-left:12px;"> {{getMember(speaker.member).name}}</b>
             </a>
           </p>
-          <b>Description: </b><div ng-if="speaker.description" ng-bind-html="convertTextToHtml(speaker.description)"></div>
+          <b>Description: </b><div ng-if="speaker.description" ng-bind-html="convertURLs(speaker.description)"></div>
           <br>
         </div>
         <div class="all-40 medium-40 small-100 tiny-100">
           <div ng-if="speaker.contacts">
             <h1>Contacts</h1>
-            <div ng-bind-html="convertTextToHtml(speaker.contacts)"></div>
+            <div ng-bind-html="convertEmails(convertURLs(speaker.contacts))"></div>
           </div>
           <br>
           <div ng-if="speaker.paragraph">
             <h1>Paragraph</h1>
-            <div ng-bind-html="convertTextToHtml(speaker.paragraph)"></div>
+            <div ng-bind-html="convertURLs(speaker.paragraph)"></div>
           </div>
           <br>
           <div>
