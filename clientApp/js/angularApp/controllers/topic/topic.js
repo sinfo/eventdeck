@@ -13,7 +13,6 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
   $scope.pollKinds = ['text','images'];
 
   if ($location.path().indexOf("/topic/") !== -1) {
-    
     TopicFactory.Topic.get({id: $routeParams.id}, function(result) {
       $scope.topic = result;
       $scope.loading = false;
@@ -148,12 +147,6 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
   };
 
   //===================================COMMENT STUFF===================================
-  $scope.convertNewLinesToHtml = function(text) {
-    return '<div data-markdown>'+text.replace(/\n/g, '<br>')+'</div>';
-  }
-  $scope.convertMarkdownToHtml = function(text) {
-    return '<div data-markdown>' + text + '</div>';
-  }
 
   $scope.submitComment = function() {
     if ($scope.commentData.markdown == ""){
