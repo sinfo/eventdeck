@@ -35,7 +35,7 @@
               <input type="text" ng-model="option.content">
               <div class="ink-button green" ng-click="focusOption()"><i class="fa fa-check"></i> Save option</div>
               <div class="ink-button red" ng-click="removeOption(option)"><i class="fa fa-times"></i> Remove option</div>
-              <p ng-show="topic.poll.kind == pollKinds[1]" style="margin-left: 5px;">
+              <p ng-if="topic.poll.kind == pollKinds[1]" style="margin-left: 5px;">
                 <img ng-src="{{option.content}}">
               </p>
 
