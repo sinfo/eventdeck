@@ -6,6 +6,11 @@ theToolController
       return $sce.trustAsResourceUrl(src+'#page-body');
     }
 
+    $scope.convertEmails = function(text) {
+      var mailExp = /[\w\.\-]+\@([\w\-]+\.)+[\w]{2,4}(?![^<]*>)/ig;
+      return text.replace(mailExp,"<a href='/api/speaker/"+$routeParams.id+"/sendInitialEmail' target='_blank'>$&</a>")
+    }
+
     $scope.submit = function() {
       var speakerData = this.formData;
 

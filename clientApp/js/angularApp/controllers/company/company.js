@@ -3,37 +3,41 @@
 theToolController
   .controller('CompanyController', function ($scope, $http, $routeParams, $sce, CompanyFactory, MemberFactory, NotificationFactory) {
 
-  $scope.trustSrc = function(src) {
-    return $sce.trustAsResourceUrl(src+'#page-body');
-  }
+    $scope.trustSrc = function(src) {
+      return $sce.trustAsResourceUrl(src+'#page-body');
+    }
 
-  $scope.submit = function() {
-    var companyData = this.formData;
+    $scope.convertEmails = function(text) {
+      var mailExp = /[\w\.\-]+\@([\w\-]+\.)+[\w]{2,4}(?![^<]*>)/ig;
+      return text.replace(mailExp,"<a href='/#/company/"+$routeParams.id+"/confirm?email=$&'>$&</a>")
+    }
 
-    CompanyFactory.Company.update({ id:companyData.id }, companyData, function(response) {
-      if(response.error) {
-        $scope.error = response.error;
-      } else {
-        $scope.message = response.success;
-      }
-    });
-  };
+    $scope.submit = function() {
+      var companyData = this.formData;
 
-  $scope.statuses = ['SUGGESTION','CONTACTED','IN CONVERSATIONS','ACCEPTED/IN NEGOTIATIONS','CLOSED DEAL','REJECTED/GIVE UP'];
-  $scope.logoSizes = [null, 'S','M','L'];
-  $scope.standDays = [null, 1,2,3,4,5];
-  $scope.postsNumbers = [null, 1,2,3,4,5];
+      CompanyFactory.Company.update({ id:companyData.id }, companyData, function(response) {
+        if(response.error) {
+          $scope.error = response.error;
+        } else {
+          $scope.message = response.success;
+        }
+      });
+    };
 
-  $scope.company = $scope.formData = $scope.getCompany($routeParams.id);
+    $scope.statuses = ['SUGGESTION','CONTACTED','IN CONVERSATIONS','ACCEPTED/IN NEGOTIATIONS','CLOSED DEAL','REJECTED/GIVE UP'];
+    $scope.logoSizes = [null, 'S','M','L'];
+    $scope.standDays = [null, 1,2,3,4,5];
+    $scope.postsNumbers = [null, 1,2,3,4,5];
 
-  CompanyFactory.Company.get({id: $routeParams.id}, function(response) {
-    $scope.company = $scope.formData = response;
+    $scope.company = $scope.formData = $scope.getCompany($routeParams.id);
 
-    NotificationFactory.Company.getAll({id: $routeParams.id}, function(getData) {
-      $scope.company.notifications = getData;
+    CompanyFactory.Company.get({id: $routeParams.id}, function(response) {
+      $scope.company = $scope.formData = response;
 
-      $scope.loading = false;
+      NotificationFactory.Company.getAll({id: $routeParams.id}, function(getData) {
+        $scope.company.notifications = getData;
+
+        $scope.loading = false;
+      });
     });
   });
-
-});
