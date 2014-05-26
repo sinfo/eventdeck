@@ -21,11 +21,12 @@ function list(request, reply) {
   }
 
   Comment.findByThread(threadId, function(err, result) {
-    if (!err && result && result.length > 0) {
-      reply(result);
+    if (err) {
+      reply({error: "There was an error getting the comments from '" + threadId + "'."});
     }
     else {
-      reply({error: "Error getting comments from '" + threadId + "'."})
+      reply(result);
     }
   });
+
 }
