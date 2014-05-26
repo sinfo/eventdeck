@@ -161,11 +161,10 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
     $scope.display = false;
   };
 
-  $scope.convertTextToHtml = function(text) {
+  $scope.convertURLs = function(text) {
     var urlExp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-    var mailExp = /[\w\.\-]+\@([\w\-]+\.)+[\w]{2,4}(?![^<]*>)/ig;
-
-    return text.replace(/\n/g, '<br>').replace(urlExp,"<a href='$1'>$1</a>").replace(mailExp,"<a href='/#/company/"+$routeParams.id+"/confirm?email=$&'>$&</a>");
+    
+    return text.replace(/\n/g, '<br>').replace(urlExp,"<a href='$1'>$1</a>");
   }
 
   $scope.convertNewLinesToHtml = function(text) {
