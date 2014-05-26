@@ -15,7 +15,7 @@ function create(request, reply) {
 
   var newComment = new Comment(comment);
 
-  newComment.save(function (err, reply){
+  newComment.save(function (err, reply) {
     if (err) {
       console.log("Error creating comment.");
       reply({error: "Error creating comment."});
