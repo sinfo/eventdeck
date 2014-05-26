@@ -39,7 +39,7 @@ theToolController
     $scope.saveStatus = function(company) {
       var companyData = company;
 
-      CompanyFactory.update({ id:company.id }, companyData, function(response) {
+      CompanyFactory.Company.update({ id:company.id }, companyData, function(response) {
         if(response.error) {
           $scope.error = response.error;
         } else {
@@ -50,7 +50,7 @@ theToolController
 
     $scope.statuses = ['Emitido', 'Recibo Enviado', 'Pago', 'Enviado'];
 
-    CompanyFactory.getAll(function(response) {
+    CompanyFactory.Company.getAll(function(response) {
       $scope.predicate = 'participation.payment.price';
       $scope.reverse = true;
       $scope.companies = response;
