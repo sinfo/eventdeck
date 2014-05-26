@@ -10,11 +10,8 @@ function list(request, reply) {
     if (err){
       reply({error: "There was an error getting speakers of '" + memberId + "'."});
     }
-    else if (result && result.length > 0) {
-      reply(result);
-    }
     else {
-      reply({error: "Member '" + memberId + "'' has no speakers."});
+      reply(result);
     }
   });
 

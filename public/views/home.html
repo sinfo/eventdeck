@@ -16,7 +16,7 @@
             <small title="{{notification.date.full}}">{{timeSince(notification.date.data)}}</small>
           </div>
           <a href="/#/{{notification.path}}">
-            <p style="color: #444;">{{notification.description}}</p>
+            <p style="color: #444;"><p>{{notification.description}}</p></p>
           </a>
           <div >
             <a href="/#/{{notification.path}}" ng-if="notification.image">
@@ -24,16 +24,16 @@
             </a>
 
             <!-- TOPIC HTML -->
-            <div ng-controller="TopicController" ng-if="notification.topic" ng-init="kind(notification.topic.kind)">
+            <div ng-controller="TopicController" ng-if="notification.topic" ng-init="kind(notification.topic)">
               <a href="/#/{{notification.path}}">
                 <p style="color: #444;">
                   <b>[{{notification.topic.kind}}]</b> {{notification.topic.text}}
                   <i ng-show="notification.topic.closed">[Closed!]</i>
-                  <i ng-hide="show.duedate">[{{timeSince(notification.topic.duedate)}}!]</i>
+                  <i ng-show="notification.topic.show.duedate">[{{timeSince(notification.topic.duedate)}}!]</i>
                 </p>
               </a>
               <div>
-                <form ng-controller="TopicController as tc" ng-show="show.poll">
+                <form ng-controller="TopicController as tc" ng-show="notification.topic.show.poll">
                   <div class="control-group">
                     <ul class="control unstyled">
                       <li ng-repeat="option in notification.topic.poll.options">
