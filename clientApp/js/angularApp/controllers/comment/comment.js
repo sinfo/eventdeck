@@ -1,9 +1,14 @@
 'use strict';
 
 theToolController
-  .controller('CommentController', function ($scope, $http, $routeParams, $sce, CommentFactory) {
+  .controller('CommentController', function ($scope, $http, $routeParams, CommentFactory) {
 
   $scope.emptyComment = false;
+
+  CommentFactory.Comment.get({id: $routeParams.id}, function(response) {
+    $scope.comment = response;
+    $scope.commentData = response;
+  });
 
   $scope.submitComment = function() {
     if ($scope.commentData.markdown == ""){
@@ -26,10 +31,5 @@ theToolController
       }
     });
   };
-
-  CommentFactory.Comment.get({id: $routeParams.id}, function(response) {
-    $scope.comment = response;
-    $scope.commentData = response;
-  });
 
 });
