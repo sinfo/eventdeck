@@ -1,11 +1,9 @@
 <div class="all-100 column-group horizontal-gutters">
   <div class="all-100">
-    <h1 class="all-100">Comments</h1>
-
     <h3 class="all-100" ng-show="loading">Loading...</h3>
 
-    <div class="all-100 activity grey" style="background: #ddd; border-radius: 5px;" ng-hide="loading" ng-repeat="comment in comments | orderBy: 'posted':false">
-      <div class="all-100">
+    <div class="activity" style="background: #ddd; border-radius: 5px;" ng-hide="loading" ng-repeat="comment in comments | orderBy: 'posted':false">
+      <div class="column-group">
         <div class="all-50">
           <a href="/#/member/{{comment.member}}">
             <img ng-src="{{'https://graph.facebook.com/' + getMember(comment.member).facebook + '/picture'}}"/>
@@ -21,15 +19,13 @@
           </small>
         </div>
       </div>
-      <div class="all-100">
-        <div ng-if="comment.editing">
+      <div class="column-group">
+        <div ng-show="comment.editing">
           <div class="all-50">
             <form class="ink-form" ng-submit="submitComment()">
               <div class="control-group">
-                <label for="markdownfield">Your Comment in Markdown</label>
-                <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">Help?</a>
                 <div class="control">
-                  <textarea id="markdownfield" ng-model="comment.markdown" type="text" rows="6" width="90%"></textarea>
+                  <textarea ng-model="commentData.markdown" type="text" rows="2" style="font-size:15px"></textarea>
                 </div>
               </div>
               <div class="control-group">
@@ -39,11 +35,12 @@
             </form>
           </div>
           <div class="all-50">
-            <h6>Preview</h6>
             <div compile="convertMarkdownToHtml(comment.markdown)"></div>
           </div>
         </div>
-        <div ng-hide="comment.editing" ng-bind-html="convertNewLinesToHtml(comment.html)"></div>
+        <div ng-hide="comment.editing" class="all-100">
+          <div ng-bind-html="convertNewLinesToHtml(comment.html)" style="font-size:15px"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -52,10 +49,8 @@
     <div class="all-50">
       <form class="ink-form">
         <div class="control-group">
-          <label for="markdownfield">Your Comment in Markdown</label>
-          <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">Help?</a>
           <div class="control">
-            <textarea ng-model="commentData.markdown" type="text" rows="6"></textarea>
+            <textarea ng-model="commentData.markdown" type="text" rows="2" style="font-size:15px"></textarea>
           </div>
         </div>
         <div class="control-group">
@@ -65,7 +60,6 @@
       </form>
     </div>
     <div class="all-50">
-      <h6>Preview</h6>
       <div compile="convertMarkdownToHtml(commentData.markdown)"></div>
     </div>
   </div>
