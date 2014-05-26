@@ -20,7 +20,7 @@ theToolController
     $scope.submit = function() {
       var speakerData = this.formData;
 
-      SpeakerFactory.update({ id:speakerData.id }, speakerData, function(response) {
+      SpeakerFactory.Speaker.update({ id:speakerData.id }, speakerData, function(response) {
         if(response.error) {
           $scope.error = response.error;
         } else {
@@ -65,7 +65,7 @@ theToolController
       $scope.commentData.markdown = '> **'+comment.member+' said**:\n> ' + comment.markdown.split('\n').join('\n> ')+'\n';
     };
 
-    SpeakerFactory.get({id: $routeParams.id}, function(response) {
+    SpeakerFactory.Speaker.get({id: $routeParams.id}, function(response) {
       $scope.speaker = $scope.formData = response;
 
       MemberFactory.Member.getAll( function(response) {
