@@ -56,7 +56,7 @@ function update(request, reply) {
   }
 
   function saveCompany(cb) {
-    Company.update({id: company.id}, company, function (err){
+    Company.update({id: company.id}, diffCompany, function (err){
       if (err) {
         cb(err);
       }
@@ -68,6 +68,7 @@ function update(request, reply) {
 
   function done(err) {
     if (err) {
+      console.log(err);
       if (err == "Nothing changed.") {
         reply({error: "Nothing changed."})
       }

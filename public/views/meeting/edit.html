@@ -58,7 +58,6 @@
         <div ng-repeat="kind in kinds" class="ink-button green half-right-space" ng-click="createTopic(kind)"><i class="fa fa-plus"></i> {{kind}}</div>
       </div>
       <div ng-controller="TopicController" class="all-100 gutters half-bottom-space activity grey" style="border-radius: 5px;" ng-repeat="topic in editTopics" ng-init="kind(topic.kind)">
-        <h1 ng-show="loading">Loading...</h1>
         <h1>{{topic.kind}}</h1>
         <form ng-hide="loading" class="all-100 ink-form">
           <div class="all-100 control-group">

@@ -13,7 +13,7 @@ theToolController
         if(response.error) {
           $scope.error = response.error;
         } else {
-          $scope.message = response.message;
+          $scope.message = response.success;
         }
       });
     };
@@ -59,7 +59,6 @@ theToolController
     $scope.speaker = $scope.formData = $scope.getSpeaker($routeParams.id);
 
     SpeakerFactory.Speaker.get({id: $routeParams.id}, function(response) {
-      console.log(response);
       $scope.speaker = $scope.formData = response;
 
       CommentFactory.Speaker.getAll({id: $routeParams.id}, function(getData) {
