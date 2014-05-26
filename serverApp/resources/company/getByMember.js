@@ -5,11 +5,11 @@ module.exports = list;
 function list(request, reply) {
 
   Company.findByMember(request.params.id, function (err, result) {
-    if (!err && result && result.length > 0) {
-      reply(result);
+    if (err) {
+      reply({error: "There was an error getting the companies of member '" + request.params.id + "'."});
     }
     else {
-      reply({error: "There was an error getting the companies of member '" + request.params.id + "'."});
+      reply(result);
     }
   });
 
