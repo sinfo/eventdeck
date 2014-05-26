@@ -4,33 +4,59 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
 
   $scope.loading = true;
 
+  $scope.commentData = {
+    markdown: ""
+  };
+
+  MemberFactory.Member.get({id: "me"}, function (me) {
+    $scope.me = me;
+  });
+
   MemberFactory.Member.getAll(function (members) {
     $scope.members = members;
   });
 
-  if ($scope.thread.indexOf("company-") != -1) {
-    CommentFactory.Company.getAll({id: $scope.thread.split("-")[1]}, gotComments);
+  loadComments();
+
+  function loadComments() {
+    $scope.loading = true;
+
+    if ($scope.thread.indexOf("company-") != -1) {
+      CommentFactory.Company.getAll({id: $scope.thread.split("-")[1]}, gotComments);
+    }
+
+    function gotComments(comments) {
+      $scope.comments = comments;
+
+      $scope.loading = false;
+    }
   }
 
-  function gotComments(comments) {
-    $scope.comments = comments;
+  $scope.postComment = function () {
+    if ($scope.commentData.markdown === ""){
+      $scope.emptyComment = true;
+      return;
+    }
 
-    $scope.loading = false;
+    CommentFactory.Comment.create({
+      thread: $scope.thread,
+      member: $scope.me.id,
+      markdown: $scope.commentData.markdown,
+      html: $scope.convertMarkdownToHtml($scope.commentData.markdown),
+      posted: Date.now()
+    }, function (response) {
+      alert("carai!");
+      loadComments();
+    });
   }
 
-  $scope.quoteComment = function(comment) {
+  $scope.quoteComment = function (comment) {
     $scope.commentData.markdown = "> **" + comment.member + " said**:\n> " + comment.markdown.split("\n").join("\n> ") + "\n";
   };
 
-  $scope.deleteComment = function(id) {
-    $scope.loading = true;
-
-    CommentFactory.Comment.delete({id: id}, function(data) {
-      // if successful, we'll need to refresh the comment list
-      CommentFactory.Company.getAll({id: $routeParams.id}, function(getData) {
-        $scope.comments = getData;
-        $scope.loading = false;
-      });
+  $scope.deleteComment = function (comment) {
+    CommentFactory.Comment.delete({id: comment._id}, function () {
+      loadComments();
     });
   };
 
