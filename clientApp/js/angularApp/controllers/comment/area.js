@@ -50,7 +50,7 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
   }
 
   $scope.quoteComment = function (comment) {
-    $scope.commentData.markdown = "> **" + comment.member + " said**:\n> " + comment.markdown.split("\n").join("\n> ") + "\n";
+    $scope.commentData.markdown = "> **" + comment.member + " said:**\n> " + comment.markdown.split("\n").join("\n> ") + "\n";
   };
 
   $scope.deleteComment = function (comment) {
