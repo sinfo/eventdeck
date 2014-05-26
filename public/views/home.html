@@ -16,10 +16,10 @@
             <p style="color: #444;">{{notification.description}}</p>
           </a>
           <div >
-            <a href="/#/{{notification.path}}">
-              <img class="image" ng-if="notification.image" ng-src="{{notification.image}}">
+            <a href="/#/{{notification.path}}" ng-if="notification.image">
+              <img class="image" ng-src="{{notification.image}}">
             </a>
-            <div ng-show="notification.topic">
+            <div ng-if="notification.topic">
               <a href="/#/{{notification.path}}">
                 <p style="color: #444;">
                   <b>[{{notification.topic.kind}}]</b> {{notification.topic.text}}
