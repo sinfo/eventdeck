@@ -34,6 +34,9 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
     else if ($scope.thread.indexOf("speaker-") != -1) {
       CommentFactory.Speaker.getAll({id: pageId}, gotComments);
     }
+    else if ($scope.thread.indexOf("topic-") != -1) {
+      CommentFactory.Topic.getAll({id: pageId}, gotComments);
+    }
 
     function gotComments(comments) {
       $scope.comments = comments;
