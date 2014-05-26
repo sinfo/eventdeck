@@ -41,7 +41,7 @@ theToolController
     });
   };
 
-  $scope.statuses = ['SUGESTÃO','CONTACTADO','EM CONVERSAÇÕES','ACEITOU/EM NEGOCIAÇÕES','NEGOCIO FECHADO','REJEITOU/DESISTIR'];
+  $scope.statuses = ['SUGGESTION','CONTACTED','IN CONVERSATIONS','ACCEPTED/IN NEGOTIATIONS','CLOSED DEAL','REJECTED/GIVE UP'];
   $scope.logoSizes = [null, 'S','M','L'];
   $scope.standDays = [null, 1,2,3,4,5];
   $scope.postsNumbers = [null, 1,2,3,4,5];
