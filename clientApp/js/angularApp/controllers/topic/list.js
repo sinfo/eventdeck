@@ -14,10 +14,10 @@ theToolController.controller('TopicsController', function ($scope, $location, $r
   $scope.kinds = ["Info", "To do", "Decision", "Idea"];
 
   if ($location.path() == '/topics') {
-    TopicFactory.Topics.getAll(gotTopics);
+    TopicFactory.Topic.getAll(gotTopics);
   }
   else {
-    TopicFactory.TargetTopics.getAll({id: $routeParams.id}, gotTopics);
+    TopicFactory.Member.getAll({id: $routeParams.id}, gotTopics);
   }
 
   function gotTopics (topics) {

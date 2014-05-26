@@ -149,13 +149,13 @@ theToolController.controller('NotificationController', function ($scope, $http, 
     });
   });
 
-  CompanyFactory.getAll(function(response) {
+  CompanyFactory.Company.getAll(function(response) {
     $scope.predicate = 'participation.payment.price';
     $scope.reverse = true;
     $scope.companies = response;
   });
 
-  SpeakerFactory.getAll(function(response) {
+  SpeakerFactory.Speaker.getAll(function(response) {
     $scope.predicate = 'participation';
     $scope.reverse = false;
     $scope.speakers = response;
