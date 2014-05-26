@@ -74,7 +74,7 @@ theToolServices
 
   .factory('NotificationFactory', function($resource) {
     return {
-      Notification: $resource('/api/notification', null, {
+      Notification: $resource('/api/notification/:id', null, {
         'getAll': {method: 'GET', isArray:true},
       }),
       Company: $resource('/api/company/:id/notifications', null, {
@@ -101,7 +101,7 @@ theToolServices
   })
 
   .factory('MeetingFactory', function($resource) {
-    return $resource('/api/meetings', null, {
+    return $resource('/api/meeting/:id', null, {
       'getAll': {method: 'GET', isArray:true},
       'create': {method: 'POST'},
       'update': {method: 'PUT'},
@@ -116,16 +116,10 @@ theToolServices
         'get':    {method: 'GET'}
       }),
       Chats: $resource('/api/chats', null, {
-        'getAll': {
-          method: 'GET',
-          isArray:true
-        }
+        'getAll': {method: 'GET', isArray:true}
       }),
       Messages: $resource('/api/chat/:id/messages', null, {
-        'get': {
-          method: 'GET',
-          isArray:true
-        }
+        'get': {method: 'GET',isArray:true}
       })
     }
   })
