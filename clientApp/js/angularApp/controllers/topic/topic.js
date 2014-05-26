@@ -16,7 +16,7 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
     TopicFactory.Topic.get({id: $routeParams.id}, function(result) {
       $scope.topic = result;
       $scope.loading = false;
-      $scope.model = kindModel(result.kind);
+      $scope.model = $scope.kind(result.kind);
 
       if(!result.topic.poll.kind) {
         $scope.topic.poll.kind = $scope.pollKinds[0];
@@ -40,7 +40,11 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
 
   //=================================AUXFUNCTIONS==================================
 
-  function kindModel(kind){
+
+
+  //===================================FUNCTIONS===================================
+
+  $scope.kind = function (kind){
     $scope.show.text      = true;
     $scope.show.targets   = true;
     $scope.show.poll      = false;
@@ -58,8 +62,6 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
     }
     console.log($scope.show);
   }
-
-  //===================================FUNCTIONS===================================
 
   $scope.deleteTopic = function() {
     var answer = confirm("Are you sure you want to delete this topic?")
