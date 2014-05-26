@@ -12,10 +12,7 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
 
   $scope.pollKinds = ['text','images'];
 
-  console.log($location.path());
-
-  if ($location.path() !== '/topics' && $location.path() !== '/') {
-
+  if ($location.path().indexOf("/topic/") !== -1) {
     TopicFactory.Topic.get({id: $routeParams.id}, function(result) {
       $scope.topic = result;
       $scope.loading = false;
@@ -59,6 +56,7 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
       $scope.show.closed  = true;
       $scope.show.poll = true;
     }
+    console.log($scope.show);
   }
 
   //===================================FUNCTIONS===================================
