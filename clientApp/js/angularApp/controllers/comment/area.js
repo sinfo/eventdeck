@@ -24,6 +24,9 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
     if ($scope.thread.indexOf("company-") != -1) {
       CommentFactory.Company.getAll({id: $scope.thread.split("-")[1]}, gotComments);
     }
+    else if ($scope.thread.indexOf("speaker-") != -1) {
+      CommentFactory.Speaker.getAll({id: $scope.thread.split("-")[1]}, gotComments);
+    }
 
     function gotComments(comments) {
       $scope.comments = comments;
@@ -50,7 +53,7 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
   }
 
   $scope.quoteComment = function (comment) {
-    $scope.commentData.markdown = "> **" + comment.member + " said:**\n> " + comment.markdown.split("\n").join("\n> ") + "\n";
+    $scope.commentData.markdown = "> **" + $scope.getMember(comment.member).name + " said:**\n> " + comment.markdown.split("\n").join("\n> ") + "\n\n";
   };
 
   $scope.deleteComment = function (comment) {
