@@ -17,6 +17,8 @@ function get(request, reply) {
     else {
       reply({error: "Could not find speaker with id '" + speakerId + "'."})
     }
+
+    notification.read(request.auth.credentials.id, 'speaker-' + speakerId);
   });
 
 }
