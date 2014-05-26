@@ -60,7 +60,6 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
       $scope.show.closed  = true;
       $scope.show.poll = true;
     }
-    console.log($scope.show);
   }
 
   $scope.deleteTopic = function() {
