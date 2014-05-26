@@ -19,13 +19,16 @@ function create(request, reply) {
     Comment.findById(request.params.id, gotComment);
 
     function gotComment(err, result) {
-      if (!err && result && result.length > 0) {
+      if (err) {
+        cb(err);
+      }
+      else if (result && result.length > 0) {
         savedComment = result[0];
         comment.updated = Date.now();
         cb();
       }
       else {
-        cb(err);
+        cb("Could not find the comment.");
       }
     }
   }
