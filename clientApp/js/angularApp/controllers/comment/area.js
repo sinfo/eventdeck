@@ -45,7 +45,6 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
       html: $scope.convertMarkdownToHtml($scope.commentData.markdown),
       posted: Date.now()
     }, function (response) {
-      alert("carai!");
       loadComments();
     });
   }
