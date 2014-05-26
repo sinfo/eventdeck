@@ -22,6 +22,10 @@ commentSchema.statics.findByThread = function (id, cb) {
   this.find({ thread: id }, cb);
 };
 
+commentSchema.statics.findByMember = function (id, cb) {
+  this.find({ member: id }, cb);
+};
+
 commentSchema.statics.findAll = function (cb) {
   this.find({},cb);
 };

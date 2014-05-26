@@ -3,7 +3,7 @@
 
   "name": "THE TOOL!",
   "description": "This extension gives you notifications from The Tool!",
-  "version": "1.0",
+  "version": "1.1",
 
   "browser_action": {
     "default_icon": "icon.png",

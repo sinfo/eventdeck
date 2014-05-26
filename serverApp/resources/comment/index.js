@@ -4,3 +4,4 @@ exports.delete      = require('./delete');
 exports.update      = require('./update');
 exports.get         = require('./get');
 exports.getByThread = require('./getByThread');
+exports.getByMember = require('./getByMember');
