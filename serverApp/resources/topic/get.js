@@ -1,5 +1,4 @@
-var Topic  = require('./../../db/models/topic.js');
-var notification  = require('./../notification');
+var Topic = require('./../../db/models/topic.js');
 
 module.exports = get;
 
