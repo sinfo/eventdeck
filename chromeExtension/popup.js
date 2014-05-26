@@ -21,7 +21,7 @@ var notificationGenerator = {
    * @private
    */
   memberEndpoint_: 'http://the-tool.franciscodias.net/api/member/me',
-  notificationsEndpoint_: 'http://the-tool.franciscodias.net/api/notifications',
+  notificationsEndpoint_: 'http://the-tool.franciscodias.net/api/notification',
 
   member: {},
 
