@@ -16,13 +16,34 @@
         <div class="all-50 align-right">
           <small>
             <a class="ink-button green" ng-click="quoteComment(comment)">Quote</a>
-            <a class="ink-button orange" ng-show="comment.member === me.id" ng-click="editComment(comment)">Edit</a>
+            <a class="ink-button orange" ng-show="comment.member === me.id" ng-click="comment.editing=!comment.editing">Edit</a>
             <a class="ink-button red" ng-show="comment.member === me.id" ng-click="deleteComment(comment)">Delete</a>
           </small>
         </div>
       </div>
       <div class="all-100">
-        <div ng-bind-html="convertNewLinesToHtml(comment.html)"></div>
+        <div ng-if="comment.editing">
+          <div class="all-50">
+            <form class="ink-form" ng-submit="submitComment()">
+              <div class="control-group">
+                <label for="markdownfield">Your Comment in Markdown</label>
+                <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">Help?</a>
+                <div class="control">
+                  <textarea id="markdownfield" ng-model="comment.markdown" type="text" rows="6" width="90%"></textarea>
+                </div>
+              </div>
+              <div class="control-group">
+                <input type="submit" id="submit" value="Save Comment" class="ink-button green" />
+                <div ng-show="emptyComment" class="ink-alert basic error">You can't post empty comments.</div>
+              </div>
+            </form>
+          </div>
+          <div class="all-50">
+            <h6>Preview</h6>
+            <div compile="convertMarkdownToHtml(comment.markdown)"></div>
+          </div>
+        </div>
+        <div ng-hide="comment.editing" ng-bind-html="convertNewLinesToHtml(comment.html)"></div>
       </div>
     </div>
   </div>
