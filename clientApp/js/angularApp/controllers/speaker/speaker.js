@@ -54,16 +54,13 @@ theToolController
       $scope.commentData.markdown = '> **'+comment.member+' said**:\n> ' + comment.markdown.split('\n').join('\n> ')+'\n';
     };
 
-    SpeakerFactory.Speaker.get({id: $routeParams.id}, function(response) {
-      $scope.speaker = $scope.formData = response;
+    $scope.statuses = ['SUGGESTION','CONTACTED','IN CONVERSATIONS','ACCEPTED','CLOSED DEAL','REJECTED/GIVE UP'];
 
-      MemberFactory.Member.getAll( function(response) {
-        $scope.members = response;
-        $scope.member = $scope.members.filter(function(e){
-          return e.id == $scope.formData.member;
-        })[0];
-        console.log($scope.member);
-      });
+    $scope.speaker = $scope.formData = $scope.getSpeaker($routeParams.id);
+
+    SpeakerFactory.Speaker.get({id: $routeParams.id}, function(response) {
+      console.log(response);
+      $scope.speaker = $scope.formData = response;
 
       CommentFactory.Speaker.getAll({id: $routeParams.id}, function(getData) {
         $scope.comments = getData;
