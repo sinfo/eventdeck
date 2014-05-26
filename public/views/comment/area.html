@@ -2,8 +2,9 @@
   <div class="all-100">
     <h3 class="all-100" ng-show="loading">Loading...</h3>
 
-    <div class="activity" style="background: #ddd; border-radius: 5px;" ng-hide="loading" ng-repeat="comment in comments | orderBy: 'posted':false">
-      <div class="column-group">
+    <h3 class="all-100" ng-show="!loading && comments.length === 0">No comments posted yet.</h3>
+    <div class="all-100 activity grey" style="background: #ddd; border-radius: 5px;" ng-hide="loading" ng-repeat="comment in comments | orderBy: 'posted':false">
+      <div class="all-100">
         <div class="all-50">
           <a href="/#/member/{{comment.member}}">
             <img ng-src="{{'https://graph.facebook.com/' + getMember(comment.member).facebook + '/picture'}}"/>
@@ -25,7 +26,7 @@
             <form class="ink-form" ng-submit="submitComment()">
               <div class="control-group">
                 <div class="control">
-                  <textarea ng-model="commentData.markdown" type="text" rows="2" style="font-size:15px"></textarea>
+                  <textarea id="markdownfield" ng-model="comment.markdown" type="text" rows="2" style="font-size:15px"></textarea>
                 </div>
               </div>
               <div class="control-group">
