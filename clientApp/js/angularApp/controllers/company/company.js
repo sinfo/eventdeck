@@ -20,7 +20,7 @@ theToolController
     $scope.submit = function() {
       var companyData = this.formData;
 
-      CompanyFactory.update({ id:companyData.id }, companyData, function(response) {
+      CompanyFactory.Company.update({ id:companyData.id }, companyData, function(response) {
         if(response.error) {
           $scope.error = response.error;
         } else {
@@ -72,7 +72,7 @@ theToolController
     $scope.standDays = [null, 1,2,3,4,5];
     $scope.postsNumbers = [null, 1,2,3,4,5];
 
-    CompanyFactory.get({id: $routeParams.id}, function(response) {
+    CompanyFactory.Company.get({id: $routeParams.id}, function(response) {
       $scope.company = $scope.formData = response;
 
       MemberFactory.Member.getAll( function(response) {

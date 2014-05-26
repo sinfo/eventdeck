@@ -5,7 +5,7 @@ theToolController
     $scope.submit = function() {
       var companyData = this.formData;
 
-      CompanyFactory.create(companyData, function(response) {
+      CompanyFactory.Company.create(companyData, function(response) {
         if(response.error) {
           $scope.error = response.error;
         } else {
