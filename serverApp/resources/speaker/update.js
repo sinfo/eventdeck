@@ -54,7 +54,7 @@ function create(request, reply) {
   }
 
   function saveSpeaker(cb) {
-    Speaker.update({id: speaker.id}, speaker, function (err) {
+    Speaker.update({id: speaker.id}, diffSpeaker, function (err) {
       if (err) {
         cb(err);
       }
@@ -66,6 +66,8 @@ function create(request, reply) {
 
   function done(err) {
     if (err) {
+      console.log(err);
+      
       if (err === "Nothing changed.") {
         reply({error: "Nothing changed."})
       }
