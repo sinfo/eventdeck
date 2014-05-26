@@ -17,6 +17,8 @@ function get(request, reply) {
     else {
       reply({error: "Could not find company with id '" + companyId + "'."});
     }
+
+    notification.read(request.auth.credentials.id, 'company-' + companyId);
   });
 
 }
