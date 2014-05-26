@@ -2,6 +2,105 @@
 
 theToolController.controller('MainController', function ($scope, $http, $routeParams, $sce, $location, $rootScope, NotificationFactory, MemberFactory, CompanyFactory, SpeakerFactory, TopicFactory) {
 
+  //================================INITIALIZATION================================
+
+  $scope.ready = false;
+
+  $scope.display = false;
+
+  $scope.search = {};
+
+  $scope.me = {};
+  $scope.members = [];
+  $scope.companies = [];
+  $scope.speakers = [];
+  $scope.topics = [];
+  $scope.notifications = [];
+
+  $scope.notificationsInfo = {
+    number: 0,
+    text: " Loading..."
+  };
+
+  var factoriesReady = 0;
+
+  MemberFactory.Member.get({id: "me"}, function (me) {
+    $scope.me = me;
+    callback();
+  });
+
+  MemberFactory.Member.getAll(function (members) {
+    $scope.members = members;
+    callback();
+  });
+
+  CompanyFactory.Company.getAll(function (companies) {
+    $scope.companies = companies;
+    callback();
+  });
+
+  SpeakerFactory.Speaker.getAll(function (speakers) {
+    $scope.speakers = speakers;
+    callback();
+  });
+
+  TopicFactory.Topic.getAll(function (topics) {
+    $scope.topics = topics;
+    callback();
+  });
+
+
+  //===================================FUNCTIONS===================================
+
+  function callback() {
+    if (++factoriesReady == 5) {
+      $scope.ready = true;
+
+      $scope.update();
+
+      setInterval($scope.update, 10000);
+
+      $rootScope.$on("$locationChangeStart", function (event, next, current) {
+        setTimeout($scope.update, 500);
+        $scope.search.name = '';
+      });
+    }
+  }
+
+
+  //================================SCOPE FUNCTIONS================================
+
+  $scope.update = function() {
+    NotificationFactory.Notification.getAll(function (response) {
+      $scope.notifications = [];
+      $scope.notificationsInfo.number = 0;
+
+      for (var i = 0, j = response.length; i < j; i++) {
+        //if (response[i].member != $scope.me.id) { //uncomment to hide self-events
+        if (response[i].unread.indexOf($scope.me.id) != -1) {
+          $scope.notificationsInfo.number++;
+
+          $scope.notifications.unshift({
+            path: response[i].thread.replace("-", "/"),
+            text: response[i].description + " (" + $scope.timeSince(new Date(response[i].posted))+")",
+            member: $scope.members.filter(function(o) {
+                      return response[i].member == o.id;
+                    })[0].facebook,
+            color: (response[i].unread.indexOf($scope.me.id) != -1 ? "LightSkyBlue" : "WhiteSmoke")
+          });
+        }
+        //}
+      }
+
+      if ($scope.notificationsInfo.number == 0) {
+        $scope.notificationsInfo.text = " No Notifications";
+      }
+      else {
+        $scope.notificationsInfo.text = " " + $scope.notificationsInfo.number + " Notification" + ($scope.notificationsInfo.number > 1 ? "s" : "");
+      }
+    });
+  }
+
   $scope.timeSince =function (date) {
     date = new Date(date);
     var seconds = Math.floor((Date.now() - date) / 1000);
@@ -36,136 +135,11 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
     return Math.floor(seconds) + " seconds " + suffix;
   };
 
-  $scope.getMemberFacebook = function(id) {
-    return $scope.members.filter(function(e){
-        return e.id == id;
-      })[0].facebook;
-  }
-
-  $scope.getName = function (member) {
+  $scope.getMember = function (member) {
     return $scope.members.filter(function(o) {
       return o.id == member;
-    })[0].name;
+    })[0];
   };
-
-  $scope.getFacebook = function (member) {
-    return $scope.members.filter(function(o) {
-      return o.id == member;
-    })[0].facebook;
-  };
-
-
-  $scope.loading = true;
-
-  $scope.notifications = [];
-
-  $scope.notificationsInfo = {
-    number: 0,
-    text: " Loading..."
-  };
-
-  $scope.me = {};
-  $scope.members = [];
-  $scope.companies = [];
-  $scope.speakers = [];
-
-  $scope.search = {};
-
-  $scope.update = function() {
-    NotificationFactory.Notification.getAll(function(response) {
-      $scope.notifications = [];
-      $scope.notificationsInfo.number = 0;
-
-      for (var i = 0, j = response.length; i < j; i++) {
-        //if (response[i].member != me.id) { //uncomment to hide self-events
-        if (response[i].unread.indexOf($scope.me.id) != -1) {
-          $scope.notificationsInfo.number++;
-
-          $scope.notifications.unshift({
-            path: response[i].thread.replace("-", "/"),
-            text: response[i].description + " (" + $scope.timeSince(new Date(response[i].posted))+")",
-            member: $scope.members.filter(function(o) {
-                      return response[i].member == o.id;
-                    })[0].facebook,
-            color: (response[i].unread.indexOf($scope.me.id) != -1 ? "LightSkyBlue" : "WhiteSmoke")
-          });
-        }
-        //}
-      }
-
-      $scope.loading = false;
-
-      if ($scope.notificationsInfo.number == 0) {
-        $scope.notificationsInfo.text = " No Notifications";
-      }
-      else {
-        $scope.notificationsInfo.text = " " + $scope.notificationsInfo.number + " Notification" + ($scope.notificationsInfo.number > 1 ? "s" : "");
-      }
-    });
-  }
-
-  MemberFactory.Member.get({id: "me"}, function(me) {
-
-    $scope.me = me;
-
-    MemberFactory.Member.getAll(function(members) {
-
-    $scope.members = members;
-
-      NotificationFactory.Notification.getAll(function(response) {
-        for (var i = 0, j = response.length; i < j; i++) {
-          //if (response[i].member != me.id) { //uncomment to hide self-events
-          if (response[i].unread.indexOf(me.id) != -1) {
-            $scope.notificationsInfo.number++;
-
-            $scope.notifications.unshift({
-              path: response[i].thread.replace("-", "/"),
-              text: response[i].description + " (" + $scope.timeSince(new Date(response[i].posted))+")",
-              member: members.filter(function(o) {
-                        return response[i].member == o.id;
-                      })[0].facebook,
-              color: (response[i].unread.indexOf(me.id) != -1 ? "LightSkyBlue" : "WhiteSmoke")
-            });
-          }
-          //}
-        }
-
-        $scope.loading = false;
-
-        if ($scope.notificationsInfo.number == 0) {
-          $scope.notificationsInfo.text = " No Notifications";
-        }
-        else {
-          $scope.notificationsInfo.text = " " + $scope.notificationsInfo.number + " Notification" + ($scope.notificationsInfo.number > 1 ? "s" : "");
-        }
-      });
-
-      setInterval($scope.update, 10000);
-
-      $rootScope.$on("$locationChangeStart", function(event, next, current) {
-        setTimeout($scope.update, 500);
-        $scope.search.name = '';
-      });
-    });
-  });
-
-  CompanyFactory.Company.getAll(function(response) {
-    $scope.predicate = 'participation.payment.price';
-    $scope.reverse = true;
-    $scope.companies = response;
-  });
-
-  SpeakerFactory.Speaker.getAll(function(response) {
-    $scope.predicate = 'participation';
-    $scope.reverse = false;
-    $scope.speakers = response;
-  });
-
-  TopicFactory.Topic.getAll(function(response) {
-    $scope.topics = response;
-  });
-
-  $scope.display = false;
 
   $scope.show = function() {
     $scope.display = ($scope.search.name ? true : false);
