@@ -15,7 +15,6 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
   if ($location.path().indexOf("/topic/") !== -1) {
     TopicFactory.Topic.get({id: $routeParams.id}, function(result) {
       $scope.topic = result;
-      $scope.loading = false;
       $scope.model = $scope.kind(result);
 
       if(!result.topic.poll.kind) {
@@ -23,16 +22,10 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
       }
     });
 
-    $scope.emptyComment = false;
-
-    CommentFactory.Topic.getAll({id: $routeParams.id}, function(getData) {
-      //console.log(getData);
-      $scope.comments = getData;
-      $scope.loading = false;
-    });
-
     NotificationFactory.Topic.getAll({id: $routeParams.id}, function(getData) {
       $scope.topic.notifications = getData;
+
+      $scope.loading = false;
     });
 
   }
@@ -147,48 +140,6 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
         $scope.success = response.success;
       }
     });
-  };
-
-  //===================================COMMENT STUFF===================================
-
-  $scope.submitComment = function() {
-    if ($scope.commentData.markdown == ""){
-      $scope.emptyComment = true;
-      return;
-    }
-
-    $scope.commentsLoading = true;
-
-    var commentData = this.commentData;
-    commentData.thread = 'topic-'+$routeParams.id;
-
-    CommentFactory.Comment.create(commentData, function(data) {
-      // if successful, we'll need to refresh the comment list
-      CommentFactory.Topic.getAll({id: $routeParams.id}, function(getData) {
-        $scope.comments = getData;
-        $scope.commentsLoading = false;
-      });
-    });
-  };
-
-  $scope.deleteComment = function(id) {
-    $scope.commentsLoading = true;
-
-    CommentFactory.Comment.delete({id: id}, function(data) {
-      // if successful, we'll need to refresh the comment list
-      CommentFactory.Topic.getAll({id: $routeParams.id}, function(getData) {
-        $scope.comments = getData;
-        $scope.commentsLoading = false;
-      });
-    });
-  };
-
-  $scope.quoteComment = function(comment) {
-    $scope.commentData.markdown = '> **'+comment.member+' said**:\n> ' + comment.markdown.split('\n').join('\n> ')+'\n';
-  };
-
-  $scope.commentData = {
-    markdown: ""
   };
 
 });
