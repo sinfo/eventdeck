@@ -17,8 +17,8 @@ function create(request, reply) {
       reply({error: "There was an error creating the topic."});
     }
     else {
-      notification.new(request.auth.credentials.id, "topic-"+newTopic.id, null, "["+newTopic.kind+"]", request.auth.credentials.name);
       reply({success: "Topic created.", id: newTopic._id});
+      notification.create(request.auth.credentials.id, "topic-"+newTopic.id, null, "["+newTopic.kind+"]", request.auth.credentials.name);
     }
   });
 
