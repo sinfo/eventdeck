@@ -118,8 +118,6 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
           if (response[i].unread.indexOf(me.id) != -1) {
             $scope.notificationsInfo.number++;
 
-            console.log(response[i], response[i].posted);
-
             $scope.notifications.unshift({
               path: response[i].thread.replace("-", "/"),
               text: response[i].description + " (" + $scope.timeSince(new Date(response[i].posted))+")",
