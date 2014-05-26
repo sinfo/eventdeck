@@ -1,0 +1,50 @@
+<div class="column-group horizontal-gutters" ng-controller="CommentsController">
+  <div class="all-100">
+    <h1>Comments</h1>
+
+    <p class="text-center" ng-show="loading"><span class="fa fa-meh-o fa-5x fa-spin"></span></p>
+
+    <div class="comment" ng-hide="loading" ng-repeat="comment in comments | orderBy: 'posted':false">
+      <div class="column-group horizontal-gutters">
+        <div class="all-10">
+          <a href="/#/member/{{comment.member}}"><img ng-src="{{'https://graph.facebook.com/'+getMemberFacebook(comment.member)+'/picture'}}"/></a>
+        </div>
+        <div class="all-70" >
+          <small>{{timeSince(comment.posted)}}</small>
+          <div ng-bind-html="convertNewLinesToHtml(comment.html)"></div>
+        </div>
+        <div class="all-20 align-right">
+          <small>
+            <a class="ink-button green" ng-click="quoteComment(comment)">Quote</a>
+            <a class="ink-button orange" ng-show="comment.member==me.id" href="/#/comment/{{comment._id}}/edit">Edit</a>
+            <a class="ink-button red" ng-show="comment.member==me.id" ng-click="deleteComment(comment._id)">Delete</a>
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="all-45 half-right-space">
+
+      <form class="ink-form" ng-submit="submitComment()">
+
+        <div class="control-group">
+          <label for="markdownfield">Your Comment in Markdown</label>
+          <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">Help?</a>
+          <div class="control">
+            <textarea id="markdownfield" ng-model="commentData.markdown" type="text" rows="6" width="90%"></textarea>
+          </div>
+        </div>
+        <div class="control-group">
+          <input type="submit" id="submit" value="Post Comment" class="ink-button green" />
+          <div ng-show="emptyComment" class="ink-alert basic error">You can't post empty comments.</div>
+        </div>
+      </form>
+    </div>
+    <div class="all-45">
+      <h6>Preview</h6>
+      <div compile="convertMarkdownToHtml(commentData.markdown)"></div>
+    </div>
+  </div>
+</div>
