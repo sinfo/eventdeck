@@ -4,6 +4,7 @@ var company = require('./../resources/company');
 var speaker = require('./../resources/speaker');
 var topic   = require('./../resources/topic');
 var message = require('./../resources/message');
+var comment = require('./../resources/comment');
 
 server.route({
   method: 'GET',
@@ -73,6 +74,15 @@ server.route({
   path: '/api/member/{id}/topics',
   config: {
     handler: topic.getByMember,
+    auth: true
+  }
+});
+
+server.route({
+  method: 'GET',
+  path: '/api/member/{id}/comments',
+  config: {
+    handler: comment.getByMember,
     auth: true
   }
 });
