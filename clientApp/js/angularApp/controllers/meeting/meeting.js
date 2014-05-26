@@ -1,6 +1,6 @@
 'use strict';
 
-theToolController.controller('MeetingEditController', function ($scope, $routeParams, MeetingFactory, TopicFactory) {
+theToolController.controller('MeetingController', function ($scope, $routeParams, MeetingFactory, TopicFactory) {
 
   //================================INITIALIZATION================================
 
@@ -114,7 +114,7 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
       });
     }
     else{
-      TopicFactory.Topics.create(topic, function(response) {
+      TopicFactory.Topic.create(topic, function(response) {
         if(response.error) {
           $scope.errorTopic = "There was an error. Please contact the Dev Team and give them the details about the error.";
         }
@@ -148,6 +148,7 @@ theToolController.controller('MeetingEditController', function ($scope, $routePa
     }
 
     MeetingFactory.update($scope.meeting, function(response) {
+      console.log(response);
       if(response.error) {
         $scope.errorMeeting = "There was an error. Please contact the Dev Team and give them the details about the error.";
       }
