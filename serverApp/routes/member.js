@@ -97,7 +97,7 @@ server.route({
 
 server.route({
   method: 'GET',
-  path: '/api/role/{id}',
+  path: '/api/role/{id}/members',
   config: {
     handler: member.getByRole,
     auth: true
