@@ -12,29 +12,33 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
 
   $scope.pollKinds = ['text','images'];
 
-  console.log($routeParams.id);
+  console.log($location.path());
 
-  TopicFactory.Topic.get({id: $routeParams.id}, function(result) {
-    $scope.topic = result;
-    $scope.loading = false;
-    $scope.model = kindModel(result.kind);
+  if ($location.path() !== '/topics' && $location.path() !== '/') {
+    
+    TopicFactory.Topic.get({id: $routeParams.id}, function(result) {
+      $scope.topic = result;
+      $scope.loading = false;
+      $scope.model = kindModel(result.kind);
 
-    if(!result.topic.poll.kind) {
-      $scope.topic.poll.kind = $scope.pollKinds[0];
-    }
-  });
+      if(!result.topic.poll.kind) {
+        $scope.topic.poll.kind = $scope.pollKinds[0];
+      }
+    });
 
-  $scope.emptyComment = false;
+    $scope.emptyComment = false;
 
-  CommentFactory.Topic.getAll({id: $routeParams.id}, function(getData) {
-    //console.log(getData);
-    $scope.comments = getData;
-    $scope.loading = false;
-  });
+    CommentFactory.Topic.getAll({id: $routeParams.id}, function(getData) {
+      //console.log(getData);
+      $scope.comments = getData;
+      $scope.loading = false;
+    });
 
-  NotificationFactory.Topic.getAll({id: $routeParams.id}, function(getData) {
-    $scope.topic.notifications = getData;
-  });
+    NotificationFactory.Topic.getAll({id: $routeParams.id}, function(getData) {
+      $scope.topic.notifications = getData;
+    });
+
+  }
 
 
   //=================================AUXFUNCTIONS==================================
