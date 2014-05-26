@@ -18,7 +18,7 @@ theToolController
       else { return "suggestion"; }
     }
 
-    SpeakerFactory.getAll(function(response) {
+    SpeakerFactory.Speaker.getAll(function(response) {
       $scope.predicate = 'participation';
       $scope.reverse = false;
       $scope.speakers = response;
