@@ -1,7 +1,7 @@
 'use strict';
 
 theToolController
-  .controller('CompanyController', function ($scope, $http, $routeParams, $sce, CompanyFactory, MemberFactory, CommentFactory, NotificationFactory) {
+  .controller('CompanyController', function ($scope, $http, $routeParams, $sce, CompanyFactory, MemberFactory, NotificationFactory) {
 
   $scope.trustSrc = function(src) {
     return $sce.trustAsResourceUrl(src+'#page-body');
@@ -19,28 +19,6 @@ theToolController
     });
   };
 
-  $scope.submitComment = function() {
-    if ($scope.commentData.markdown == ""){
-      $scope.emptyComment = true;
-      return;
-    }
-
-    console.log("Comment: " + $scope.commentData.markdown);
-
-    $scope.loading = true;
-
-    var commentData = this.commentData;
-    commentData.thread = 'company-'+this.company.id;
-
-    CommentFactory.Comment.create(commentData, function(data) {
-      // if successful, we'll need to refresh the comment list
-      CommentFactory.Company.getAll({id: $routeParams.id}, function(getData) {
-        $scope.comments = getData;
-        $scope.loading = false;
-      });
-    });
-  };
-
   $scope.statuses = ['SUGGESTION','CONTACTED','IN CONVERSATIONS','ACCEPTED/IN NEGOTIATIONS','CLOSED DEAL','REJECTED/GIVE UP'];
   $scope.logoSizes = [null, 'S','M','L'];
   $scope.standDays = [null, 1,2,3,4,5];
@@ -51,22 +29,11 @@ theToolController
   CompanyFactory.Company.get({id: $routeParams.id}, function(response) {
     $scope.company = $scope.formData = response;
 
-    CommentFactory.Company.getAll({id: $routeParams.id}, function(getData) {
-      $scope.comments = getData;
-      $scope.loading = false;
-    });
-
     NotificationFactory.Company.getAll({id: $routeParams.id}, function(getData) {
       $scope.company.notifications = getData;
+
+      $scope.loading = false;
     });
   });
 
-  $scope.init = function (){
-    $scope.commentData = {
-      markdown: ""
-    };
-    $scope.emptyComment = false;
-  };
-
-  $scope.init();
 });

@@ -21,11 +21,18 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
   function loadComments() {
     $scope.loading = true;
 
+    if ($scope.thread.split("-")[1] === "") {
+      setTimeout(loadComments, 500);
+      return;
+    }
+
+    var pageId = $scope.thread.substring($scope.thread.indexOf("-") + 1);
+
     if ($scope.thread.indexOf("company-") != -1) {
-      CommentFactory.Company.getAll({id: $scope.thread.split("-")[1]}, gotComments);
+      CommentFactory.Company.getAll({id: pageId}, gotComments);
     }
     else if ($scope.thread.indexOf("speaker-") != -1) {
-      CommentFactory.Speaker.getAll({id: $scope.thread.split("-")[1]}, gotComments);
+      CommentFactory.Speaker.getAll({id: pageId}, gotComments);
     }
 
     function gotComments(comments) {
@@ -41,12 +48,15 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
       return;
     }
 
+    var date = Date.now();
+
     CommentFactory.Comment.create({
       thread: $scope.thread,
       member: $scope.me.id,
       markdown: $scope.commentData.markdown,
       html: $scope.convertMarkdownToHtml($scope.commentData.markdown),
-      posted: Date.now()
+      posted: date,
+      updated: date
     }, function (response) {
       loadComments();
     });
