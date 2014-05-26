@@ -1,7 +1,7 @@
 'use strict';
  
 theToolController
-  .controller('MemberController', function ($scope, $http, $routeParams, $sce, $location, MemberFactory) {
+  .controller('MemberController', function ($scope, $http, $routeParams, $sce, $location, MemberFactory, CompanyFactory) {
     $scope.getClassFromKind = function(participation) {
       if(!participation) { return "nope"; }
       if(!participation.kind) { return "sponsor"; }
@@ -21,7 +21,7 @@ theToolController
       $scope.member = response;
     });
 
-    MemberFactory.Companies.getAll({id: $routeParams.id}, function(response) {
+    CompanyFactory.Member.getAll({id: $routeParams.id}, function(response) {
       $scope.companies = response;
     });
   });
