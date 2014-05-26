@@ -18,33 +18,32 @@
             <a class="ink-button blue" href="{{speaker.forum}}" target="_blank"><i class="fa fa-comments"></i> Go to Forum!</a>
             <a class="ink-button orange" href="/#/speaker/{{speaker.id}}/edit"><i class="fa fa-wrench"></i> Edit Speaker</a>
           </p>
-          <img ng-show="speaker.img" ng-src="{{speaker.img}}" width="100%" />
+          <img ng-if="speaker.img" ng-src="{{speaker.img}}" width="100%" />
           <br><br>
           <p><b>Status: </b>{{speaker.status}}</p>
           <p>
-            <a href="/#/member/{{member.id}}">
-            <i ng-hide="member.facebook" class="fa fa-user"></i>
-            <img ng-show="member.facebook" ng-src="{{'https://graph.facebook.com/'+member.facebook+'/picture'}}"/>
-            <b style="font-size: 20px; margin-left:12px;"> {{member.name}}</b>
+            <a href="/#/member/{{speaker.member}}">
+            <img ng-src="https://graph.facebook.com/{{getMember(speaker.member).facebook}}/picture"/>
+            <b style="font-size: 20px; margin-left:12px;"> {{getMember(speaker.member).name}}</b>
             </a>
           </p>
-          <b>Description: </b><div ng-bind-html="convertTextToHtml(speaker.description)"></div>
+          <b>Description: </b><div ng-if="speaker.description" ng-bind-html="convertTextToHtml(speaker.description)"></div>
           <br>
         </div>
         <div class="all-40 medium-40 small-100 tiny-100">
-          <div ng-show="speaker.contacts">
+          <div ng-if="speaker.contacts">
             <h1>Contacts</h1>
             <div ng-bind-html="convertTextToHtml(speaker.contacts)"></div>
           </div>
           <br>
-          <div ng-show="speaker.paragraph">
+          <div ng-if="speaker.paragraph">
             <h1>Paragraph</h1>
             <div ng-bind-html="convertTextToHtml(speaker.paragraph)"></div>
           </div>
           <br>
           <div>
             <h1>Last Changes</h1>
-            <ul ng-show="speaker.notifications">
+            <ul ng-if="speaker.notifications">
               <li ng-repeat="notification in speaker.notifications | orderBy: 'posted':true | limitTo: 5">{{notification.description}} <small>{{timeSince(notification.posted)}}</small>.</li>
             </ul>
           </div>
