@@ -33,6 +33,11 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
   }
 
   $scope.postComment = function () {
+    if ($scope.commentData.markdown === ""){
+      $scope.emptyComment = true;
+      return;
+    }
+
     CommentFactory.Comment.create({
       thread: $scope.thread,
       member: $scope.me.id,
@@ -40,6 +45,7 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
       html: $scope.convertMarkdownToHtml($scope.commentData.markdown),
       posted: Date.now()
     }, function (response) {
+      alert("carai!");
       loadComments();
     });
   }
