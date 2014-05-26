@@ -16,7 +16,7 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
     TopicFactory.Topic.get({id: $routeParams.id}, function(result) {
       $scope.topic = result;
       $scope.loading = false;
-      $scope.model = $scope.kind(result.kind);
+      $scope.model = $scope.kind(result);
 
       if(!result.topic.poll.kind) {
         $scope.topic.poll.kind = $scope.pollKinds[0];
@@ -44,21 +44,23 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
 
   //===================================FUNCTIONS===================================
 
-  $scope.kind = function (kind){
-    $scope.show.text      = true;
-    $scope.show.targets   = true;
-    $scope.show.poll      = false;
-    $scope.show.duedate   = false;
-    $scope.show.meeting   = true;
-    $scope.show.closed    = false;
-    if(kind === 'To do'){
-      $scope.show.duedate = true;
-      $scope.show.closed  = true;
+  $scope.kind = function (topic){
+    topic.show = {
+      text     : true,
+      targets  : true,
+      poll     : false,
+      duedate  : false,
+      meeting  : true,
+      closed   : false
     }
-    else if(kind === 'Decision'){
-      $scope.show.duedate = true;
-      $scope.show.closed  = true;
-      $scope.show.poll = true;
+    if(topic.kind === 'To do'){
+      topic.show.duedate = true;
+      topic.show.closed  = true;
+    }
+    else if(topic.kind === 'Decision'){
+      topic.show.duedate = true;
+      topic.show.closed  = true;
+      topic.show.poll = true;
     }
   }
 

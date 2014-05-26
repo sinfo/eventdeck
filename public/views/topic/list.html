@@ -10,7 +10,7 @@
           <div class="ink-button red" ng-click="showOpen = false;">{{shownTopics(false).length}} Closed</div>
         </div>
         <h3>{{showOpen ? 'Open' : 'Closed'}} topics</h3>
-        <div class="activity grey" ng-controller="TopicController" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true'" ng-init="kind(topic.kind)">
+        <div class="activity grey" ng-controller="TopicController" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true'" ng-init="kind(topic)">
           <div class="all-100">
             <a href="/#/member/{{topic.author}}">
               <img ng-src="{{'https://graph.facebook.com/'+getMember(topic.author).facebook+'/picture'}}">
@@ -21,11 +21,11 @@
           <a href="/#/topic/{{topic._id}}">
             <p style="color: #444;">
               <b>[{{topic.kind}}]</b> {{topic.text}}
-              <i ng-show="show.closed">[Closed!]</i>
-              <i ng-show="show.duedate">[{{timeSince(topic.duedate)}}!]</i>
+              <i ng-show="topic.closed">[Closed!]</i>
+              <i ng-show="topic.show.duedate">[{{timeSince(topic.duedate)}}!]</i>
             </p>
           </a>
-          <form ng-show="show.poll" ng-controller="TopicController as tc">
+          <form ng-show="topic.show.poll" ng-controller="TopicController as tc">
             <div class="control-group">
               <ul class="control unstyled">
                 <li ng-repeat="option in topic.poll.options">
