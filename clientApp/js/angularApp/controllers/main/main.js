@@ -1,6 +1,6 @@
 'use strict';
 
-theToolController.controller('NotificationController', function ($scope, $http, $routeParams, $sce, $location, $rootScope, NotificationFactory, MemberFactory, CompanyFactory, SpeakerFactory, TopicFactory) {
+theToolController.controller('MainController', function ($scope, $http, $routeParams, $sce, $location, $rootScope, NotificationFactory, MemberFactory, CompanyFactory, SpeakerFactory, TopicFactory) {
 
   $scope.timeSince =function (date) {
     date = new Date(date);
@@ -41,7 +41,7 @@ theToolController.controller('NotificationController', function ($scope, $http, 
         return e.id == id;
       })[0].facebook;
   }
-  
+
   $scope.getName = function (member) {
     return $scope.members.filter(function(o) {
       return o.id == member;
@@ -68,6 +68,8 @@ theToolController.controller('NotificationController', function ($scope, $http, 
   $scope.members = [];
   $scope.companies = [];
   $scope.speakers = [];
+
+  $scope.search = {};
 
   $scope.update = function() {
     NotificationFactory.Notification.getAll(function(response) {
