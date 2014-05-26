@@ -135,9 +135,21 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
     return Math.floor(seconds) + " seconds " + suffix;
   };
 
-  $scope.getMember = function (member) {
+  $scope.getMember = function (memberId) {
     return $scope.members.filter(function(o) {
-      return o.id == member;
+      return o.id == memberId;
+    })[0];
+  };
+
+  $scope.getSpeaker = function (speakerId) {
+    return $scope.speakers.filter(function(o) {
+      return o.id == speakerId;
+    })[0];
+  };
+
+  $scope.getCompany = function (companyId) {
+    return $scope.companies.filter(function(o) {
+      return o.id == companyId;
     })[0];
   };
 
