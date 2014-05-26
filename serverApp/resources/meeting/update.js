@@ -4,7 +4,7 @@ module.exports = update;
 
 function update(request, reply) {
 
-  Meeting.update({_id: request.params._id}, request.payload, function (err){
+  Meeting.update({_id: request.params.id}, request.payload, function (err){
     if (err) {
       reply({error: "There was an error updating the meeting."});
     }

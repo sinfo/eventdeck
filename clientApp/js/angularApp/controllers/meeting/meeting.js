@@ -23,6 +23,8 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
   }
 
   function getTopic(){
+    console.log($scope.meeting.topics);
+    console.log($scope.topics);
     for(var i = 0; i < $scope.meeting.topics.length; i++){
       $scope.editTopics.push($scope.topics.filter(function(o) {
           return o._id == $scope.meeting.topics[i];
@@ -121,6 +123,7 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
         else if (response.success) {
           topic._id = response.id;
           $scope.meeting.topics.push(response.id);
+          console.log($scope.meeting.topics);
           $scope.successTopic = response.success;
         }
       });
@@ -147,7 +150,7 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
       $scope.saveTopic($scope.editTopics[i]);
     }
 
-    MeetingFactory.update($scope.meeting, function(response) {
+    MeetingFactory.update({id: $scope.meeting._id}, $scope.meeting, function(response) {
       console.log(response);
       if(response.error) {
         $scope.errorMeeting = "There was an error. Please contact the Dev Team and give them the details about the error.";
