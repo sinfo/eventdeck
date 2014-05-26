@@ -57,7 +57,7 @@
       <div class="all-100">
         <div ng-repeat="kind in kinds" class="ink-button green half-right-space" ng-click="createTopic(kind)"><i class="fa fa-plus"></i> {{kind}}</div>
       </div>
-      <div ng-controller="TopicController" class="all-100 gutters half-bottom-space activity grey" style="border-radius: 5px;" ng-repeat="topic in editTopics" ng-init="kindModel(topic.kind)">
+      <div ng-controller="TopicController" class="all-100 gutters half-bottom-space activity grey" style="border-radius: 5px;" ng-repeat="topic in editTopics" ng-init="kind(topic.kind)">
         <h1 ng-show="loading">Loading...</h1>
         <h1>{{topic.kind}}</h1>
         <form ng-hide="loading" class="all-100 ink-form">
@@ -93,7 +93,7 @@
                     <input type="text" ng-model="option.content">
                     <div class="ink-button green" ng-click="focusOption()"><i class="fa fa-check"></i> Save option</div>
                     <div class="ink-button red" ng-click="removeOption(option)"><i class="fa fa-times"></i> Remove option</div>
-                    <p ng-show="topic.poll.kind == pollKinds[1]" style="margin-left: 5px;">
+                    <p ng-if="topic.poll.kind == pollKinds[1]" style="margin-left: 5px;">
                       <img ng-src="{{option.content}}">
                     </p>
 
@@ -102,11 +102,11 @@
 
                 <div class="all-100" ng-hide="option.editing" ng-click="focusOption(option)">
 
-                  <p ng-show="topic.poll.kind == pollKinds[0]" style="margin-left: 5px;">
+                  <p ng-if="topic.poll.kind == pollKinds[0]" style="margin-left: 5px;">
                     {{option.content}}
                     <i class="fa fa-wrench ink-button"></i>
                   </p>
-                  <p ng-show="topic.poll.kind == pollKinds[1]" style="margin-left: 5px;">
+                  <p ng-if="topic.poll.kind == pollKinds[1]" style="margin-left: 5px;">
                     <img ng-src="{{option.content}}">
                     <i class="fa fa-wrench ink-button"></i>
                   </p>

@@ -1,7 +1,8 @@
 'use strict';
 
-theToolController
-  .controller('CommentsController', function ($scope, $http, $routeParams, CommentFactory) {
+theToolController.controller('CommentAreaController', function ($scope, $http, $routeParams, CommentFactory) {
+
+  console.log($scope.thread);
 
   $scope.quoteComment = function(comment) {
     $scope.commentData.markdown = '> **'+comment.member+' said**:\n> ' + comment.markdown.split('\n').join('\n> ')+'\n';
