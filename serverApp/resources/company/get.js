@@ -5,12 +5,17 @@ module.exports = get;
 
 function get(request, reply) {
 
-  Company.findById(request.params.id, function (err, result) {
-    if (!err && result && result.length > 0) {
+  var companyId = request.params.id;
+
+  Company.findById(companyId, function (err, result) {
+    if (err) {
+      reply({error: "Error getting company with id '" + companyId + "'."});
+    }
+    else if (result && result.length > 0) {
       reply(result[0]);
     }
     else {
-      reply({error: "Error getting company '" + request.params.id + "'."});
+      reply({error: "Could not find company with id '" + companyId + "'."});
     }
   });
 

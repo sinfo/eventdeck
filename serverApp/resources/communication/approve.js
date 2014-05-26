@@ -18,13 +18,16 @@ function create(request, reply) {
     Communication.findById(request.params.id, gotCommunication);
 
     function gotCommunication(err, result) {
-      if (!err && result && result.length > 0) {
+      if (err) {
+        cb(err);
+      }
+      else if (result && result.length > 0) {
         savedCommunication = result[0];
         communication.updated = Date.now();
         cb();
       }
       else {
-        cb(err);
+        cb("Could not find the communication.");
       }
     }
   }
