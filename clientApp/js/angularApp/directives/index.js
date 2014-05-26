@@ -61,7 +61,7 @@ angular.module('theTool.directives', [])
       templateUrl: 'views/comment/area.html',
       controller: 'CommentAreaController',
       scope: {
-        thread: '='
+        thread: '@'
       }
     };
   });
