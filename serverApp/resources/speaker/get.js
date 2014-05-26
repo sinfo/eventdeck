@@ -12,7 +12,7 @@ function get(request, reply) {
       reply({error: "There was an error getting the speaker."});
     }
     else if (result && result.length > 0) {
-      reply(result);
+      reply(result[0]);
     }
     else {
       reply({error: "Could not find speaker with id '" + speakerId + "'."})

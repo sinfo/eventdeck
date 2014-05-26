@@ -14,7 +14,7 @@ theToolController
       if(response.error) {
         $scope.error = response.error;
       } else {
-        $scope.message = response.message;
+        $scope.message = response.success;
       }
     });
   };
@@ -46,15 +46,10 @@ theToolController
   $scope.standDays = [null, 1,2,3,4,5];
   $scope.postsNumbers = [null, 1,2,3,4,5];
 
+  $scope.company = $scope.formData = $scope.getCompany($routeParams.id);
+
   CompanyFactory.Company.get({id: $routeParams.id}, function(response) {
     $scope.company = $scope.formData = response;
-
-    MemberFactory.Member.getAll( function(response) {
-      $scope.members = response;
-      $scope.member = $scope.members.filter(function(e){
-        return e.id == $scope.formData.member;
-      })[0];
-    });
 
     CommentFactory.Company.getAll({id: $routeParams.id}, function(getData) {
       $scope.comments = getData;
@@ -63,7 +58,6 @@ theToolController
 
     NotificationFactory.Company.getAll({id: $routeParams.id}, function(getData) {
       $scope.company.notifications = getData;
-      console.log(getData);
     });
   });
 
