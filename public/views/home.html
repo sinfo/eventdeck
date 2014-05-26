@@ -22,16 +22,18 @@
             <a href="/#/{{notification.path}}" ng-if="notification.image">
               <img class="image" ng-src="{{notification.image}}">
             </a>
-            <div ng-if="notification.topic">
+
+            <!-- TOPIC HTML -->
+            <div ng-controller="TopicController" ng-if="notification.topic" ng-init="kind(notification.topic.kind)">
               <a href="/#/{{notification.path}}">
                 <p style="color: #444;">
                   <b>[{{notification.topic.kind}}]</b> {{notification.topic.text}}
                   <i ng-show="notification.topic.closed">[Closed!]</i>
-                  <i ng-hide="notification.topic.closed || !notification.topic.duedate">[{{timeSince(notification.topic.duedate)}}!]</i>
+                  <i ng-hide="show.duedate">[{{timeSince(notification.topic.duedate)}}!]</i>
                 </p>
               </a>
-              <div ng-controller="TopicController as tc">
-                <form ng-show="notification.topic.kind == 'Decision'">
+              <div>
+                <form ng-controller="TopicController as tc" ng-show="show.poll">
                   <div class="control-group">
                     <ul class="control unstyled">
                       <li ng-repeat="option in notification.topic.poll.options">
@@ -44,7 +46,7 @@
                   </div>
                 </form>
               </div>
-              <div ng-show="notification.topic.targets.length > 0" ng-controller="TopicController">
+              <div ng-show="notification.topic.targets.length > 0">
                 <div class="ink-button blue" ng-click="toggleTargets()"><i class="fa fa-users"></i> {{showTargets ? 'Hide' : 'Show'}} {{notification.topic.targets.length}} targets</div>
                 <div ng-show="showTargets" style="margin-left: 5px;">
                   <small ng-repeat="target in notification.topic.targets" href="/#/member/{{target}}">
@@ -53,6 +55,8 @@
                 </div>
               </div>
             </div>
+            <!-- TOPIC HTML -->
+
           </div>
         </div>
       </div>
