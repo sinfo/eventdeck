@@ -2,6 +2,8 @@
 
 theToolController.controller("CommentAreaController", function ($scope, $http, $routeParams, MemberFactory, CommentFactory) {
 
+  $scope.loading = true;
+
   MemberFactory.Member.getAll(function (members) {
     $scope.members = members;
   });
@@ -12,6 +14,8 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
 
   function gotComments(comments) {
     $scope.comments = comments;
+
+    $scope.loading = false;
   }
 
   $scope.quoteComment = function(comment) {
@@ -34,6 +38,55 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
     return $scope.members.filter(function(o) {
       return o.id == memberId;
     })[0];
+  };
+
+  $scope.convertTextToHtml = function(text) {
+    var urlExp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    var mailExp = /[\w\.\-]+\@([\w\-]+\.)+[\w]{2,4}(?![^<]*>)/ig;
+
+    return text.replace(/\n/g, '<br>').replace(urlExp,"<a href='$1'>$1</a>").replace(mailExp,"<a href='/#/company/"+$routeParams.id+"/confirm?email=$&'>$&</a>");
+  };
+
+  $scope.convertNewLinesToHtml = function(text) {
+    return '<div data-markdown>'+text.replace(/\n/g, '<br>')+'</div>';
+  };
+
+  $scope.convertMarkdownToHtml = function(text) {
+    return '<div data-markdown>' + text + '</div>';
+  };
+
+  $scope.timeSince =function (date) {
+    date = new Date(date);
+    var seconds = Math.floor((Date.now() - date) / 1000);
+
+    var suffix = 'ago';
+    if(seconds < 0){
+      seconds = Math.abs(seconds);
+      suffix = 'to go';
+    }
+
+    var interval = Math.floor(seconds / 31536000);
+
+    if (interval > 1) {
+        return interval + " years " + suffix;
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) {
+        return interval + " months " + suffix;
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) {
+        return interval + " days " + suffix;
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) {
+        return interval + " hours " + suffix;
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval > 1) {
+        return interval + " minutes " + suffix;
+    }
+    return Math.floor(seconds) + " seconds " + suffix;
   };
 
 });
