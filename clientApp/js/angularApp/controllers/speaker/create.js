@@ -5,7 +5,7 @@ theToolController
     $scope.submit = function() {
       var speakerData = this.formData;
 
-      SpeakerFactory.create(speakerData, function(response) {
+      SpeakerFactory.Speaker.create(speakerData, function(response) {
         if(response.error) {
           $scope.error = response.error;
         } else {
