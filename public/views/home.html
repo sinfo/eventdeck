@@ -17,7 +17,7 @@
           </a>
           <div >
             <a href="/#/{{notification.path}}">
-              <img class="image" ng-show="notification.image" ng-src="{{notification.image}}">
+              <img class="image" ng-if="notification.image" ng-src="{{notification.image}}">
             </a>
             <div ng-show="notification.topic">
               <a href="/#/{{notification.path}}">
