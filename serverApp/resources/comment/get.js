@@ -4,12 +4,17 @@ module.exports = get;
 
 function get(request, reply) {
 
-  Comment.findById(request.params.id, function(err, result) {
-    if (!err && result && result.length > 0) {
+  var commentId = request.params.id;
+
+  Comment.findById(commentId, function(err, result) {
+    if (err) {
+      reply({error: "There was an error getting comment with id '" + commentId + "'."});
+    }
+    else if (result && result.length > 0) {
       reply(result[0]);
     }
     else {
-      reply({error: "Unable to find comment with id '" + request.params.id + "'."});
+      reply({error: "Could not find comment with id '" + commentId + "'."});
     }
   });
 

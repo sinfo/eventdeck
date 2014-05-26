@@ -4,12 +4,12 @@ module.exports = list;
 
 function list(request, reply) {
 
-  Comment.findAll(function(err, result) {
-    if (!err && result && result.length > 0) {
-      reply(result);
+  Comment.findAll(function (err, result) {
+    if (err) {
+      reply({error: "There was an error getting all comments."});
     }
     else {
-      reply({error: "There was an error getting all comments."});
+      reply(result);
     }
   });
 

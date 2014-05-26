@@ -17,12 +17,12 @@ function list(request, reply) {
     return;
   }
 
-  Communication.findByThread(threadId, function(err, result) {
-    if (!err && result && result.length > 0) {
-      reply(result);
+  Communication.findByThread(threadId, function (err, result) {
+    if (err) {
+      reply({error: "Error getting communications from '" + threadId + "'."});
     }
     else {
-      reply({error: "Error getting communications from '" + threadId + "'."})
+      reply(result);
     }
   });
 }
