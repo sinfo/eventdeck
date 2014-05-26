@@ -41,22 +41,6 @@ theToolController
     });
   };
 
-  $scope.deleteComment = function(id) {
-    $scope.loading = true;
-
-    CommentFactory.Comment.delete({id: id}, function(data) {
-      // if successful, we'll need to refresh the comment list
-      CommentFactory.Company.getAll({id: $routeParams.id}, function(getData) {
-        $scope.comments = getData;
-        $scope.loading = false;
-      });
-    });
-  };
-
-  $scope.quoteComment = function(comment) {
-    $scope.commentData.markdown = '> **'+comment.member+' said**:\n> ' + comment.markdown.split('\n').join('\n> ')+'\n';
-  };
-
   $scope.statuses = ['SUGESTÃO','CONTACTADO','EM CONVERSAÇÕES','ACEITOU/EM NEGOCIAÇÕES','NEGOCIO FECHADO','REJEITOU/DESISTIR'];
   $scope.logoSizes = [null, 'S','M','L'];
   $scope.standDays = [null, 1,2,3,4,5];
