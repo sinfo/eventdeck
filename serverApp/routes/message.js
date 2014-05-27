@@ -1,4 +1,4 @@
-var server  = require('./../index.js');
+var server  = require('./../index.js').hapi;
 var message = require('./../resources/message');
 
 server.route({
