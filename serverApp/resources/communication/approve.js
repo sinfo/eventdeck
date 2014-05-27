@@ -39,9 +39,9 @@ function create(request, reply) {
     });
 
     if(roles.length == 0) {
-      cb('You don\'t have permissions for this.');
+      return cb('You don\'t have permissions for this.');
     }
-    
+
     if (savedCommunication.member == request.auth.credentials.id) {
       return cb('You cannot approve your own stuff.');
     }
