@@ -8,11 +8,21 @@ function list(request, reply) {
     if (err) {
       reply({error: "There was an error getting all the roles."});
     }
-    else if (result && result.length > 0) {
-      reply(result);
-    }
     else {
-      reply({error: "There are no roles."});
+      var rolesIds = [];
+      var roles = [];
+
+      for(var i=0; i<result.length; i++) {
+        if(rolesIds.indexOf(result[i].id) == -1) {
+          rolesIds.push(result[i].id)
+          roles.push({
+            name: result[i].name,
+            id: result[i].id
+          })
+        }
+      }
+
+      reply(roles);
     }
   });
 
