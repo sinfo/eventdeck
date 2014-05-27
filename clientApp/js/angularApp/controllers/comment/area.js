@@ -110,6 +110,20 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
     return '<div data-markdown>' + text + '</div>';
   };
 
+  $scope.checkPermission = function (comment) {
+    var roles = $scope.me.roles.filter(function(o) {
+      return o.id == 'development-team' || o.id == 'coordination';
+    });
+
+    console.log(comment);
+
+    if(roles.length == 0 && comment.member != $scope.me.id) {
+      return false;
+    }
+
+    return true;
+  }
+
   $scope.timeSince =function (date) {
     date = new Date(date);
     var seconds = Math.floor((Date.now() - date) / 1000);

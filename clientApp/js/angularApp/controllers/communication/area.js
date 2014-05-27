@@ -110,6 +110,18 @@ theToolController.controller("CommunicationAreaController", function ($scope, $h
     })[0];
   };
 
+  $scope.checkPermission = function (communication) {
+    var roles = $scope.me.roles.filter(function(o) {
+      return o.id == 'development-team' || o.id == 'coordination';
+    });
+
+    if(roles.length == 0 && communication.member != $scope.me.id) {
+      return false;
+    }
+
+    return true;
+  }
+
   $scope.timeSince =function (date) {
     date = new Date(date);
     var seconds = Math.floor((Date.now() - date) / 1000);
