@@ -3,7 +3,7 @@
     <h3 class="all-100" ng-show="loading">Loading...</h3>
 
     <h3 class="all-100" ng-show="!loading && comments.length === 0">No comments posted yet.</h3>
-    <div class="all-100 activity grey" style="background: #ddd; border-radius: 5px;" ng-hide="loading" ng-repeat="comment in comments | orderBy: 'posted':false">
+    <div class="all-100 activity" style="background: #eee; border-radius: 5px;" ng-hide="loading" ng-repeat="comment in comments | orderBy: 'posted':false">
       <div class="all-100">
         <div class="all-50">
           <a href="/#/member/{{comment.member}}">
