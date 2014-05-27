@@ -4,13 +4,13 @@
       <h1>Topics</h1>
       <h3 ng-show="loading">Loading...</h3>
       <div ng-hide="loading" class="column-group">
-        <h3 ng-hide="topics">No topics created yet.</h3>
+        <h3 ng-hide="loading || topics">No topics created yet.</h3>
         <div class="half-bottom-space">
           <div class="ink-button green" ng-click="showOpen = true;">{{shownTopics(true).length}} Open</div>
           <div class="ink-button red" ng-click="showOpen = false;">{{shownTopics(false).length}} Closed</div>
         </div>
         <h3>{{showOpen ? 'Open' : 'Closed'}} topics</h3>
-        <div class="activity grey" ng-controller="TopicController" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true'" ng-init="kind(topic)">
+        <div class="activity grey" ng-controller="TopicController" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true'">
           <div class="all-100">
             <a href="/#/member/{{topic.author}}">
               <img ng-src="{{'https://graph.facebook.com/'+getMember(topic.author).facebook+'/picture'}}">
