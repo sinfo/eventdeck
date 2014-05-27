@@ -54,14 +54,14 @@
     </div> -->
   <div class="all-100 control-group">
 
-    <div class="all-20">
+    <div class="all-20" style="margin-bottom: 20px">
       <nav class="ink-navigation">
         <ul class="menu vertical" style="width:150px">
-          <li>
+          <li class="hide-medium hide-small hide-tiny">
             <a style="background: rgba(0,0,0,0); padding-left: 0px; padding-right: 0px; cursor: default;">
               <input type="text" ng-model="searchTopic" ng-change="show()" ng-click="show()" placeholder="Add an existing topic!" style="width: 300px;">
             </a>
-            <ul ng-if="searchTopic && searchTopic.length > 1" class="submenu grey" style="width: 300px; max-height: 400px; overflow: auto; display: {{display ? 'block' : 'none'}};">
+            <ul ng-if="searchTopic && searchTopic.length > 1" class="submenu grey" style="width: 300px; max-height: 400px; margin-top: -8px; overflow: auto; display: {{display ? 'block' : 'none'}};">
               <li ng-repeat="topic in topics | filter:noEditFilter | filter:searchTopic:strict">
                 <a ng-click="addTopic(topic._id)" title="{{topic.text}}">
                   <img ng-src="{{'https://graph.facebook.com/'+getMember(topic.author).facebook+'/picture'}}" style="height: 20px; max-width: 40px">
