@@ -1,4 +1,4 @@
-var async    = require('async');
+var async = require('async');
 var Communication  = require('./../../db/models/communication.js');
 
 module.exports = create;
@@ -30,10 +30,6 @@ function create(request, reply) {
   }
 
   function saveCommunication(cb) {
-    if (savedCommunication.member != request.auth.credentials.id) {
-      return cb("You're not the author.");
-    }
-
     Communication.update({_id: request.params.id}, communication, function(err) {
       if (err) {
         cb(err);

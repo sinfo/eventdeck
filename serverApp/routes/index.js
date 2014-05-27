@@ -12,3 +12,4 @@ require('./chat');
 require('./topic');
 require('./communication');
 require('./session');
+require('./tag');
