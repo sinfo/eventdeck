@@ -75,4 +75,16 @@ angular.module('theTool.directives', [])
         thread: '@'
       }
     };
+  })
+  .directive('topic', function () {
+    return {
+      restrict: 'EAC',
+      replace: true,
+      templateUrl: 'views/topic/topic.html',
+      controller: 'TopicEmbedController',
+      scope: {
+        topic: '@topicObject',
+        members: '@'
+      }
+    };
   });
