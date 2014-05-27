@@ -96,6 +96,16 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
     });*/
   };
 
+  $scope.addTopic = function(topicId) {
+
+    var addedTopic = $scope.topics.filter(function(o) {
+      return o._id == topicId;
+    })[0];
+    $scope.editTopics.push(addedTopic);
+    $scope.meeting.topics.push(topicId);
+    $scope.display = false;
+  }
+
   $scope.getName = function (member) {
     return $scope.members.filter(function(o) {
       return o.id == member;
@@ -159,6 +169,19 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
         $scope.successMeeting = response.success;
       }
     });
+  };
+
+  $scope.show = function() {
+    $scope.display = ($scope.searchTopic ? true : false);
+  };
+
+  $scope.noEditFilter = function(topic) {
+    for(var i = 0; i < $scope.editTopics.length; i++){
+      if(topic._id === $scope.editTopics[i]._id){
+        return false;
+      }
+    }
+    return true;
   };
 
 });
