@@ -1,8 +1,9 @@
-var async       = require('async');
-var Speaker     = require('./../../db/models/speaker.js');
-var Member      = require('./../../db/models/member.js');
-var email       = require('emailjs');
-var emailConfig = require('./../../emailConfig');
+var async         = require('async');
+var Speaker       = require('./../../db/models/speaker.js');
+var Member        = require('./../../db/models/member.js');
+var Communication = require('./../../db/models/communication.js');
+var email         = require('emailjs');
+var emailConfig   = require('./../../emailConfig');
 
 var server = email.server.connect({
   user:     emailConfig.user,
@@ -22,8 +23,8 @@ function get(request, reply) {
 
   async.series([
     getSpeaker,
-    getMember//,
-    //sendEmail,
+    getCommunications,
+    getMember
   ], done);
 
   function getSpeaker(cb) {
@@ -39,6 +40,22 @@ function get(request, reply) {
       }
       else {
         cb("Could not find speaker with id '" + speakerId + "'.");
+      }
+    }
+  }
+
+  function getCommunications(cb) {
+    Communication.findByThread('speaker-'+speakerId, gotCommunications);
+
+    function gotCommunications(err, result) {
+      if (err) {
+        cb(err);
+      }
+      else {
+        speaker.paragraph = result.filter(function(o) {
+          return o.kind.indexOf('Paragraph') != -1;
+        })[0].text.replace('\n','<br>');
+        cb();
       }
     }
   }
@@ -59,33 +76,6 @@ function get(request, reply) {
         cb("Could not find member with id '" + speaker.member + "'.");
       }
     }
-  }
-
-  function sendEmail(cb){
-    var email = request.payload.email;
-
-    var message = {
-       text:    "Invitation for Speaking Engagement",
-       from:    member.name + "<" +member.mails.sinfo + ">",
-       to:      email,
-       cc:      member.name + "<" +member.mails.sinfo + ">",
-       subject: "[SINFO] Invitation for Speaking Engagement",
-       attachment:
-       [
-          {data:"<html><div style=\"width: 100%;\"><div style=\"margin: 0px auto; text-align: center; overflow: hidden;\"><p style=\"font-size: 40px; font-family: Arial; font-weight: bold; font-style: normal; font-variant: normal; text-decoration: none;\">We want you to speak at</p><img src=\"http://static.sinfo.org/SINFO_21/mailTemplates/Logo.jpg\" alt=\"SINFO - Semana Informática\" /></div><p>Dear "+speaker.name+",</p><p> On behalf of the team organizing SINFO <strong>we would be pleased if you would accept our invitation to speak at our event.</strong></p><p>SINFO is on its 22nd edition and is an event <strong>organized by college students who have a passion for technology and innovation</strong>.Check our <a href=\"http://www.sinfo.org\">website</a> for more thorough information regarding SINFO.</p><p><strong>When: The week from February 9th to February 13th, 2015</strong></p><p><strong>Where: Lisbon Tech (IST - Alameda Campus) - Lisbon, Portugal</strong></p><p>Even though we're a non-funded university event,<span style=\"font-size:19pt;\"><strong>we're fully prepared to cover all travel and lodging expenses.</strong></span></p><p>We're committed to bring to our Country and University the most interesting and innovative speakers in thevarious fields regarding Software Development and Engineering - and that is the reason why we're inviting you.</p><p>"+speaker.paragraph+"</p><p>I hope you find this invitation alluring and that you can give us a positive response.</p><p>My Best Regards,</p><p class=\"normal\">"+signature+"</p></div></html>", alternative:true}
-       ],
-       "reply-to":member.name + "<" +member.mails.sinfo + ">"
-    };
-
-    // send the message and get a callback with an error or details of the message that was sent
-    server.send(message, function (err, details) {
-      if(err) {
-        cb(err);
-      }
-      else {
-        cb();
-      }
-    });
   }
 
   function done(err) {
