@@ -1,6 +1,6 @@
 'use strict';
 
-theToolController.controller('MainController', function ($scope, $http, $routeParams, $sce, $location, $rootScope, NotificationFactory, MemberFactory, CompanyFactory, SpeakerFactory, TopicFactory) {
+theToolController.controller('MainController', function ($scope, $http, $routeParams, $sce, $location, $rootScope, NotificationFactory, MemberFactory, CompanyFactory, SpeakerFactory, TopicFactory, RoleFactory) {
 
   //================================INITIALIZATION================================
 
@@ -49,11 +49,16 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
     callback();
   });
 
+  RoleFactory.Role.getAll(function (roles) {
+    $scope.roles = roles;
+    callback();
+  });
+
 
   //===================================FUNCTIONS===================================
 
   function callback() {
-    if (++factoriesReady == 5) {
+    if (++factoriesReady == 6) {
       $scope.ready = true;
 
       $scope.update();
