@@ -3,4 +3,5 @@ exports.create      = require('./create');
 exports.get         = require('./get');
 exports.update      = require('./update');
 exports.delete      = require('./delete');
-exports.getByMember = require('./getByMember')
+exports.getByMember = require('./getByMember');
+exports.getByTag    = require('./getByTag');
