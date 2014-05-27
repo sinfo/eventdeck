@@ -113,28 +113,28 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
   };
 
   $scope.saveTopic = function(topic) {
-    $scope.successTopic = "";
-    $scope.errorTopic   = "";
+    topic.successTopic = "";
+    topic.errorTopic   = "";
     if(topic._id){
       TopicFactory.Topic.update({id: topic._id}, topic, function(response) {
         if(response.error) {
-          $scope.errorTopic = "There was an error. Please contact the Dev Team and give them the details about the error.";
+          topic.errorTopic = "There was an error. Please contact the Dev Team and give them the details about the error.";
         }
         else if (response.success) {
-          $scope.successTopic = response.success;
+          topic.successTopic = response.success;
         }
       });
     }
     else{
       TopicFactory.Topic.create(topic, function(response) {
         if(response.error) {
-          $scope.errorTopic = "There was an error. Please contact the Dev Team and give them the details about the error.";
+          topic.errorTopic = "There was an error. Please contact the Dev Team and give them the details about the error.";
         }
         else if (response.success) {
           topic._id = response.id;
           $scope.meeting.topics.push(response.id);
           console.log($scope.meeting.topics);
-          $scope.successTopic = response.success;
+          topic.successTopic = response.success;
         }
       });
     }

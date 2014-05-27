@@ -54,16 +54,19 @@
     </div> -->
   <div class="all-100 control-group">
 
-    <div class="all-20">
+    <div class="all-20" style="margin-bottom: 20px">
       <nav class="ink-navigation">
         <ul class="menu vertical" style="width:150px">
-          <li>
+          <li class="hide-medium hide-small hide-tiny">
             <a style="background: rgba(0,0,0,0); padding-left: 0px; padding-right: 0px; cursor: default;">
               <input type="text" ng-model="searchTopic" ng-change="show()" ng-click="show()" placeholder="Add an existing topic!" style="width: 300px;">
             </a>
-            <ul ng-if="searchTopic && searchTopic.length > 1" class="submenu grey" style="width: 300px; max-height: 400px; overflow: auto; display: {{display ? 'block' : 'none'}};">
+            <ul ng-if="searchTopic && searchTopic.length > 1" class="submenu grey" style="width: 300px; max-height: 400px; margin-top: -8px; overflow: auto; display: {{display ? 'block' : 'none'}};">
               <li ng-repeat="topic in topics | filter:noEditFilter | filter:searchTopic:strict">
-              <a ng-click="addTopic(topic._id)"><img ng-src="{{'https://graph.facebook.com/'+getMember(topic.author).facebook+'/picture'}}" style="height: 20px; max-width: 40px"> <b> [{{topic.kind}}]</b> {{topic.text | limitTo : 20}}</a>
+                <a ng-click="addTopic(topic._id)" title="{{topic.text}}">
+                  <img ng-src="{{'https://graph.facebook.com/'+getMember(topic.author).facebook+'/picture'}}" style="height: 20px; max-width: 40px">
+                  <b> [{{topic.kind}}]</b> {{topic.text | limitTo : 15}} <span ng-if="topic.text.length > 15">(...)</span>
+                </a>
               </li>
             </ul>
           </li>
@@ -151,11 +154,11 @@
           <a class="ink-button orange" href="/#/topic/{{topic._id}}"><i class="fa fa-back"></i><i class="fa fa-reply"></i> Go back...</a>
           <a class="ink-button green" ng-click="saveTopic(topic)"><i class="fa fa-check"></i> Save</a>
           <a class="ink-button red" ng-click="deleteTopic(topic)"><i class="fa fa-times"></i> Delete</a>
-          <div class="ink-alert basic success" ng-show="successTopic">
+          <div class="ink-alert basic success" ng-show="topic.successTopic">
             <button class="ink-dismiss">&times;</button>
             <p><strong>Success!</strong> {{success}}</p>
           </div>
-          <div class="ink-alert basic error" ng-show="errorTopic">
+          <div class="ink-alert basic error" ng-show="topic.errorTopic">
             <button class="ink-dismiss">&times;</button>
             <p><strong>Error!</strong> {{error}}</p>
           </div>
