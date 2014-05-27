@@ -18,6 +18,8 @@ theToolController.controller("CommunicationAreaController", function ($scope, $h
 
   loadCommunications();
 
+  $scope.kinds=['Inital Email Paragraph','Email To', 'Email From', 'Meeting', 'Phone Call'];
+
   function loadCommunications() {
     $scope.loading = true;
 
@@ -56,6 +58,7 @@ theToolController.controller("CommunicationAreaController", function ($scope, $h
     CommunicationFactory.Communication.create({
       thread: $scope.thread,
       member: $scope.me.id,
+      kind: $scope.communicationData.kind,
       text: $scope.communicationData.text,
       posted: date,
       updated: date
@@ -80,6 +83,13 @@ theToolController.controller("CommunicationAreaController", function ($scope, $h
 
   $scope.deleteCommunication = function (communication) {
     CommunicationFactory.Communication.delete({id: communication._id}, function () {
+      loadCommunications();
+    });
+  };
+
+  $scope.approveCommunication = function (communication) {
+    CommunicationFactory.Communication.approve({id: communication._id}, null, function (response) {
+      console.log(response);
       loadCommunications();
     });
   };
@@ -123,5 +133,11 @@ theToolController.controller("CommunicationAreaController", function ($scope, $h
     }
     return Math.floor(seconds) + " seconds " + suffix;
   };
+
+  $scope.convertURLs = function(text) {
+    var urlExp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    
+    return text.replace(/\n/g, '<br>').replace(urlExp,"<a href='$1'>$1</a>");
+  }
 
 });

@@ -14,13 +14,19 @@
         </div>
         <div class="all-50 align-right">
           <small>
+            <a class="ink-button green" ng-hide="communication.approved" ng-show="communication.member !== me.id" ng-click="approveCommunication(communication)">Approve</a>
             <a class="ink-button orange" ng-show="communication.member === me.id" ng-click="communication.editing = true; communication.buffer = communication.text">Edit</a>
             <a class="ink-button red" ng-show="communication.member === me.id" ng-click="deleteCommunication(communication)">Delete</a>
           </small>
         </div>
       </div>
       <div class="all-100" ng-hide="communication.editing">
-        {{communication.text}}
+        <p>
+          <b>{{communication.kind}}</b>
+          <span class="ink-label green" ng-show="communication.approved">Approved!</span>
+          <span class="ink-label yellow" ng-hide="communication.approved">Not Approved Yet!</span>
+        </p>
+        <div ng-if="communication.text" ng-bind-html="convertURLs(communication.text)"></div>
       </div>
       <div class="all-100 column-group horizontal-gutters" ng-show="communication.editing">
         <div class="all-50">
@@ -38,7 +44,7 @@
           </form>
         </div>
         <div class="all-50">
-          {{communication.buffer}}
+          <div ng-if="communication.buffer" ng-bind-html="convertURLs(communication.buffer)"></div>
         </div>
       </div>
     </div>
@@ -49,7 +55,12 @@
       <form class="ink-form">
         <div class="control-group">
           <div class="control">
-            <textarea ng-model="communicationData.text" type="text" rows="2" style="font-size: 15px;"></textarea>
+            <select id="kind" ng-model="communicationData.kind" ng-options="s for s in kinds"></select>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="control">
+            <textarea ng-model="communicationData.text" type="text" rows="4" style="font-size: 15px;"></textarea>
           </div>
         </div>
         <div class="control-group">
@@ -59,7 +70,7 @@
       </form>
     </div>
     <div class="all-50">
-      {{communicationData.text}}
+      <div ng-if="communicationData.text" ng-bind-html="convertURLs(communicationData.text)"></div>
     </div>
   </div>
 </div>
