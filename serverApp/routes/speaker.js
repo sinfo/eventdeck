@@ -1,4 +1,4 @@
-var server        = require('./../index.js');
+var server        = require('./../index.js').hapi;
 var speaker       = require('./../resources/speaker');
 var comment       = require('./../resources/comment');
 var notification  = require('./../resources/notification');

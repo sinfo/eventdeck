@@ -11,6 +11,7 @@ function create(request, reply) {
 
   async.series([
     getCommunication,
+    checkPermission,
     saveCommunication
   ], done);
 
@@ -27,19 +28,31 @@ function create(request, reply) {
         cb();
       }
       else {
-        cb("Could not find the communication.");
+        cb('Could not find the communication.');
       }
     }
   }
 
-  function saveCommunication(cb) {
-    if (savedCommunication.member == request.auth.credentials.id) {
-      return cb("You cannot approve your own stuff.");
+  function checkPermission(cb) {
+    var roles = request.auth.credentials.roles.filter(function(o) {
+      return o.id == 'development-team' || o.id == 'coordination';
+    });
+
+    if(roles.length == 0) {
+      return cb('You don\'t have permissions for this.');
     }
 
+    if (savedCommunication.member == request.auth.credentials.id) {
+      return cb('You cannot approve your own stuff.');
+    }
+
+    cb();
+  }
+
+  function saveCommunication(cb) {
     Communication.update({_id: request.params.id}, {approved: true}, function(err) {
       if (err) {
-        cb(err);
+        cb('Error on the database');
       }
       else {
         cb();
@@ -49,10 +62,10 @@ function create(request, reply) {
 
   function done(err) {
     if (err) {
-      reply({error: "There was an error approving the communication."});
+      reply({error: err});
     }
     else {
-      reply({success: "Communication approved."});
+      reply({success: 'Communication approved.'});
     }
   }
 }
