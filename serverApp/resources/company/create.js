@@ -52,7 +52,7 @@ function create(request, reply) {
       reply({error: "Error creating the company."});
     }
     else {
-      notification.new(request.auth.credentials.id, 'company-'+company.id, company.name, "company",request.auth.credentials.name);
+      notification.create(request.auth.credentials.id, 'company-'+company.id, company.name, "company",request.auth.credentials.name);
       reply({success: "Company created."});
     }
   }
