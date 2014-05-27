@@ -10,3 +10,4 @@ require('./meeting');
 require('./chat');
 require('./message');
 require('./topic');
+require('./communication');
