@@ -20,8 +20,8 @@
       <div class="all-100">
       <label ng-click="toggleAllTargets()"><a>Targets</a></label><i class="fa fa-long-arrow-left"></i><small> Click to toggle all.</small>
         <div class="all-100">
-          <div class="ink-button small" style="margin-bottom: 0.5em;" ng-click="toggleTarget(member.id)" ng-repeat="role in roles | orderBy:'id'">{{role.name}}</div>
-
+          <div class="ink-button small green" style="margin-bottom: 0.5em;" ng-click="toggleRoleTargets(role.id)" ng-repeat="role in roles | orderBy:'id'">{{role.name}}</div>
+          <br>
           <div class="ink-button small {{topic.targets.indexOf(member.id) != -1 ? 'blue' : ''}}" style="margin-bottom: 0.5em;" ng-click="toggleTarget(member.id)" ng-repeat="member in members | orderBy:'id'">{{member.name}}</div>
         </div>
       </div>
