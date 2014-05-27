@@ -10,42 +10,7 @@
           <div class="ink-button red" ng-click="showOpen = false;">{{shownTopics(false).length}} Closed</div>
         </div>
         <h3>{{showOpen ? 'Open' : 'Closed'}} topics</h3>
-        <div class="activity grey" ng-controller="TopicController" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true'">
-          <div class="all-100">
-            <a href="/#/member/{{topic.author}}">
-              <img ng-src="{{'https://graph.facebook.com/'+getMember(topic.author).facebook+'/picture'}}">
-              <b>{{getMember(topic.author).name}}</b>
-            </a>
-            <small title="{{topic.date.full}}">{{timeSince(topic.posted)}}</small>
-          </div>
-          <a href="/#/topic/{{topic._id}}">
-            <p style="color: #444;">
-              <b>[{{topic.kind}}]</b> {{topic.text}}
-              <i ng-show="topic.closed">[Closed!]</i>
-              <i ng-show="topic.show.duedate">[{{timeSince(topic.duedate)}}!]</i>
-            </p>
-          </a>
-          <form ng-show="topic.show.poll" ng-controller="TopicController as tc">
-            <div class="control-group">
-              <ul class="control unstyled">
-                <li ng-repeat="option in topic.poll.options">
-                  <input type="checkbox" value="true" ng-click="tc.selectOption(topic,option)" ng-checked="option.votes.indexOf(me.id) != -1" ng-disabled="{{topic.closed}}">
-                  <span ng-if="topic.poll.kind == 'text'">{{option.content}}</span>
-                  <img ng-if="topic.poll.kind == 'images'" ng-src="{{option.content}}" style="width:30% ">
-                  <small>{{option.votes.length}} votes</small>
-                </li>
-              </ul>
-            </div>
-          </form>
-          <div ng-show="topic.targets.length > 0">
-            <div class="ink-button blue" ng-click="toggleTargets()"><i class="fa fa-users"></i> {{showTargets ? 'Hide' : 'Show'}} {{topic.targets.length}} targets</div>
-            <div ng-show="showTargets" style="margin-left: 5px;">
-              <small ng-repeat="target in topic.targets" href="/#/member/{{target}}">
-                <a style="margin-right: 10px;">{{getMember(target).name}}</a>
-              </small>
-            </div>
-          </div>
-        </div>
+        <topic topic-object="{{topic}}" members="{{members}}" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true'"></topic>
       </div>
     </div>
 
