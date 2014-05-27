@@ -16,6 +16,7 @@ var topicSchema = new mongoose.Schema({
   },
   duedate: {type: Date},
   meetings: [String],
+  tags: [String],
   root: String,
   posted: {type: Date}
 });
@@ -34,6 +35,10 @@ topicSchema.statics.findByMeeting = function (id, cb) {
 
 topicSchema.statics.findByTarget = function (id, cb) {
   this.find({ targets: {$in: [id]} }, cb);
+};
+
+topicSchema.statics.findByTag = function (id, cb) {
+  this.find({ tags: {$in: [id]} }, cb);
 };
 
 topicSchema.statics.findAll = function (cb) {
