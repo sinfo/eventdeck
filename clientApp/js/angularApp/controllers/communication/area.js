@@ -18,8 +18,6 @@ theToolController.controller("CommunicationAreaController", function ($scope, $h
 
   loadCommunications();
 
-  $scope.kinds=['Inital Email Paragraph','Email To', 'Email From', 'Meeting', 'Phone Call'];
-
   function loadCommunications() {
     $scope.loading = true;
 
@@ -32,23 +30,35 @@ theToolController.controller("CommunicationAreaController", function ($scope, $h
 
     if ($scope.thread.indexOf("company-") != -1) {
       CommunicationFactory.Company.getAll({id: pageId}, gotCommunications);
+      $scope.kinds=['Email To', 'Email From', 'Meeting', 'Phone Call'];
     }
     else if ($scope.thread.indexOf("speaker-") != -1) {
       CommunicationFactory.Speaker.getAll({id: pageId}, gotCommunications);
-    }
-    else if ($scope.thread.indexOf("topic-") != -1) {
-      CommunicationFactory.Topic.getAll({id: pageId}, gotCommunications);
     }
 
     function gotCommunications(communications) {
       $scope.communications = communications;
 
       $scope.loading = false;
+
+      if ($scope.thread.indexOf("speaker-") != -1) {
+        if(communications.filter(function(o) {
+          return o.kind.indexOf('Paragraph') != -1;
+        }).length != 0) {
+          $scope.kinds=['Email To', 'Email From', 'Meeting', 'Phone Call'];          
+        } else {
+          $scope.kinds=['Inital Email Paragraph','Email To', 'Email From', 'Meeting', 'Phone Call'];
+        }
+      }
     }
   }
 
   $scope.postCommunication = function () {
-    if ($scope.communicationData.text === ""){
+    if (!$scope.communicationData.kind || $scope.communicationData.kind== ""){
+      $scope.emptyCommunication = true;
+      return;
+    }
+    if (!$scope.communicationData.text || $scope.communicationData.text== ""){
       $scope.emptyCommunication = true;
       return;
     }

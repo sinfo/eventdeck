@@ -14,9 +14,10 @@
         </div>
         <div class="all-50 align-right">
           <small>
-            <a class="ink-button green" ng-hide="communication.approved" ng-show="communication.member !== me.id" ng-click="approveCommunication(communication)">Approve</a>
-            <a class="ink-button orange" ng-show="communication.member === me.id" ng-click="communication.editing = true; communication.buffer = communication.text">Edit</a>
-            <a class="ink-button red" ng-show="communication.member === me.id" ng-click="deleteCommunication(communication)">Delete</a>
+            <a class="ink-button green" ng-hide="communication.approved || communication.member === me.id" ng-click="approveCommunication(communication)">Approve</a>
+            <a class="ink-button blue" ng-show="communication.kind.indexOf('Paragraph')!=-1" href="http://the-tool.franciscodias.net/api/speaker/{{communication.thread.split('speaker-')[1]}}/sendInitialEmail">Preview</a>
+            <a class="ink-button orange" ng-hide="communication.approved" ng-click="communication.editing = true; communication.buffer = communication.text">Edit</a>
+            <a class="ink-button red" ng-click="deleteCommunication(communication)">Delete</a>
           </small>
         </div>
       </div>
@@ -64,7 +65,7 @@
           </div>
         </div>
         <div class="control-group">
-          <input type="submit" value="Post communication" class="ink-button green" ng-click="postCommunication()">
+          <a class="ink-button green" ng-click="postCommunication()">Post communication</a>
           <div ng-show="emptyCommunication" class="ink-alert basic error">You can't post empty communications.</div>
         </div>
       </form>
