@@ -64,4 +64,15 @@ angular.module('theTool.directives', [])
         thread: '@'
       }
     };
+  })
+  .directive('communicationArea', function () {
+    return {
+      restrict: 'EAC',
+      replace: true,
+      templateUrl: 'views/communication/area.html',
+      controller: 'CommunicationAreaController',
+      scope: {
+        thread: '@'
+      }
+    };
   });
