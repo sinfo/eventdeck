@@ -15,8 +15,8 @@
         <div class="all-50 align-right">
           <small>
             <a class="ink-button green" ng-click="quoteComment(comment)">Quote</a>
-            <a class="ink-button orange" ng-show="comment.member === me.id" ng-click="comment.editing = true; comment.buffer = comment.markdown">Edit</a>
-            <a class="ink-button red" ng-show="comment.member === me.id" ng-click="deleteComment(comment)">Delete</a>
+            <a class="ink-button orange" ng-show="checkPermission(comment)" ng-click="comment.editing = true; comment.buffer = comment.markdown">Edit</a>
+            <a class="ink-button red" ng-show="checkPermission(comment)" ng-click="deleteComment(comment)">Delete</a>
           </small>
         </div>
       </div>
