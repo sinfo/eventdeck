@@ -2,9 +2,9 @@ var async    = require('async');
 var Comment  = require('./../../db/models/comment.js');
 var markdown = require( "markdown" ).markdown;
 
-module.exports = create;
+module.exports = update;
 
-function create(request, reply) {
+function update(request, reply) {
 
   var comment = request.payload;
 
@@ -12,6 +12,7 @@ function create(request, reply) {
 
   async.series([
     getComment,
+    checkPermission,
     saveComment
   ], done);
 
@@ -31,6 +32,18 @@ function create(request, reply) {
         cb("Could not find the comment.");
       }
     }
+  }
+
+  function checkPermission(cb) {
+    var roles = request.auth.credentials.roles.filter(function(o) {
+      return o.id == 'development-team' || o.id == 'coordination';
+    });
+
+    if(roles.length == 0 && savedComment.member != request.auth.credentials.id) {
+      return cb('You don\'t have permissions for this.');
+    }
+    
+    cb();
   }
 
   function saveComment(cb) {
