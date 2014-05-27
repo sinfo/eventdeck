@@ -83,6 +83,16 @@ theToolController.controller('TopicController', function ($scope, $routeParams, 
     }
   };
 
+  $scope.toggleRoleTargets = function(roleId) {
+    for (var i = 0, j = $scope.members.length; i < j; i++) {
+      for(var o = 0; o < $scope.members[i].roles.length; o++) {
+        if($scope.members[i].roles[o].id == roleId) {
+          $scope.toggleTarget($scope.members[i].id);
+        }
+      }
+    }
+  };
+
   $scope.toggleTargets = function() {
     console.log($scope.showTargets);
     $scope.showTargets = !$scope.showTargets;
