@@ -1,4 +1,4 @@
-var async    = require('async');
+var async = require('async');
 var Communication  = require('./../../db/models/communication.js');
 
 module.exports = create;
