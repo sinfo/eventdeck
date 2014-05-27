@@ -25,138 +25,157 @@
         </div>
       </div>
     </div>
-
-    <div class="all-100 control-group">
-      <!-- <label>Topics</label>
-      <div class="all-100 gutters half-bottom-space activity grey" style="border-radius: 5px;" ng-repeat="topic in meeting.topics">
+  </form>
+  
+    <!-- <label>Topics</label>
+    <div class="all-100 gutters half-bottom-space activity grey" style="border-radius: 5px;" ng-repeat="topic in meeting.topics">
+      <div class="all-100">
+        <div class="all-50">
+          <h3>{{topic.kind}}</h3>
+        </div>
+        <div class="all-50 align-right">
+          <div class="ink-button blue" ng-click="toggleTargets(topic)"><i class="fa fa-users"></i> {{topic.showTargets ? 'Hide' : 'Show'}} targets</div>
+          <div class="ink-button green" ng-click="saveTopic(topic)"><i class="fa fa-check"></i> Save topic</div>
+          <div class="ink-button red" ng-click="removeTopic(topic)"><i class="fa fa-times"></i> Remove topic</div>
+        </div>
+      </div>
+      <div ng-show="topic.showTargets" class="all-100">
+        <label>Targets</label>
         <div class="all-100">
-          <div class="all-50">
-            <h3>{{topic.kind}}</h3>
-          </div>
-          <div class="all-50 align-right">
-            <div class="ink-button blue" ng-click="toggleTargets(topic)"><i class="fa fa-users"></i> {{topic.showTargets ? 'Hide' : 'Show'}} targets</div>
-            <div class="ink-button green" ng-click="saveTopic(topic)"><i class="fa fa-check"></i> Save topic</div>
-            <div class="ink-button red" ng-click="removeTopic(topic)"><i class="fa fa-times"></i> Remove topic</div>
-          </div>
-        </div>
-        <div ng-show="topic.showTargets" class="all-100">
-          <label>Targets</label>
-          <div class="all-100">
-            <div class="ink-button small {{topic.targets.indexOf(member.id) != -1 ? 'blue' : ''}}" style="margin-bottom: 0.5em;" ng-click="toggleTarget(member.id, topic)" ng-repeat="member in members | orderBy:'id'">{{member.name}}</div>
-          </div>
-        </div>
-        <div class="all-100 control">
-          <textarea ng-model="topic.text" type="text" rows="2" placeholder="Write a description."></textarea>
+          <div class="ink-button small {{topic.targets.indexOf(member.id) != -1 ? 'blue' : ''}}" style="margin-bottom: 0.5em;" ng-click="toggleTarget(member.id, topic)" ng-repeat="member in members | orderBy:'id'">{{member.name}}</div>
         </div>
       </div>
-      <div class="all-100">
-        <div ng-repeat="kind in kinds" class="ink-button green half-right-space" ng-click="createTopic(kind)"><i class="fa fa-plus"></i> {{kind}}</div>
-      </div> -->
-
-      <!-- REPEATED HTML -->
-      <div class="all-100">
-        <div ng-repeat="kind in kinds" class="ink-button green half-right-space" ng-click="createTopic(kind)"><i class="fa fa-plus"></i> {{kind}}</div>
+      <div class="all-100 control">
+        <textarea ng-model="topic.text" type="text" rows="2" placeholder="Write a description."></textarea>
       </div>
-      <div ng-controller="TopicController" class="all-100 gutters half-bottom-space activity grey" style="border-radius: 5px;" ng-repeat="topic in editTopics" ng-init="kind(topic)">
-        <h1>{{topic.kind}}</h1>
-        <form ng-hide="loading" class="all-100 ink-form">
-          <div class="all-100 control-group">
-            <label for="text">Text</label>
-            <div class="control">
-              <textarea id="text" ng-model="topic.text" type="text" rows="3" placeholder="Write your topic contents."></textarea>
-            </div>
-          </div>
+    </div>
+    <div class="all-100">
+      <div ng-repeat="kind in kinds" class="ink-button green half-right-space" ng-click="createTopic(kind)"><i class="fa fa-plus"></i> {{kind}}</div>
+    </div> -->
+  <div class="all-100 control-group">
 
-          <div ng-show="topic.show.duedate" class="all-100 control-group">
-            <label for="text">Due Date</label>
-            <div class="control"><input date-input ng-model="topic.duedate">
-            </div>
-          </div>
-
-          <div ng-show="topic.show.targets" class="all-100 control-group">
-            <div class="all-100">
-            <label ng-click="toggleAllTargets()"><a>Targets</a></label><i class="fa fa-long-arrow-left"></i><small> Click to toggle all.</small>
-              <div class="all-100">
-                <div class="ink-button small {{topic.targets.indexOf(member.id) != -1 ? 'blue' : ''}}" style="margin-bottom: 0.5em;" ng-click="toggleTarget(member.id)" ng-repeat="member in members | orderBy:'id'">{{member.name}}</div>
-              </div>
-            </div>
-          </div>
-
-          <div ng-show="topic.show.poll" class="all-100 gutters half-bottom-space">
-            <label>Poll</label>
-            <select ng-model="topic.poll.kind" ng-options="value for value in pollKinds"></select>
-            <ul>
-              <li ng-repeat="option in topic.poll.options">
-                <div ng-show="option.editing">
-                  <div class="all-100">
-                    <input type="text" ng-model="option.content">
-                    <div class="ink-button green" ng-click="focusOption()"><i class="fa fa-check"></i> Save option</div>
-                    <div class="ink-button red" ng-click="removeOption(option)"><i class="fa fa-times"></i> Remove option</div>
-                    <p ng-if="topic.poll.kind == pollKinds[1]" style="margin-left: 5px;">
-                      <img ng-src="{{option.content}}">
-                    </p>
-
-                  </div>
-                </div>
-
-                <div class="all-100" ng-hide="option.editing" ng-click="focusOption(option)">
-
-                  <p ng-if="topic.poll.kind == pollKinds[0]" style="margin-left: 5px;">
-                    {{option.content}}
-                    <i class="fa fa-wrench ink-button"></i>
-                  </p>
-                  <p ng-if="topic.poll.kind == pollKinds[1]" style="margin-left: 5px;">
-                    <img ng-src="{{option.content}}">
-                    <i class="fa fa-wrench ink-button"></i>
-                  </p>
-                </div>
+    <div class="all-20">
+      <nav class="ink-navigation">
+        <ul class="menu vertical" style="width:150px">
+          <li>
+            <a style="background: rgba(0,0,0,0); padding-left: 0px; padding-right: 0px; cursor: default;">
+              <input type="text" ng-model="searchTopic" ng-change="show()" ng-click="show()" placeholder="Add an existing topic!" style="width: 300px;">
+            </a>
+            <ul ng-if="searchTopic && searchTopic.length > 1" class="submenu grey" style="width: 300px; max-height: 400px; overflow: auto; display: {{display ? 'block' : 'none'}};">
+              <li ng-repeat="topic in topics | filter:noEditFilter | filter:searchTopic:strict">
+              <a ng-click="addTopic(topic._id)"><img ng-src="{{'https://graph.facebook.com/'+getMember(topic.author).facebook+'/picture'}}" style="height: 20px; max-width: 40px"> <b> [{{topic.kind}}]</b> {{topic.text | limitTo : 20}}</a>
               </li>
             </ul>
-            <br>
-            <div class="all-100">
-              <div class="ink-button green" ng-click="addOption()"><i class="fa fa-plus"></i> Add option</div>
-            </div>
-          </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
 
-          <div ng-show="topic.show.closed" class="all-100 gutters half-bottom-space">
-            <label>Is it done?</label>
-            <div class="control-group">
-              <ul class="control unstyled">
-                <li><input type="checkbox" ng-model="topic.closed" id="close" name="close" value="true"><label for="close">Close</label></li>
-              </ul>
-            </div>
-          </div>
+    <div class="all-100">
+      <div ng-repeat="kind in kinds" class="ink-button green half-right-space" ng-click="createTopic(kind)"><i class="fa fa-plus"></i>New {{kind}}</div>
+    </div>
 
-          <div class="all-100 control-group top-space half-bottom-space">
-            <a class="ink-button orange" href="/#/topic/{{topic._id}}"><i class="fa fa-back"></i><i class="fa fa-reply"></i> Go back...</a>
-            <a class="ink-button green" ng-click="saveTopic(topic)"><i class="fa fa-check"></i> Save</a>
-            <a class="ink-button red" ng-click="deleteTopic(topic)"><i class="fa fa-times"></i> Delete</a>
-            <div class="ink-alert basic success" ng-show="successTopic">
-              <button class="ink-dismiss">&times;</button>
-              <p><strong>Success!</strong> {{success}}</p>
-            </div>
-            <div class="ink-alert basic error" ng-show="errorTopic">
-              <button class="ink-dismiss">&times;</button>
-              <p><strong>Error!</strong> {{error}}</p>
-            </div>
-          </div>
-        </form>
-      </div>
     <!-- REPEATED HTML -->
-    </div>
+    <h1 ng-show="loading">Loading...</h1>
+    <div ng-controller="TopicController" class="all-100 gutters half-bottom-space activity grey" style="border-radius: 5px;" ng-repeat="topic in editTopics" ng-init="kind(topic)">
+      <h1>{{topic.kind}}</h1>
+      <form class="all-100 ink-form">
+        <div class="all-100 control-group">
+          <label for="text">Text</label>
+          <div class="control">
+            <textarea id="text" ng-model="topic.text" type="text" rows="3" placeholder="Write your topic contents."></textarea>
+          </div>
+        </div>
 
-    <div class="all-100 control-group top-space half-bottom-space">
-      <a class="ink-button orange" href="/#/meetings"><i class="fa fa-back"></i><i class="fa fa-reply"></i> Go back...</a>
-      <div class="ink-button green" ng-click="saveMeeting()"><i class="fa fa-check"></i> Save</div>
-      <div class="ink-alert basic success" ng-show="successMeeting">
-        <button class="ink-dismiss">&times;</button>
-        <p><strong>Success!</strong> {{success}}</p>
-      </div>
-      <div class="ink-alert basic error" ng-show="errorMeeting">
-        <button class="ink-dismiss">&times;</button>
-        <p><strong>Error!</strong> {{error}}</p>
-      </div>
+        <div ng-show="topic.show.duedate" class="all-100 control-group">
+          <label for="text">Due Date</label>
+          <div class="control"><input date-input ng-model="topic.duedate">
+          </div>
+        </div>
+
+        <div ng-show="topic.show.targets" class="all-100 control-group">
+          <div class="all-100">
+          <label ng-click="toggleAllTargets()"><a>Targets</a></label><i class="fa fa-long-arrow-left"></i><small> Click to toggle all.</small>
+            <div class="all-100">
+              <div class="ink-button small {{topic.targets.indexOf(member.id) != -1 ? 'blue' : ''}}" style="margin-bottom: 0.5em;" ng-click="toggleTarget(member.id)" ng-repeat="member in members | orderBy:'id'">{{member.name}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div ng-show="topic.show.poll" class="all-100 gutters half-bottom-space">
+          <label>Poll</label>
+          <select ng-model="topic.poll.kind" ng-options="value for value in pollKinds"></select>
+          <ul>
+            <li ng-repeat="option in topic.poll.options">
+              <div ng-show="option.editing">
+                <div class="all-100">
+                  <input type="text" ng-model="option.content">
+                  <div class="ink-button green" ng-click="focusOption()"><i class="fa fa-check"></i> Save option</div>
+                  <div class="ink-button red" ng-click="removeOption(option)"><i class="fa fa-times"></i> Remove option</div>
+                  <p ng-if="topic.poll.kind == pollKinds[1]" style="margin-left: 5px;">
+                    <img ng-src="{{option.content}}">
+                  </p>
+
+                </div>
+              </div>
+
+              <div class="all-100" ng-hide="option.editing" ng-click="focusOption(option)">
+
+                <p ng-if="topic.poll.kind == pollKinds[0]" style="margin-left: 5px;">
+                  {{option.content}}
+                  <i class="fa fa-wrench ink-button"></i>
+                </p>
+                <p ng-if="topic.poll.kind == pollKinds[1]" style="margin-left: 5px;">
+                  <img ng-src="{{option.content}}">
+                  <i class="fa fa-wrench ink-button"></i>
+                </p>
+              </div>
+            </li>
+          </ul>
+          <br>
+          <div class="all-100">
+            <div class="ink-button green" ng-click="addOption()"><i class="fa fa-plus"></i> Add option</div>
+          </div>
+        </div>
+
+        <div ng-show="topic.show.closed" class="all-100 gutters half-bottom-space">
+          <label>Is it done?</label>
+          <div class="control-group">
+            <ul class="control unstyled">
+              <li><input type="checkbox" ng-model="topic.closed" id="close" name="close" value="true"><label for="close">Close</label></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="all-100 control-group top-space half-bottom-space">
+          <a class="ink-button orange" href="/#/topic/{{topic._id}}"><i class="fa fa-back"></i><i class="fa fa-reply"></i> Go back...</a>
+          <a class="ink-button green" ng-click="saveTopic(topic)"><i class="fa fa-check"></i> Save</a>
+          <a class="ink-button red" ng-click="deleteTopic(topic)"><i class="fa fa-times"></i> Delete</a>
+          <div class="ink-alert basic success" ng-show="successTopic">
+            <button class="ink-dismiss">&times;</button>
+            <p><strong>Success!</strong> {{success}}</p>
+          </div>
+          <div class="ink-alert basic error" ng-show="errorTopic">
+            <button class="ink-dismiss">&times;</button>
+            <p><strong>Error!</strong> {{error}}</p>
+          </div>
+        </div>
+      </form>
     </div>
-  </form>
+  </div>
+  <!-- REPEATED HTML -->
+
+  <div class="all-100 control-group top-space half-bottom-space">
+    <a class="ink-button orange" href="/#/meetings"><i class="fa fa-back"></i><i class="fa fa-reply"></i> Go back...</a>
+    <div class="ink-button green" ng-click="saveMeeting()"><i class="fa fa-check"></i> Save</div>
+    <div class="ink-alert basic success" ng-show="successMeeting">
+      <button class="ink-dismiss">&times;</button>
+      <p><strong>Success!</strong> {{success}}</p>
+    </div>
+    <div class="ink-alert basic error" ng-show="errorMeeting">
+      <button class="ink-dismiss">&times;</button>
+      <p><strong>Error!</strong> {{error}}</p>
+    </div>
+  </div>
 
 </div>
