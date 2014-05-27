@@ -15,32 +15,31 @@
         <div class="all-50 align-right">
           <small>
             <a class="ink-button green" ng-click="quoteComment(comment)">Quote</a>
-            <a class="ink-button orange" ng-show="comment.member === me.id" ng-click="comment.editing=!comment.editing">Edit</a>
+            <a class="ink-button orange" ng-show="comment.member === me.id" ng-click="comment.editing = true; comment.buffer = comment.markdown">Edit</a>
             <a class="ink-button red" ng-show="comment.member === me.id" ng-click="deleteComment(comment)">Delete</a>
           </small>
         </div>
       </div>
-      <div class="column-group">
-        <div ng-show="comment.editing">
-          <div class="all-50">
-            <form class="ink-form" ng-submit="submitComment()">
-              <div class="control-group">
-                <div class="control">
-                  <textarea id="markdownfield" ng-model="comment.markdown" type="text" rows="2" style="font-size:15px"></textarea>
-                </div>
+      <div class="all-100" ng-hide="comment.editing">
+        <div ng-bind-html="convertNewLinesToHtml(comment.html)" style="font-size: 15px;"></div>
+      </div>
+      <div class="all-100 column-group horizontal-gutters" ng-show="comment.editing">
+        <div class="all-50">
+          <form class="ink-form" ng-submit="submitComment()">
+            <div class="control-group">
+              <div class="control">
+                <textarea ng-model="comment.buffer" type="text" rows="2" style="font-size: 15px;"></textarea>
               </div>
-              <div class="control-group">
-                <input type="submit" id="submit" value="Save Comment" class="ink-button green" />
-                <div ng-show="emptyComment" class="ink-alert basic error">You can't post empty comments.</div>
-              </div>
-            </form>
-          </div>
-          <div class="all-50">
-            <div compile="convertMarkdownToHtml(comment.markdown)"></div>
-          </div>
+            </div>
+            <div class="control-group">
+              <input type="submit" value="Save comment" class="ink-button green" ng-click="saveComment(comment)">
+              <div class="ink-button red" ng-click="comment.editing = false">Cancel</div>
+              <div ng-show="emptyComment" class="ink-alert basic error">You can't post empty comments.</div>
+            </div>
+          </form>
         </div>
-        <div ng-hide="comment.editing" class="all-100">
-          <div ng-bind-html="convertNewLinesToHtml(comment.html)" style="font-size:15px"></div>
+        <div class="all-50">
+          <div compile="convertMarkdownToHtml(comment.buffer)"></div>
         </div>
       </div>
     </div>
@@ -51,7 +50,7 @@
       <form class="ink-form">
         <div class="control-group">
           <div class="control">
-            <textarea ng-model="commentData.markdown" type="text" rows="2" style="font-size:15px"></textarea>
+            <textarea ng-model="commentData.markdown" type="text" rows="2" style="font-size: 15px;"></textarea>
           </div>
         </div>
         <div class="control-group">
