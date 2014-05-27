@@ -1,34 +1,16 @@
-'use strict';
+"use strict";
 
-theToolController.controller('TopicController', function ($scope, $routeParams, $location, $window, TopicFactory, CommentFactory, NotificationFactory) {
+theToolController.controller("TopicEmbedController", function ($scope) {
 
   //================================INITIALIZATION================================
 
-  $scope.loading = true;
+  $scope.loading = false;
 
   $scope.success = "";
   $scope.error   = "";
   $scope.showTargets = false;
 
   $scope.pollKinds = ['text', 'images'];
-
-  if ($location.path().indexOf("/topic/") !== -1) {
-    TopicFactory.Topic.get({id: $routeParams.id}, function(result) {
-      $scope.topic = result;
-      $scope.model = $scope.kind(result);
-
-      if(!result.topic.poll.kind) {
-        $scope.topic.poll.kind = $scope.pollKinds[0];
-      }
-    });
-
-    NotificationFactory.Topic.getAll({id: $routeParams.id}, function(getData) {
-      $scope.topic.notifications = getData;
-
-      $scope.loading = false;
-    });
-
-  }
 
 
   //=================================AUXFUNCTIONS==================================
