@@ -80,11 +80,11 @@ angular.module('theTool.directives', [])
     return {
       restrict: 'EAC',
       replace: true,
-      templateUrl: 'views/topics/topic.html',
+      templateUrl: 'views/topic/topic.html',
       controller: 'TopicEmbedController',
       scope: {
-        topic: '=',
-        members: '='
+        topic: '@topicObject',
+        members: '@'
       }
     };
   });
