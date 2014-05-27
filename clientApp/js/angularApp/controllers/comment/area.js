@@ -65,6 +65,20 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
     });
   }
 
+  $scope.saveComment = function (comment) {
+    if (comment.buffer === "") {
+      return;
+    }
+
+    comment.markdown = comment.buffer;
+    comment.html = $scope.convertMarkdownToHtml(comment.markdown);
+    comment.updated = Date.now();
+
+    CommentFactory.Comment.update({id: comment._id}, comment, function (response) {
+      comment.editing = false;
+    });
+  }
+
   $scope.quoteComment = function (comment) {
     $scope.commentData.markdown = "> **" + $scope.getMember(comment.member).name + " said:**\n> " + comment.markdown.split("\n").join("\n> ") + "\n\n";
   };
