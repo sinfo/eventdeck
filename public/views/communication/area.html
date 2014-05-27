@@ -1,0 +1,65 @@
+<div class="all-100 column-group horizontal-gutters">
+  <div class="all-100">
+    <h3 class="all-100" ng-show="loading">Loading...</h3>
+
+    <h3 class="all-100" ng-show="!loading && communications.length === 0">No communications posted yet.</h3>
+    <div class="all-100 activity" style="background: #eee; border-radius: 5px;" ng-hide="loading" ng-repeat="communication in communications | orderBy: 'posted':false">
+      <div class="all-100">
+        <div class="all-50">
+          <a href="/#/member/{{communication.member}}">
+            <img ng-src="{{'https://graph.facebook.com/' + getMember(communication.member).facebook + '/picture'}}"/>
+            <small>{{getMember(communication.member).name}}</small>
+          </a>
+          <small title="{{communication.posted}}">({{timeSince(communication.posted)}})</small>
+        </div>
+        <div class="all-50 align-right">
+          <small>
+            <a class="ink-button orange" ng-show="communication.member === me.id" ng-click="communication.editing = true; communication.buffer = communication.text">Edit</a>
+            <a class="ink-button red" ng-show="communication.member === me.id" ng-click="deleteCommunication(communication)">Delete</a>
+          </small>
+        </div>
+      </div>
+      <div class="all-100" ng-hide="communication.editing">
+        {{communication.text}}
+      </div>
+      <div class="all-100 column-group horizontal-gutters" ng-show="communication.editing">
+        <div class="all-50">
+          <form class="ink-form" ng-submit="submitCommunication()">
+            <div class="control-group">
+              <div class="control">
+                <textarea ng-model="communication.buffer" type="text" rows="2" style="font-size: 15px;"></textarea>
+              </div>
+            </div>
+            <div class="control-group">
+              <input type="submit" value="Save communication" class="ink-button green" ng-click="saveCommunication(communication)">
+              <div class="ink-button red" ng-click="communication.editing = false">Cancel</div>
+              <div ng-show="emptyCommunication" class="ink-alert basic error">You can't post empty communications.</div>
+            </div>
+          </form>
+        </div>
+        <div class="all-50">
+          {{communication.buffer}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="all-100 column-group horizontal-gutters">
+    <div class="all-50">
+      <form class="ink-form">
+        <div class="control-group">
+          <div class="control">
+            <textarea ng-model="communicationData.text" type="text" rows="2" style="font-size: 15px;"></textarea>
+          </div>
+        </div>
+        <div class="control-group">
+          <input type="submit" value="Post communication" class="ink-button green" ng-click="postCommunication()">
+          <div ng-show="emptyCommunication" class="ink-alert basic error">You can't post empty communications.</div>
+        </div>
+      </form>
+    </div>
+    <div class="all-50">
+      {{communicationData.text}}
+    </div>
+  </div>
+</div>
