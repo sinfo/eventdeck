@@ -1,4 +1,4 @@
-var server  = require('./../index.js');
+var server  = require('./../index.js').hapi;
 var member  = require('./../resources/member');
 var company = require('./../resources/company');
 var speaker = require('./../resources/speaker');
