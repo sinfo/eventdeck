@@ -1,13 +1,13 @@
 <div class="all-100 activity grey column-group gutters" style="background: #ddd; border-radius: 5px;">
-  <h1 ng-show="loading">Loading...</h1>
+  <h1 ng-if="loading">Loading...</h1>
 
-  <div ng-hide="loading">
-    <h3><b>[{{topic.kind}}]</b> {{topic.text}}<i ng-show="topic.closed"> [Closed!]</i><i ng-hide="topic.show.duedate"> [{{timeSince(topic.duedate)}}!]</i></h3>
+  <div ng-if="!topic.editing">
+    <h3><b>[{{topic.kind}}]</b> {{topic.text}}<i ng-if="topic.closed"> [Closed!]</i><i ng-hide="topic.show.duedate"> [{{timeSince(topic.duedate)}}!]</i></h3>
 
     <div class="column-group horizontal-gutters">
       <div class="all-20 medium-20 small-100 tiny-100">
         <p>
-          <a class="ink-button orange" href="/#/topic/{{topic._id}}/edit"><i class="fa fa-wrench"></i> Edit topic</a>
+          <a class="ink-button orange" ng-click="topic.editing=!topic.editing"><i class="fa fa-wrench"></i> Edit topic</a>
         </p>
         <p><small>{{timeSince(topic.posted)}}</small></p>
         <p>
@@ -18,7 +18,7 @@
         </p>
       </div>
       <div class="all-80 medium-80 small-100 tiny-100">
-        <form ng-show="topic.show.poll" ng-controller="TopicController as tc">
+        <form ng-if="topic.show.poll" ng-controller="TopicController as tc">
           <div class="control-group">
             <ul class="control unstyled">
               <li ng-repeat="option in topic.poll.options">
@@ -30,9 +30,9 @@
             </ul>
           </div>
         </form>
-        <div ng-show="topic.targets.length > 0" style="margin-left: 5px;">
+        <div ng-if="topic.targets.length > 0" style="margin-left: 5px;">
           <div class="ink-button blue" ng-click="toggleTargets()"><i class="fa fa-users"></i> {{showTargets ? 'Hide' : 'Show'}} {{topic.targets.length}} targets</div>
-          <div ng-show="showTargets" style="margin-left: 5px;">
+          <div ng-if="showTargets" style="margin-left: 5px;">
             <small ng-repeat="target in topic.targets">
               <a href="/#/member/{{target}}" style="margin-right: 10px;">
                 {{getMember(target).name}}
@@ -47,4 +47,19 @@
     <div class="ink-button small" ng-click="showComments = !showComments">{{showComments ? 'Hide' : 'Show'}} comments</div>
 
   </div>
+
+
+
+  <div ng-if="topic.editing">
+    <h1>{{topic.kind}}</h1>
+    <form class="all-100 ink-form">
+      <div class="all-100 control-group">
+        <label for="text">Text</label>
+        <div class="control">
+          <textarea id="text" ng-model="topic.text" type="text" rows="3" placeholder="Write your topic contents."></textarea>
+        </div>
+      </div>
+    </form>
+  </div>
+
 </div>
