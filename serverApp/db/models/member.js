@@ -38,7 +38,7 @@ memberSchema.statics.findTeamLeaders = function (cb) {
 };
 
 memberSchema.statics.findAllRoles = function (cb) {
-  this.find().distinct('roles.id',cb);
+  this.find().distinct('roles',cb);
 };
 
 memberSchema.statics.findAll = function (cb) {
