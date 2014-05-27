@@ -12,6 +12,7 @@ function update(request, reply) {
 
   async.series([
     getCompany,
+    checkPermission,
     updateCompany,
     saveCompany
   ], done);
@@ -31,6 +32,18 @@ function update(request, reply) {
         cb("Could not find company '" + request.params.id + "'.");
       }
     }
+  }
+
+  function checkPermission(cb) {
+    var roles = request.auth.credentials.roles.filter(function(o) {
+      return o.id == 'development-team' || o.id == 'coordination' || o.id == 'treasury';
+    });
+
+    if(roles.length == 0 && request.payload.participation && request.payload.participation.payment && request.payload.participation.payment.status) {
+      return cb('You don\'t have permissions for this.');
+    }
+    
+    cb();
   }
 
   function updateCompany(cb) {
@@ -58,7 +71,7 @@ function update(request, reply) {
   function saveCompany(cb) {
     Company.update({id: company.id}, diffCompany, function (err){
       if (err) {
-        cb(err);
+        cb('Error on database');
       }
       else {
         cb();
