@@ -2,7 +2,7 @@
   <h1 ng-show="loading">Loading...</h1>
 
   <div ng-hide="loading">
-    <h1><b>[{{topic.kind}}]</b> {{topic.text}}<i ng-show="topic.closed"> [Closed!]</i><i ng-hide="topic.show.duedate"> [{{timeSince(topic.duedate)}}!]</i></h1>
+    <h3><b>[{{topic.kind}}]</b> {{topic.text}}<i ng-show="topic.closed"> [Closed!]</i><i ng-hide="topic.show.duedate"> [{{timeSince(topic.duedate)}}!]</i></h3>
 
     <div class="column-group horizontal-gutters">
       <div class="all-20 medium-20 small-100 tiny-100">
@@ -22,7 +22,7 @@
           <div class="control-group">
             <ul class="control unstyled">
               <li ng-repeat="option in topic.poll.options">
-                <input type="checkbox" value="true" ng-click="tc.selectOption(topic,option)" ng-checked="option.votes.indexOf(me.id) != -1" ng-disabled="{{topic.closed}}">
+                <input type="checkbox" value="true" ng-click="selectOption(topic, option)" ng-checked="option.votes.indexOf(me.id) != -1" ng-disabled="{{topic.closed}}">
                 <span ng-if="topic.poll.kind == 'text'">{{option.content}}</span>
                 <img ng-if="topic.poll.kind == 'images'" ng-src="{{option.content}}" style="width:30% ">
                 <small>{{option.votes.length}} votes</small>
@@ -40,17 +40,11 @@
             </small>
           </div>
         </div>
-        <br>
-        <div ng-show="topic.notifications">
-          <h3>Last Changes</h3>
-          <ul>
-            <li ng-repeat="notification in topic.notifications | orderBy: 'posted':true | limitTo: 5">{{notification.description}} <small>{{timeSince(notification.posted)}}</small>.</li>
-          </ul>
-        </div>
       </div>
     </div>
 
-    <comment-area thread="{{'topic-' + topic._id}}"></comment-area>
+    <comment-area thread="{{'topic-' + topic._id}}" ng-if="showComments"></comment-area>
+    <div class="ink-button small" ng-click="showComments = !showComments">{{showComments ? 'Hide' : 'Show'}} comments</div>
 
   </div>
 </div>

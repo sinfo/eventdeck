@@ -83,8 +83,8 @@ angular.module('theTool.directives', [])
       templateUrl: 'views/topic/topic.html',
       controller: 'TopicEmbedController',
       scope: {
-        topic: '@topicObject',
-        members: '@'
+        topicJson: '@topicObject',
+        membersJson: '@members'
       }
     };
   });
