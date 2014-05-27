@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="all-100" ng-hide="comment.editing">
-        <div ng-bind-html="convertNewLinesToHtml(comment.html)" style="font-size: 15px;"></div>
+        <div compile="convertMarkdownToHtml(comment.markdown)" style="font-size: 15px;"></div>
       </div>
       <div class="all-100 column-group horizontal-gutters" ng-show="comment.editing">
         <div class="all-50">
