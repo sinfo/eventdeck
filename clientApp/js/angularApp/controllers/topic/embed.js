@@ -15,6 +15,7 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
   $scope.topic = JSON.parse($scope.topicJson);
 
   $scope.members = JSON.parse($scope.membersJson);
+  $scope.roles = JSON.parse($scope.rolesJson);
 
   show($scope.topic);
 
@@ -47,10 +48,10 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
 
   //===================================FUNCTIONS===================================
 
-  $scope.deleteTopic = function() {
+  $scope.deleteTopic = function(topic) {
     var answer = confirm("Are you sure you want to delete this topic?")
     if (answer) {
-      TopicFactory.Topic.delete({id: $routeParams.id}, function(result) {
+      TopicFactory.Topic.delete({id: topic._id}, function(result) {
         $location.path("/topics/");
       })
     }
@@ -129,15 +130,16 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     });
   };
 
-  $scope.save = function() {
+  $scope.save = function(topic) {
     $scope.success = "";
     $scope.error   = "";
 
-    TopicFactory.Topic.update({id: $routeParams.id}, $scope.topic, function(response) {
+    TopicFactory.Topic.update({id: topic._id}, $scope.topic, function(response) {
       if(response.error) {
         $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
       } else if (response.success) {
         $scope.success = response.success;
+        $scope.topic.editing = false;
       }
     });
   };
@@ -179,6 +181,10 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     console.log($scope.showTargets);
     $scope.showTargets = !$scope.showTargets;
   };
+
+  $scope.getTargetColor = function(topic) {
+    return topic.targets.indexOf(member.id) != -1 ? 'blue' : '';
+  }
 
   $scope.focusOption = function(option) {
     for (var i = 0, j = $scope.topic.poll.options.length; i < j; i++) {
