@@ -42,7 +42,7 @@
           </div>
           <span>{{speaker.status}}</span><br>
           <span><a href="{{speaker.forum}}"><i class="fa fa-comments"></i> Go to Forum!</a></span><br>
-          <span><a href="/#/member/{{speaker.member}}"><i class="fa fa-user"></i> {{speaker.member}}</a></span><br>
+          <span><a href="/#/member/{{speaker.member}}"><i class="fa fa-user"></i> {{getMember(speaker.member).name}}</a></span><br>
           <span><a href="/#/speaker/{{speaker.id}}/edit"><i class="fa fa-wrench"></i> Edit Speaker</a></span><br>
         </div>
       </div>
