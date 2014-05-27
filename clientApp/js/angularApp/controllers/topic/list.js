@@ -38,6 +38,7 @@ theToolController.controller('TopicsController', function ($scope, $location, $r
   }
 
   $scope.showOpen = true;
+  $scope.limit = 3;
 
 
   //===================================FUNCTIONS===================================
@@ -63,6 +64,11 @@ theToolController.controller('TopicsController', function ($scope, $location, $r
     return $scope.topics.filter(function(o) {
       return (showOpen ? !o.closed : o.closed);
     });
+  };
+
+  $scope.scroll = function() {
+    if ($scope.limit < $scope.topics.length)
+      $scope.limit += 3;
   };
 
 });

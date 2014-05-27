@@ -28,8 +28,8 @@
         <div class="ink-button red" ng-click="showOpen = false;">{{shownTopics(false).length}} Closed</div>
       </div>
       <h3>{{showOpen ? 'Open' : 'Closed'}} topics</h3>
-      <div class="all-100">
-        <topic topic-object="{{topic}}" members="{{members}}" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true'"></topic>
+      <div class="all-100" infinite-scroll="scroll()">
+        <topic topic-object="{{topic}}" members="{{members}}" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true' | limitTo: limit"></topic>
       </div>
     </div>
   </div>
