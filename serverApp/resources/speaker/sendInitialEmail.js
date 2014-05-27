@@ -52,9 +52,15 @@ function get(request, reply) {
         cb(err);
       }
       else {
-        speaker.paragraph = result.filter(function(o) {
+        var paragraphCommunication = result.filter(function(o) {
           return o.kind.indexOf('Paragraph') != -1;
-        })[0].text.replace('\n','<br>');
+        })[0];
+
+        speaker.paragraph = '';
+        if(paragraphCommunication) {
+          speaker.paragraph = paragraphCommunication.text.replace('\n','<br>');
+        }
+
         cb();
       }
     }
