@@ -18,11 +18,11 @@ function list(request, reply) {
   }
 
   Session.findByThread(threadId, function(err, result) {
-    if (!err && result && result.length > 0) {
-      reply(result);
+    if (err) {
+      reply({error: "Error getting sessions from '" + threadId + "'."});
     }
     else {
-      reply({error: "Error getting sessions from '" + threadId + "'."})
+      reply(result);
     }
   });
 }
