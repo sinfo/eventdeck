@@ -11,9 +11,8 @@ function create(request, reply) {
 
   var newCommunication = new Communication(communication);
 
-  newCommunication.save(function (err, reply){
+  newCommunication.save(function (err){
     if (err) {
-      console.log("Error creating communication.");
       reply({error: "Error creating communication."});
     }
     else {
