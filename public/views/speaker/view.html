@@ -36,14 +36,9 @@
             <div ng-bind-html="convertEmails(convertURLs(speaker.contacts))"></div>
           </div>
           <br>
-          <div ng-if="speaker.paragraph">
-            <h1>Paragraph</h1>
-            <div ng-bind-html="convertURLs(speaker.paragraph)"></div>
-          </div>
-          <br>
-          <div>
+          <div ng-if="speaker.notifications">
             <h1>Last Changes</h1>
-            <ul ng-if="speaker.notifications">
+            <ul>
               <li ng-repeat="notification in speaker.notifications | orderBy: 'posted':true | limitTo: 5">{{notification.description}} <small>{{timeSince(notification.posted)}}</small>.</li>
             </ul>
           </div>
