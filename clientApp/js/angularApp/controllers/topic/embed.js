@@ -4,22 +4,20 @@ theToolController.controller("TopicEmbedController", function ($scope) {
 
   //================================INITIALIZATION================================
 
-  $scope.loading = false;
+  $scope.loading = true;
 
-  $scope.success = "";
-  $scope.error   = "";
+  $scope.success     = "";
+  $scope.error       = "";
   $scope.showTargets = false;
 
   $scope.pollKinds = ['text', 'images'];
 
+  kind($scope.topic);
+
 
   //=================================AUXFUNCTIONS==================================
 
-
-
-  //===================================FUNCTIONS===================================
-
-  $scope.kind = function (topic){
+  function kind(topic) {
     topic.show = {
       text     : true,
       targets  : true,
@@ -37,7 +35,16 @@ theToolController.controller("TopicEmbedController", function ($scope) {
       topic.show.closed  = true;
       topic.show.poll = true;
     }
+
+    $scope.loading = false;
+
+    setTimeout(function () {
+      console.log($scope.topic, $scope.topic['kind']);
+    }, 5000);
   }
+
+
+  //===================================FUNCTIONS===================================
 
   $scope.deleteTopic = function() {
     var answer = confirm("Are you sure you want to delete this topic?")
