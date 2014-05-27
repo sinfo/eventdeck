@@ -55,8 +55,14 @@
             <!-- TOPIC HTML -->
 
           </div>
+
+          <br>
           
-          <comment-area thread="{{notification.thread}}"></comment-area>
+          <a ng-hide="notification.showComments" ng-click="notification.showComments=!notification.showComments" class="ink-button"><i class="fa fa-comments"></i> Show Comments</a>          
+
+          <comment-area ng-if="notification.showComments" thread="{{notification.thread}}"></comment-area>
+
+          <a ng-show="notification.showComments" ng-click="notification.showComments=!notification.showComments" class="ink-button"><i class="fa fa-chevron-circle-up"></i> Hide Comments</a>   
         </div>
       </div>
     </div>
