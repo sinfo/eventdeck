@@ -1,7 +1,7 @@
 'use strict';
  
 theToolController
-  .controller('MemberController', function ($scope, $http, $routeParams, $sce, $location, MemberFactory, CompanyFactory) {
+  .controller('MemberController', function ($scope, $http, $routeParams, $sce, $location, MemberFactory) {
     $scope.getClassFromKind = function(participation) {
       if(!participation) { return "nope"; }
       if(!participation.kind) { return "sponsor"; }
@@ -11,6 +11,8 @@ theToolController
       else if(kind.indexOf("prata") != -1) { return "silver"; }
       else { return "sponsor"; }
     }
+
+    $scope.loading = true;
     
     MemberFactory.Member.get({id: $routeParams.id}, function(response) {
       if($routeParams.id == "me") {
@@ -19,9 +21,27 @@ theToolController
         $location.path(newPath);        
       }
       $scope.member = response;
+
+      getMemberStuff();
     });
 
-    CompanyFactory.Member.getAll({id: $routeParams.id}, function(response) {
-      $scope.companies = response;
-    });
+    
+    function getMemberStuff() {
+      console.log("UPDATEEEE", $scope.companies, $scope.speakers)
+
+      $scope.member.companies = $scope.companies.filter(function(e) {
+        return e.member == $scope.member.id;
+      })
+
+      $scope.member.speakers = $scope.speakers.filter(function(e) {
+        return e.member == $scope.member.id;
+      })
+
+      if($scope.companies.length > 0 && $scope.speakers.length > 0) {
+        $scope.loading = false;
+      } else {
+        setTimeout(getMemberStuff, 1000);
+      }
+    }
+
   });
