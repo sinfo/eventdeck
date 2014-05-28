@@ -54,7 +54,7 @@
 
     <div class="all-100">
       <h1 ng-show="loading">Loading...</h1>
-      <div ng-repeat="topic in editTopics | orderBy: 'posted':'true'">
+      <div ng-repeat="topic in editTopics track by $index">
         <topic topic-object="{{topic}}" members="{{members}}" me="{{me}}" roles="{{roles}}"></topic>
         <a class="ink-button red" ng-click="removeTopic(topic)"><i class="fa fa-chevron-circle-up"></i> Remove topic without deleting it</a>
         <br><br>
@@ -64,7 +64,7 @@
     <br>
 
     <div class="all-100">
-      <div ng-repeat="kind in kinds" class="ink-button green half-right-space" ng-click="createTopic(kind)"><i class="fa fa-plus"></i>New {{kind}}</div>
+      <div ng-repeat="kind in kinds" class="ink-button green half-right-space" ng-click="createTopic(kind)"><i class="fa fa-plus"></i> New {{kind}}</div>
     </div>
 
   </div>

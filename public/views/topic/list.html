@@ -5,17 +5,8 @@
       <h1>Topics</h1>
     </div>
 
-    <div class="all-50">
-      <nav class="ink-navigation">
-        <ul class="menu vertical green" style="width: 150px;">
-          <li>
-            <a><i class="fa fa-plus"></i> Create topic</a>
-            <ul class="submenu" style="overflow: auto;">
-              <li ng-repeat="kind in kinds"><a ng-click="createTopic(kind)">{{kind}}</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
+    <div class="all-50 align-right">
+      <small ng-repeat="kind in kinds" class="ink-button green" ng-click="createTopic(kind)"><i class="fa fa-plus"></i> {{kind}}</small>
     </div>
   </div>
 
