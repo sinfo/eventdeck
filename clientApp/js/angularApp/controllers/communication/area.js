@@ -82,8 +82,7 @@ theToolController.controller("CommunicationAreaController", function ($scope, $h
       return;
     }
 
-    communication.markdown = communication.buffer;
-    communication.html = $scope.convertMarkdownToHtml(communication.markdown);
+    communication.text = communication.buffer;
     communication.updated = Date.now();
 
     CommunicationFactory.Communication.update({id: communication._id}, communication, function (response) {
