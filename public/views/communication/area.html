@@ -15,12 +15,13 @@
         <div class="all-50 align-right">
           <small>
             <a class="ink-button green" ng-show="checkPermission(communication) && communication.member !== me.id" ng-click="approveCommunication(communication)">Approve</a>
-            <a class="ink-button blue" ng-show="communication.kind.indexOf('Paragraph')!=-1" href="http://the-tool.franciscodias.net/api/speaker/{{communication.thread.split('speaker-')[1]}}/sendInitialEmail">Preview</a>
+            <a class="ink-button blue" ng-show="communication.kind.indexOf('Paragraph')!=-1" href="http://the-tool.franciscodias.net/api/speaker/{{communication.thread.split('speaker-')[1]}}/sendInitialEmail" target="_blank">Preview</a>
             <a class="ink-button orange" ng-show="checkPermission(communication)" ng-hide="communication.approved" ng-click="communication.editing = true; communication.buffer = communication.text">Edit</a>
             <a class="ink-button red" ng-show="checkPermission(communication)" ng-click="deleteCommunication(communication)">Delete</a>
           </small>
         </div>
       </div>
+
       <div class="all-100" ng-hide="communication.editing">
         <p>
           <b>{{communication.kind}}</b>
@@ -29,12 +30,13 @@
         </p>
         <div ng-if="communication.text" ng-bind-html="convertURLs(communication.text)"></div>
       </div>
+
       <div class="all-100 column-group horizontal-gutters" ng-show="communication.editing">
         <div class="all-50">
           <form class="ink-form" ng-submit="submitCommunication()">
             <div class="control-group">
               <div class="control">
-                <textarea ng-model="communication.buffer" type="text" rows="2" style="font-size: 15px;"></textarea>
+                <textarea ng-model="communication.buffer" type="text" rows="5" style="font-size: 15px;"></textarea>
               </div>
             </div>
             <div class="control-group">
