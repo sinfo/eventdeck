@@ -55,7 +55,7 @@ theToolController.controller('TopicsController', function ($scope, $location, $r
     }, function(response) {
       console.log(response);
       if (response.success) {
-        $location.path("/topic/" + response.id + "/edit");
+        $location.path("/topic/" + response.id);
       }
     });
   };
