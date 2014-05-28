@@ -72,7 +72,10 @@
           <div class="all-100">
             <div class="ink-button small green" style="margin-bottom: 0.5em;" ng-click="toggleRoleTargets(role.id)" ng-repeat="role in roles | orderBy:'id'">{{role.name}}</div>
             <br>
-            <div class="ink-button small" ng-click="toggleTarget(member.id)" ng-repeat="member in members | orderBy:'id'">{{member.name}}</div>
+            <span ng-click="toggleTarget(member.id)" ng-repeat="member in members | orderBy:'id'">
+              <a class="ink-button small blue" ng-show="topic.targets.indexOf(member.id) != -1">{{member.name}}</a>
+              <a class="ink-button small" ng-hide="topic.targets.indexOf(member.id) != -1">{{member.name}}</a>
+            </span>
           </div>
         </div>
       </div>

@@ -182,10 +182,6 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     $scope.showTargets = !$scope.showTargets;
   };
 
-  $scope.getTargetColor = function(topic) {
-    return topic.targets.indexOf(member.id) != -1 ? 'blue' : '';
-  }
-
   $scope.focusOption = function(option) {
     for (var i = 0, j = $scope.topic.poll.options.length; i < j; i++) {
       $scope.topic.poll.options[i].editing = false;
