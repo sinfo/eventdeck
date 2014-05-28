@@ -7,11 +7,6 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
   $scope.loading = true;
   $scope.messages = [];
 
-  ChatFactory.Chat.get({id: $routeParams.id}, function(result) {
-    $scope.chat = result;
-    $scope.loading = false;
-  });
-
  /* setInterval(function(){
     ChatFactory.Messages.get({id: $routeParams.id}, function(response) {
       if(response.error) {
