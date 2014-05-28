@@ -21,6 +21,7 @@ function create(request, reply) {
       if (!err && result && result.length > 0) {
         savedCommunication = result[0];
         communication.updated = Date.now();
+        communication.approved = false;
         cb();
       }
       else {

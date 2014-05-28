@@ -26,6 +26,7 @@ theToolController.controller("CommunicationEmbedController", function ($scope, C
 
     CommunicationFactory.Communication.update({id: communication._id}, communication, function (response) {
       communication.editing = false;
+      communication.approved = false;
     });
   }
 
