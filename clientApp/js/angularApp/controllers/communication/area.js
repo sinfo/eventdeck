@@ -1,6 +1,6 @@
 "use strict";
 
-theToolController.controller("CommunicationAreaController", function ($scope, $http, $routeParams, MemberFactory, CommunicationFactory) {
+theToolController.controller("CommunicationAreaController", function ($scope, $http, $routeParams, CommunicationFactory) {
 
   $scope.loading = true;
 
@@ -8,13 +8,9 @@ theToolController.controller("CommunicationAreaController", function ($scope, $h
     markdown: ""
   };
 
-  MemberFactory.Member.get({id: "me"}, function (me) {
-    $scope.me = me;
-  });
-
-  MemberFactory.Member.getAll(function (members) {
-    $scope.members = members;
-  });
+  $scope.me = JSON.parse($scope.meJson);
+  $scope.members = JSON.parse($scope.membersJson);
+  $scope.roles = JSON.parse($scope.rolesJson);
 
   loadCommunications();
 
