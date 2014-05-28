@@ -37,8 +37,7 @@ theToolController.controller("CommunicationEmbedController", function ($scope, C
 
   $scope.approveCommunication = function (communication) {
     CommunicationFactory.Communication.approve({id: communication._id}, null, function (response) {
-      console.log(response);
-      loadCommunications();
+      $scope.communication.approved = true;
     });
   };
 
