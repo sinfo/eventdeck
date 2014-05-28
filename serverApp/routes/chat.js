@@ -15,7 +15,7 @@ server.route({
   method: 'GET',
   path: '/api/chat',
   config: {
-    handler: chat.get,
+    handler: chat.list,
     auth: true
   }
 });
