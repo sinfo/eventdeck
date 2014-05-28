@@ -1,0 +1,14 @@
+<h1>Communications</h1>
+
+<div ng-if="!communications">
+  <h3>Loading...</h3>
+</div>
+
+<div ng-if="communications">
+  <div class="half-bottom-space">
+    <div class="ink-button orange" ng-click="showOpen = true;">{{shownCommunications(true).length}} Pending Approval</div>
+    <div class="ink-button green" ng-click="showOpen = false;">{{shownCommunications(false).length}} Approved</div>
+  </div>
+  <h3>{{showOpen ? 'Pending' : 'Approved'}} communications</h3>
+  <communication communication-object="{{communication}}" members="{{members}}" me="{{me}}" roles="{{roles}}" ng-repeat="communication in shownCommunications(showOpen) | orderBy: 'posted':'true'"></communication>
+</div>
