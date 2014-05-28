@@ -36,9 +36,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label for="member">Member</label>
+              <label for="status">Status</label>
               <div class="control">
-                <select ng-model="formData.member" ng-options="m.id as m.name for m in members"></select>
+                <select id="status" ng-model="formData.status" ng-options="s for s in statuses"></select>
               </div>
             </div>
             <div class="control-group">
@@ -47,18 +47,6 @@
                 <input id="img" ng-model="formData.img" type="text">
               </div>
               <img ng-show="formData.img" src="{{formData.img}}" width="100%" />
-            </div>
-            <div class="control-group">
-              <label for="id">Id</label>
-              <div class="control">
-                <input id="id" ng-model="formData.id" type="text" disabled>
-              </div>
-            </div>
-            <div class="control-group">
-              <label for="status">Status</label>
-              <div class="control">
-                <select id="status" ng-model="formData.status" ng-options="s for s in statuses"></select>
-              </div>
             </div>
           </div>
           <div class="all-40 medium-40 small-100 tiny-100">
@@ -71,13 +59,7 @@
             <div class="control-group">
               <label for="description">Description</label>
               <div class="control">
-                <textarea id="description" ng-model="formData.description" type="text" rows="3"></textarea>
-              </div>
-            </div>
-            <div class="control-group">
-              <label for="contacts">Contacts</label>
-              <div class="control">
-                <textarea id="contacts" ng-model="formData.contacts" type="text" rows="6"></textarea>
+                <textarea id="description" ng-model="formData.description" type="text" rows="8"></textarea>
               </div>
             </div>
             <div class="control-group">
@@ -87,9 +69,19 @@
             </div>
           </div>
           <div class="all-30 medium-30 small-100 tiny-100">
-
+            <div class="control-group">
+              <label for="member">Member</label>
+              <div class="control">
+                <select ng-model="formData.member" ng-options="m.id as m.name for m in members"></select>
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="contacts">Contacts</label>
+              <div class="control">
+                <textarea id="contacts" ng-model="formData.contacts" type="text" rows="8"></textarea>
+              </div>
+            </div>
           </div>
-
         </div>
         <div class="column-group horizontal-gutters">
           <div class="all-100">

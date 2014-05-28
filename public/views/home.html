@@ -24,10 +24,10 @@
           </div>
 
           <div ng-hide="notification.topic">
-            <a ng-hide="notification.showComments" ng-click="notification.showComments=!notification.showComments" class="ink-button"><i class="fa fa-comments"></i> Show Comments</a>
+            <small ng-hide="notification.showComments" ng-click="notification.showComments=!notification.showComments" class="ink-button"><i class="fa fa-comments"></i> Show Comments</small>
 
             <comment-area ng-if="notification.showComments" thread="{{notification.thread}}"></comment-area>
-            <a ng-show="notification.showComments" ng-click="notification.showComments=!notification.showComments" class="ink-button"><i class="fa fa-chevron-circle-up"></i> Hide Comments</a>
+            <small ng-show="notification.showComments" ng-click="notification.showComments=!notification.showComments" class="ink-button"><i class="fa fa-chevron-circle-up"></i> Hide Comments</small>
           </div>
         </div>
       </div>
