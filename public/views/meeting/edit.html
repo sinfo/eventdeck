@@ -26,9 +26,11 @@
       </div>
     </div>
   </form>
-  <div class="all-100 control-group">
+  <div class="control-group">
 
-    <div class="all-20" style="margin-bottom: 20px">
+    <div class="all-100" style="margin-bottom: 20px">
+      <h3>Topics</h3>
+
       <nav class="ink-navigation">
         <ul class="menu vertical" style="width:150px">
           <li class="hide-medium hide-small hide-tiny">
@@ -49,10 +51,11 @@
     </div>
 
 
-    <div class="ink-grid">
+
+    <div class="all-100">
       <h1 ng-show="loading">Loading...</h1>
       <div ng-repeat="topic in editTopics | orderBy: 'posted':'true'">
-        <topic topic-object="{{topic}}" members="{{members}}" roles="{{roles}}"></topic>
+        <topic topic-object="{{topic}}" members="{{members}}" me="{{me}}" roles="{{roles}}"></topic>
         <a class="ink-button red" ng-click="removeTopic(topic)"><i class="fa fa-chevron-circle-up"></i> Remove topic without deleting it</a>
         <br><br>
       </div>
