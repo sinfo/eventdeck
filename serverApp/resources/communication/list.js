@@ -9,7 +9,9 @@ function list(request, reply) {
       reply({error: "There was an error getting all communications."});
     }
     else {
-      reply(result);
+      reply(result.filter(function(e) {
+        return e.kind;
+      }));
     }
   });
 
