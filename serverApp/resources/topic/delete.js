@@ -1,6 +1,7 @@
 var Topic        = require('./../../db/models/topic.js');
 var Notification = require('./../../db/models/notification.js');
 var Comment      = require('./../../db/models/comment.js');
+var Meeting      = require('./../../db/models/meeting.js');
 
 module.exports = del;
 
@@ -18,6 +19,10 @@ function del(request, reply) {
       });
 
       Comment.removeByThread('topic-'+topicId, function(err, result) {
+        //console.log("Comments removed", result);
+      });
+
+      Meeting.removeTopic(topicId, function(err, result) {
         //console.log("Comments removed", result);
       });
 
