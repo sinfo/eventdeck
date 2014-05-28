@@ -157,7 +157,7 @@ theToolServices
         'update': {method: 'POST'},
         'get':    {method: 'GET'}
       }),
-      Chats: $resource('/api/chats', null, {
+      Chats: $resource('/api/chat', null, {
         'getAll': {method: 'GET', isArray:true}
       }),
       Messages: $resource('/api/chat/:id/messages', null, {
@@ -181,5 +181,29 @@ theToolServices
       Member: $resource('/api/role/:id/members', null, {
         'getAll': {method: 'GET', isArray: true}
       })
+    };
+  })
+
+  .factory('SocketFactory', function ($resource, $location, $rootScope) {
+    var socket = io.connect('/chat');
+    return {
+      on: function (eventName, callback) {
+        socket.on(eventName, function () {  
+          var args = arguments;
+          $rootScope.$apply(function () {
+            callback.apply(socket, args);
+          });
+        });
+      },
+      emit: function (eventName, data, callback) {
+        socket.emit(eventName, data, function () {
+          var args = arguments;
+          $rootScope.$apply(function () {
+            if (callback) {
+              callback.apply(socket, args);
+            }
+          });
+        })
+      }
     };
   });

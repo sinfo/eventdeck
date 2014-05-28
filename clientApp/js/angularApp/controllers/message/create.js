@@ -1,6 +1,6 @@
 'use strict';
 
-theToolController.controller('MessageController', function ($scope, $http, $routeParams, $sce, MessageFactory, ChatFactory, MemberFactory) {
+theToolController.controller('MessageController', function ($scope, $http, $routeParams, $sce, SocketFactory, MessageFactory, ChatFactory, MemberFactory) {
 
   $scope.error = {};
 
@@ -12,7 +12,7 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
     $scope.loading = false;
   });
 
-  setInterval(function(){
+ /* setInterval(function(){
     ChatFactory.Messages.get({id: $routeParams.id}, function(response) {
       if(response.error) {
         $scope.error = response.error;
@@ -24,7 +24,24 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
         } 
       }
     });
-  },4000);
+  },4000);*/
+
+  SocketFactory.emit('auth', {id: $routeParams.id}, function (result) {
+      if (!result) {
+        console.log('Error on authentication');
+      }
+      else {
+        console.log('Auth success');
+      }
+  });
+
+  SocketFactory.on('init', function (data) {
+    console.log('Chat running');
+  });
+
+  SocketFactory.on('message', function (message) {
+    $scope.messages.push(message);
+  });
 
   $scope.submit = function() {
     if ($scope.messageText == ""){
@@ -39,7 +56,8 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
     }
     console.log(messageData);
 
-    MessageFactory.create(messageData, function(response){
+    SocketFactory.emit('send:message', { message: 'welcome to the chat' }, function() {console.log('emited')});
+    /*MessageFactory.create(messageData, function(response){
       if(response.error) {
         $scope.error = response.error;
       } else {
@@ -57,6 +75,6 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
           }
         });
       }
-    });
+    });*/
   };
 });
