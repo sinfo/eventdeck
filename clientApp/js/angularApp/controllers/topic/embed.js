@@ -14,6 +14,7 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
 
   $scope.topic = JSON.parse($scope.topicJson);
 
+  $scope.me = JSON.parse($scope.meJson);
   $scope.members = JSON.parse($scope.membersJson);
   $scope.roles = JSON.parse($scope.rolesJson);
 
@@ -202,6 +203,7 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
   };
 
   $scope.selectOption = function(topic, option) {
+    console.log("Select", option);
     var updatedTopic = topic;
 
     if(option.votes.indexOf($scope.me.id) != -1) {
