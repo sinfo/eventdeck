@@ -20,49 +20,15 @@
               <img class="image" ng-src="{{notification.image}}">
             </a>
 
-            <!-- TOPIC HTML -->
-            <div ng-controller="TopicController" ng-if="notification.topic" ng-init="kind(notification.topic)">
-              <a href="/#/{{notification.path}}">
-                <p style="color: #444;">
-                  <b>[{{notification.topic.kind}}]</b> {{notification.topic.text}}
-                  <i ng-show="notification.topic.closed">[Closed!]</i>
-                  <i ng-show="notification.topic.show.duedate">[{{timeSince(notification.topic.duedate)}}!]</i>
-                </p>
-              </a>
-              <div>
-                <form ng-controller="TopicController as tc" ng-show="notification.topic.show.poll">
-                  <div class="control-group">
-                    <ul class="control unstyled">
-                      <li ng-repeat="option in notification.topic.poll.options">
-                        <input type="checkbox" value="true" ng-click="tc.selectOption(notification.topic,option)" ng-checked="option.votes.indexOf(me.id) != -1" ng-disabled="{{notification.topic.closed}}">
-                        <span ng-if="notification.topic.poll.kind == 'text'">{{option.content}}</span>
-                        <img ng-if="notification.topic.poll.kind == 'images'" ng-src="{{option.content}}" style="width:30% ">
-                        <small>{{option.votes.length}} votes</small>
-                      </li>
-                    </ul>
-                  </div>
-                </form>
-              </div>
-              <div ng-show="notification.topic.targets.length > 0">
-                <div class="ink-button blue" ng-click="toggleTargets()"><i class="fa fa-users"></i> {{showTargets ? 'Hide' : 'Show'}} {{notification.topic.targets.length}} targets</div>
-                <div ng-show="showTargets" style="margin-left: 5px;">
-                  <small ng-repeat="target in notification.topic.targets" href="/#/member/{{target}}">
-                    <a style="margin-right: 10px;">{{getMember(target).name}}</a>
-                  </small>
-                </div>
-              </div>
-            </div>
-            <!-- TOPIC HTML -->
-
+            <topic ng-if="notification.topic" topic-object="{{notification.topic}}" members="{{members}}" me="{{me}}" roles="{{roles}}"></topic>
           </div>
 
-          <br>
+          <div ng-hide="notification.topic">
+            <a ng-hide="notification.showComments" ng-click="notification.showComments=!notification.showComments" class="ink-button"><i class="fa fa-comments"></i> Show Comments</a>
 
-          <a ng-hide="notification.showComments" ng-click="notification.showComments=!notification.showComments" class="ink-button"><i class="fa fa-comments"></i> Show Comments</a>
-
-          <comment-area ng-if="notification.showComments" thread="{{notification.thread}}"></comment-area>
-
-          <a ng-show="notification.showComments" ng-click="notification.showComments=!notification.showComments" class="ink-button"><i class="fa fa-chevron-circle-up"></i> Hide Comments</a>
+            <comment-area ng-if="notification.showComments" thread="{{notification.thread}}"></comment-area>
+            <a ng-show="notification.showComments" ng-click="notification.showComments=!notification.showComments" class="ink-button"><i class="fa fa-chevron-circle-up"></i> Hide Comments</a>
+          </div>
         </div>
       </div>
     </div>
