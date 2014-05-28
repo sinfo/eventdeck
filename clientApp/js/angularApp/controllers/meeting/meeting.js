@@ -72,7 +72,6 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
         topic._id = response.id;
         $scope.meeting.topics.push(response.id);
         $scope.editTopics.push(topic);
-        console.log("Topic created", topic);
       }
     });
   };
@@ -101,7 +100,6 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
   };
 
   $scope.removeAllTopics = function() {
-    console.log("REMOVE EVERYTHING!!!");
     $scope.meeting.topics = [];
     $scope.editTopics = [];
   };
@@ -115,10 +113,7 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
       return;
     }
 
-    console.log("now meeting", $scope.meeting.topics);
-    
     MeetingFactory.update({id: $scope.meeting._id}, $scope.meeting, function(response) {
-      console.log(response);
       if(response.error) {
         $scope.errorMeeting = "There was an error. Please contact the Dev Team and give them the details about the error.";
       }

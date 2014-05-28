@@ -85,6 +85,7 @@ angular.module('theTool.directives', [])
       scope: {
         topicJson: '@topicObject',
         membersJson: '@members',
+        meJson: '@me',
         rolesJson: '@roles'
       }
     };

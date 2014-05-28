@@ -29,7 +29,7 @@
       </div>
       <h3>{{showOpen ? 'Open' : 'Closed'}} topics</h3>
       <div class="all-100" infinite-scroll="scroll()">
-        <topic topic-object="{{topic}}" members="{{members}}" roles="{{roles}}" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true' | limitTo: limit"></topic>
+        <topic topic-object="{{topic}}" members="{{members}}" me="{{me}}" roles="{{roles}}" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true' | limitTo: limit"></topic>
       </div>
     </div>
   </div>
