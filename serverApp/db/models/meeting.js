@@ -17,4 +17,8 @@ meetingSchema.statics.findAll = function (cb) {
   this.find({},cb);
 };
 
+meetingSchema.statics.removeTopic = function(topicId, cb) {
+  this.update({},{ $pull: { topics: topicId } } , { multi: true }, cb);
+};
+
 var Meeting = module.exports = mongoose.model('Meeting', meetingSchema);
