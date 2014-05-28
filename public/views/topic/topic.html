@@ -1,14 +1,12 @@
-<div ng-hide="topic.deleted" class="all-100 activity grey column-group gutters" style="background: #ddd; border-radius: 5px;">
+<div ng-hide="topic.deleted" class="activity grey" style="background: #ddd; border-radius: 5px;">
   <h1 ng-if="loading">Loading...</h1>
 
   <div ng-if="!topic.editing">
-    <h3><b>[{{topic.kind}}]</b> {{topic.text}}<i ng-if="topic.closed"> [Closed!]</i><i ng-hide="topic.show.duedate"> [{{timeSince(topic.duedate)}}!]</i></h3>
+    <h3><b>[{{topic.kind}}]</b> {{topic.text}}<i ng-if="topic.closed"> [Closed!]</i><i ng-show="topic.show.duedate"> [{{timeSince(topic.duedate)}}]</i></h3>
 
     <div class="column-group horizontal-gutters">
+      <!--
       <div class="all-20 medium-20 small-100 tiny-100">
-        <p>
-          <a class="ink-button orange" ng-click="topic.editing=!topic.editing"><i class="fa fa-wrench"></i> Edit topic</a>
-        </p>
         <p><small>{{timeSince(topic.posted)}}</small></p>
         <p>
           <a href="/#/member/{{topic.author}}">
@@ -17,7 +15,8 @@
           </a>
         </p>
       </div>
-      <div class="all-80 medium-80 small-100 tiny-100">
+      -->
+      <div class="all-100 medium-80 small-100 tiny-100">
         <form ng-if="topic.show.poll" ng-controller="TopicController as tc">
           <div class="control-group">
             <ul class="control unstyled">
@@ -31,7 +30,6 @@
           </div>
         </form>
         <div ng-if="topic.targets.length > 0" style="margin-left: 5px;">
-          <div class="ink-button blue" ng-click="toggleTargets()"><i class="fa fa-users"></i> {{showTargets ? 'Hide' : 'Show'}} {{topic.targets.length}} targets</div>
           <div ng-if="showTargets" style="margin-left: 5px;">
             <small ng-repeat="target in topic.targets">
               <a href="/#/member/{{target}}" style="margin-right: 10px;">
@@ -43,8 +41,12 @@
       </div>
     </div>
 
+    <small class="ink-button orange" ng-click="topic.editing=!topic.editing"><i class="fa fa-wrench"></i> Edit topic</small>
+    <small class="ink-button blue" ng-click="toggleTargets()"><i class="fa fa-users"></i> {{showTargets ? 'Hide' : 'Show'}} {{topic.targets.length}} targets</small>
+
+    <small ng-hide="showComments" class="ink-button small green" ng-click="showComments = !showComments"><i class="fa fa-comments"></i> Show comments</small>
+    <small ng-show="showComments" class="ink-button small green" ng-click="showComments = !showComments"><i class="fa fa-chevron-circle-up"></i> Hide comments</small>
     <comment-area thread="{{'topic-' + topic._id}}" ng-if="showComments"></comment-area>
-    <div class="ink-button small" ng-click="showComments = !showComments">{{showComments ? 'Hide' : 'Show'}} comments</div>
 
   </div>
 
