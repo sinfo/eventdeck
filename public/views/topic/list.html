@@ -1,6 +1,6 @@
 <div class="ink-grid">
 
-  <div class="all-100 column-group">
+  <div class="column-group">
     <div class="all-50">
       <h1>Topics</h1>
     </div>
@@ -10,9 +10,9 @@
     </div>
   </div>
 
-  <div class="all-100">
+  <div class="column-group">
     <h3 ng-show="loading">Loading...</h3>
-    <div ng-hide="loading" class="column-group gutters">
+    <div ng-hide="loading">
       <h3 ng-hide="loading || topics">No topics created yet.</h3>
       <div class="half-bottom-space">
         <div class="ink-button green" ng-click="showOpen = true;">{{shownTopics(true).length}} Open</div>

@@ -38,7 +38,7 @@ theToolController.controller('TopicsController', function ($scope, $location, $r
   }
 
   $scope.showOpen = true;
-  $scope.limit = 3;
+  $scope.limit = 6;
 
 
   //===================================FUNCTIONS===================================
