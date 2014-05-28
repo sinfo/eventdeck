@@ -72,7 +72,10 @@ angular.module('theTool.directives', [])
       templateUrl: 'views/communication/area.html',
       controller: 'CommunicationAreaController',
       scope: {
-        thread: '@'
+        thread: '@',
+        membersJson: '@members',
+        meJson: '@me',
+        rolesJson: '@roles'
       }
     };
   })
