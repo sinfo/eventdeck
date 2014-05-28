@@ -2,7 +2,7 @@
   <h1 ng-if="loading">Loading...</h1>
 
   <div ng-if="!topic.editing">
-    <h3><b>[{{topic.kind}}]</b> {{topic.text}}<i ng-if="topic.closed"> [Closed!]</i><i ng-show="topic.show.duedate"> [{{timeSince(topic.duedate)}}]</i></h3>
+    <a href="/#/topic/{{topic._id}}"><h3><b>[{{topic.kind}}]</b> {{topic.text}}<i ng-if="topic.closed"> [Closed!]</i><i ng-show="topic.show.duedate"> [{{timeSince(topic.duedate)}}]</i></h3></a>
 
     <div class="column-group horizontal-gutters">
       <!--
@@ -17,7 +17,7 @@
       </div>
       -->
       <div class="all-100 medium-80 small-100 tiny-100">
-        <form ng-if="topic.show.poll" ng-controller="TopicController as tc">
+        <form ng-if="topic.show.poll">
           <div class="control-group">
             <ul class="control unstyled">
               <li ng-repeat="option in topic.poll.options">
@@ -44,9 +44,9 @@
     <small class="ink-button orange" ng-click="topic.editing=!topic.editing"><i class="fa fa-wrench"></i> Edit topic</small>
     <small class="ink-button blue" ng-click="toggleTargets()"><i class="fa fa-users"></i> {{showTargets ? 'Hide' : 'Show'}} {{topic.targets.length}} targets</small>
 
-    <small ng-hide="showComments" class="ink-button small green" ng-click="showComments = !showComments"><i class="fa fa-comments"></i> Show comments</small>
-    <small ng-show="showComments" class="ink-button small green" ng-click="showComments = !showComments"><i class="fa fa-chevron-circle-up"></i> Hide comments</small>
-    <comment-area thread="{{'topic-' + topic._id}}" ng-if="showComments"></comment-area>
+    <small ng-hide="topic.showComments" class="ink-button small green" ng-click="topic.showComments = !topic.showComments"><i class="fa fa-comments"></i> Show comments</small>
+    <small ng-show="topic.showComments" class="ink-button small green" ng-click="topic.showComments = !topic.showComments"><i class="fa fa-chevron-circle-up"></i> Hide comments</small>
+    <comment-area thread="{{'topic-' + topic._id}}" ng-if="topic.showComments"></comment-area>
 
   </div>
 
