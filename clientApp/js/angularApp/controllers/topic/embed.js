@@ -17,8 +17,6 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
   $scope.members = JSON.parse($scope.membersJson);
   $scope.roles = JSON.parse($scope.rolesJson);
 
-  $scope.topic.deleted = false;
-
   show($scope.topic);
 
 
@@ -136,14 +134,25 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     $scope.success = "";
     $scope.error   = "";
 
-    TopicFactory.Topic.update({id: topic._id}, $scope.topic, function(response) {
-      if(response.error) {
-        $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
-      } else if (response.success) {
-        $scope.success = response.success;
-        $scope.topic.editing = false;
-      }
-    });
+    if(topic._id) {
+      TopicFactory.Topic.update({id: topic._id}, $scope.topic, function(response) {
+        if(response.error) {
+          $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
+        } else if (response.success) {
+          $scope.success = response.success;
+          $scope.topic.editing = false;
+        }
+      });
+    } else {
+      TopicFactory.Topic.create(topic, function(response) {
+        if(response.error) {
+          $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
+        } else if (response.success) {
+          $scope.success = response.success;
+          $scope.topic.editing = false;
+        }
+      });
+    }
   };
 
   $scope.getMember = function (memberId) {
