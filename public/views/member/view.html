@@ -21,34 +21,30 @@
           <span ng-show="member.mails.msn"><a href="mailto:{{member.mails.msn}}"><i class="fa fa-windows"></i> {{member.mails.msn}}</a></span><br>
           </p>
           <h6><a href="http://fb.com/{{member.facebook}}" target="_blank"><i class="fa fa-facebook fa-2x"></i></a></h6>
-
         </div>
-        <div class="all-60 medium-60 small-100 tiny-100">
-          <div ng-hide="companies">
-              <br>
-              <h1>Loading...</h1>
-            </div>
 
-            <div ng-show="companies">
-              <div class="column-group horizontal-gutters">
-                <div class="all-30 medium-30 small-50 tiny-50" ng-repeat="company in companies | filter:search:strict | orderBy:predicate:reverse">
-                  <div class="list-box {{getClassFromKind(company.participation)}}">
-                    <h1><a href="/#/company/{{company.id}}">{{ company.name }}</a></h1>
-                    <div ng-show="company.img">
-                      <a href="/#/company/{{company.id}}">
-                        <img src="{{company.img}}"/>
-                      </a>
-                    </div>
-                    <span ng-show="company.participation">Patrocinou {{company.participation.kind}}</a></span>
-                    <span ng-hide="company.participation">{{company.status}}</span><br>
-                    <span><a href="{{company.forum}}"><i class="fa fa-comments"></i> Go to Forum!</a></span><br>
-                    <span><a href="/#/member/{{company.member}}"><i class="fa fa-user"></i> {{company.member}}</a></span><br>
-                    <span><a href="/#/company/{{company.id}}/edit"><i class="fa fa-wrench"></i> Edit Company</a></span><br>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div class="all-60 medium-60 small-100 tiny-100">  
+          <h3 ng-show="loading">Loading...</h3>
+          <div ng-show="member.speakers">
+            <h3>{{member.speakers.length}} Speakers</h3>
+            <table class="ink-table">
+              <tr ng-repeat="speaker in member.speakers | filter:search:strict | orderBy:predicate:reverse">
+                <td style="width: 100px;"><a href="/#/speaker/{{speaker.id}}"><img ng-src="{{speaker.img}}" style="height: 20px;"></a></td>
+                <td><a href="/#/speaker/{{speaker.id}}">{{speaker.name}}</a></td>
+              </tr>
+            </table>
+          </div>
+          <div ng-show="member.companies">
+            <h3>{{member.companies.length}} Companies</h3>
+            <table class="ink-table">
+              <tr ng-repeat="company in member.companies | filter:search:strict | orderBy:predicate:reverse">
+                <td style="width: 100px;"><a href="/#/company/{{company.id}}"><img ng-src="{{company.img}}" style="height: 20px;"></a></td>
+                <td><a href="/#/company/{{company.id}}">{{company.name}}</a></td>
+              </tr>
+            </table>
+          </div>
         </div>
+
       </div>
     </div>
   </div>
