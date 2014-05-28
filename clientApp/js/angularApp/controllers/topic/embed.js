@@ -17,6 +17,8 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
   $scope.members = JSON.parse($scope.membersJson);
   $scope.roles = JSON.parse($scope.rolesJson);
 
+  $scope.topic.deleted = false;
+
   show($scope.topic);
 
 
@@ -52,7 +54,7 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     var answer = confirm("Are you sure you want to delete this topic?")
     if (answer) {
       TopicFactory.Topic.delete({id: topic._id}, function(result) {
-        $location.path("/topics/");
+        $scope.topic.deleted = true;
       })
     }
   };
