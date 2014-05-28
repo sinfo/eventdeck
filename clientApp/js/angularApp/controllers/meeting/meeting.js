@@ -9,7 +9,6 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
   $scope.kinds = ["Info", "To do", "Decision", "Idea"];
   $scope.editTopics = [];
   getMeeting();
-  $scope.loading = false;
 
   function getMeeting(){
     MeetingFactory.getAll(function(meetings) {
@@ -17,6 +16,7 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
         return o._id == $routeParams.id;
       })[0];
       getTopic();
+      $scope.loading = false;
     });
   }
 

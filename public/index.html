@@ -54,7 +54,7 @@
                 <a ng-click="hide()" href="/#/company/{{company.id}}"><img ng-src="{{company.img}}" style="height: 20px; max-width: 40px"> {{company.name}}</a>
               </li>
               <li ng-repeat="speaker in speakers | filter:search:strict">
-                <a ng-click="hide()" href="/#/speaker/{{speaker.id}}"><img ng-src="{speaker.img}}" style="height: 20px; max-width: 40px"> {{speaker.name}}</a>
+                <a ng-click="hide()" href="/#/speaker/{{speaker.id}}"><img ng-src="{{speaker.img}}" style="height: 20px; max-width: 40px"> {{speaker.name}}</a>
               </li>
               <li ng-repeat="member in members | filter:search:strict">
                 <a ng-click="hide()" href="/#/member/{{member.id}}"><img ng-src="{{'https://graph.facebook.com/'+member.facebook+'/picture'}}" style="height: 20px; max-width: 40px"> {{member.name}}</a>
@@ -105,7 +105,7 @@
           <li><a><input type="text" ng-model="search.name" ng-change="searchBoxChanged()" placeholder="Super search!!!"></a>
           <ul ng-if="search.name && search.name.length > 1" class="submenu" style="max-height:400px; overflow:auto; margin: 0px 20px 0px;">
             <li ng-show="search.name" ng-repeat="company in companies | filter:search:strict"><a href="/#/company/{{company.id}}"><img ng-src="{{company.img}}" style="height:20px; max-width:40px"> {{company.name}}</a></li>
-            <li ng-show="search.name" ng-repeat="speaker in speakers | filter:search:strict"><a href="/#/speaker/{{speaker.id}}"><img ng-src="{speaker.img}}" style="height:20px; max-width:40px"> {{speaker.name}}</a></li>
+            <li ng-show="search.name" ng-repeat="speaker in speakers | filter:search:strict"><a href="/#/speaker/{{speaker.id}}"><img ng-src="{{speaker.img}}" style="height:20px; max-width:40px"> {{speaker.name}}</a></li>
             <li ng-show="search.name" ng-repeat="member in members | filter:search:strict"><a href="/#/member/{{member.id}}"><img ng-src="{{'https://graph.facebook.com/'+member.facebook+'/picture'}}" style="height:20px; max-width:40px"> {{member.name}}</a></li>
           </ul>
         </li>
