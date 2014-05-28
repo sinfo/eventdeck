@@ -35,8 +35,7 @@ config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/chats'                    , {templateUrl: 'views/chat/list.html',             controller: 'ChatController'});
   $routeProvider.when('/chat/:id'                 , {templateUrl: 'views/chat/view.html',             controller: 'MessageController'});
   $routeProvider.when('/topics'                   , {templateUrl: 'views/topic/list.html',            controller: 'TopicsController'});
-  $routeProvider.when('/topics/:id'               , {templateUrl: 'views/topic/list.html',            controller: 'TopicsController'});
   $routeProvider.when('/topic/:id'                , {templateUrl: 'views/topic/view.html',            controller: 'TopicController'});
-  $routeProvider.when('/topic/:id/edit'           , {templateUrl: 'views/topic/edit.html',            controller: 'TopicController'});
+  $routeProvider.when('/communications'           , {templateUrl: 'views/communication/list.html',    controller: 'CommunicationsController'});
   $routeProvider.otherwise({redirectTo: '/'});
 }]);
