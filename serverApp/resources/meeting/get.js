@@ -6,42 +6,28 @@ module.exports = get;
 
 function get(request, reply) {
 
-  if (request.params.id === "all") {
-    Meeting.findAll(gotMeetings);
-  }
-  else {
-    Meeting.findById(request.params.id, gotMeetings);
-  }
-
-  function gotMeetings(err, result) {
+  Meeting.findById(request.params.id, function (err, result) {
     if (err) {
       reply({error: "There was an error getting the meetings."});
     }
-    else {
-      async.eachSeries(result, function (meeting, nextMeeting) {
-        var remove = [];
+    else if (result && result.length > 0) {
+      var meeting = {};
 
-        async.eachSeries(meeting.topics, function (topicId, nextTopic) {
-          Topic.findById(topicId, function (err, array) {
-            if (err || array.length === 0) {
-              remove.push(topicId);
-            }
+      for (var key in result[0]) {
+        meeting[key] = result[0][key];
+      }
 
-            nextTopic();
-          });
-        },
-        function (err) {
-          for (var i in remove) {
-            meeting.topics.splice(meeting.topics.indexOf(remove[i]), 1);
-          }
+      Topic.findByMeeting(meeting._id, function (err, topics) {
+        meeting.topics = "carai";
 
-          nextMeeting();
-        });
-      },
-      function (err) {
-        reply(result);
+        console.log(meeting);
+
+        reply(meeting);
       });
     }
-  }
+    else {
+      reply({error: "Could not find the meeting."});
+    }
+  });
 
 }
