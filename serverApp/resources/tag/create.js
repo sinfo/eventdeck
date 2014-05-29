@@ -20,7 +20,7 @@ function create(request, reply) {
       reply({error: "Error creating tag."});
     }
     else {
-      reply({success: "Tag created."});
+      reply({success: "Tag created.", tag:newTag});
     }
   });
 }
