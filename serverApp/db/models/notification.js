@@ -17,6 +17,10 @@ notificationSchema.statics.findBySource = function (id, cb) {
   this.find({ source: id }, cb);
 };
 
+notificationSchema.statics.removeBySource = function (id, cb) {
+  this.remove({ source: id }, cb);
+};
+
 notificationSchema.statics.findByThread = function (id, cb) {
   this.find({ thread: id }, cb);
 };
