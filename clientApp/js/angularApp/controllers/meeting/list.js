@@ -15,7 +15,7 @@ theToolController.controller('MeetingsController', function ($scope, $location, 
       }
     }, 1000);
 
-    MeetingFactory.getAll(function(meetings) {
+    MeetingFactory.get({id: "all"}, function(meetings) {
       $scope.meetings = meetings;
 
       for (var i = 0, j = $scope.meetings.length; i < j; i++) {
