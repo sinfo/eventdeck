@@ -11,18 +11,17 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
   getMeeting();
 
   function getMeeting(){
-    MeetingFactory.getAll(function(meetings) {
-      $scope.meeting = meetings.filter(function(o) {
-        return o._id == $routeParams.id;
-      })[0];
+    MeetingFactory.get({id: $routeParams.id}, function (meetings) {
+      $scope.meeting = meetings[0];
+      console.log($scope.meeting);
       getTopic();
       $scope.loading = false;
     });
   }
 
   function getTopic(){
-    for(var i = 0; i < $scope.meeting.topics.length; i++){
-      $scope.editTopics.push($scope.topics.filter(function(o) {
+    for (var i = 0; i < $scope.meeting.topics.length; i++) {
+      $scope.editTopics.push($scope.topics.filter(function (o) {
           return o._id == $scope.meeting.topics[i];
       })[0]);
     }
