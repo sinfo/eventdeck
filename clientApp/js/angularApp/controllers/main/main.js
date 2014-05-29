@@ -55,7 +55,7 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
   });
 
   TagFactory.Tag.getAll(function (tags) {
-    $scope.tags = tags;
+    $scope.topicTags = tags;
     callback();
   });
 
