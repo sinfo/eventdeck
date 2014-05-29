@@ -5,7 +5,6 @@ var meetingSchema = new mongoose.Schema({
   title: String,
   description: String,
   attendants: [String],
-  topics: [String],
   date: {type: Date}
 });
 
@@ -15,10 +14,6 @@ meetingSchema.statics.findById = function (id, cb) {
 
 meetingSchema.statics.findAll = function (cb) {
   this.find({},cb);
-};
-
-meetingSchema.statics.removeTopic = function(topicId, cb) {
-  this.update({},{ $pull: { topics: topicId } } , { multi: true }, cb);
 };
 
 var Meeting = module.exports = mongoose.model('Meeting', meetingSchema);

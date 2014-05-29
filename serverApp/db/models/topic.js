@@ -30,7 +30,7 @@ topicSchema.statics.findById = function (id, cb) {
 };
 
 topicSchema.statics.findByMeeting = function (id, cb) {
-  this.find({ meeting: id }, cb);
+  this.find({ meetings: {$in: [id]} }, cb);
 };
 
 topicSchema.statics.findByTarget = function (id, cb) {
