@@ -16,6 +16,12 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
   $scope.members = JSON.parse($scope.membersJson);
   $scope.roles = JSON.parse($scope.rolesJson);
 
+  if($scope.comments) {
+    $scope.topic.comments = $scope.comments.filter(function(e) {
+      return e.thread == 'topic-'+$scope.topic._id;
+    })
+  }
+
   show($scope.topic);
 
 
