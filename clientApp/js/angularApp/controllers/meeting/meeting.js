@@ -8,24 +8,18 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
 
   $scope.kinds = ["Info", "To do", "Decision", "Idea"];
   $scope.editTopics = [];
-  getMeeting();
 
-  function getMeeting(){
-    MeetingFactory.get({id: $routeParams.id}, function (meetings) {
-      $scope.meeting = meetings[0];
-      console.log($scope.meeting);
-      getTopic();
-      $scope.loading = false;
-    });
-  }
+  MeetingFactory.get({id: $routeParams.id}, function (meeting) {
+    $scope.meeting = meeting;
 
-  function getTopic(){
+    console.log($scope.meeting);
+
     for (var i = 0; i < $scope.meeting.topics.length; i++) {
-      $scope.editTopics.push($scope.topics.filter(function (o) {
-          return o._id == $scope.meeting.topics[i];
-      })[0]);
+      $scope.editTopics.push($scope.meeting.topics[i]);
     }
-  }
+
+    $scope.loading = false;
+  });
 
 
   //===================================FUNCTIONS===================================
