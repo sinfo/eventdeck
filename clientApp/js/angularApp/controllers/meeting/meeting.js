@@ -11,8 +11,8 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
   getMeeting();
 
   function getMeeting(){
-    MeetingFactory.get({id: $routeParams.id}, function (meetings) {
-      $scope.meeting = meetings[0];
+    MeetingFactory.get({id: $routeParams.id}, function (meeting) {
+      $scope.meeting = meeting;
       console.log($scope.meeting);
       getTopic();
       $scope.loading = false;
