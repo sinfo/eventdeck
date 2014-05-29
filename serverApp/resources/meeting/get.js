@@ -18,36 +18,29 @@ function get(request, reply) {
       reply({error: "There was an error getting the meetings."});
     }
     else {
-      async.series([
-        function (cb) {
-          async.eachSeries(result, function (meeting, cb) {
-            var remove = [];
+      async.eachSeries(result, function (meeting, nextMeeting) {
+        var remove = [];
 
-            async.eachSeries(meeting.topics, function (topicId, cb) {
-              Topic.findById(topicId, function (array) {
-                if (array.length === 0) {
-                  remove.push(topicId);
-                }
-
-                cb();
-              });
-            });
-
-            for (var i in remove) {
-              meeting.topics.splice(meeting.topics.indexOf(remove[i]), 1);
+        async.eachSeries(meeting.topics, function (topicId, nextTopic) {
+          Topic.findById(topicId, function (err, array) {
+            if (err || array.length === 0) {
+              remove.push(topicId);
             }
 
-            cb();
+            nextTopic();
           });
-
-          cb();
         },
-        function (cb) {
-          reply(result);
+        function (err) {
+          for (var i in remove) {
+            meeting.topics.splice(meeting.topics.indexOf(remove[i]), 1);
+          }
 
-          cb();
-        }
-      ]);
+          nextMeeting();
+        });
+      },
+      function (err) {
+        reply(result);
+      });
     }
   }
 
