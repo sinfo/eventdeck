@@ -115,7 +115,8 @@ angular.module('theTool.directives', [])
       templateUrl: 'views/tag/manager.html',
       controller: 'TagManagerController',
       scope: {
-        tags: '=tagsArray'
+        tags: '=tagsArray',
+        search: '=search'
       }
     };
   });
