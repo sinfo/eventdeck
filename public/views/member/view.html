@@ -27,7 +27,7 @@
           <h3 ng-show="loading">Loading...</h3>
           <div ng-show="member.speakers">
             <h3>{{member.speakers.length}} Speakers</h3>
-            <table class="ink-table">
+            <table class="ink-table alternating">
               <tr ng-repeat="speaker in member.speakers | filter:search:strict | orderBy:predicate:reverse">
                 <td style="width: 100px;"><a href="/#/speaker/{{speaker.id}}"><img ng-src="{{speaker.img}}" style="height: 20px;"></a></td>
                 <td><a href="/#/speaker/{{speaker.id}}">{{speaker.name}}</a></td>
@@ -36,7 +36,7 @@
           </div>
           <div ng-show="member.companies">
             <h3>{{member.companies.length}} Companies</h3>
-            <table class="ink-table">
+            <table class="ink-table alternating">
               <tr ng-repeat="company in member.companies | filter:search:strict | orderBy:predicate:reverse">
                 <td style="width: 100px;"><a href="/#/company/{{company.id}}"><img ng-src="{{company.img}}" style="height: 20px;"></a></td>
                 <td><a href="/#/company/{{company.id}}">{{company.name}}</a></td>
