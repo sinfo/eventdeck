@@ -100,11 +100,11 @@ angular.module('theTool.directives', [])
       templateUrl: 'views/topic/topic.html',
       controller: 'TopicEmbedController',
       scope: {
-        topicJson: '@topicObject',
+        topic: '=topicObject',
         membersJson: '@members',
         meJson: '@me',
         rolesJson: '@roles',
-        tagsJson: '@tagsArray'
+        tags: '=tagsArray'
       }
     };
   })
@@ -115,7 +115,7 @@ angular.module('theTool.directives', [])
       templateUrl: 'views/tag/manager.html',
       controller: 'TagManagerController',
       scope: {
-        tagsJson: '@tagsArray'
+        tags: '=tagsArray'
       }
     };
   });
