@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 
 var commentSchema = new mongoose.Schema({
-  id: String,
   thread: String,
   member: String,
   markdown: String,
