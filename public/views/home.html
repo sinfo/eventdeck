@@ -20,7 +20,7 @@
               <img class="image" ng-src="{{notification.image}}">
             </a>
 
-            <topic ng-if="notification.topic" topic-object="{{notification.topic}}" members="{{members}}" me="{{me}}" roles="{{roles}}" tags-array="{{topicTags}}"></topic>
+            <topic ng-if="notification.topic" topic-object="notification.topic" members="{{members}}" me="{{me}}" roles="{{roles}}" tags-array="topicTags"></topic>
           </div>
 
           <div ng-hide="notification.topic">

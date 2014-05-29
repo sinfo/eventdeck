@@ -12,14 +12,9 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
 
   $scope.pollKinds = ['text', 'images'];
 
-  $scope.topic = JSON.parse($scope.topicJson);
-
   $scope.me = JSON.parse($scope.meJson);
   $scope.members = JSON.parse($scope.membersJson);
   $scope.roles = JSON.parse($scope.rolesJson);
-
-  console.log($scope.tagsJson);
-  $scope.tags = JSON.parse($scope.tagsJson);
 
   show($scope.topic);
 
