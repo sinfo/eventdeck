@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var notificationSchema = new mongoose.Schema({
   thread: String,
+  source: String,
   member: String,
   description: String,
   unread: [String],
@@ -10,6 +11,10 @@ var notificationSchema = new mongoose.Schema({
 
 notificationSchema.statics.findById = function (id, cb) {
   this.find({ _id: id }, cb);
+};
+
+notificationSchema.statics.findBySource = function (id, cb) {
+  this.find({ source: id }, cb);
 };
 
 notificationSchema.statics.findByThread = function (id, cb) {
