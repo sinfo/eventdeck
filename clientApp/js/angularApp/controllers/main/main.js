@@ -169,6 +169,12 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
     })[0];
   };
 
+  $scope.getTopic = function (topicId) {
+    return $scope.topics.filter(function(o) {
+      return o._id == topicId;
+    })[0];
+  };
+
   $scope.show = function() {
     $scope.display = ($scope.search.name ? true : false);
   };
