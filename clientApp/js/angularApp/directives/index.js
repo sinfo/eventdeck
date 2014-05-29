@@ -103,7 +103,19 @@ angular.module('theTool.directives', [])
         topicJson: '@topicObject',
         membersJson: '@members',
         meJson: '@me',
-        rolesJson: '@roles'
+        rolesJson: '@roles',
+        tagsJson: '@tagsArray'
+      }
+    };
+  })
+  .directive('tagManager', function () {
+    return {
+      restrict: 'EAC',
+      replace: true,
+      templateUrl: 'views/tag/manager.html',
+      controller: 'TagManagerController',
+      scope: {
+        tagsJson: '@tagsArray'
       }
     };
   });

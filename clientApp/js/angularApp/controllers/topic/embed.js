@@ -18,6 +18,9 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
   $scope.members = JSON.parse($scope.membersJson);
   $scope.roles = JSON.parse($scope.rolesJson);
 
+  console.log($scope.tagsJson);
+  $scope.tags = JSON.parse($scope.tagsJson);
+
   show($scope.topic);
 
 
@@ -55,6 +58,17 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
       TopicFactory.Topic.delete({id: topic._id}, function(result) {
         $scope.topic.deleted = true;
       })
+    }
+  };
+
+  $scope.toggleTag = function(tag) {
+    var index = $scope.topic.tags.indexOf(tag);
+
+    if (index == -1) {
+      $scope.topic.tags.push(tag);
+    }
+    else {
+      $scope.topic.tags.splice(index, 1);
     }
   };
 
