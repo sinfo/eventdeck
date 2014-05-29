@@ -1,46 +1,32 @@
 var async   = require("async");
 var Meeting = require("./../../db/models/meeting.js");
-var Topic   = require("./../../db/models/topic.js");
+var Topic = require("./../../db/models/topic.js");
 
 module.exports = get;
 
 function get(request, reply) {
 
-  if (request.params.id === "all") {
-    Meeting.findAll(gotMeetings);
-  }
-  else {
-    Meeting.findById(request.params.id, gotMeetings);
-  }
+  Meeting.findById(request.params.id, gotMeetings);
 
-  function gotMeetings(err, result) {
+  function gotMeetings(err, meetings) {
     if (err) {
       reply({error: "There was an error getting the meetings."});
     }
-    else {
-      async.eachSeries(result, function (meeting, nextMeeting) {
-        var remove = [];
+    else if (meetings && meetings.length > 0) {
+      var meeting = meetings[0];
 
-        async.eachSeries(meeting.topics, function (topicId, nextTopic) {
-          Topic.findById(topicId, function (err, array) {
-            if (err || array.length === 0) {
-              remove.push(topicId);
-            }
-
-            nextTopic();
-          });
-        },
-        function (err) {
-          for (var i in remove) {
-            meeting.topics.splice(meeting.topics.indexOf(remove[i]), 1);
-          }
-
-          nextMeeting();
+      Topic.findAll(function (err, topics) {
+        meeting.topics = topics.filter(function (o) {
+          return meeting.topics.indexOf(o._id) != -1;
+        }).map(function (o) {
+          return o._id;
         });
-      },
-      function (err) {
-        reply(result);
+
+        reply(meeting);
       });
+    }
+    else {
+      reply({error: "Could not find the meeting."});
     }
   }
 
