@@ -217,7 +217,7 @@ theToolServices
               callback.apply(socket, args);
             }
           });
-        })
+        });
       }
     };
   });
