@@ -41,7 +41,17 @@
           </div>
         </div>
 
-        <comment-area thread="{{'topic-' + topic._id}}" ng-if="topic.showComments"></comment-area>
+        <div ng-show="topic.tags">
+          Tags: 
+          <span ng-repeat="tag in tags" ng-show="topic.tags.indexOf(tag.id) != -1" style="background:{{tag.color}};padding:0.2em 0.6em;border-radius:10px;color: white;">
+            <b>{{tag.name}}</b>
+          </span>
+        </div>
+
+        <div ng-if="topic.showComments">
+          <br>
+          <comment-area thread="{{'topic-' + topic._id}}"></comment-area>
+        </div>
       </div>
     
       <div class="all-10 align-right">
@@ -128,6 +138,17 @@
             <li><input type="checkbox" ng-model="topic.closed" id="close" name="close" value="true"><label for="close">Close</label></li>
           </ul>
         </div>
+      </div>
+
+      <div>
+        <p>
+          <h6>Manage Tags</h6>
+          <span ng-hide="tags">There are no tags</span>
+          <span ng-repeat="tag in tags" ng-click="toggleTag(tag.id)" style="background:{{tag.color}};padding:0.2em 0.6em;border-radius:10px;color: white;">
+            <b ng-show="topic.tags.indexOf(tag.id) != -1"><i class="fa fa-times"></i> {{tag.name}}</b>
+            <i ng-hide="topic.tags.indexOf(tag.id) != -1">{{tag.name}}</i>
+          </span>
+        </p>
       </div>
 
       <div class="all-100 control-group">

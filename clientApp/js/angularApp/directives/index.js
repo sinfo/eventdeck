@@ -103,7 +103,8 @@ angular.module('theTool.directives', [])
         topicJson: '@topicObject',
         membersJson: '@members',
         meJson: '@me',
-        rolesJson: '@roles'
+        rolesJson: '@roles',
+        tagsJson: '@tagsArray'
       }
     };
   })
