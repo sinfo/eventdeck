@@ -22,23 +22,24 @@ exports.facebook = function facebook(request, reply) {
   Request("https://graph.facebook.com/debug_token?input_token=" + request.url.query.token + "&access_token=457207507744159|dc4e34861edcd5be164c15ff6df29565", {
     method: "GET",
     json: true
-  }, function (error, response, result) {
-
+  },
+  function (error, response, result) {
     if (!error && response.statusCode == 200) {
       if (result.data && result.data.app_id === "457207507744159" && result.data.user_id === request.url.query.id) {
         Member.findByFacebookId(request.url.query.id, function(error, result) {
-          if (error) { return reply.view('error.html'); }
-
-          if (result.length > 0) {
+          if (error) {
+            reply.view('error.html');
+          }
+          else if (result && result.length > 0) {
             var account = result[0];
 
             console.log("FACEBOOK LOG IN", account);
 
             request.auth.session.set(account);
-            return reply().redirect('/');
+            reply().redirect('/');
           }
           else {
-            return reply.view('error.html', { error: "Your ist id is not allowed :-(" });
+            reply.view('error.html', {error: "Your ist id is not allowed."});
           }
         });
       }
