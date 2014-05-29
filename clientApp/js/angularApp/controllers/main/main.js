@@ -1,6 +1,6 @@
 'use strict';
 
-theToolController.controller('MainController', function ($scope, $http, $routeParams, $sce, $location, $rootScope, NotificationFactory, MemberFactory, CompanyFactory, SpeakerFactory, TopicFactory, RoleFactory, TagFactory) {
+theToolController.controller('MainController', function ($scope, $http, $routeParams, $sce, $location, $rootScope, NotificationFactory, MemberFactory, CompanyFactory, SpeakerFactory, TopicFactory, RoleFactory, TagFactory, CommentFactory) {
 
   //================================INITIALIZATION================================
 
@@ -60,11 +60,16 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
     callback();
   });
 
+  CommentFactory.Comment.getAll(function (comments) {
+    $scope.comments = comments;
+    callback();
+  });
+
 
   //===================================FUNCTIONS===================================
 
   function callback() {
-    if (++factoriesReady == 7) {
+    if (++factoriesReady == 8) {
       $scope.ready = true;
 
       $scope.update();

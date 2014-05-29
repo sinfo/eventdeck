@@ -104,7 +104,8 @@ angular.module('theTool.directives', [])
         membersJson: '@members',
         meJson: '@me',
         rolesJson: '@roles',
-        tags: '=tagsArray'
+        tags: '=tagsArray',
+        comments: '=commentsArray'
       }
     };
   })
