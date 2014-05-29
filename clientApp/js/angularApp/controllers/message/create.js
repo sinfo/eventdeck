@@ -21,17 +21,11 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
     });
   },4000);*/
 
-  SocketFactory.emit('auth', {id: $routeParams.id}, function (result) {
-      if (!result) {
-        console.log('Error on authentication');
-      }
-      else {
-        console.log('Auth success');
-      }
-  });
-
-  SocketFactory.on('init', function (data) {
-    console.log('Chat running');
+  SocketFactory.emit('auth', {id: $routeParams.id, user: $scope.me.id}, function (result) {
+      console.log('Auth success');
+      $scope.chat     = result.chatData;
+      $scope.messages = result.messages;
+      $scope.room     = result.room;
   });
 
   SocketFactory.on('message', function (message) {
@@ -51,7 +45,7 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
     }
     console.log(messageData);
 
-    SocketFactory.emit('send:message', { message: 'welcome to the chat' }, function() {console.log('emited')});
+    SocketFactory.emit('send', { message: messageData }, function() {console.log('emited')});
     /*MessageFactory.create(messageData, function(response){
       if(response.error) {
         $scope.error = response.error;
