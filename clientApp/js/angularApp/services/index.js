@@ -104,7 +104,7 @@ theToolServices
       Member: $resource('/api/member/:id/topics', null, {
         'getAll': { method: 'GET', isArray: true }
       })
-    }
+    };
   })
 
   .factory('MeetingFactory', function ($resource) {
@@ -113,7 +113,7 @@ theToolServices
       'create': {method: 'POST'},
       'update': {method: 'PUT'},
       'delete': {method: 'DELETE'}
-    })
+    });
   })
 
   .factory('CommunicationFactory', function ($resource) {
@@ -131,7 +131,7 @@ theToolServices
       Speaker: $resource('/api/speaker/:id/communications', null, {
         'getAll': {method: 'GET', isArray: true}
       })
-    }
+    };
   })
 
   .factory('SessionFactory', function ($resource) {
