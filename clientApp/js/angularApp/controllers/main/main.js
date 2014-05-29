@@ -54,11 +54,16 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
     callback();
   });
 
+  TagFactory.Tag.getAll(function (tags) {
+    $scope.tags = tags;
+    callback();
+  });
+
 
   //===================================FUNCTIONS===================================
 
   function callback() {
-    if (++factoriesReady == 6) {
+    if (++factoriesReady == 7) {
       $scope.ready = true;
 
       $scope.update();
