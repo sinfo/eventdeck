@@ -6,7 +6,7 @@
       <div class="comment" ng-repeat="message in messages | orderBy:'date':false">
         <div class="column-group horizontal-gutters">
           <div class="all-10">
-            <a href="/#/member/{{message.member}}"><img src="https://graph.facebook.com/{{getMemberFacebook(message.member)}}/picture" style="width:25px; margin-left:15px;"/></a>
+            <a href="/#/member/{{message.member}}"><img src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px; margin-left:15px;"/></a>
           </div>
           <div class="all-70">
             {{message.text}}
