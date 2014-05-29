@@ -11,16 +11,21 @@
   </div>
 
   <div class="column-group">
-    <h3 ng-show="loading">Loading...</h3>
-    <div ng-hide="loading">
-      <h3 ng-hide="loading || topics">No topics created yet.</h3>
-      <div class="half-bottom-space">
-        <div class="ink-button green" ng-click="showOpen = true;">{{shownTopics(true).length}} Open</div>
-        <div class="ink-button red" ng-click="showOpen = false;">{{shownTopics(false).length}} Closed</div>
-      </div>
-      <h3>{{showOpen ? 'Open' : 'Closed'}} topics</h3>
-      <div class="all-100" infinite-scroll="scroll()">
-        <topic topic-object="{{topic}}" members="{{members}}" me="{{me}}" roles="{{roles}}" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true' | limitTo: limit"></topic>
+    <div class="all-25">
+      <tag-manager tags-array="{{topicTags}}"></tag-manager>
+    </div>
+    <div class="all-75">
+      <h3 ng-show="loading">Loading...</h3>
+      <div ng-hide="loading">
+        <h3 ng-hide="loading || topics">No topics created yet.</h3>
+        <div class="half-bottom-space">
+          <div class="ink-button green" ng-click="showOpen = true;">{{shownTopics(true).length}} Open</div>
+          <div class="ink-button red" ng-click="showOpen = false;">{{shownTopics(false).length}} Closed</div>
+        </div>
+        <h3>{{showOpen ? 'Open' : 'Closed'}} topics</h3>
+        <div class="all-100" infinite-scroll="scroll()">
+          <topic topic-object="{{topic}}" members="{{members}}" me="{{me}}" roles="{{roles}}" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true' | limitTo: limit"></topic>
+        </div>
       </div>
     </div>
   </div>
