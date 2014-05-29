@@ -5,7 +5,7 @@
     
     <div class="column-group horizontal-gutters">
             
-      <div class="all-90">
+      <div class="all-85">
 
         <a href="/#/member/{{topic.author}}">
           <img ng-src="{{'https://graph.facebook.com/' + getMember(topic.author).facebook + '/picture'}}"/>
@@ -31,18 +31,17 @@
             </ul>
           </div>
         </form>
-        <div ng-if="topic.targets.length > 0" style="margin-left: 5px;">
-          <div ng-if="showTargets" style="margin-left: 5px;">
-            <small ng-repeat="target in topic.targets">
-              <a href="/#/member/{{target}}" style="margin-right: 10px;">
-                {{getMember(target).name}}
-              </a>
-            </small>
+        <div ng-if="topic.targets.length > 0">
+          <div ng-if="showTargets">
+            <a ng-repeat="target in topic.targets" href="/#/member/{{target}}" title="{{getMember(target).name}}">
+              <img ng-src="https://graph.facebook.com/{{getMember(target).facebook}}/picture?width=100&height=100" style="width:50px; margin:2px">
+            </a>
+            <br><br>
           </div>
         </div>
 
         <div ng-show="topic.tags">
-          <span ng-repeat="tag in tags" ng-show="topic.tags.indexOf(tag.id) != -1" style="background:{{tag.color}};padding:0.2em 0.6em;border-radius:10px;color: white;">
+          <span ng-repeat="tag in tags" ng-show="topic.tags.indexOf(tag.id) != -1" style="background:{{tag.color}};padding:0.2em 0.6em;margin-bottom:5px;border-radius:10px;color: white;">
             <b>{{tag.name}}</b>
           </span>
         </div>
@@ -53,10 +52,10 @@
         </div>
       </div>
     
-      <div class="all-10 align-right">
-        <small title="Edit Topic" class="ink-button orange" ng-click="topic.editing=!topic.editing"><i class="fa fa-wrench"></i></small>
-        <small title="Show/Hide Targets" class="ink-button blue" ng-click="toggleTargets()"><i class="fa fa-users"></i></small>
-        <small title="Show/Hide Comments" class="ink-button small green" ng-click="topic.showComments = !topic.showComments"><i class="fa fa-comments"></i></small>
+      <div class="all-15 align-right">
+        <small title="Edit Topic" class="ink-button orange" ng-click="topic.editing=!topic.editing" style="width:60px"><i class="fa fa-wrench"></i></small><br>
+        <small title="Show/Hide Targets" class="ink-button blue" ng-click="toggleTargets()" style="width:60px">{{topic.targets.length}} <i class="fa fa-users"></i></small><br>
+        <small title="Show/Hide Comments" class="ink-button small green" ng-click="topic.showComments = !topic.showComments" style="width:60px">{{topic.comments.length}} <i class="fa fa-comments"></i></small>
       </div>
     </div>
 
@@ -143,7 +142,7 @@
         <p>
           <h6>Manage Tags</h6>
           <span ng-hide="tags">There are no tags</span>
-          <span ng-repeat="tag in tags" ng-click="toggleTag(tag.id)" style="background:{{tag.color}};padding:0.2em 0.6em;border-radius:10px;color: white;">
+          <span ng-repeat="tag in tags" ng-click="toggleTag(tag.id)" style="background:{{tag.color}};margin-bottom:5px;padding:0.2em 0.6em;border-radius:10px;color: white;">
             <b ng-show="topic.tags.indexOf(tag.id) != -1"><i class="fa fa-times"></i> {{tag.name}}</b>
             <i ng-hide="topic.tags.indexOf(tag.id) != -1">{{tag.name}}</i>
           </span>
