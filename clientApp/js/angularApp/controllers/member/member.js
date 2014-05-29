@@ -27,13 +27,15 @@ theToolController
 
     
     function getMemberStuff() {
-      console.log("UPDATEEEE", $scope.companies, $scope.speakers)
-
       $scope.member.companies = $scope.companies.filter(function(e) {
         return e.member == $scope.member.id;
       })
 
       $scope.member.speakers = $scope.speakers.filter(function(e) {
+        return e.member == $scope.member.id;
+      })
+
+      $scope.member.comments = $scope.comments.filter(function(e) {
         return e.member == $scope.member.id;
       })
 

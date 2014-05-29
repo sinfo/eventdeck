@@ -27,19 +27,34 @@
           <h3 ng-show="loading">Loading...</h3>
           <div ng-show="member.speakers">
             <h3>{{member.speakers.length}} Speakers</h3>
-            <table class="ink-table alternating">
-              <tr ng-repeat="speaker in member.speakers | filter:search:strict | orderBy:predicate:reverse">
-                <td style="width: 100px;"><a href="/#/speaker/{{speaker.id}}"><img ng-src="{{speaker.img}}" style="height: 20px;"></a></td>
+            <table class="ink-table alternating bordered hover">
+              <tr ng-repeat="speaker in member.speakers | orderBy:predicate:reverse">
+                <td style="width: 100px; text-align: center;"><a href="/#/speaker/{{speaker.id}}"><img ng-src="{{speaker.img}}" style="height: 20px;"></a></td>
                 <td><a href="/#/speaker/{{speaker.id}}">{{speaker.name}}</a></td>
               </tr>
             </table>
           </div>
           <div ng-show="member.companies">
             <h3>{{member.companies.length}} Companies</h3>
-            <table class="ink-table alternating">
-              <tr ng-repeat="company in member.companies | filter:search:strict | orderBy:predicate:reverse">
-                <td style="width: 100px;"><a href="/#/company/{{company.id}}"><img ng-src="{{company.img}}" style="height: 20px;"></a></td>
+            <table class="ink-table alternating bordered hover">
+              <tr ng-repeat="company in member.companies | orderBy:predicate:reverse">
+                <td style="width: 100px;  text-align: center;"><a href="/#/company/{{company.id}}"><img ng-src="{{company.img}}" style="height: 20px;"></a></td>
                 <td><a href="/#/company/{{company.id}}">{{company.name}}</a></td>
+              </tr>
+            </table>
+          </div>
+          <div ng-show="member.comments">
+            <h3>Recent Comments</h3>
+            <table class="ink-table alternating bordered hover">
+              <tr ng-repeat="comment in member.comments | orderBy:'posted':true | limitTo:5">
+                <td style="width: 100px;  text-align: center;"><a href="/#/{{comment.thread.replace('-','/')}}">
+                  <img ng-show="comment.thread.indexOf('company') != -1" ng-src="{{getCompany(comment.thread.replace('company-', '')).img}}" style="height: 20px;">
+                  <img ng-show="comment.thread.indexOf('speaker') != -1" ng-src="{{getSpeaker(comment.thread.replace('speaker-', '')).img}}" style="height: 20px;">
+                  <h4 ng-show="comment.thread.indexOf('topic') != -1"> [{{getTopic(comment.thread.replace('topic-', '')).kind}}] </h4>
+                </a></td>
+                <td><a href="/#/{{comment.thread.replace('-','/')}}">
+                  <div ng-bind-html="comment.html"></div>
+                </a></td>
               </tr>
             </table>
           </div>
