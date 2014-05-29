@@ -18,7 +18,7 @@
       <tag-manager tags-array="topicTags" search="searchTopics"></tag-manager>
     </div>
 
-    <div class="all-100 show-small show-100">
+    <div class="all-100 hide-all show-small show-100">
       <a class="ink-button blue" ng-click="showFilters=!showFilters" title="Click to show/hide filters"> 
         Filters 
         <i ng-hide="showFilters" class="fa fa-chevron-circle-down" style="font-size:20px"></i> 
@@ -45,7 +45,7 @@
         </div>
         <h3>{{showOpen ? 'Open' : 'Closed'}} topics</h3>
         <div class="all-100" infinite-scroll="scroll()">
-          <topic topic-object="topic" members="{{members}}" me="{{me}}" roles="{{roles}}" tags-array="topicTags" ng-repeat="topic in shownTopics(showOpen) | filter:searchTopics:strict | orderBy: 'posted':'true' | limitTo: limit"></topic>
+          <topic topic-object="topic" members="{{members}}" me="{{me}}" roles="{{roles}}" tags-array="topicTags" comments-array="comments" ng-repeat="topic in shownTopics(showOpen) | filter:searchTopics:strict | orderBy: 'posted':'true' | limitTo: limit"></topic>
         </div>
       </div>
     </div>
