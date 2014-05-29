@@ -9,6 +9,7 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
   $scope.display = false;
 
   $scope.search = {};
+  $scope.searchTopics = {};
 
   $scope.me = {};
   $scope.members = [];
