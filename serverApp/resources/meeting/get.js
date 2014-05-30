@@ -11,16 +11,10 @@ function get(request, reply) {
       reply({error: "There was an error getting the meetings."});
     }
     else if (result && result.length > 0) {
-      var meeting = {};
-
-      for (var key in result[0]) {
-        meeting[key] = result[0][key];
-      }
+      var meeting = result[0].toObject();
 
       Topic.findByMeeting(meeting._id, function (err, topics) {
-        meeting.topics = "carai";
-
-        console.log(meeting);
+        meeting.topics = topics;
 
         reply(meeting);
       });
