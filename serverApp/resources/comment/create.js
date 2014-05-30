@@ -22,7 +22,7 @@ function create(request, reply) {
     }
     else {
       email.comment(comment);
-      notification.comment(comment.member, comment.thread, request.auth.credentials.name);
+      notification.notify(comment.member, comment.thread, 'posted a new comment', newComment._id);
 
       reply({success: "Comment created."});
     }

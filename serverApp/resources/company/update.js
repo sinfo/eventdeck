@@ -94,10 +94,26 @@ function update(request, reply) {
         email.companyAttribute(diffCompany.member, company);
       }
 
-      notification.update(request.auth.credentials.id, "company-" + company.id, company.name, request.auth.credentials.name, diffCompany);
+      notification.notify(request.auth.credentials.id, 'company-'+company.id, 'updated '+getEditionString(diffCompany), null);
+
       reply({success: "Company updated."});
     }
   }
+}
+
+function getEditionString(diffObject) {
+  var editionsArray = [];
+  for(var propertyName in diffObject) {
+    if(propertyName != "updated"){
+      editionsArray.push(propertyName);
+    }
+  }
+  var editions = editionsArray[0];
+  if(editionsArray.length > 1){
+    editions = editionsArray.slice(0, -1).join(', ')+ ' and ' +editionsArray[editionsArray.length -1];
+  }
+
+  return editions;
 }
 
 function equals(o1, o2) {
