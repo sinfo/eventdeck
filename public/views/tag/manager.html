@@ -4,9 +4,9 @@
   <span ng-hide="tags">There are no tags</span>
   <small>
   <ul style="padding:0px;">
-    <li ng-repeat="tag in tags" style="background:{{tag.color}};padding:0.2em 0.6em;border-radius:10px;color: white;width:80%;">
-      <a title="Delete Tag" ng-click="deleteTag(tag)" style="color:white;"><i class="fa fa-trash-o"></i></a> 
-      <span ng-click="search.tags=tag.id"> {{tag.name}}</span>
+    <li ng-repeat="tag in tags" ng-click="search.tags = tag.id" style="cursor: pointer; background: {{tag.color}}; padding: 0.2em 0.6em; border-radius: 6px; color: white; width: 80%;">
+      <a title="Delete Tag" ng-click="deleteTag(tag)" style="color:white;"><i class="fa fa-trash-o"></i></a>
+      <span> {{tag.name}}</span>
     </li>
   </ul>
   </small>
@@ -21,7 +21,7 @@
       <li ng-repeat="color in lightColors" ng-click="changeColor(color)" style="width:30px;height:30px;background:{{color}};display: table-cell;cursor: pointer;"></li>
     </ul>
     <input type="text" ng-model="newTag.color" placeholder="Tag color" style="border-color:{{newTag.color}};color:{{newTag.color}};width:240px">
-    
+
     <div class="align-left">
       <a class="ink-button" ng-click="createTag(newTag)" style="background:{{newTag.color}};color:white;margin:0;border-color:{{newTag.color}};width:240px">Create {{newTag.name | limitTo: 15}} <i ng-show="newTag.name.length>15">(...)</i></a>
     </div>
