@@ -4,7 +4,7 @@
   <span ng-hide="tags">There are no tags</span>
   <small>
   <ul style="padding:0px;">
-    <li ng-repeat="tag in tags" style="background:{{tag.color}};padding:0.2em 0.6em;border-radius:10px;color: white;width:80%;">
+    <li ng-repeat="tag in tags" style="background:{{tag.color}};padding:0.2em 0.6em;border-radius: 6px;color: white;width:80%;">
       <a title="Delete Tag" ng-click="deleteTag(tag)" style="color:white;"><i class="fa fa-trash-o"></i></a> 
       <span ng-click="search.tags=tag.id"> {{tag.name}}</span>
     </li>
