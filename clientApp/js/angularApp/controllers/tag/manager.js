@@ -30,7 +30,8 @@ theToolController.controller("TagManagerController", function ($scope, TagFactor
     TagFactory.Tag.delete({id:tag.id}, function(response) {
       console.log("RESPONSE", response);
       if(response.success) {
-        $scope.tags.splice(tag.id, 1);
+        var index = $scope.tags.indexOf(tag.id);
+        $scope.tags.splice(index, 1);
       }
     });
   }
