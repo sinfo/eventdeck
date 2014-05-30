@@ -1,4 +1,5 @@
 var Meeting = require('./../../db/models/meeting');
+var notification  = require('./../notification');
 
 module.exports = create;
 

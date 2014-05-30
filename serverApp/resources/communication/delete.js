@@ -1,5 +1,6 @@
 var async = require('async');
 var Communication = require('./../../db/models/communication.js');
+var Notification = require('./../../db/models/notification.js');
 
 module.exports = remove;
 
@@ -48,7 +49,13 @@ function remove(request, reply) {
         cb('Error on the database');
       }
       else {
-        cb();
+        Notification.removeBySource(request.params.id, function (err, result) {
+          if(err) { 
+            console.log(err); 
+          }
+
+          cb();
+        });
       }
     });
   }
