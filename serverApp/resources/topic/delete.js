@@ -15,7 +15,9 @@ function del(request, reply) {
     }
     else {
       Notification.removeByThread('topic-'+topicId, function (err, result) {
-        //console.log("Notifications removed", result);
+        if(err) { 
+          console.log(err); 
+        }
       });
 
       Comment.removeByThread('topic-'+topicId, function (err, result) {

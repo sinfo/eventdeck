@@ -52,7 +52,7 @@ function notify(memberId, thread, description, objectId) {
     if (err) {
       console.log("There was an error! "+ err);
     } else {
-      console.log("Notification saved!");
+      console.log(memberId+' '+description+' on '+thread+' (objectId:'+objectId+')');
     }
   }
 }
