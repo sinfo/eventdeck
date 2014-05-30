@@ -1,5 +1,4 @@
 <div class="column-group">
-
   <h1 ng-show="loading">Loading...</h1>
   <form ng-hide="loading" class="all-100 ink-form">
     <div class="all-100 control-group required {{meeting.title ? '' : 'validation error'}}">
@@ -26,11 +25,24 @@
       </div>
     </div>
   </form>
-  <div class="control-group">
 
-    <div class="all-100" style="margin-bottom: 20px">
+  <div class="all-100 bottom-space">
+    <a class="ink-button orange" href="/#/meetings"><i class="fa fa-back"></i><i class="fa fa-reply"></i> Go back</a>
+    <div class="ink-button green" ng-click="saveMeeting()"><i class="fa fa-check"></i> Save</div>
+    <div class="ink-button red" ng-click="deleteMeeting()"><i class="fa fa-times"></i> Delete</div>
+    <div class="ink-alert basic success" ng-show="success">
+      <button class="ink-dismiss">&times;</button>
+      <p><strong>Success!</strong> {{success}}</p>
+    </div>
+    <div class="ink-alert basic error" ng-show="error">
+      <button class="ink-dismiss">&times;</button>
+      <p><strong>Error!</strong> {{error}}</p>
+    </div>
+  </div>
+
+  <div class="all-100 half-bottom-space">
+    <div class="all-100 half-bottom-space">
       <h3>Topics</h3>
-
       <nav class="ink-navigation">
         <ul class="menu vertical">
           <li>
@@ -38,7 +50,7 @@
               <input type="text" ng-model="searchTopic" ng-change="show()" ng-click="show()" placeholder="Add an existing topic!" style="width: 80%; max-width:600px">
             </a>
             <ul ng-if="searchTopic && searchTopic.length > 1" class="submenu grey" style="width: 600px; max-height: 400px; margin-top: -8px; overflow: auto; display: {{display ? 'block' : 'none'}};">
-              <li ng-repeat="topic in topics | filter:noEditFilter | filter:searchTopic:strict">
+              <li ng-repeat="topic in topics | filter:alreadyInMeetingFilter | filter:searchTopic:strict">
                 <a ng-click="addTopic(topic._id)" title="{{topic.text}}">
                   <img ng-src="{{'https://graph.facebook.com/'+getMember(topic.author).facebook+'/picture'}}" style="height: 20px; max-width: 40px">
                   <b> [{{topic.kind}}]</b> {{topic.text | limitTo : 60}} <span ng-if="topic.text.length > 60">(...)</span>
@@ -50,37 +62,17 @@
       </nav>
     </div>
 
-
-
     <div class="all-100">
       <h1 ng-show="loading">Loading...</h1>
-      <div ng-if="!topic.deleted" ng-repeat="topic in editTopics track by $index">
+      <div ng-if="!topic.deleted" ng-repeat="topic in meeting.topics | orderBy:'posted'">
         <topic topic-object="topic" members="{{members}}" me="{{me}}" roles="{{roles}}" tags-array="topicTags"></topic>
         <a class="ink-button red" ng-click="removeTopic(topic)"><i class="fa fa-chevron-circle-up"></i> Remove topic without deleting it</a>
         <br><br>
       </div>
     </div>
 
-    <br>
-
     <div class="all-100">
       <div ng-repeat="kind in kinds" class="ink-button green half-right-space" ng-click="createTopic(kind)"><i class="fa fa-plus"></i> New {{kind}}</div>
     </div>
-
   </div>
-
-  <div class="all-100 control-group top-space half-bottom-space">
-    <a class="ink-button orange" href="/#/meetings"><i class="fa fa-back"></i><i class="fa fa-reply"></i> Go back...</a>
-    <div class="ink-button green" ng-click="saveMeeting()"><i class="fa fa-check"></i> Save</div>
-    <div class="ink-button red" ng-click="deleteMeeting()"><i class="fa fa-times"></i> Delete</div>
-    <div class="ink-alert basic success" ng-show="successMeeting">
-      <button class="ink-dismiss">&times;</button>
-      <p><strong>Success!</strong> {{success}}</p>
-    </div>
-    <div class="ink-alert basic error" ng-show="errorMeeting">
-      <button class="ink-dismiss">&times;</button>
-      <p><strong>Error!</strong> {{error}}</p>
-    </div>
-  </div>
-
 </div>

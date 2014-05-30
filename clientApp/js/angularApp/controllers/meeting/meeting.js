@@ -7,16 +7,9 @@ theToolController.controller("MeetingController", function ($scope, $routeParams
   $scope.loading = true;
 
   $scope.kinds = ["Info", "To do", "Decision", "Idea"];
-  $scope.editTopics = [];
 
   MeetingFactory.get({id: $routeParams.id}, function (meeting) {
     $scope.meeting = meeting;
-
-    console.log($scope.meeting);
-
-    for (var i = 0; i < $scope.meeting.topics.length; i++) {
-      $scope.editTopics.push($scope.meeting.topics[i]);
-    }
 
     $scope.loading = false;
   });
@@ -27,7 +20,7 @@ theToolController.controller("MeetingController", function ($scope, $routeParams
   $scope.toggleAttendant = function (member) {
     var index = $scope.meeting.attendants.indexOf(member);
 
-    if (index == -1) {
+    if (index === -1) {
       $scope.meeting.attendants.push(member);
     }
     else {
@@ -63,46 +56,34 @@ theToolController.controller("MeetingController", function ($scope, $routeParams
     TopicFactory.Topic.create(topic, function (response) {
       if (response.success) {
         topic._id = response.id;
-        $scope.meeting.topics.push(response.id);
-        $scope.editTopics.push(topic);
+        $scope.meeting.topics.push(topic);
       }
     });
   };
 
   $scope.addTopic = function (topicId) {
-
-    var addedTopic = $scope.topics.filter(function (o) {
-      return o._id == topicId;
-    })[0];
-    $scope.editTopics.push(addedTopic);
-    $scope.meeting.topics.push(topicId);
     $scope.display = false;
-  }
 
-  $scope.getName = function (member) {
-    return $scope.members.filter(function (o) {
-      return o.id == member;
-    })[0].name;
+    var topic = $scope.topics.filter(function (o) {
+      return o._id === topicId;
+    })[0];
+
+    $scope.meeting.topics.push(topic);
+
+    topic.meetings.push($scope.meeting._id);
+    TopicFactory.Topic.update({id: topic._id}, topic);
   };
 
   $scope.removeTopic = function (topic) {
-    if (topic._id) {
-      $scope.meeting.topics.splice($scope.meeting.topics.indexOf(topic._id), 1);
-    }
-    $scope.editTopics.splice($scope.editTopics.indexOf(topic), 1);
+    $scope.meeting.topics.splice($scope.meeting.topics.indexOf(topic), 1);
 
     topic.meetings.splice(topic.meetings.indexOf($scope.meeting._id), 1);
     TopicFactory.Topic.update({id: topic._id}, topic);
   };
 
-  $scope.removeAllTopics = function () {
-    $scope.meeting.topics = [];
-    $scope.editTopics = [];
-  };
-
   $scope.saveMeeting = function () {
-    $scope.successMeeting = "";
-    $scope.errorMeeting   = "";
+    $scope.success = "";
+    $scope.error   = "";
 
     if (!$scope.meeting.title){
       $scope.error = "Please enter a title.";
@@ -111,10 +92,10 @@ theToolController.controller("MeetingController", function ($scope, $routeParams
 
     MeetingFactory.update({id: $scope.meeting._id}, $scope.meeting, function (response) {
       if(response.error) {
-        $scope.errorMeeting = "There was an error. Please contact the Dev Team and give them the details about the error.";
+        $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
       }
       else if (response.success) {
-        $scope.successMeeting = response.success;
+        $scope.success = response.success;
       }
     });
   };
@@ -122,7 +103,7 @@ theToolController.controller("MeetingController", function ($scope, $routeParams
   $scope.deleteMeeting = function () {
     MeetingFactory.delete({id: $scope.meeting._id}, function (response) {
       if(response.error) {
-        $scope.errorMeeting = "There was an error. Please contact the Dev Team and give them the details about the error.";
+        $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
       }
       else {
         $location.path("/meetings/");
@@ -134,9 +115,9 @@ theToolController.controller("MeetingController", function ($scope, $routeParams
     $scope.display = ($scope.searchTopic ? true : false);
   };
 
-  $scope.noEditFilter = function (topic) {
-    for(var i = 0; i < $scope.editTopics.length; i++){
-      if(topic._id === $scope.editTopics[i]._id){
+  $scope.alreadyInMeetingFilter = function (topic) {
+    for (var i = 0; i < $scope.meeting.topics.length; i++) {
+      if ($scope.meeting.topics[i]._id === topic._id) {
         return false;
       }
     }
