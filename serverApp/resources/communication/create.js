@@ -16,7 +16,7 @@ function create(request, reply) {
       reply({error: "Error creating communication."});
     }
     else {
-      notification.communication(communication.member, communication.thread, request.auth.credentials.name);
+      notification.notify(communication.member, communication.thread, 'posted a new communication', newCommunication._id);
 
       reply({success: "Communication created."});
     }
