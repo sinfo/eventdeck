@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-theToolController.controller('MeetingController', function ($scope, $routeParams, $location, MeetingFactory, TopicFactory) {
+theToolController.controller("MeetingController", function ($scope, $routeParams, $location, MeetingFactory, TopicFactory) {
 
   //================================INITIALIZATION================================
 
@@ -24,7 +24,7 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
 
   //===================================FUNCTIONS===================================
 
-  $scope.toggleAttendant = function(member) {
+  $scope.toggleAttendant = function (member) {
     var index = $scope.meeting.attendants.indexOf(member);
 
     if (index == -1) {
@@ -35,13 +35,13 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
     }
   };
 
-  $scope.toggleAttendants = function() {
+  $scope.toggleAttendants = function () {
     for (var i = 0, j = $scope.members.length; i < j; i++) {
       $scope.toggleAttendant($scope.members[i].id);
     }
   };
 
-  $scope.createTopic = function(kind) {
+  $scope.createTopic = function (kind) {
     var topic = {
       editing: true,
       author: $scope.me.id,
@@ -60,7 +60,7 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
       posted: new Date()
     };
 
-    TopicFactory.Topic.create(topic, function(response) {
+    TopicFactory.Topic.create(topic, function (response) {
       if (response.success) {
         topic._id = response.id;
         $scope.meeting.topics.push(response.id);
@@ -69,9 +69,9 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
     });
   };
 
-  $scope.addTopic = function(topicId) {
+  $scope.addTopic = function (topicId) {
 
-    var addedTopic = $scope.topics.filter(function(o) {
+    var addedTopic = $scope.topics.filter(function (o) {
       return o._id == topicId;
     })[0];
     $scope.editTopics.push(addedTopic);
@@ -80,24 +80,27 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
   }
 
   $scope.getName = function (member) {
-    return $scope.members.filter(function(o) {
+    return $scope.members.filter(function (o) {
       return o.id == member;
     })[0].name;
   };
 
-  $scope.removeTopic = function(topic) {
-    if(topic._id){
+  $scope.removeTopic = function (topic) {
+    if (topic._id) {
       $scope.meeting.topics.splice($scope.meeting.topics.indexOf(topic._id), 1);
     }
     $scope.editTopics.splice($scope.editTopics.indexOf(topic), 1);
+
+    topic.meetings.splice(topic.meetings.indexOf($scope.meeting._id), 1);
+    TopicFactory.Topic.update({id: topic._id}, topic);
   };
 
-  $scope.removeAllTopics = function() {
+  $scope.removeAllTopics = function () {
     $scope.meeting.topics = [];
     $scope.editTopics = [];
   };
 
-  $scope.saveMeeting = function() {
+  $scope.saveMeeting = function () {
     $scope.successMeeting = "";
     $scope.errorMeeting   = "";
 
@@ -106,7 +109,7 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
       return;
     }
 
-    MeetingFactory.update({id: $scope.meeting._id}, $scope.meeting, function(response) {
+    MeetingFactory.update({id: $scope.meeting._id}, $scope.meeting, function (response) {
       if(response.error) {
         $scope.errorMeeting = "There was an error. Please contact the Dev Team and give them the details about the error.";
       }
@@ -116,8 +119,8 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
     });
   };
 
-  $scope.deleteMeeting = function() {
-    MeetingFactory.delete({id: $scope.meeting._id}, function(response) {
+  $scope.deleteMeeting = function () {
+    MeetingFactory.delete({id: $scope.meeting._id}, function (response) {
       if(response.error) {
         $scope.errorMeeting = "There was an error. Please contact the Dev Team and give them the details about the error.";
       }
@@ -127,11 +130,11 @@ theToolController.controller('MeetingController', function ($scope, $routeParams
     });
   };
 
-  $scope.show = function() {
+  $scope.show = function () {
     $scope.display = ($scope.searchTopic ? true : false);
   };
 
-  $scope.noEditFilter = function(topic) {
+  $scope.noEditFilter = function (topic) {
     for(var i = 0; i < $scope.editTopics.length; i++){
       if(topic._id === $scope.editTopics[i]._id){
         return false;
