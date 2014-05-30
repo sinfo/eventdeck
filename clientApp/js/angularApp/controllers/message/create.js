@@ -45,7 +45,7 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
     }
     console.log(messageData);
 
-    SocketFactory.emit('send', { message: messageData }, function() {console.log('emited')});
+    SocketFactory.emit('send', {room: $scope.room, message: messageData }, function() {console.log('emited')});
     /*MessageFactory.create(messageData, function(response){
       if(response.error) {
         $scope.error = response.error;
