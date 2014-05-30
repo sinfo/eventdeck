@@ -6,7 +6,6 @@ function create(request, reply) {
 
   var message    = {};
   message = new Message(request.payload);
-  console.log("CreateMessage: " + message);
   message.save(function (err){
     if (err) {
       console.log(err);

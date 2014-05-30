@@ -33,17 +33,16 @@ webSocket
       socket.on('send', function(data, cbClient){
         console.log("Sent message Chat ID: " + data.room);
 
-        var room = data.room;
+        var room    = data.room;
+        messageData = data.message; 
 
         async.series([
+          createMessage,
           function(cb){
-            createMessage(messageData, cb)
-          },
-          function(cb){
-            updateChat(room, messageId, cb)
+            updateChat(room, cb)
           }
         ], function(){
-            socket.in(room).emit('message', messageData);
+            webSocket.of('/chat').in(room).emit('message', messageData);
             cbClient();
         });
       });
@@ -87,8 +86,8 @@ function done(room, socket, cb){
   cb(data);
 }
 
-function createMessage(messageData, cb){
-  MessageFactory.create(messageData, function(response){
+function createMessage(cb){
+  Message.create({payload: messageData}, function(response){
     if(response.error) {
       console.log('Message creation error!');
       console.log(response.error);
@@ -99,14 +98,14 @@ function createMessage(messageData, cb){
   });
 }
 
-function updateChat(room, messageId, cb){
-  ChatFactory.Chat.update({ id: room }, {message: messageId}, function(response) {
+function updateChat(room, cb){
+  Chat.post({params: { id: room}, payload: {message: messageData.id}}, function(response) {
     // if successful, we'll need to refresh the chat list
     if(response.error) {
-      console.log('Chat id: ' + chatID + ' update error!');
+      console.log('Chat id: ' + messageData.id + ' update error!');
       console.log(response.error);
     } else {
-      console.log('Chat id: ' + chatID + ' updated successfully!');
+      console.log('Chat id: ' + messageData.id + ' updated successfully!');
     }
     cb();
   });
