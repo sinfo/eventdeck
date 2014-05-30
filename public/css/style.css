@@ -318,6 +318,7 @@ body.ink-drawer .right-drawer li.active > a {
   padding: 10px;
   margin-bottom: 20px;
   height: 260px;
+  border-radius: 6px;
 }
 
 .list-box div {
