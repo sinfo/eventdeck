@@ -1,17 +1,17 @@
 <div>
-  <h4>Manage Tags</h4>
+  <h3>Manage tags</h3>
   <small class="ink-button red" ng-show="search.tags" ng-click="search.tags=undefined"><i class="fa fa-times"></i> Clear Tag Filters</small>
-  <span ng-hide="tags">There are no tags</span>
-  <small>
-  <ul style="padding:0px;">
-    <li ng-repeat="tag in tags" ng-click="search.tags = tag.id" style="cursor: pointer; background: {{tag.color}}; padding: 0.2em 0.6em; border-radius: 6px; color: white; width: 80%;">
-      <a title="Delete Tag" ng-click="deleteTag(tag)" style="color:white;"><i class="fa fa-trash-o"></i></a>
-      <span> {{tag.name}}</span>
-    </li>
-  </ul>
-  </small>
+  <span ng-hide="tags">There are no tags.</span>
+  <div class="button-group" ng-repeat="tag in tags">
+    <div class="ink-button small all-15" ng-click="deleteTag(tag)" style="background: {{tag.color}}; border: 0px; border-right: 1px solid white; color: white; font-size: 16px;" title="Delete tag">
+      <i class="fa fa-trash-o"></i>
+    </div>
+    <div class="ink-button small all-85" ng-click="search.tags = tag.id" style="background: {{tag.color}}; border: 0px; color: white; font-size: 16px;">
+      {{tag.name}}
+    </div>
+  </div>
 
-  <h6>Create New Tag</h6>
+  <h4 class="half-top-space">Create new tag</h4>
   <form class="ink-form">
     <input type="text" ng-model="newTag.name" placeholder="Tag name" style="width:240px">
     <ul style="padding:0px;margin:0px;">
