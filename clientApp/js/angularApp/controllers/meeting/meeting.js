@@ -101,14 +101,16 @@ theToolController.controller("MeetingController", function ($scope, $routeParams
   };
 
   $scope.deleteMeeting = function () {
-    MeetingFactory.delete({id: $scope.meeting._id}, function (response) {
-      if(response.error) {
-        $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
-      }
-      else {
-        $location.path("/meetings/");
-      }
-    });
+    if (confirm("Are you sure you want to delete this meeting?")) {
+      MeetingFactory.delete({id: $scope.meeting._id}, function (response) {
+        if(response.error) {
+          $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
+        }
+        else {
+          $location.path("/meetings/");
+        }
+      });
+    }
   };
 
   $scope.show = function () {
