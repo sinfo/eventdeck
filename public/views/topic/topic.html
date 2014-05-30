@@ -2,9 +2,9 @@
   <h1 ng-if="loading">Loading...</h1>
 
   <div ng-if="!topic.editing">
-    
+
     <div class="column-group horizontal-gutters">
-            
+
       <div class="all-85">
 
         <a href="/#/member/{{topic.author}}">
@@ -51,7 +51,7 @@
           <comment-area thread="{{'topic-' + topic._id}}"></comment-area>
         </div>
       </div>
-    
+
       <div class="all-15 align-right">
         <small title="Edit Topic" class="ink-button orange" ng-click="topic.editing=!topic.editing" style="width:60px"><i class="fa fa-wrench"></i></small><br>
         <small title="Show/Hide Targets" class="ink-button blue" ng-click="toggleTargets()" style="width:60px">{{topic.targets.length}} <i class="fa fa-users"></i></small><br>

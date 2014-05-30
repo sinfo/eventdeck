@@ -14,17 +14,17 @@ function del(request, reply) {
       reply({error: "There was an error deleting the topic with id '" + topicId + "'."});
     }
     else {
-      Notification.removeByThread('topic-'+topicId, function(err, result) {
+      /*Notification.removeByThread('topic-'+topicId, function (err, result) {
         //console.log("Notifications removed", result);
       });
 
-      Comment.removeByThread('topic-'+topicId, function(err, result) {
+      Comment.removeByThread('topic-'+topicId, function (err, result) {
         //console.log("Comments removed", result);
       });
 
-      Meeting.removeTopic(topicId, function(err, result) {
+      Meeting.removeTopic(topicId, function (err, result) {
         //console.log("Comments removed", result);
-      });
+      });*/
 
       reply({success: "Topic deleted."});
     }
