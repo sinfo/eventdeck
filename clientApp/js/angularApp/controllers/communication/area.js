@@ -41,7 +41,7 @@ theToolController.controller("CommunicationAreaController", function ($scope, $h
         if(communications.filter(function(o) {
           return o.kind.indexOf('Paragraph') != -1;
         }).length != 0) {
-          $scope.kinds=['Email To', 'Email From', 'Meeting', 'Phone Call'];          
+          $scope.kinds=['Email To', 'Email From', 'Meeting', 'Phone Call'];
         } else {
           $scope.kinds=['Inital Email Paragraph','Email To', 'Email From', 'Meeting', 'Phone Call'];
         }
@@ -94,7 +94,6 @@ theToolController.controller("CommunicationAreaController", function ($scope, $h
 
   $scope.approveCommunication = function (communication) {
     CommunicationFactory.Communication.approve({id: communication._id}, null, function (response) {
-      console.log(response);
       loadCommunications();
     });
   };
@@ -153,7 +152,7 @@ theToolController.controller("CommunicationAreaController", function ($scope, $h
 
   $scope.convertURLs = function(text) {
     var urlExp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-    
+
     return text.replace(/\n/g, '<br>').replace(urlExp,"<a href='$1'>$1</a>");
   }
 
