@@ -232,23 +232,42 @@ body.ink-drawer .right-drawer li.active > a {
   min-width: 300px;
 }
 
+.suggestion:hover,
 .suggestion {
-  background: #ccc;
+  background: #5319e7;
 }
+.contacted:hover,
 .contacted {
-  background: #783F04;
+  background: #fbca04;
 }
-.convesations {
-  background: #0000FF;
+.in-conversations:hover,
+.in-conversations {
+  background: #207de5;
 }
+.in-negotiations:hover,
+.in-negotiations {
+  background: #006b75;
+}
+.closed-deal:hover,
+.closed-deal,
+.accepted:hover,
 .accepted {
-  background: #00FF00;
+  background: #009800;
 }
+.rejected:hover,
 .rejected {
-  background: #FF0000;
+  background: #e11d21;
 }
-.giveup {
-  background: #000;
+.give-up:hover,
+.give-up {
+  background: #333;
+}
+
+.status {
+  padding:0.2em 0.6em;
+  margin-bottom:5px;
+  border-radius:8px;
+  color: white;
 }
 
 .gold {
