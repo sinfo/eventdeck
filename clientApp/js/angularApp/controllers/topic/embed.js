@@ -20,6 +20,8 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
 
   show($scope.topic);
 
+  console.log($scope);
+
 
   //=================================AUXFUNCTIONS==================================
 
