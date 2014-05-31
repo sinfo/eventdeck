@@ -17,6 +17,7 @@ theToolController.controller("TagManagerController", function ($scope, TagFactor
     TagFactory.Tag.create(tag, function (response) {
       if (response.success) {
         $scope.tags.push(response.tag);
+        $scope.tag = {};
       }
     });
   };
