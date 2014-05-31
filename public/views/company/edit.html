@@ -36,6 +36,12 @@
               </div>
             </div>
             <div class="control-group">
+              <label for="status">Status</label>
+              <div class="control">
+                <select id="status" ng-model="formData.status" ng-options="s for s in statuses"></select>
+              </div>
+            </div>
+            <div class="control-group">
               <label for="member">Member</label>
               <div class="control">
                 <select ng-model="formData.member" ng-options="m.id as m.name for m in members"></select>
@@ -52,18 +58,6 @@
               <label for="area">Area</label>
               <div class="control">
                 <input id="area" ng-model="formData.area" type="text">
-              </div>
-            </div>
-            <div class="control-group">
-              <label for="id">Id</label>
-              <div class="control">
-                <input id="id" ng-model="formData.id" type="text" disabled>
-              </div>
-            </div>
-            <div class="control-group">
-              <label for="status">Status</label>
-              <div class="control">
-                <select id="status" ng-model="formData.status" ng-options="s for s in statuses"></select>
               </div>
             </div>
           </div>

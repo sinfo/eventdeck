@@ -14,7 +14,8 @@
 
         <a href="/#/company/{{company.id}}">
           <h5 style="margin-top:10px;">
-            {{company.name}} <i ng-if="company.status">[{{company.status}}]</i>
+            <span class="status" ng-class="company.status.replace(' ','-').toLowerCase()">{{company.status}}</span> 
+            {{company.name}} 
           </h5>
           <img class="image" ng-src="{{company.img}}">
         </a>
