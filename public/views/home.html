@@ -4,17 +4,17 @@
       <h1>Recent Activity</h1>
       <h2 ng-show="loading">Loading...</h2>
       <div ng-hide="loading" infinite-scroll="scroll()">
-        <div class="activity {{notification.color}}" ng-repeat="notification in notifications | orderBy: 'posted':true | limitTo: limit">
-          <div class="all-100">
+        <div class="activity {{notification.color}}" ng-repeat="notification in notifications | orderBy:'posted':true | limitTo: limit">
+          <div class="all-100" style="margin-bottom:5px">
             <a href="/#/member/{{getMember(getMember(notification.member)).id}}">
               <img ng-src="{{'https://graph.facebook.com/'+getMember(notification.member).facebook+'/picture'}}">
               <b>{{getMember(notification.member).name}}</b>
             </a>
-            <small title="{{notification.posted}}">{{timeSince(notification.posted)}}</small>
+            <a href="/#/{{notification.thread.replace('-','/')}}" style="color: #666;">
+              {{notification.description}}
+            </a>
+            <small title="{{notification.posted}}">({{timeSince(notification.posted)}})</small>
           </div>
-          <a href="/#/{{notification.thread.replace('-','/')}}">
-            <p style="color: #444;"><p>{{notification.description}}</p></p>
-          </a>
           <div >
             <topic ng-if="notification.thread.indexOf('topic')!=-1" topic-object="getTopic(notification.thread.replace('topic-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" tags-array="topicTags" comments-array="comments"></topic>
             <speaker ng-if="notification.thread.indexOf('speaker')!=-1" speaker-object="getSpeaker(notification.thread.replace('speaker-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></speaker>
