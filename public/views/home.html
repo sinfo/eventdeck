@@ -16,7 +16,7 @@
             <small title="{{notification.posted}}">({{timeSince(notification.posted)}})</small>
           </div>
           <div >
-            <topic ng-if="notification.thread.indexOf('topic')!=-1" topic-object="getTopic(notification.thread.replace('topic-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" tags-array="topicTags" comments-array="comments"></topic>
+            <topic ng-if="notification.thread.indexOf('topic')!=-1" topic-object="getTopic(notification.thread.replace('topic-',''))" topic-members="members" topic-me="me" topic-roles="roles" topic-tags="topicTags" topic-comments="comments"></topic>
             <speaker ng-if="notification.thread.indexOf('speaker')!=-1" speaker-object="getSpeaker(notification.thread.replace('speaker-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></speaker>
             <company ng-if="notification.thread.indexOf('company')!=-1" company-object="getCompany(notification.thread.replace('company-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></company>
           </div>
