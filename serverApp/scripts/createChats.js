@@ -7,39 +7,35 @@ require('./../db');
 setTimeout(function() {
 
   var newChat = {};
-  async.each(chats, function(jsonChat, callback){
-    createChat(jsonChat, callback);
-
-  }, function(error) {
-
-    if(error) { console.log("Error!!", error); }
-    console.log("DONE");
+  var members = [];
+  Member.findAll(function(err, result){
+    if (err) { cb(err); }
+    for(var i= 0; i < members.length; i++){
+      members[i] = result[i].id;
+    }
+    async.each(chats, function(jsonChat, callback){
+      createChat(jsonChat, callback);
+    }, 
+    function(error) {
+      if(error) { console.log("Error!!", error); }
+      console.log("DONE");
+    });
   });
 
   function createChat(jsonChat, cb){
-    Chat.findByName(jsonChat.name, function(err, result) {
+    Chat.findById(jsonChat.id, function(err, result) {
       if (err) { cb(err); }
-
-      if (result.length == 0) {
+      if (!result) {
         console.log("missing", jsonChat.name);
-        newChat = {};
-        newChat.id       = jsonChat.id;
-        newChat.name     = jsonChat.name;
-        newChat.messages = jsonChat.messages;
-        newChat.members  = [];
-        console.log(jsonChat.members);
+        newChat = jsonChat;
         if(!jsonChat.members){
-          Member.findAll(function(err, members){
-            if (err) { cb(err); }
-            for(var i= 0; i < members.length; i++){
-              newChat.members[i] = members[i].id;
-            }
-          });
+          console.log(members);
+          newChat.members  = members;
         }
         else{
           newChat.members  = jsonChat.members;
+          saveChat(cb);
         }
-        saveChat(cb);
       }
       else{
         cb();
