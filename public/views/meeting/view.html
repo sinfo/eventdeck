@@ -1,0 +1,26 @@
+<div class="column-group">
+  <h2 ng-show="loading">Loading...</h2>
+  <div ng-hide="loading">
+    <div class="all-100">
+      <div class="all-50">
+        <h2>{{meeting.title}}</h2>
+      </div>
+      <div class="all-50 align-right">
+        <a class="ink-button orange" ng-href="/#/meeting/{{meeting._id}}/edit"><i class="fa fa-pencil"></i> Edit meeting</a>
+      </div>
+    </div>
+
+    <p class="all-100">{{meeting.description}}</p>
+
+    <h4 style="margin-bottom: 0px;">Attendants</h4>
+    <div class="all-100 half-bottom-space">
+      <div ng-repeat="member in getAttendants() | orderBy:'id'" class="ink-button green" style="cursor: default; margin: 0.25em;">
+        <img ng-src="https://graph.facebook.com/{{member.facebook}}/picture?width=60&height=60" style="width: 30px;">
+        {{member.name}}
+      </div>
+    </div>
+
+    <h4 style="margin-bottom: 0.25em;">Topics</h4>
+    <topic ng-repeat="topic in meeting.topics | orderBy:posted" topic-object="topic" topic-members="members" topic-me="me" topic-roles="roles" topic-tags="topicTags"></topic>
+  </div>
+</div>
