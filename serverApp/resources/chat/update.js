@@ -4,8 +4,6 @@ var Chat  = require('./../../db/models/chat.js');
 
 exports = module.exports = update;
 
-/// update Chat
-
 function update(request, reply) {
 
   var chatId = request.params.id;
@@ -25,13 +23,8 @@ function update(request, reply) {
       if (err) {
         cb(err);
       }
-
       if (result.length > 0) {
-        if (result[0].id)            { chat.id        = result[0].id; }
-        if (result[0].name)          { chat.name      = result[0].name; }
-        if (result[0].members)       { chat.members   = result[0].members; }
-        if (result[0].messages)      { chat.messages  = result[0].messages; }
-        cb();
+        chat = result;
       }
       else {
         cb(Hapi.error.conflict('No chat with the ID: ' + chatId));
@@ -40,16 +33,18 @@ function update(request, reply) {
   }
 
   function updateChat(cb) {
-    //console.log(request.payload.members, chat.members, request.payload.member != chat.member)
 
-    if (request.payload.id != chat.id)              { diffChat.id        = request.payload.id; }
-    if (request.payload.name != chat.name)          { diffChat.name      = request.payload.name; }
-    if (request.payload.member != chat.members)     { diffChat.member    = request.payload.member; }
-    if (request.payload.messages != chat.messages)  { diffChat.messages  = request.payload.messages; }
+    if (request.payload.message){
+      chat.messages.push(request.payload.message);
+    }
+    else{
+      if (request.payload.id != chat.id)              { diffChat.id        = request.payload.id; }
+      if (request.payload.name != chat.name)          { diffChat.name      = request.payload.name; }
+      if (request.payload.member != chat.members)     { diffChat.member    = request.payload.member; }
+      if (request.payload.messages != chat.messages)  { diffChat.messages  = request.payload.messages; }
+    }
     
     diffChat.updated = Date.now();
-
-    console.log("DIFF", diffChat)
 
     cb();
   }
@@ -66,7 +61,7 @@ function update(request, reply) {
         return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
       }
 
-      console.log("UPDATED", numAffected)
+      console.log("Updated chat:", numAffected)
       cb();
     });
   }
