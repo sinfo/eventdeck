@@ -45,6 +45,8 @@ function create(request, reply) {
       reply({error: "There was an error updating the session."});
     }
     else {
+      notification.notify(request.auth.credentials.id, 'session-'+session.id, 'updated a session', null);
+
       reply({success: "Session updated."});
     }
   }

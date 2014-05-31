@@ -123,7 +123,6 @@ function notify(comment) {
       // send the message and get a callback with an error or details of the message that was sent
       server.send(message, function(err, message) {
         if(err) { cb(err); }
-        console.log(err || message);
         cb();
       });
     }

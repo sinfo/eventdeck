@@ -18,7 +18,8 @@ function create(request, reply) {
     }
     else {
       reply({success: "Topic created.", id: newTopic._id});
-      notification.create(request.auth.credentials.id, "topic-"+newTopic.id, null, "["+newTopic.kind+"]", request.auth.credentials.name);
+
+      notification.notify(request.auth.credentials.id, 'topic-'+newTopic._id, 'created a new topic', null);
     }
   });
 

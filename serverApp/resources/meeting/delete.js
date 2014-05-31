@@ -1,4 +1,5 @@
 var Meeting = require('./../../db/models/meeting');
+var Notification = require('./../../db/models/notification.js');
 
 module.exports = del;
 
@@ -10,6 +11,12 @@ function del(request, reply) {
     }
     else {
       reply({success: "Meeting deleted."});
+      
+      Notification.removeByThread('meeting-'+request.params.id, function (err, result) {
+        if(err) { 
+          console.log(err); 
+        }
+      });
     }
   });
 

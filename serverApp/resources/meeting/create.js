@@ -1,4 +1,5 @@
 var Meeting = require('./../../db/models/meeting');
+var notification  = require('./../notification');
 
 module.exports = create;
 
@@ -11,7 +12,8 @@ function create(request, reply) {
       reply({error: "There was an error creating the meeting."});
     }
     else {
-      //notification.new(request.auth.credentials.id, 'meeting-'+meeting.id, meeting.name, "meeting",request.auth.credentials.name);
+      notification.notify(request.auth.credentials.id, 'meeting-'+meeting.id, 'created a new meeting', null);
+
       reply({
         success: "Meeting created.",
         id: meeting._id
