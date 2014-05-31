@@ -9,11 +9,11 @@ var chatSchema = new mongoose.Schema({
 });
 
 chatSchema.statics.findById = function (id, cb) {
-  this.find({ _id: id }, cb);
+  this.find({id: id }, cb);
 };
 
 chatSchema.statics.findByName = function (id, cb) {
-  this.find({ name: id }, cb);
+  this.find({name: id }, cb);
 };
 
 chatSchema.statics.findAll = function (cb) {
