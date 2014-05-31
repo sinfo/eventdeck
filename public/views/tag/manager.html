@@ -1,10 +1,9 @@
 <div>
   <h3>{{manage ? 'Manage tags' : 'Tags'}}</h3>
-  <small class="ink-button red" ng-show="search.tags" ng-click="search.tags=undefined"><i class="fa fa-times"></i> Clear Tag Filters</small>
   <span ng-hide="tags">There are no tags.</span>
 
-  <div class="button-group quarter-bottom-space">
-    <div class="ink-button small all-100" ng-click="manage = !manage" style="border-radius: 2px; font-size: 16px;">Manage tags</div>
+  <div ng-show="search.tags" class="button-group quarter-bottom-space">
+    <div class="ink-button red small all-100" ng-click="search.tags = undefined" style="border-radius: 2px; font-size: 16px;"><i class="fa fa-times"></i> Clear tag filters</div>
   </div>
 
   <div ng-hide="manage">
@@ -14,6 +13,7 @@
       </div>
     </div>
   </div>
+
   <div ng-show="manage">
     <div class="button-group" ng-repeat="tag in tags">
       <div class="ink-button small all-15" ng-click="deleteTag(tag)" style="background: {{tag.color}}; border: 0px; border-right: 1px solid white; color: white; font-size: 16px;" title="Delete tag">
@@ -23,21 +23,25 @@
         {{tag.name}}
       </div>
     </div>
-
-    <h4 class="half-top-space">Create new tag</h4>
-    <form class="ink-form">
-      <input type="text" ng-model="newTag.name" placeholder="Tag name" style="width:240px">
-      <ul style="padding:0px;margin:0px;">
-        <li ng-repeat="color in colors" ng-click="changeColor(color)" style="width:30px;height:30px;background:{{color}};display: table-cell;cursor: pointer;"></li>
-      </ul>
-      <ul style="padding:0px;margin:0px;">
-        <li ng-repeat="color in lightColors" ng-click="changeColor(color)" style="width:30px;height:30px;background:{{color}};display: table-cell;cursor: pointer;"></li>
-      </ul>
-      <input type="text" ng-model="newTag.color" placeholder="Tag color" style="border-color:{{newTag.color}};color:{{newTag.color}};width:240px">
-
-      <div class="align-left">
-        <a class="ink-button" ng-click="createTag(newTag)" style="background:{{newTag.color}};color:white;margin:0;border-color:{{newTag.color}};width:240px">Create {{newTag.name | limitTo: 15}} <i ng-show="newTag.name.length > 15">(...)</i></a>
-      </div>
-    </form>
   </div>
+
+  <div class="button-group half-top-space">
+    <div class="ink-button small all-100" ng-click="manage = !manage" style="border-radius: 2px; font-size: 16px;">Manage tags</div>
+  </div>
+
+  <h4 class="half-top-space">Create new tag</h4>
+  <form class="ink-form">
+    <input type="text" ng-model="tag.name" placeholder="Tag name" style="width:240px">
+    <ul style="padding:0px;margin:0px;">
+      <li ng-repeat="color in colors" ng-click="changeColor(color)" style="width:30px;height:30px;background:{{color}};display: table-cell;cursor: pointer;"></li>
+    </ul>
+    <ul style="padding:0px;margin:0px;">
+      <li ng-repeat="color in lightColors" ng-click="changeColor(color)" style="width:30px;height:30px;background:{{color}};display: table-cell;cursor: pointer;"></li>
+    </ul>
+    <input type="text" ng-model="tag.color" placeholder="Tag color" style="border-color:{{tag.color}};color:{{tag.color}};width:240px">
+
+    <div class="align-left">
+      <a class="ink-button" ng-click="createTag(tag)" style="background:{{tag.color}};color:white;margin:0;border-color:{{tag.color}};width:240px">Create {{tag.name | limitTo: 15}} <i ng-show="tag.name.length > 15">(...)</i></a>
+    </div>
+  </form>
 </div>
