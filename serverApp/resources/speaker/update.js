@@ -76,10 +76,26 @@ function create(request, reply) {
       }
     }
     else {
-      notification.update(request.auth.credentials.id, "speaker-" + speaker.id, speaker.name, request.auth.credentials.name, diffSpeaker);
+      notification.notify(request.auth.credentials.id, 'speaker-'+speaker.id, 'updated '+getEditionString(diffSpeaker), null);
+      
       reply({success: "Speaker updated."});
     }
   }
+}
+
+function getEditionString(diffObject) {
+  var editionsArray = [];
+  for(var propertyName in diffObject) {
+    if(propertyName != "updated"){
+      editionsArray.push(propertyName);
+    }
+  }
+  var editions = editionsArray[0];
+  if(editionsArray.length > 1){
+    editions = editionsArray.slice(0, -1).join(', ')+ ' and ' +editionsArray[editionsArray.length -1];
+  }
+
+  return editions;
 }
 
 function isEmpty(o) {

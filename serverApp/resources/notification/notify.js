@@ -1,23 +1,10 @@
 var async        = require('async');
 var Member       = require('./../../db/models/member.js');
-var Company      = require('./../../db/models/company.js');
-var Speaker      = require('./../../db/models/speaker.js');
 var Notification = require('./../../db/models/notification.js');
 
 exports = module.exports = notify;
 
-function notify(memberId, thread, thingName, memberName, diffObject) {
-
-  var editionsArray = [];
-  for(var propertyName in diffObject) {
-    if(propertyName != "updated"){
-      editionsArray.push(propertyName);
-    }
-  }
-  var editions = editionsArray[0];
-  if(editionsArray.length > 1){
-    editions = editionsArray.slice(0, -1).join(', ')+ ' and ' +editionsArray[editionsArray.length -1];
-  }
+function notify(memberId, thread, description, objectId) {
 
   var members = [];
   async.series([
@@ -44,14 +31,20 @@ function notify(memberId, thread, thingName, memberName, diffObject) {
   function saveNotification(cb) {
     var newNotification = new Notification({
       thread: thread,
+      source: objectId,
       member: memberId,
-      description: memberName+' edited '+editions+' on '+thingName+'.',
+      description: description,
       unread: members,
       posted: Date.now()
-    })
+    });
+
     newNotification.save(function (err, reply){
-      if (err) { return cb('Hipcup on the DB' + err);}
-      cb();
+      if (err) {
+        cb('Hipcup on the DB' + err);
+      }
+      else {
+        cb();
+      }
     });
   }
 
@@ -59,9 +52,7 @@ function notify(memberId, thread, thingName, memberName, diffObject) {
     if (err) {
       console.log("There was an error! "+ err);
     } else {
-      console.log("Notification saved!");
+      console.log(memberId+' '+description+' on '+thread+' (objectId:'+objectId+')');
     }
   }
-
-
 }

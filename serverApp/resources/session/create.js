@@ -17,7 +17,7 @@ function create(request, reply) {
       reply({error: "Error creating session."});
     }
     else {
-      //notification.session(session.member, session.thread, request.auth.credentials.name);
+      notification.notify(request.auth.credentials.id, 'session-'+session.id, 'created a new session', null);
 
       reply({success: "Session created."});
     }
