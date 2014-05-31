@@ -10,16 +10,12 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
   $scope.error       = "";
   $scope.showTargets = false;
 
-  $scope.pollKinds = ['text', 'images'];
+  $scope.pollKinds = ["text", "images"];
 
-  $scope.me = JSON.parse($scope.meJson);
-  $scope.members = JSON.parse($scope.membersJson);
-  $scope.roles = JSON.parse($scope.rolesJson);
-
-  if($scope.comments) {
-    $scope.topic.comments = $scope.comments.filter(function(e) {
-      return e.thread == 'topic-'+$scope.topic._id;
-    })
+  if ($scope.comments) {
+    $scope.topic.comments = $scope.comments.filter(function (e) {
+      return e.thread == "topic-" + $scope.topic._id;
+    });
   }
 
   show($scope.topic);
@@ -37,11 +33,11 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
       closed   : false
     };
 
-    if (topic.kind === 'To do') {
+    if (topic.kind === "To do") {
       topic.show.duedate = true;
       topic.show.closed  = true;
     }
-    else if (topic.kind === 'Decision') {
+    else if (topic.kind === "Decision") {
       topic.show.duedate = true;
       topic.show.closed  = true;
       topic.show.poll = true;
@@ -245,10 +241,10 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     date = new Date(date);
     var seconds = Math.floor((Date.now() - date) / 1000);
 
-    var suffix = 'ago';
+    var suffix = "ago";
     if(seconds < 0){
       seconds = Math.abs(seconds);
-      suffix = 'to go';
+      suffix = "to go";
     }
 
     var interval = Math.floor(seconds / 31536000);
