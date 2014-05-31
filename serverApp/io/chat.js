@@ -99,7 +99,7 @@ function createMessage(cb){
 }
 
 function updateChat(room, cb){
-  Chat.post({params: { id: room}, payload: {message: messageData.id}}, function(response) {
+  Chat.update({params: { id: room}, payload: {message: messageData.id}}, function(response) {
     // if successful, we'll need to refresh the chat list
     if(response.error) {
       console.log('Chat id: ' + messageData.id + ' update error!');

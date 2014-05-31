@@ -154,14 +154,11 @@ theToolServices
   .factory('ChatFactory', function ($resource) {
     return {
       Chat: $resource('/api/chat/:id', null, {
-        'update': {method: 'POST'},
-        'get':    {method: 'GET'}
+        'update': {method: 'PUT'},
+        'getAll': {method: 'GET', isArray: true}
       }),
-      Chats: $resource('/api/chat', null, {
+      Message: $resource('/api/chat/:id/messages', null, {
         'getAll': {method: 'GET', isArray:true}
-      }),
-      Messages: $resource('/api/chat/:id/messages', null, {
-        'get': {method: 'GET',isArray:true}
       })
     }
   })
@@ -199,7 +196,7 @@ theToolServices
   })
 
   .factory('SocketFactory', function ($resource, $location, $rootScope) {
-    var socket = io.connect('/chat');
+    var socket = io.connect('/' + $location.url().split('/')[1]);
     return {
       on: function (eventName, callback) {
         socket.on(eventName, function () {
