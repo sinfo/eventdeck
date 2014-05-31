@@ -27,17 +27,19 @@ setTimeout(function() {
         newChat.name     = jsonChat.name;
         newChat.messages = jsonChat.messages;
         newChat.members  = [];
-        if(jsonChat.members === null){
+        console.log(jsonChat.members);
+        if(!jsonChat.members){
           Member.findAll(function(err, members){
             if (err) { cb(err); }
-            console.log(members[0]);
-            newChat.members = members;
-            saveChat(cb);
+            for(var i= 0; i < members.length; i++){
+              newChat.members[i] = members[i].id;
+            }
           });
         }
         else{
           newChat.members  = jsonChat.members;
         }
+        saveChat(cb);
       }
       else{
         cb();
@@ -48,8 +50,6 @@ setTimeout(function() {
   function saveChat(cb){
     console.log(newChat);
     var chat = new Chat(newChat);
-
-    console.log(chat);
 
     chat.save(function (err, reply){
       if (err) {

@@ -17,16 +17,17 @@ webSocket
         console.log("Chat ID: " + data.id);
 
         var room = data.id;
+        var user = data.user;
 
         async.parallel([
           function(cb){
-            getChat(room, cb)
+            getChat(room, user, cb)
           },
           function(cb){
             getMessages(room, cb)
           }
-        ], function(){
-            done(room, socket, cbClient);
+        ], function(err, results){
+            done(err, room, socket, cbClient);
         });
       });
 
@@ -48,7 +49,7 @@ webSocket
       });
   });
 
-function getChat(chatID, cb){
+function getChat(chatID, memberID, cb){
   Chat.get({params:{id: chatID}}, function(response) {
     if(response.error) {
       console.log('Chat id: ' + chatID + ' unavailable');
@@ -57,6 +58,9 @@ function getChat(chatID, cb){
       console.log('Logged in chat id: ' + chatID );
       message = 'Logged in chat with sucess';
       outChat = response;
+      if(outChat.members.indexOf(memberID) === -1){
+        return callback('member');
+      }
     }
     cb();
   });
@@ -75,13 +79,24 @@ function getMessages(chatID, cb){
   });
 }
 
-function done(room, socket, cb){
-  socket.join(room);
-  var data = {
-    room     : room,
-    chatData : outChat,
-    messages : messages,
-    message  : message
+function done(err, room, socket, cb){
+  var data = {};
+  if(err){
+    if(err === 'member'){
+      console.log('Member not valid in chat: ' + chatID );
+      data.message = "You're not allowed into this chat!";
+      data.err     = true;
+    }
+  }
+  else{
+    socket.join(room);
+    var data = {
+      room     : room,
+      chatData : outChat,
+      messages : messages,
+      message  : message,
+      err      : true
+    }
   }
   cb(data);
 }
