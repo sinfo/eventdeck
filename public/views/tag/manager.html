@@ -7,7 +7,7 @@
   </div>
 
   <div ng-hide="manage">
-    <div ng-repeat="tag in tags" class="button-group">
+    <div ng-repeat="tag in tags | orderBy: 'name'" class="button-group">
       <div class="ink-button small all-100" ng-click="search.tags = tag.id" style="background: {{tag.color}}; border: 0px; border-radius: 2px; color: white; font-size: 16px;">
         {{tag.name}}
       </div>
@@ -15,7 +15,7 @@
   </div>
 
   <div ng-show="manage">
-    <div class="button-group" ng-repeat="tag in tags">
+    <div class="button-group" ng-repeat="tag in tags | orderBy: 'name'">
       <div class="ink-button small all-15" ng-click="deleteTag(tag)" style="background: {{tag.color}}; border: 0px; border-right: 1px solid white; color: white; font-size: 16px;" title="Delete tag">
         <i class="fa fa-trash-o"></i>
       </div>
