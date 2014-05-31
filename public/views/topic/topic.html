@@ -125,7 +125,7 @@
       </div>
 
       <div class="all-100 half-bottom-space">
-        <h6 style="margin-bottom: 0.25em;">Manage Tags</h6>
+        <h6 style="margin-bottom: 0.25em;">Manage tags</h6>
         <p ng-hide="tags">There are no tags.</p>
         <div ng-repeat="tag in tags" ng-click="toggleTag(tag.id)" class="ink-button small" style="border: 0px; background: {{tag.color}}; color: white; margin: 0.25em;">
           <i class="fa fa-{{getTagIcon(tag)}}"></i> {{tag.name}}
