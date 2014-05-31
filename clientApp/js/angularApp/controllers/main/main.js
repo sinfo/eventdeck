@@ -10,6 +10,9 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
 
   $scope.search = {};
   $scope.searchTopics = {};
+  $scope.searchCompanies = {};
+  $scope.searchSpeakers = {};
+  $scope.searchMembers = {};
 
   $scope.me = {};
   $scope.members = [];

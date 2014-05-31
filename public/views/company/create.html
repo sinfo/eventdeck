@@ -31,6 +31,12 @@
               </div>
             </div>
             <div class="control-group">
+              <label for="status">Status</label>
+              <div class="control">
+                <select id="status" ng-model="formData.status" ng-options="s for s in statuses"></select>
+              </div>
+            </div>
+            <div class="control-group">
               <label for="member">Member</label>
               <div class="control">
                 <select ng-model="formData.member" ng-options="m.id as m.name for m in members"></select>
@@ -50,19 +56,13 @@
               </div>
             </div>
             <div class="control-group">
-              <label for="status">Status</label>
-              <div class="control">
-                <input id="status" ng-model="formData.status" type="text">
-              </div>
-            </div>
-          </div>
-          <div class="all-70 medium-60 small-100 tiny-100">
-            <div class="control-group">
               <label for="forum">Forum</label>
               <div class="control">
                 <input id="forum" ng-model="formData.forum" type="text">
               </div>
             </div>
+          </div>
+          <div class="all-70 medium-60 small-100 tiny-100">
             <div class="control-group">
               <label for="description">Description</label>
               <div class="control">
@@ -83,7 +83,6 @@
             </div>
             <div class="control-group">
               <input type="submit" id="submit" value="Submit" class="ink-button green" />
-              <a class="ink-button blue" ng-click="showForum=!showForum"><i class="fa fa-comments"></i> Show Forum!</a>
               <a class="ink-button orange" href="/#/companies"><i class="fa fa-back"></i><i class="fa fa-reply"></i>  Go back...</a>
             </div>
           </div>
