@@ -150,12 +150,9 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     $scope.success = "";
     $scope.error   = "";
 
-    console.log(topic);
-
     if(topic._id) {
       TopicFactory.Topic.update({id: topic._id}, topic, function (response) {
         if (response.error) {
-          console.log(response);
           $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
         }
         else if (response.success) {
