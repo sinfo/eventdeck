@@ -50,12 +50,16 @@ theToolController.controller('TopicsController', function ($scope, $location, $r
   $scope.createTopic = function(kind) {
     var date = new Date();
     TopicFactory.Topic.create({
-      //author: $scope.me.id,
+      author: $scope.me.id,
       kind: kind
-    }, function(response) {
-      console.log(response);
+    }, function (response) {
       if (response.success) {
-        $location.path("/topic/" + response.id);
+        TopicFactory.Topic.getAll(function (topics) {
+          $scope.topics = topics;
+          $scope.topics.find(function (o) {
+            return o._id == response.id;
+          }).editing = true;
+        });
       }
     });
   };
