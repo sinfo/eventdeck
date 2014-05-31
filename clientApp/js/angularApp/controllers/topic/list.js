@@ -4,26 +4,17 @@ theToolController.controller('TopicsController', function ($scope, $location, $r
 
   //================================INITIALIZATION================================
 
-  if($location.path() != '/topics' && $routeParams.id == "me") {
-    $location.path('/topics/' + $scope.me.id);
-    return;
-  }
-
   $scope.loading = true;
 
   $scope.kinds = ["Info", "To do", "Decision", "Idea"];
 
-  if ($location.path() == '/topics') {
-    TopicFactory.Topic.getAll(gotTopics);
-  }
-  else {
-    TopicFactory.Member.getAll({id: $routeParams.id}, gotTopics);
-  }
+  TopicFactory.Topic.getAll(gotTopics);
 
   function gotTopics (topics) {
     setTimeout(function () {
-      if ($scope.loading)
+      if ($scope.loading) {
         gotTopics(topics);
+      }
     }, 1000);
 
     $scope.topics = topics;
