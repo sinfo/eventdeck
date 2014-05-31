@@ -9,9 +9,7 @@ function list(request, reply) {
   var memberId = request.params.id;
   var message;
 
-  async.series([
-      getMessage,
-    ], done);
+  getMessage(done);
 
   function getMessage(cb) {
     Message.findByMember(memberId, gotMessage);

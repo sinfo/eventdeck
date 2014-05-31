@@ -1,3 +1,4 @@
+'use strict';
 
 theToolServices
   .factory('ChatFactory', function ($resource) {

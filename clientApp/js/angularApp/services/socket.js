@@ -2,7 +2,7 @@
 
 theToolServices
   .factory('SocketFactory', function ($resource, $location, $rootScope) {
-    var socket = io.connect('/chat');
+    var socket = io.connect('/' + $location.url().split('/')[1]);
     return {
       on: function (eventName, callback) {
         socket.on(eventName, function () {
