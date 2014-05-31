@@ -2,9 +2,9 @@ var Hapi  = require('hapi');
 var async = require('async');
 var Chat  = require('./../../db/models/chat.js');
 
-exports = module.exports = get;
+exports = module.exports = list;
 
-function get(request, reply) {
+function list(request, reply) {
   Chat.findAll(function(err, result) {
     if (!err && result && result.length > 0) {
       reply(result);
