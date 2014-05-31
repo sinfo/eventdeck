@@ -23,7 +23,7 @@
 
       <form class="ink-form" ng-submit="submit()" >
         <div class="column-group horizontal-gutters">
-          <div class="all-30 medium-40 small-100 tiny-100">
+          <div class="all-30 medium-30 small-100 tiny-100">
             <div class="control-group">
               <label for="name">Name</label>
               <div class="control">
@@ -31,9 +31,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label for="member">Member</label>
+              <label for="status">Status</label>
               <div class="control">
-                <select ng-model="formData.member" ng-options="m.id as m.name for m in members"></select>
+                <select id="status" ng-model="formData.status" ng-options="s for s in statuses"></select>
               </div>
             </div>
             <div class="control-group">
@@ -43,14 +43,8 @@
               </div>
               <img ng-show="formData.img" src="{{formData.img}}" width="100%" />
             </div>
-            <div class="control-group">
-              <label for="status">Status</label>
-              <div class="control">
-                <input id="status" ng-model="formData.status" type="text">
-              </div>
-            </div>
           </div>
-          <div class="all-70 medium-60 small-100 tiny-100">
+          <div class="all-40 medium-40 small-100 tiny-100">
             <div class="control-group">
               <label for="forum">Forum</label>
               <div class="control">
@@ -60,26 +54,27 @@
             <div class="control-group">
               <label for="description">Description</label>
               <div class="control">
-                <textarea id="description" ng-model="formData.description" type="text" rows="3"></textarea>
-              </div>
-            </div>
-            <div class="control-group">
-              <label for="paragraph">Paragraph</label>
-              <div class="control">
-                <textarea id="paragraph" ng-model="formData.paragraph" type="text" rows="3"></textarea>
-              </div>
-            </div>
-            <div class="control-group">
-              <label for="contacts">Contacts</label>
-              <div class="control">
-                <textarea id="contacts" ng-model="formData.contacts" type="text" rows="6"></textarea>
+                <textarea id="description" ng-model="formData.description" type="text" rows="8"></textarea>
               </div>
             </div>
             <div class="control-group">
               <input type="submit" id="submit" value="Submit" class="ink-button green" />
-              <a class="ink-button blue" ng-click="showForum=!showForum"><i class="fa fa-comments"></i> Show Forum!</a>
               <a class="ink-button orange" href="/#/speakers"><i class="fa fa-back"></i><i class="fa fa-reply"></i>  Go back...</a>
             </div>
+          </div>
+          <div class="all-30 medium-30 small-100 tiny-100">
+          <div class="control-group">
+            <label for="member">Member</label>
+            <div class="control">
+              <select ng-model="formData.member" ng-options="m.id as m.name for m in members"></select>
+            </div>
+          </div>
+          <div class="control-group">
+            <label for="contacts">Contacts</label>
+            <div class="control">
+              <textarea id="contacts" ng-model="formData.contacts" type="text" rows="8"></textarea>
+            </div>
+          </div>
           </div>
         </div>
         <div class="column-group horizontal-gutters">
