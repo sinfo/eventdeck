@@ -1,4 +1,4 @@
-<div>
+<div style="width: 240px;">
   <h3>{{manage ? 'Manage tags' : 'Tags'}}</h3>
   <span ng-hide="tags">There are no tags.</span>
 
@@ -31,9 +31,9 @@
 
   <h4 class="half-top-space">Create new tag</h4>
   <form class="ink-form">
-    <input type="text" ng-focus="creating = true" ng-blur="creating = false" ng-model="tag.name" placeholder="Tag name" style="width:240px">
+    <input type="text" ng-model="tag.name" placeholder="Tag name" style="width:240px">
 
-    <div ng-show="creating || tag.name.length > 0">
+    <div ng-show="tag.name.length > 0">
       <ul style="padding:0px;margin:0px;">
         <li ng-repeat="color in colors" ng-click="changeColor(color)" style="width:30px;height:30px;background:{{color}};display: table-cell;cursor: pointer;"></li>
       </ul>
