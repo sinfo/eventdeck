@@ -47,7 +47,7 @@
         </div>
         <h3>{{showOpen ? 'Open' : 'Closed'}} topics</h3>
         <div class="all-100" infinite-scroll="scroll()">
-          <topic topic-object="topic" members="{{members}}" me="{{me}}" roles="{{roles}}" tags-array="topicTags" comments-array="comments" ng-repeat="topic in shownTopics(showOpen) | filter:searchTopics:strict | orderBy: 'posted':'true' | limitTo: limit"></topic>
+          <topic topic-object="topic" topic-members="members" topic-me="me" topic-roles="roles" topic-tags="topicTags" topic-comments="comments" ng-repeat="topic in shownTopics(showOpen) | filter:searchTopics:strict | orderBy: 'posted':'true' | limitTo: limit"></topic>
         </div>
       </div>
     </div>
