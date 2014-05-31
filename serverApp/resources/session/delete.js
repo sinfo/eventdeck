@@ -1,4 +1,5 @@
 var Session = require('./../../db/models/session.js');
+var Notification = require('./../../db/models/notification.js');
 
 module.exports = remove;
 
@@ -10,6 +11,18 @@ function remove(request, reply) {
     }
     else {
       reply({success: "Session deleted."});
+      
+      Notification.removeByThread('session-'+request.params.id, function (err, result) {
+        if(err) { 
+          console.log(err); 
+        }
+      });
+      
+      Notification.removeBySource(request.params.id, function (err, result) {
+        if(err) { 
+          console.log(err); 
+        }
+      });
     }
   });
 
