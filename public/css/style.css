@@ -420,8 +420,20 @@ a, a:visited, a:hover {
     width: 20px;
     height: 30px;
     float: left;
-    border-right: 1px solid #76CEE2;
+    border-right: 1px solid #FFFFFF;
     background: rgba(0, 0, 0, 0) url('/img/fenixedu_white.svg') no-repeat 50% 40%;
+    background-size: 55%;
+  }
+
+  @font-face { font-family: 'FontAwesome'; src: local('FontAwesome'); }
+
+  .button.icon.facebook:before {
+    font-family: 'FontAwesome';
+    content: "\f09a";
+    width: 20px;
+    height: 30px;
+    float: left;
+    border-right: 1px solid #FFFFFF;
     background-size: 55%;
   }
 
