@@ -1,14 +1,16 @@
-var Chat = require('./../../db/models/chat.js');
+var Hapi  = require('hapi');
+var async = require('async');
+var Chat  = require('./../../db/models/chat.js');
 
-exports = module.exports = list;
+exports = module.exports = get;
 
-function list(request, reply) {
-  Chat.findAll(gotChat);
-
-  function gotChat(err, result) {
-    if (err)
-      reply(err);
-    else
+function get(request, reply) {
+  Chat.findAll(function(err, result) {
+    if (!err && result && result.length > 0) {
       reply(result);
-  }
+    }
+    else {
+      reply("There was an error getting all chats.");
+    }
+  });
 }
