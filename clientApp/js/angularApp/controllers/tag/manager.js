@@ -22,6 +22,14 @@ theToolController.controller("TagManagerController", function ($scope, TagFactor
     });
   };
 
+  $scope.saveTag = function (tag) {
+    TagFactory.Tag.update({id: tag.id}, tag, function (response) {
+      if (response.success) {
+        tag.editing = false;
+      }
+    });
+  };
+
   $scope.deleteTag = function (tag) {
     TagFactory.Tag.delete({id: tag.id}, function (response) {
       if (response.success) {

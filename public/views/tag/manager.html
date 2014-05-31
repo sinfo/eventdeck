@@ -15,13 +15,29 @@
   </div>
 
   <div ng-show="manage">
-    <div class="button-group" ng-repeat="tag in tags | orderBy: 'name'">
-      <div class="ink-button small all-15" ng-click="deleteTag(tag)" style="background: {{tag.color}}; border: 0px; border-right: 1px solid white; color: white; font-size: 16px;" title="Delete tag">
-        <i class="fa fa-trash-o"></i>
+    <div ng-repeat="tag in tags | orderBy: 'name'">
+      <div class="button-group">
+        <div class="ink-button small all-15" ng-click="deleteTag(tag)" style="background: {{tag.color}}; border: 0px; border-right: 1px solid white; color: white; font-size: 16px;" title="Delete tag">
+          <i class="fa fa-trash-o"></i>
+        </div>
+        <div class="ink-button small all-85" ng-click="tag.editing = !tag.editing" style="background: {{tag.color}}; border: 0px; color: white; font-size: 16px;">
+          {{tag.name ? tag.name : 'Tag name'}}
+        </div>
       </div>
-      <div class="ink-button small all-85" ng-click="search.tags = tag.id" style="background: {{tag.color}}; border: 0px; color: white; font-size: 16px;">
-        {{tag.name}}
-      </div>
+
+      <form ng-show="tag.editing" class="ink-form quarter-bottom-space">
+        <input type="text" ng-model="tag.name" placeholder="Tag name" style="width:240px">
+
+        <ul style="padding:0px;margin:0px;">
+          <li ng-repeat="color in colors" ng-click="tag.color = color" style="width:30px;height:30px;background:{{color}};display: table-cell;cursor: pointer;"></li>
+        </ul>
+        <ul style="padding:0px;margin:0px;">
+          <li ng-repeat="color in lightColors" ng-click="tag.color = color" style="width:30px;height:30px;background:{{color}};display: table-cell;cursor: pointer;"></li>
+        </ul>
+        <input type="text" ng-model="tag.color" placeholder="Tag color" style="border-color:{{tag.color}};color:{{tag.color}};width:240px">
+
+        <div class="ink-button" ng-click="saveTag(tag)" style="background:{{tag.color}};color:white;margin:0;border:0px;width:240px">Save</div>
+      </form>
     </div>
   </div>
 
