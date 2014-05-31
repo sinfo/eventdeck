@@ -14,6 +14,8 @@ theToolController
       });
     };
 
+    $scope.statuses = ['Suggestion','Contacted','In Conversations','Accepted','Rejected','Give Up'];
+
     MemberFactory.Member.getAll( function(response) {
       $scope.members = response;
     });

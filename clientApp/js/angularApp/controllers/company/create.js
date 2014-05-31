@@ -1,7 +1,7 @@
 'use strict';
  
 theToolController
-  .controller('CreateCompanyController', function ($scope, $http, $routeParams, $sce, CompanyFactory, MemberFactory) {
+  .controller('CreateCompanyController', function ($scope, $http, $routeParams, $sce, CompanyFactory) {
     $scope.submit = function() {
       var companyData = this.formData;
 
@@ -14,7 +14,5 @@ theToolController
       });
     };
 
-    MemberFactory.Member.getAll( function(response) {
-      $scope.members = response;
-    });
+    $scope.statuses = ['Suggestion','Contacted','In Conversations','In Negotiations','Closed Deal','Rejected','Give Up'];
   });
