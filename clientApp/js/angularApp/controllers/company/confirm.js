@@ -1,5 +1,5 @@
 'use strict';
- 
+
 theToolController
   .controller('CompanyEmailController', function ($scope, $http, $routeParams, $sce, $location, EmailFactory) {
     $scope.email = $location.search().email;

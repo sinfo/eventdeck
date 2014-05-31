@@ -20,8 +20,6 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
 
   show($scope.topic);
 
-  console.log($scope);
-
 
   //=================================AUXFUNCTIONS==================================
 
@@ -99,7 +97,6 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
   };
 
   $scope.toggleTargets = function() {
-    console.log($scope.showTargets);
     $scope.showTargets = !$scope.showTargets;
   };
 
@@ -206,7 +203,6 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
   };
 
   $scope.toggleTargets = function() {
-    console.log($scope.showTargets);
     $scope.showTargets = !$scope.showTargets;
   };
 
@@ -219,7 +215,6 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
   };
 
   $scope.selectOption = function(topic, option) {
-    console.log("Select", option);
     var updatedTopic = topic;
 
     if(option.votes.indexOf($scope.me.id) != -1) {

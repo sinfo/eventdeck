@@ -115,8 +115,6 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
       return o.id == 'development-team' || o.id == 'coordination';
     });
 
-    console.log(comment);
-
     if(roles.length == 0 && comment.member != $scope.me.id) {
       return false;
     }
