@@ -1,1 +1,1 @@
-require('./topic')
+require("./topic");
