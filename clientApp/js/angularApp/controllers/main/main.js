@@ -92,20 +92,11 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
       $scope.notificationsInfo.number = 0;
 
       for (var i = 0, j = response.length; i < j; i++) {
-        //if (response[i].member != $scope.me.id) { //uncomment to hide self-events
         if (response[i].unread.indexOf($scope.me.id) != -1) {
           $scope.notificationsInfo.number++;
 
-          $scope.notifications.unshift({
-            path: response[i].thread.replace("-", "/"),
-            text: response[i].description + " (" + $scope.timeSince(new Date(response[i].posted))+")",
-            member: $scope.members.filter(function(o) {
-                      return response[i].member == o.id;
-                    })[0].facebook,
-            color: (response[i].unread.indexOf($scope.me.id) != -1 ? "LightSkyBlue" : "WhiteSmoke")
-          });
+          $scope.notifications.unshift(response[i]);
         }
-        //}
       }
 
       if ($scope.notificationsInfo.number == 0) {
