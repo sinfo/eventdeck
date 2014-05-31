@@ -1,10 +1,13 @@
 <div>
   <h3>{{manage ? 'Manage tags' : 'Tags'}}</h3>
-  <small class="ink-button red" ng-show="search.tags" ng-click="search.tags=undefined"><i class="fa fa-times"></i> Clear Tag Filters</small>
   <span ng-hide="tags">There are no tags.</span>
 
   <div class="button-group quarter-bottom-space">
     <div class="ink-button small all-100" ng-click="manage = !manage" style="border-radius: 2px; font-size: 16px;">Manage tags</div>
+  </div>
+
+  <div ng-show="search.tags" class="button-group quarter-bottom-space">
+    <div class="ink-button red small all-100" ng-click="search.tags = undefined" style="border-radius: 2px; font-size: 16px;"><i class="fa fa-times"></i> Clear tag filters</div>
   </div>
 
   <div ng-hide="manage">
