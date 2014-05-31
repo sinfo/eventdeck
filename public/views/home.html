@@ -4,30 +4,21 @@
       <h1>Recent Activity</h1>
       <h2 ng-show="loading">Loading...</h2>
       <div ng-hide="loading" infinite-scroll="scroll()">
-        <div class="activity {{notification.color}}" ng-repeat="notification in notifications | limitTo: limit | orderBy: 'date.data':true">
+        <div class="activity {{notification.color}}" ng-repeat="notification in notifications | orderBy: 'posted':true | limitTo: limit">
           <div class="all-100">
-            <a href="/#/member/{{notification.member.id}}">
-              <img ng-src="{{'https://graph.facebook.com/'+notification.member.facebook+'/picture'}}">
-              <b>{{notification.member.name}}</b>
+            <a href="/#/member/{{getMember(getMember(notification.member)).id}}">
+              <img ng-src="{{'https://graph.facebook.com/'+getMember(notification.member).facebook+'/picture'}}">
+              <b>{{getMember(notification.member).name}}</b>
             </a>
-            <small title="{{notification.date.full}}">{{timeSince(notification.date.data)}}</small>
+            <small title="{{notification.posted}}">{{timeSince(notification.posted)}}</small>
           </div>
-          <a href="/#/{{notification.path}}">
+          <a href="/#/{{notification.thread.replace('-','/')}}">
             <p style="color: #444;"><p>{{notification.description}}</p></p>
           </a>
           <div >
-            <a href="/#/{{notification.path}}" ng-if="notification.image">
-              <img class="image" ng-src="{{notification.image}}">
-            </a>
-
-            <topic ng-if="notification.topic" topic-object="notification.topic" members="{{members}}" me="{{me}}" roles="{{roles}}" tags-array="topicTags" comments-array="comments"></topic>
-          </div>
-
-          <div ng-hide="notification.topic">
-            <small ng-hide="notification.showComments" ng-click="notification.showComments=!notification.showComments" class="ink-button"><i class="fa fa-comments"></i> Show Comments</small>
-
-            <comment-area ng-if="notification.showComments" thread="{{notification.thread}}"></comment-area>
-            <small ng-show="notification.showComments" ng-click="notification.showComments=!notification.showComments" class="ink-button"><i class="fa fa-chevron-circle-up"></i> Hide Comments</small>
+            <topic ng-if="notification.thread.indexOf('topic')!=-1" topic-object="getTopic(notification.thread.replace('topic-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" tags-array="topicTags" comments-array="comments"></topic>
+            <speaker ng-if="notification.thread.indexOf('speaker')!=-1" speaker-object="getSpeaker(notification.thread.replace('speaker-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></speaker>
+            <company ng-if="notification.thread.indexOf('company')!=-1" company-object="getCompany(notification.thread.replace('company-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></company>
           </div>
         </div>
       </div>
