@@ -34,6 +34,12 @@ theToolController.controller("MeetingController", function ($scope, $routeParams
     }
   };
 
+  $scope.getAttendants = function () {
+    return $scope.meeting.attendants.map(function (o) {
+      return $scope.getMember(o);
+    });
+  };
+
   $scope.createTopic = function (kind) {
     var topic = {
       editing: true,
