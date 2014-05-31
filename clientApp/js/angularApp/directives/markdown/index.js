@@ -1,0 +1,2 @@
+require('./compile');
+require('./markdown');
