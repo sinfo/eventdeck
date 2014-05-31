@@ -22,10 +22,15 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
   },4000);*/
 
   SocketFactory.emit('auth', {id: $routeParams.id, user: $scope.me.id}, function (result) {
+    if(!result.err){
       console.log('Auth success');
       $scope.chat     = result.chatData;
       $scope.messages = result.messages;
       $scope.room     = result.room;
+    }
+    else{
+      console.log('Auth failed!');
+    }
   });
 
   SocketFactory.on('message', function (message) {

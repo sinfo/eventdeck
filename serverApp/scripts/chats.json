@@ -4,5 +4,11 @@
     "name": "Geral",
     "members": null,
     "messages": []
+  },
+  {
+    "id": "dev.team",
+    "name": "Dev Team",
+    "members": ["diogo.pais", "francisco.dias"],
+    "messages": []
   }
 ]
