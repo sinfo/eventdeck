@@ -12,8 +12,10 @@
 
   <div class="column-group gutters">
     <div class="all-25 medium-40 hide-small hide-100">
-      <p class="ink-button" ng-click="searchTopics={}">All topics</p>
-      <p class="ink-button" ng-click="searchTopics.targets=me.id">Assigned to me</p>
+      <div class="button-group half-bottom-space">
+        <p class="ink-button" ng-click="searchTopics={}">All topics</p>
+        <p class="ink-button" ng-click="searchTopics.targets=me.id">Assigned to me</p>
+      </div>
 
       <tag-manager tags-array="topicTags" search="searchTopics"></tag-manager>
     </div>
@@ -39,8 +41,8 @@
       <h3 ng-show="loading">Loading...</h3>
       <div ng-hide="loading">
         <h3 ng-hide="loading || topics">No topics created yet.</h3>
-        <div class="half-bottom-space">
-          <div class="ink-button green" ng-click="showOpen = true;">{{shownTopics(true).length}} Open</div>
+        <div class="button-group half-bottom-space">
+          <div class="ink-button green" ng-click="showOpen = true;" style="border-right: 1px solid white;">{{shownTopics(true).length}} Open</div>
           <div class="ink-button red" ng-click="showOpen = false;">{{shownTopics(false).length}} Closed</div>
         </div>
         <h3>{{showOpen ? 'Open' : 'Closed'}} topics</h3>
