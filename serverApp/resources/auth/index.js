@@ -25,6 +25,7 @@ exports.facebook = function facebook(request, reply) {
   },
   function (error, response, result) {
     if (!error && response.statusCode == 200) {
+      console.log(result);
       if (result.data && result.data.app_id === "457207507744159" && result.data.user_id === request.url.query.id) {
         Member.findByFacebookId(request.url.query.id, function(error, result) {
           if (error) {
