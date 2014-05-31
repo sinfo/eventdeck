@@ -10,22 +10,22 @@ setTimeout(function() {
   var members = [];
   Member.findAll(function(err, result){
     if (err) { cb(err); }
-    for(var i= 0; i < members.length; i++){
+    for(var i= 0; i < result.length; i++){
       members[i] = result[i].id;
     }
     async.each(chats, function(jsonChat, callback){
-      createChat(jsonChat, callback);
-    }, 
-    function(error) {
-      if(error) { console.log("Error!!", error); }
-      console.log("DONE");
+        createChat(jsonChat, callback);
+      }, 
+      function(error) {
+        if(error) { console.log("Error!!", error); }
+        console.log("DONE");
     });
   });
 
   function createChat(jsonChat, cb){
     Chat.findById(jsonChat.id, function(err, result) {
       if (err) { cb(err); }
-      if (!result) {
+      if (!result || result.length === 0) {
         console.log("missing", jsonChat.name);
         newChat = jsonChat;
         if(!jsonChat.members){
@@ -34,8 +34,8 @@ setTimeout(function() {
         }
         else{
           newChat.members  = jsonChat.members;
-          saveChat(cb);
         }
+        saveChat(cb);
       }
       else{
         cb();
