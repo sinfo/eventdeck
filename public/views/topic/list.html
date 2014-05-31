@@ -11,9 +11,11 @@
   </div>
 
   <div class="column-group gutters">
-    <div class="all-20 medium-40 hide-small hide-100">
-      <p class="ink-button small" ng-click="searchTopics={}">All topics</p>
-      <p class="ink-button small" ng-click="searchTopics.targets=me.id">Assigned to me</p>
+    <div class="all-25 medium-40 hide-small hide-100">
+      <div class="button-group half-bottom-space">
+        <p class="ink-button" ng-click="searchTopics={}">All topics</p>
+        <p class="ink-button" ng-click="searchTopics.targets=me.id">Assigned to me</p>
+      </div>
 
       <tag-manager tags-array="topicTags" search="searchTopics"></tag-manager>
     </div>
@@ -35,11 +37,11 @@
     </div>
 
 
-    <div class="all-80 medium-60 small-100 tiny-100">
+    <div class="all-75 medium-60 small-100 tiny-100">
       <h3 ng-show="loading">Loading...</h3>
       <div ng-hide="loading">
         <h3 ng-hide="loading || topics">No topics created yet.</h3>
-        <div class="half-bottom-space">
+        <div class="button-group half-bottom-space">
           <div class="ink-button green" ng-click="showOpen = true;">{{shownTopics(true).length}} Open</div>
           <div class="ink-button red" ng-click="showOpen = false;">{{shownTopics(false).length}} Closed</div>
         </div>
