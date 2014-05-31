@@ -20,8 +20,8 @@ theToolController.controller('TopicsController', function ($scope, $location, $r
     $scope.topics = topics;
 
     for (var i = 0, j = $scope.topics.length; i < j; i++) {
-      $scope.topics[i].facebook = $scope.members.filter(function(o) {
-        return $scope.topics[i].author == o.id;
+      $scope.topics[i].facebook = $scope.members.filter(function (o) {
+        return $scope.topics[i].author === o.id;
       })[0].facebook;
     }
 
