@@ -19,7 +19,7 @@ function create(request, reply) {
     else {
       reply({success: "Topic created.", id: newTopic._id});
 
-      notification.notify(request.auth.credentials.id, 'topic-'+topic.id, 'created a new topic', null);
+      notification.notify(request.auth.credentials.id, 'topic-'+newTopic._id, 'created a new topic', null);
     }
   });
 
