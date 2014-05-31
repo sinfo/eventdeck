@@ -47,7 +47,7 @@
           <li class="logoPlaceholder"><a href="/" class="logoPlaceholder">THE TOOL!</a></li>
           <li class="hide-medium hide-small hide-tiny" style="margin-left: 1em;">
             <a style="background: rgba(0,0,0,0); padding-left: 0px; padding-right: 0px; cursor: default;">
-              <input type="text" ng-model="search.name" ng-change="show()" ng-click="show()" placeholder="Super search!!!" style="width: 300px;">
+              <input type="text" ng-model="search.name" ng-change="show()" ng-click="show()" placeholder="Super search!!!" style="width: 200px;">
             </a>
             <ul ng-if="search.name && search.name.length > 1" class="submenu" style="width: 300px; max-height: 400px; overflow: auto; display: {{display ? 'block' : 'none'}};">
               <li ng-repeat="company in companies | filter:search:strict">
@@ -66,7 +66,7 @@
           <li>
             <a style="{{notificationsInfo.number == 0 ? 'background: FireBrick;' : 'background: OrangeRed;'}} color: white;"><span><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a>
             <ul class="submenu" style="max-height: 400px; overflow: auto; {{notificationsInfo.number == 0 ? 'display: none;' : ''}}">
-              <li ng-repeat="notification in notifications | orderBy: 'posted':false" style="width: 600px;">
+              <li ng-repeat="notification in notifications | orderBy: 'posted':true" style="width: 600px;">
                 <a href="/#/{{notification.path}}"><img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px"> {{getMember(notification.member).name}} {{notification.description}}</a>
               </li>
             </ul>
@@ -112,9 +112,9 @@
         <li>
           <a style="{{notificationsInfo.number == 0 ? 'background: FireBrick;' : 'background: OrangeRed;'}}"><span><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a>
           <ul class="submenu" style="max-height:200px; overflow:auto; margin: 0px 20px 0px;">
-            <li ng-repeat="notification in notifications | orderBy: 'posted':false"><a href="/#/{{notification.path}}">
-            <img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px">
-            {{notification.text}}</a></li>
+            <li ng-repeat="notification in notifications | orderBy: 'posted':false">
+              <a href="/#/{{notification.path}}"><img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px"> {{getMember(notification.member).name}} {{notification.description}}</a>
+            </li>
           </ul>
         </li>
         <li><a href="/#/topics" style="background:MediumPurple"><i class="fa fa-paper-plane"></i> Topics</a>
