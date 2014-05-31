@@ -7,7 +7,7 @@
     <h3 ng-show="loading" class="all-100">Loading...</h3>
     <div ng-hide="loading" class="all-100 column-group">
       <h3 ng-hide="chats" class="all-100">There aren't any chats! OMG!</h3>
-      <a href="/#/chat/{{chat._id}}/" ng-repeat="chat in chats | orderBy:'name':true">
+      <a href="/#/chat/{{chat.id}}/" ng-repeat="chat in chats | orderBy:'name':true">
         <div class="all-100 ink-label half-bottom-space align-left grey" style="height: 4em;">
           <p class="all-95 tiny-70 small-80" style="line-height: 4em;">{{chat.name}}</p>
         </div>
