@@ -23,7 +23,7 @@ theToolController
       });
     };
 
-    $scope.statuses = ['SUGGESTION','CONTACTED','IN CONVERSATIONS','ACCEPTED','CLOSED DEAL','REJECTED/GIVE UP'];
+    $scope.statuses = ['Suggestion','Contacted','In Conversations','Accepted','Rejected','Give Up'];
 
     $scope.speaker = $scope.formData = $scope.getSpeaker($routeParams.id);
 

@@ -14,7 +14,8 @@
 
         <a href="/#/speaker/{{speaker.id}}">
           <h5 style="margin-top:10px;">
-            {{speaker.name}} <i ng-if="speaker.status">[{{speaker.status}}]</i>
+            <span class="status" ng-class="speaker.status.replace(' ','-').toLowerCase()">{{speaker.status}}</span> 
+            {{speaker.name}} 
           </h5>
           <img class="image" ng-src="{{speaker.img}}">
         </a>
