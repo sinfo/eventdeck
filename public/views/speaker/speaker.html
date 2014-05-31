@@ -1,0 +1,36 @@
+<div ng-hide="!speaker._id || speaker.deleted" class="activity grey" style="border-radius: 5px;">
+  <h1 ng-if="loading">Loading...</h1>
+
+  <div ng-if="!speaker.editing">
+
+    <div class="column-group horizontal-gutters">
+
+      <div class="all-85">
+
+        <a href="/#/member/{{speaker.member}}">
+          <img ng-src="https://graph.facebook.com/{{getMember(speaker.member).facebook}}/picture"/>
+          <small>{{getMember(speaker.member).name}}</small>
+        </a>
+
+        <a href="/#/speaker/{{speaker.id}}">
+          <h5 style="margin-top:10px;">
+            {{speaker.name}} <i ng-if="speaker.status">[{{speaker.status}}]</i>
+          </h5>
+          <img class="image" ng-src="{{speaker.img}}">
+        </a>
+
+        <div ng-if="speaker.showComments">
+          <br>
+          <comment-area thread="{{'speaker-' + speaker.id}}"></comment-area>
+        </div>
+      </div>
+
+      <div class="all-15 align-right">
+        <!--<small title="Edit Topic" class="ink-button orange" ng-click="speaker.editing=!speaker.editing" style="width:60px"><i class="fa fa-wrench"></i></small><br>-->
+        <small title="Show/Hide Comments" class="ink-button small green" ng-click="speaker.showComments = !speaker.showComments" style="width:60px">{{speaker.comments.length}} <i class="fa fa-comments"></i></small>
+      </div>
+    </div>
+
+  </div>
+
+</div>
