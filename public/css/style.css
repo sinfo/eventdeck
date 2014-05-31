@@ -361,7 +361,7 @@ body.ink-drawer .right-drawer li.active > a {
 }
 
 a, a:visited, a:hover {
-    text-decoration: none; 
+    text-decoration: none;
     outline: 0;
   }
 
