@@ -146,26 +146,32 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     });
   };
 
-  $scope.save = function(topic) {
+  $scope.save = function (topic) {
     $scope.success = "";
     $scope.error   = "";
 
+    console.log(topic);
+
     if(topic._id) {
-      TopicFactory.Topic.update({id: topic._id}, $scope.topic, function(response) {
-        if(response.error) {
+      TopicFactory.Topic.update({id: topic._id}, topic, function (response) {
+        if (response.error) {
+          console.log(response);
           $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
-        } else if (response.success) {
+        }
+        else if (response.success) {
           $scope.success = response.success;
-          $scope.topic.editing = false;
+          topic.editing = false;
         }
       });
-    } else {
-      TopicFactory.Topic.create(topic, function(response) {
-        if(response.error) {
+    }
+    else {
+      TopicFactory.Topic.create(topic, function (response) {
+        if (response.error) {
           $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
-        } else if (response.success) {
+        }
+        else if (response.success) {
           $scope.success = response.success;
-          $scope.topic.editing = false;
+          topic.editing = false;
         }
       });
     }
