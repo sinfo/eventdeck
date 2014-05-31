@@ -5,7 +5,6 @@ require('./company');
 require('./speaker');
 require('./member');
 require('./comment');
-require('./notification');
 require('./meeting');
 require('./chat');
 require('./message');
