@@ -1,5 +1,6 @@
-var async    = require('async');
-var Communication  = require('./../../db/models/communication.js');
+var async         = require('async');
+var Communication = require('./../../db/models/communication.js');
+var notification  = require('./../notification');
 
 module.exports = create;
 
@@ -65,6 +66,8 @@ function create(request, reply) {
       reply({error: err});
     }
     else {
+      notification.notify(request.auth.credentials.id, savedCommunication.thread, 'approved a communication', savedCommunication._id);
+      
       reply({success: 'Communication approved.'});
     }
   }
