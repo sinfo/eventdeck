@@ -9,9 +9,7 @@ function list(request, reply) {
   var chatId = request.params.id;
   var messages;
 
-  async.series([
-      getMessage,
-    ], done);
+  getMessage(done);
 
   function getMessage(cb) {
     Message.findByChatId(chatId, gotMessage);
