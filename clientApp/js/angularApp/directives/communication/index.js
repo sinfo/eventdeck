@@ -1,0 +1,2 @@
+require('./area');
+require('./communication');
