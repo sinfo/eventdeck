@@ -1,46 +1,18 @@
 {{> head}}
 {{> public-header}}
 
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/facebook.js"></script>
+
 <div class="ink-grid">
   <div class="column-group horizontal-gutters">
     <div class="all-100 align-center half-bottom-space">
-      <a class="button icon fenixedu" href="{{url}}" style="background-color: #ffcd19">login with fenixedu</a>
+      <a class="button icon fenixedu" href="{{url}}" style="background-color: #ffcd19; border-radius: 3px;">Login with FenixEdu</a>
     </div>
     <div class="all-100 align-center">
-      <a id="facebook" class="button icon facebook" style="background-color: #ffcd19">login with facebook</a>
+      <a id="facebook" class="button icon" style="background-color: #ffcd19; border-radius: 3px;">Login with Facebook</a>
     </div>
   </div>
 </div>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-<script type="text/javascript">
-  $.ajaxSetup({ cache: true });
-  $.getScript('//connect.facebook.net/pt_PT/all.js', function(){
-    FB.init({
-      appId: '457207507744159'
-    });
-  });
-
-  $("#facebook").click(function() {
-    FB.getLoginStatus(function(response) {
-      if (response.status === "connected") {
-        connected(response);
-      }
-      else {
-        FB.login();
-        FB.Event.subscribe("auth.statusChange", function(response) {
-          if (response.status === "connected"){
-            connected(response);
-          }
-        });
-      }
-    });
-
-    function connected(response) {
-      location.assign(location.href + "/facebook?id=" + response.authResponse.userID + "&token=" + response.authResponse.accessToken);
-    }
-  });
-</script>
 
 {{> footer}}
