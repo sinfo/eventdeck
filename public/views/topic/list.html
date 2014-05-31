@@ -42,7 +42,7 @@
       <div ng-hide="loading">
         <h3 ng-hide="loading || topics">No topics created yet.</h3>
         <div class="button-group half-bottom-space">
-          <div class="ink-button green" ng-click="showOpen = true;">{{shownTopics(true).length}} Open</div>
+          <div class="ink-button green" ng-click="showOpen = true;" style="border-right: 1px solid white;">{{shownTopics(true).length}} Open</div>
           <div class="ink-button red" ng-click="showOpen = false;">{{shownTopics(false).length}} Closed</div>
         </div>
         <h3>{{showOpen ? 'Open' : 'Closed'}} topics</h3>
