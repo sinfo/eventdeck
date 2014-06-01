@@ -17,10 +17,20 @@
         <p class="ink-button" ng-click="searchCompanies.member=me.id">Assigned to me</p>
       </div>
 
+      <h3>Filter Status</h3>
       <div ng-repeat="status in statuses" class="button-group">
         <div class="ink-button small all-100 {{status.replace(' ','-').toLowerCase()}}" ng-click="searchCompanies.status=status" style="border: 0px; border-radius: 2px; color: white; font-size: 16px;">
           {{status}}
         </div>
+      </div>
+
+      <br>
+
+      <h3>Order by</h3>
+      <div class="button-group">
+        <div class="ink-button blue small all-100" ng-click="companyPredicate='name'; reverse=!reverse">Name <i class="fa fa-arrows-v"></i></div>
+        <div class="ink-button blue small all-100" ng-click="companyPredicate='updated'; reverse=!reverse">Updated <i class="fa fa-arrows-v"></i></div>
+        <div class="ink-button blue small all-100" ng-click="companyPredicate='member'; reverse=!reverse">Member <i class="fa fa-arrows-v"></i></div>
       </div>
     </div>
 
@@ -32,9 +42,27 @@
       </a>
       <br><br>
       <div ng-if="showFilters">
-        <p class="ink-button" ng-click="searchCompanies={}">All</p>
-        <p class="ink-button" ng-click="searchCompanies.member=me.id">Assigned to me</p>
-        <small ng-repeat="status in statuses" ng-click="searchCompanies.status=status">{{status}}</small>
+        <div class="button-group half-bottom-space">
+          <p class="ink-button" ng-click="searchCompanies={}">All</p>
+          <p class="ink-button" ng-click="searchCompanies.member=me.id">Assigned to me</p>
+        </div>
+
+        <h3>Filter Status</h3>
+        <div ng-repeat="status in statuses" class="button-group">
+          <div class="ink-button small all-100 {{status.replace(' ','-').toLowerCase()}}" ng-click="searchCompanies.status=status" style="border: 0px; border-radius: 2px; color: white; font-size: 16px;">
+            {{status}}
+          </div>
+        </div>
+
+        <br>
+
+        <h3>Order by</h3>
+        <div class="button-group">
+          <div class="ink-button blue small all-100" ng-click="companyPredicate='name'; reverse=!reverse">Name <i class="fa fa-arrows-v"></i></div>
+          <div class="ink-button blue small all-100" ng-click="companyPredicate='updated'; reverse=!reverse">Updated <i class="fa fa-arrows-v"></i></div>
+          <div class="ink-button blue small all-100" ng-click="companyPredicate='member'; reverse=!reverse">Member <i class="fa fa-arrows-v"></i></div>
+        </div>
+        <br><br>
       <br><br>
       </div>
     </div>
@@ -46,7 +74,7 @@
         <h3 ng-hide="loading || companies">No companies created yet.</h3>
         
         <div class="all-100" infinite-scroll="scroll()">
-          <company company-object="company" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments" ng-repeat="company in companies | filter:searchCompanies:strict | orderBy: 'updated':'true' | limitTo: limit"></company>
+          <company company-object="company" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments" ng-repeat="company in companies | filter:searchCompanies:strict | orderBy:companyPredicate:reverse | limitTo: limit"></company>
         </div>
       </div>
     </div>
