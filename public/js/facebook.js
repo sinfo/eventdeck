@@ -23,6 +23,7 @@ $(document).ready(function () {
     });
 
     function connected(response) {
+      $("#loading").show();
       $.ajax(location.href + "/facebook", {
         type: "GET",
         data: {
