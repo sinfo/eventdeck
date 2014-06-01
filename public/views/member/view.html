@@ -13,14 +13,28 @@
           <br><br>
           <h6><i class="fa fa-users"></i> {{member.roles[0].name}}</h6>
           <p>
-          <b><i class="fa fa-envelope"></i> Emails</b><br>
-          <span ng-show="member.mails.sinfo"><a href="mailto:{{member.mails.sinfo}}"><i class="fa fa-power-off"></i> {{member.mails.sinfo}}</a></span><br>
-          <span ng-show="member.mails.ist"><a href="mailto:{{member.mails.ist}}"><i class="fa fa-book"></i> {{member.mails.ist}}</a></span><br>
-          <span ng-show="member.mails.google"><a href="mailto:{{member.mails.google}}"><i class="fa fa-google-plus"></i> {{member.mails.google}}</a></span><br>
-          <span ng-show="member.mails.dropbox"><a href="mailto:{{member.mails.dropbox}}"><i class="fa fa-dropbox"></i> {{member.mails.dropbox}}</a></span><br>
-          <span ng-show="member.mails.msn"><a href="mailto:{{member.mails.msn}}"><i class="fa fa-windows"></i> {{member.mails.msn}}</a></span><br>
+          <h6><i class="fa fa-envelope"></i> Emails</h6>
+            <span ng-show="member.mails.sinfo"><a href="mailto:{{member.mails.sinfo}}"><i class="fa fa-power-off"></i> {{member.mails.sinfo}}</a></span><br>
+            <span ng-show="member.mails.ist"><a href="mailto:{{member.mails.ist}}"><i class="fa fa-book"></i> {{member.mails.ist}}</a></span><br>
+            <span ng-show="member.mails.google"><a href="mailto:{{member.mails.google}}"><i class="fa fa-google-plus"></i> {{member.mails.google}}</a></span><br>
+            <span ng-show="member.mails.dropbox"><a href="mailto:{{member.mails.dropbox}}"><i class="fa fa-dropbox"></i> {{member.mails.dropbox}}</a></span><br>
+            <span ng-show="member.mails.msn"><a href="mailto:{{member.mails.msn}}"><i class="fa fa-windows"></i> {{member.mails.msn}}</a></span><br>
           </p>
-          <h6><a href="http://fb.com/{{member.facebook}}" target="_blank"><i class="fa fa-facebook fa-2x"></i></a></h6>
+          <h6><i class="fa fa-phone"></i> Phone</h6>
+          <span ng-repeat="phone in member.phones">{{phone}}<br></span>
+
+          <br><br>
+
+          <h6><i class="fa fa-graduation-cap"></i> IST ID</h6> 
+          <span>{{member.istId}}<br></span>
+
+          <br><br>
+
+          <h6>
+            <a href="http://fb.com/{{member.facebook}}" target="_blank"><i class="fa fa-facebook fa-2x"></i> </a> 
+            <a title="{{member.skype}}" target="_blank"><i class="fa fa-skype fa-2x"></i></a>
+
+          </h6>
         </div>
 
         <div class="all-60 medium-60 small-100 tiny-100">  
