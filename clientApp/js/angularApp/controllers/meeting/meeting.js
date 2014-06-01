@@ -1,6 +1,6 @@
 "use strict";
 
-theToolController.controller("MeetingController", function ($scope, $routeParams, $location, MeetingFactory, TopicFactory) {
+theToolController.controller("MeetingController", function ($scope, $routeParams, $location, $timeout, MeetingFactory, TopicFactory) {
 
   //================================INITIALIZATION================================
 
@@ -32,6 +32,12 @@ theToolController.controller("MeetingController", function ($scope, $routeParams
     for (var i = 0, j = $scope.members.length; i < j; i++) {
       $scope.toggleAttendant($scope.members[i].id);
     }
+  };
+
+  $scope.getAttendants = function () {
+    return $scope.meeting.attendants.map(function (o) {
+      return $scope.getMember(o);
+    });
   };
 
   $scope.createTopic = function (kind) {
@@ -91,11 +97,19 @@ theToolController.controller("MeetingController", function ($scope, $routeParams
     }
 
     MeetingFactory.update({id: $scope.meeting._id}, $scope.meeting, function (response) {
-      if(response.error) {
-        $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
+      if (response.success) {
+        $scope.success = "Meeting saved.";
+
+        if ($scope.timeout) {
+          $timeout.cancel($scope.timeout);
+        }
+
+        $scope.timeout = $timeout(function () {
+          $scope.success = "";
+        }, 3000);
       }
-      else if (response.success) {
-        $scope.success = response.success;
+      else {
+        $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
       }
     });
   };
