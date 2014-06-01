@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-theToolController.controller('TopicsController', function ($scope, $location, $routeParams, TopicFactory) {
+theToolController.controller("TopicsController", function ($scope, $location, $routeParams, TopicFactory) {
 
   //================================INITIALIZATION================================
 
