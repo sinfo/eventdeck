@@ -22,12 +22,21 @@ theToolController.controller('MessageController', function ($scope, $http, $rout
   },4000);*/
 
   SocketFactory.on('connected', function (message) {
-    SocketFactory.emit('auth', {id: $routeParams.id, user: $scope.me.id}, function (result) {
+    SocketFactory.emit('auth', {id: $routeParams.id, user: $scope.me.id}, function () {
       console.log('Auth success');
+    });
+  });
+
+  SocketFactory.on('validation', function (result){
+    console.log(result);
+    if(!result.err){
       $scope.chat     = result.chatData;
       $scope.messages = result.messages;
       $scope.room     = result.room;
-    });
+    }
+    else{
+      console.log(result.message);
+    }
   });
 
   SocketFactory.on('message', function (message) {
