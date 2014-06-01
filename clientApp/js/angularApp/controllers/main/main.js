@@ -146,9 +146,18 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
   };
 
   $scope.getMember = function (memberId) {
-    return $scope.members.filter(function(o) {
+    var member = $scope.members.filter(function(o) {
       return o.id == memberId;
-    })[0];
+    });
+
+    if(member.length>0) {
+      return member[0];
+    } else {
+      return {
+        name: "No one",
+        facebook: "100000456335972"
+      }
+    }
   };
 
   $scope.getSpeaker = function (speakerId) {
