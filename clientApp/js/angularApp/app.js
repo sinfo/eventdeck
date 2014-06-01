@@ -28,9 +28,12 @@ config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/speaker/:id/edit'         , {templateUrl: 'views/speaker/edit.html',          controller: 'SpeakerController'});
   $routeProvider.when('/speaker/:id/confirm'      , {templateUrl: 'views/speaker/confirm.html',       controller: 'SpeakerEmailController'});
   $routeProvider.when('/members/'                 , {templateUrl: 'views/member/list.html',           controller: 'MembersController'});
+  $routeProvider.when('/member/'                  , {templateUrl: 'views/member/create.html',         controller: 'CreateMemberController'});
   $routeProvider.when('/member/:id'               , {templateUrl: 'views/member/view.html',           controller: 'MemberController'});
+  $routeProvider.when('/member/:id/edit'          , {templateUrl: 'views/member/edit.html',           controller: 'MemberController'});
   $routeProvider.when('/meetings'                 , {templateUrl: 'views/meeting/list.html',          controller: 'MeetingsController'});
   $routeProvider.when('/meeting/:id'              , {templateUrl: 'views/meeting/view.html',          controller: 'MeetingController'});
+  $routeProvider.when('/meeting/:id/text'         , {templateUrl: 'views/meeting/text.html',          controller: 'MeetingController'});
   $routeProvider.when('/meeting/:id/edit'         , {templateUrl: 'views/meeting/edit.html',          controller: 'MeetingController'});
   $routeProvider.when('/chats'                    , {templateUrl: 'views/chat/list.html',             controller: 'ChatsController'});
   $routeProvider.when('/chat/:id'                 , {templateUrl: 'views/chat/view.html',             controller: 'ChatController'});
