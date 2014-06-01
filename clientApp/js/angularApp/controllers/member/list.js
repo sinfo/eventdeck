@@ -1,9 +1,10 @@
 'use strict';
 
 theToolController
-  .controller('MembersController', function ($scope, $http, $sce, MemberFactory) {
-    $scope.trustSrc = function(src) {
-      return $sce.trustAsResourceUrl(src);
+  .controller('MembersController', function ($scope, $http, MemberFactory) {
+    $scope.setRoleSearch = function(roleId) {
+      console.log(roleId);
+      $scope.searchRoles=roleId;
     }
 
     MemberFactory.Member.getAll(function(response) {
