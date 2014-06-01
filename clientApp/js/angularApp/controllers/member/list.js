@@ -2,7 +2,7 @@
 
 theToolController
   .controller('MembersController', function ($scope, $http, MemberFactory) {
-    $scope.setRoleSearch = function(roleId) {
+    $scope.setSearchRole = function(roleId) {
       console.log(roleId);
       $scope.searchRoles=roleId;
     }

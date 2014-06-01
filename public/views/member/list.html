@@ -2,7 +2,7 @@
 
   <div class="column-group">
     <div class="all-50">
-      <h1>Member {{searchRoles}}</h1>
+      <h1>Members</h1>
     </div>
 
     <div class="all-50 align-right">
@@ -13,14 +13,14 @@
   <div class="column-group gutters">
     <div class="all-25 medium-40 hide-small hide-100">
       <div class="button-group half-bottom-space">
-        <p class="ink-button" ng-click="searchMembers={}">All</p>
-        <p class="ink-button" ng-click="searchMembers.member=me.id">Assigned to me</p>
+        <p class="ink-button" ng-click="searchMembers={};setSearchRole()">All Members</p>
+        <p class="ink-button" ng-click="searchMembers.id=me.id">Me</p>
       </div>
 
       <h3>Filter Roles</h3>
       <div ng-repeat="role in roles" class="button-group">
-        <a ng-click="setSearchRole(role)" class="ink-button small all-100 {{role.replace(' ','-').toLowerCase()}}" style="border: 0px; border-radius: 2px; color: white; font-size: 16px;">
-          {{role.id}}
+        <a ng-click="setSearchRole(role.id)" class="ink-button small all-100" style="border: 0px; border-radius: 2px; color: white; font-size: 16px;">
+          {{role.name}}
         </a>
       </div>
 
@@ -44,7 +44,7 @@
       <div ng-if="showFilters">
         <div class="button-group half-bottom-space">
           <p class="ink-button" ng-click="searchMembers={}">All</p>
-          <p class="ink-button" ng-click="searchMembers.member=me.id">Assigned to me</p>
+          <p class="ink-button" ng-click="searchMembers.id=me.id">Assigned to me</p>
         </div>
 
         <h3>Filter Roles</h3>
@@ -75,7 +75,7 @@
         
         <div class="all-100" infinite-scroll="scroll()">
           <div class="column-group horizontal-gutters">
-            <div class="all-25 medium-33 small-50 tiny-100" ng-repeat="member in members | filter:search:strict | filterRole: searchRoles.toString() | orderBy:memberPredicate:reverse">
+            <div class="all-25 medium-33 small-50 tiny-100" ng-repeat="member in members | filter:searchMembers:strict | filterRole: searchRoles.toString() | orderBy:memberPredicate:reverse">
               <a href="/#/member/{{member.id}}">
                 <div class="list-box member">
                   <h1>{{member.name}}</h1>
