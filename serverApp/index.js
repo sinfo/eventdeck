@@ -19,15 +19,7 @@ server.pack.require('hapi-auth-cookie', function (err) {
   server.start(function () {
     console.log('Server started at: ' + server.info.uri);
     var webSocket = module.exports.webSocket = SocketIO.listen(server.listener);
-/*    webSocket
-      .of('/chat')
-      .on('connection', function (socket) {
-        console.log("Connected to main chat!");
-        socket.on('auth', function(data){
-          console.log(data.id);
-        });
-      });*/
-    var sockets = require('./io');
+    var sockets = require('./sockets');
   });
 
 });

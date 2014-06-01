@@ -3,18 +3,9 @@ var message = require('./../resources/message');
 
 server.route({
   method: 'GET',
-  path: '/api/messages',
-  config: {
-    handler: message.list,
-    auth: true
-  }
-});
-
-server.route({
-  method: 'POST',
   path: '/api/message',
   config: {
-    handler: message.create,
+    handler: message.list,
     auth: true
   }
 });
