@@ -11,7 +11,7 @@
             {{message.text}}
           </div>
           <div class="all-20" style="text-align: right; padding-right:15px;">
-            <!-- <small>{{timeSince(message.date)}}</small> -->
+          <small>{{timeSince(message.date)}}</small>
           </div>
         </div>
       </div>
@@ -23,10 +23,7 @@
   <div class="all-100">
     <form class="ink-form" ng-submit="submit()">
       <div class="control-group">
-        <textarea ng-model="text" type="text" rows="3" placeholder="Post message on chat."></textarea>
-      </div>
-      <div class="control-group">
-        <input type="submit" id="submit" value="Save Message" class="ink-button green" />
+        <input ng-model="text" type="text" id="submit" rows="3" placeholder="Post message on chat.">
       </div>
     </form>
   </div>

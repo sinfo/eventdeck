@@ -12,7 +12,7 @@ function create(request, reply) {
       reply({error:"There was an error!"});
     } else{
       console.log("Message Created: " + message._id);
-      reply({message:"Message Created!", messageId: message._id});
+      reply(message);
     }
   });
 }
