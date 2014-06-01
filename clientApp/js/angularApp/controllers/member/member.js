@@ -9,11 +9,11 @@ theToolController.controller("MemberController", function ($scope, $http, $route
     return;
   }
 
-  $scope.member = $scope.getMember($routeParams.id);
+  $scope.member = $scope.formData = $scope.getMember($routeParams.id);
 
   MemberFactory.Member.get({id:$routeParams.id}, function(result) { 
     if(!result.error) {
-      $scope.member = result;
+      $scope.member = $scope.formData = result;
       getMemberStuff();
     } 
   });
@@ -21,6 +21,12 @@ theToolController.controller("MemberController", function ($scope, $http, $route
   getMemberStuff();
 
   function getMemberStuff() {
+    if($scope.companies && $scope.speakers && $scope.comments && $scope.companies.length > 0 && $scope.speakers.length > 0 && $scope.comments.length > 0) {
+      $scope.loading = false;
+    } else {
+      return setTimeout(getMemberStuff, 1000);
+    }
+
     $scope.member.companies = $scope.companies.filter(function(e) {
       return e.member == $scope.member.id;
     })
@@ -32,12 +38,19 @@ theToolController.controller("MemberController", function ($scope, $http, $route
     $scope.member.comments = $scope.comments.filter(function(e) {
       return e.member == $scope.member.id;
     })
-
-    if($scope.companies.length > 0 && $scope.speakers.length > 0) {
-      $scope.loading = false;
-    } else {
-      setTimeout(getMemberStuff, 1000);
-    }
   }
+
+
+  $scope.submit = function() {
+    var memberData = this.formData;
+
+    MemberFactory.Member.update({ id:memberData.id }, memberData, function(response) {
+      if(response.error) {
+        $scope.error = response.error;
+      } else {
+        $scope.message = response.success;
+      }
+    });
+  };
 
 });
