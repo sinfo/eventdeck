@@ -60,7 +60,7 @@ function getChat(chatID, memberID, cb){
       message = 'Logged in chat with sucess';
       outChat = response;
       if(outChat.members.indexOf(memberID) === -1){
-        return callback('member');
+        return cb('member');
       }
     }
     cb();
@@ -84,7 +84,7 @@ function done(err, room, socket, cb){
   var data = {};
   if(err){
     if(err === 'member'){
-      console.log('Member not valid in chat: ' + chatID );
+      console.log('Invalid member in chat: ' + room );
       data.message = "You're not allowed into this chat!";
       data.err     = true;
     }
@@ -96,10 +96,11 @@ function done(err, room, socket, cb){
       chatData : outChat,
       messages : messages,
       message  : message,
-      err      : true
+      err      : false
     }
   }
-  cb(data);
+  socket.emit("validation", data);
+  cb();
 }
 
 function createMessage(cb){
@@ -116,12 +117,11 @@ function createMessage(cb){
 
 function updateChat(room, cb){
   Chat.update({params: { id: room}, payload: {message: messageData.id}}, function(response) {
-    // if successful, we'll need to refresh the chat list
     if(response.error) {
-      console.log('Chat id: ' + messageData.id + ' update error!');
+      console.log('Chat id: ' + room + ' update error!');
       console.log(response.error);
     } else {
-      console.log('Chat id: ' + messageData.id + ' updated successfully!');
+      console.log('Chat id: ' + room + ' updated successfully!');
     }
     cb();
   });

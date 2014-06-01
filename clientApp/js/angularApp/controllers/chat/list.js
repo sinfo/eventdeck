@@ -1,6 +1,6 @@
 'use strict';
 
-theToolController.controller('ChatController', function ($scope, ChatFactory) {
+theToolController.controller('ChatsController', function ($scope, ChatFactory) {
 
   $scope.loading = true;
 
