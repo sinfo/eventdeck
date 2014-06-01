@@ -19,7 +19,7 @@
 
       <h3>Filter Roles</h3>
       <div ng-repeat="role in roles" class="button-group">
-        <a ng-click="searchRoles=role.id" class="ink-button small all-100 {{role.replace(' ','-').toLowerCase()}}" style="border: 0px; border-radius: 2px; color: white; font-size: 16px;">
+        <a ng-click="setSearchRole(role)" class="ink-button small all-100 {{role.replace(' ','-').toLowerCase()}}" style="border: 0px; border-radius: 2px; color: white; font-size: 16px;">
           {{role.id}}
         </a>
       </div>
@@ -49,7 +49,7 @@
 
         <h3>Filter Roles</h3>
         <div ng-repeat="role in roles" class="button-group">
-          <div class="ink-button small all-100 {{role.replace(' ','-').toLowerCase()}}" ng-click="searchRoles=role.id" style="border: 0px; border-radius: 2px; color: white; font-size: 16px;">
+          <div class="ink-button small all-100 {{role.replace(' ','-').toLowerCase()}}" ng-click="setSearchRole(role)" style="border: 0px; border-radius: 2px; color: white; font-size: 16px;">
             {{role.id}}
           </div>
         </div>
