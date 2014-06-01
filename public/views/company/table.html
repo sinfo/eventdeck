@@ -5,25 +5,14 @@
     <h1>Loading...</h1>
   </div>
 
-  <div class="all-100">
-    <a href="" class="ink-button grey" ng-click="search.status='SUGESTÃO'">SUGESTÃO</a>
-    <a href="" class="ink-button orange" ng-click="search.status='CONTACTADO'">CONTACTADO</a>
-    <a href="" class="ink-button blue" ng-click="search.status='EM CONVERSAÇÕES'">EM CONVERSAÇÕES</a>
-    <a href="" class="ink-button green" ng-click="search.status='ACEITOU/EM NEGOCIAÇÕES'">ACEITOU/EM NEGOCIAÇÕES</a>
-    <a href="" class="ink-button lime" ng-click="search.status='NEGOCIO FECHADO'">NEGOCIO FECHADO</a>
-    <a href="" class="ink-button red" ng-click="search.status='REJEITOU/DESISTIR'">REJEITOU/DESISTIR</a>
-    <br><br>
-  </div>
-
-
   <div ng-show="companies">
     <table class="companies-table">
       <tr ng-repeat="member in members">
         <td class="member-cell">
-          <a style="color:#fff" href="/#/member/{{member.id}}"><h6><img ng-show="member.facebook" src="https://graph.facebook.com/{{member.facebook}}/picture"/> {{member.name}}</h6></a>
+          <a style="color:#fff" href="/#/member/{{member.id}}"><h6><img ng-show="member.facebook" ng-src="https://graph.facebook.com/{{member.facebook}}/picture"/> {{member.name}}</h6></a>
         </td>
-        <td ng-repeat="company in companies | filter:{member:member.id}:strict" class="{{getClassFromStatusAndKind(company)}}" style="text-align:center">
-          <a style="color:#fff" href="/#/company/{{company.id}}">{{company.name}}</a>
+        <td ng-repeat="company in companies | filter:{member:member.id}:strict" style="text-align:center" ng-class="company.status.replace(' ','-').toLowerCase()" >
+          <a class="status" style="color:#fff" href="/#/company/{{company.id}}">{{company.name}}</a>
         </td>
     </table>
   </div>

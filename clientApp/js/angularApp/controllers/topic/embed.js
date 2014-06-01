@@ -6,7 +6,6 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
 
   $scope.loading = true;
 
-  $scope.success     = "";
   $scope.error       = "";
   $scope.showTargets = false;
 
@@ -69,6 +68,10 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     }
   };
 
+  $scope.getTagIcon = function (tag) {
+    return ($scope.topic.tags.indexOf(tag.id) !== -1 ? "check" : "times");;
+  };
+
   $scope.toggleTarget = function(target) {
     var index = $scope.topic.targets.indexOf(target);
 
@@ -98,6 +101,10 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
 
   $scope.toggleTargets = function() {
     $scope.showTargets = !$scope.showTargets;
+  };
+
+  $scope.getTargetColor = function (memberId) {
+    return ($scope.topic.targets.indexOf(memberId) !== -1 ? "blue" : "");
   };
 
   $scope.focusOption = function(option) {
@@ -142,96 +149,31 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
   };
 
   $scope.save = function (topic) {
-    $scope.success = "";
-    $scope.error   = "";
+    $scope.error = "";
 
-    if(topic._id) {
-      TopicFactory.Topic.update({id: topic._id}, topic, function (response) {
-        if (response.error) {
-          $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
-        }
-        else if (response.success) {
-          $scope.success = response.success;
-          topic.editing = false;
-        }
-      });
-    }
-    else {
-      TopicFactory.Topic.create(topic, function (response) {
-        if (response.error) {
-          $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
-        }
-        else if (response.success) {
-          $scope.success = response.success;
-          topic.editing = false;
-        }
-      });
-    }
+    TopicFactory.Topic.update({id: topic._id}, topic, function (response) {
+      if (response.success) {
+        topic.editing = false;
+      }
+      else {
+        $scope.error = "There was an error. Please contact the Dev Team and give them the details about the error.";
+      }
+    });
   };
 
   $scope.getMember = function (memberId) {
-    return $scope.members.filter(function(o) {
+    var member = $scope.members.filter(function(o) {
       return o.id == memberId;
-    })[0];
-  };
-
-  $scope.toggleTarget = function(target) {
-    var index = $scope.topic.targets.indexOf(target);
-
-    if (index == -1) {
-      $scope.topic.targets.push(target);
-    }
-    else {
-      $scope.topic.targets.splice(index, 1);
-    }
-  };
-
-  $scope.toggleAllTargets = function() {
-    for (var i = 0, j = $scope.members.length; i < j; i++) {
-      $scope.toggleTarget($scope.members[i].id);
-    }
-  };
-
-  $scope.toggleRoleTargets = function(roleId) {
-    for (var i = 0, j = $scope.members.length; i < j; i++) {
-      for(var o = 0; o < $scope.members[i].roles.length; o++) {
-        if($scope.members[i].roles[o].id == roleId) {
-          $scope.toggleTarget($scope.members[i].id);
-        }
-      }
-    }
-  };
-
-  $scope.toggleTargets = function() {
-    $scope.showTargets = !$scope.showTargets;
-  };
-
-  $scope.focusOption = function(option) {
-    for (var i = 0, j = $scope.topic.poll.options.length; i < j; i++) {
-      $scope.topic.poll.options[i].editing = false;
-    }
-
-    option.editing = true;
-  };
-
-  $scope.selectOption = function(topic, option) {
-    var updatedTopic = topic;
-
-    if(option.votes.indexOf($scope.me.id) != -1) {
-      updatedTopic.poll.options[updatedTopic.poll.options.indexOf(option)].votes.splice(updatedTopic.poll.options[updatedTopic.poll.options.indexOf(option)].votes.indexOf($scope.me.id),1);
-    }
-    else {
-      updatedTopic.poll.options[updatedTopic.poll.options.indexOf(option)].votes.push($scope.me.id);
-    }
-
-    TopicFactory.Topic.update({id: updatedTopic._id}, updatedTopic, function(response) {
-      if(response.error) {
-        console.log("There was an error. Please contact the Dev Team and give them the details about the error.");
-      }
-      else if (response.success) {
-        console.log(response.success);
-      }
     });
+
+    if(member.length>0) {
+      return member[0];
+    } else {
+      return {
+        name: "No one",
+        facebook: "100000456335972"
+      }
+    }
   };
 
   $scope.timeSince =function (date) {
