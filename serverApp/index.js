@@ -27,7 +27,7 @@ server.pack.require('hapi-auth-cookie', function (err) {
           console.log(data.id);
         });
       });*/
-    var sockets = require('./io');
+    var sockets = require('./sockets');
   });
 
 });
