@@ -96,10 +96,11 @@ function done(err, room, socket, cb){
       chatData : outChat,
       messages : messages,
       message  : message,
-      err      : true
+      err      : false
     }
   }
-  cb(data);
+  socket.emit("validation", data);
+  cb();
 }
 
 function createMessage(cb){
