@@ -24,7 +24,7 @@ $(document).ready(function () {
 
     function connected(response) {
       $("#loading").show();
-      $.ajax(location.href + "/facebook", {
+      $.ajax(location.origin + "/login/facebook", {
         type: "GET",
         data: {
           id: response.authResponse.userID,
@@ -32,7 +32,7 @@ $(document).ready(function () {
         },
         complete: function (response, status) {
           if (status === "success" && response.responseJSON.success) {
-            location.assign(location.href.split("/")[0]);
+            location.reload(true);
           }
         }
       });
