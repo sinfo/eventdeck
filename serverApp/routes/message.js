@@ -11,15 +11,6 @@ server.route({
 });
 
 server.route({
-  method: 'POST',
-  path: '/api/message',
-  config: {
-    handler: message.create,
-    auth: true
-  }
-});
-
-server.route({
   method: 'GET',
   path: '/api/message/{id}',
   config: {
