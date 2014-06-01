@@ -56,6 +56,7 @@ theToolController.controller("MeetingController", function ($scope, $routeParams
       duedate: null,
       meetings: [$scope.meeting._id],
       root: null,
+      tags: [],
       posted: new Date()
     };
 
