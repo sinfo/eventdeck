@@ -17,26 +17,24 @@
       </div>
 
       <div class="all-100 control-group">
-        <label ng-click="toggleAttendants()"><a>Attendants</a> </label><i class="fa fa-long-arrow-left"></i><small> Click to toggle all.</small>
+        <label ng-click="toggleAttendants()">Attendants </label><i class="fa fa-long-arrow-left"></i><small> Click to toggle all.</small>
         <div class="all-100">
-          <small class="ink-button {{meeting.attendants.indexOf(member.id) != -1 ? 'green' : 'red'}}" style="margin-bottom: 0.5em;" ng-repeat="member in members | orderBy:'id'" ng-click="toggleAttendant(member.id)">
+          <div class="ink-button {{meeting.attendants.indexOf(member.id) != -1 ? 'green' : 'red'}}" style="margin: 0.25em;" ng-repeat="member in members | orderBy:'id'" ng-click="toggleAttendant(member.id)">
             <img ng-src="https://graph.facebook.com/{{member.facebook}}/picture?width=60&height=60" style="width:30px">
             <label for="{{member.id}}" style="line-height: 30px;">{{member.name}}</label>
-          </small>
+          </div>
         </div>
       </div>
     </form>
 
     <div class="all-100 bottom-space">
-      <a class="ink-button orange" href="/#/meetings"><i class="fa fa-back"></i><i class="fa fa-reply"></i> Go back</a>
+      <a class="ink-button orange" ng-href="/#/meeting/{{meeting._id}}"><i class="fa fa-back"></i><i class="fa fa-reply"></i> Go back</a>
       <div class="ink-button green" ng-click="saveMeeting()"><i class="fa fa-check"></i> Save</div>
       <div class="ink-button red" ng-click="deleteMeeting()"><i class="fa fa-times"></i> Delete</div>
       <div class="ink-alert basic success" ng-show="success">
-        <button class="ink-dismiss">&times;</button>
         <p><strong>Success!</strong> {{success}}</p>
       </div>
       <div class="ink-alert basic error" ng-show="error">
-        <button class="ink-dismiss">&times;</button>
         <p><strong>Error!</strong> {{error}}</p>
       </div>
     </div>
@@ -66,7 +64,7 @@
       <div class="all-100">
         <h1 ng-show="loading">Loading...</h1>
         <div ng-if="!topic.deleted" ng-repeat="topic in meeting.topics | orderBy:posted">
-          <topic topic-object="topic" members="{{members}}" me="{{me}}" roles="{{roles}}" tags-array="topicTags"></topic>
+          <topic topic-object="topic" topic-members="members" topic-me="me" topic-roles="roles" topic-tags="topicTags"></topic>
           <a class="ink-button red small" ng-click="removeTopic(topic)"><i class="fa fa-chevron-circle-up"></i> Remove topic without deleting it</a>
           <br><br>
         </div>
