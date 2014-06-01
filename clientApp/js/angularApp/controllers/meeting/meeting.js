@@ -1,6 +1,6 @@
 "use strict";
 
-theToolController.controller("MeetingController", function ($scope, $routeParams, $location, $timeout, MeetingFactory, TopicFactory) {
+theToolController.controller("MeetingController", function ($scope, $routeParams, $location, $timeout, MeetingFactory, TopicFactory, TagFactory) {
 
   //================================INITIALIZATION================================
 
@@ -11,7 +11,75 @@ theToolController.controller("MeetingController", function ($scope, $routeParams
   MeetingFactory.get({id: $routeParams.id}, function (meeting) {
     $scope.meeting = meeting;
 
-    $scope.loading = false;
+    String.prototype.endsWith = function (suffix) {
+      return this.indexOf(suffix, this.length - suffix.length) !== -1;
+    };
+
+    if ($location.path().endsWith("/text")) {
+      var text = meeting.title + "\n\n" + meeting.description + "\n\n";
+
+      if (meeting.attendants.length > 0) {
+        text += "Attendants:\n";
+
+        meeting.attendants.sort();
+
+        for (var i = 0; i < meeting.attendants.length; i++) {
+          text += $scope.getMember(meeting.attendants[i]).name + (i+1 < meeting.attendants.length ? ", " : "");
+        }
+        text += "\n\n";
+      }
+
+      TagFactory.Tag.getAll(function (result) {
+        var tags = [];
+
+        for (var i = 0; i < result.length; i++) {
+          tags.push(result[i]);
+        }
+
+        tags.sort(function (o1, o2) {
+          return o1.name.localeCompare(o2.name);
+        });
+
+        for (var i = 0; i < tags.length; i++) {
+          var topics = meeting.topics.filter(function (o) {
+            return o.tags.indexOf(tags[i].id) != -1;
+          });
+
+          if (topics.length === 0) {
+            continue;
+          }
+
+          text += tags[i].name + ":\n";
+
+          topics.sort(function (o1, o2) {
+            return o1.posted.toString().localeCompare(o2.posted.toString());
+          });
+
+          for (var j = 0; j < topics.length; j++) {
+            text += "    - " + topics[j].text.replace(/\n/g, "\n      ") + "\n";
+          }
+
+          text += "\n";
+        }
+
+        $scope.numberOfLines = (function () {
+          var n = 0;
+          for (var i = 0; i < text.length; i++) {
+            if (text[i] === "\n") {
+              n++;
+            }
+          }
+          return n + 1;
+        }());
+
+        $scope.text = text;
+
+        $scope.loading = false;
+      });
+    }
+    else {
+      $scope.loading = false;
+    }
   });
 
 
