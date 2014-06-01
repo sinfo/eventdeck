@@ -17,14 +17,15 @@ function update(request, reply) {
     ], done);
 
   function getChat(cb) {
-    Chat.findById(ChatId, gotChat);
+    Chat.findById(chatId, gotChat);
 
     function gotChat(err, result) {
       if (err) {
         cb(err);
       }
       if (result.length > 0) {
-        chat = result;
+        chat = result[0];
+        cb();
       }
       else {
         cb(Hapi.error.conflict('No chat with the ID: ' + chatId));
@@ -35,7 +36,7 @@ function update(request, reply) {
   function updateChat(cb) {
 
     if (request.payload.message){
-      chat.messages.push(request.payload.message);
+      diffChat.$push = {messages: request.payload.message}; 
     }
     else{
       if (request.payload.id != chat.id)              { diffChat.id        = request.payload.id; }
@@ -44,24 +45,18 @@ function update(request, reply) {
       if (request.payload.messages != chat.messages)  { diffChat.messages  = request.payload.messages; }
     }
     
-    diffChat.updated = Date.now();
+    diffChat.date = Date.now();
 
     cb();
   }
 
   function saveChat(cb) {
-    var query = {
-      id: chat.id
-    };
-    if(diffChat.id) {
-      query = chat;
-    }
+    var query = { _id: chat._id };
     Chat.update(query, diffChat, {}, function (err, numAffected){
       if (err) {
         return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
       }
-
-      console.log("Updated chat:", numAffected)
+      console.log("Updated chat:", numAffected);
       cb();
     });
   }
