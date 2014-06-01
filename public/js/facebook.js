@@ -23,7 +23,14 @@ $(document).ready(function () {
     });
 
     function connected(response) {
-      $("#loading").show();
+      var loginInfo = $("#login");
+
+      loginInfo.find("p:eq(0)").text("Logging in...");
+      loginInfo.find("p:eq(1)").text("");
+      loginInfo.find("i").show();
+
+      loginInfo.show();
+
       $.ajax(location.origin + "/login/facebook", {
         type: "GET",
         data: {
@@ -31,8 +38,20 @@ $(document).ready(function () {
           token: response.authResponse.accessToken
         },
         complete: function (response, status) {
-          if (status === "success" && response.responseJSON.success) {
+          if (status !== "success") {
+            loginInfo.find("p:eq(0)").text("There was an error with your request.");
+            loginInfo.find("p:eq(1)").text("Please try again.");
+            loginInfo.find("i").hide();
+          }
+          else if (response.responseJSON.success) {
+            loginInfo.find("p:eq(0)").text("Success!");
+            loginInfo.find("p:eq(1)").text("Redirecting...");
+
             location.reload(true);
+          }
+          else {
+            loginInfo.find("p:eq(0)").text("You are not authorized to log in.");
+            loginInfo.find("i").hide();
           }
         }
       });
