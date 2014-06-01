@@ -19,14 +19,14 @@ theToolController.controller('ChatController', function ($scope, $http, $routePa
       $scope.chat     = result.chatData;
       $scope.messages = result.messages;
       $scope.room     = result.room;
+      SocketFactory.on('message', function (message) {
+        console.log(message.date);
+        $scope.messages.push(message);
+      });
     }
     else{
       console.log(result.message);
     }
-  });
-
-  SocketFactory.on('message', function (message) {
-    $scope.messages.push(message);
   });
 
   $scope.submit = function() {
