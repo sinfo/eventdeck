@@ -17,6 +17,9 @@ theToolController
     $scope.limit = 10;
 
     $scope.statuses = ['Suggestion','Contacted','In Conversations','In Negotiations','Closed Deal','Rejected','Give Up'];
+    
+    $scope.companyPredicate = 'updated';
+    $scope.reverse = 'true';
 
     CompanyFactory.Company.getAll(function(response) {
       $scope.predicate = 'updated';

@@ -6,10 +6,11 @@ theToolController
     $scope.limit = 10;
 
     $scope.statuses = ['Suggestion','Contacted','In Conversations','Accepted','Rejected','Give Up'];
+
+    $scope.speakerPredicate = 'updated';
+    $scope.reverse = 'true';
     
     SpeakerFactory.Speaker.getAll(function(response) {
-      $scope.predicate = 'participation';
-      $scope.reverse = false;
       $scope.speakers = response;
     });
 

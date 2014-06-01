@@ -17,10 +17,20 @@
         <p class="ink-button" ng-click="searchSpeakers.member=me.id">Assigned to me</p>
       </div>
 
+      <h3>Filter Status</h3>
       <div ng-repeat="status in statuses" class="button-group">
         <div class="ink-button small all-100 {{status.replace(' ','-').toLowerCase()}}" ng-click="searchSpeakers.status=status" style="border: 0px; border-radius: 2px; color: white; font-size: 16px;">
           {{status}}
         </div>
+      </div>
+
+      <br>
+
+      <h3>Order by</h3>
+      <div class="button-group">
+        <div class="ink-button blue small all-100" ng-click="speakerPredicate='name'; reverse=!reverse">Name <i class="fa fa-arrows-v"></i></div>
+        <div class="ink-button blue small all-100" ng-click="speakerPredicate='updated'; reverse=!reverse">Updated <i class="fa fa-arrows-v"></i></div>
+        <div class="ink-button blue small all-100" ng-click="speakerPredicate='member'; reverse=!reverse">Member <i class="fa fa-arrows-v"></i></div>
       </div>
     </div>
 
@@ -32,10 +42,27 @@
       </a>
       <br><br>
       <div ng-if="showFilters">
-        <p class="ink-button" ng-click="searchSpeakers={}">All</p>
-        <p class="ink-button" ng-click="searchSpeakers.member=me.id">Assigned to me</p>
-        <small ng-repeat="status in statuses" ng-click="searchSpeakers.status=status">{{status}}</small>
-      <br><br>
+        <div class="button-group half-bottom-space">
+          <p class="ink-button" ng-click="searchSpeakers={}">All</p>
+          <p class="ink-button" ng-click="searchSpeakers.member=me.id">Assigned to me</p>
+        </div>
+
+        <h3>Filter Status</h3>
+        <div ng-repeat="status in statuses" class="button-group">
+          <div class="ink-button small all-100 {{status.replace(' ','-').toLowerCase()}}" ng-click="searchSpeakers.status=status" style="border: 0px; border-radius: 2px; color: white; font-size: 16px;">
+            {{status}}
+          </div>
+        </div>
+
+        <br>
+
+        <h3>Order by</h3>
+        <div class="button-group">
+          <div class="ink-button blue small all-100" ng-click="speakerPredicate='name'; reverse=!reverse">Name <i class="fa fa-arrows-v"></i></div>
+          <div class="ink-button blue small all-100" ng-click="speakerPredicate='updated'; reverse=!reverse">Updated <i class="fa fa-arrows-v"></i></div>
+          <div class="ink-button blue small all-100" ng-click="speakerPredicate='member'; reverse=!reverse">Member <i class="fa fa-arrows-v"></i></div>
+        </div>
+        <br><br>
       </div>
     </div>
 
@@ -46,7 +73,7 @@
         <h3 ng-hide="loading || speakers">No speakers created yet.</h3>
         
         <div class="all-100" infinite-scroll="scroll()">
-          <speaker speaker-object="speaker" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments" ng-repeat="speaker in speakers | filter:searchSpeakers:strict | orderBy: 'updated':'true' | limitTo: limit"></speaker>
+          <speaker speaker-object="speaker" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments" ng-repeat="speaker in speakers | filter:searchSpeakers:strict | orderBy:speakerPredicate:reverse | limitTo: limit"></speaker>
         </div>
       </div>
     </div>
