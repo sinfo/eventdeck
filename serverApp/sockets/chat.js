@@ -19,7 +19,6 @@ webSocket
 
         var room = data.id;
         var user = data.user;
-
         async.parallel([
           function(cb){
             getChat(room, user, cb)
@@ -48,6 +47,10 @@ webSocket
             cbClient();
         });
       });
+
+      socket.on('disconnect'){
+        webSocket.of('/chat').in(room).emit(' user connected', socket.nickname);
+      }
   });
 
 function getChat(chatID, memberID, cb){
@@ -80,7 +83,7 @@ function getMessages(chatID, cb){
   });
 }
 
-function done(err, room, socket, cb){
+function done(err, room, memberID, socket, cb){
   var data = {};
   if(err){
     if(err === 'member'){
@@ -90,14 +93,22 @@ function done(err, room, socket, cb){
     }
   }
   else{
+    socket.nickname = memberID;
     socket.join(room);
+    var online  = [];
+    var clients = webSocket.of('/chat').sockets;
+    for(var i = 0; i < clients.length; i++){
+      online[i] = clients[i].nickname;
+    }
     var data = {
       room     : room,
       chatData : outChat,
       messages : messages,
       message  : message,
+      online   : online,
       err      : false
     }
+    webSocket.of('/chat').in(room).emit("user connected", memberID);
   }
   socket.emit("validation", data);
   cb();
@@ -109,7 +120,7 @@ function createMessage(cb){
       console.log('Message creation error!');
       console.log(response.error);
     } else {
-      messageData.id = response.messageId;
+      messageData = response;
     }
     cb();
   });
