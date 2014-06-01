@@ -68,7 +68,7 @@
             <a style="{{notificationsInfo.number == 0 ? 'background: FireBrick;' : 'background: OrangeRed;'}} color: white;"><span><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a>
             <ul class="submenu" style="max-height: 400px; overflow: auto; {{notificationsInfo.number == 0 ? 'display: none;' : ''}}">
               <li ng-repeat="notification in notifications | orderBy: 'posted':true" style="width: 600px;">
-                <a href="/#/{{notification.path}}"><img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px"> {{getMember(notification.member).name}} {{notification.description}}</a>
+                <a href="/#/{{notification.thread.replace('-','/')}}"><img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px"> {{getMember(notification.member).name}} {{notification.description}}</a>
               </li>
             </ul>
           </li>
@@ -114,7 +114,7 @@
           <a style="{{notificationsInfo.number == 0 ? 'background: FireBrick;' : 'background: OrangeRed;'}}"><span><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a>
           <ul class="submenu" style="max-height:200px; overflow:auto; margin: 0px 20px 0px;">
             <li ng-repeat="notification in notifications | orderBy: 'posted':false">
-              <a href="/#/{{notification.path}}"><img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px"> {{getMember(notification.member).name}} {{notification.description}}</a>
+              <a href="/#/{{notification..thread.replace('-','/')}}"><img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px"> {{getMember(notification.member).name}} {{notification.description}}</a>
             </li>
           </ul>
         </li>

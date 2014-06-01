@@ -11,7 +11,7 @@
     <div class="all-50 align-right">
       <small>
         <a class="ink-button green" ng-show="checkPermission(communication) && communication.member !== me.id" ng-click="approveCommunication(communication)">Approve</a>
-        <a class="ink-button blue" ng-show="communication.kind.indexOf('Paragraph')!=-1" href="http://the-tool.franciscodias.net/api/speaker/{{communication.thread.split('speaker-')[1]}}/sendInitialEmail" target="_blank">Preview</a>
+        <a class="ink-button blue" ng-show="communication.kind.indexOf('Paragraph')!=-1" href="/api/speaker/{{communication.thread.split('speaker-')[1]}}/sendInitialEmail" target="_blank">Preview</a>
         <a class="ink-button orange" ng-show="checkPermission(communication)" ng-click="communication.editing = true; communication.buffer = communication.text">Edit</a>
         <a class="ink-button red" ng-show="checkPermission(communication)" ng-click="deleteCommunication(communication)">Delete</a>
       </small>
