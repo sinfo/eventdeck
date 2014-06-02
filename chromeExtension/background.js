@@ -20,8 +20,8 @@ var notificationGenerator = {
    * @type {string}
    * @private
    */
-  memberEndpoint_: 'http://the-tool.franciscodias.net/api/member/me',
-  notificationsEndpoint_: 'http://the-tool.franciscodias.net/api/notification',
+  memberEndpoint_: 'http://tool.bananamarket.eu/api/member/me',
+  notificationsEndpoint_: 'http://tool.bananamarket.eu/api/notification',
 
   member: {},
 
