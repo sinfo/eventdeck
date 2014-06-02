@@ -33,7 +33,7 @@
     <script src="js/vendor/angular/ng-infinite-scroll.min.js"></script>
 
     <script src="/js/theTool.js"></script>
-    
+
     <!-- <script src="/socket.io/socket.io.js"></script> -->
     <script type="text/javascript" src="/ink/js/holder.js"></script>
     <script type="text/javascript" src="/ink/js/ink-all.min.js"></script>
@@ -69,7 +69,7 @@
             <ul class="submenu" style="max-height: 400px; overflow: auto; {{notificationsInfo.number == 0 ? 'display: none;' : ''}}">
               <li ng-repeat="notification in notifications | orderBy: 'posted':true" style="width: 600px;">
                 <a  title="{{notification.posted | date:'medium'}}" href="/#/{{notification.thread.replace('-','/')}}">
-                  <img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px"> 
+                  <img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px">
                   {{getMember(notification.member).name}} {{notification.description}}
                   <span ng-if="notification.thread.indexOf('company-')!=-1">on {{getCompany(notification.thread.replace('company-','')).name}}.</span>
                   <span ng-if="notification.thread.indexOf('speaker-')!=-1">on {{getSpeaker(notification.thread.replace('speaker-','')).name}}.</span>
