@@ -8,7 +8,8 @@ theToolController
 
     $scope.convertEmails = function(text) {
       var mailExp = /[\w\.\-]+\@([\w\-]+\.)+[\w]{2,4}(?![^<]*>)/ig;
-      return text.replace(mailExp,"<a href='/api/speaker/"+$routeParams.id+"/sendInitialEmail' target='_blank'>$&</a>")
+      var twitterExp = /(^|[^@\w])@(\w{1,15})\b/g;
+      return text.replace(mailExp,"<a href='/#/company/"+$routeParams.id+"/confirm?email=$&'>$&</a>").replace(twitterExp,"$1<a href='http://twitter.com/$2' target='_blank'>@$2</a>")
     }
 
     $scope.submit = function() {
