@@ -52,7 +52,6 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
     }
 
     var date = Date.now();
-
     CommentFactory.Comment.create({
       thread: $scope.thread,
       member: $scope.me.id,
@@ -61,6 +60,7 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
       posted: date,
       updated: date
     }, function (response) {
+      $scope.commentData.markdown = "";
       loadComments();
     });
   }
