@@ -37,8 +37,8 @@
 
   <body ng-app="myApp">
     <div ng-controller="PopupCtrl">
-      <h3 ng-hide="ready||loggedOut">Loading...</h3>
-      <h3 ng-show="loggedOut"><a href="http://tool.bananamarket.eu/" target="_blank">Please log in</a></h3>
+      <h3 ng-hide="ready" class="align-center"><a href="http://tool.bananamarket.eu/" target="_blank"><br>Please log in on THE TOOL!</a></h3>
+      <h3 ng-hide="!notifications || notifications.length>0" class="align-center"><a href="http://tool.bananamarket.eu/" target="_blank"><br>No notifications...<br><br>Go to THE TOOL!</a></h3>
       <table ng-show="ready" ng-hide="loggedOut" class="ink-table alternating hover small" style="max-height: 400px; overflow: auto;">
         <tr ng-repeat="notification in notifications | orderBy: 'posted':true" style="width: 600px;"><td>
           <a title="{{notification.posted | date:'medium'}}" href="http://tool.bananamarket.eu/#/{{notification.thread.replace('-','/')}}" target="_blank">

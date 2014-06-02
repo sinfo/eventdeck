@@ -10,6 +10,7 @@ server.pack.require('hapi-auth-cookie', function (err) {
   server.auth.strategy('session', 'cookie', {
     password: 'secret',
     cookie: 'sid-the-tool',
+    redirectTo: '/login',
     ttl: 2592000000,
     isSecure: false
   });
