@@ -1,24 +1,33 @@
 $(document).ready(function () {
 
-  $.ajaxSetup({ cache: true });
-  $.getScript("//connect.facebook.net/pt_PT/all.js", function(){
-    FB.init({
-      appId: "457207507744159"
-    });
+  $.ajaxSetup({cache: true});
+  $.getScript("//connect.facebook.net/pt_PT/all.js", function () {
+    FB.init({appId: "457207507744159"});
   });
 
+  var lock = false;
+  var redirecting = false;
+
   $("#facebook").click(function() {
-    FB.getLoginStatus(function(response) {
+    if (lock) {
+      return;
+    }
+
+    lock = true;
+
+    FB.getLoginStatus(function (response) {
       if (response.status === "connected") {
         connected(response);
       }
       else {
         FB.login();
-        FB.Event.subscribe("auth.statusChange", function(response) {
-          if (response.status === "connected"){
+        FB.Event.subscribe("auth.statusChange", function (response) {
+          if (response.status === "connected") {
             connected(response);
           }
         });
+
+        lock = false;
       }
     });
 
@@ -38,12 +47,20 @@ $(document).ready(function () {
           token: response.authResponse.accessToken
         },
         complete: function (response, status) {
+          if (redirecting) {
+            return;
+          }
+
           if (status !== "success") {
             loginInfo.find("p:eq(0)").text("There was an error with your request.");
             loginInfo.find("p:eq(1)").text("Please try again.");
             loginInfo.find("i").hide();
+
+            lock = false;
           }
           else if (response.responseJSON.success) {
+            redirecting = true;
+
             loginInfo.find("p:eq(0)").text("Success!");
             loginInfo.find("p:eq(1)").text("Redirecting...");
 
@@ -52,6 +69,8 @@ $(document).ready(function () {
           else {
             loginInfo.find("p:eq(0)").text("You are not authorized to log in.");
             loginInfo.find("i").hide();
+
+            lock = false;
           }
         }
       });
