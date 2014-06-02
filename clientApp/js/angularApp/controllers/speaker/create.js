@@ -1,7 +1,7 @@
 'use strict';
  
 theToolController
-  .controller('CreateSpeakerController', function ($scope, $http, $routeParams, $sce, SpeakerFactory, MemberFactory) {
+  .controller('CreateSpeakerController', function ($scope, $http, $routeParams, $location, SpeakerFactory) {
     $scope.submit = function() {
       var speakerData = this.formData;
 
@@ -10,13 +10,10 @@ theToolController
           $scope.error = response.error;
         } else {
           $scope.message = response.message;
+          $location.path("/speaker/" + response.id);
         }
       });
     };
 
     $scope.statuses = ['Suggestion','Contacted','In Conversations','Accepted','Rejected','Give Up'];
-
-    MemberFactory.Member.getAll( function(response) {
-      $scope.members = response;
-    });
   });

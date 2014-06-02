@@ -1,7 +1,7 @@
 'use strict';
  
 theToolController
-  .controller('CreateCompanyController', function ($scope, $http, $routeParams, $sce, CompanyFactory) {
+  .controller('CreateCompanyController', function ($scope, $http, $routeParams, $location, CompanyFactory) {
     $scope.submit = function() {
       var companyData = this.formData;
 
@@ -10,6 +10,7 @@ theToolController
           $scope.error = response.error;
         } else {
           $scope.message = response.message;
+          $location.path("/company/" + response.id);
         }
       });
     };
