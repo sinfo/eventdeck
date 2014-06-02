@@ -13,6 +13,6 @@
     "page": "background.html"
   },
   "permissions": [
-    "http://the-tool.franciscodias.net/"
+    "http://tool.bananamarket.eu/"
   ]
 }
