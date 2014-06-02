@@ -68,7 +68,14 @@
             <a style="{{notificationsInfo.number == 0 ? 'background: FireBrick;' : 'background: OrangeRed;'}} color: white;"><span><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a>
             <ul class="submenu" style="max-height: 400px; overflow: auto; {{notificationsInfo.number == 0 ? 'display: none;' : ''}}">
               <li ng-repeat="notification in notifications | orderBy: 'posted':true" style="width: 600px;">
-                <a href="/#/{{notification.thread.replace('-','/')}}"><img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px"> {{getMember(notification.member).name}} {{notification.description}}</a>
+                <a  title="{{notification.posted | date:'medium'}}" href="/#/{{notification.thread.replace('-','/')}}">
+                  <img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px"> 
+                  {{getMember(notification.member).name}} {{notification.description}}
+                  <span ng-if="notification.thread.indexOf('company-')!=-1">on a company.</span>
+                  <span ng-if="notification.thread.indexOf('speaker-')!=-1">on a speaker.</span>
+                  <span ng-if="notification.thread.indexOf('topic-')!=-1">on a topic.</span>
+                  <small>({{timeSince(notification.posted)}})</small>
+                </a>
               </li>
             </ul>
           </li>
