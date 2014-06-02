@@ -33,9 +33,9 @@
           <th>Via</th>
         </thead>
 
-        <tr ng-repeat="company in companies  | filter:{participation.payment:''} | orderBy:predicate:reverse">
+        <tr ng-repeat="company in companies  | filter:{participation.payment:''} | orderBy:predicate:reverse" ng-class="getClassFromPaymentStatus(company.participation)">
           <td style="text-align:center; min-width: 300px;">
-            <a style="color:#fff" href="/#/company/{{company.id}}">{{company.name}}</a>
+            <a href="/#/company/{{company.id}}">{{company.name}}</a>
           </td>
           <td style="text-align:center"><a href="/#/member/{{company.member}}">{{company.member}}</a></td>
           <td>€ {{company.participation.payment.price}}</td>
@@ -44,7 +44,7 @@
           <td>{{company.participation.payment.date}}</td>
           <td>{{company.participation.payment.invoice}}</td>
           <td>
-            <select ng-model="company.participation.payment.status" ng-options="s for s in statuses" ng-change="saveStatus(company)"></select>
+            <select ng-model="company.participation.payment.status" ng-options="s for s in paymentStatuses" ng-change="saveStatus(company)"></select>
           </td>
           <td>{{company.participation.payment.via}}</td>
         </tr>
