@@ -7,14 +7,7 @@
     <h3 ng-show="loading" class="all-100">Loading...</h3>
     <div ng-hide="loading" class="all-100 column-group">
       <h3 ng-hide="meetings" class="all-100">No meetings created yet.</h3>
-      <a href="/#/meeting/{{meeting._id}}" ng-repeat="meeting in meetings | orderBy:'date':true">
-        <div class="all-100 half-bottom-space align-left" style="height: 4em; background: #ccc; border-radius: 5px;">
-          <div class="all-5 tiny-30 small-20" style="margin-top: 0.5em; height: 3em;" ng-show="meeting.facebook">
-            <img style="border-radius: 3px; margin-left: 0.5em;" src="https://graph.facebook.com/{{meeting.facebook}}/picture">
-          </div>
-          <p class="all-95 tiny-70 small-80" style="line-height: 4em;">{{meeting.title}} <span title="{{meeting.date}}">({{time(meeting.date)}})</span></p>
-        </div>
-      </a>
+      <embed-meeting ng-repeat="meeting in meetings | orderBy:'date':true" meeting-id="meeting._id" members="members"></embed-meeting>
     </div>
   </div>
 </div>

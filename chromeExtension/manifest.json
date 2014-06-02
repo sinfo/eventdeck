@@ -3,16 +3,16 @@
 
   "name": "THE TOOL!",
   "description": "This extension gives you notifications from The Tool!",
-  "version": "1.1",
+  "version": "1.3",
 
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "banana.png",
     "default_popup": "popup.html"
   },
   "background": {
     "page": "background.html"
   },
   "permissions": [
-    "http://the-tool.franciscodias.net/"
+    "http://tool.bananamarket.eu/"
   ]
 }

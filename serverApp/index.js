@@ -1,25 +1,27 @@
-var Hapi    = require('hapi');
-var SocketIO  = require('socket.io');
-var options = require('./options');
-require('./db');
+var Hapi         = require("hapi");
+var SocketIO     = require("socket.io");
+var options      = require("./options");
+var cookieConfig = require("./cookieConfig");
+require("./db");
 
-var server = module.exports.hapi = new Hapi.Server('0.0.0.0', 8765, options);
+var server = module.exports.hapi = new Hapi.Server("0.0.0.0", 8765, options);
 
-server.pack.require('hapi-auth-cookie', function (err) {
+server.pack.require("hapi-auth-cookie", function (err) {
 
-  server.auth.strategy('session', 'cookie', {
-    password: 'secret',
-    cookie: 'sid-example',
-    redirectTo: '/login',
-    isSecure: false
+  server.auth.strategy("session", "cookie", {
+    cookie: cookieConfig.name,
+    password: cookieConfig.password,
+    ttl: 2592000000,
+    isSecure: false,
+    redirectTo: "/login"
   });
-  
-  var routes = require('./routes');
+
+  var routes = require("./routes");
 
   server.start(function () {
-    console.log('Server started at: ' + server.info.uri);
+    console.log("Server started at: " + server.info.uri);
     var webSocket = module.exports.webSocket = SocketIO.listen(server.listener);
-    var sockets = require('./sockets');
+    var sockets = require("./sockets");
   });
 
 });
