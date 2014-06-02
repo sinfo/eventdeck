@@ -69,7 +69,7 @@ theToolController.controller("MeetingController", function ($scope, $routeParams
               n++;
             }
           }
-          return n + 1;
+          return n + 2;
         }());
 
         $scope.text = text;

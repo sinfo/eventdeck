@@ -1,6 +1,7 @@
 var async   = require("async");
 var Meeting = require("./../../db/models/meeting.js");
 var Topic   = require("./../../db/models/topic.js");
+var notification = require('./../notification');
 
 module.exports = get;
 
@@ -18,6 +19,8 @@ function get(request, reply) {
 
         reply(meeting);
       });
+
+      notification.read(request.auth.credentials.id, 'meeting-' + meeting._id);
     }
     else {
       reply({error: "Could not find the meeting."});
