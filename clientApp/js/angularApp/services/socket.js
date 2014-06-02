@@ -2,8 +2,16 @@
 
 theToolServices
   .factory('SocketFactory', function ($resource, $location, $rootScope) {
-    var socket = io.connect('/' + $location.url().split('/')[1]);
+    var socket;
     return {
+      connect: function(nsp) {
+        console.log(socket);
+        if(socket){
+          console.log(socket.connected);
+          socket.disconnect();
+        }
+        socket = io.connect(nsp);
+      },
       on: function (eventName, callback) {
         socket.on(eventName, function () {
           var args = arguments;
@@ -21,6 +29,9 @@ theToolServices
             }
           });
         });
+      },
+      disconnect: function () {
+        socket.disconnect();
       }
     };
   });
