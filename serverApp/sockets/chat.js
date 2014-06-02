@@ -44,7 +44,7 @@ webSocket
             updateChat(room, cb)
           }
         ], function(){
-            webSocket.of('/chat').in(room).emit('message', messageData, null);
+            webSocket.of('/chat').in(room).emit('message', messageData);
             cbClient();
         });
       });
@@ -52,7 +52,7 @@ webSocket
       socket.on('logout', function(data, cb){
         console.log("Log out: " + socket.nickname);
         socket.disconnect();
-        webSocket.of('/chat').in(room).emit('user:disconnected', socket.nickname, null);
+        webSocket.of('/chat').in(data.room).emit('user:disconnected', {id: socket.nickname});
         cb();
       });
 
@@ -116,7 +116,7 @@ function done(err, room, socket, cb){
       online   : online,
       err      : false
     }
-    webSocket.of('/chat').in(room).emit('user:connected', socket.nickname, null);
+    /*webSocket.of('/chat').in(room).emit('user:connected', {id: socket.nickname});*/
   }
   socket.emit("validation", data);
   cb();
