@@ -71,9 +71,9 @@
                 <a  title="{{notification.posted | date:'medium'}}" href="/#/{{notification.thread.replace('-','/')}}">
                   <img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px"> 
                   {{getMember(notification.member).name}} {{notification.description}}
-                  <span ng-if="notification.thread.indexOf('company-')!=-1">on a company.</span>
-                  <span ng-if="notification.thread.indexOf('speaker-')!=-1">on a speaker.</span>
-                  <span ng-if="notification.thread.indexOf('topic-')!=-1">on a topic.</span>
+                  <span ng-if="notification.thread.indexOf('company-')!=-1">on {{getCompany(notification.thread.replace('company-','')).name}}.</span>
+                  <span ng-if="notification.thread.indexOf('speaker-')!=-1">on {{getSpeaker(notification.thread.replace('speaker-','')).name}}.</span>
+                  <span ng-if="notification.thread.indexOf('topic-')!=-1">on a {{getTopic(notification.thread.replace('topic-','')).kind}}.</span>
                   <small>({{timeSince(notification.posted)}})</small>
                 </a>
               </li>
@@ -121,7 +121,13 @@
           <a style="{{notificationsInfo.number == 0 ? 'background: FireBrick;' : 'background: OrangeRed;'}}"><span><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a>
           <ul class="submenu" style="max-height:200px; overflow:auto; margin: 0px 20px 0px;">
             <li ng-repeat="notification in notifications | orderBy: 'posted':false">
-              <a href="/#/{{notification..thread.replace('-','/')}}"><img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px"> {{getMember(notification.member).name}} {{notification.description}}</a>
+              <a href="/#/{{notification..thread.replace('-','/')}}">
+                <img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px"> {{getMember(notification.member).name}} {{notification.description}}
+                <span ng-if="notification.thread.indexOf('company-')!=-1">on {{getCompany(notification.thread.replace('company-','')).name}}.</span>
+                <span ng-if="notification.thread.indexOf('speaker-')!=-1">on {{getSpeaker(notification.thread.replace('speaker-','')).name}}.</span>
+                <span ng-if="notification.thread.indexOf('topic-')!=-1">on a {{getTopic(notification.thread.replace('topic-','')).kind}}.</span>
+                <small>({{timeSince(notification.posted)}})</small>
+              </a>
             </li>
           </ul>
         </li>
