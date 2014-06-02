@@ -29,26 +29,28 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
           $scope.online[i].on = true;
         }
       }
+
     }
     else{
       console.log(result.message);
     }
+    console.log('Out on call!');
   });
 
-  SocketFactory.on('user:connected', function (userID) {
-    console.log("User connected: " + userID);
+  SocketFactory.on('user:connected', function (data) {
+    console.log("User connected: " + data.id);
     for(var i = 0; i < $scope.online.length; i++){
-      if($scope.online[i].member === userID){
+      if($scope.online[i].member === data.id){
         $scope.online[i].on = true;
         break;
       }
     }
   });
 
-  SocketFactory.on('user:disconnected', function (userID) {
-    console.log("User connected: " + userID);
+  SocketFactory.on('user:disconnected', function (data) {
+    console.log("User connected: " + data.id);
     for(var i = 0; i < $scope.online.length; i++){
-      if($scope.online[i].member === userID){
+      if($scope.online[i].member === data.id){
         $scope.online[i].on = false;
         break;
       }

@@ -5,11 +5,12 @@ theToolServices
     var socket;
     return {
       connect: function(nsp) {
-        console.log(socket);
-        if(socket){
-          console.log(socket.connected);
-          socket.disconnect();
+/*        console.log($rootScope.socket);
+        if($rootScope.socket){
+          console.log($rootScope.socket.connected);
+          $rootScope.socket.disconnect();
         }
+        $rootScope.socket = socket = io.connect(nsp);*/
         socket = io.connect(nsp);
       },
       on: function (eventName, callback) {
