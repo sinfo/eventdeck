@@ -16,7 +16,7 @@ theToolController.controller("MeetingController", function ($scope, $routeParams
     };
 
     if ($location.path().endsWith("/text")) {
-      var text = meeting.title + "\n\n" + meeting.description + "\n\n";
+      var text = meeting.title + "\n\n" + (meeting.description ? meeting.description + "\n\n" : "");
 
       if (meeting.attendants.length > 0) {
         text += "Attendants:\n";

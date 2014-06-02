@@ -1,5 +1,5 @@
 <div class="column-group horizontal-gutters">
-  <div class="all-100">
+  <div class="all-70">
     <h1>Chat {{chat.name}}</h1>
     <ul>
       <div class="comment" ng-repeat="message in messages | orderBy:'date':false">
@@ -12,6 +12,23 @@
           </div>
           <div class="all-20" style="text-align: right; padding-right:15px;">
           <small>{{timeSince(message.date)}}</small>
+          </div>
+        </div>
+      </div>
+    </ul>
+  </div>
+  <div class="all-30">
+    <ul>
+      <div class="comment" ng-repeat="user in online | orderBy:'getMember(user.member).name':false">
+        <div class="column-group horizontal-gutters">
+          <div ng-show="user.on" class="all-10">
+            <i class="fa fa-wrench" style='color: Green'></i>
+          </div>
+          <div class="all-30">
+            <a href="/#/member/{{user.member}}"><img src="https://graph.facebook.com/{{getMember(user.member).facebook}}/picture" style="width:25px; margin-left:15px;"/></a>
+          </div>
+          <div class="all-60">
+            {{getMember(user.member).name}}
           </div>
         </div>
       </div>
