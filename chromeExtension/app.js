@@ -36,36 +36,31 @@ function PopupCtrl($scope, notificationFactory, memberFactory, companyFactory, s
 
   memberFactory.get({id: "me"}, function (me) {
     $scope.me = me;
-    console.log(me);
-    callback(me.error);
+    callback();
   });
 
   memberFactory.getAll(function (members) {
     $scope.members = members;
-    callback(members.error);
+    callback();
   });
 
   companyFactory.getAll(function (companies) {
     $scope.companies = companies;
-    callback(companies.error);
+    callback();
   });
 
   speakerFactory.getAll(function (speakers) {
     $scope.speakers = speakers;
-    callback(speakers.error);
+    callback();
   });
 
   topicFactory.getAll(function (topics) {
     $scope.topics = topics;
-    callback(topics.error);
+    callback();
   });
 
 
-  function callback(error) {
-    if(error) {
-      $scope.loggedOut = true;
-    }
-
+  function callback() {
     if (++factoriesReady == 5) {
       $scope.ready = true;
       $scope.update();
@@ -77,8 +72,6 @@ function PopupCtrl($scope, notificationFactory, memberFactory, companyFactory, s
       $scope.notifications = response.filter(function(e){
         return e.unread.indexOf($scope.me.id) != -1;
       });
-
-      console.log($scope.notifications);
     });
   }
 

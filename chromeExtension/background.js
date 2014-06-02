@@ -20,10 +20,10 @@ var notificationGenerator = {
    * @type {string}
    * @private
    */
-  memberEndpoint_: 'http://tool.bananamarket.eu/api/member/me',
+  meEndpoint_: 'http://tool.bananamarket.eu/api/member/me',
   notificationsEndpoint_: 'http://tool.bananamarket.eu/api/notification',
 
-  member: {},
+  me: {},
 
   /**
    * Sends an XHR GET request to grab photos of lots and lots of notifications. The
@@ -33,7 +33,7 @@ var notificationGenerator = {
    */
   requestNotifications: function() {
     var req = new XMLHttpRequest();
-    req.open("GET", this.memberEndpoint_, true);
+    req.open("GET", this.meEndpoint_, true);
     req.onload = this.requestMember_.bind(this);
     req.send(null);
   },
@@ -41,7 +41,7 @@ var notificationGenerator = {
   requestMember_: function(e) {
     try
     {
-      member = JSON.parse(e.target.responseText);
+      me = JSON.parse(e.target.responseText);
 
       var req = new XMLHttpRequest();
       req.open("GET", this.notificationsEndpoint_, true);
@@ -68,7 +68,7 @@ var notificationGenerator = {
     console.log(notifications);
 
     notifications = notifications.filter(function(e){
-      return e.unread.indexOf(member.id) != -1;
+      return e.unread.indexOf(me.id) != -1;
     })
 
     chrome.browserAction.setBadgeText({ text: notifications.length.toString()});
