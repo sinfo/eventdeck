@@ -8,6 +8,10 @@ npm run-script dist
 Sync server with Github:
 ```
 cd /root/the-tool
+./sync.sh
+```
+```
+cd /root/the-tool
 git fetch --all
 git reset --hard origin/master
 npm run-script dist
