@@ -4,7 +4,7 @@ var options      = require("./options");
 var cookieConfig = require("./cookieConfig");
 require("./db");
 
-var server = module.exports.hapi = new Hapi.Server("0.0.0.0", 8765, options);
+var server = module.exports.hapi = new Hapi.Server(8765, options);
 
 server.pack.require("hapi-auth-cookie", function (err) {
 
