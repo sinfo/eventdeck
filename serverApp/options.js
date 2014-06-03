@@ -5,5 +5,6 @@ module.exports = {
       html: "handlebars"
     },
     partialsPath: "partials"
-  }
+  },
+  cors: true
 };
