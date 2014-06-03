@@ -116,7 +116,7 @@ function done(err, room, socket, cb){
       online   : online,
       err      : false
     }
-    /*webSocket.of('/chat').in(room).emit('user:connected', {id: socket.nickname});*/
+    webSocket.of('/chat').in(room).emit('user:connected', {id: socket.nickname});
   }
   socket.emit("validation", data);
   cb();

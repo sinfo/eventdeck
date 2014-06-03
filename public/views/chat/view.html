@@ -1,46 +1,50 @@
 <div class="column-group horizontal-gutters">
-  <div class="all-70">
+  <h2 ng-show="loading">Loading...</h2>
+  <div ng-hide="loading" class="all-100">
     <h1>Chat {{chat.name}}</h1>
-    <ul>
-      <div class="comment" ng-repeat="message in messages | orderBy:'date':false">
-        <div class="column-group horizontal-gutters">
-          <div class="all-10">
-            <a href="/#/member/{{message.member}}"><img src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px; margin-left:15px;"/></a>
-          </div>
-          <div class="all-70">
-            {{message.text}}
-          </div>
-          <div class="all-20" style="text-align: right; padding-right:15px;">
-          <small>{{timeSince(message.date)}}</small>
-          </div>
-        </div>
-      </div>
-    </ul>
   </div>
-  <div class="all-30">
-    <ul>
-      <div class="comment" ng-repeat="user in online | orderBy:'getMember(user.member).name':false">
-        <div class="column-group horizontal-gutters">
-          <div ng-show="user.on" class="all-10">
-            <i class="fa fa-wrench" style='color: Green'></i>
+  <div ng-hide="loading" class="all-70">
+    <div class="column-group horizontal-gutters">
+      <ul class="unstyled">
+        <li ng-repeat="message in messages | orderBy:'date':false">
+          <div ng-class="message.member == me.id ? 'me' : 'others'" class="all-70 chat-message">
+            <dl>
+              <dt>
+                <a href="/#/member/{{message.member}}">
+                  <img src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px; margin-left:15px;"/>
+                  <span>{{getMember(message.member).name}}</span>
+                  <small>{{timeSince(message.date)}}</small>
+                </a>
+              </dt>
+              <dd>
+                <span>{{message.text}}</span>
+              </dd>
+            </dl>
           </div>
-          <div class="all-30">
-            <a href="/#/member/{{user.member}}"><img src="https://graph.facebook.com/{{getMember(user.member).facebook}}/picture" style="width:25px; margin-left:15px;"/></a>
-          </div>
-          <div class="all-60">
-            {{getMember(user.member).name}}
-          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div ng-hide="loading" class="all-30">
+    <div class="comment" ng-repeat="user in online | orderBy:['-on', 'name']">
+      <div class="column-group horizontal-gutters">
+        <div class="all-40">
+          <i ng-if="user.on" class="fa fa-wrench" style='color: Green'></i>
+          <a href="/#/member/{{user.member}}"><img src="https://graph.facebook.com/{{getMember(user.member).facebook}}/picture" style="width:25px; margin-left:15px;"/></a>
+        </div>
+        <div class="all-60">
+          {{getMember(user.member).name}}
         </div>
       </div>
-    </ul>
+    </div>
   </div>
 </div>
 
-<div class="column-group horizontal-gutters">
+<div ng-hide="loading" class="column-group horizontal-gutters">
   <div class="all-100">
     <form class="ink-form" ng-submit="submit()">
       <div class="control-group">
-        <input ng-model="text" type="text" id="submit" rows="3" placeholder="Post message on chat.">
+        <input ng-model="text" type="text" id="submit" rows="3" placeholder="Say something chatty!">
       </div>
     </form>
   </div>
