@@ -1,9 +1,9 @@
 module.exports = {
   views: {
-    path: 'templates',
+    path: "templates",
     engines: {
-      html: 'handlebars'
+      html: "handlebars"
     },
-    partialsPath: 'partials'
+    partialsPath: "partials"
   }
 };
