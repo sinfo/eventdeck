@@ -19,8 +19,6 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
   loadComments();
 
   function loadComments() {
-    $scope.loading = true;
-
     if ($scope.thread.split("-")[1] === "") {
       setTimeout(loadComments, 500);
       return;
