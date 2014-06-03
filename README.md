@@ -9,8 +9,9 @@ Sync server with Github:
 ```
 cd /root/the-tool
 ./sync.sh
-```
-```
+
+or
+
 cd /root/the-tool
 git fetch --all
 git reset --hard origin/master
