@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var memberSchema = new mongoose.Schema({
   id: {type: String, unique: true},
-  istId: {type: String, unique: true},
+  istId: String,
   name: String,
   roles: [{
     id: String,
