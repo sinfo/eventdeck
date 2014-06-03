@@ -39,6 +39,8 @@ theToolController.controller("TopicsController", function ($scope, $location, $r
   };
 
   $scope.createTopic = function(kind) {
+    $scope.searchTopics = {};
+
     var date = new Date();
     TopicFactory.Topic.create({
       author: $scope.me.id,
