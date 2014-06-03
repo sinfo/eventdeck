@@ -135,14 +135,16 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
 
     if(option.votes.indexOf($scope.me.id) != -1) {
       updatedTopic.poll.options[updatedTopic.poll.options.indexOf(option)].votes.splice(updatedTopic.poll.options[updatedTopic.poll.options.indexOf(option)].votes.indexOf($scope.me.id),1);
-    } else {
+    }
+    else {
       updatedTopic.poll.options[updatedTopic.poll.options.indexOf(option)].votes.push($scope.me.id);
     }
 
     TopicFactory.Topic.update({id: updatedTopic._id}, updatedTopic, function(response) {
       if(response.error) {
         console.log("There was an error. Please contact the Dev Team and give them the details about the error.");
-      } else if (response.success) {
+      }
+      else if (response.success) {
         console.log(response.success);
       }
     });
@@ -168,7 +170,8 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
 
     if(member.length>0) {
       return member[0];
-    } else {
+    }
+    else {
       return {
         name: "No one",
         facebook: "100000456335972"

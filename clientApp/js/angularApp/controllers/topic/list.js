@@ -57,7 +57,7 @@ theToolController.controller("TopicsController", function ($scope, $location, $r
   };
 
   $scope.shownTopics = function (showOpen) {
-    return $scope.topics.filter(function(o) {
+    return $scope.topics.filter(function (o) {
       return (showOpen ? !o.closed : o.closed);
     });
   };
