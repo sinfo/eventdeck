@@ -39,12 +39,11 @@ theToolController.controller("TopicsController", function ($scope, $location, $r
   };
 
   $scope.createTopic = function(kind) {
-    $scope.searchTopics = {};
-
     var date = new Date();
     TopicFactory.Topic.create({
       author: $scope.me.id,
-      kind: kind
+      kind: kind,
+      tags: [$scope.searchTopics.tags]
     }, function (response) {
       if (response.success) {
         TopicFactory.Topic.getAll(function (topics) {
