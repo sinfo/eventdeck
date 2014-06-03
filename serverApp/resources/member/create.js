@@ -1,6 +1,5 @@
-var Member         = require('./../../db/models/member.js');
-var Request        = require("request");
-var facebookConfig = require("../auth/facebookConfig.js");
+var Member  = require('./../../db/models/member.js');
+var Request = require("request");
 
 module.exports = create;
 
@@ -21,6 +20,9 @@ function create(request, reply) {
       if (!error && response.statusCode == 200) {
         member.facebookId = result.id;
         save(member, reply);
+      }
+      else {
+        reply({error: "There was an error creating the member."});
       }
     });
   }
