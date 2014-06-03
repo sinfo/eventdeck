@@ -26,7 +26,6 @@ exports.facebook = function facebook(request, reply) {
   },
   function (error, response, result) {
     if (!error && response.statusCode == 200) {
-      console.log(result);
       if (result.data && result.data.app_id === facebookConfig.appId && result.data.user_id === request.url.query.id) {
         Member.findByFacebookId(request.url.query.id, function (error, result) {
           if (!error && result && result.length > 0) {
@@ -73,7 +72,7 @@ exports.redirect = function redirect(request, reply) {
         if (result.length > 0) {
           account = result[0];
 
-          console.log("LOG IN", account);
+          console.log("FENIX LOG IN", account);
 
           request.auth.session.set(account);
           return reply().redirect("/");
