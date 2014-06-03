@@ -384,6 +384,24 @@ a, a:visited, a:hover {
     outline: 0;
   }
 
+.chat-message {
+  background: #eee;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 6px;
+  text-align: left;
+}
+
+.chat-message.me {
+  background: lime;
+}
+
+.chat-message.others {
+  margin-left: 120px;
+}
+
 .button {
     background: #19ACCD;
     color: #fefefe;

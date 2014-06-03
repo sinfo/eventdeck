@@ -28,13 +28,15 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
         if(result.online.indexOf($scope.chat.members[i]) != -1){
           $scope.online[i].on = true;
         }
+        $scope.online[i].name = $scope.getMember($scope.online[i].member).name;
       }
+      console.log($scope.online);
 
     }
     else{
       console.log(result.message);
     }
-    console.log('Out on call!');
+    $scope.loading  = false;
   });
 
   SocketFactory.on('user:connected', function (data) {
@@ -62,14 +64,8 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
     $scope.messages.push(message);
   });
 
-  $rootScope.$on("$locationChangeStart", function (event, next, current) {
-    SocketFactory.emit("logout", {room: $scope.room}, function(){
-      console.log("Exited chat!");
-    });
-  });
-
   $scope.submit = function() {
-    if ($scope.messageText == ""){
+    if ($scope.text == ""){
       //$scope.empty = true;
       return;
     }
@@ -81,6 +77,9 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
     }
     console.log(messageData);
 
-    SocketFactory.emit('send', {room: $scope.room, message: messageData }, function() {console.log('emited')});
+    SocketFactory.emit('send', {room: $scope.room, message: messageData }, function() {
+      console.log('Message sent');
+      $scope.text = "";
+    });
   };
 });
