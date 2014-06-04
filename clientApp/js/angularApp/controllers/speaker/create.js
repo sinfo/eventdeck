@@ -15,5 +15,5 @@ theToolController
       });
     };
 
-    $scope.statuses = ['Suggestion','Contacted','In Conversations','Accepted','Rejected','Give Up'];
+    $scope.statuses = ['Suggestion','Selected','Approved','Contacted','In Conversations','Accepted','Rejected','Give Up'];
   });
