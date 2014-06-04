@@ -1,5 +1,6 @@
 var async         = require('async');
 var Communication = require('./../../db/models/communication.js');
+var Speaker      = require('./../../db/models/speaker.js');
 var notification  = require('./../notification');
 
 module.exports = create;
@@ -67,6 +68,12 @@ function create(request, reply) {
     }
     else {
       notification.notify(request.auth.credentials.id, savedCommunication.thread, 'approved a communication', savedCommunication._id);
+
+      if(savedCommunication.thread.indexOf('speaker-') != -1 && savedCommunication.kind == 'Inital Email Paragraph') {
+        Speaker.update({id: savedCommunication.thread.replace('speaker-','')}, {status: 'Approved'}, function (err) {
+          if (err) { console.log(err)}
+        });
+      }
       
       reply({success: 'Communication approved.'});
     }

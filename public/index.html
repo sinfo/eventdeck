@@ -73,9 +73,9 @@
                 <a  title="{{notification.posted | date:'medium'}}" href="/#/{{notification.thread.replace('-','/')}}">
                   <img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px">
                   {{getMember(notification.member).name}} {{notification.description}}
-                  <span ng-if="notification.thread.indexOf('company-')!=-1 && notification.description.indexOf('created')==-1">on {{getCompany(notification.thread.replace('company-','')).name}}.</span>
-                  <span ng-if="notification.thread.indexOf('speaker-')!=-1 && notification.description.indexOf('created')==-1">on {{getSpeaker(notification.thread.replace('speaker-','')).name}}.</span>
-                  <span ng-if="notification.thread.indexOf('topic-')!=-1 && notification.description.indexOf('created')==-1">on a {{getTopic(notification.thread.replace('topic-','')).kind}}.</span>
+                  <span ng-if="notification.thread.indexOf('company-')!=-1 && notification.description.indexOf('created')==-1">on {{getCompany(notification.thread.replace('company-','')).name}}</span>
+                  <span ng-if="notification.thread.indexOf('speaker-')!=-1 && notification.description.indexOf('created')==-1">on {{getSpeaker(notification.thread.replace('speaker-','')).name}}</span>
+                  <span ng-if="notification.thread.indexOf('topic-')!=-1 && notification.description.indexOf('created')==-1">on a {{getTopic(notification.thread.replace('topic-','')).kind}}</span>
                   <small>({{timeSince(notification.posted)}})</small>
                 </a>
               </li>
@@ -125,9 +125,9 @@
             <li ng-repeat="notification in notifications | orderBy: 'posted':false">
               <a href="/#/{{notification..thread.replace('-','/')}}">
                 <img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px"> {{getMember(notification.member).name}} {{notification.description}}
-                <span ng-if="notification.thread.indexOf('company-')!=-1">on {{getCompany(notification.thread.replace('company-','')).name}}.</span>
-                <span ng-if="notification.thread.indexOf('speaker-')!=-1">on {{getSpeaker(notification.thread.replace('speaker-','')).name}}.</span>
-                <span ng-if="notification.thread.indexOf('topic-')!=-1">on a {{getTopic(notification.thread.replace('topic-','')).kind}}.</span>
+                <span ng-if="notification.thread.indexOf('company-')!=-1 && notification.description.indexOf('created')==-1">on {{getCompany(notification.thread.replace('company-','')).name}}</span>
+                <span ng-if="notification.thread.indexOf('speaker-')!=-1 && notification.description.indexOf('created')==-1">on {{getSpeaker(notification.thread.replace('speaker-','')).name}}</span>
+                <span ng-if="notification.thread.indexOf('topic-')!=-1 && notification.description.indexOf('created')==-1">on a {{getTopic(notification.thread.replace('topic-','')).kind}}</span>
                 <small>({{timeSince(notification.posted)}})</small>
               </a>
             </li>
