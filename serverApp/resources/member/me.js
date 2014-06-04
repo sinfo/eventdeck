@@ -4,7 +4,7 @@ module.exports = get;
 
 function get(request, reply) {
 
-  var memberId = request.params.id;
+  var memberId = request.auth.credentials.id;
 
   Member.findById(memberId, function (err, result) {
     if (err) {

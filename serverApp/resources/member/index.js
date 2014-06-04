@@ -5,3 +5,4 @@ exports.update    = require('./update');
 exports.delete    = require('./delete');
 exports.getByRole = require('./getByRole');
 exports.roles     = require('./roles');
+exports.me 		  = require('./me');
