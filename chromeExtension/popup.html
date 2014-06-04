@@ -19,17 +19,6 @@
         overflow-x: hidden;
         font-family: Verdana;
       }
-
-      a {
-        text-decoration: none;
-        color: #444;
-      }
-
-      p {
-        background: #eee;
-        padding: 10px;
-        margin: 5px;
-      }
     </style>
 
     <script src="app.js"></script>
@@ -44,9 +33,9 @@
           <a title="{{notification.posted | date:'medium'}}" href="http://tool.bananamarket.eu/#/{{notification.thread.replace('-','/')}}" target="_blank">
             <img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px"> 
             {{getMember(notification.member).name}} {{notification.description}}
-            <span ng-if="notification.thread.indexOf('company-')!=-1">on {{getCompany(notification.thread.replace('company-','')).name}}.</span>
-            <span ng-if="notification.thread.indexOf('speaker-')!=-1">on {{getSpeaker(notification.thread.replace('speaker-','')).name}}.</span>
-            <span ng-if="notification.thread.indexOf('topic-')!=-1">on a {{getTopic(notification.thread.replace('topic-','')).kind}}.</span>
+            <span ng-if="notification.thread.indexOf('company-')!=-1 && notification.description.indexOf('created')==-1">on {{getCompany(notification.thread.replace('company-','')).name}}</span>
+            <span ng-if="notification.thread.indexOf('speaker-')!=-1 && notification.description.indexOf('created')==-1">on {{getSpeaker(notification.thread.replace('speaker-','')).name}}</span>
+            <span ng-if="notification.thread.indexOf('topic-')!=-1 && notification.description.indexOf('created')==-1">on a {{getTopic(notification.thread.replace('topic-','')).kind}}</span>
             <small>({{timeSince(notification.posted)}})</small>
           </a>
         </td></tr>

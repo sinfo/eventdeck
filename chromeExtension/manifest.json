@@ -3,7 +3,7 @@
 
   "name": "THE TOOL!",
   "description": "This extension gives you notifications from The Tool!",
-  "version": "1.3",
+  "version": "1.4",
 
   "browser_action": {
     "default_icon": "banana.png",
@@ -13,6 +13,6 @@
     "page": "background.html"
   },
   "permissions": [
-    "http://tool.bananamarket.eu/"
+    "https://tool.bananamarket.eu/"
   ]
 }
