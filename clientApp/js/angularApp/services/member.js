@@ -13,7 +13,7 @@ theToolServices
         'getAll': {method: 'GET', isArray: true}
       }),
       Me: $resource('/api/me', null, {
-        'get': {method: 'GET', isArray: true}
+        'get': {method: 'GET', isArray: false}
       })
     };
   })
