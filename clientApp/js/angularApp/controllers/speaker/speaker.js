@@ -24,6 +24,18 @@ theToolController
       });
     };
 
+    $scope.checkPermission = function (speaker) {
+      var roles = $scope.me.roles.filter(function(o) {
+        return o.id == 'development-team' || o.id == 'coordination';
+      });
+
+      if(roles.length == 0 && (speaker.status == 'Suggestion' || speaker.status == 'Selected')) {
+        return false;
+      }
+
+      return true;
+    };
+
     $scope.statuses = ['Suggestion','Selected','Approved','Contacted','In Conversations','Accepted','Rejected','Give Up'];
 
     $scope.speaker = $scope.formData = $scope.getSpeaker($routeParams.id);
