@@ -13,8 +13,8 @@
   <div class="column-group gutters">
     <div class="all-25 medium-40 hide-small hide-100">
       <div class="button-group half-bottom-space">
-        <p class="ink-button {{searchTopics.targets ? '' : 'blue'}}" ng-click="searchTopics.targets = undefined">All topics</p>
-        <p class="ink-button {{searchTopics.targets ? 'blue' : ''}}" ng-click="searchTopics.targets = me.id">Assigned to me</p>
+        <p class="ink-button {{searchTopics.target ? '' : 'blue'}}" ng-click="searchTopics.target = undefined">All topics</p>
+        <p class="ink-button {{searchTopics.target ? 'blue' : ''}}" ng-click="searchTopics.target = me.id">Assigned to me</p>
       </div>
 
       <tag-manager tags-array="topicTags" search="searchTopics"></tag-manager>
@@ -28,8 +28,8 @@
       </a>
       <br><br>
       <div ng-if="showFilters">
-        <p class="ink-button" ng-click="searchTopics.targets = undefined">All topics</p>
-        <p class="ink-button" ng-click="searchTopics.targets = me.id">Assigned to me</p>
+        <p class="ink-button" ng-click="searchTopics.target = undefined">All topics</p>
+        <p class="ink-button" ng-click="searchTopics.target = me.id">Assigned to me</p>
 
         <tag-manager tags-array="topicTags" search="searchTopics"></tag-manager>
       <br><br>
