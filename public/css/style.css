@@ -234,7 +234,15 @@ body.ink-drawer .right-drawer li.active > a {
 
 .suggestion:hover,
 .suggestion {
+  background: #eb6420;
+}
+.selected:hover,
+.selected {
   background: #5319e7;
+}
+.approved:hover,
+.approved {
+  background: #0052cc;
 }
 .contacted:hover,
 .contacted {
