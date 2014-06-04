@@ -50,12 +50,14 @@
       </div>
 
       
-      <h2 ng-click="hideCommunications=!hideCommunications" title="Click to show/hide communications"> 
-        Communications 
-        <i ng-show="hideCommunications" class="fa fa-chevron-circle-down" style="font-size:30px"></i> 
-        <i ng-hide="hideCommunications" class="fa fa-chevron-circle-up" style="font-size:30px"></i>
-      </h2>
-      <communication-area ng-hide="hideCommunications" thread="{{'speaker-' + speaker.id}}" members="{{members}}" me="{{me}}" roles="{{roles}}"></communication-area>
+      <div ng-if="speaker.status && speaker.status!='Suggestion'">
+        <h2 ng-click="hideCommunications=!hideCommunications" title="Click to show/hide communications"> 
+          Communications 
+          <i ng-show="hideCommunications" class="fa fa-chevron-circle-down" style="font-size:30px"></i> 
+          <i ng-hide="hideCommunications" class="fa fa-chevron-circle-up" style="font-size:30px"></i>
+        </h2>
+        <communication-area ng-hide="hideCommunications" thread="{{'speaker-' + speaker.id}}" members="{{members}}" me="{{me}}" roles="{{roles}}"></communication-area>
+      </div>
 
       <h2 ng-click="showComments=!showComments" title="Click to show/hide comments"> 
         Comments 
