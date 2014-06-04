@@ -1,7 +1,7 @@
 //angular.js example for factory vs service
 var app = angular.module('myApp', ['ngResource']);
 
-var API_URL = 'http://tool.bananamarket.eu';
+var API_URL = 'https://tool.bananamarket.eu';
     
 app.factory('notificationFactory', function ($resource) {
   return $resource(API_URL+'/api/notification/:id', null, {
@@ -9,9 +9,12 @@ app.factory('notificationFactory', function ($resource) {
   })
 })
 app.factory('memberFactory', function ($resource) {
-  return $resource(API_URL+'/api/member/:id', null, {
+  return {
+    Member: $resource(API_URL+'/api/member/:id', null, {
     'getAll': {method: 'GET', isArray:true}
-  })
+    }),
+    Me: $resource(API_URL+'/api/me', null, {})
+  }
 })
 app.factory('companyFactory', function ($resource) {
   return $resource(API_URL+'/api/company/:id', null, {
@@ -34,12 +37,12 @@ function PopupCtrl($scope, notificationFactory, memberFactory, companyFactory, s
 {
   var factoriesReady = 0;
 
-  memberFactory.get({id: "me"}, function (me) {
+  memberFactory.Me.get(function (me) {
     $scope.me = me;
     callback();
   });
 
-  memberFactory.getAll(function (members) {
+  memberFactory.Member.getAll(function (members) {
     $scope.members = members;
     callback();
   });
@@ -61,7 +64,7 @@ function PopupCtrl($scope, notificationFactory, memberFactory, companyFactory, s
 
 
   function callback() {
-    if (++factoriesReady == 5) {
+    if (++factoriesReady >= 5) {
       $scope.ready = true;
       $scope.update();
     }
