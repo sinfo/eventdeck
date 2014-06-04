@@ -28,7 +28,7 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
 
   var factoriesReady = 0;
 
-  MemberFactory.Member.get({id: "me"}, function (me) {
+  MemberFactory.Me.get(function (me) {
     $scope.me = me;
     callback();
   });
