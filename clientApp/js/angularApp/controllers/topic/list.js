@@ -66,18 +66,12 @@ theToolController.controller("TopicsController", function ($scope, $location, $r
 
   $scope.shownTopics = function (open) {
     return $scope.topics.filter(function (o) {
-      return o.editing || (open ? !o.closed : o.closed);
-    }).filter(function (o) {
-      return o.editing || (function () {
-        if ($scope.searchTopics.tags) {
-          if (o.tags.indexOf($scope.searchTopics.tags) === -1) {
-            return false;
-          }
+      return o.editing || (open ? !o.closed : o.closed) && (function () {
+        if ($scope.searchTopics.tags && o.tags.indexOf($scope.searchTopics.tags) === -1) {
+          return false;
         }
-        if ($scope.searchTopics.targets) {
-          if (o.targets.indexOf($scope.searchTopics.targets) === -1) {
-            return false;
-          }
+        if ($scope.searchTopics.target && o.targets.indexOf($scope.searchTopics.target) === -1) {
+          return false;
         }
         return true;
       }());
