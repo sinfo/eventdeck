@@ -20,8 +20,8 @@ var notificationGenerator = {
    * @type {string}
    * @private
    */
-  meEndpoint_: 'http://tool.bananamarket.eu/api/member/me',
-  notificationsEndpoint_: 'http://tool.bananamarket.eu/api/notification',
+  meEndpoint_: 'https://tool.bananamarket.eu/api/me',
+  notificationsEndpoint_: 'https://tool.bananamarket.eu/api/notification',
 
   me: {},
 
@@ -71,7 +71,11 @@ var notificationGenerator = {
       return e.unread.indexOf(me.id) != -1;
     })
 
-    chrome.browserAction.setBadgeText({ text: notifications.length.toString()});
+    if(notifications.length>0) {
+      chrome.browserAction.setBadgeText({ text: notifications.length.toString()});
+    } else {
+      chrome.browserAction.setBadgeText({text:''});
+    }
   }
 };
 
