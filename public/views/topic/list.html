@@ -13,8 +13,8 @@
   <div class="column-group gutters">
     <div class="all-25 medium-40 hide-small hide-100">
       <div class="button-group half-bottom-space">
-        <p class="ink-button" ng-click="searchTopics={}">All topics</p>
-        <p class="ink-button" ng-click="searchTopics.targets=me.id">Assigned to me</p>
+        <p class="ink-button {{searchTopics.targets ? '' : 'blue'}}" ng-click="searchTopics.targets = undefined">All topics</p>
+        <p class="ink-button {{searchTopics.targets ? 'blue' : ''}}" ng-click="searchTopics.targets = me.id">Assigned to me</p>
       </div>
 
       <tag-manager tags-array="topicTags" search="searchTopics"></tag-manager>
@@ -28,8 +28,8 @@
       </a>
       <br><br>
       <div ng-if="showFilters">
-        <p class="ink-button" ng-click="searchTopics={}">All topics</p>
-        <p class="ink-button" ng-click="searchTopics.targets=me.id">Assigned to me</p>
+        <p class="ink-button" ng-click="searchTopics.targets = undefined">All topics</p>
+        <p class="ink-button" ng-click="searchTopics.targets = me.id">Assigned to me</p>
 
         <tag-manager tags-array="topicTags" search="searchTopics"></tag-manager>
       <br><br>
@@ -42,12 +42,12 @@
       <div ng-hide="loading">
         <h3 ng-hide="loading || topics">No topics created yet.</h3>
         <div class="button-group half-bottom-space">
-          <div class="ink-button green" ng-click="showOpen = true;" style="border-right: 1px solid white;">{{shownTopics(true).length}} Open</div>
-          <div class="ink-button red" ng-click="showOpen = false;">{{shownTopics(false).length}} Closed</div>
+          <div class="ink-button green" ng-click="showOpen = true;" style="border-right: 1px solid white;">{{count(true)}} Open</div>
+          <div class="ink-button red" ng-click="showOpen = false;" style="border-left: 0px;">{{count(false)}} Closed</div>
         </div>
         <h3>{{showOpen ? 'Open' : 'Closed'}} topics</h3>
         <div class="all-100" infinite-scroll="scroll()">
-          <topic topic-object="topic" topic-members="members" topic-me="me" topic-roles="roles" topic-tags="topicTags" topic-comments="comments" ng-repeat="topic in shownTopics(showOpen) | filter:searchTopics:strict | orderBy: 'posted':'true' | limitTo: limit"></topic>
+          <topic topic-object="topic" topic-members="members" topic-me="me" topic-roles="roles" topic-tags="topicTags" topic-comments="comments" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true' | limitTo: limit"></topic>
         </div>
       </div>
     </div>
