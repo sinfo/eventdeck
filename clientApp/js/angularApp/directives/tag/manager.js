@@ -1,15 +1,15 @@
-'use strict';
+"use strict";
 
 theToolDirectives
-  .directive('tagManager', function () {
+  .directive("tagManager", function () {
     return {
-      restrict: 'EAC',
+      restrict: "E",
       replace: true,
-      templateUrl: 'views/tag/manager.html',
-      controller: 'TagManagerController',
+      templateUrl: "views/tag/manager.html",
+      controller: "TagManagerController",
       scope: {
-        tags: '=tagsArray',
-        search: '=search'
+        tags: "=tagsArray",
+        search: "="
       }
     };
   })
