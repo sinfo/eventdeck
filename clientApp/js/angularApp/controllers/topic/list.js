@@ -8,6 +8,8 @@ theToolController.controller("TopicsController", function ($scope, $location, $r
 
   $scope.kinds = ["Info", "To do", "Decision", "Idea"];
 
+  $scope.searchTopics = {};
+
   TopicFactory.Topic.getAll(gotTopics);
 
   function gotTopics (topics) {
@@ -56,9 +58,29 @@ theToolController.controller("TopicsController", function ($scope, $location, $r
     });
   };
 
-  $scope.shownTopics = function (showOpen) {
+  $scope.count = function (open) {
     return $scope.topics.filter(function (o) {
-      return (showOpen ? !o.closed : o.closed);
+      return (open ? !o.closed : o.closed);
+    }).length;
+  };
+
+  $scope.shownTopics = function (open) {
+    return $scope.topics.filter(function (o) {
+      return o.editing || (open ? !o.closed : o.closed);
+    }).filter(function (o) {
+      return o.editing || (function () {
+        if ($scope.searchTopics.tags) {
+          if (o.tags.indexOf($scope.searchTopics.tags) === -1) {
+            return false;
+          }
+        }
+        if ($scope.searchTopics.targets) {
+          if (o.targets.indexOf($scope.searchTopics.targets) === -1) {
+            return false;
+          }
+        }
+        return true;
+      }());
     });
   };
 
