@@ -5,7 +5,7 @@ theToolController
   
     $scope.limit = 10;
 
-    $scope.statuses = ['Suggestion','Contacted','In Conversations','Accepted','Rejected','Give Up'];
+    $scope.statuses = ['Suggestion','Selected','Approved','Contacted','In Conversations','Accepted','Rejected','Give Up'];
 
     $scope.speakerPredicate = 'updated';
     $scope.reverse = 'true';
