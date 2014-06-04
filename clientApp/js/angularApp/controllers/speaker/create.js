@@ -5,6 +5,8 @@ theToolController
     $scope.submit = function() {
       var speakerData = this.formData;
 
+      speakerData.status = 'Suggestion';
+
       SpeakerFactory.Speaker.create(speakerData, function(response) {
         if(response.error) {
           $scope.error = response.error;
@@ -14,6 +16,4 @@ theToolController
         }
       });
     };
-
-    $scope.statuses = ['Suggestion','Contacted','In Conversations','Accepted','Rejected','Give Up'];
   });
