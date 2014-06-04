@@ -8,6 +8,15 @@ var comment = require('./../resources/comment');
 
 server.route({
   method: 'GET',
+  path: '/api/me',
+  config: {
+    handler: member.me,
+    auth: true
+  }
+});
+
+server.route({
+  method: 'GET',
   path: '/api/member',
   config: {
     handler: member.list,
@@ -113,3 +122,4 @@ server.route({
     auth: true
   }
 });
+
