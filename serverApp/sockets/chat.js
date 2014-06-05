@@ -12,53 +12,58 @@ webSocket
   .of('/chat')
   .on('connection', function (socket) {
     console.log("Connected to main chat!");
-      socket.emit('connected');
-    /*socket.emit('init', { message: 'welcome to the chat' });*/
-      socket.on('auth', function(data, cbClient){
-        console.log("Chat ID: " + data.id);
 
-        var room = data.id;
-        var user = data.user;
-        socket.nickname = user;
-        async.parallel([
-          function(cb){
-            getChat(room, user, cb)
-          },
-          function(cb){
-            getMessages(room, cb)
-          }
-        ], function(err, results){
-            done(err, room, socket, cbClient);
-        });
+    console.log(webSocket.of('/chat').sockets.length);
+
+    socket.emit('connected');
+
+    socket.on('auth', function(data, cbClient){
+      console.log("Chat ID: " + data.id);
+
+      var room = data.id;
+      var user = data.user;
+      socket.nickname = user;
+      async.parallel([
+        function(cb){
+          getChat(room, user, cb)
+        },
+        function(cb){
+          getMessages(room, cb)
+        }
+      ], function(err, results){
+          done(err, room, socket, cbClient);
       });
+    });
 
-      socket.on('send', function(data, cbClient){
-        console.log("Sent message Chat ID: " + data.room);
+    socket.on('send', function(data, cbClient){
+      console.log("Sent message Chat ID: " + data.room);
 
-        var room    = data.room;
-        messageData = data.message; 
+      var room    = data.room;
+      messageData = data.message; 
 
-        async.series([
-          createMessage,
-          function(cb){
-            updateChat(room, cb)
-          }
-        ], function(){
-            webSocket.of('/chat').in(room).emit('message', messageData);
-            cbClient();
-        });
+      async.series([
+        createMessage,
+        function(cb){
+          updateChat(room, cb)
+        }
+      ], function(){
+          webSocket.of('/chat').in(room).emit('message', messageData);
+          cbClient();
       });
+    });
 
-      socket.on('logout', function(data, cb){
-        console.log("Log out: " + socket.nickname);
-        socket.disconnect();
-        webSocket.of('/chat').in(data.room).emit('user:disconnected', {id: socket.nickname});
-        cb();
-      });
+    socket.on('logout', function(data, cb){
+      console.log("Log out: " + socket.nickname);
+      socket.disconnect();
+      webSocket.of('/chat').in(data.room).emit('user:disconnected', {id: socket.nickname});
+      cb();
+    });
 
-      socket.on('disconnect', function(){
-        console.log("Disconnected: " + socket.nickname);
-      });
+    socket.on('disconnect', function(){
+      console.log("Disconnected: " + socket.nickname);
+      delete socket;
+    });
+
   });
 
 function getChat(chatID, memberID, cb){
@@ -104,9 +109,12 @@ function done(err, room, socket, cb){
     var online  = [];
     socket.join(room);
     var clients = webSocket.of('/chat').sockets;
-    console.log(clients.length);
+    console.log("Currently Loged:");
     for(var i = 0; i < clients.length; i++){
-      online[i] = clients[i].nickname;
+      if(clients[i].connected){
+        online[i] = clients[i].nickname;
+        console.log(clients[i].nickname);
+      }
     }
     var data = {
       room     : room,
