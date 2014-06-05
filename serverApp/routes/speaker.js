@@ -1,13 +1,13 @@
-var server        = require('./../index.js').hapi;
-var speaker       = require('./../resources/speaker');
-var comment       = require('./../resources/comment');
-var notification  = require('./../resources/notification');
-var communication = require('./../resources/communication');
-var session       = require('./../resources/session');
+var server        = require("./../index.js").hapi;
+var speaker       = require("./../resources/speaker");
+var comment       = require("./../resources/comment");
+var notification  = require("./../resources/notification");
+var communication = require("./../resources/communication");
+var session       = require("./../resources/session");
 
 server.route({
-  method: 'GET',
-  path: '/api/speaker',
+  method: "GET",
+  path: "/api/speaker",
   config: {
     handler: speaker.list,
     auth: true
@@ -15,17 +15,8 @@ server.route({
 });
 
 server.route({
-  method: 'POST',
-  path: '/api/speaker',
-  config: {
-    handler: speaker.create,
-    auth: true
-  }
-});
-
-server.route({
-  method: 'GET',
-  path: '/api/speaker/{id}',
+  method: "GET",
+  path: "/api/speaker/{id}",
   config: {
     handler: speaker.get,
     auth: true
@@ -33,8 +24,17 @@ server.route({
 });
 
 server.route({
-  method: 'PUT',
-  path: '/api/speaker/{id}',
+  method: "POST",
+  path: "/api/speaker",
+  config: {
+    handler: speaker.create,
+    auth: true
+  }
+});
+
+server.route({
+  method: "PUT",
+  path: "/api/speaker/{id}",
   config: {
     handler: speaker.update,
     auth: true
@@ -42,8 +42,17 @@ server.route({
 });
 
 server.route({
-  method: 'GET',
-  path: '/api/speaker/{id}/comments',
+  method: "DELETE",
+  path: "/api/speaker/{id}",
+  config: {
+    handler: speaker.delete,
+    auth: true
+  }
+});
+
+server.route({
+  method: "GET",
+  path: "/api/speaker/{id}/comments",
   config: {
     handler: comment.getByThread,
     auth: true
@@ -51,8 +60,8 @@ server.route({
 });
 
 server.route({
-  method: 'GET',
-  path: '/api/speaker/{id}/sendInitialEmail',
+  method: "GET",
+  path: "/api/speaker/{id}/sendInitialEmail",
   config: {
     handler: speaker.sendInitialEmail,
     auth: true
@@ -60,8 +69,8 @@ server.route({
 });
 
 server.route({
-  method: 'GET',
-  path: '/api/speaker/{id}/notifications',
+  method: "GET",
+  path: "/api/speaker/{id}/notifications",
   config: {
     handler: notification.getByThread,
     auth: true
@@ -69,8 +78,8 @@ server.route({
 });
 
 server.route({
-  method: 'GET',
-  path: '/api/speaker/{id}/communications',
+  method: "GET",
+  path: "/api/speaker/{id}/communications",
   config: {
     handler: communication.getByThread,
     auth: true
@@ -78,8 +87,8 @@ server.route({
 });
 
 server.route({
-  method: 'GET',
-  path: '/api/speaker/{id}/sessions',
+  method: "GET",
+  path: "/api/speaker/{id}/sessions",
   config: {
     handler: session.getByThread,
     auth: true
