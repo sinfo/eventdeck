@@ -393,22 +393,22 @@ a, a:visited, a:hover {
   }
 
 .chat-message {
-  background: #eee;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  padding-top: 2px;
-  padding-bottom: 2px;
+  margin: 5px;
+  padding: 5px;
   border-radius: 6px;
-  text-align: left;
-  float: right;
+  width:70%;
 }
 
 .chat-message.me {
   background: Gold;
+  float: right;
+  text-align: right;
 }
 
 .chat-message.others {
+  background: #eee;
   float: left;
+  text-align: left;
 }
 
 .button {
