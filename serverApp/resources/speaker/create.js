@@ -54,7 +54,7 @@ function create(request, reply) {
     else {
       notification.notify(request.auth.credentials.id, 'speaker-'+speaker.id, 'created a new speaker', null);
 
-      reply({success: "Speaker created."});
+      reply({success: "Speaker created.", id:speaker.id});
     }
   }
 }

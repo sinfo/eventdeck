@@ -403,11 +403,11 @@ a, a:visited, a:hover {
 }
 
 .chat-message.me {
-  background: lime;
+  background: Gold;
 }
 
 .chat-message.others {
-  margin-left: 120px;
+  float: right;
 }
 
 .button {
