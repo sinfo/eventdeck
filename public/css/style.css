@@ -400,6 +400,7 @@ a, a:visited, a:hover {
   padding-bottom: 5px;
   border-radius: 6px;
   text-align: left;
+  float: right;
 }
 
 .chat-message.me {
@@ -407,7 +408,7 @@ a, a:visited, a:hover {
 }
 
 .chat-message.others {
-  float: right;
+  float: left;
 }
 
 .button {
