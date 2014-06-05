@@ -12,8 +12,9 @@
             </a>
             <a href="/#/{{notification.thread.replace('-','/')}}" style="color: #666;">
               {{notification.description}}
+              <small title="{{notification.posted | date:'medium'}}">({{timeSince(notification.posted)}})</small>
+              <span class="ink-label red" ng-show="notification.unread.indexOf(me.id)!=-1">UNREAD!</span>
             </a>
-            <small title="{{notification.posted | date:'medium'}}">({{timeSince(notification.posted)}})</small>
           </div>
           <div >
             <topic ng-if="notification.thread.indexOf('topic')!=-1" topic-object="getTopic(notification.thread.replace('topic-',''))" topic-members="members" topic-me="me" topic-roles="roles" topic-tags="topicTags" topic-comments="comments"></topic>
