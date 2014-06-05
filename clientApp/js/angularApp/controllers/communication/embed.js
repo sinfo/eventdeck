@@ -94,9 +94,13 @@ theToolController.controller("CommunicationEmbedController", function ($scope, C
     return Math.floor(seconds) + " seconds " + suffix;
   };
 
+  $scope.formatDate = function (time) {
+    return new Date(time).toUTCString();
+  };
+
   $scope.convertURLs = function(text) {
     var urlExp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-    
+
     return text.replace(/\n/g, '<br>').replace(urlExp,"<a href='$1'>$1</a>");
   }
 });
