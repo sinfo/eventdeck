@@ -5,13 +5,8 @@ theToolServices
     var socket;
     return {
       connect: function(nsp) {
-/*        console.log($rootScope.socket);
-        if($rootScope.socket){
-          console.log($rootScope.socket.connected);
-          $rootScope.socket.disconnect();
-        }
-        $rootScope.socket = socket = io.connect(nsp);*/
-        socket = io.connect(nsp);
+        console.log(socket);
+        socket = io.connect(nsp, {multiplex: false});
       },
       on: function (eventName, callback) {
         socket.on(eventName, function () {
@@ -33,6 +28,7 @@ theToolServices
       },
       disconnect: function () {
         socket.disconnect();
-      }
+      },
+      socket: socket
     };
   });
