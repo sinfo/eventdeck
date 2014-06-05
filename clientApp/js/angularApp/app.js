@@ -5,6 +5,7 @@ angular.module("theTool", [
   "ngRoute",
   "ngSanitize",
   "infinite-scroll",
+  "luegg.directives",
   "theTool.filters",
   "theTool.services",
   "theTool.directives",
