@@ -154,4 +154,8 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
     return Math.floor(seconds) + " seconds " + suffix;
   };
 
+  $scope.formatDate = function (time) {
+    return new Date(time).toUTCString();
+  };
+
 });

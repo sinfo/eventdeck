@@ -10,7 +10,7 @@
             <img ng-src="{{'https://graph.facebook.com/' + getMember(comment.member).facebook + '/picture'}}"/>
             <small>{{getMember(comment.member).name}}</small>
           </a>
-          <small title="{{comment.posted}}">({{timeSince(comment.posted)}})</small>
+          <small title="{{formatDate(comment.posted)}}">({{timeSince(comment.posted)}})</small>
         </div>
         <div class="all-50 align-right">
           <small>
