@@ -62,6 +62,9 @@
               <li ng-repeat="member in members | filter:search:strict">
                 <a ng-click="hide()" href="/#/member/{{member.id}}"><img ng-src="https://graph.facebook.com/{{+member.facebook}}/picture" style="height: 20px; max-width: 40px"> {{member.name}}</a>
               </li>
+              <li ng-repeat="topic in topics | filter:{text:search.name}:strict">
+                <a ng-click="hide()" href="/#/topic/{{topic._id}}"><b>{{topic.kind}}</b> {{topic.text | limitTo:30}}<i ng-show="topic.text.length>30">(...)</i></a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -117,12 +120,13 @@
             <li ng-show="search.name" ng-repeat="company in companies | filter:search:strict"><a href="/#/company/{{company.id}}"><img ng-src="{{company.img}}" style="height:20px; max-width:40px"> {{company.name}}</a></li>
             <li ng-show="search.name" ng-repeat="speaker in speakers | filter:search:strict"><a href="/#/speaker/{{speaker.id}}"><img ng-src="{{speaker.img}}" style="height:20px; max-width:40px"> {{speaker.name}}</a></li>
             <li ng-show="search.name" ng-repeat="member in members | filter:search:strict"><a href="/#/member/{{member.id}}"><img ng-src="https://graph.facebook.com/{{+member.facebook}}/picture" style="height:20px; max-width:40px"> {{member.name}}</a></li>
+            <li ng-repeat="topic in topics | filter:{text:search.name}:strict"><a ng-click="hide()" href="/#/topic/{{topic._id}}"><b>{{topic.kind}}</b> {{topic.text | limitTo:30}}<i ng-show="topic.text.length>30">(...)</i></a></li>
           </ul>
         </li>
         <li>
           <a style="{{notificationsInfo.number == 0 ? 'background: FireBrick;' : 'background: OrangeRed;'}}"><span><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a>
           <ul class="submenu" style="max-height:200px; overflow:auto; margin: 0px 20px 0px;">
-            <li ng-repeat="notification in notifications | orderBy: 'posted':false">
+            <li ng-repeat="notification in notifications | orderBy: 'posted':true">
               <a href="/#/{{notification..thread.replace('-','/')}}">
                 <img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px"> {{getMember(notification.member).name}} {{notification.description}}
                 <span ng-if="notification.thread.indexOf('company-')!=-1 && notification.description.indexOf('created')==-1">on {{getCompany(notification.thread.replace('company-','')).name}}</span>
