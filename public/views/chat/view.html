@@ -26,7 +26,7 @@
   <div ng-repeat="user in online | orderBy:['-on', 'name']" style="margin-bottom:10px">
     <div class="column-group horizontal-gutters">
       <div class="all-20">
-        <a href="/#/member/{{user.member}}"><img src="https://graph.facebook.com/{{getMember(user.member).facebook}}/picture" style="width:25px; margin-left:15px;"/></a>
+        <a href="/#/member/{{user.member}}"><img src="https://graph.facebook.com/{{getMember(user.member).facebook}}/picture" style="width:25px;"/></a>
       </div>
       <div class="all-60">
         <small>{{getMember(user.member).name}}</small>
