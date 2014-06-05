@@ -1,28 +1,20 @@
-'use strict';
+"use strict";
 
-theToolController.controller('home', function ($scope, $http, $sce,  $rootScope, NotificationFactory, MemberFactory) {
+theToolController.controller("home", function ($scope, NotificationFactory) {
 
   $scope.loading = true;
   $scope.notifications = [];
   $scope.limit = 10;
 
-  init();
+  NotificationFactory.Notification.getAll(function (response) {
+    $scope.notifications = response;
+    $scope.loading = false;
+  });
 
-  function init() {
-    setTimeout(function() {
-      if ($scope.loading)
-        init();
-    }, 1000);
-
-    NotificationFactory.Notification.getAll(function(response) {
-      $scope.notifications = response;
-      $scope.loading = false;
-    });
-  }
-
-  $scope.scroll = function() {
-    if ($scope.limit < $scope.notifications.length)
+  $scope.scroll = function () {
+    if ($scope.limit < $scope.notifications.length) {
       $scope.limit += 10;
+    }
   };
 
 });

@@ -145,6 +145,10 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
     return Math.floor(seconds) + " seconds " + suffix;
   };
 
+  $scope.formatDate = function (time) {
+    return new Date(time).toUTCString();
+  };
+
   $scope.getMember = function (memberId) {
     var member = $scope.members.filter(function(o) {
       return o.id == memberId;
@@ -188,7 +192,7 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
 
   $scope.convertURLs = function(text) {
     var urlExp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-    
+
     return text.replace(/\n/g, '<br>').replace(urlExp,"<a href='$1'>$1</a>");
   }
 
