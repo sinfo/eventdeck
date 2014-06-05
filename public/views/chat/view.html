@@ -2,7 +2,7 @@
 <div ng-hide="loading">
   <h1>Chat {{chat.name}}</h1>
 </div>
-<div ng-hide="loading" style="position: absolute; top: 100px; left: 20px; overflow-y: scroll; height: 70%; width:70%">
+<div ng-hide="loading" style="position: absolute; top: 100px; left: 20px; overflow-y: scroll; height: 70%; width:70%; background:white">
  <ul class="unstyled">
     <li ng-repeat="message in messages | orderBy:'date':false">
       <div class="all-70 chat-message" ng-class="message.member == me.id ? 'me' : 'others'">
@@ -24,15 +24,17 @@
 </div>
 </div>
 
-<div ng-hide="loading" style="position: absolute; top: 50px; right: 20px; overflow-y: scroll; height: 90%; width:25%">
-  <div class="comment" ng-repeat="user in online | orderBy:['-on', 'name']">
+<div ng-hide="loading" scroll-glue style="position: absolute; top: 50px; right: 20px; overflow-y: scroll; height: 90%; width:25%">
+  <div ng-repeat="user in online | orderBy:['-on', 'name']" style="margin-bottom:10px">
     <div class="column-group horizontal-gutters">
-      <div class="all-40">
-        <i ng-if="user.on" class="fa fa-wrench" style='color: Green'></i>
+      <div class="all-20">
         <a href="/#/member/{{user.member}}"><img src="https://graph.facebook.com/{{getMember(user.member).facebook}}/picture" style="width:25px; margin-left:15px;"/></a>
       </div>
       <div class="all-60">
-        {{getMember(user.member).name}}
+        <small>{{getMember(user.member).name}}</small>
+      </div>
+      <div class="all-20" ng-if="user.on">
+        <small style="font-size:xx-small; color: LimeGreen">· Online</small>
       </div>
     </div>
   </div>
