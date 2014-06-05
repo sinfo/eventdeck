@@ -1,44 +1,47 @@
-<div class="column-group horizontal-gutters" style="height: 100%;">
+<div class="column-group horizontal-gutters">
   <h2 ng-show="loading">Loading...</h2>
-  <div ng-hide="loading" class="all-100">
+  <div ng-hide="loading" class="all-100" style="height: 100%; width:100%; position: absolute; top: 0; left: 0;">
     <h1>Chat {{chat.name}}</h1>
   </div>
-  <div ng-hide="loading" class="all-70" style="overflow-y: scroll; max-height: 100%;">
-    <div class="column-group horizontal-gutters">
-      <ul class="unstyled">
-        <li ng-repeat="message in messages | orderBy:'date':false">
-          <div class="all-70 chat-message" ng-class="message.member == me.id ? 'me' : 'others'">
-            <dl>
-              <dt>
-                <a href="/#/member/{{message.member}}">
-                  <img src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px; margin-left:15px;"/>
-                  <span>{{getMember(message.member).name}}</span>
-                  <small>{{timeSince(message.date)}}</small>
-                </a>
-              </dt>
-              <dd>
-                <span>{{message.text}}</span>
-              </dd>
-            </dl>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div ng-hide="loading" class="all-30" style="overflow-y: scroll; max-height: 100%;">
-    <div class="comment" ng-repeat="user in online | orderBy:['-on', 'name']">
+  <div style="height: 100%; width: 100%; position: absolute; top: 0; left: 0;">
+    <div ng-hide="loading" class="all-70" style="overflow-y: scroll; max-height: 100%;">
       <div class="column-group horizontal-gutters">
-        <div class="all-40">
-          <i ng-if="user.on" class="fa fa-wrench" style='color: Green'></i>
-          <a href="/#/member/{{user.member}}"><img src="https://graph.facebook.com/{{getMember(user.member).facebook}}/picture" style="width:25px; margin-left:15px;"/></a>
-        </div>
-        <div class="all-60">
-          {{getMember(user.member).name}}
+        <ul class="unstyled">
+          <li ng-repeat="message in messages | orderBy:'date':false">
+            <div class="all-70 chat-message" ng-class="message.member == me.id ? 'me' : 'others'">
+              <dl>
+                <dt>
+                  <a href="/#/member/{{message.member}}">
+                    <img src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px; margin-left:15px;"/>
+                    <span>{{getMember(message.member).name}}</span>
+                    <small>{{timeSince(message.date)}}</small>
+                  </a>
+                </dt>
+                <dd>
+                  <span>{{message.text}}</span>
+                </dd>
+              </dl>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div ng-hide="loading" class="all-30" style="overflow-y: scroll; max-height: 100%;">
+      <div class="comment" ng-repeat="user in online | orderBy:['-on', 'name']">
+        <div class="column-group horizontal-gutters">
+          <div class="all-40">
+            <i ng-if="user.on" class="fa fa-wrench" style='color: Green'></i>
+            <a href="/#/member/{{user.member}}"><img src="https://graph.facebook.com/{{getMember(user.member).facebook}}/picture" style="width:25px; margin-left:15px;"/></a>
+          </div>
+          <div class="all-60">
+            {{getMember(user.member).name}}
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+  
 
 <div ng-hide="loading" class="column-group horizontal-gutters">
   <div class="all-100">
