@@ -73,6 +73,9 @@ theToolController.controller("TopicsController", function ($scope, $location, $r
         if ($scope.searchTopics.target && o.targets.indexOf($scope.searchTopics.target) === -1) {
           return false;
         }
+        if ($scope.searchTopics.kind && o.kind !== $scope.searchTopics.kind) {
+          return false;
+        }
         return true;
       }());
     });
