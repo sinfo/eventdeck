@@ -72,7 +72,7 @@
       <h3 ng-show="loading">Loading...</h3>
       <div ng-hide="loading">
         <h3 ng-hide="loading || members">No members created yet.</h3>
-        
+
         <div class="all-100" infinite-scroll="scroll()">
           <div class="column-group horizontal-gutters">
             <div class="all-25 medium-33 small-50 tiny-100" ng-repeat="member in members | filter:searchMembers:strict | filterRole: searchRoles.toString() | orderBy:memberPredicate:reverse">
