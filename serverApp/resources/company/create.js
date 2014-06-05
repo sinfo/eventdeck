@@ -54,7 +54,7 @@ function create(request, reply) {
     else {
       notification.notify(request.auth.credentials.id, 'company-'+company.id, 'created a new company', null);
 
-      reply({success: "Company created."});
+      reply({success: "Company created.", id:company.id});
     }
   }
 }

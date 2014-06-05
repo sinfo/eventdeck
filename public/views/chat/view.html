@@ -1,13 +1,13 @@
-<div class="column-group horizontal-gutters">
+<div class="column-group horizontal-gutters" style="height: 100%;">
   <h2 ng-show="loading">Loading...</h2>
   <div ng-hide="loading" class="all-100">
     <h1>Chat {{chat.name}}</h1>
   </div>
-  <div ng-hide="loading" class="all-70">
+  <div ng-hide="loading" class="all-70" style="overflow-y: scroll; max-height: 100%;">
     <div class="column-group horizontal-gutters">
       <ul class="unstyled">
         <li ng-repeat="message in messages | orderBy:'date':false">
-          <div ng-class="message.member == me.id ? 'me' : 'others'" class="all-70 chat-message">
+          <div class="all-70 chat-message" ng-class="message.member == me.id ? 'me' : 'others'">
             <dl>
               <dt>
                 <a href="/#/member/{{message.member}}">
@@ -25,7 +25,7 @@
       </ul>
     </div>
   </div>
-  <div ng-hide="loading" class="all-30">
+  <div ng-hide="loading" class="all-30" style="overflow-y: scroll; max-height: 100%;">
     <div class="comment" ng-repeat="user in online | orderBy:['-on', 'name']">
       <div class="column-group horizontal-gutters">
         <div class="all-40">
