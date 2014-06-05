@@ -12,7 +12,7 @@ theToolServices
       Role: $resource('/api/role/:id/members', null, {
         'getAll': {method: 'GET', isArray: true}
       }),
-      Me: $resource('/api/me', null, {
+      Me: $resource('/api/myself', null, {
         'get': {method: 'GET', isArray: false}
       })
     };
