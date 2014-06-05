@@ -8,7 +8,7 @@ var comment = require('./../resources/comment');
 
 server.route({
   method: 'GET',
-  path: '/api/me',
+  path: '/api/myself',
   config: {
     handler: member.me,
     auth: true
