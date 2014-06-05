@@ -8,7 +8,18 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
   $scope.messages = [];
   $scope.online   = [];
 
+  console.log("Connecting");
+
+  if(SocketFactory.socket){
+    console.log();
+  }
   SocketFactory.connect('/chat');
+
+  /*setTimeout(function(){
+    if(!SocketFactory.socket.connected){
+      SocketFactory.connect('/chat');
+    }
+  }, 3000);*/
 
   SocketFactory.on('connected', function (message) {
     SocketFactory.emit('auth', {id: $routeParams.id, user: $scope.me.id}, function () {
@@ -62,6 +73,13 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
   SocketFactory.on('message', function (message) {
     console.log(message.date);
     $scope.messages.push(message);
+  });
+
+  $scope.$on('$locationChangeStart', function(){
+    console.log("On location change");
+    console.log(SocketFactory);
+    SocketFactory.disconnect();
+    delete SocketFactory.socket;
   });
 
   $scope.submit = function() {
