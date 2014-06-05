@@ -1,4 +1,4 @@
-<div class="ink-grid" id="homeModal">
+<div class="ink-grid">
   <div class="column-group">
     <div class="all-100">
       <h1>Recent Activity</h1>
@@ -7,12 +7,12 @@
         <div class="activity {{notification.color}}" ng-repeat="notification in notifications | orderBy:'posted':true | limitTo: limit">
           <div class="all-100" style="margin-bottom:5px">
             <a href="/#/member/{{notification.member}}">
-              <img ng-src="{{'https://graph.facebook.com/'+getMember(notification.member).facebook+'/picture'}}">
+              <img ng-src="{{'https://graph.facebook.com/' + getMember(notification.member).facebook + '/picture'}}">
               <b>{{getMember(notification.member).name}}</b>
             </a>
             <a href="/#/{{notification.thread.replace('-','/')}}" style="color: #666;">
               {{notification.description}}
-              <small title="{{notification.posted | date:'medium'}}">({{timeSince(notification.posted)}})</small>
+              <small title="{{formatDate(notification.posted)}}">({{timeSince(notification.posted)}})</small>
               <span class="ink-label red" ng-show="notification.unread.indexOf(me.id)!=-1">UNREAD!</span>
             </a>
           </div>
