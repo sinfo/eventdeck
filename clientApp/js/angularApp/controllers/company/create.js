@@ -10,6 +10,11 @@ theToolController
           $scope.error = response.error;
         } else {
           $scope.message = response.message;
+          
+          CompanyFactory.Company.getAll(function (companies) {
+            $scope.companies = companies;
+          });
+
           $location.path("/company/" + response.id);
         }
       });
