@@ -1,6 +1,7 @@
 var async        = require('async');
 var Member       = require('./../../db/models/member.js');
 var Notification = require('./../../db/models/notification.js');
+var webSocket    = require('./../index.js').webSocket;
 
 exports = module.exports = notify;
 
@@ -52,6 +53,14 @@ function notify(memberId, thread, description, objectId) {
     if (err) {
       console.log("There was an error! "+ err);
     } else {
+      var newMessage {
+        chatId: 'geral',
+        member: memberId,
+        kind:   'notification',
+        source: objectId,
+        text:   description,
+      }
+      webSocket.of('/chat').in('geral').emit('message', newMessage);
       console.log(memberId+' '+description+' on '+thread+' (objectId:'+objectId+')');
     }
   }
