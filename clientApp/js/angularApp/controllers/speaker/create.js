@@ -12,6 +12,12 @@ theToolController
           $scope.error = response.error;
         } else {
           $scope.message = response.message;
+
+          SpeakerFactory.Speaker.getAll(function (speakers) {
+            $scope.speakers = speakers;
+            callback();
+          });
+          
           $location.path("/speaker/" + response.id);
         }
       });
