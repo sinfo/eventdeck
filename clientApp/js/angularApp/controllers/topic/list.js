@@ -50,9 +50,9 @@ theToolController.controller("TopicsController", function ($scope, $location, $r
       if (response.success) {
         TopicFactory.Topic.getAll(function (topics) {
           $scope.topics = topics;
-          $scope.topics.find(function (o) {
+          $scope.topics.filter(function (o) {
             return o._id == response.id;
-          }).editing = true;
+          })[0].editing = true;
         });
       }
     });
