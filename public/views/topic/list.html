@@ -38,14 +38,22 @@
 
 
     <div class="all-75 medium-60 small-100 tiny-100">
-      <h3 ng-show="loading">Loading...</h3>
-      <div ng-hide="loading">
-        <h3 ng-hide="loading || topics">No topics created yet.</h3>
-        <div class="button-group half-bottom-space">
-          <div class="ink-button green" ng-click="showOpen = true;" style="border-right: 1px solid white;">{{count(true)}} Open</div>
-          <div class="ink-button red" ng-click="showOpen = false;" style="border-left: 0px;">{{count(false)}} Closed</div>
+      <h3 ng-show="loading" class="all-100">Loading...</h3>
+      <div ng-hide="loading" class="all-100">
+        <h3 ng-hide="topics" class="all-100">No topics created yet.</h3>
+        <div class="all-100 half-bottom-space">
+          <div class="button-group">
+            <div class="ink-button green" ng-click="showOpen = true;" style="border-right: 1px solid white;">{{count(true)}} Open</div>
+            <div class="ink-button red" ng-click="showOpen = false;" style="border-left: 0px;">{{count(false)}} Closed</div>
+          </div>
         </div>
-        <h3>{{showOpen ? 'Open' : 'Closed'}} topics</h3>
+        <div class="all-100">
+          <h3 class="all-50">{{showOpen ? 'Open' : 'Closed'}} topics</h3>
+          <div class="all-50 align-right">
+            <div class="ink-button {{!searchTopics.kind ? 'blue' : ''}}" ng-click="searchTopics.kind = undefined">All</div>
+            <div ng-repeat="kind in kinds" class="ink-button {{searchTopics.kind === kind ? 'blue' : ''}}" ng-click="searchTopics.kind = kind">{{kind}}</div>
+          </div>
+        </div>
         <div class="all-100" infinite-scroll="scroll()">
           <topic topic-object="topic" topic-members="members" topic-me="me" topic-roles="roles" topic-tags="topicTags" topic-comments="comments" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true' | limitTo: limit"></topic>
         </div>
