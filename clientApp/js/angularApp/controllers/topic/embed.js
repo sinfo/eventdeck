@@ -213,4 +213,8 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     return Math.floor(seconds) + " seconds " + suffix;
   };
 
+  $scope.formatDate = function (time) {
+    return new Date(time).toUTCString();
+  };
+
 });

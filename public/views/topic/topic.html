@@ -7,7 +7,7 @@
         <img ng-src="{{'https://graph.facebook.com/' + getMember(topic.author).facebook + '/picture'}}"/>
         <small>{{getMember(topic.author).name}}</small>
       </a>
-      <small title="{{topic.posted}}">({{timeSince(topic.posted)}})</small>
+      <small title="{{formatDate(topic.posted)}}">({{timeSince(topic.posted)}})</small>
 
       <a href="/#/topic/{{topic._id}}">
         <h5 style="margin-top:10px;">
