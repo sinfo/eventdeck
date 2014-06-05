@@ -5,21 +5,32 @@
 <div scroll-glue ng-hide="loading" style="position: absolute; top: 100px; left: 20px; overflow-y: scroll; height: 70%; width:70%; background:white">
  <ul class="unstyled">
     <li ng-repeat="message in messages | orderBy:'date':false">
-      <div ng-show="message.member == me.id" class="chat-message me">
-        <small title="{{timeSince(message.date)}}">{{message.text}}</small>
-        <a href="/#/member/{{message.member}}" title="{{getMember(message.member).name}}">
-          <img src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px; margin-left:15px;"/>
-        </a>
+      <div ng-if="message.kind == 'message'">
+        <div ng-show="message.member == me.id" class="chat-message me">
+          <small title="{{timeSince(message.date)}}">{{message.text}}</small>
+          <a href="/#/member/{{message.member}}" title="{{getMember(message.member).name}}">
+            <img src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px; margin-left:15px;"/>
+          </a>
+        </div>
+        <div ng-show="message.member != me.id" class="chat-message others">
+          <a href="/#/member/{{message.member}}" title="{{getMember(message.member).name}}">
+            <img src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px; margin-left:15px;"/>
+          </a>
+          <small title="{{timeSince(message.date)}}">{{message.text}}</small>
+        </div>
       </div>
-      <div ng-show="message.member != me.id" class="chat-message others">
-        <a href="/#/member/{{message.member}}" title="{{getMember(message.member).name}}">
-          <img src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px; margin-left:15px;"/>
-        </a>
-        <small title="{{timeSince(message.date)}}">{{message.text}}</small>
+      <div ng-if="message.king == 'notification'">
+        <blockquote>
+          <a href="/#/{{message.thread.replace('-','/')}}" title="{{timeSince(message.date)}}">
+            {{message.text}}
+          </a>
+          <a href="/#/member/{{message.member}}" title="{{getMember(message.member).name}}">
+            <img src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px; margin-left:15px;"/>
+          </a>
+        </blockquote>
       </div>
     </li>
   </ul>
-</div>
 </div>
 
 <div ng-hide="loading" style="position: absolute; top: 50px; right: 20px; overflow-y: scroll; height: 90%; width:25%">
