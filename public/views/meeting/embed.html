@@ -1,17 +1,19 @@
-<div class="all-100 column-group activity grey" style="border-radius: 5px;">
+<div class="all-100 activity grey" style="border-radius: 5px;">
   <h5 ng-show="loading">Loading...</h5>
 
   <div ng-hide="loading" class="all-100">
-    <a class="all-50" ng-href="/#/member/{{meeting.author}}">
-      <img ng-src="https://graph.facebook.com/{{getMember(meeting.author).facebook}}/picture">
-      <small>{{getMember(meeting.author).name}}</small>
-    </a>
-    <div class="all-50 align-right">
-      <div class="ink-button blue" ng-click="showAttendants = !showAttendants" style="width: 60px;"><small style="color: white;">{{meeting.attendants.length}} </small><i class="fa fa-users"></i></div>
+    <div classs="all-100">
+      <a class="all-50" ng-href="/#/member/{{meeting.author}}">
+        <img ng-src="https://graph.facebook.com/{{getMember(meeting.author).facebook}}/picture">
+        <small>{{getMember(meeting.author).name}}</small>
+      </a>
+      <div class="all-50 align-right">
+        <div class="ink-button blue" ng-click="showAttendants = !showAttendants" style="width: 60px;"><small style="color: white;">{{meeting.attendants.length}} </small><i class="fa fa-users"></i></div>
+      </div>
     </div>
 
     <a class="all-100" ng-href="/#/meeting/{{meetingId}}" style="color: #555555;">
-      <p>{{meeting.title}}</p>
+      <h5>{{meeting.title}}</h5>
     </a>
 
     <div ng-if="showAttendants" class="all-100 half-top-space">
