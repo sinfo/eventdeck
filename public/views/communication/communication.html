@@ -6,7 +6,7 @@
         <img ng-src="{{'https://graph.facebook.com/' + getMember(communication.member).facebook + '/picture'}}"/>
         <small>{{getMember(communication.member).name}}</small>
       </a>
-      <small title="{{communication.posted}}">({{timeSince(communication.posted)}})</small>
+      <small title="{{formatDate(communication.posted)}}">({{timeSince(communication.posted)}})</small>
     </div>
     <div class="all-50 align-right">
       <small>
