@@ -3,6 +3,8 @@ var mongoose = require('mongoose');
 var messageSchema = new mongoose.Schema({
   chatId: String,
   member: String,
+  kind: { type: String, default: 'message' },
+  source: { type: String, default: ''},
   text: String,
   date: { type: Date, default: Date.now }
 });
