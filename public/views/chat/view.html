@@ -9,12 +9,12 @@
         <div ng-show="message.member == me.id" class="chat-message me">
           <small title="{{timeSince(message.date)}}">{{message.text}}</small>
           <a href="/#/member/{{message.member}}" title="{{getMember(message.member).name}}">
-            <img src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
+            <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
           </a>
         </div>
         <div ng-show="message.member != me.id" class="chat-message others">
           <a href="/#/member/{{message.member}}" title="{{getMember(message.member).name}}">
-            <img src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
+            <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
           </a>
           <small title="{{timeSince(message.date)}}">{{message.text}}</small>
         </div>
@@ -28,6 +28,17 @@
             <img src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px; margin-left:15px;"/>
           </a>
         </blockquote>
+      <div ng-show="message.member == me.id" class="chat-message me">
+        <small title="{{timeSince(message.date)}}">{{message.text}}</small>
+        <a href="/#/member/{{message.member}}" title="{{getMember(message.member).name}}">
+          <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
+        </a>
+      </div>
+      <div ng-show="message.member != me.id" class="chat-message others">
+        <a href="/#/member/{{message.member}}" title="{{getMember(message.member).name}}">
+          <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
+        </a>
+        <small title="{{timeSince(message.date)}}">{{message.text}}</small>
       </div>
     </li>
   </ul>
@@ -37,7 +48,7 @@
   <div ng-repeat="user in online | orderBy:['-on', 'name']" style="margin-bottom:10px">
     <div class="column-group horizontal-gutters">
       <div class="all-20">
-        <a href="/#/member/{{user.member}}"><img src="https://graph.facebook.com/{{getMember(user.member).facebook}}/picture" style="width:25px; margin-left:15px;"/></a>
+        <a href="/#/member/{{user.member}}"><img ng-src="https://graph.facebook.com/{{getMember(user.member).facebook}}/picture" style="width:25px; margin-left:15px;"/></a>
       </div>
       <div class="all-60">
         <small>{{getMember(user.member).name}}</small>
