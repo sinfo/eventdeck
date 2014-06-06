@@ -16,9 +16,12 @@ server.pack.require("hapi-auth-cookie", function (err) {
     redirectTo: "/login"
   });
 
+
   server.start(function () {
     console.log("Server started at: " + server.info.uri);
-    var webSocket = module.exports.webSocket = SocketIO.listen(server.listener);
+    var webSocket = module.exports.webSocket = {
+      server: SocketIO.listen(server.listener)
+    };
     var sockets = require("./sockets");
     var routes = require("./routes");
   });

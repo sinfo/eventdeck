@@ -1,6 +1,6 @@
 'use strict';
 
-theToolController.controller('ChatController', function ($rootScope, $scope, $http, $routeParams, $sce, SocketFactory, MessageFactory, ChatFactory, MemberFactory) {
+theToolController.controller('ChatController', function ($rootScope, $scope, $http, $routeParams, $sce, ngAudio, SocketFactory, MessageFactory, ChatFactory, MemberFactory) {
 
   $scope.error = {};
 
@@ -73,6 +73,10 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
   SocketFactory.on('message', function (message) {
     console.log(message.date);
     $scope.messages.push(message);
+
+    if(message.member != me.id) {
+      ngAudio.play("audio/message.mp3");
+    }
   });
 
   $scope.$on('$locationChangeStart', function(){
