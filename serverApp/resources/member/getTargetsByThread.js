@@ -1,5 +1,4 @@
 var async   = require('async');
-var Member  = require('./../../db/models/member.js');
 var Company = require('./../../db/models/company.js');
 var Speaker = require('./../../db/models/speaker.js');
 var Topic   = require('./../../db/models/topic.js');
@@ -9,13 +8,11 @@ exports = module.exports = get;
 
 function get(thread, callback) {
 
-  var member  = {};
   var speaker = {};
   var company = {};
   var topic = {};
   var meeting = {};
 
-  var memberId;
   var companyId;
   var speakerId;
   var topicId;
