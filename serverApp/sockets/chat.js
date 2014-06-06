@@ -1,4 +1,4 @@
-var webSocket = require('./../index.js').webSocket;
+var webSocket = require('./../index.js').webSocket.server;
 var async = require('async');
 var Chat = require('./../resources/chat');
 var Message = require('./../resources/message');
@@ -14,8 +14,6 @@ webSocket
   .of('/chat')
   .on('connection', function (socket) {
     console.log("Connected to main chat!");
-
-    console.log(webSocket.of('/chat').sockets.length);
 
     socket.emit('connected');
 
@@ -113,7 +111,7 @@ function done(err, room, socket, cb){
     var clients = webSocket.of('/chat').sockets;
     console.log("Currently Loged:");
     for(var i = 0; i < clients.length; i++){
-      if(clients[i].connected){
+      if(clients[i].connected  && clients[i].nicknam != 'server'){
         online[i] = clients[i].nickname;
         console.log(clients[i].nickname);
       }
