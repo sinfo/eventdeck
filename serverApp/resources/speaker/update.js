@@ -76,7 +76,11 @@ function create(request, reply) {
       }
     }
     else {
-      notification.notify(request.auth.credentials.id, 'speaker-'+speaker.id, 'updated '+getEditionString(diffSpeaker), null);
+      var targets = [];
+      if(request.auth.credentials.id != speaker.member) {
+        targets.push(speaker.member);
+      }
+      notification.notify(request.auth.credentials.id, 'speaker-'+speaker.id, 'updated '+getEditionString(diffSpeaker), null, targets);
       
       reply({success: "Speaker updated."});
     }

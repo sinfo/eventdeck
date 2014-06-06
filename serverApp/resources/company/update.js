@@ -94,7 +94,11 @@ function update(request, reply) {
         email.companyAttribute(diffCompany.member, company);
       }
 
-      notification.notify(request.auth.credentials.id, 'company-'+company.id, 'updated '+getEditionString(diffCompany), null);
+      var targets = [];
+      if(request.auth.credentials.id != company.member) {
+        targets.push(company.member);
+      }
+      notification.notify(request.auth.credentials.id, 'company-'+company.id, 'updated '+getEditionString(diffCompany), null, targets);
 
       reply({success: "Company updated."});
     }
