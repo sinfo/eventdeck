@@ -13,7 +13,7 @@ app.factory('memberFactory', function ($resource) {
     Member: $resource(API_URL+'/api/member/:id', null, {
     'getAll': {method: 'GET', isArray:true}
     }),
-    Me: $resource(API_URL+'/api/me', null, {})
+    Me: $resource(API_URL+'/api/myself', null, {})
   }
 })
 app.factory('companyFactory', function ($resource) {

@@ -20,7 +20,7 @@ var notificationGenerator = {
    * @type {string}
    * @private
    */
-  meEndpoint_: 'https://tool.bananamarket.eu/api/me',
+  meEndpoint_: 'https://tool.bananamarket.eu/api/myself',
   notificationsEndpoint_: 'https://tool.bananamarket.eu/api/notification',
 
   me: {},
