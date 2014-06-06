@@ -22,10 +22,10 @@
     <a href="/#/speaker/{{communication.thread.split('speaker-')[1]}}/">
     <h6>
       <b>{{communication.kind}}</b>
-      <div ng-show="communication.kind=='Email To' || communication.kind=='Inital Email Paragraph'">
+      <span ng-show="communication.kind=='Email To' || communication.kind=='Inital Email Paragraph'">
         <span class="ink-label green" ng-show="communication.approved">Approved!</span>
         <span class="ink-label yellow" ng-hide="communication.approved">Not Approved Yet!</span>
-      </div>
+      </span>
     </h6>
     </a>
     <div ng-if="communication.text" ng-bind-html="convertURLs(communication.text)"></div>
