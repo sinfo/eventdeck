@@ -5,6 +5,7 @@ var notificationSchema = new mongoose.Schema({
   source: String,
   member: String,
   description: String,
+  targets: [String],
   unread: [String],
   posted: { type: Date, default: Date.now }
 });
