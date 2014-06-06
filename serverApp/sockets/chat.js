@@ -8,8 +8,6 @@ var messages;
 var message;
 var messageData;
 
-console.log(webSocket);
-
 webSocket
   .of('/chat')
   .on('connection', function (socket) {
