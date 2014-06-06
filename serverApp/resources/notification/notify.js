@@ -5,13 +5,26 @@ var Notification = require('./../../db/models/notification.js');
 
 exports = module.exports = notify;
 
-function notify(memberId, thread, description, objectId) {
+function notify(memberId, thread, description, objectId, subscribers) {
 
   var members = [];
+  var targets = [];
+
   async.series([
+    setTargets,
     getMembers,
     saveNotification
   ], done);
+
+  function setTargets(cb) {
+    targets = subscribers;
+    
+    if(!targets) {
+      targets = [];
+    }
+
+    cb():
+  }
 
   function getMembers(cb) {
     Member.findAll(gotMembers);
@@ -36,6 +49,7 @@ function notify(memberId, thread, description, objectId) {
       member: memberId,
       description: description,
       unread: members,
+      targets: targets,
       posted: Date.now()
     });
 
