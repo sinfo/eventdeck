@@ -67,7 +67,7 @@ function create(request, reply) {
       reply({error: err});
     }
     else {
-      notification.notify(request.auth.credentials.id, savedCommunication.thread, 'approved a communication', savedCommunication._id);
+      notification.notify(request.auth.credentials.id, savedCommunication.thread, 'approved a communication', savedCommunication._id, [savedCommunication.member]);
 
       if(savedCommunication.thread.indexOf('speaker-') != -1 && savedCommunication.kind == 'Inital Email Paragraph') {
         Speaker.update({id: savedCommunication.thread.replace('speaker-','')}, {status: 'Approved'}, function (err) {
