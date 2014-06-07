@@ -94,10 +94,11 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
       $scope.notifications = [];
       $scope.notificationsInfo.number = 0;
 
-      for (var i = 0, j = response.length; i < j; i++) {
-        if (response[i].unread.indexOf($scope.me.id) != -1) {
-          $scope.notificationsInfo.number++;
-
+      for (var i = 0; i < response.length; i++) {
+        if (response[i].targets.indexOf($scope.me.id) != -1) {
+          if (response[i].unread.indexOf($scope.me.id) != -1) {
+            $scope.notificationsInfo.number++;
+          }
           $scope.notifications.unshift(response[i]);
         }
       }

@@ -73,8 +73,8 @@
         <ul class="menu horizontal black push-right hide-medium hide-small hide-tiny">
           <li>
             <a style="{{notificationsInfo.number == 0 ? 'background: FireBrick;' : 'background: #e11d21;'}} color: white;"><span><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a>
-            <ul class="submenu" style="max-height: 400px; overflow: auto; {{notificationsInfo.number == 0 ? 'display: none;' : ''}}">
-              <li ng-repeat="notification in notifications | orderBy: 'posted':true" style="width: 600px;">
+            <ul class="submenu" style="max-height: 400px; overflow: auto;">
+              <li ng-repeat="notification in notifications | orderBy: 'posted':true" style="width: 600px; {{notification.unread.indexOf(me.id) != -1 ? 'background: SkyBlue;' : ''}}">
                 <a  title="{{notification.posted | date:'medium'}}" href="/#/{{notification.thread.replace('-','/')}}">
                   <img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px">
                   {{getMember(notification.member).name}} {{notification.description}}
