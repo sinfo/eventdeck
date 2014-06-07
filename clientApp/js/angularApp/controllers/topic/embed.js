@@ -49,8 +49,7 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
   //===================================FUNCTIONS===================================
 
   $scope.deleteTopic = function(topic) {
-    var answer = confirm("Are you sure you want to delete this topic?");
-    if (answer) {
+    if (confirm("Are you sure you want to delete this topic?")) {
       TopicFactory.Topic.delete({id: topic._id}, function () {
         topic.deleted = true;
       });
