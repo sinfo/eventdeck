@@ -15,7 +15,6 @@ theToolController
 
           SpeakerFactory.Speaker.getAll(function (speakers) {
             $scope.speakers = speakers;
-            callback();
           });
           
           $location.path("/speaker/" + response.id);
