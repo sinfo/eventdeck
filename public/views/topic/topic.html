@@ -45,9 +45,12 @@
     </div>
 
     <div class="all-15 align-right">
-      <small title="Edit Topic" class="ink-button orange" ng-click="topic.editing=!topic.editing" style="width:60px"><i class="fa fa-pencil"></i></small><br>
-      <small title="Show/Hide Targets" class="ink-button blue" ng-click="toggleTargets()" style="width:60px">{{topic.targets.length}} <i class="fa fa-users"></i></small><br>
-      <small title="Show/Hide Comments" class="ink-button small green" ng-click="topic.showComments = !topic.showComments" style="width:60px">{{topic.comments.length}} <i class="fa fa-comments"></i></small>
+      <small title="Edit topic" class="ink-button orange" ng-click="topic.editing = true" style="width: 28px; padding-left: 0px; padding-right: 0px;"><i class="fa fa-pencil"></i></small>
+      <small title="Delete topic" class="ink-button red" ng-click="deleteTopic(topic)" style="width: 28px; margin-left: 0px; padding-left: 0px; padding-right: 0px;"><i class="fa fa-times"></i></small>
+      <br>
+      <small title="Show/Hide targets" class="ink-button blue" ng-click="toggleTargets()" style="width:60px">{{topic.targets.length}} <i class="fa fa-users"></i></small>
+      <br>
+      <small title="Show/Hide comments" class="ink-button small green" ng-click="topic.showComments = !topic.showComments" style="width:60px">{{topic.comments.length}} <i class="fa fa-comments"></i></small>
     </div>
   </div>
 
