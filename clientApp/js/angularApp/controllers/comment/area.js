@@ -82,9 +82,11 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
   };
 
   $scope.deleteComment = function (comment) {
-    CommentFactory.Comment.delete({id: comment._id}, function () {
-      loadComments();
-    });
+    if (confirm("Are you sure you want to delete this comment?")) {
+      CommentFactory.Comment.delete({id: comment._id}, function () {
+        loadComments();
+      });
+    }
   };
 
   $scope.getMember = function (memberId) {
