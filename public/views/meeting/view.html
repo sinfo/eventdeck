@@ -22,6 +22,6 @@
     </div>
 
     <h4 ng-if="meeting.topics.length > 0" class="all-100" style="margin-bottom: 0.25em;">Topics</h4>
-    <topic ng-repeat="topic in meeting.topics | orderBy:posted" topic-object="topic" topic-members="members" topic-me="me" topic-roles="roles" topic-tags="topicTags"></topic>
+    <topic ng-repeat="topic in meeting.topics | orderBy:posted" topic="topic" members="members" me="me" roles="roles" tags="topicTags" notifications="notifications"></topic>
   </div>
 </div>
