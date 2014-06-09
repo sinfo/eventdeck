@@ -17,7 +17,7 @@ function create(request, reply) {
       reply({error: "Error creating communication."});
     }
     else {
-      getTargets(comment.thread, function(err, targets) {
+      getTargets(communication.thread, function(err, targets) {
         if(err) { console.log(err); }
 
         notification.notify(communication.member, communication.thread, 'posted a new communication', newCommunication._id, targets);
