@@ -9,11 +9,9 @@
       </a>
       <small title="{{formatDate(topic.posted)}}">({{timeSince(topic.posted)}})</small>
 
-      <a href="/#/topic/{{topic._id}}">
-        <h5 style="margin-top:10px;">
-          <b>[{{topic.kind}}]</b> <span ng-bind-html="topic.text | linky"><i ng-if="topic.closed"> [Closed!]</i><i ng-show="topic.show.duedate && topic.duedate"> [{{timeSince(topic.duedate)}}]</i>
-        </h5>
-      </a>
+      <h5 style="margin-top:10px;">
+        <b>[{{topic.kind}}]</b> <span ng-bind-html="topic.text | linky"><i ng-if="topic.closed"> [Closed!]</i><i ng-show="topic.show.duedate && topic.duedate"> [{{timeSince(topic.duedate)}}]</i>
+      </h5>
 
       <form ng-if="topic.show.poll">
         <div class="control-group">
