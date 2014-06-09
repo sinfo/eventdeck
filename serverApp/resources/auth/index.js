@@ -31,7 +31,7 @@ exports.facebook = function facebook(request, reply) {
           if (!error && result && result.length > 0) {
             var account = result[0];
 
-            console.log("FACEBOOK LOG IN", account);
+          console.log(account.name, 'logged in using Facebook');
 
             request.auth.session.set(account);
             reply({success: "Logged in with Facebook."});
@@ -77,7 +77,7 @@ exports.redirect = function redirect(request, reply) {
         if (result.length > 0) {
           var account = result[0];
 
-          console.log("FENIX LOG IN", account);
+          console.log(account.name, 'logged in using FenixEdu');
 
           request.auth.session.set(account);
           return reply().redirect("/");
