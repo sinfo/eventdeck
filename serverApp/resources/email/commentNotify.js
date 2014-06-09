@@ -57,7 +57,7 @@ function notify(comment) {
         cb();
       }
       else {
-        cb(Hapi.error.conflict('No company with the ID: ' + companyId));
+        cb('No company with the ID: ' + companyId);
       }
     }
   }
@@ -76,7 +76,7 @@ function notify(comment) {
         cb();
       }
       else {
-        cb(Hapi.error.conflict('No speaker with the ID: ' + speakerId));
+        cb('No speaker with the ID: ' + speakerId);
       }
     }
   }
@@ -94,7 +94,7 @@ function notify(comment) {
         cb();
       }
       else {
-        cb(Hapi.error.conflict('No member with the ID: ' + memberId));
+        cb('No member with the ID: ' + memberId);
       }
     }
   }
