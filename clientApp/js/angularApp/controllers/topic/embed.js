@@ -45,6 +45,20 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     $scope.loading = false;
   }
 
+  $scope.checkPermission = function (topic) {
+    if(!$scope.me.roles) { return false; }
+
+    var roles = $scope.me.roles.filter(function(o) {
+      return o.id == 'coordination';
+    });
+
+    if(roles.length == 0 && topic.author != $scope.me.id) {
+      return false;
+    }
+
+    return true;
+  }
+
 
   //===================================FUNCTIONS===================================
 
