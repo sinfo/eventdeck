@@ -2,17 +2,18 @@
 
 theToolDirectives.directive("topic", function () {
   return {
-    restrict: "EAC",
+    restrict: "E",
     replace: true,
     templateUrl: "views/topic/topic.html",
     controller: "TopicEmbedController",
     scope: {
-      topic: "=topicObject",
-      members: "=topicMembers",
-      me: "=topicMe",
-      roles: "=topicRoles",
-      tags: "=topicTags",
-      comments: "=topicComments"
+      topic: "=",
+      members: "=",
+      me: "=",
+      roles: "=",
+      tags: "=",
+      comments: "=",
+      notifications: "="
     }
   };
 });

@@ -1,5 +1,5 @@
-var Topic = require('./../../db/models/topic.js');
-var notification = require('./../notification');
+var Topic        = require('./../../db/models/topic.js');
+var Notification = require('./../notification');
 
 module.exports = get;
 
@@ -20,7 +20,7 @@ function get(request, reply) {
       reply({error: "Could not find topic with id '" + topicId + "'."});
     }
 
-    notification.read(request.auth.credentials.id, 'topic-' + topicId);
+    Notification.read(request.auth.credentials.id, 'topic-' + topicId);
   }
 
 }

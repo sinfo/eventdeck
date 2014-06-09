@@ -18,3 +18,12 @@ server.route({
     auth: true
   }
 });
+
+server.route({
+  method: 'PUT',
+  path: '/api/notification/{id}',
+  config: {
+    handler: notification.update,
+    auth: true
+  }
+});

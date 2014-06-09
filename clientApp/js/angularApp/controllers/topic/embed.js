@@ -163,9 +163,17 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
   };
 
   $scope.read = function (topic) {
-    NotificationFactory.Topic.getAll({id: topic._id}, function (response) {
-      if (!response.error) {
-        console.log(response);
+    if (!$scope.notifications) {
+      return;
+    }
+
+    $scope.notifications.filter(function (o) {
+      return o.thread === "topic-" + topic._id;
+    }).forEach(function (notification) {
+      var index = notification.unread.indexOf($scope.me.id);
+      if (index !== -1) {
+        notification.unread.splice(index, 1);
+        NotificationFactory.Notification.update({id: notification._id}, notification);
       }
     });
   };
