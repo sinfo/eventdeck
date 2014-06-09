@@ -4,7 +4,7 @@
   <div ng-if="!topic.editing" class="column-group horizontal-gutters">
     <div class="all-85">
       <a href="/#/member/{{topic.author}}">
-        <img ng-src="{{'https://graph.facebook.com/' + getMember(topic.author).facebook + '/picture'}}"/>
+        <img ng-src="https://graph.facebook.com/{{getMember(topic.author).facebook}}/picture"/>
         <small>{{getMember(topic.author).name}}</small>
       </a>
       <small title="{{formatDate(topic.posted)}}">({{timeSince(topic.posted)}})</small>
@@ -43,9 +43,11 @@
     </div>
 
     <div class="all-15 align-right">
-      <small title="Edit topic" class="ink-button orange" ng-click="topic.editing = true" style="width: 28px; padding-left: 0px; padding-right: 0px;"><i class="fa fa-pencil"></i></small>
-      <small title="Delete topic" class="ink-button red" ng-click="deleteTopic(topic)" style="width: 28px; margin-left: 0px; padding-left: 0px; padding-right: 0px;"><i class="fa fa-times"></i></small>
-      <br>
+      <span ng-if="checkPermission(topic)">
+        <small title="Edit topic" class="ink-button orange" ng-click="topic.editing = true" style="width: 28px; padding-left: 0px; padding-right: 0px;"><i class="fa fa-pencil"></i></small>
+        <small title="Delete topic" class="ink-button red" ng-click="deleteTopic(topic)" style="width: 28px; margin-left: 0px; padding-left: 0px; padding-right: 0px;"><i class="fa fa-times"></i></small>
+        <br>
+      </span>
       <small title="Show/Hide targets" class="ink-button blue" ng-click="toggleTargets()" style="width:60px">{{topic.targets.length}} <i class="fa fa-users"></i></small>
       <br>
       <small title="Show/Hide comments" class="ink-button small green" ng-click="topic.showComments = !topic.showComments" style="width:60px">{{topic.comments.length}} <i class="fa fa-comments"></i></small>

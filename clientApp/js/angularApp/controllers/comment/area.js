@@ -111,6 +111,8 @@ theToolController.controller("CommentAreaController", function ($scope, $http, $
   };
 
   $scope.checkPermission = function (comment) {
+    if(!$scope.me.roles) { return false; }
+
     var roles = $scope.me.roles.filter(function(o) {
       return o.id == 'development-team' || o.id == 'coordination';
     });
