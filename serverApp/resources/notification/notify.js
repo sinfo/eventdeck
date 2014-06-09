@@ -18,12 +18,12 @@ function notify(memberId, thread, description, objectId, subscribers) {
 
   function setTargets(cb) {
     targets = subscribers;
-    
+
     if(!targets) {
       targets = [];
     }
 
-    cb():
+    cb();
   }
 
   function getMembers(cb) {

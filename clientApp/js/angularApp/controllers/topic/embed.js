@@ -1,6 +1,6 @@
 "use strict";
 
-theToolController.controller("TopicEmbedController", function ($scope, TopicFactory) {
+theToolController.controller("TopicEmbedController", function ($scope, TopicFactory, NotificationFactory) {
 
   //================================INITIALIZATION================================
 
@@ -162,19 +162,27 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     });
   };
 
+  $scope.read = function (topic) {
+    NotificationFactory.Topic.getAll({id: topic._id}, function (response) {
+      if (!response.error) {
+        console.log(response);
+      }
+    });
+  };
+
   $scope.getMember = function (memberId) {
     var member = $scope.members.filter(function(o) {
       return o.id == memberId;
     });
 
-    if(member.length>0) {
+    if(member && member.length > 0) {
       return member[0];
     }
     else {
       return {
         name: "No one",
         facebook: "100000456335972"
-      }
+      };
     }
   };
 
