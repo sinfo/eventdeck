@@ -49,7 +49,7 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     if(!$scope.me.roles) { return false; }
 
     var roles = $scope.me.roles.filter(function(o) {
-      return o.id == 'coordination';
+      return o.id == 'development-team' || o.id == 'coordination';
     });
 
     if(roles.length == 0 && topic.author != $scope.me.id) {
