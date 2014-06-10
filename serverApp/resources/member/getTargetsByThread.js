@@ -59,7 +59,7 @@ function get(thread, callback) {
   else if (thread.indexOf("topic") != -1) {
     topicId = thread.split("topic-")[1];
 
-    Speaker.findById(topicId, gotTopic);
+    Topic.findById(topicId, gotTopic);
 
     function gotTopic(err, result) {
       if (err) {
