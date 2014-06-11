@@ -14,43 +14,44 @@
     <link rel="shortcut icon" href="http://sinfo.github.io/img/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="http://sinfo.github.io/img/favicon.ico" type="image/x-icon" />
 
-    <!-- Place your CSS here  -->
-    <link rel="stylesheet" type="text/css" href="/ink/css/ink.css">
+    <!-- Our Custom CSS  -->
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    <!-- CSS Bower Stuff  -->
+    <link rel="stylesheet" type="text/css" href="lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/Ink/dist/css/ink.css">
 
     <!--[if lte IE 8 ]>
-        <link rel="stylesheet" href="/ink/css/ink-ie.css" type="text/css" media="screen" title="no title" charset="utf-8">
+        <link rel="stylesheet" href="lib/Ink/dist/css/ink-ie.css" type="text/css" media="screen" title="no title" charset="utf-8">
     <![endif]-->
 
-    <!-- Place your Javascript here  -->
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/vendor/angular/angular.js"></script>
-    <script type="text/javascript" src="js/vendor/angular/angular-route.js"></script>
-    <script type="text/javascript" src="js/vendor/angular/angular-cookies.js"></script>
-    <script type="text/javascript" src="js/vendor/angular/angular-resource.js"></script>
-    <script type="text/javascript" src="js/vendor/angular/angular-sanitize.js"></script>
-    <script type="text/javascript" src="js/vendor/angular/ng-infinite-scroll.min.js"></script>
-    <script type="text/javascript" src="js/vendor/angular/scrollglue.js"></script>
-    <script type="text/javascript" src="js/vendor/angular/angular.audio.js"></script>
-    <script type="text/javascript" src="js/vendor/underscore.js"></script>
+    <!-- JS Bower Stuff  -->
+    <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/angular/angular.js"></script>
+    <script type="text/javascript" src="lib/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="lib/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="lib/angular-sanitize/angular-sanitize.js"></script>
+    <script type="text/javascript" src="lib/angularjs-scroll-glue/src/scrollglue.js"></script>
+    <script type="text/javascript" src="lib/ngInfiniteScroll/build/ng-infinite-scroll.min.js"></script>
+    <script type="text/javascript" src="lib/underscore/underscore.js"></script>
+    <script type="text/javascript" src="lib/Ink/dist/js/holder.js"></script>
+    <script type="text/javascript" src="lib/Ink/dist/js/ink-all.min.js"></script>
+    <script type="text/javascript" src="lib/Ink/dist/js/autoload.js"></script>
 
+    <!-- Our Custom JS  -->
     <script type="text/javascript" src="/js/theTool.js"></script>
-
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="/ink/js/holder.js"></script>
-    <script type="text/javascript" src="/ink/js/ink-all.min.js"></script>
-    <script type="text/javascript" src="/ink/js/autoload.js"></script>
-    <script type="text/javascript" src="/js/vendor/markdown/markdown.js"></script>
+    <script type="text/javascript" src="js/vendor/angular.audio.js"></script>
+    <script type="text/javascript" src="/js/vendor/markdown.js"></script>
   </head>
 
   <body class="ink-drawer" ng-controller="MainController">
     <div id="topbar" style="height: 44px;">
       <nav class="ink-navigation ink-grid ie7">
         <ul class="menu horizontal black push-left medium-push-center small-push-center tiny-push-center" style="height: 44px;">
-          <li class="hide-all show-medium show-tiny show-small"><button class="fa fa-bars left-drawer-trigger"></button></li>
+          <li ng-if="me._id" class="hide-all show-medium show-tiny show-small"><button class="fa fa-bars left-drawer-trigger"></button></li>
           <li class="logoPlaceholder"><a href="/" class="logoPlaceholder">THE TOOL!<span style="font-size: x-small; font-weight: 100;"> BETA</span></a></li>
-          <li class="hide-medium hide-small hide-tiny">
+          <li ng-if="me._id" class="hide-medium hide-small hide-tiny">
             <a style="background: rgba(0,0,0,0); padding-left: 0px; padding-right: 0px; cursor: default;">
               <input type="text" ng-model="search.name" ng-change="show()" ng-click="show()" placeholder="Super search!!!" style="width: 200px;">
             </a>
@@ -70,7 +71,7 @@
             </ul>
           </li>
         </ul>
-        <ul class="menu horizontal black push-right hide-medium hide-small hide-tiny">
+        <ul ng-if="me._id" class="menu horizontal black push-right hide-medium hide-small hide-tiny">
           <li>
             <a style="{{notificationsInfo.number == 0 ? 'background: FireBrick;' : 'background: #e11d21;'}} color: white;"><span><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a>
             <ul class="submenu" style="max-height: 400px; overflow: auto;">
@@ -115,7 +116,7 @@
       </nav>
     </div>
 
-    <div class="left-drawer">
+    <div ng-if="me._id" class="left-drawer">
       <ul>
           <li><a><input type="text" ng-model="search.name" ng-change="searchBoxChanged()" placeholder="Super search!!!"></a>
           <ul ng-if="search.name && search.name.length > 1" class="submenu" style="max-height:400px; overflow:auto; margin: 0px 20px 0px;">
