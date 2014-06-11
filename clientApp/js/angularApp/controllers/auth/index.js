@@ -1,1 +1,2 @@
 require("./login");
+require('./interceptor');

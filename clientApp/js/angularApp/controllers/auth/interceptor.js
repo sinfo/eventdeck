@@ -8,7 +8,7 @@ theToolController.factory('AuthInterceptor', function ($location) {
   return {
     responseError: function (response) {
       if (response.status === 401) {
-        $location.redirect('/');
+        $location.path('/login');
       }
     }
   };
