@@ -14,6 +14,7 @@ angular.module("theTool", [
 ]).
 config(["$routeProvider", function($routeProvider) {
   $routeProvider.when("/"                         , {templateUrl: "views/home.html",                  controller: "home"});
+  $routeProvider.when("/login"                    , {templateUrl: "views/auth/login.html",            controller: "LoginController"});
   $routeProvider.when("/companies/"               , {templateUrl: "views/company/list.html",          controller: "CompaniesController"});
   $routeProvider.when("/companies/table/"         , {templateUrl: "views/company/table.html",         controller: "CompaniesController"});
   $routeProvider.when("/companies/budget/"        , {templateUrl: "views/company/budget.html",        controller: "CompaniesController"});
