@@ -25,17 +25,6 @@ server.route({
 
 server.route({
   method: 'GET',
-  path: '/redirect',
-  config: {
-    handler: auth.redirect,
-    auth: {
-      mode: 'try'
-    }
-  }
-});
-
-server.route({
-  method: 'GET',
   path: '/logout',
   config: {
     handler: auth.logout,
