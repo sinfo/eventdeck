@@ -50,7 +50,7 @@
         <ul class="menu horizontal black push-left medium-push-center small-push-center tiny-push-center" style="height: 44px;">
           <li class="hide-all show-medium show-tiny show-small"><button class="fa fa-bars left-drawer-trigger"></button></li>
           <li class="logoPlaceholder"><a href="/" class="logoPlaceholder">THE TOOL!<span style="font-size: x-small; font-weight: 100;"> BETA</span></a></li>
-          <li class="hide-medium hide-small hide-tiny">
+          <li ng-if="me._id" class="hide-medium hide-small hide-tiny">
             <a style="background: rgba(0,0,0,0); padding-left: 0px; padding-right: 0px; cursor: default;">
               <input type="text" ng-model="search.name" ng-change="show()" ng-click="show()" placeholder="Super search!!!" style="width: 200px;">
             </a>
@@ -70,7 +70,7 @@
             </ul>
           </li>
         </ul>
-        <ul class="menu horizontal black push-right hide-medium hide-small hide-tiny">
+        <ul ng-if="me._id" class="menu horizontal black push-right hide-medium hide-small hide-tiny">
           <li>
             <a style="{{notificationsInfo.number == 0 ? 'background: FireBrick;' : 'background: #e11d21;'}} color: white;"><span><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a>
             <ul class="submenu" style="max-height: 400px; overflow: auto;">
@@ -115,7 +115,7 @@
       </nav>
     </div>
 
-    <div class="left-drawer">
+    <div ng-if="me._id" class="left-drawer">
       <ul>
           <li><a><input type="text" ng-model="search.name" ng-change="searchBoxChanged()" placeholder="Super search!!!"></a>
           <ul ng-if="search.name && search.name.length > 1" class="submenu" style="max-height:400px; overflow:auto; margin: 0px 20px 0px;">
