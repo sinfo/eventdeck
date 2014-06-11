@@ -1,5 +1,6 @@
 theToolController = angular.module('theTool.controllers', []);
 
+require('./auth');
 require('./main');
 require('./company');
 require('./speaker');
