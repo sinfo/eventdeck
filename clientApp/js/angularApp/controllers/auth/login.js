@@ -1,6 +1,6 @@
 "use strict";
 
-theToolController.controller("LoginController", function ($scope, $location) {
+theToolController.controller("LoginController", function ($scope) {
 
   //================================INITIALIZATION================================
 
@@ -78,7 +78,7 @@ theToolController.controller("LoginController", function ($scope, $location) {
             loginInfo.find("p:eq(0)").text("Success!");
             loginInfo.find("p:eq(1)").text("Redirecting...");
 
-            //$location.path("/");
+            location.assign(location.origin);
           }
           else {
             loginInfo.find("p:eq(0)").text("You are not authorized to log in.");
