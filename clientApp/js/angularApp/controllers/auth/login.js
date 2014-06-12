@@ -1,6 +1,6 @@
 "use strict";
 
-theToolController.controller("LoginController", function ($scope) {
+theToolController.controller("LoginController", function ($scope, $location) {
 
   //================================INITIALIZATION================================
 
@@ -10,17 +10,16 @@ theToolController.controller("LoginController", function ($scope) {
   });
 
   var lock = false;
-  var redirecting = false;
-
-
-  //=================================AUXFUNCTIONS==================================
-
-
+  $scope.redirecting = false;
+  
+  $scope.banana = false;
 
 
   //===================================FUNCTIONS===================================
 
   $scope.login = function () {
+    $scope.banana = true;
+
   	if (lock) {
       return;
     }
@@ -32,7 +31,7 @@ theToolController.controller("LoginController", function ($scope) {
         connected(response);
       }
       else {
-        FB.login(function () {}, {display: "touch"});
+        FB.login(function () {}, {display: "popup"});
         FB.Event.subscribe("auth.statusChange", function (response) {
           if (response.status === "connected") {
             connected(response);
@@ -44,13 +43,12 @@ theToolController.controller("LoginController", function ($scope) {
     });
 
     function connected(response) {
-      var loginInfo = $("#login");
+      $scope.connected = true;
+      $scope.redirecting = true;
+      $scope.loginInfo = {};
 
-      loginInfo.find("p:eq(0)").text("Logging in...");
-      loginInfo.find("p:eq(1)").text("");
-      loginInfo.find("i").show();
-
-      loginInfo.show();
+      $scope.loginInfo.firstRow = "Logging in...";
+      $scope.loginInfo.secondRow = "";
 
       $.ajax(url_prefix + "/login/facebook", {
         type: "GET",
@@ -59,28 +57,28 @@ theToolController.controller("LoginController", function ($scope) {
           token: response.authResponse.accessToken
         },
         complete: function (response, status) {
-          if (redirecting) {
+          if ($scope.redirecting) {
             return;
           }
 
           if (status !== "success") {
-            loginInfo.find("p:eq(0)").text("There was an error with your request.");
-            loginInfo.find("p:eq(1)").text("Please try again.");
-            loginInfo.find("i").hide();
+            $scope.loginInfo.firstRow = "There was an error with your request.";
+            $scope.loginInfo.secondRow = "Please try again.";
+            $scope.redirecting = false;
 
             lock = false;
           }
           else if (response.responseJSON.success) {
-            redirecting = true;
+            $scope.redirecting = true;
 
-            loginInfo.find("p:eq(0)").text("Success!");
-            loginInfo.find("p:eq(1)").text("Redirecting...");
+            $scope.loginInfo.firstRow = "Success!";
+            $scope.loginInfo.secondRow = "Redirecting...";
 
-            location.assign(location.origin);
+            $location.path('/');
           }
           else {
-            loginInfo.find("p:eq(0)").text("You are not authorized to log in.");
-            loginInfo.find("i").hide();
+            $scope.loginInfo.firstRow = "You are not authorized to log in.";
+            $scope.redirecting = false;
 
             lock = false;
           }
