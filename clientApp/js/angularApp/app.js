@@ -4,6 +4,7 @@ angular.module("theTool", [
   "ng",
   "ngRoute",
   "ngSanitize",
+  "ngTouch",
   "infinite-scroll",
   "luegg.directives",
   "ngAudio",
