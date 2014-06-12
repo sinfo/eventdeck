@@ -2,7 +2,7 @@
 
 theToolServices
   .factory('MeetingFactory', function ($resource) {
-    return $resource('/api/meeting/:id', null, {
+    return $resource(url_prefix+'/api/meeting/:id', null, {
       'getAll': {method: 'GET', isArray: true},
       'create': {method: 'POST'},
       'update': {method: 'PUT'},
