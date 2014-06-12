@@ -63,8 +63,6 @@ theToolController.controller("LoginController", function ($scope) {
             return;
           }
 
-          console.log(response);
-
           if (status !== "success") {
             loginInfo.find("p:eq(0)").text("There was an error with your request.");
             loginInfo.find("p:eq(1)").text("Please try again.");
