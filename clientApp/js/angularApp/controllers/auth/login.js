@@ -52,7 +52,7 @@ theToolController.controller("LoginController", function ($scope) {
 
       loginInfo.show();
 
-      $.ajax(location.origin + "/login/facebook", {
+      $.ajax(url_prefix + "/login/facebook", {
         type: "GET",
         data: {
           id: response.authResponse.userID,
