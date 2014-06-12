@@ -7,6 +7,7 @@
     "start": "node serverApp/index.js",
     "mon": "node_modules/.bin/nodemon serverApp/index.js",
     "dist": "node_modules/.bin/browserify -t brfs --debug -e clientApp/js/theTool.js -o public/js/theTool.js",
+    "phonegap": "cp -rf public/ phonegap/www/ && node_modules/.bin/browserify -t brfs --debug -e clientApp/js/theTool.js -o phonegap/www/js/theTool.js && cd phonegap && phonegap run ios",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
