@@ -32,7 +32,7 @@ theToolController.controller("LoginController", function ($scope) {
         connected(response);
       }
       else {
-        FB.login();
+        FB.login(function () {}, {display: "touch"});
         FB.Event.subscribe("auth.statusChange", function (response) {
           if (response.status === "connected") {
             connected(response);
