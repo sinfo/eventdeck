@@ -1,6 +1,6 @@
 "use strict";
 
-theToolController.controller("LoginController", function ($scope, $location, $http) {
+theToolController.controller("LoginController", function ($scope, $rootScope, $location, $http, $window) {
 
   //================================INITIALIZATION================================
   $scope.banana = true;
@@ -49,9 +49,10 @@ theToolController.controller("LoginController", function ($scope, $location, $ht
       $scope.loginInfo.firstRow = "Logging in...";
       $scope.loginInfo.secondRow = "";
 
-      $http.get(url_prefix + '/login/facebook?id='+response.authResponse.userID+'&token='+response.authResponse.accessToken).
+      $http.get(url_prefix + '/api/login/facebook?id='+response.authResponse.userID+'&token='+response.authResponse.accessToken).
         success(function(data, status, headers, config) {
-          $location.path('/');
+          //$location.path('/');
+          $window.location.assign('/');
         }).
         error(function(data, status, headers, config) {
           $scope.redirecting = false;

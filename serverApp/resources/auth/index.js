@@ -16,7 +16,7 @@ exports.login = function login(request, reply) {
 
 exports.facebook = function facebook(request, reply) {
   if (request.auth.isAuthenticated) {
-    return reply().redirect("/");
+    return reply({error: "You're already authenticated"});
   }
 
   if(!request.url.query.token) {
