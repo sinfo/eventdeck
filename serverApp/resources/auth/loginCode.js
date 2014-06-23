@@ -19,9 +19,7 @@ function login(request, reply) {
         return reply({error: "Login failed."});
       }
 
-      member.loginCodes = [];
-
-      Member.update({id: request.params.id}, member, function (err) {
+      Member.update({id: request.params.id}, {loginCodes: []}, function (err) {
         if (err) {
           console.log(err);
           reply({error: "Login failed."});
