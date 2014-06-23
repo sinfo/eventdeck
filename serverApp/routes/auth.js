@@ -25,6 +25,17 @@ server.route({
 
 server.route({
   method: 'GET',
+  path: '/api/login/{id}/{code}',
+  config: {
+    handler: auth.loginCode,
+    auth: {
+      mode: 'try'
+    }
+  }
+});
+
+server.route({
+  method: 'GET',
   path: '/api/logout',
   config: {
     handler: auth.logout,
