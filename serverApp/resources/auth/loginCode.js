@@ -1,10 +1,10 @@
-var Member = require("./../../db/models/member.js");
+var Member = require('./../../db/models/member.js');
 
 module.exports = login;
 
 function login(request, reply) {
   if (request.auth.isAuthenticated) {
-    return reply().redirect("/");
+    return reply({error: 'You\'re already authenticated'});
   }
 
   Member.find({id: request.params.id}, function (err, result) {
@@ -16,7 +16,7 @@ function login(request, reply) {
       }).indexOf(request.params.code);
 
       if (index === -1 || member.loginCodes[index].created - Date.now() > 5*60*1000) {
-        return reply({error: "Login failed."});
+        return reply({error: 'Login failed.'});
       }
 
       member.loginCodes = [];
@@ -24,16 +24,16 @@ function login(request, reply) {
       Member.update({id: request.params.id}, member, function (err) {
         if (err) {
           console.log(err);
-          reply({error: "Login failed."});
+          reply({error: 'Login failed.'});
         }
         else {
           request.auth.session.set(member);
-          reply({success: "Logged in."});
+          reply({success: 'Logged in.'});
         }
       });
     }
     else {
-      reply({error: "Login failed."});
+      reply({error: 'Login failed.'});
     }
   });
 };
