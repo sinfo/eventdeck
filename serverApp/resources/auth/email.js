@@ -13,6 +13,10 @@ var server  = email.server.connect({
 module.exports = sendCode;
 
 function sendCode(request, reply) {
+  
+  if (request.auth.isAuthenticated) {
+    return reply({error: 'You\'re already authenticated'});
+  }
 
   var memberId = request.params.id;
   var member = {};
