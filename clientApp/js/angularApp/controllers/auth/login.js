@@ -1,8 +1,9 @@
 "use strict";
 
-theToolController.controller("LoginController", function ($scope, $location) {
+theToolController.controller("LoginController", function ($scope, $location, $http) {
 
   //================================INITIALIZATION================================
+  $scope.banana = true;
 
   $.ajaxSetup({cache: true});
   $.getScript("//connect.facebook.net/pt_PT/all.js", function () {
@@ -12,8 +13,6 @@ theToolController.controller("LoginController", function ($scope, $location) {
   var lock = false;
   $scope.redirecting = false;
   
-  $scope.banana = false;
-
 
   //===================================FUNCTIONS===================================
 
@@ -50,40 +49,14 @@ theToolController.controller("LoginController", function ($scope, $location) {
       $scope.loginInfo.firstRow = "Logging in...";
       $scope.loginInfo.secondRow = "";
 
-      $.ajax(url_prefix + "/login/facebook", {
-        type: "GET",
-        data: {
-          id: response.authResponse.userID,
-          token: response.authResponse.accessToken
-        },
-        complete: function (response, status) {
-          if ($scope.redirecting) {
-            return;
-          }
-
-          if (status !== "success") {
-            $scope.loginInfo.firstRow = "There was an error with your request.";
-            $scope.loginInfo.secondRow = "Please try again.";
-            $scope.redirecting = false;
-
-            lock = false;
-          }
-          else if (response.responseJSON.success) {
-            $scope.redirecting = true;
-
-            $scope.loginInfo.firstRow = "Success!";
-            $scope.loginInfo.secondRow = "Redirecting...";
-
-            $location.path('/');
-          }
-          else {
-            $scope.loginInfo.firstRow = "You are not authorized to log in.";
-            $scope.redirecting = false;
-
-            lock = false;
-          }
-        }
-      });
+      $http.get(url_prefix + '/login/facebook?id='+response.authResponse.userID+'&token='+response.authResponse.accessToken).
+        success(function(data, status, headers, config) {
+          $location.path('/');
+        }).
+        error(function(data, status, headers, config) {
+          $scope.redirecting = false;
+          console.log("ERROR", data);
+        });
     }
   };
 
