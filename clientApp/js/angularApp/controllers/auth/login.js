@@ -3,8 +3,6 @@
 theToolController.controller("LoginController", function ($scope, $rootScope, $location, $http, $window) {
 
   //================================INITIALIZATION================================
-  $scope.banana = true;
-
   $.ajaxSetup({cache: true});
   $.getScript("//connect.facebook.net/pt_PT/all.js", function () {
     FB.init({appId: "457207507744159"});
@@ -13,6 +11,10 @@ theToolController.controller("LoginController", function ($scope, $rootScope, $l
   var lock = false;
   $scope.redirecting = false;
   
+  if($scope.me.id) {
+    $location.path('/');
+    //$window.location.assign('/');
+  }
 
   //===================================FUNCTIONS===================================
 
