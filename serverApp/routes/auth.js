@@ -14,7 +14,7 @@ server.route({
 
 server.route({
   method: 'GET',
-  path: '/login/facebook',
+  path: '/api/login/facebook',
   config: {
     handler: auth.facebook,
     auth: {
