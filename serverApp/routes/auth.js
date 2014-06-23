@@ -3,7 +3,7 @@ var auth   = require('./../resources/auth');
 
 server.route({
   method: 'GET',
-  path: '/login',
+  path: '/api/login',
   config: {
     handler: auth.login,
     auth: {
@@ -25,7 +25,7 @@ server.route({
 
 server.route({
   method: 'GET',
-  path: '/logout',
+  path: '/api/logout',
   config: {
     handler: auth.logout,
     auth: true
