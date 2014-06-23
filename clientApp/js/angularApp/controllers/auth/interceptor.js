@@ -4,11 +4,12 @@ theToolController.config(function ($httpProvider) {
   }]);
 });
 
-theToolController.factory('AuthInterceptor', function ($location) {
+theToolController.factory('AuthInterceptor', function ($location, $window) {
   return {
     responseError: function (response) {
       if (response.status === 401) {
         $location.path('/login');
+        //$window.location.assign('/#/login');
       }
     }
   };
