@@ -1,4 +1,4 @@
 exports.facebook  = require('./facebook');
 exports.logout    = require('./logout');
-exports.login     = require('./login');
+exports.email     = require('./email');
 exports.loginCode = require('./loginCode');
