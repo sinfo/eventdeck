@@ -3,9 +3,9 @@ var auth   = require('./../resources/auth');
 
 server.route({
   method: 'GET',
-  path: '/api/login',
+  path: '/api/login/facebook',
   config: {
-    handler: auth.login,
+    handler: auth.facebook,
     auth: {
       mode: 'try'
     }
@@ -14,9 +14,9 @@ server.route({
 
 server.route({
   method: 'GET',
-  path: '/api/login/facebook',
+  path: '/api/login/{id}',
   config: {
-    handler: auth.facebook,
+    handler: auth.email,
     auth: {
       mode: 'try'
     }
