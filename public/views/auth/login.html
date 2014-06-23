@@ -1,12 +1,11 @@
 <div class="all-100 align-center double-vertical-space">
 	<h1>Welcome to The Tool! Beta</h1>
-	<h3 class="ink-button green" ng-click="login()">Login with {{'banana'+5}}</h3>
+	<h3 class="ink-button green" ng-click="login()">Login with Facebook</h3>
 	<div id="login" class="all-100 align-center" ng-show="connected" style="color: green;">
     <b class="all-100">
       <p class="all-100">{{loginInfo.firstRow}}</p>
       <p class="all-100">{{loginInfo.secondRow}}</p>
     </b>
     <i ng-show="redirecting" class="fa fa-circle-o-notch fa-3x fa-spin"></i>
-    <i ng-show="banana" class="fa fa-smile fa-3x fa-spin"></i>
   </div>
 </div>
