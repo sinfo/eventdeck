@@ -19,6 +19,10 @@ exports.facebook = function facebook(request, reply) {
     return reply().redirect("/");
   }
 
+  if(!request.url.query.token) {
+    return reply({error: "Token not specified"});
+  }
+
   Request("https://graph.facebook.com/debug_token?input_token=" + request.url.query.token + "&access_token=" + facebookConfig.appId + "|" + facebookConfig.appSecret, {
     method: "GET",
     json: true
