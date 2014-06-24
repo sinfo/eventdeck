@@ -1,6 +1,6 @@
 "use strict";
 
-theToolController.controller("LoginController", function ($scope, $rootScope, $location, $http, $window) {
+theToolController.controller("LoginController", function ($scope, $routeParams, $location, $http, $window) {
 
   //================================INITIALIZATION================================
   $.ajaxSetup({cache: true});
@@ -8,17 +8,22 @@ theToolController.controller("LoginController", function ($scope, $rootScope, $l
     FB.init({appId: "457207507744159"});
   });
 
-  var lock = false;
-  $scope.redirecting = false;
+  $scope.loading = false;
+  $scope.showIdInput = true;
+  $scope.showCodeInput = false;
   
+  /*
   if($scope.me.id) {
     $location.path('/');
     //$window.location.assign('/');
   }
+  */
+
+  var lock = false;
 
   //===================================FUNCTIONS===================================
 
-  $scope.login = function () {
+  $scope.facebookLogin = function () {
     $scope.banana = true;
 
   	if (lock) {
@@ -45,11 +50,8 @@ theToolController.controller("LoginController", function ($scope, $rootScope, $l
 
     function connected(response) {
       $scope.connected = true;
-      $scope.redirecting = true;
-      $scope.loginInfo = {};
-
-      $scope.loginInfo.firstRow = "Logging in...";
-      $scope.loginInfo.secondRow = "";
+      $scope.loading = true;
+      $scope.loginInfo = "Logging in...";
 
       $http.get(url_prefix + '/api/login/facebook?id='+response.authResponse.userID+'&token='+response.authResponse.accessToken).
         success(function(data, status, headers, config) {
@@ -57,10 +59,71 @@ theToolController.controller("LoginController", function ($scope, $rootScope, $l
           $window.location.assign('/');
         }).
         error(function(data, status, headers, config) {
-          $scope.redirecting = false;
+          $scope.loading = false;
           console.log("ERROR", data);
         });
     }
   };
+
+  $scope.sendEmail = function (memberId) {
+    $scope.loading = true;
+    $scope.loginInfo = "Sending email...";  
+    $scope.showIdInput = false;
+    console.log("Sending email...");
+
+    $http.get(url_prefix + '/api/login/' + memberId).
+      success(function(data, status, headers, config) {
+        if(data.error) {
+          $scope.loading = false;
+          setInfo("There was an error...");
+          $scope.showIdInput = true;
+          return;
+        }
+        $scope.loading = false;
+        setInfo("Email sent!");
+        $scope.showCodeInput = true;
+        console.log("Email sent!")
+      }).
+      error(function(data, status, headers, config) {
+        $scope.loading = false;
+        setInfo("There was an error...");
+        $scope.showIdInput = true;
+        console.log("ERROR", data);
+      });
+  }
+
+  $scope.submitCode = function (memberId, memberCode) {
+    $scope.loading = true;
+    $scope.loginInfo = "Verifying code...";  
+    $scope.showCodeInput = false;
+
+    $http.get(url_prefix + '/api/login/' + memberId + '/' + memberCode).
+      success(function(data, status, headers, config) {
+        if(data.error) {
+          $scope.loading = false;
+          setInfo("There was an error...");
+          $scope.showIdInput = true;
+          return;
+        }
+        $scope.loading = false;
+        $scope.loginInfo = "Success!";
+        $window.location.assign('/#/');
+        //$location.path('/');
+      }).
+      error(function(data, status, headers, config) {
+        $scope.loading = false;
+        setInfo("There was an error...");
+        $scope.showIdInput = true;
+      });
+  }
+
+  function setInfo(message) {
+    $scope.loginInfo = message;
+    setTimeout(function(){$scope.loginInfo=""}, 2000);
+  }
+
+  if ($routeParams.id && $routeParams.code) {
+    $scope.submitCode($routeParams.id, $routeParams.code)
+  }
 
 });
