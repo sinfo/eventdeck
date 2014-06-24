@@ -10,7 +10,7 @@
         <div class="all-40 medium-40 small-100 tiny-100">
           <h1>{{member.name}}</h1>
           <p class="button-group">
-            <a class="ink-button orange" href="/#/member/{{member.id}}/edit"><i class="fa fa-wrench"></i> Edit Member</a>
+            <a class="ink-button orange" href="#/member/{{member.id}}/edit"><i class="fa fa-wrench"></i> Edit Member</a>
           </p>
 
           <img ng-show="member.facebook" src="https://graph.facebook.com/{{member.facebook}}/picture?width=300&height=300" width="70%" />
@@ -47,8 +47,8 @@
             <h3>{{member.speakers.length}} Speakers</h3>
             <table class="ink-table alternating bordered hover">
               <tr ng-repeat="speaker in member.speakers | orderBy:predicate:reverse">
-                <td style="width: 100px; text-align: center;"><a href="/#/speaker/{{speaker.id}}"><img ng-src="{{speaker.img}}" style="height: 20px;"></a></td>
-                <td><a href="/#/speaker/{{speaker.id}}">{{speaker.name}}</a></td>
+                <td style="width: 100px; text-align: center;"><a href="#/speaker/{{speaker.id}}"><img ng-src="{{speaker.img}}" style="height: 20px;"></a></td>
+                <td><a href="#/speaker/{{speaker.id}}">{{speaker.name}}</a></td>
               </tr>
             </table>
           </div>
@@ -56,8 +56,8 @@
             <h3>{{member.companies.length}} Companies</h3>
             <table class="ink-table alternating bordered hover">
               <tr ng-repeat="company in member.companies | orderBy:predicate:reverse">
-                <td style="width: 100px;  text-align: center;"><a href="/#/company/{{company.id}}"><img ng-src="{{company.img}}" style="height: 20px;"></a></td>
-                <td><a href="/#/company/{{company.id}}">{{company.name}}</a></td>
+                <td style="width: 100px;  text-align: center;"><a href="#/company/{{company.id}}"><img ng-src="{{company.img}}" style="height: 20px;"></a></td>
+                <td><a href="#/company/{{company.id}}">{{company.name}}</a></td>
               </tr>
             </table>
           </div>
@@ -65,12 +65,12 @@
             <h3>Recent Comments</h3>
             <table class="ink-table alternating bordered hover">
               <tr ng-repeat="comment in member.comments | orderBy:'posted':true | limitTo:5">
-                <td style="width: 100px;  text-align: center;"><a href="/#/{{comment.thread.replace('-','/')}}">
+                <td style="width: 100px;  text-align: center;"><a href="#/{{comment.thread.replace('-','/')}}">
                   <img ng-show="comment.thread.indexOf('company') != -1" ng-src="{{getCompany(comment.thread.replace('company-', '')).img}}" style="height: 20px;">
                   <img ng-show="comment.thread.indexOf('speaker') != -1" ng-src="{{getSpeaker(comment.thread.replace('speaker-', '')).img}}" style="height: 20px;">
                   <h4 ng-show="comment.thread.indexOf('topic') != -1"> [{{getTopic(comment.thread.replace('topic-', '')).kind}}] </h4>
                 </a></td>
-                <td><a href="/#/{{comment.thread.replace('-','/')}}">
+                <td><a href="#/{{comment.thread.replace('-','/')}}">
                   <div ng-bind-html="comment.html"></div>
                 </a></td>
               </tr>
