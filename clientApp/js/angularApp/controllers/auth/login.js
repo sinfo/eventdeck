@@ -107,7 +107,7 @@ theToolController.controller("LoginController", function ($scope, $routeParams, 
         }
         $scope.loading = false;
         $scope.loginInfo = "Success!";
-        $window.location.assign('/#/');
+        $window.location.assign('/');
         //$location.path('/');
       }).
       error(function(data, status, headers, config) {

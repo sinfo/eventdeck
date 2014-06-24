@@ -8,8 +8,9 @@ theToolController.factory('AuthInterceptor', function ($location, $window) {
   return {
     responseError: function (response) {
       if (response.status === 401) {
-        $location.path('/login');
-        //$window.location.assign('/#/login');
+        if($location.path().indexOf('/login') == -1) {
+          $location.path('/login');
+        }
       }
     }
   };
