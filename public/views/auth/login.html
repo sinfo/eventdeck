@@ -1,12 +1,25 @@
-<div class="all-100 align-center double-vertical-space">
-	<h1>Welcome to The Tool! Beta</h1>
-	<div class="ink-button blue" ng-click="login()"><i class="fa fa-facebook-square"></i> Login with Facebook</div>
-  <br><br>
-	<div id="login" class="all-100 align-center" ng-show="connected">
-    <b class="all-100">
-      <p class="all-100">{{loginInfo.firstRow}}</p>
-      <p class="all-100">{{loginInfo.secondRow}}</p>
-    </b>
-    <i ng-show="redirecting" class="fa fa-circle-o-notch fa-3x fa-spin"></i>
+<div class="column-group double-vertical-space">
+  <div class="all-30 hide-small hide-tiny"><br></div>
+  <div class="all-40 small-100 tiny-100 align-center">
+    <h1>Welcome to The Tool!</h1>
+  	<div class="ink-button blue" ng-click="facebookLogin()"><i class="fa fa-facebook-square"></i> Login with Facebook</div>
+    <br><br>
+    <form class="ink-form">
+      <div class="control-group">
+        <div ng-show="showIdInput" class="control append-button">
+          <span><input type="text" ng-model="memberId" placeholder="joaquim.couves"></span>
+          <button class="ink-button" ng-click="sendEmail(memberId)"><i class="icon-sign-in"></i> Log in</button>
+        </div>
+        <div ng-show="showCodeInput" class="control append-button">
+          <span><input type="text" ng-model="memberCode" placeholder="AAAA"></span>
+          <button class="ink-button" ng-click="submitCode(memberId,memberCode)"><i class="icon-sign-in"></i> Submit Code</button>
+        </div>
+    </form>
+    <div id="login" class="all-100 align-center">
+      <b class="all-100">
+        <p class="all-100">{{loginInfo}}</p>
+      </b>
+      <i ng-show="loading" class="fa fa-circle-o-notch fa-3x fa-spin"></i>
+    </div>
   </div>
 </div>

@@ -6,7 +6,7 @@
       <div ng-hide="loading" infinite-scroll="scroll()">
         <div class="activity {{notification.color}}" ng-repeat="notification in notifications | orderBy:'posted':true | limitTo: limit">
           <div class="all-100" style="margin-bottom:5px">
-            <a href="/#/member/{{notification.member}}">
+            <a href="/member/{{notification.member}}">
               <img ng-src="{{'https://graph.facebook.com/' + getMember(notification.member).facebook + '/picture'}}">
               <b>{{getMember(notification.member).name}}</b>
             </a>

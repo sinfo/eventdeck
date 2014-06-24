@@ -117,7 +117,7 @@
       </nav>
     </div>
 
-    <div ng-if="me._id" class="left-drawer">
+    <div ng-show="me._id" class="left-drawer">
       <ul>
           <li><a><input type="text" ng-model="search.name" ng-change="searchBoxChanged()" placeholder="Super search!!!"></a>
           <ul ng-if="search.name && search.name.length > 1" class="submenu" style="max-height:400px; overflow:auto; margin: 0px 20px 0px;">
