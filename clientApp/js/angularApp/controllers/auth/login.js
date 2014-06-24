@@ -12,12 +12,10 @@ theToolController.controller("LoginController", function ($scope, $routeParams, 
   $scope.showIdInput = true;
   $scope.showCodeInput = false;
   
-  /*
   if($scope.me.id) {
-    $location.path('/');
-    //$window.location.assign('/');
+    //$location.path('/');
+    $window.location.assign('/');
   }
-  */
 
   var lock = false;
 
