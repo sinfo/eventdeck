@@ -30,5 +30,3 @@ serverApp/resources/auth/facebookConfig.js
 sftp-config.json
 
 chromeExtension.*
-
-phonegap/platforms
