@@ -3,7 +3,7 @@
 
   <div ng-if="!topic.editing" class="column-group horizontal-gutters">
     <div class="all-85">
-      <a href="#/member/{{topic.author}}">
+      <a href="/#/member/{{topic.author}}">
         <img ng-src="https://graph.facebook.com/{{getMember(topic.author).facebook}}/picture"/>
         <small>{{getMember(topic.author).name}}</small>
       </a>
@@ -27,7 +27,7 @@
       </form>
       <div ng-if="topic.targets.length > 0">
         <div ng-if="showTargets">
-          <a ng-repeat="target in topic.targets" href="#/member/{{target}}" title="{{getMember(target).name}}">
+          <a ng-repeat="target in topic.targets" href="/#/member/{{target}}" title="{{getMember(target).name}}">
             <img ng-src="https://graph.facebook.com/{{getMember(target).facebook}}/picture?width=100&height=100" style="width:50px; margin:2px">
           </a>
           <br><br>
