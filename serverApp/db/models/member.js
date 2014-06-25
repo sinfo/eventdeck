@@ -14,7 +14,11 @@ var memberSchema = new mongoose.Schema({
   skype: String,
   phones: [String],
   mails: Object,
-  fenixedu: Object
+  fenixedu: Object,
+  loginCodes: [{
+    code: String,
+    created: {type: Date}
+  }]
 });
 
 memberSchema.statics.findById = function (id, cb) {
