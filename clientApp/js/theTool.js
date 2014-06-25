@@ -1,4 +1,4 @@
-url_prefix = 'http://dev.bananamarket.eu';
+url_prefix = 'http://tool.bananamarket.eu/';
 
 require('./angularApp/app.js');
 require('./angularApp/controllers');

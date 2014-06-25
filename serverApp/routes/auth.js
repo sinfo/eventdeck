@@ -3,7 +3,18 @@ var auth   = require('./../resources/auth');
 
 server.route({
   method: 'GET',
-  path: '/api/login/facebook',
+  path: '/login',
+  config: {
+    handler: auth.login,
+    auth: {
+      mode: 'try'
+    }
+  }
+});
+
+server.route({
+  method: 'GET',
+  path: '/login/facebook',
   config: {
     handler: auth.facebook,
     auth: {
@@ -14,9 +25,9 @@ server.route({
 
 server.route({
   method: 'GET',
-  path: '/api/login/{id}',
+  path: '/redirect',
   config: {
-    handler: auth.email,
+    handler: auth.redirect,
     auth: {
       mode: 'try'
     }
@@ -25,18 +36,7 @@ server.route({
 
 server.route({
   method: 'GET',
-  path: '/api/login/{id}/{code}',
-  config: {
-    handler: auth.loginCode,
-    auth: {
-      mode: 'try'
-    }
-  }
-});
-
-server.route({
-  method: 'GET',
-  path: '/api/logout',
+  path: '/logout',
   config: {
     handler: auth.logout,
     auth: true

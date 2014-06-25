@@ -3,7 +3,7 @@
 
   <div ng-hide="loading" class="all-100">
     <div classs="all-100">
-      <a class="all-50" ng-href="#/member/{{meeting.author}}">
+      <a class="all-50" ng-href="/#/member/{{meeting.author}}">
         <img ng-src="https://graph.facebook.com/{{getMember(meeting.author).facebook}}/picture">
         <small>{{getMember(meeting.author).name}}</small>
       </a>
@@ -12,12 +12,12 @@
       </div>
     </div>
 
-    <a class="all-100" ng-href="#/meeting/{{meetingId}}" style="color: #555555;">
+    <a class="all-100" ng-href="/#/meeting/{{meetingId}}" style="color: #555555;">
       <h5>{{meeting.title}}</h5>
     </a>
 
     <div ng-if="showAttendants" class="all-100 half-top-space">
-      <a ng-repeat="attendant in meeting.attendants | orderBy:'toString()'" ng-href="#/member/{{attendant}}" style="margin-right: 2px;">
+      <a ng-repeat="attendant in meeting.attendants | orderBy:'toString()'" ng-href="/#/member/{{attendant}}" style="margin-right: 2px;">
         <img ng-src="https://graph.facebook.com/{{getMember(attendant).facebook}}/picture" style="width: 50px;" title="{{getMember(attendant).name}}">
       </a>
     </div>
