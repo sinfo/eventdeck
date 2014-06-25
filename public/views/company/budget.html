@@ -35,9 +35,9 @@
 
         <tr ng-repeat="company in companies  | filter:{participation.payment:''} | orderBy:predicate:reverse" ng-class="getClassFromPaymentStatus(company.participation)">
           <td style="text-align:center; min-width: 300px;">
-            <a href="#/company/{{company.id}}">{{company.name}}</a>
+            <a href="/#/company/{{company.id}}">{{company.name}}</a>
           </td>
-          <td style="text-align:center"><a href="#/member/{{company.member}}">{{company.member}}</a></td>
+          <td style="text-align:center"><a href="/#/member/{{company.member}}">{{company.member}}</a></td>
           <td>€ {{company.participation.payment.price}}</td>
           <td>€ {{company.participation.payment.iva}}</td>
           <td>€ {{company.participation.payment.total}}</td>
