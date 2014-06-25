@@ -1,0 +1,21 @@
+{
+ "title": "The Tool API docs",
+ "api-calls": [
+    {
+      "id": "route-company-getAll",
+      "method": "GET",
+      "data-route": "/api/company",
+      "simple-route": "/api/company",
+      "data-truncate": "20",
+      "requires-auth": true   
+    },
+    {
+      "id": "route-company-get",
+      "method": "GET",
+      "data-route": "/api/company/foo",
+      "simple-route": "/api/company/:companyId",
+      "data-truncate": "20",
+      "requires-auth": true
+    }
+ ] 
+}
