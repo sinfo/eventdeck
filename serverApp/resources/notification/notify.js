@@ -1,7 +1,7 @@
 var async        = require('async');
 var Member       = require('./../../db/models/member.js');
 var Notification = require('./../../db/models/notification.js');
-/*var webSocketCl    = require('./../../index.js').webSocket.client;*/
+var webSocket    = require('./../../index.js').webSocket.client;
 
 exports = module.exports = notify;
 
@@ -74,10 +74,11 @@ function notify(memberId, thread, description, objectId, subscribers) {
         thread: thread,
         text:   description,
       }
-/*      console.log(webSocketCl);
-      webSocketCl.emit('send', {room: 'geral', message: newMessage}, function(){
+      webSocket.connect();
+      console.log(webSocket);
+      webSocket.emit('send', {room: 'geral', message: newMessage}, function(){
         console.log("Notification sent to chat!");
-      });*/
+      });
       console.log(memberId+' '+description+' on '+thread+' (objectId:'+objectId+')');
     }
   }

@@ -5,8 +5,8 @@ theToolServices
     var socket;
     return {
       connect: function(nsp) {
-        console.log(socket);
         socket = io.connect(nsp, {multiplex: false});
+        console.log(socket);
       },
       on: function (eventName, callback) {
         socket.on(eventName, function () {
