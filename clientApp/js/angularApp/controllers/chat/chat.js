@@ -10,11 +10,7 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 
   console.log("Connecting");
 
-  if(SocketFactory.socket){
-    console.log();
-  }
   SocketFactory.connect('/chat');
-
   /*setTimeout(function(){
     if(!SocketFactory.socket.connected){
       SocketFactory.connect('/chat');
@@ -22,6 +18,7 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
   }, 3000);*/
 
   SocketFactory.on('connected', function (message) {
+    console.log(SocketFactory.socket);
     SocketFactory.emit('auth', {id: $routeParams.id, user: $scope.me.id}, function () {
       console.log('Auth success');
     });

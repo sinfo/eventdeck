@@ -109,7 +109,7 @@ function done(err, room, socket, cb){
     var clients = webSocket.of('/chat').sockets;
     console.log("Currently Loged:");
     for(var i = 0; i < clients.length; i++){
-      if(clients[i].connected  && clients[i].nicknam != 'server'){
+      if(clients[i].connected  && clients[i].nickname){
         online[i] = clients[i].nickname;
         console.log(clients[i].nickname);
       }
