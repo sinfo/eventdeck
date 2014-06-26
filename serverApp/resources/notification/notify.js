@@ -75,6 +75,10 @@ function notify(memberId, thread, description, objectId, subscribers) {
         text:   description,
       }
       webSocket.connect();
+<<<<<<< HEAD
+=======
+      console.log(webSocket);
+>>>>>>> 57e3a2c... working on chta notification
       webSocket.emit('send', {room: 'geral', message: newMessage}, function(){
         console.log("Notification sent to chat!");
       });
