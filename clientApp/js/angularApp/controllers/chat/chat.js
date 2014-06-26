@@ -12,8 +12,8 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
   console.log("Connecting");
 
   SocketFactory.connect('/chat');
-
-  SocketFactory.on('connected', function () {
+  
+  SocketFactory.on('connected', function (message) {
     console.log(SocketFactory.socket);
     SocketFactory.emit('auth', {id: $routeParams.id, user: $scope.me.id}, function () {
       console.log('Auth success');

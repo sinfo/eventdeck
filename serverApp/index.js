@@ -22,7 +22,9 @@ server.pack.require("hapi-auth-cookie", function (err) {
       server: SocketIO.server.listen(server.listener)
     };
     var sockets = require("./sockets");
+
     webSocket.client = module.exports.webSocket.client = SocketIO.client.connect("http://localhost:" + server.info.port + "/chat");
+
     var routes = require("./routes");
   });
 
