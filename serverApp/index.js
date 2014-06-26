@@ -1,5 +1,5 @@
 var Hapi         = require("hapi");
-var SocketIO     = require("socket.io");
+var SocketIO     = {server: require("socket.io"), client: require('socket.io-client')};
 var options      = require("./options");
 var cookieConfig = require("./cookieConfig");
 require("./db");
@@ -16,14 +16,15 @@ server.pack.require("hapi-auth-cookie", function (err) {
     redirectTo: "/login"
   });
 
-  var routes = require("./routes");
-
   server.start(function () {
     console.log("Server started at: " + server.info.uri);
     var webSocket = module.exports.webSocket = {
-      server: SocketIO.listen(server.listener)
+      server: SocketIO.server.listen(server.listener)
     };
     var sockets = require("./sockets");
+    webSocket.client = module.exports.webSocket.client = SocketIO.client.connect('https://tool.bananamarket.eu/chat');
+
+    var routes = require("./routes");
   });
 
 });
