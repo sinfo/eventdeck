@@ -71,11 +71,10 @@ function notify(memberId, thread, description, objectId, subscribers) {
         chatId: 'geral',
         member: memberId,
         kind:   'notification',
-        thread: thread,
+        source: objectId,
         text:   description,
       }
       webSocket.connect();
-      console.log(webSocket);
       webSocket.emit('send', {room: 'geral', message: newMessage}, function(){
         console.log("Notification sent to chat!");
       });
