@@ -71,7 +71,7 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
     console.log(message.date);
     $scope.messages.push(message);
 
-    if(message.member != me.id) {
+    if(message.member != $scope.me.id) {
       ngAudio.play("audio/message.mp3");
     }
   });
