@@ -403,8 +403,8 @@ a, a:visited, a:hover {
   margin: 5px;
   padding: 10px;
   width:70%;
-  float: right;
-  text-align: right;
+  float: left;
+  text-align: left;
 }
 
 .chat-message.me {
