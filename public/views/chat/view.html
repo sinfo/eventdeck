@@ -20,16 +20,25 @@
         </div>
       </div>
       <div ng-if="message.kind == 'notification'">
-        <blockquote cite="/#/{{message.source}}" ng-show="message.member != me.id" class="chat-notification others">
-          <p style="margin:0">
-            <a href="/#/{{message.source}}">
-              <span class="fa fa-info-circle"></span>
-              <small title="{{timeSince(message.date)}}">{{message.text}}</small>
-            </a>
+        <blockquote>
+          <a href="/#/{{message.source}}" title="{{timeSince(message.date)}}">
+            {{message.text}}
+          </a>
+          <a href="/#/member/{{message.member}}" title="{{getMember(message.member).name}}">
+            <img src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px; margin-left:15px;"/>
+          </a>
+          <div ng-show="message.member == me.id" class="chat-notification me">
+            <small title="{{timeSince(message.date)}}">{{message.text}}</small>
             <a href="/#/member/{{message.member}}" title="{{getMember(message.member).name}}">
               <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
             </a>
-          </p>
+          </div>
+          <div ng-show="message.member != me.id" class="chat-notification others">
+            <a href="/#/member/{{message.member}}" title="{{getMember(message.member).name}}">
+              <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
+            </a>
+            <small title="{{timeSince(message.date)}}">{{message.text}}</small>
+          </div>
         </blockquote>
       </div>
     </li>
