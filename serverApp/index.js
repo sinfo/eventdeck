@@ -18,12 +18,14 @@ server.pack.require("hapi-auth-cookie", function (err) {
 
   server.start(function () {
     console.log("Server started at: " + server.info.uri);
+    console.log(server);
     var webSocket = module.exports.webSocket = {
       server: SocketIO.server.listen(server.listener)
     };
     var sockets = require("./sockets");
-    webSocket.client = module.exports.webSocket.client = SocketIO.client.connect('https://tool.bananamarket.eu/chat');
-
+    console.log(webSocket.server);
+    webSocket.client = module.exports.webSocket.client = SocketIO.client.connect("http://localhost:" + server.info.port + "/chat");
+    console.log(webSocket.client);
     var routes = require("./routes");
   });
 
