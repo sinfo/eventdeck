@@ -21,9 +21,9 @@
       </div>
       <div ng-if="message.kind == 'notification'">
         <blockquote cite="/#/{{message.source}}" ng-show="message.member != me.id" class="chat-notification others">
-          <p>
-            <span class="fa fa-spinner"></span>
+          <p style="margin:0">
             <a href="/#/{{message.source}}">
+              <span class="fa fa-info-circle"></span>
               <small title="{{timeSince(message.date)}}">{{message.text}}</small>
             </a>
             <a href="/#/member/{{message.member}}" title="{{getMember(message.member).name}}">
