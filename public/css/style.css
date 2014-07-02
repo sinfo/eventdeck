@@ -2,10 +2,11 @@
   position: fixed;
   z-index: 100;
   width: 100%;
-  background: #1a1a1a;
+  background: #eee;
   -webkit-transform: scale3d(1, 1, 1);
   *zoom: 1;
   top: 0;
+  border-bottom: 1px solid #ddd;
 }
 #topbar:after {
   content: "";
@@ -15,44 +16,36 @@
 #topbar .ink-navigation {
   *zoom: 1;
 }
-#topbar .ink-navigation ul.black li {
+#topbar .ink-navigation ul.push-right li {
+  border-top: 6px solid #333;
   font-size: 14px;
 }
-#topbar .ink-navigation ul.black li a {
-  padding: .7em 1em;
-  color: #fff;
-  text-transform: none;
+#topbar .ink-navigation ul.push-right ul li {
+  border-top: 0px solid #333;
+}
+#topbar .ink-navigation ul li a {
+  padding: 5 10px;
   font-weight: 300;
   line-height: 24px;
   *height: auto;
 }
-#topbar .ink-navigation ul.black li ul.submenu li a {
+#topbar .ink-navigation ul li a:hover {
+  background: #fff;
+}
+#topbar .ink-navigation ul li ul.submenu li a {
   color: #333;
 }
-#topbar .ink-navigation ul.black li a:hover {
-  color: white;
-}
-#topbar .ink-navigation ul.black li a.ink-button {
-  color: white;
-  padding: 4px 12px;
-  margin: 5px 1em;
-  font-size: .875em;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-}
-#topbar .ink-navigation ul.black li a.ink-button:hover {
-  background: #0d68c2;
-}
-#topbar .ink-navigation ul.black li a.logoPlaceholder {
+#topbar .ink-navigation ul li a.logoPlaceholder {
   margin-right: .5em;
-  padding: .4em 0;
+  padding: 10px;
   font-weight: bold;
   font-size: 1.8em;
+  color: #333;
 }
-#topbar .ink-navigation ul.black li a.logoPlaceholder:hover {
+#topbar .ink-navigation ul li a.logoPlaceholder:hover {
   background: none;
 }
-#topbar .ink-navigation ul.black li button.fa-bars {
+#topbar .ink-navigation ul li button.fa-bars {
   font-size: 21px;
   background: none;
   font-size: 1.2em;
@@ -60,13 +53,6 @@
   border: none;
   padding: .8em .8em .8em 0;
   float: left;
-}
-#topbar .ink-navigation ul.black li button.fa-bars:hover, #topbar .ink-navigation ul.black li button.fa-bars:active, #topbar .ink-navigation ul.black li button.fa-bars:focus {
-  color: white;
-  outline: none;
-}
-#topbar .ink-navigation ul.black li.active a {
-  color: white;
 }
 #topbar .ink-navigation:after {
   content: "";
