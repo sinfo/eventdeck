@@ -82,7 +82,7 @@ function getChat(chatID, memberID, cb){
 }
 
 function getMessages(chatID, cb){
-  Message.getByChatId({params:{id: chatID}}, function(response){
+  Message.getByChatId({params:{id: chatID, date: Date.now()}}, function(response){
     if(response.error) {
       console.log('Chat id: ' + chatID + ' messages unavailable');
     } 
@@ -92,6 +92,7 @@ function getMessages(chatID, cb){
     }
     cb();
   });
+ /* Message.getByChatLast({params:{id: chatID}}, function(response){});*/
 }
 
 function done(err, room, socket, cb){

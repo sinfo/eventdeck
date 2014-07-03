@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var async    = require('async');
 
 var messageSchema = new mongoose.Schema({
   chatId: String,
@@ -13,8 +14,39 @@ messageSchema.statics.findById = function (id, cb) {
   this.find({ _id: id }, cb);
 };
 
-messageSchema.statics.findByChatId = function (id, cb) {
-  this.find({ chatId: id }, cb);
+messageSchema.statics.findByChatId = function (id, now, cb) {
+  var date;
+  var messages = [];
+  var schema = this;
+  async.series([
+    getFirst,
+    getMessages,
+  ], function(){
+    cb(messages);
+  });
+
+  function getFirst(callback){
+    schema.findOne({ chatId: id, date: {$lt: now} }).sort('-date').exec(function(err, result) {
+      if (err) callback(err);
+      date = result.date;
+      messages.push(result);
+      callback();
+    });
+  }
+  
+  function getMessages(callback){
+    var dateBegin = new Date(date);
+    dateBegin.setHours(0);
+    dateBegin.setMinutes(0);
+    dateBegin.setSeconds(0);
+    schema.find({ chatId: id, date: {$gte: dateBegin, $lt: date} }).sort('-date').exec(function(err, result) {
+      if (err) callback(err);
+      messages = messages.concat(result);
+      callback();
+    });
+  }
+
+
 };
 
 messageSchema.statics.findByMember = function (id, cb) {
