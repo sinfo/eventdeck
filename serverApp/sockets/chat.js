@@ -91,7 +91,6 @@ function getChat(chatID, memberID, cb){
   });
 }
 
-
 function getMessages(chatID, dateRef, cb){
   Message.getByChatId({params:{id: chatID, date: dateRef}}, function(response){
     if(response.error) {
@@ -103,7 +102,6 @@ function getMessages(chatID, dateRef, cb){
     }
     cb();
   });
- /* Message.getByChatLast({params:{id: chatID}}, function(response){});*/
 }
 
 function done(err, room, socket, cb){
