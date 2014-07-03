@@ -2,15 +2,6 @@ var async         = require('async');
 var Speaker       = require('./../../db/models/speaker.js');
 var Member        = require('./../../db/models/member.js');
 var Communication = require('./../../db/models/communication.js');
-var email         = require('emailjs');
-var emailConfig   = require('./../../emailConfig');
-
-var server = email.server.connect({
-  user:     emailConfig.user,
-  password: emailConfig.password,
-  host:     emailConfig.host,
-  ssl:      emailConfig.ssl
-});
 
 module.exports = get;
 
