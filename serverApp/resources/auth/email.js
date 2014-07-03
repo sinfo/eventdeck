@@ -1,7 +1,8 @@
 var async = require('async')
 var email = require('emailjs');
 var Member = require("./../../db/models/member.js");
-var emailConfig = require('./../../emailConfig');
+var url_prefix = require('./../../../config').url;
+var emailConfig = require('./../../../config').email;
 
 var server  = email.server.connect({
   user:     emailConfig.user,
@@ -67,7 +68,7 @@ function sendCode(request, reply) {
 
   function sendEmail(cb) {
     var message = {
-      text:    "Hey "+member.name+"!\n\n Here is your code for logging in on The Tool: "+loginCode+"\n\nhttp://dev.bananamarket.eu/#/login/"+member.id+"/"+loginCode,
+      text:    "Hey "+member.name+"!\n\n Here is your code for logging in on The Tool: "+loginCode+"\n\n"+url_prefix+"#/login/"+member.id+"/"+loginCode,
       from:    "The Tool! <thetoolsinfo@gmail.com>",
       to:       member.name + "<" +member.mails.sinfo + ">",
       subject: "[SINFO] Login code for The Tool!"

@@ -1,6 +1,6 @@
 var Member         = require("./../../db/models/member.js");
 var Request        = require("request");
-var facebookConfig = require("./facebookConfig.js");
+var facebookConfig = require("./../../../config").facebook;
 
 module.exports = facebook;
 

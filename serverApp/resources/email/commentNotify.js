@@ -3,7 +3,8 @@ var Company     = require('./../../db/models/company.js');
 var Speaker     = require('./../../db/models/speaker.js');
 var email       = require('emailjs');
 var async       = require('async');
-var emailConfig = require('./../../emailConfig');
+var url_prefix = require('./../../../config').url;
+var emailConfig = require('./../../../config').email;
 
 var server  = email.server.connect({
   user:     emailConfig.user,
@@ -104,7 +105,7 @@ function notify(comment) {
       var message = null;
       if (company.id) {
         message = {
-          text:    "There is a new comment on "+company.name+"'s page. \n\nCheck it out:\nhttp://the-tool.franciscodias.net/#/company/"+company.id,
+          text:    "There is a new comment on "+company.name+"'s page. \n\nCheck it out:\n"+url_prefix+"#/company/"+company.id,
           from:    "The Tool! <thetoolsinfo@gmail.com>",
           to:       member.name + "<" +member.mails.sinfo + ">",
           subject: "[SINFO] New comment on "+company.name+"!"
@@ -112,7 +113,7 @@ function notify(comment) {
       }
       else if (speaker.id){
         message = {
-          text:    "There is a new comment on "+speaker.name+"'s page. \n\nCheck it out:\nhttp://the-tool.franciscodias.net/#/speaker/"+speaker.id,
+          text:    "There is a new comment on "+speaker.name+"'s page. \n\nCheck it out:\n"+url_prefix+"#/speaker/"+speaker.id,
           from:    "The Tool! <thetoolsinfo@gmail.com>",
           to:       member.name + "<" +member.mails.sinfo + ">",
           subject: "[SINFO] New comment on "+speaker.name+"!"
