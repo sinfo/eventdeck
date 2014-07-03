@@ -12,8 +12,13 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
   console.log("Connecting");
 
   SocketFactory.connect('/chat');
+<<<<<<< HEAD
   
   SocketFactory.on('connected', function (message) {
+=======
+
+  SocketFactory.on('connected', function () {
+>>>>>>> d6a0a72... chat infinite scroll
     console.log(SocketFactory.socket);
     SocketFactory.emit('auth', {id: $routeParams.id, user: $scope.me.id}, function () {
       console.log('Auth success');
