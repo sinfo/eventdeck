@@ -7,7 +7,7 @@
     <li ng-repeat="message in messages | orderBy:'date':false">
       <div ng-if="message.kind == 'message'">
         <div ng-show="message.member == me.id" class="chat-message me">
-          <small title="{{timeSince(message.date)}}">{{message.text}}</small>
+          <small title="{{timeSince(message.date)}}" ng-bind-html="message.text | linky:'_blank'"></small>
           <a href="/#/member/{{message.member}}" title="{{getMember(message.member).name}}">
             <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
           </a>
@@ -16,7 +16,7 @@
           <a href="/#/member/{{message.member}}" title="{{getMember(message.member).name}}">
             <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
           </a>
-          <small title="{{timeSince(message.date)}}">{{message.text}}</small>
+          <small title="{{timeSince(message.date)}}" ng-bind-html="message.text | linky:'_blank'"></small>
         </div>
       </div>
       <div ng-if="message.kind == 'notification'">
