@@ -18,7 +18,6 @@ server.pack.require("hapi-auth-cookie", function (err) {
 
   server.start(function () {
     console.log("Server started at: " + server.info.uri);
-    console.log(server);
     var webSocket = module.exports.webSocket = {
       server: SocketIO.server.listen(server.listener)
     };
