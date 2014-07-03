@@ -4,7 +4,7 @@
 </div>
 <div scroll-glue ng-hide="loading" style="position: absolute; top: 100px; left: 20px; overflow-y: scroll; height: 70%; width:70%; background:white">
  <ul class="unstyled">
-    <li ng-repeat="message in messages | orderBy:'date':false">
+    <li ng-repeat="message in messages | orderBy:'date':false" infinite-scroll="scroll()">
       <div ng-if="message.kind == 'message'">
         <div ng-show="message.member == me.id" class="chat-message me">
           <small title="{{timeSince(message.date)}}" ng-bind-html="message.text | linky:'_blank'"></small>
