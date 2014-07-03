@@ -1,0 +1,17 @@
+{
+  "url": "http://dev.bananamarket.eu",
+  "email" : {
+    "user": "YOUR EMAIL USER",
+    "password": "YOUR EMAIL PASSWORD",
+    "host": "smtp.gmail.com",
+    "ssl": true
+  },
+  "cookie": {
+    "name": "login",
+    "password": "YOUR COOKIE PASSWORD"
+  },
+  "facebook": {
+    "appId": "YOUR APP ID",
+    "appSecret": "YOUR APP SECRET"
+  }
+}
