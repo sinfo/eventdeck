@@ -9,10 +9,10 @@
     <table class="companies-table">
       <tr ng-repeat="member in members">
         <td class="member-cell">
-          <a style="color:#fff" href="/#/member/{{member.id}}"><h6><img ng-show="member.facebook" ng-src="https://graph.facebook.com/{{member.facebook}}/picture"/> {{member.name}}</h6></a>
+          <a style="color:#fff" href="#/member/{{member.id}}"><h6><img ng-show="member.facebook" ng-src="https://graph.facebook.com/{{member.facebook}}/picture"/> {{member.name}}</h6></a>
         </td>
         <td ng-repeat="company in companies | filter:{member:member.id}:strict" style="text-align:center" ng-class="company.status.replace(' ','-').toLowerCase()" >
-          <a class="status" style="color:#fff" href="/#/company/{{company.id}}">{{company.name}}</a>
+          <a class="status" style="color:#fff" href="#/company/{{company.id}}">{{company.name}}</a>
         </td>
     </table>
   </div>
