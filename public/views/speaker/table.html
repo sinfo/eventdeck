@@ -10,10 +10,10 @@
     <table class="speakers-table">
       <tr ng-repeat="member in members">
         <td class="member-cell">
-          <a style="color:#fff" href="/#/member/{{member.id}}"><h6><img ng-show="member.facebook" src="https://graph.facebook.com/{{member.facebook}}/picture"/> {{member.name}}</h6></a>
+          <a style="color:#fff" href="#/member/{{member.id}}"><h6><img ng-show="member.facebook" src="https://graph.facebook.com/{{member.facebook}}/picture"/> {{member.name}}</h6></a>
         </td>
         <td title="{{speaker.status}}" ng-repeat="speaker in speakers | filter:{member:member.id}:strict" ng-class="speaker.status.replace(' ','-').toLowerCase()" style="text-align:center">
-          <a class="status" style="color:#fff" href="/#/speaker/{{speaker.id}}">{{speaker.name}}</a>
+          <a class="status" style="color:#fff" href="#/speaker/{{speaker.id}}">{{speaker.name}}</a>
         </td>
     </table>
   </div>
