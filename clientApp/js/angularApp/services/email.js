@@ -3,10 +3,10 @@
 theToolServices
   .factory('EmailFactory', function ($resource) {
     return {
-      Company: $resource(url_prefix+'/api/company/:id/sendInitialEmail', null, {
+      Company: $resource('/api/company/:id/sendInitialEmail', null, {
         'send': {method: 'POST'}
       }),
-      Speaker: $resource(url_prefix+'/api/speaker/:id/sendInitialEmail', null, {
+      Speaker: $resource('/api/speaker/:id/sendInitialEmail', null, {
         'send': {method: 'POST'}
       })
     }
