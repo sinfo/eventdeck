@@ -1,6 +1,6 @@
 'use strict';
 
-theToolController.controller('MainController', function ($scope, $http, $routeParams, $sce, $location, $window, $rootScope, NotificationFactory, MemberFactory, CompanyFactory, SpeakerFactory, TopicFactory, RoleFactory, TagFactory, CommentFactory) {
+theToolController.controller('MainController', function ($scope, $http, $routeParams, $sce, $location, $rootScope, NotificationFactory, MemberFactory, CompanyFactory, SpeakerFactory, TopicFactory, RoleFactory, TagFactory, CommentFactory) {
 
   //================================INITIALIZATION================================
 
@@ -204,17 +204,5 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
   $scope.convertMarkdownToHtml = function(text) {
     return '<div data-markdown>' + text + '</div>';
   }
-
-  $scope.logout = function () {
-    $http.get(url_prefix + '/api/logout').
-      success(function(data, status, headers, config) {
-        $window.location.assign('/');
-      }).
-      error(function(data, status, headers, config) {
-        console.log("ERROR", data);
-        $window.location.assign('/');
-      });
-  }
-
 
 });
