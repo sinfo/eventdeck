@@ -2,7 +2,7 @@
 
   <div class="all-100">
     <div class="all-50">
-      <a href="/#/member/{{communication.member}}">
+      <a href="#/member/{{communication.member}}">
         <img ng-src="{{'https://graph.facebook.com/' + getMember(communication.member).facebook + '/picture'}}"/>
         <small>{{getMember(communication.member).name}}</small>
       </a>
@@ -19,7 +19,7 @@
   </div>
 
   <div ng-hide="communication.editing">
-    <a href="/#/speaker/{{communication.thread.split('speaker-')[1]}}/">
+    <a href="#/speaker/{{communication.thread.split('speaker-')[1]}}/">
     <h6>
       <b>{{communication.kind}}</b>
       <span ng-show="communication.kind=='Email To' || communication.kind=='Inital Email Paragraph'">
