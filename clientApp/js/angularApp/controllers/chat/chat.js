@@ -4,6 +4,7 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 
   $scope.error = {};
 
+  $scope.updating = false;
   $scope.loading  = true;
   $scope.messages = [];
   $scope.online   = [];
@@ -72,6 +73,7 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 
   SocketFactory.on('history-send', function (response) {
     $scope.messages = $scope.messages.concat(response.messages);
+    $scope.updating = false;
   });
 
   $scope.$on('$locationChangeStart', function(){
@@ -80,6 +82,16 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
     SocketFactory.disconnect();
     delete SocketFactory.socket;
   });
+
+  $scope.history = function() {
+    console.log('Start history request');
+    if(!$scope.updating){
+      $scope.updating = true;
+      SocketFactory.emit('history-get', {room: $scope.room, date: $scope.messages[$scope.messages.length-1].date }, function() {
+        console.log('Sent history request');
+      });
+    }
+  }
 
   $scope.submit = function() {
     if ($scope.text == ""){
