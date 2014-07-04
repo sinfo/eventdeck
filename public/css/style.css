@@ -385,14 +385,6 @@ a, a:visited, a:hover {
   width:70%;
 }
 
-.chat-notification {
-  margin: 5px;
-  padding: 10px;
-  width:70%;
-  float: left;
-  text-align: left;
-}
-
 .chat-message.me {
   background: Gold;
   float: right;
