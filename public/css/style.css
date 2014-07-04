@@ -456,7 +456,7 @@ a, a:visited, a:hover {
     background-size: 55%;
   }
 
-  @font-face { font-family: 'FontAwesome'; src: local('FontAwesome'); }
+  /*@font-face { font-family: 'FontAwesome'; src: local('FontAwesome'); }*/
 
   .button.icon.facebook:before {
     font-family: 'FontAwesome';
