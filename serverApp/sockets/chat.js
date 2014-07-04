@@ -70,7 +70,7 @@ webSocket
         webSocket.of('/chat').in(room).emit('history-send', {messages: messages});
         cb();
       })
-    }
+    });
 
   });
 
