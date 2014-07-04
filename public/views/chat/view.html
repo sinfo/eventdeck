@@ -4,41 +4,33 @@
 </div>
 <div scroll-glue ng-hide="loading" style="position: absolute; top: 100px; left: 20px; overflow-y: scroll; height: 70%; width:70%; background:white">
  <ul class="unstyled">
-    <li ng-repeat="message in messages | orderBy:'date':false">
+    <li ng-repeat="message in messages | orderBy:'date':false" infinite-scroll="history()" infinite-scroll-reverse="true">
       <div ng-if="message.kind == 'message'">
         <div ng-show="message.member == me.id" class="chat-message me">
-          <small title="{{timeSince(message.date)}}">{{message.text}}</small>
-          <a href="#/member/{{message.member}}" title="{{getMember(message.member).name}}">
+          <small title="{{timeSince(message.date)}}" ng-bind-html="message.text | linky:'_blank'"></small>
+          <a href="/#/member/{{message.member}}" title="{{getMember(message.member).name}}">
             <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
           </a>
         </div>
         <div ng-show="message.member != me.id" class="chat-message others">
-          <a href="#/member/{{message.member}}" title="{{getMember(message.member).name}}">
+          <a href="/#/member/{{message.member}}" title="{{getMember(message.member).name}}">
             <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
           </a>
-          <small title="{{timeSince(message.date)}}">{{message.text}}</small>
+          <small title="{{timeSince(message.date)}}" ng-bind-html="message.text | linky:'_blank'"></small>
         </div>
       </div>
-      <div ng-if="message.king == 'notification'">
-        <blockquote>
-          <a href="#/{{message.thread.replace('-','/')}}" title="{{timeSince(message.date)}}">
-            {{message.text}}
-          </a>
-          <a href="#/member/{{message.member}}" title="{{getMember(message.member).name}}">
-            <img src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px; margin-left:15px;"/>
-          </a>
+      <div ng-if="message.kind == 'notification'">
+        <blockquote cite="/#/{{message.source}}" ng-show="message.member != me.id" class="chat-notification others">
+          <p style="margin:0">
+            <a href="/#/{{message.source}}">
+              <span class="fa fa-info-circle"></span>
+              <small title="{{timeSince(message.date)}}">{{message.text}}</small>
+            </a>
+            <a href="/#/member/{{message.member}}" title="{{getMember(message.member).name}}">
+              <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
+            </a>
+          </p>
         </blockquote>
-      <div ng-show="message.member == me.id" class="chat-message me">
-        <small title="{{timeSince(message.date)}}">{{message.text}}</small>
-        <a href="#/member/{{message.member}}" title="{{getMember(message.member).name}}">
-          <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
-        </a>
-      </div>
-      <div ng-show="message.member != me.id" class="chat-message others">
-        <a href="#/member/{{message.member}}" title="{{getMember(message.member).name}}">
-          <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
-        </a>
-        <small title="{{timeSince(message.date)}}">{{message.text}}</small>
       </div>
     </li>
   </ul>
@@ -48,7 +40,7 @@
   <div ng-repeat="user in online | orderBy:['-on', 'name']" style="margin-bottom:10px">
     <div class="column-group horizontal-gutters">
       <div class="all-20">
-        <a href="#/member/{{user.member}}"><img ng-src="https://graph.facebook.com/{{getMember(user.member).facebook}}/picture" style="width:25px; margin-left:15px;"/></a>
+        <a href="/#/member/{{user.member}}"><img ng-src="https://graph.facebook.com/{{getMember(user.member).facebook}}/picture" style="width:25px; margin-left:15px;"/></a>
       </div>
       <div class="all-60">
         <small>{{getMember(user.member).name}}</small>
