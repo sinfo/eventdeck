@@ -1,11 +1,13 @@
 "use strict";
 
+var facebookConfig = require('./../../../../../config').facebook;
+
 theToolController.controller("LoginController", function ($scope, $routeParams, $location, $http, $window) {
 
   //================================INITIALIZATION================================
   $.ajaxSetup({cache: true});
   $.getScript("//connect.facebook.net/pt_PT/all.js", function () {
-    FB.init({appId: "457207507744159"});
+    FB.init({appId: facebookConfig.appId});
   });
 
   $scope.loading = false;
