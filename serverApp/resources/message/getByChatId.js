@@ -7,15 +7,15 @@ module.exports = list;
 function list(request, reply) {
 
   var chatId = request.params.id;
+  var dateRef = request.params.date;
   var messages;
 
   getMessage(done);
 
   function getMessage(cb) {
-    Message.findByChatId(chatId, gotMessage);
+    Message.findByChatId(chatId, dateRef, gotMessage);
 
-    function gotMessage(err, result) {
-      if (err) cb(err);
+    function gotMessage(result) {
       messages = result;
       cb();
     }
