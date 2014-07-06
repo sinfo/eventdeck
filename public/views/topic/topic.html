@@ -25,6 +25,7 @@
           </ul>
         </div>
       </form>
+
       <div ng-if="topic.targets.length > 0">
         <div ng-if="showTargets">
           <a ng-repeat="target in topic.targets" href="#/member/{{target}}" title="{{getMember(target).name}}">
