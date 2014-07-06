@@ -46,13 +46,13 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
   }
 
   $scope.checkPermission = function (topic) {
-    if(!$scope.me.roles) { return false; }
+    if (!$scope.me.roles) { return false; }
 
-    var roles = $scope.me.roles.filter(function(o) {
+    var roles = $scope.me.roles.filter(function (o) {
       return o.id == 'development-team' || o.id == 'coordination';
     });
 
-    if(roles.length == 0 && topic.author != $scope.me.id) {
+    if (roles.length == 0 && topic.author != $scope.me.id) {
       return false;
     }
 
@@ -62,7 +62,7 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
 
   //===================================FUNCTIONS===================================
 
-  $scope.deleteTopic = function(topic) {
+  $scope.deleteTopic = function (topic) {
     if (confirm("Are you sure you want to delete this topic?")) {
       TopicFactory.Topic.delete({id: topic._id}, function () {
         topic.deleted = true;
@@ -70,7 +70,7 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     }
   };
 
-  $scope.toggleTag = function(tag) {
+  $scope.toggleTag = function (tag) {
     var index = $scope.topic.tags.indexOf(tag);
 
     if (index == -1) {
@@ -85,7 +85,7 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     return ($scope.topic.tags.indexOf(tag.id) !== -1 ? "check" : "times");;
   };
 
-  $scope.toggleTarget = function(target) {
+  $scope.toggleTarget = function (target) {
     var index = $scope.topic.targets.indexOf(target);
 
     if (index == -1) {
@@ -96,23 +96,23 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     }
   };
 
-  $scope.toggleAllTargets = function() {
+  $scope.toggleAllTargets = function () {
     for (var i = 0, j = $scope.members.length; i < j; i++) {
       $scope.toggleTarget($scope.members[i].id);
     }
   };
 
-  $scope.toggleRoleTargets = function(roleId) {
+  $scope.toggleRoleTargets = function (roleId) {
     for (var i = 0, j = $scope.members.length; i < j; i++) {
       for(var o = 0; o < $scope.members[i].roles.length; o++) {
-        if($scope.members[i].roles[o].id == roleId) {
+        if ($scope.members[i].roles[o].id == roleId) {
           $scope.toggleTarget($scope.members[i].id);
         }
       }
     }
   };
 
-  $scope.toggleTargets = function() {
+  $scope.toggleTargets = function () {
     $scope.showTargets = !$scope.showTargets;
   };
 
@@ -120,7 +120,7 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     return ($scope.topic.targets.indexOf(memberId) !== -1 ? "blue" : "");
   };
 
-  $scope.focusOption = function(option) {
+  $scope.focusOption = function (option) {
     for (var i = 0, j = $scope.topic.poll.options.length; i < j; i++) {
       $scope.topic.poll.options[i].editing = false;
     }
@@ -128,7 +128,7 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     option.editing = true;
   };
 
-  $scope.addOption = function() {
+  $scope.addOption = function () {
     var option = {
       optionType: "Info",
       targets: []
@@ -139,26 +139,26 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     $scope.focusOption(option);
   };
 
-  $scope.removeOption = function(option) {
+  $scope.removeOption = function (option) {
     $scope.topic.poll.options.splice($scope.topic.poll.options.indexOf(option), 1);
   };
 
-  this.selectOption = function(topic, option) {
+  $scope.selectOption = function (topic, option) {
     var updatedTopic = topic;
 
-    if(option.votes.indexOf($scope.me.id) != -1) {
-      updatedTopic.poll.options[updatedTopic.poll.options.indexOf(option)].votes.splice(updatedTopic.poll.options[updatedTopic.poll.options.indexOf(option)].votes.indexOf($scope.me.id),1);
+    if (option.votes.indexOf($scope.me.id) !== -1) {
+      updatedTopic.poll.options[updatedTopic.poll.options.indexOf(option)].votes.splice(updatedTopic.poll.options[updatedTopic.poll.options.indexOf(option)].votes.indexOf($scope.me.id), 1);
     }
     else {
       updatedTopic.poll.options[updatedTopic.poll.options.indexOf(option)].votes.push($scope.me.id);
     }
 
-    TopicFactory.Topic.update({id: updatedTopic._id}, updatedTopic, function(response) {
-      if(response.error) {
+    TopicFactory.Topic.update({id: updatedTopic._id}, updatedTopic, function (response) {
+      if (response.error) {
         console.log("There was an error. Please contact the Dev Team and give them the details about the error.");
       }
       else if (response.success) {
-        console.log(response.success);
+        //console.log(response.success);
       }
     });
   };
@@ -193,11 +193,11 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
   };
 
   $scope.getMember = function (memberId) {
-    var member = $scope.members.filter(function(o) {
+    var member = $scope.members.filter(function (o) {
       return o.id == memberId;
     });
 
-    if(member && member.length > 0) {
+    if (member && member.length > 0) {
       return member[0];
     }
     else {
@@ -213,7 +213,7 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     var seconds = Math.floor((Date.now() - date) / 1000);
 
     var suffix = "ago";
-    if(seconds < 0){
+    if (seconds < 0){
       seconds = Math.abs(seconds);
       suffix = "to go";
     }
