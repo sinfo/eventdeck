@@ -16,7 +16,10 @@ function update(request, reply) {
           console.log(err);
         }
 
-        notification.notify(request.auth.credentials.id, "topic-" + request.payload._id, "updated a topic.", null, targets);
+        if (!request.payload._voting) {
+          notification.notify(request.auth.credentials.id, "topic-" + request.payload._id, "updated a topic.", null, targets);
+        }
+
         reply({success: "Topic updated."});
       });
     }

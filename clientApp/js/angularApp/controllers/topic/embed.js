@@ -153,6 +153,8 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
       updatedTopic.poll.options[updatedTopic.poll.options.indexOf(option)].votes.push($scope.me.id);
     }
 
+    updatedTopic._voting = true;
+
     TopicFactory.Topic.update({id: updatedTopic._id}, updatedTopic, function (response) {
       if (response.error) {
         console.log("There was an error. Please contact the Dev Team and give them the details about the error.");
