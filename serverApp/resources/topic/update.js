@@ -1,6 +1,6 @@
-var Topic = require('./../../db/models/topic');
-var notification = require('./../notification');
-var getTargets = require('./../member').getTargetsByThread;
+var Topic = require("./../../db/models/topic");
+var notification = require("./../notification");
+var getTargets = require("./../member").getTargetsByThread;
 
 module.exports = update;
 
@@ -11,10 +11,12 @@ function update(request, reply) {
       reply({error: "There was an error updating the topic with id '" + request.payload._id + "'."});
     }
     else {
-      getTargets('topic-'+request.payload._id, function(err, targets) {
-        if(err) { console.log(err); }
+      getTargets("topic-" + request.payload._id, function (err, targets) {
+        if (err) {
+          console.log(err);
+        }
 
-        notification.notify(request.auth.credentials.id, 'topic-'+request.payload._id, 'updated a topic', null, targets);
+        notification.notify(request.auth.credentials.id, "topic-" + request.payload._id, "updated a topic.", null, targets);
         reply({success: "Topic updated."});
       });
     }
