@@ -26,7 +26,7 @@ webSocket
           getChat(room, user, cb)
         },
         function(cb){
-          getMessages(room, cb)
+          getMessages(room, Date.now(), cb)
         }
       ], function(err, results){
           done(err, room, socket, cbClient);
@@ -45,7 +45,7 @@ webSocket
           updateChat(room, cb)
         }
       ], function(){
-          webSocket.of('/chat').in(room).emit('message', messageData);
+          webSocket.of('/chat').in(room).emit('message', {message: messageData});
           cbClient();
       });
     });
@@ -60,6 +60,16 @@ webSocket
     socket.on('disconnect', function(){
       console.log("Disconnected: " + socket.nickname);
       delete socket;
+    });
+
+    socket.on('history-get', function(data, cb){
+      console.log("Getting history: " + socket.nickname);
+      var dateRef = data.date;
+      var room = data.room;
+      getMessages(room, dateRef, function(){
+        webSocket.of('/chat').in(room).emit('history-send', {messages: messages});
+        cb();
+      })
     });
 
   });
@@ -81,8 +91,8 @@ function getChat(chatID, memberID, cb){
   });
 }
 
-function getMessages(chatID, cb){
-  Message.getByChatId({params:{id: chatID}}, function(response){
+function getMessages(chatID, dateRef, cb){
+  Message.getByChatId({params:{id: chatID, date: dateRef}}, function(response){
     if(response.error) {
       console.log('Chat id: ' + chatID + ' messages unavailable');
     } 
@@ -109,7 +119,7 @@ function done(err, room, socket, cb){
     var clients = webSocket.of('/chat').sockets;
     console.log("Currently Loged:");
     for(var i = 0; i < clients.length; i++){
-      if(clients[i].connected  && clients[i].nicknam != 'server'){
+      if(clients[i].connected  && clients[i].nickname){
         online[i] = clients[i].nickname;
         console.log(clients[i].nickname);
       }
