@@ -68,7 +68,6 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
   });
 
   SocketFactory.on('message', function (response) {
-    console.log($scope.scroll);
     var message = response.message
     $scope.messages.push(message);
     if(message.member != $scope.me.id) {
