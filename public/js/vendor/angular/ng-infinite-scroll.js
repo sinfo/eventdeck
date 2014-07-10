@@ -48,7 +48,7 @@ mod.directive('infiniteScroll', [
           }
           remaining = scrollReverse ? elementTop - containerTop : elementBottom - containerBottom;
           if(scrollReverse){
-            shouldScroll = remaining >= scrollDistance + 5;
+            shouldScroll = remaining >= scrollDistance;
           }
           else{
             shouldScroll = remaining <= container.height() * scrollDistance + 1;
