@@ -6,7 +6,6 @@ theToolDirectives.directive("scrollPosition", function () {
       scroll: '=scrollPosition'
     },
     link: function(scope, elem, attrs) {
-      console.log(elem);
       var handler = function() {
         scope.scroll = elem.scrollTop();
       }
