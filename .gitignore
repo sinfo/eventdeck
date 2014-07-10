@@ -32,4 +32,8 @@ sftp-config.json
 
 chromeExtension.*
 
+<<<<<<< HEAD
 phonegap/platforms
+=======
+phonegap/platforms
+>>>>>>> c5b165871acd6def953b0c10dd04c6f0b9c4bf30

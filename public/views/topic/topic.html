@@ -3,7 +3,7 @@
 
   <div ng-if="!topic.editing" class="column-group horizontal-gutters">
     <div class="all-85">
-      <a href="/#/member/{{topic.author}}">
+      <a href="#/member/{{topic.author}}">
         <img ng-src="https://graph.facebook.com/{{getMember(topic.author).facebook}}/picture"/>
         <small>{{getMember(topic.author).name}}</small>
       </a>
@@ -13,7 +13,8 @@
         <b>[{{topic.kind}}]</b> <span ng-bind-html="topic.text | linky"></span><i ng-if="topic.closed"> [Closed!]</i><i ng-show="topic.show.duedate && topic.duedate"> [{{timeSince(topic.duedate)}}]</i>
       </h5>
 
-      <form ng-if="topic.show.poll">
+      <div ng-if="topic.show.poll" class="ink-button small" ng-click="topic.show.pollOptions = !topic.show.pollOptions"><i class="fa fa-chevron-{{topic.show.pollOptions ? 'up': 'down'}}"></i> {{topic.show.pollOptions ? 'Hide' : 'Show'}} poll options</div>
+      <form ng-if="topic.show.pollOptions">
         <div class="control-group">
           <ul class="control unstyled">
             <li ng-repeat="option in topic.poll.options">
@@ -25,9 +26,10 @@
           </ul>
         </div>
       </form>
+
       <div ng-if="topic.targets.length > 0">
         <div ng-if="showTargets">
-          <a ng-repeat="target in topic.targets" href="/#/member/{{target}}" title="{{getMember(target).name}}">
+          <a ng-repeat="target in topic.targets" href="#/member/{{target}}" title="{{getMember(target).name}}">
             <img ng-src="https://graph.facebook.com/{{getMember(target).facebook}}/picture?width=100&height=100" style="width:50px; margin:2px">
           </a>
           <br><br>

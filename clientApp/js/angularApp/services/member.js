@@ -3,16 +3,16 @@
 theToolServices
   .factory('MemberFactory', function ($resource) {
     return {
-      Member: $resource('/api/member/:id', null, {
+      Member: $resource(url_prefix+'/api/member/:id', null, {
         'getAll': {method: 'GET', isArray:true},
         'update': {method: 'PUT'},
         'create': {method: 'POST'},
         'delete': {method: 'DELETE'}
       }),
-      Role: $resource('/api/role/:id/members', null, {
+      Role: $resource(url_prefix+'/api/role/:id/members', null, {
         'getAll': {method: 'GET', isArray: true}
       }),
-      Me: $resource('/api/myself', null, {
+      Me: $resource(url_prefix+'/api/myself', null, {
         'get': {method: 'GET', isArray: false}
       })
     };

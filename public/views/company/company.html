@@ -7,12 +7,12 @@
 
       <div class="all-85">
 
-        <a href="/#/member/{{company.member}}">
+        <a href="#/member/{{company.member}}">
           <img ng-src="https://graph.facebook.com/{{getMember(company.member).facebook}}/picture"/>
           <small>{{getMember(company.member).name}}</small>
         </a>
 
-        <a href="/#/company/{{company.id}}">
+        <a href="#/company/{{company.id}}">
           <h5 style="margin-top:10px;">
             <span class="status" ng-class="company.status.replace(' ','-').toLowerCase()">{{company.status}}</span> 
             {{company.name}} 
