@@ -1,5 +1,4 @@
 require('./publicAssets');
-require('./angularApp');
 require('./auth');
 require('./company');
 require('./speaker');

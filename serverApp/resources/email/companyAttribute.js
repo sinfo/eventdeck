@@ -1,7 +1,8 @@
 var Member     = require('./../../db/models/member.js');
 var email       = require('emailjs');
 var async       = require('async');
-var emailConfig = require('./../../emailConfig');
+var url_prefix = require('./../../../config').url;
+var emailConfig = require('./../../../config').email;
 
 var server  = email.server.connect({
   user:     emailConfig.user, 
@@ -41,7 +42,7 @@ function notify(memberId, company) {
 
   function sendEmail(cb) {
     var message = {
-      text:    "You are now the responsible member of "+company.name+"! \n\nCheck it out:\nhttp://the-tool.franciscodias.net/#/company/"+company.id, 
+      text:    "You are now the responsible member of "+company.name+"! \n\nCheck it out:\n"+url_prefix+"#/company/"+company.id, 
       from:    "The Tool! <thetoolsinfo@gmail.com>",
       to:       member.name + "<" +member.mails.sinfo + ">",
       subject: "[SINFO] New company for you: "+company.name+"!"
