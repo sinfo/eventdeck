@@ -9,3 +9,4 @@ require("./meeting");
 require("./speaker");
 require("./tag");
 require("./topic");
+require("./scroll");

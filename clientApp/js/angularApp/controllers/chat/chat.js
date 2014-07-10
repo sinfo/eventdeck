@@ -9,6 +9,8 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
   $scope.messages = [];
   $scope.online   = [];
 
+  console.log($scope.scroll);
+
   console.log("Connecting");
 
   SocketFactory.connect('/chat');
@@ -35,7 +37,9 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
         $scope.online[i].name = $scope.getMember($scope.online[i].member).name;
       }
       console.log($scope.online);
-
+      $scope.$watch('scroll', function(newValue, oldValue, scope) {
+        if (!newValue) {history();}
+      });
     }
     else{
       console.log(response.message);
@@ -64,7 +68,8 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
   });
 
   SocketFactory.on('message', function (response) {
-    var message = reponse.message
+    console.log($scope.scroll);
+    var message = response.message
     $scope.messages.push(message);
     if(message.member != $scope.me.id) {
       ngAudio.play("audio/message.mp3");
@@ -83,16 +88,6 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
     delete SocketFactory.socket;
   });
 
-  $scope.history = function() {
-    console.log('Start history request');
-    if(!$scope.updating){
-      $scope.updating = true;
-      SocketFactory.emit('history-get', {room: $scope.room, date: $scope.messages[$scope.messages.length-1].date }, function() {
-        console.log('Sent history request');
-      });
-    }
-  }
-
   $scope.submit = function() {
     if ($scope.text == ""){
       return;
@@ -110,4 +105,14 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
       $scope.text = "";
     });
   };
+
+  function history () {
+    console.log('Start history request');
+    if(!$scope.updating){
+      $scope.updating = true;
+      SocketFactory.emit('history-get', {room: $scope.room, date: $scope.messages[$scope.messages.length-1].date }, function() {
+        console.log('Sent history request');
+      });
+    }
+  }
 });
