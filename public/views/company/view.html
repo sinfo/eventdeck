@@ -16,12 +16,12 @@
         <div class="all-30 medium-30 small-100 tiny-100">
           <p class="button-group">
             <a class="ink-button blue" href="{{company.forum}}" target="_blank"><i class="fa fa-comments"></i> Go to Forum!</a>
-            <a class="ink-button orange" href="/#/company/{{company.id}}/edit"><i class="fa fa-wrench"></i> Edit Company</a>
+            <a class="ink-button orange" href="#/company/{{company.id}}/edit"><i class="fa fa-wrench"></i> Edit Company</a>
           </p>
           <img ng-show="company.img" ng-src="{{company.img}}" width="100%" />
           <br><br>
           <p>
-            <a href="/#/member/{{company.member}}">
+            <a href="#/member/{{company.member}}">
             <img ng-if="company.member" ng-src="https://graph.facebook.com/{{getMember(company.member).facebook}}/picture"/>
             <b style="font-size: 20px; margin-left:12px;"> {{getMember(company.member).name}}</b>
             </a>
