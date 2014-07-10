@@ -383,6 +383,7 @@ a, a:visited, a:hover {
   padding: 5px;
   border-radius: 6px;
   width:70%;
+  word-break: break-all;
 }
 
 .chat-notification {
@@ -391,6 +392,7 @@ a, a:visited, a:hover {
   width:70%;
   float: left;
   text-align: left;
+  word-break: break-all;
 }
 
 .chat-message.me {
