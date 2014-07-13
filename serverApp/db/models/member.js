@@ -18,7 +18,11 @@ var memberSchema = new mongoose.Schema({
   loginCodes: [{
     code: String,
     created: {type: Date}
-  }]
+  }],
+  subscriptions: {
+    all: Boolean,
+    ids: [String]
+  }
 });
 
 memberSchema.statics.findById = function (id, cb) {
@@ -43,6 +47,10 @@ memberSchema.statics.findTeamLeaders = function (cb) {
 
 memberSchema.statics.findAllRoles = function (cb) {
   this.find().distinct('roles',cb);
+};
+
+memberSchema.statics.findSubscribers = function (id, cb) {
+  this.find({ $or: [ { 'subscriptions.ids': id }, {'subscriptions.all': true } ] },cb);
 };
 
 memberSchema.statics.findAll = function (cb) {
