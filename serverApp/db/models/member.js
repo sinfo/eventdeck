@@ -21,7 +21,7 @@ var memberSchema = new mongoose.Schema({
   }],
   subscriptions: {
     all: Boolean,
-    ids: [String]
+    threads: [String]
   }
 });
 
@@ -50,7 +50,11 @@ memberSchema.statics.findAllRoles = function (cb) {
 };
 
 memberSchema.statics.findSubscribers = function (id, cb) {
-  this.find({ $or: [ { 'subscriptions.ids': id }, {'subscriptions.all': true } ] },cb);
+  this.find({ $or: [ { 'subscriptions.threads': id }, {'subscriptions.all': true } ] },cb);
+};
+
+memberSchema.statics.subscribeThread = function (memberId, thread, cb) {
+  this.update({ id: memberId.toLowerCase() }, { $push: { 'subscriptions.threads': thread } }, cb);
 };
 
 memberSchema.statics.findAll = function (cb) {
