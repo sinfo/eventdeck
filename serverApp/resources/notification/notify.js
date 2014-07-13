@@ -23,7 +23,19 @@ function notify(memberId, thread, description, objectId, subscribers) {
       targets = [];
     }
 
-    cb();
+    Member.findSubscribers(thread, gotMembers);
+
+    function gotMembers(err, result) {
+      if (err)
+        return cb(err);
+
+      for(var member in result) {
+        if(targets.indexOf(result[member].id) != -1){
+          targets.push(result[member].id);
+        }
+      }
+      cb();
+    }
   }
 
   function getMembers(cb) {
