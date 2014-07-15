@@ -1,15 +1,7 @@
 var Member     = require('./../../db/models/member.js');
-var email       = require('emailjs');
+var email       = require('./');
 var async       = require('async');
 var url_prefix = require('./../../../config').url;
-var emailConfig = require('./../../../config').email;
-
-var server  = email.server.connect({
-  user:     emailConfig.user, 
-  password: emailConfig.password, 
-  host:     emailConfig.host, 
-  ssl:      emailConfig.ssl
-});
 
 exports = module.exports = notify;
 
@@ -42,14 +34,13 @@ function notify(memberId, company) {
 
   function sendEmail(cb) {
     var message = {
-      text:    "You are now the responsible member of "+company.name+"! \n\nCheck it out:\n"+url_prefix+"#/company/"+company.id, 
-      from:    "The Tool! <thetoolsinfo@gmail.com>",
       to:       member.name + "<" +member.mails.sinfo + ">",
-      subject: "[SINFO] New company for you: "+company.name+"!"
+      subject: "[SINFO] New company for you: "+company.name+"!",
+      text:    "You are now the responsible member of "+company.name+"! \n\nCheck it out:\n"+url_prefix+"#/company/"+company.id, 
     };
 
     // send the message and get a callback with an error or details of the message that was sent
-    server.send(message, function(err, message) {
+    email.send(message, function(err, message) {
       if(err) { cb(err); }
       console.log(err || message); 
       cb();

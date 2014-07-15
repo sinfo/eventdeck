@@ -1,15 +1,7 @@
 var async = require('async')
-var email = require('emailjs');
+var email = require('./../email');
 var Member = require("./../../db/models/member.js");
 var url_prefix = require('./../../../config').url;
-var emailConfig = require('./../../../config').email;
-
-var server  = email.server.connect({
-  user:     emailConfig.user,
-  password: emailConfig.password,
-  host:     emailConfig.host,
-  ssl:      emailConfig.ssl
-});
 
 module.exports = sendCode;
 
@@ -68,14 +60,13 @@ function sendCode(request, reply) {
 
   function sendEmail(cb) {
     var message = {
-      text:    "Hey "+member.name+"!\n\n Here is your code for logging in on The Tool: "+loginCode+"\n\n"+url_prefix+"#/login/"+member.id+"/"+loginCode,
-      from:    "The Tool! <thetoolsinfo@gmail.com>",
       to:       member.name + "<" +member.mails.sinfo + ">",
-      subject: "[SINFO] Login code for The Tool!"
+      subject: "[SINFO] Login code for The Tool!",
+      text:    "Hey "+member.name+"!\n\n Here is your code for logging in on The Tool: "+loginCode+"\n\n"+url_prefix+"#/login/"+member.id+"/"+loginCode,
     };
   
     // send the message and get a callback with an error or details of the message that was sent
-    server.send(message, function(err, message) {
+    email.send(message, function(err, message) {
       if(err) { cb('There was an error sending the email'); }
       console.log(err)
       cb();

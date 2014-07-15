@@ -4,6 +4,7 @@ var comment       = require("./../resources/comment");
 var notification  = require("./../resources/notification");
 var communication = require("./../resources/communication");
 var session       = require("./../resources/session");
+var member        = require("./../resources/member");
 
 server.route({
   method: "GET",
@@ -91,6 +92,33 @@ server.route({
   path: "/api/company/{id}/sessions",
   config: {
     handler: session.getByThread,
+    auth: true
+  }
+});
+
+server.route({
+  method: "GET",
+  path: "/api/company/{id}/subscribe",
+  config: {
+    handler: member.getSubscription,
+    auth: true
+  }
+});
+
+server.route({
+  method: "POST",
+  path: "/api/company/{id}/subscribe",
+  config: {
+    handler: member.addSubscription,
+    auth: true
+  }
+});
+
+server.route({
+  method: "DELETE",
+  path: "/api/company/{id}/subscribe",
+  config: {
+    handler: member.removeSubscription,
     auth: true
   }
 });
