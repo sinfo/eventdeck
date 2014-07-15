@@ -29,7 +29,8 @@
     "markdown": "~0.5.0",
     "emailjs": "~0.3.8",
     "socket.io": "~1.0.2",
-    "request": "~2.36.0"
+    "request": "~2.36.0",
+    "mailgun": "~0.4.2"
   },
   "devDependencies": {
     "nodemon": "~0.7.10",
