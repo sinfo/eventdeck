@@ -2,7 +2,7 @@
 <div ng-hide="loading">
   <h1>Chat {{chat.name}}</h1>
 </div>
-<div scroll-glue scroll-position="scroll" ng-hide="loading" style="position: absolute; top: 100px; left: 20px; overflow-y: scroll; height: 70%; width:70%; background:white">
+<div scroll-glue infinite-scroll="history()" infinite-scroll-reverse="true" ng-hide="loading" style="position: absolute; top: 100px; left: 20px; overflow-y: scroll; height: 70%; width:70%; background:white">
  <ul class="unstyled">
     <li ng-repeat="message in messages | orderBy:'date':false">
       <div ng-if="message.kind == 'message'">
