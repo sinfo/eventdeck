@@ -29,7 +29,6 @@ mod.directive('infiniteScroll', [
         handler = function() {
           var containerBottom, elementTop, containerTop, containerTopOffset, elementBottom, remaining, shouldScroll;
           if (container === $window) {
-            containerTop = container.scrollTop();
             containerBottom = container.height() + container.scrollTop();
             elementBottom = elem.offset().top + elem.height();
             elementTop = elem.offset().top;
@@ -41,12 +40,11 @@ mod.directive('infiniteScroll', [
             }
             containerTop = containerTopOffset;
             elementBottom = elem.offset().top - containerTopOffset + elem.height();
-            elementTop = elem.offset().top - containerTopOffset;
           }
           if (useDocumentBottom) {
             elementBottom = $(document).height();
           }
-          remaining = scrollReverse ? elementTop - containerTop : elementBottom - containerBottom;
+          remaining = scrollReverse ? container.scrollTop() : elementBottom - containerBottom;
           if(scrollReverse){
             shouldScroll = remaining >= scrollDistance;
           }
