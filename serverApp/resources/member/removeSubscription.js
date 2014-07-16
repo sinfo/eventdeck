@@ -1,11 +1,11 @@
-var Member = require('./../../db/models/member.js');
+var Member = require("./../../db/models/member.js");
 
-module.exports = get;
+module.exports = remove;
 
-function get(request, reply) {
+function remove(request, reply) {
 
   var member = request.auth.credentials.id;
 
-  reply(request);
+  reply("gaita");
 
 }

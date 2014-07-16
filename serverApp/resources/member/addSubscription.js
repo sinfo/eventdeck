@@ -1,11 +1,21 @@
-var Member = require('./../../db/models/member.js');
+var Member = require("./../../db/models/member.js");
 
-module.exports = get;
+module.exports = add;
 
-function get(request, reply) {
+function add(request, reply) {
 
-  var member = request.auth.credentials.id;
+  var memberId = request.auth.credentials.id;
 
-  reply(request);
+  var source = request.url.path.split("/")[2];
+  var sourceId = request.url.path.split("/")[3];
+
+  Member.update({id: memberId}, {subscriptions: {$push: {threads: source + "-" + sourceId}}}, function (err) {
+    if (err) {
+      reply({error: "There was an error updating the member."});
+    }
+    else {
+      reply({success: "Member updated."});
+    }
+  });
 
 }

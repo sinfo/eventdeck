@@ -1,11 +1,27 @@
-var Member = require('./../../db/models/member.js');
+var Member = require("./../../db/models/member.js");
 
 module.exports = get;
 
 function get(request, reply) {
 
-  var member = request.auth.credentials.id;
+  var memberId = request.auth.credentials.id;
 
-  reply(request);
+  var source = request.url.path.split("/")[2];
+  var sourceId = request.url.path.split("/")[3];
+
+  Member.find({id: memberId}, function (err, result) {
+    if (err || !result || result.length < 1) {
+      reply({error: "There was an error getting the member."});
+    }
+    else {
+      var member = result[0];
+      if (member.subscriptions.all || member.subscriptions.threads.indexOf(source + "-" + sourceId) !== -1) {
+        reply({success: "subscribed"});
+      }
+      else {
+        reply({success: "unsubscribed"});
+      }
+    }
+  });
 
 }
