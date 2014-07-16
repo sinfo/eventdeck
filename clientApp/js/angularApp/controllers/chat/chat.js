@@ -8,9 +8,9 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
   $scope.loading  = true;
   $scope.messages = [];
   $scope.online   = [];
-  $scope.history  = function () {
+ /* $scope.history  = function () {
     setTimeout(function() {$scope.history()}, 3000);
-  }
+  }*/
 
   console.log($scope.scroll);
 
