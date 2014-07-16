@@ -27,18 +27,16 @@ mod.directive('infiniteScroll', [
         useDocumentBottom = false;
         scrollReverse = false;
         handler = function() {
-          var containerBottom, elementTop, containerTop, containerTopOffset, elementBottom, remaining, shouldScroll;
+          var containerBottom, containerTopOffset, elementBottom, remaining, shouldScroll;
           if (container === $window) {
             containerBottom = container.height() + container.scrollTop();
             elementBottom = elem.offset().top + elem.height();
-            elementTop = elem.offset().top;
           } else {
             containerBottom = container.height();
             containerTopOffset = 0;
             if (container.offset() !== void 0) {
               containerTopOffset = container.offset().top;
             }
-            containerTop = containerTopOffset;
             elementBottom = elem.offset().top - containerTopOffset + elem.height();
           }
           if (useDocumentBottom) {
@@ -46,7 +44,7 @@ mod.directive('infiniteScroll', [
           }
           remaining = scrollReverse ? container.scrollTop() : elementBottom - containerBottom;
           if(scrollReverse){
-            shouldScroll = remaining >= scrollDistance;
+            shouldScroll = remaining <= scrollDistance + 1;
           }
           else{
             shouldScroll = remaining <= container.height() * scrollDistance + 1;
@@ -54,9 +52,6 @@ mod.directive('infiniteScroll', [
           if (shouldScroll) {
             checkWhenEnabled = true;
             if (scrollEnabled) {
-              if(scrollReverse){
-                container.scrollTop(container.scrollTop() + elementBottom + 1); 
-              }
               if (scope.$$phase || $rootScope.$$phase) {
                 return scope.infiniteScroll();
               } else {
@@ -126,12 +121,26 @@ mod.directive('infiniteScroll', [
         };
         scope.$watch('infiniteScrollReverse', handleInfiniteScrollReverse);
         handleInfiniteScrollReverse(scope.infiniteScrollReverse);
+        handleHeightChange = function(newHeight, oldHeight) {
+          console.log('Height: ' + newHeight + " Old: " + oldHeight);
+          if (newHeight !== oldHeight){
+            container.scrollTop(newHeight - oldHeight - 1);
+            if (!(scope.$$phase || $rootScope.$$phase)) {
+              scope.$apply();
+            }
+          }
+        }
         changeContainer = function(newContainer) {
           if (container != null) {
             container.off('scroll', handler);
           }
           container = typeof newContainer.last === 'function' && newContainer !== $window ? newContainer.last() : newContainer;
           if (newContainer != null) {
+            if (scrollReverse){
+              console.log(container.scrollTop());
+              console.log(container[0].scrollHeight);
+              scope.$watch(function(){ return container[0].scrollHeight; }, handleHeightChange);
+            }
             return container.on('scroll', handler);
           }
         };
