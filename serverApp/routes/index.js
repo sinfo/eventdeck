@@ -12,3 +12,4 @@ require('./topic');
 require('./communication');
 require('./session');
 require('./tag');
+require('./update');
