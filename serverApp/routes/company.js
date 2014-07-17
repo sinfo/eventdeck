@@ -98,7 +98,7 @@ server.route({
 
 server.route({
   method: "GET",
-  path: "/api/company/{id}/subscribe",
+  path: "/api/company/{id}/subscription",
   config: {
     handler: member.getSubscription,
     auth: true
@@ -107,7 +107,7 @@ server.route({
 
 server.route({
   method: "POST",
-  path: "/api/company/{id}/subscribe",
+  path: "/api/company/{id}/subscription",
   config: {
     handler: member.addSubscription,
     auth: true
@@ -116,7 +116,7 @@ server.route({
 
 server.route({
   method: "DELETE",
-  path: "/api/company/{id}/subscribe",
+  path: "/api/company/{id}/subscription",
   config: {
     handler: member.removeSubscription,
     auth: true
