@@ -37,6 +37,10 @@ topicSchema.statics.findByTarget = function (id, cb) {
   this.find({ targets: {$in: [id]} }, cb);
 };
 
+topicSchema.statics.findByDuedate = function (start, end, cb) {
+  this.find({ duedate: {$gte: start, $lt: end} }, cb);
+};
+
 topicSchema.statics.findByTag = function (id, cb) {
   this.find({ tags: {$in: [id]} }, cb);
 };
