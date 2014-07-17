@@ -13,5 +13,6 @@ require('./role');
 require('./session');
 require('./socket');
 require('./speaker');
+require('./subscription');
 require('./tag');
 require('./topic');
