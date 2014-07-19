@@ -17,6 +17,7 @@
           <p class="button-group">
             <a class="ink-button blue" href="{{speaker.forum}}" target="_blank"><i class="fa fa-comments"></i> Go to Forum!</a>
             <a class="ink-button orange" href="#/speaker/{{speaker.id}}/edit"><i class="fa fa-wrench"></i> Edit Speaker</a>
+            <a><subscription thread="{{'speaker-' + speaker.id}}"></subscription></a>
           </p>
           <p>
             <img ng-if="speaker.img" ng-src="{{speaker.img}}" width="100%" />
