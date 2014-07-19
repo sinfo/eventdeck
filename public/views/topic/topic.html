@@ -54,6 +54,8 @@
       <br>
       <small title="Show/Hide comments" class="ink-button small green" ng-click="topic.showComments = !topic.showComments" style="width:60px">{{topic.comments.length}} <i class="fa fa-comments"></i></small>
       <br>
+      <small style="margin-right:1px"><subscription thread="{{'topic-' + topic._id}}"></subscription></small>
+      <br>
     </div>
   </div>
 
