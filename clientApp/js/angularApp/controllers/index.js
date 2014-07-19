@@ -11,3 +11,4 @@ require('./chat');
 require('./topic');
 require('./communication');
 require('./tag');
+require('./subscription');

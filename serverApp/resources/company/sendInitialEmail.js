@@ -1,16 +1,8 @@
 var async       = require('async');
 var Company     = require('./../../db/models/company.js');
 var Member      = require('./../../db/models/member.js');
-var email       = require('emailjs');
+var email       = require('./../email');
 var url_prefix = require('./../../../config').url;
-var emailConfig = require('./../../../config').email;
-
-var server = email.server.connect({
-  user:     emailConfig.user,
-  password: emailConfig.password,
-  host:     emailConfig.host,
-  ssl:      emailConfig.ssl
-});
 
 module.exports = send;
 
@@ -62,23 +54,19 @@ function send(request, reply) {
   }
 
   function sendEmail(cb){
-    var email = request.payload.email;
+    var recipient = request.payload.email;
 
     var message = {
        text:    "Convite para a participação da "+company.name+" na SINFO 22",
-       from:    member.name + "<" +member.mails.sinfo + ">",
-       to:      email,
+       to:      recipient,
        cc:      member.name + "<" +member.mails.sinfo + ">",
        subject: "[SINFO] Convite para a participação da "+company.name+" na SINFO 22",
-       attachment:
-       [
-          {data:"<html><div style=\"width: 100%;\"><div style=\"margin: 0px auto; text-align: center; overflow: hidden;\"><p style=\"font-size: 40px; font-family: Arial; font-weight: bold; font-style: normal; font-variant: normal; text-decoration: none;\">Convidamos a " + company.name + " a participar na      </p>      <img src=\""+url_prefix+"/sponsor/"+company.id+"/logo.jpg\" alt=\"SINFO 22 - Semana Informática\" />  </div>    <p>      Os alunos do curso de Engenharia de Informática e de Computadores do Instituto Superior Técnico têm todo o prazer       e vêm por este meio convidar a " + company.name + " a participar na 22ª edição da SINFO.  </p>    <p><strong>Quando: Semana de 2ª-feira 9 de Fevereiro a 6ª-feira 13 de Fevereiro de 2015.</strong></p>  <p><strong>Onde: Instituto Superior Técnico, Campus Alameda, em Lisboa.</strong></p>  <p>      Na nossa <a href=\""+url_prefix+"/sponsor/"+company.id+"\">página de apresentação</a> do evento encontra-se      mais informação sobre o evento, assim como sobre as condições de participação no mesmo.  </p>    <p>      Para qualquer questão, não hesite em contactar-me via email ou telefone (ver assinatura do email). Estou       igualmente disponível para uma reunião presencial de esclarecimentos, em horário oportuno.  </p>  <p>      Agradecidos pela atenção prestada e esperando uma resposta favorável, apresentamos os nossos mais cordiais cumprimentos.  </p>  <p>      Pela Comissão Organizadora da SINFO 22,  </p>"+signature+"</html>", alternative:true}
-       ],
-       "reply-to":member.name + "<" +member.mails.sinfo + ">"
+       html:    "<html><div style=\"width: 100%;\"><div style=\"margin: 0px auto; text-align: center; overflow: hidden;\"><p style=\"font-size: 40px; font-family: Arial; font-weight: bold; font-style: normal; font-variant: normal; text-decoration: none;\">Convidamos a " + company.name + " a participar na      </p>      <img src=\""+url_prefix+"/sponsor/"+company.id+"/logo.jpg\" alt=\"SINFO 22 - Semana Informática\" />  </div>    <p>      Os alunos do curso de Engenharia de Informática e de Computadores do Instituto Superior Técnico têm todo o prazer       e vêm por este meio convidar a " + company.name + " a participar na 22ª edição da SINFO.  </p>    <p><strong>Quando: Semana de 2ª-feira 9 de Fevereiro a 6ª-feira 13 de Fevereiro de 2015.</strong></p>  <p><strong>Onde: Instituto Superior Técnico, Campus Alameda, em Lisboa.</strong></p>  <p>      Na nossa <a href=\""+url_prefix+"/sponsor/"+company.id+"\">página de apresentação</a> do evento encontra-se      mais informação sobre o evento, assim como sobre as condições de participação no mesmo.  </p>    <p>      Para qualquer questão, não hesite em contactar-me via email ou telefone (ver assinatura do email). Estou       igualmente disponível para uma reunião presencial de esclarecimentos, em horário oportuno.  </p>  <p>      Agradecidos pela atenção prestada e esperando uma resposta favorável, apresentamos os nossos mais cordiais cumprimentos.  </p>  <p>      Pela Comissão Organizadora da SINFO 22,  </p>"+signature+"</html>",
+       replyTo: member.name + "<" +member.mails.sinfo + ">"
     };
 
     // send the message and get a callback with an error or details of the message that was sent
-    server.send(message, function(err, message) {
+    email.send(message, function(err, message) {
       if(err) {
         cb(err);
       }

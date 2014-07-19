@@ -17,6 +17,7 @@
           <p class="button-group">
             <a class="ink-button blue" href="{{company.forum}}" target="_blank"><i class="fa fa-comments"></i> Go to Forum!</a>
             <a class="ink-button orange" href="#/company/{{company.id}}/edit"><i class="fa fa-wrench"></i> Edit Company</a>
+            <subscription thread="{{'company-' + company.id}}"></subscription>
           </p>
           <img ng-show="company.img" ng-src="{{company.img}}" width="100%" />
           <br><br>

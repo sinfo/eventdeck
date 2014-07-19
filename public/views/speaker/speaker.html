@@ -29,6 +29,8 @@
       <div class="all-15 align-right">
         <!--<small title="Edit Topic" class="ink-button orange" ng-click="speaker.editing=!speaker.editing" style="width:60px"><i class="fa fa-wrench"></i></small><br>-->
         <small title="Show/Hide Comments" class="ink-button small green" ng-click="speaker.showComments = !speaker.showComments" style="width:60px">{{speaker.comments.length}} <i class="fa fa-comments"></i></small>
+        <br>
+        <small style="margin-right:4px"><subscription thread="{{'speaker-' + speaker.id}}"></subscription></small>
       </div>
     </div>
 

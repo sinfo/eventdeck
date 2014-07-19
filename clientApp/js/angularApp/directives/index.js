@@ -10,3 +10,4 @@ require("./speaker");
 require("./tag");
 require("./topic");
 require("./scroll");
+require("./subscription");
