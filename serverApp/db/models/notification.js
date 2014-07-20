@@ -38,6 +38,14 @@ notificationSchema.statics.findAll = function (cb) {
   this.find({},cb);
 };
 
+notificationSchema.statics.findByThread = function (id, cb) {
+  this.find({ thread: id }, cb);
+};
+
+notificationSchema.statics.findByThreadAndDate = function (id, date, cb) {
+  this.find({ thread: id, posted: {$gte: date}, member: 'toolbot' }, cb);
+};
+
 notificationSchema.statics.removeByThread = function (id, cb) {
   this.remove({ thread: id }, cb);
 };
