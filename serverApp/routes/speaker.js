@@ -4,7 +4,7 @@ var comment       = require("./../resources/comment");
 var notification  = require("./../resources/notification");
 var communication = require("./../resources/communication");
 var session       = require("./../resources/session");
-var member        = require("./../resources/member");
+var subscription  = require("./../resources/subscription");
 
 server.route({
   method: "GET",
@@ -100,7 +100,7 @@ server.route({
   method: "GET",
   path: "/api/speaker/{id}/subscription",
   config: {
-    handler: member.getSubscription,
+    handler: subscription.get,
     auth: true
   }
 });
@@ -109,7 +109,7 @@ server.route({
   method: "POST",
   path: "/api/speaker/{id}/subscription",
   config: {
-    handler: member.addSubscription,
+    handler: subscription.add,
     auth: true
   }
 });
@@ -118,7 +118,7 @@ server.route({
   method: "DELETE",
   path: "/api/speaker/{id}/subscription",
   config: {
-    handler: member.removeSubscription,
+    handler: subscription.remove,
     auth: true
   }
 });
