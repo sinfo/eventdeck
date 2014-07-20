@@ -7,6 +7,3 @@ exports.getByRole          = require('./getByRole');
 exports.roles              = require('./roles');
 exports.me                 = require('./me');
 exports.getTargetsByThread = require('./getTargetsByThread');
-exports.getSubscription    = require('./getSubscription');
-exports.addSubscription    = require('./addSubscription');
-exports.removeSubscription = require('./removeSubscription');
