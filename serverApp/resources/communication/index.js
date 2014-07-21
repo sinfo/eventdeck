@@ -5,3 +5,4 @@ exports.update      = require('./update');
 exports.approve     = require('./approve');
 exports.get         = require('./get');
 exports.getByThread = require('./getByThread');
+exports.getThreads 	= require('./getThreads');
