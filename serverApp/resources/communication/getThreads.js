@@ -2,7 +2,7 @@ var Communication = require('./../../db/models/communication.js');
 
 module.exports = list;
 
-function list(request, reply) {
+function list(reply) {
 
   Communication.getAllThreads(function(err, result) {
     if (err) {
