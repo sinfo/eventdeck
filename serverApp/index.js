@@ -23,7 +23,8 @@ server.pack.require("hapi-auth-cookie", function (err) {
       server: SocketIO.listen(server.listener)
     };
     var sockets = require("./sockets");
-    require("./scripts/crono");
+    var crono   = require("./scripts/crono");
+    crono.reminder.start();
   });
 
 });
