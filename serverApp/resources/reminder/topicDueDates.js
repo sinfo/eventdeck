@@ -26,7 +26,7 @@ function remind(done) {
             getTargets('topic-'+topic._id, function(err, targets) {
               if(err) { console.log(err); }
 
-              notify('toolbot', 'topic-'+topic._id, 'reminder: only ' + days + ' days to go!', null, targets);
+              notify('toolbot', 'topic-'+topic._id, 'reminder: only ' + days + ' days to go', null, targets);
 
               topicDone();
             });
