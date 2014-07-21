@@ -23,7 +23,7 @@ communicationSchema.statics.findByThread = function (id, cb) {
 };
 
 communicationSchema.statics.findByThreadLast = function (id, cb) {
-  this.findOne({ thread: id }).sort('-date').exec(cb);
+  this.findOne({ thread: id }).sort('-posted').exec(cb);
 };
 
 communicationSchema.statics.findAll = function (cb) {

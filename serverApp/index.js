@@ -2,6 +2,7 @@ var Hapi         = require("hapi");
 var SocketIO     = require("socket.io");
 var options      = require("./options");
 var cookieConfig = require("./../config").cookie;
+var Reminder     = require('./resources/reminder');
 require("./db");
 
 var server = module.exports.hapi = new Hapi.Server(8765, options);
@@ -24,6 +25,14 @@ server.pack.require("hapi-auth-cookie", function (err) {
     };
     var sockets = require("./sockets");
     var crono   = require("./scripts/crono");
+    Reminder(null, function(reply) {
+      if(reply.success){
+        console.log("Success while running crono reminder " + reply.success);
+      }
+      else{
+        console.log("Error while running crono reminder " + reply.error);
+      }
+    });
     crono.reminder.start();
   });
 
