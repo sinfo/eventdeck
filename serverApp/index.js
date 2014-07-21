@@ -25,14 +25,14 @@ server.pack.require("hapi-auth-cookie", function (err) {
     };
     var sockets = require("./sockets");
     var crono   = require("./scripts/crono");
-    Reminder(null, function(reply) {
+/*    Reminder(null, function(reply) {
       if(reply.success){
         console.log("Success while running crono reminder " + reply.success);
       }
       else{
         console.log("Error while running crono reminder " + reply.error);
       }
-    });
+    });*/
     crono.reminder.start();
   });
 
