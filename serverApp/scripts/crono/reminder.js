@@ -3,18 +3,18 @@ var Reminder = require('./../../resources/reminder');
 
 
 module.exports = reminder = new CronJob({
-  cronTime: '00 00 17 * * *',
+  cronTime: '00 00 */6 * * *',
   onTick: function() {
-  	var reply;
     console.log("Running crono reminder.");
-    Reminder(null, reply);
-    if(reply.success){
-    	console.log("Success while running crono reminder " + reply.success);
-    }
-    else{
-    	console.log("Error while running crono reminder " + reply.error);
-    }
+    Reminder(null, function(reply) {
+	    if(reply.success){
+	    	console.log("Success while running crono reminder " + reply.success);
+	    }
+	    else{
+	    	console.log("Error while running crono reminder " + reply.error);
+	    }
+		});
   },
-  start: true,
+  start: false,
   timeZone: "Portugal"
 });
