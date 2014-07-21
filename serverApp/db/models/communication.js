@@ -30,5 +30,9 @@ communicationSchema.statics.removeByThread = function (id, cb) {
   this.remove({ thread: id }, cb);
 };
 
+communicationSchema.statics.getAllThreads = function (cb) {
+  this.distinct('thread', cb);
+};
+
 
 var Communication = module.exports = mongoose.model('Communication', communicationSchema);
