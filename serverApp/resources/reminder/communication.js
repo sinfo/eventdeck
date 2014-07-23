@@ -16,9 +16,9 @@ function remind(remindDays, done) {
     console.log(threads);
     async.each(threads, function(thread, threadDone) {
       communication.getByThreadLast(thread, function(result){
-        console.log(result);
         if(today.getTime() - result.posted.getTime() > oneDay * remindDays){
           if(result.approved === undefined || result.approved){
+            console.log(result);
             notify('toolbot', thread, 'reminder: communications have been innactive for more than ' + remindDays + ' days.', null, result.member);
           }
         }
