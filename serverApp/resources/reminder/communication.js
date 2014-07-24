@@ -13,6 +13,7 @@ function remind(remindDays, done) {
   
   var today = new Date();
   var oneDay = (24 * 60 * 60 * 1000);
+  var week = new Date(today.getTime() - oneDay * 7);
   var coordination = [];
   var approvalTargets;
 
@@ -21,6 +22,7 @@ function remind(remindDays, done) {
       console.log(result.error);
     }
     else{
+      console.log('Communication reminders started!');
       async.each(result, function(member, memberDone){
         coordination.push(member.id);
         memberDone();
@@ -32,30 +34,42 @@ function remind(remindDays, done) {
 
   function notifyThreads(){
     communication.getThreads(function(threads){
+
       async.each(threads, function(thread, threadDone) {
-        var speakerId = thread.split('speaker-')[1];
-        Speaker.get({params: {id: speakerId}, auth: {credentials: {id: 'toolbot'}}}, function(speaker){
-          if(speaker.error){
-            console.log(speaker.error);
-            threadDone();
-          }
-          else if(speaker.status !== 'Give Up' && speaker.status !== 'Rejected') {
-            communication.getByThreadLast(thread, function(result){
-              if(today.getTime() - result.posted.getTime() > oneDay * remindDays){
-                if(result.approved === undefined || result.approved){
-                  console.log(thread);
-                  notify('toolbot', thread, 'reminder: communications have been innactive for more than ' + remindDays + ' days.', null, result.member);
-                }
-                else{
-                  approvalTargets = [result.member].concat(coordination);
-                  notify('toolbot', thread, 'reminder: communication peding approval for more than ' + remindDays + ' days.', null, approvalTargets);
-                }
+
+        Notification.findByThreadAndDate(thread, week, function(err, notifications) {
+          if(!err && notifications.length == 0) {
+            var speakerId = thread.split('speaker-')[1];
+
+            Speaker.get({params: {id: speakerId}, auth: {credentials: {id: 'toolbot'}}}, function(speaker){
+              if(speaker.error){
+                console.log(speaker.error);
+                threadDone();
               }
-              threadDone();
+              else if(speaker.status !== 'Give Up' && speaker.status !== 'Rejected') {
+
+                communication.getByThreadLast(thread, function(result){
+                  if(today.getTime() - result.posted.getTime() > oneDay * remindDays){
+                    if(result.approved === undefined || result.approved){
+                      console.log(thread);
+                      notify('toolbot', thread, 'reminder: communications have been innactive for more than ' + remindDays + ' days.', null, result.member);
+                    }
+                    else{
+                      approvalTargets = [result.member].concat(coordination);
+                      notify('toolbot', thread, 'reminder: communication peding approval for more than ' + remindDays + ' days.', null, approvalTargets);
+                    }
+                  }
+                  threadDone();
+                });
+              }
+              else{
+                console.log('Speaker ' + speaker.id + ' status: ' + speaker.status + ' not reminded.');
+                threadDone(); 
+              }
             });
-          }
-          else{
-            console.log('Speaker ' + speaker.id + ' status: ' + speaker.status + ' not reminded.') 
+          } else {
+            console.log(thread + ' already notified in the past week.');
+            threadDone();
           }
         });
       }, done);
