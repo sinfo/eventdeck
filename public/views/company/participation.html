@@ -43,7 +43,7 @@
             <div class="control-group">
               <label>Logo on site</label>
               <div class="control">
-                <select ng-model="formData.participation.items.logos.site" ng-options="s for s in logoSizes"></select>
+                <select ng-model="formData.participation.items.logos.site" ng-options="s for s in logoSizes | orderBy: 'toString()'"></select>
               </div>
             </div>
             <div class="control-group">
@@ -55,7 +55,7 @@
             <div class="control-group">
               <label>Logo on tshirts</label>
               <div class="control">
-                <select ng-model="formData.participation.items.logos.tshirts" ng-options="s for s in logoSizes"></select>
+                <select ng-model="formData.participation.items.logos.tshirts" ng-options="s for s in logoSizes | orderBy: 'toString()'"></select>
               </div>
             </div>
             <div class="control-group">
@@ -67,42 +67,42 @@
             <div class="control-group">
               <label>Logo on banners</label>
               <div class="control">
-                <select ng-model="formData.participation.items.logos.banners" ng-options="s for s in logoSizes"></select>
+                <select ng-model="formData.participation.items.logos.banners" ng-options="s for s in logoSizes | orderBy: 'toString()'"></select>
               </div>
             </div>
             <div class="control-group">
               <label>Logo on posters</label>
               <div class="control">
-                <select ng-model="formData.participation.items.logos.posters" ng-options="s for s in logoSizes"></select>
+                <select ng-model="formData.participation.items.logos.posters" ng-options="s for s in logoSizes | orderBy: 'toString()'"></select>
               </div>
             </div>
             <div class="control-group">
               <label>Logo on flyers</label>
               <div class="control">
-                <select ng-model="formData.participation.items.logos.flyers" ng-options="s for s in logoSizes"></select>
+                <select ng-model="formData.participation.items.logos.flyers" ng-options="s for s in logoSizes | orderBy: 'toString()'"></select>
               </div>
             </div>
             <div class="control-group">
               <label>Logo on folders</label>
               <div class="control">
-                <select ng-model="formData.participation.items.logos.folders" ng-options="s for s in logoSizes"></select>
+                <select ng-model="formData.participation.items.logos.folders" ng-options="s for s in logoSizes | orderBy: 'toString()'"></select>
               </div>
             </div>
             <div class="control-group">
               <label>Logo on individuals</label>
               <div class="control">
-                <select ng-model="formData.participation.items.logos.individuals" ng-options="s for s in logoSizes"></select>
+                <select ng-model="formData.participation.items.logos.individuals" ng-options="s for s in logoSizes | orderBy: 'toString()'"></select>
               </div>
             </div>
             <div class="control-group">
               <label>Logo on rollups</label>
               <div class="control">
-                <select ng-model="formData.participation.items.logos.rollups" ng-options="s for s in logoSizes"></select>
+                <select ng-model="formData.participation.items.logos.rollups" ng-options="s for s in logoSizes | orderBy: 'toString()'"></select>
               </div>
             <div class="control-group">
               <label>Logo on showcase</label>
               <div class="control">
-                <select ng-model="formData.participation.items.logos.showcase" ng-options="s for s in logoSizes"></select>
+                <select ng-model="formData.participation.items.logos.showcase" ng-options="s for s in logoSizes | orderBy: 'toString()'"></select>
               </div>
             </div>
           </div>
@@ -112,13 +112,13 @@
           <div class="control-group">
             <label>Stand days</label>
             <div class="control">
-              <select ng-model="formData.participation.items.stand" ng-options="s for s in standDays"></select>
+              <select ng-model="formData.participation.items.stand" ng-options="s for s in standDays | orderBy: 'toString()'"></select>
             </div>
           </div>
           <div class="control-group">
             <label>Posts</label>
             <div class="control">
-              <select ng-model="formData.participation.items.posts" ng-options="s for s in postsNumbers"></select>
+              <select ng-model="formData.participation.items.posts" ng-options="s for s in postsNumbers | orderBy: 'toString()'"></select>
             </div>
           </div>
           <div class="control-group">

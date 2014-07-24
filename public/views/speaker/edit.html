@@ -38,7 +38,7 @@
             <div class="control-group">
               <label for="status">Status</label>
               <div class="control">
-                <select id="status" ng-model="formData.status" ng-options="s for s in statuses" ng-disabled="{{!checkPermission(formData)}}"></select>
+                <select id="status" ng-model="formData.status" ng-options="s for s in statuses | orderBy: 'toString()'" ng-disabled="{{!checkPermission(formData)}}"></select>
               </div>
             </div>
             <div class="control-group">
@@ -72,7 +72,7 @@
             <div class="control-group">
               <label for="member">Member</label>
               <div class="control">
-                <select ng-model="formData.member" ng-options="m.id as m.name for m in members"></select>
+                <select ng-model="formData.member" ng-options="m.id as m.name for m in members | orderBy: 'id'"></select>
               </div>
             </div>
             <div class="control-group">
