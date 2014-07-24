@@ -9,7 +9,6 @@ function list(reply) {
       reply({error: "There was an error getting all communications."});
     }
     else {
-      console.log(result);
       reply(result);
     }
   });
