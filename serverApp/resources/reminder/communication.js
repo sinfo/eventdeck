@@ -13,7 +13,7 @@ function remind(remindDays, done) {
   
   var today = new Date();
   var oneDay = (24 * 60 * 60 * 1000);
-  var coordination;
+  var coordination = [];
   var approvalTargets;
 
   Member.getByRole({params: {id: 'coordination'}}, function(result){
@@ -21,8 +21,12 @@ function remind(remindDays, done) {
       console.log(result.error);
     }
     else{
-      coordination = result;
-      notifyThreads();
+      async.each(result, function(member, memberDone){
+        coordination.push(member.id);
+        memberDone();
+      }, function(){
+        notifyThreads();
+      });
     }
   });
 
@@ -43,7 +47,7 @@ function remind(remindDays, done) {
                   notify('toolbot', thread, 'reminder: communications have been innactive for more than ' + remindDays + ' days.', null, result.member);
                 }
                 else{
-                  approvalTargets = coordination.push(result.member);
+                  approvalTargets = [result.member].concat(coordination);
                   notify('toolbot', thread, 'reminder: communication peding approval for more than ' + remindDays + ' days.', null, approvalTargets);
                 }
               }
