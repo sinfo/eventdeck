@@ -44,7 +44,7 @@
           <td>{{company.participation.payment.date}}</td>
           <td>{{company.participation.payment.invoice}}</td>
           <td>
-            <select ng-model="company.participation.payment.status" ng-options="s for s in paymentStatuses" ng-change="saveStatus(company)"></select>
+            <select ng-model="company.participation.payment.status" ng-options="s for s in paymentStatuses | orderBy: 'toString()'" ng-change="saveStatus(company)"></select>
           </td>
           <td>{{company.participation.payment.via}}</td>
         </tr>
