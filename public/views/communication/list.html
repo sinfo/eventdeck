@@ -10,5 +10,13 @@
     <div class="ink-button green" ng-click="showOpen = false;">{{shownCommunications(false).length}} Approved</div>
   </div>
   <h3>{{showOpen ? 'Pending' : 'Approved'}} communications</h3>
-  <communication communication-object="{{communication}}" members="{{members}}" me="{{me}}" roles="{{roles}}" ng-repeat="communication in shownCommunications(showOpen) | orderBy: 'posted':'true'"></communication>
+  <div class="column-group" ng-repeat="communication in shownCommunications(showOpen) | orderBy: 'posted':'true'">
+    <div class="all-60">
+      <communication communication-object="{{communication}}" members="{{members}}" me="{{me}}" roles="{{roles}}" ></communication>
+    </div>
+    <div class="all-40">
+      <speaker ng-if="communication.thread.indexOf('speaker')!=-1" speaker-object="getSpeaker(communication.thread.replace('speaker-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></speaker>
+      <company ng-if="communication.thread.indexOf('company')!=-1" company-object="getCompany(communication.thread.replace('company-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></company>
+    </div>
+  </div>
 </div>
