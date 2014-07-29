@@ -2,6 +2,7 @@ var Hapi         = require("hapi");
 var SocketIO     = require("socket.io");
 var options      = require("./options");
 var cookieConfig = require("./../config").cookie;
+var Reminder     = require('./resources/reminder');
 require("./db");
 
 var server = module.exports.hapi = new Hapi.Server(8765, options);

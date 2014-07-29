@@ -13,7 +13,7 @@
       <form class="ink-form">
         <div class="control-group">
           <div class="control">
-            <select id="kind" ng-model="communicationData.kind" ng-options="s for s in kinds"></select>
+            <select id="kind" ng-model="communicationData.kind" ng-options="s for s in kinds | orderBy: 'toString()'"></select>
           </div>
         </div>
         <div class="control-group">
