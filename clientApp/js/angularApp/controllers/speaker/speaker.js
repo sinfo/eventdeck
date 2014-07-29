@@ -1,7 +1,7 @@
 'use strict';
 
 theToolController
-  .controller('SpeakerController', function ($scope, $http, $routeParams, $sce, SpeakerFactory, MemberFactory, NotificationFactory) {
+  .controller('SpeakerController', function ($scope, $window, $routeParams, $sce, SpeakerFactory, MemberFactory, NotificationFactory) {
     $scope.trustSrc = function(src) {
       return $sce.trustAsResourceUrl(src+'#page-body');
     }
@@ -9,7 +9,7 @@ theToolController
     $scope.convertEmails = function(text) {
       var mailExp = /[\w\.\-]+\@([\w\-]+\.)+[\w]{2,4}(?![^<]*>)/ig;
       var twitterExp = /(^|[^@\w])@(\w{1,15})\b/g;
-      return text.replace(mailExp,"<a href='#/company/"+$routeParams.id+"/confirm?email=$&'>$&</a>").replace(twitterExp,"$1<a href='http://twitter.com/$2' target='_blank'>@$2</a>")
+      return text.replace(mailExp,"<a href='#/company/"+$routeParams.id+"/confirm?email=$&'>$&</a>").replace(twitterExp,"$1<a href='window://twitter.com/$2' target='_blank'>@$2</a>")
     }
 
     $scope.submit = function() {
@@ -48,6 +48,15 @@ theToolController
 
         $scope.loading = false;
       });
+    });
+
+    var win = $window;
+    $scope.$watch('speakerForm.$dirty', function(value) {
+      if(value) {
+        win.onbeforeunload = function(){
+          return 'You have unsaved changes';
+        };
+      }
     });
 
   });
