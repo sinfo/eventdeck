@@ -38,13 +38,13 @@
             <div class="control-group">
               <label for="status">Status</label>
               <div class="control">
-                <select id="status" ng-model="formData.status" ng-options="s for s in statuses"></select>
+                <select id="status" ng-model="formData.status" ng-options="s for s in statuses | orderBy: 'toString()'"></select>
               </div>
             </div>
             <div class="control-group">
               <label for="member">Member</label>
               <div class="control">
-                <select ng-model="formData.member" ng-options="m.id as m.name for m in members"></select>
+                <select ng-model="formData.member" ng-options="m.id as m.name for m in members | orderBy: 'id'"></select>
               </div>
             </div>
             <div class="control-group">
