@@ -63,11 +63,19 @@
     <h1 style="margin-bottom: 0px;">{{topic.kind}}</h1>
     <form class="all-100 ink-form">
       <div class="all-100 control-group">
-        <label for="text">Text</label>
+        <label for="text">Title</label>
         <div class="control">
-          <textarea id="text" ng-model="topic.text" type="text" rows="3" placeholder="Write your topic contents."></textarea>
+          <input type="text" ng-model="topic.text" placeholder="Write your topic title">
         </div>
       </div>
+
+      <div class="all-100 control-group">
+        <label for="text"></label>
+        <div class="control">
+          <first-comment thread="{{'topic-' + topic._id}}"></first-comment>
+        </div>
+      </div>
+
 
       <div ng-if="topic.show.duedate" class="all-100 control-group">
         <label for="text">Due Date</label>
