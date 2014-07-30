@@ -47,17 +47,17 @@ function update(request, reply) {
   }
 
   function updateCompany(cb) {
-    if (request.payload.id != company.id)                              { diffCompany.id            = request.payload.id; }
-    if (request.payload.name != company.name)                          { diffCompany.name          = request.payload.name; }
-    if (request.payload.img != company.img)                            { diffCompany.img           = request.payload.img; }
-    if (request.payload.description != company.description)            { diffCompany.description   = request.payload.description; }
-    if (request.payload.status != company.status)                      { diffCompany.status        = request.payload.status; }
-    if (request.payload.history != company.history)                    { diffCompany.history       = request.payload.history; }
-    if (request.payload.contacts != company.contacts)                  { diffCompany.contacts      = request.payload.contacts; }
-    if (request.payload.forum != company.forum)                        { diffCompany.forum         = request.payload.forum; }
-    if (request.payload.member != company.member)                      { diffCompany.member        = request.payload.member; }
-    if (request.payload.area != company.area)                          { diffCompany.area          = request.payload.area; }
-    if (!equals(request.payload.participation, company.participation)) { diffCompany.participation = request.payload.participation; }
+    if (request.payload.id && request.payload.id != company.id)                                         { diffCompany.id            = request.payload.id; }
+    if (request.payload.name && request.payload.name != company.name)                                   { diffCompany.name          = request.payload.name; }
+    if (request.payload.img && request.payload.img != company.img)                                      { diffCompany.img           = request.payload.img; }
+    if (request.payload.description && request.payload.description != company.description)              { diffCompany.description   = request.payload.description; }
+    if (request.payload.status && request.payload.status != company.status)                             { diffCompany.status        = request.payload.status; }
+    if (request.payload.history && request.payload.history != company.history)                          { diffCompany.history       = request.payload.history; }
+    if (request.payload.contacts && request.payload.contacts != company.contacts)                       { diffCompany.contacts      = request.payload.contacts; }
+    if (request.payload.forum && request.payload.forum != company.forum)                                { diffCompany.forum         = request.payload.forum; }
+    if (request.payload.member && request.payload.member != company.member)                             { diffCompany.member        = request.payload.member; }
+    if (request.payload.area && request.payload.area != company.area)                                   { diffCompany.area          = request.payload.area; }
+    if (request.payload.participation && !equals(request.payload.participation, company.participation)) { diffCompany.participation = request.payload.participation; }
 
     if (isEmpty(diffCompany)) {
       cb("Nothing changed.");
