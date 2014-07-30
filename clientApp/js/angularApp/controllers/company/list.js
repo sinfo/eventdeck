@@ -44,5 +44,52 @@ theToolController
       if ($scope.limit <= $scope.companies.length)
         $scope.limit += 10;
     };
-  });
+    
+    $scope.checkPermission = function (member) {
+      var roles = $scope.me.roles.filter(function(o) {
+        return o.id == 'development-team' || o.id == 'coordination';
+      });
+
+      if(roles.length == 0 && member.id != $scope.me.id) {
+        return false;
+      }
+
+      return true;
+    };
+
+    $scope.addCompany = function(member, newCompany) {
+      console.log(newCompany);
+      var companyData = newCompany;
+      
+      if(newCompany.id) {
+        CompanyFactory.Company.update({ id: companyData.id }, { member: member.id }, function(response) {
+          if(response.error) {
+            console.log(response);
+            $scope.error = response.error;
+          } else {
+            $scope.message = response.success;
+
+            CompanyFactory.Company.getAll(function (companies) {
+              $scope.companies = companies;
+            });
+          }
+        });
+      } else {
+        companyData.status = 'Selected';
+        companyData.member = member.id;
+
+        CompanyFactory.Company.create(companyData, function(response) {
+          if(response.error) {
+            $scope.error = response.error;
+          } else {
+            $scope.message = response.message;
+
+            CompanyFactory.Company.getAll(function (companies) {
+              $scope.companies = companies;
+            });
+          }
+        });
+      }
+    };
+});
   
