@@ -52,6 +52,10 @@ function create(request, reply) {
       reply({error: "Error creating the company."});
     }
     else {
+      var targets = [];
+      if(request.auth.credentials.id != company.member) {
+        targets.push(company.member);
+      }
       notification.notify(request.auth.credentials.id, 'company-'+company.id, 'created a new company', null);
 
       reply({success: "Company created.", id:company.id});

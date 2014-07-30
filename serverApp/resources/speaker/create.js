@@ -52,7 +52,11 @@ function create(request, reply) {
       reply({error: "There was an error creating the speaker."});
     }
     else {
-      notification.notify(request.auth.credentials.id, 'speaker-'+speaker.id, 'created a new speaker', null);
+      var targets = [];
+      if(request.auth.credentials.id != speaker.member) {
+        targets.push(speaker.member);
+      }
+      notification.notify(request.auth.credentials.id, 'speaker-'+speaker.id, 'created a new speaker', null, targets);
 
       reply({success: "Speaker created.", id:speaker.id});
     }
