@@ -6,6 +6,7 @@
       <a href="#/member/{{topic.author}}">
         <img ng-src="https://graph.facebook.com/{{getMember(topic.author).facebook}}/picture"/>
         <small>{{getMember(topic.author).name}}</small>
+        <span class="ink-label red">{{getUnreadNotifications('topic-'+topic._id).length}} UNREAD!</span>
       </a>
       <small title="{{formatDate(topic.posted)}}">({{timeSince(topic.posted)}})</small>
 

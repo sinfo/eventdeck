@@ -210,6 +210,14 @@ theToolController.controller("TopicEmbedController", function ($scope, TopicFact
     }
   };
 
+  $scope.getUnreadNotifications = function (thread) {
+    var notifications = $scope.notifications.filter(function(o) {
+      return o.thread == thread && o.unread.indexOf($scope.me.id) != -1;
+    });
+
+    return notifications;
+  };
+
   $scope.timeSince =function (date) {
     date = new Date(date);
     var seconds = Math.floor((Date.now() - date) / 1000);
