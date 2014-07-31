@@ -74,8 +74,8 @@
           <li style="{{notificationsInfo.number == 0 ? 'border-color: FireBrick;' : 'border-color: #e11d21;'}}">
             <a style="{{notificationsInfo.number == 0 ? 'color: FireBrick;' : 'color: #e11d21;'}}"><span><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a>
             <ul class="submenu" style="max-height: 400px; overflow: auto;">
-              <li ng-repeat="notification in notifications | orderBy: 'posted':true" style="width: 600px; {{notification.unread.indexOf(me.id) != -1 ? 'border-color: SkyBlue;' : ''}}">
-                <a  title="{{notification.posted | date:'medium'}}" href="#/{{notification.thread.replace('-','/')}}">
+              <li ng-repeat="notification in notifications | orderBy: 'posted':true" style="width: 600px;">
+                <a style="{{notification.unread.indexOf(me.id) != -1 ? 'font-weight: 700;' : ''}}" title="{{notification.posted | date:'medium'}}" href="#/{{notification.thread.replace('-','/')}}">
                   <img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px">
                   {{getMember(notification.member).name}} {{notification.description}}
                   <span ng-if="notification.thread.indexOf('company-')!=-1 && notification.description.indexOf('created')==-1">on {{getCompany(notification.thread.replace('company-','')).name}}</span>
