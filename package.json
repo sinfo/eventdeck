@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/SINFO/the-tool",
   "dependencies": {
+    "cron": "~1.0.4",
     "hapi": "~3.0.0",
     "hapi-auth-cookie": "~1.0.2",
     "handlebars": "~2.0.0-alpha.2",
@@ -29,6 +30,7 @@
     "markdown": "~0.5.0",
     "emailjs": "~0.3.8",
     "socket.io": "~1.0.2",
+    "socket.io-client": "~1.0.2",
     "request": "~2.36.0",
     "mailgun": "~0.4.2",
     "mailcomposer": "~0.2.12"
