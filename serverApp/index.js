@@ -13,6 +13,9 @@ server.pack.require("hapi-auth-cookie", function (err) {
     cookie: cookieConfig.name,
     password: cookieConfig.password,
     ttl: 2592000000,
+/*    appendNext: true,
+    redirectTo: '/login',
+    redirectOnTry: false,*/
     isSecure: false
   });
 
