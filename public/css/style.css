@@ -151,19 +151,60 @@ body.ink-drawer .right-drawer li.active > a {
   padding: 10px;
   margin-bottom: 10px;
 }
-.activity.read {
-  background: WhiteSmoke;
-}
-.activity.unread {
-  background: Pink;
-}
 .activity img {
   width:25px;
 }
-.activity img.image {
+
+.card {
+  float:left;
+  position: relative;
+  width: 300px;
+  height: 150px;
+  margin: 10px;
+  box-shadow: 1px 1px 2px #999; 
+  border-radius: 2px;
+}
+.card .header {
+  position: relative;
+  float: left;
+  width: 100px;
+  height: 150px;
+  background-repeat:no-repeat;
+  background-position:center; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.card .header.wide {
+  -webkit-background-size: 100px;
+  -moz-background-size: 100px;
+  -o-background-size: 100px;
+  background-size: 100px;
+}
+.card .content {
+  overflow: hidden;
+  float: left;
+  width: 200px;
+  padding: 10px;
+}
+.card .content .name{
+  color: #666;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.card .content .status{
+  margin-bottom: 10px;
+}
+
+.card img {
+  width:25px;
+}
+.card img.image {
   width:100px;
 }
-.activity p {
+.card p {
   margin-top:10px;
   margin-bottom:0px;
 }
@@ -316,10 +357,6 @@ body.ink-drawer .right-drawer li.active > a {
   background-image: -moz-radial-gradient(#cd6969,#9c3434);
   background-image: -o-radial-gradient(#cd6969,#9c3434);
   background-image: radial-gradient(#cd6969,#9c3434);
-}
-
-.member {
-  background: #eee;
 }
 
 .search-box {

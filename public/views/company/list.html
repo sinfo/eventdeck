@@ -73,7 +73,7 @@
       <div ng-hide="loading">
         <h3 ng-hide="loading || companies">No companies created yet.</h3>
         
-        <div class="all-100" infinite-scroll="scroll()">
+        <div class="all-100" infinite-scroll="scroll()" infinite-scroll-distance="3">
           <company company-object="company" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments" ng-repeat="company in companies | filter:searchCompanies:strict | orderBy:companyPredicate:reverse | limitTo: limit"></company>
         </div>
       </div>
