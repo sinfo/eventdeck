@@ -183,6 +183,18 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
     })[0];
   };
 
+  $scope.getNotifications = function (thread) {
+    return $scope.notifications.filter(function(o) {
+      return o.thread == thread;
+    })[0];
+  };
+
+  $scope.getUnreadNotifications = function (thread) {
+    return $scope.notifications.filter(function(o) {
+      return o.thread == thread && o.unread.indexOf($scope.me.id) != -1;
+    })[0];
+  };
+
   $scope.show = function() {
     $scope.display = ($scope.search.name ? true : false);
   };
