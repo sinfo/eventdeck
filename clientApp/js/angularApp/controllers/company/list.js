@@ -27,7 +27,7 @@ theToolController
 
     $scope.paymentStatuses = ['Emitido', 'Recibo Enviado', 'Pago', 'Enviado'];
   
-    $scope.limit = 10;
+    $scope.limit = 6;
 
     $scope.statuses = ['Suggestion','Contacted','In Conversations','In Negotiations','Closed Deal','Rejected','Give Up'];
     
@@ -42,7 +42,7 @@ theToolController
 
     $scope.scroll = function() {
       if ($scope.limit <= $scope.companies.length)
-        $scope.limit += 10;
+        $scope.limit += 2;
     };
     
     $scope.checkPermission = function (member) {
