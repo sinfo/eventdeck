@@ -1,39 +1,31 @@
-<div ng-hide="!company._id || company.deleted" class="activity grey" style="border-radius: 5px;">
-  <h1 ng-if="loading">Loading...</h1>
-
-  <div ng-if="!company.editing">
-
-    <div class="column-group horizontal-gutters">
-
-      <div class="all-85">
-
-        <a href="#/member/{{company.member}}">
-          <img ng-src="https://graph.facebook.com/{{getMember(company.member).facebook}}/picture"/>
-          <small>{{getMember(company.member).name}}</small>
-        </a>
-
-        <a href="#/company/{{company.id}}">
-          <h5 style="margin-top:10px;">
-            <span class="status" ng-class="company.status.replace(' ','-').toLowerCase()">{{company.status}}</span> 
-            {{company.name}} 
-          </h5>
-          <img class="image" ng-src="{{company.img}}">
-        </a>
-
-        <div ng-if="company.showComments">
-          <br>
-          <comment-area thread="{{'company-' + company.id}}"></comment-area>
-        </div>
-      </div>
-
-      <div class="all-15 align-right">
-        <!--<small title="Edit Topic" class="ink-button orange" ng-click="company.editing=!company.editing" style="width:60px"><i class="fa fa-wrench"></i></small><br>-->
-        <small title="Show/Hide Comments" class="ink-button small green" ng-click="company.showComments = !company.showComments" style="width:60px">{{company.comments.length}} <i class="fa fa-comments"></i></small>
-        <br>
-        <small style="margin-right:4px"><subscription thread="{{'company-' + company.id}}"></subscription></small>
-      </div>
+<div ng-hide="!company._id || company.deleted" class="card">
+  <a href="#/company/{{company.id}}">
+    <div class="header wide" style="background-image:url({{company.img}});">
+   
     </div>
 
-  </div>
+    <div class="content">
+      <div class="name">{{company.name}}</div> 
+      <div class="status" ng-class="company.status.replace(' ','-').toLowerCase()">{{company.status}}</div> 
+      <a class="member" href="#/member/{{company.member}}">
+        <img ng-src="https://graph.facebook.com/{{getMember(company.member).facebook}}/picture"/>
+        <small>{{getMember(company.member).name}}</small>
+      </a>
+    </div>
+  </a>
 
+<!--
+
+  <div class="footer">
+    <div ng-if="company.showComments">
+      <br>
+      <comment-area thread="{{'company-' + company.id}}"></comment-area>
+    </div>
+  </div>
+<div class="all-15 align-right">
+  <small title="Show/Hide Comments" class="ink-button small green" ng-click="company.showComments = !company.showComments" style="width:60px">{{company.comments.length}} <i class="fa fa-comments"></i></small>
+  <br>
+  <small style="margin-right:4px"><subscription thread="{{'company-' + company.id}}"></subscription></small>
+</div>
+-->
 </div>
