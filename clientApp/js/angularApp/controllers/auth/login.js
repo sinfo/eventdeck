@@ -57,7 +57,7 @@ theToolController.controller("LoginController", function ($rootScope, $scope, $r
         success(function(data, status, headers, config) {
           //$location.path('/');
           $window.location.assign($rootScope.nextPath);
-          $scope.update.all();
+          $rootScope.update.all();
         }).
         error(function(data, status, headers, config) {
           $scope.loading = false;
