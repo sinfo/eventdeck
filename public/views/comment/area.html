@@ -25,15 +25,15 @@
       </div>
       <div class="all-100 column-group horizontal-gutters" ng-show="comment.editing">
         <div class="all-50">
-          <form class="ink-form" ng-submit="submitComment()">
+          <form class="ink-form" ng-submit="submitComment()" unsaved-warning-form>
             <div class="control-group">
               <div class="control">
-                <textarea ng-model="comment.buffer" type="text" rows="2" style="font-size: 15px;"></textarea>
+                <textarea ng-model="comment.buffer" type="text" rows="2" style="font-size: 15px;" resettable></textarea>
               </div>
             </div>
             <div class="control-group">
               <input type="submit" value="Save comment" class="ink-button green" ng-click="saveComment(comment)">
-              <div class="ink-button red" ng-click="comment.editing = false">Cancel</div>
+              <div class="ink-button red" ng-click="comment.editing = false" unsaved-warning-clear>Cancel</div>
               <div ng-show="emptyComment" class="ink-alert basic error">You can't post empty comments.</div>
             </div>
           </form>
