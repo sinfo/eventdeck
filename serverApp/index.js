@@ -12,11 +12,12 @@ server.pack.require("hapi-auth-cookie", function (err) {
     cookie: cookieConfig.name,
     password: cookieConfig.password,
     ttl: 2592000000,
-/*    appendNext: true,
+/*  appendNext: true,
     redirectTo: '/login',
-    redirectOnTry: false,
+    redirectOnTry: true,
+    isSecure: false,
     isHttpOnly: false,*/
-    isSecure: false
+    isSecure: false,
   });
 
   server.start(function () {
