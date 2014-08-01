@@ -28,12 +28,14 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
 
   var factoriesReady = 0;
 
-  $scope.update = {
+  $rootScope.update = {
 
-    me: MemberFactory.Me.get(function (me) {
+    me: function(){
+      MemberFactory.Me.get(function (me) {
         $scope.me = me;
         callback();
-      });,
+      });
+    },
 
     members: function(){
       MemberFactory.Member.getAll(function (members) {
@@ -98,7 +100,7 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
 
   }
 
-  $scope.update.all();
+  $rootScope.update.all();
 
 
   //===================================FUNCTIONS===================================
