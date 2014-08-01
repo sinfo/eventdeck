@@ -28,45 +28,77 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
 
   var factoriesReady = 0;
 
-  MemberFactory.Me.get(function (me) {
-    $scope.me = me;
-    callback();
-  });
+  $scope.update = {
 
-  MemberFactory.Member.getAll(function (members) {
-    $scope.members = members;
-    callback();
-  });
+    me: MemberFactory.Me.get(function (me) {
+        $scope.me = me;
+        callback();
+      });,
 
-  CompanyFactory.Company.getAll(function (companies) {
-    $scope.companies = companies;
-    callback();
-  });
+    members: function(){
+      MemberFactory.Member.getAll(function (members) {
+        $scope.members = members;
+        callback();
+      });
+    },
 
-  SpeakerFactory.Speaker.getAll(function (speakers) {
-    $scope.speakers = speakers;
-    callback();
-  });
+    companies: function(){    
+      CompanyFactory.Company.getAll(function (companies) {
+        $scope.companies = companies;
+        callback();
+      });
+    },
 
-  TopicFactory.Topic.getAll(function (topics) {
-    $scope.topics = topics;
-    callback();
-  });
+    speakers: function(){
+      SpeakerFactory.Speaker.getAll(function (speakers) {
+        $scope.speakers = speakers;
+        callback();
+      });
+    },
 
-  RoleFactory.Role.getAll(function (roles) {
-    $scope.roles = roles;
-    callback();
-  });
+    topics: function(){
+      TopicFactory.Topic.getAll(function (topics) {
+        $scope.topics = topics;
+        callback();
+      });
+    },
 
-  TagFactory.Tag.getAll(function (tags) {
-    $scope.topicTags = tags;
-    callback();
-  });
+    roles: function(){
+      RoleFactory.Role.getAll(function (roles) {
+        $scope.roles = roles;
+        callback();
+      });
+    },
 
-  CommentFactory.Comment.getAll(function (comments) {
-    $scope.comments = comments;
-    callback();
-  });
+    tags: function(){
+      TagFactory.Tag.getAll(function (tags) {
+        $scope.topicTags = tags;
+        callback();
+      });
+    },
+
+    comments: function(){
+      CommentFactory.Comment.getAll(function (comments) {
+        $scope.comments = comments;
+        callback();
+      });
+    },
+
+    all: function(){
+      console.log("Updating!");
+      this.me();
+      this.members();
+      this.companies();
+      this.speakers();
+      this.topics();
+      this.roles();
+      this.tags();
+      this.comments();
+    }
+
+  }
+
+  $scope.update.all();
 
 
   //===================================FUNCTIONS===================================
