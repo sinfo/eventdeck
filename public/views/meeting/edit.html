@@ -1,18 +1,18 @@
 <div class="column-group">
   <h1 ng-show="loading">Loading...</h1>
   <div ng-hide="loading">
-    <form ng-hide="loading" class="all-100 ink-form">
+    <form ng-hide="loading" class="all-100 ink-form" unsaved-warning-form>
       <div class="all-100 control-group required {{meeting.title ? '' : 'validation error'}}">
         <label for="title">Meeting Title</label>
         <div class="control">
-          <input id="title" ng-model="meeting.title" type="text" placeholder="Please enter a title.">
+          <input id="title" ng-model="meeting.title" type="text" placeholder="Please enter a title." resettable>
         </div>
         <p ng-hide="meeting.title" class="tip">This field is required.</p>
       </div>
       <div class="all-100 control-group">
         <label for="description">Description</label>
         <div class="control">
-          <textarea id="description" ng-model="meeting.description" type="text" rows="3" placeholder="Write a description."></textarea>
+          <textarea id="description" ng-model="meeting.description" type="text" rows="3" placeholder="Write a description." resettable></textarea>
         </div>
       </div>
 
@@ -28,9 +28,9 @@
     </form>
 
     <div class="all-100 bottom-space">
-      <a class="ink-button orange" ng-href="#/meeting/{{meeting._id}}"><i class="fa fa-back"></i><i class="fa fa-reply"></i> Go back</a>
+      <a class="ink-button orange" ng-href="#/meeting/{{meeting._id}}"><i class="fa fa-back"></i><i class="fa fa-reply" unsaved-warning-clear></i> Go back</a>
       <div class="ink-button green" ng-click="saveMeeting()"><i class="fa fa-check"></i> Save</div>
-      <div class="ink-button red" ng-click="deleteMeeting()"><i class="fa fa-times"></i> Delete</div>
+      <div class="ink-button red" ng-click="deleteMeeting()" unsaved-warning-clear><i class="fa fa-times"></i> Delete</div>
       <div class="ink-alert basic success" ng-show="success">
         <p><strong>Success!</strong> {{success}}</p>
       </div>
