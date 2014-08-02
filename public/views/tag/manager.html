@@ -8,7 +8,7 @@
 
   <div ng-hide="manage">
     <div ng-repeat="tag in tags | orderBy: 'name'" class="button-group">
-      <div class="ink-button small all-100" ng-click="search.tags = tag.id" style="border-left: 10px solid {{tag.color}}; border-radius: 2px;">
+      <div class="ink-button small all-100" ng-click="search.tags = tag.id" style="background:{{tag.color}}; color: #fff">
         {{tag.name}}
       </div>
     </div>
