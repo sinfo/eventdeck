@@ -1,1 +1,2 @@
 require("./topic");
+require("./card");

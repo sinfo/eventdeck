@@ -55,7 +55,7 @@
           </div>
         </div>
         <div class="all-100" infinite-scroll="scroll()">
-          <topic topic="topic" members="members" me="me" roles="roles" tags="topicTags" comments="comments" notifications="notifications" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true' | limitTo: limit"></topic>
+          <topic-card topic="topic" members="members" me="me" roles="roles" tags="topicTags" comments="comments" notifications="notifications" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true' | limitTo: limit"></topic-card>
         </div>
       </div>
     </div>
