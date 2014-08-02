@@ -1,6 +1,6 @@
 "use strict";
 
-theToolController.controller("TopicEmbedController", function ($rootScope, $scope, TopicFactory, NotificationFactory) {
+theToolController.controller("TopicEmbedController", function ($rootScope, $scope, $location, TopicFactory, NotificationFactory) {
 
   $rootScope.update.timeout(runController);
 
@@ -70,6 +70,7 @@ theToolController.controller("TopicEmbedController", function ($rootScope, $scop
       if (confirm("Are you sure you want to delete this topic?")) {
         TopicFactory.Topic.delete({id: topic._id}, function () {
           topic.deleted = true;
+          $location.path('/topics');
         });
       }
     };
