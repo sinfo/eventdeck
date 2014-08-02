@@ -156,6 +156,7 @@ body.ink-drawer .right-drawer li.active > a {
 }
 
 .card {
+  background: white;
   float:left;
   position: relative;
   width: 300px;
@@ -208,6 +209,10 @@ body.ink-drawer .right-drawer li.active > a {
 .card .closed {
   font-size: 15px;
   color: firebrick;
+}
+.card .unread {
+  font-size: 15px;
+  color: red;
 }
 .card .duedate {
   font-size: 15px;
@@ -453,9 +458,10 @@ a, a:visited, a:hover {
   }
 
 .chat-message {
+  box-shadow: 1px 1px 2px #999; 
   margin: 5px;
   padding: 5px;
-  border-radius: 6px;
+  border-radius: 2px;
   width:70%;
   word-break: break-all;
 }
@@ -469,14 +475,12 @@ a, a:visited, a:hover {
   word-break: break-all;
 }
 
-.chat-message.me {
-  background: Gold;
+.chat-message.me, .chat-notification.me {
   float: right;
   text-align: right;
 }
 
-.chat-message.others {
-  background: #eee;
+.chat-message.others, .chat-notification.others {
   float: left;
   text-align: left;
 }
