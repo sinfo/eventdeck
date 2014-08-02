@@ -10,7 +10,6 @@ theToolController.factory('AuthInterceptor', function ($rootScope, $location, $w
       if (response.status === 401) {
         $rootScope.update.running = false;
         if($location.path().indexOf('/login') == -1) {
-          console.log($location.path());
           $rootScope.nextPath = '#' + $location.path();
           $location.path('/login');
         }

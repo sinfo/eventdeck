@@ -33,14 +33,12 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
     running: false,
 
     timeout: function(cb){
-      console.log("Inside timeout!");
       if(!$scope.ready){
         $scope.loading = true;
-        console.log($rootScope.update.running);
         if(!$rootScope.update.running){
           $rootScope.update.all();
         }
-        setTimeout(function() { $rootScope.update.timeout(cb) }, 3000);
+        setTimeout(function() { $rootScope.update.timeout(cb) }, 1500);
       }
       else{
         cb();
@@ -129,8 +127,6 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
     if (++factoriesReady == 8) {
       $rootScope.update.running = false;
       $scope.ready = true;
-
-      console.log("Scope ready");
 
       $scope.update();
 
