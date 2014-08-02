@@ -56,7 +56,6 @@ theToolController.controller("LoginController", function ($rootScope, $scope, $r
       $http.get(url_prefix + '/api/login/facebook?id='+response.authResponse.userID+'&token='+response.authResponse.accessToken).
         success(function(data, status, headers, config) {
           //$location.path('/');
-          console.log($rootScope.nextPath);
           if(typeof $rootScope.nextPath == undefined){
             $window.location.assign('#');
           }
