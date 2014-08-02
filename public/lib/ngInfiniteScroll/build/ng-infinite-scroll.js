@@ -124,7 +124,7 @@ mod.directive('infiniteScroll', [
         handleHeightChange = function(newHeight, oldHeight) {
           console.log('Height: ' + newHeight + " Old: " + oldHeight);
           if (newHeight !== oldHeight){
-            container.scrollTop(newHeight - oldHeight - 1);
+            container.scrollTop(newHeight - oldHeight);
             if (!(scope.$$phase || $rootScope.$$phase)) {
               scope.$apply();
             }
