@@ -81,12 +81,12 @@
       </h2>
       <communication-area ng-hide="hideCommunications" thread="{{'company-' + company.id}}" members="{{members}}" me="{{me}}" roles="{{roles}}"></communication-area>
 
-      <h2 ng-click="showComments=!showComments" title="Click to show/hide comments"> 
+      <h2 ng-click="hideComments=!hideComments" title="Click to show/hide comments"> 
         Comments 
-        <i ng-hide="showComments" class="fa fa-chevron-circle-down" style="font-size:30px"></i> 
-        <i ng-show="showComments" class="fa fa-chevron-circle-up" style="font-size:30px"></i>
+        <i ng-show="hideComments" class="fa fa-chevron-circle-down" style="font-size:30px"></i> 
+        <i ng-hide="hideComments" class="fa fa-chevron-circle-up" style="font-size:30px"></i>
       </h2>
-      <comment-area ng-show="showComments" thread="{{'company-' + company.id}}"></comment-area>
+      <comment-area ng-hide="hideComments" thread="{{'company-' + company.id}}"></comment-area>
 
     </div>
   </div>
