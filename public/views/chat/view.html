@@ -1,64 +1,62 @@
-<h2 ng-show="loading">Loading...</h2>
-<div ng-hide="loading">
-  <h1>Chat {{chat.name}}</h1>
-</div>
-<div id="scroll-chat" scroll-glue  ng-hide="loading" style="position: absolute; top: 100px; left: 20px; overflow-y: scroll; height: 70%; width:70%; background:white">
-  <div infinite-scroll="history()" infinite-scroll-reverse="true" infinite-scroll-container="'#scroll-chat'" infinite-scroll-parent>
-    <ul class="unstyled infinite-scroll">
-      <li ng-repeat="message in messages | orderBy:'date':false">
-        <div ng-if="message.kind == 'message'">
-          <div ng-show="message.member == me.id" class="chat-message me">
-            <small title="{{timeSince(message.date)}}" ng-bind-html="message.text | linky:'_blank'"></small>
-            <a href="#/member/{{message.member}}" title="{{getMember(message.member).name}}">
-              <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
-            </a>
-          </div>
-          <div ng-show="message.member != me.id" class="chat-message others">
-            <a href="#/member/{{message.member}}" title="{{getMember(message.member).name}}">
-              <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
-            </a>
-            <small title="{{timeSince(message.date)}}" ng-bind-html="message.text | linky:'_blank'"></small>
-          </div>
-        </div>
-        <div ng-if="message.kind == 'notification'" class="chat-notification {{message.member == me.id ? 'me' : 'others'}}">
-          <p style="margin:0">
-            <a href="#/member/{{message.member}}" title="{{getMember(message.member).name}}">
-              <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
-            </a>
-            <a href="#/{{message.source.replace('-','/')}}">
-              <small title="{{timeSince(message.date)}}">{{message.text}}</small>
-            </a>
-          </p>
-          <topic-card ng-if="message.source.indexOf('topic') !== -1" topic="getTopic(message.source.replace('topic-', ''))" members="members" me="me" roles="roles" tags="topicTags" comments="comments" notifications="notifications"></topic-card>
-          <speaker-card ng-if="message.source.indexOf('speaker')!=-1" speaker-object="getSpeaker(message.source.replace('speaker-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></speaker-card>
-          <company-card ng-if="message.source.indexOf('company')!=-1" company-object="getCompany(message.source.replace('company-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></company-card>
-          <embed-meeting ng-if="message.source.indexOf('meeting-') != -1" meeting-id="message.source.replace('meeting-', '')" members="members"></embed-meeting>
-        </div>
-      </li>
-    </ul>
-  </div>
-</div>
+<div>
+  <h2 ng-show="loading">Loading...</h2>
+  <div class="all-100">
+    <div id="scroll-chat" scroll-glue  ng-hide="loading">
+    <div infinite-scroll="history()" infinite-scroll-reverse="true" infinite-scroll-container="'#scroll-chat'" infinite-scroll-parent>
+      <div class="infinite-scroll">
+        <div ng-repeat="message in messages | orderBy:'date':false" class="all-100 chat-message">
 
-<div ng-hide="loading" style="position: absolute; top: 50px; right: 20px; overflow-y: scroll; height: 90%; width:25%">
-  <div ng-repeat="user in online | orderBy:['-on', 'name']" style="margin-bottom:10px">
-    <div class="column-group horizontal-gutters">
-      <div class="all-20">
-        <a href="#/member/{{user.member}}"><img ng-src="https://graph.facebook.com/{{getMember(user.member).facebook}}/picture" style="width:25px; margin-left:15px;"/></a>
-      </div>
-      <div class="all-60">
-        <small>{{getMember(user.member).name}}</small>
-      </div>
-      <div class="all-20" ng-if="user.on">
-        <small style="font-size:xx-small; color: LimeGreen">· Online</small>
+          <div ng-if="message.kind == 'message'">
+            <div>
+              <a href="#/member/{{message.member}}" title="{{getMember(message.member).name}}">
+                <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
+              </a>
+              <small title="{{timeSince(message.date)}}" ng-bind-html="message.text | linky:'_blank'"></small>
+            </div>
+          </div>
+
+          <div ng-if="message.kind == 'notification'">
+            <div>
+              <a href="#/member/{{message.member}}" title="{{getMember(message.member).name}}">
+                <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
+              </a>
+              <a href="#/{{message.source.replace('-','/')}}">
+                <small title="{{timeSince(message.date)}}">{{message.text}}</small>
+              </a>
+            </div>
+            <topic-card ng-if="message.source.indexOf('topic') !== -1" topic="getTopic(message.source.replace('topic-', ''))" members="members" me="me" roles="roles" tags="topicTags" comments="comments" notifications="notifications"></topic-card>
+            <speaker-card ng-if="message.source.indexOf('speaker')!=-1" speaker-object="getSpeaker(message.source.replace('speaker-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></speaker-card>
+            <company-card ng-if="message.source.indexOf('company')!=-1" company-object="getCompany(message.source.replace('company-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></company-card>
+            <embed-meeting ng-if="message.source.indexOf('meeting-') != -1" meeting-id="message.source.replace('meeting-', '')" members="members"></embed-meeting>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+  </div>
 
-<div ng-hide="loading" style="position: absolute; bottom: 0; right: 30%;width: 30%; overflow-y: scroll;">
-  <form class="ink-form" ng-submit="submit()">
-    <div class="control-group">
-      <input ng-model="text" type="text" id="submit" placeholder="Say something chatty!" style="width: 100%;">
+  <div class="awesome-sidebar" ng-click="hideSidebar=!hideSidebar" title="Click to hide sidebar!" ng-hide="hideSidebar || loading" style="padding-bottom:120px;">
+    <h3>#{{chat.id}}</h3>
+    <h6><a href="#/chat/{{subchat.id}}/" ng-show="subchat.id!=chat.id" ng-repeat="subchat in chats | orderBy:'name':true">
+      #{{subchat.id}}
+    </a></h6>
+
+    <div ng-repeat="user in online | orderBy:['-on', 'name']" style="margin-bottom:10px;">
+      <a href="#/member/{{user.member}}"><img ng-src="https://graph.facebook.com/{{getMember(user.member).facebook}}/picture" style="width:25px;"/></a>
+      <small>{{getMember(user.member).name}}</small>
+      <small ng-if="user.on" style="font-size:xx-small; color: LimeGreen">Online</small>
     </div>
-  </form>
+  </div>
+
+  <div class="awesome-sidebar-button" ng-click="hideSidebar=!hideSidebar" title="Click to show sidebar!" ng-show="hideSidebar">
+    <i class="fa fa-3x fa-caret-left"></i> 
+  </div>
+
+  <div class="awesome-bottombar" ng-hide="loading">
+    <form class="ink-form" ng-submit="submit()">
+      <div class="control-group">
+        <input ng-model="text" type="text" id="submit" placeholder="Say something chatty!" style="width: 100%;">
+      </div>
+    </form>
+  </div>
 </div>
