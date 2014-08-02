@@ -1,34 +1,32 @@
 <div>
   <h2 ng-show="loading">Loading...</h2>
-  <div class="all-100">
-    <div id="scroll-chat" scroll-glue  ng-hide="loading">
-      <div infinite-scroll="history()" infinite-scroll-distance="5" infinite-scroll-reverse="true" infinite-scroll-container="'#scroll-chat'" infinite-scroll-parent>
-        <div class="infinite-scroll">
-          <div ng-repeat="message in messages | orderBy:'date':false" class="all-100 chat-message">
+  <div id="scroll-chat" class="all-100" ng-hide="loading">
+    <div infinite-scroll="history()" infinite-scroll-distance="1" infinite-scroll-reverse="true" infinite-scroll-container="'#scroll-chat'" infinite-scroll-start-bottom="true" infinite-scroll-parent="true">
+      <div class="infinite-scroll">
+        <div ng-repeat="message in messages | orderBy:'date':false" class="all-100 chat-message">
 
-            <div ng-if="message.kind == 'message'">
-              <div>
-                <a href="#/member/{{message.member}}" title="{{getMember(message.member).name}}">
-                  <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
-                </a>
-                <small title="{{timeSince(message.date)}}" ng-bind-html="message.text | linky:'_blank'"></small>
-              </div>
+          <div ng-if="message.kind == 'message'">
+            <div>
+              <a href="#/member/{{message.member}}" title="{{getMember(message.member).name}}">
+                <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
+              </a>
+              <small title="{{timeSince(message.date)}}" ng-bind-html="message.text | linky:'_blank'"></small>
             </div>
+          </div>
 
-            <div ng-if="message.kind == 'notification'">
-              <div>
-                <a href="#/member/{{message.member}}" title="{{getMember(message.member).name}}">
-                  <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
-                </a>
-                <a href="#/{{message.source.replace('-','/')}}">
-                  <small title="{{timeSince(message.date)}}">{{message.text}}</small>
-                </a>
-              </div>
-              <topic-card ng-if="message.source.indexOf('topic') !== -1" topic="getTopic(message.source.replace('topic-', ''))" members="members" me="me" roles="roles" tags="topicTags" comments="comments" notifications="notifications"></topic-card>
-              <speaker-card ng-if="message.source.indexOf('speaker')!=-1" speaker-object="getSpeaker(message.source.replace('speaker-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></speaker-card>
-              <company-card ng-if="message.source.indexOf('company')!=-1" company-object="getCompany(message.source.replace('company-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></company-card>
-              <embed-meeting ng-if="message.source.indexOf('meeting-') != -1" meeting-id="message.source.replace('meeting-', '')" members="members"></embed-meeting>
+          <div ng-if="message.kind == 'notification'">
+            <div>
+              <a href="#/member/{{message.member}}" title="{{getMember(message.member).name}}">
+                <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
+              </a>
+              <a href="#/{{message.source.replace('-','/')}}">
+                <small title="{{timeSince(message.date)}}">{{message.text}}</small>
+              </a>
             </div>
+            <topic-card ng-if="message.source.indexOf('topic') !== -1" topic="getTopic(message.source.replace('topic-', ''))" members="members" me="me" roles="roles" tags="topicTags" comments="comments" notifications="notifications"></topic-card>
+            <speaker-card ng-if="message.source.indexOf('speaker')!=-1" speaker-object="getSpeaker(message.source.replace('speaker-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></speaker-card>
+            <company-card ng-if="message.source.indexOf('company')!=-1" company-object="getCompany(message.source.replace('company-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></company-card>
+            <embed-meeting ng-if="message.source.indexOf('meeting-') != -1" meeting-id="message.source.replace('meeting-', '')" members="members"></embed-meeting>
           </div>
         </div>
       </div>
