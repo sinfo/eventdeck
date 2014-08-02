@@ -128,9 +128,15 @@ mod.directive('infiniteScroll', [
         scope.$watch('infiniteScrollReverse', handleInfiniteScrollReverse);
         handleInfiniteScrollReverse(scope.infiniteScrollReverse);
 
+        handleInfiniteScrollStartBottom = function(v) {
+          return startBottom = v;
+        };
+        scope.$watch('infiniteScrollStartBottom', handleInfiniteScrollStartBottom);
+        handleInfiniteScrollStartBottom(scope.infiniteScrollStartBottom);
+
         handleHeightChange = function(newHeight, oldHeight) {
           console.log('Height: ' + newHeight + " Old: " + oldHeight + " Scroll: " + container.scrollTop());
-          if (container.scrollTop() <= newHeight - oldHeight + scrollDistance && newHeight - oldHeight > 5){
+          if (container.scrollTop() <= newHeight - oldHeight + scrollDistance){
             var curPos = container.scrollTop();
             console.log("NewPos: " + (newHeight - oldHeight) + " CurPos: " + curPos);
             container.scrollTop (newHeight - oldHeight);
@@ -172,10 +178,6 @@ mod.directive('infiniteScroll', [
         }
         if (attrs.infiniteScrollImmediateCheck != null) {
           immediateCheck = attrs.infiniteScrollImmediateCheck;
-        }
-        console.log("Start bottom: " + startBottom);
-        if (startBottom){
-          container.scrollTop(container.scrollHeight);
         }
         return $timeout((function() {
           if (immediateCheck) {

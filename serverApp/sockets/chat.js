@@ -53,7 +53,7 @@ webSocket
     socket.on('logout', function(data, cb){
       console.log("Log out: " + socket.nickname);
       socket.disconnect();
-      webSocket.of('/chat').in(data.room).emit('user:disconnected', {id: socket.nickname});
+      webSocket.of('/chat').in(data.room).emit('user-disconnected', {id: socket.nickname});
       cb();
     });
 
@@ -132,7 +132,7 @@ function done(err, room, socket, cb){
       online   : online,
       err      : false
     }
-    webSocket.of('/chat').in(room).emit('user:connected', {id: socket.nickname});
+    webSocket.of('/chat').in(room).emit('user-connected', {id: socket.nickname});
   }
   socket.emit("validation", data);
   cb();
