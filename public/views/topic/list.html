@@ -1,63 +1,42 @@
 <div class="ink-grid">
 
-  <div class="column-group">
-    <div class="all-50">
-      <h1>Topics</h1>
-    </div>
-
-    <div class="all-50 align-right">
-      <div ng-repeat="kind in kinds" class="ink-button green" ng-click="createTopic(kind)"><i class="fa fa-plus"></i> {{kind}}</div>
-    </div>
+  <div class="all-100" infinite-scroll="scroll()">
+    <topic-card topic="topic" members="members" me="me" roles="roles" tags="topicTags" comments="comments" notifications="notifications" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true' | limitTo: limit"></topic-card>
   </div>
 
-  <div class="column-group gutters">
-    <div class="all-25 medium-40 hide-small hide-100">
-      <div class="button-group half-bottom-space">
-        <p class="ink-button {{searchTopics.target ? '' : 'blue'}}" ng-click="searchTopics.target = undefined">All topics</p>
-        <p class="ink-button {{searchTopics.target ? 'blue' : ''}}" ng-click="searchTopics.target = me.id">Assigned to me</p>
-      </div>
-
-      <tag-manager tags-array="topicTags" search="searchTopics"></tag-manager>
+  <div class="awesome-sidebar" ng-hide="hideSidebar || loading" style="padding-bottom:120px;">
+    <div class="header">
+      <b title="Click to hide sidebar!">{{showOpen ? 'Open' : 'Closed'}} Topics</b>
+      <div ng-click="hideSidebar=!hideSidebar" class="push-right hide-button">HIDE</div>
     </div>
 
-    <div class="all-100 hide-all show-small show-100">
-      <a class="ink-button blue" ng-click="showFilters=!showFilters" title="Click to show/hide filters">
-        Filters
-        <i ng-hide="showFilters" class="fa fa-chevron-circle-down" style="font-size:20px"></i>
-        <i ng-show="showFilters" class="fa fa-chevron-circle-up" style="font-size:20px"></i>
-      </a>
-      <br><br>
-      <div ng-if="showFilters">
-        <p class="ink-button" ng-click="searchTopics.target = undefined">All topics</p>
-        <p class="ink-button" ng-click="searchTopics.target = me.id">Assigned to me</p>
+    <div class="button-group small">
+      <div class="ink-button green" ng-click="showOpen = true;" style="border-right: 1px solid white;">{{count(true)}} Open</div>
+      <div class="ink-button red" ng-click="showOpen = false;" style="border-left: 0px;">{{count(false)}} Closed</div>
+    </div>
 
-        <tag-manager tags-array="topicTags" search="searchTopics"></tag-manager>
-      <br><br>
-      </div>
+    <div class="button-group small">
+      <div class="ink-button {{searchTopics.target == undefined ? 'blue' : ''}}" ng-click="searchTopics.target = undefined">All topics</div>
+      <div class="ink-button {{searchTopics.target == me.id ? 'blue' : ''}}" ng-click="searchTopics.target = me.id">Assigned to me</div>
+    </div>
+
+    <div class="button-group small uppercase">
+      <div class="ink-button {{!searchTopics.kind ? 'blue' : ''}}" ng-click="searchTopics.kind = undefined" style="padding:6px">All</div>
+      <div ng-repeat="kind in kinds" class="ink-button {{searchTopics.kind === kind ? 'blue' : ''}}" ng-click="searchTopics.kind = kind" style="padding:6px">{{kind}}</div>
     </div>
 
 
-    <div class="all-75 medium-60 small-100 tiny-100">
-      <h3 ng-show="loading" class="all-100">Loading...</h3>
-      <div ng-hide="loading" class="all-100">
-        <h3 ng-hide="topics" class="all-100">No topics created yet.</h3>
-        <div class="all-100 half-bottom-space">
-          <div class="button-group">
-            <div class="ink-button green" ng-click="showOpen = true;" style="border-right: 1px solid white;">{{count(true)}} Open</div>
-            <div class="ink-button red" ng-click="showOpen = false;" style="border-left: 0px;">{{count(false)}} Closed</div>
-          </div>
-        </div>
-        <div class="all-100">
-          <h3 class="all-50">{{showOpen ? 'Open' : 'Closed'}} topics</h3>
-          <div class="all-50 align-right">
-            <div class="ink-button {{!searchTopics.kind ? 'blue' : ''}}" ng-click="searchTopics.kind = undefined">All</div>
-            <div ng-repeat="kind in kinds" class="ink-button {{searchTopics.kind === kind ? 'blue' : ''}}" ng-click="searchTopics.kind = kind">{{kind}}</div>
-          </div>
-        </div>
-        <div class="all-100" infinite-scroll="scroll()">
-          <topic-card topic="topic" members="members" me="me" roles="roles" tags="topicTags" comments="comments" notifications="notifications" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true' | limitTo: limit"></topic-card>
-        </div>
-      </div>
+    <div class="button-group small uppercase">
+      <div ng-repeat="kind in kinds" class="ink-button green" ng-click="createTopic(kind)" style="padding:4px"><i class="fa fa-plus"></i> {{kind}}</div>
     </div>
+
+    <br>
+
+    <tag-manager tags-array="topicTags" search="searchTopics"></tag-manager>
   </div>
+
+  <div class="awesome-sidebar-button" ng-click="hideSidebar=!hideSidebar" title="Click to show sidebar!" ng-show="hideSidebar">
+    <i class="fa fa-3x fa-caret-left"></i> 
+  </div>
+
 </div>

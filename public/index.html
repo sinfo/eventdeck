@@ -48,7 +48,7 @@
   </head>
 
   <body class="ink-drawer" ng-controller="MainController">
-    <div id="topbar" style="height: 44px;">
+    <div id="topbar" style="height: 44px; z-index:600;">
       <nav class="ink-navigation ink-grid ie7">
         <ul class="menu horizontal push-left medium-push-center small-push-center tiny-push-center" style="height: 44px;">
           <li ng-if="me._id" class="hide-all show-medium show-tiny show-small"><button class="fa fa-bars left-drawer-trigger" style="color:#333;"></button></li>
@@ -116,7 +116,7 @@
       </nav>
     </div>
 
-    <div ng-show="me._id" class="left-drawer">
+    <div ng-show="me._id" class="left-drawer" style="z-index:500;">
       <ul>
           <li><a><input type="text" ng-model="search.name" ng-change="searchBoxChanged()" placeholder="Super search!!!"></a>
           <ul ng-if="search.name && search.name.length > 1" class="submenu" style="max-height:400px; overflow:auto; margin: 0px 20px 0px;">
@@ -177,7 +177,7 @@
 
     <script>
       Ink.requireModules(['Ink.UI.Drawer_1'], function(Drawer) {
-        var inkDrawer = new Drawer({ sides: 'left', mode: 'push' });
+        var inkDrawer = new Drawer({ sides: 'left', mode: 'over' });
       });
     </script>
     <script type="text/javascript" src="js/index.js"></script>

@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
-
-var mongo_url = 'mongodb://localhost/sinfo';
+var mongo_url = require('./../../config').mongo.url;
 
 mongoose.connect(mongo_url);
 var db = mongoose.connection;
