@@ -1,4 +1,4 @@
-<div ng-hide="communication.deleted" class="all-100 activity" style="background: #eee; border-radius: 5px;">
+<div ng-hide="communication.deleted" class="all-100 activity">
 
   <div class="all-100">
     <div class="all-50">
@@ -9,7 +9,7 @@
       <small title="{{formatDate(communication.posted)}}">({{timeSince(communication.posted)}})</small>
     </div>
     <div class="all-50 align-right">
-      <small>
+      <small class="button-group push-right">
         <a class="ink-button green" ng-show="(communication.kind=='Email To' || communication.kind=='Inital Email Paragraph') && checkPermission(communication) && communication.member !== me.id" ng-click="approveCommunication(communication)">Approve</a>
         <a class="ink-button blue" ng-show="communication.kind.indexOf('Paragraph')!=-1" href="/api/speaker/{{communication.thread.split('speaker-')[1]}}/sendInitialEmail" target="_blank">Preview</a>
         <a class="ink-button orange" ng-show="checkPermission(communication)" ng-click="communication.editing = true; communication.buffer = communication.text">Edit</a>

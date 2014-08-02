@@ -57,6 +57,7 @@ theToolController.controller("TopicsController", function ($rootScope, $scope, $
             $scope.topics.filter(function (o) {
               return o._id == response.id;
             })[0].editing = true;
+            $location.path('topic/'+response.id);
           });
         }
       });
