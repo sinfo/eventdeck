@@ -1,6 +1,6 @@
 'use strict';
 
-theToolController.controller('MainController', function ($scope, $http, $routeParams, $sce, $location, $window, $rootScope, NotificationFactory, MemberFactory, CompanyFactory, SpeakerFactory, TopicFactory, RoleFactory, TagFactory, CommentFactory) {
+theToolController.controller('MainController', function ($scope, $http, $routeParams, $sce, $location, $window, $rootScope, NotificationFactory, MemberFactory, CompanyFactory, SpeakerFactory, TopicFactory, RoleFactory, TagFactory, CommentFactory, ChatFactory) {
 
   //================================INITIALIZATION================================
 
@@ -102,6 +102,13 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
       });
     },
 
+    chats: function() {
+      ChatFactory.Chat.getAll(function(chats) {
+        $scope.chats = chats;
+        callback();
+      });
+    },
+
     all: function(){
       this.running = true;
       factoriesReady = 0;
@@ -114,6 +121,7 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
       this.roles();
       this.tags();
       this.comments();
+      this.chats();
     }
 
   }
@@ -124,7 +132,7 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
   //===================================FUNCTIONS===================================
 
   function callback() {
-    if (++factoriesReady == 8) {
+    if (++factoriesReady == 9) {
       $rootScope.update.running = false;
       $scope.ready = true;
 

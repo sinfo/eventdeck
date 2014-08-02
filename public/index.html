@@ -172,18 +172,14 @@
     <br><br>
 
     <div class="content-drawer">
-      <div class="ink-grid" ng-view></div>
+      <div ng-view></div>
     </div>
-    <footer class="ink-grid">
-      <script>
+
+    <script>
       Ink.requireModules(['Ink.UI.Drawer_1'], function(Drawer) {
         var inkDrawer = new Drawer({ sides: 'left', mode: 'push' });
       });
-      </script>
-      <a href="https://github.com/sinfo/the-tool/issues?state=open" target="_blank"><i class="fa fa-github"></i> Leave Feedback or Request new Features</a>
-      <br><br><br>
-    </footer>
-
+    </script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
       app.initialize();
