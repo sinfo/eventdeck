@@ -17,7 +17,7 @@
 
     <br>
 
-    <h3>Filter Roles</h3>
+    <h6>Filter Roles</h6>
     <div ng-repeat="role in roles | orderBy:'name'">
       <a ng-click="setSearchRole(role.id)" class="ink-button small all-100">
         {{role.name}}
@@ -29,8 +29,6 @@
     <h6>Order by</h6>
     <div>
       <div class="ink-button blue small all-100" ng-click="memberPredicate='name'; reverse=!reverse">Name <i class="fa fa-arrows-v"></i></div><br>
-      <div class="ink-button blue small all-100" ng-click="memberPredicate='updated'; reverse=!reverse">Updated <i class="fa fa-arrows-v"></i></div><br>
-      <div class="ink-button blue small all-100" ng-click="memberPredicate='member'; reverse=!reverse">Member <i class="fa fa-arrows-v"></i></div>
     </div>
   </div>
 
