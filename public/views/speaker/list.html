@@ -1,81 +1,40 @@
 <div class="ink-grid">
 
-  <div class="column-group">
-    <div class="all-50">
-      <h1>Speakers</h1>
+  <div class="all-100" infinite-scroll="scroll()">
+    <speaker-card speaker-object="speaker" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments" ng-repeat="speaker in speakers | filter:searchSpeakers:strict | orderBy:speakerPredicate:reverse | limitTo: limit"></speaker-card>
+  </div>
+
+  <div class="awesome-sidebar" ng-hide="hideSidebar || loading">
+    <div class="header">
+      <b title="Click to hide sidebar!">Speakers</b>
+      <div ng-click="hideSidebar=!hideSidebar" class="push-right hide-button">HIDE</div>
     </div>
 
-    <div class="all-50 align-right">
-      <a class="ink-button green" href="#/speaker"><i class="fa fa-plus"></i> Speaker</a>
+    <div class="button-group small">
+      <p class="ink-button {{searchSpeakers.member == undefined ? 'blue' : ''}}" ng-click="searchSpeakers={}">All</p>
+      <p class="ink-button {{searchSpeakers.member == me.id ? 'blue' : ''}}" ng-click="searchSpeakers.member=me.id">Assigned to me</p>
+    </div>
+
+    <br>
+
+    <h6>Filter Status</h6>
+    <div ng-repeat="status in statuses">
+      <div class="ink-button small all-100 {{status.replace(' ','-').toLowerCase()}}" ng-click="searchSpeakers.status=status">
+        {{status}}
+      </div>
+    </div>
+
+    <br>
+
+    <h6>Order by</h6>
+    <div>
+      <div class="ink-button blue small all-100" ng-click="speakerPredicate='name'; reverse=!reverse">Name <i class="fa fa-arrows-v"></i></div><br>
+      <div class="ink-button blue small all-100" ng-click="speakerPredicate='updated'; reverse=!reverse">Updated <i class="fa fa-arrows-v"></i></div><br>
+      <div class="ink-button blue small all-100" ng-click="speakerPredicate='member'; reverse=!reverse">Member <i class="fa fa-arrows-v"></i></div>
     </div>
   </div>
 
-  <div class="column-group gutters">
-    <div class="all-25 medium-40 hide-small hide-100">
-      <div class="button-group half-bottom-space">
-        <p class="ink-button" ng-click="searchSpeakers={}">All</p>
-        <p class="ink-button" ng-click="searchSpeakers.member=me.id">Assigned to me</p>
-      </div>
-
-      <h3>Filter Status</h3>
-      <div ng-repeat="status in statuses" class="button-group">
-        <div class="ink-button small all-100 {{status.replace(' ','-').toLowerCase()}}" ng-click="searchSpeakers.status=status" style="border: 0px; border-radius: 2px; color: white; font-size: 16px;">
-          {{status}}
-        </div>
-      </div>
-
-      <br>
-
-      <h3>Order by</h3>
-      <div class="button-group">
-        <div class="ink-button blue small all-100" ng-click="speakerPredicate='name'; reverse=!reverse">Name <i class="fa fa-arrows-v"></i></div>
-        <div class="ink-button blue small all-100" ng-click="speakerPredicate='updated'; reverse=!reverse">Updated <i class="fa fa-arrows-v"></i></div>
-        <div class="ink-button blue small all-100" ng-click="speakerPredicate='member'; reverse=!reverse">Member <i class="fa fa-arrows-v"></i></div>
-      </div>
-    </div>
-
-    <div class="all-100 hide-all show-small show-100">
-      <a class="ink-button blue" ng-click="showFilters=!showFilters" title="Click to show/hide filters">
-        Filters
-        <i ng-hide="showFilters" class="fa fa-chevron-circle-down" style="font-size:20px"></i>
-        <i ng-show="showFilters" class="fa fa-chevron-circle-up" style="font-size:20px"></i>
-      </a>
-      <br><br>
-      <div ng-if="showFilters">
-        <div class="button-group half-bottom-space">
-          <p class="ink-button" ng-click="searchSpeakers={}">All</p>
-          <p class="ink-button" ng-click="searchSpeakers.member=me.id">Assigned to me</p>
-        </div>
-
-        <h3>Filter Status</h3>
-        <div ng-repeat="status in statuses" class="button-group">
-          <div class="ink-button small all-100 {{status.replace(' ','-').toLowerCase()}}" ng-click="searchSpeakers.status=status" style="border: 0px; border-radius: 2px; color: white; font-size: 16px;">
-            {{status}}
-          </div>
-        </div>
-
-        <br>
-
-        <h3>Order by</h3>
-        <div class="button-group">
-          <div class="ink-button blue small all-100" ng-click="speakerPredicate='name'; reverse=!reverse">Name <i class="fa fa-arrows-v"></i></div>
-          <div class="ink-button blue small all-100" ng-click="speakerPredicate='updated'; reverse=!reverse">Updated <i class="fa fa-arrows-v"></i></div>
-          <div class="ink-button blue small all-100" ng-click="speakerPredicate='member'; reverse=!reverse">Member <i class="fa fa-arrows-v"></i></div>
-        </div>
-        <br><br>
-      </div>
-    </div>
-
-
-    <div class="all-75 medium-60 small-100 tiny-100">
-      <h3 ng-show="loading">Loading...</h3>
-      <div ng-hide="loading">
-        <h3 ng-hide="loading || speakers">No speakers created yet.</h3>
-        
-        <div class="all-100" infinite-scroll="scroll()">
-          <speaker-card speaker-object="speaker" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments" ng-repeat="speaker in speakers | filter:searchSpeakers:strict | orderBy:speakerPredicate:reverse | limitTo: limit"></speaker-card>
-        </div>
-      </div>
-    </div>
+  <div class="awesome-sidebar-button" ng-click="hideSidebar=!hideSidebar" title="Click to show sidebar!" ng-show="hideSidebar">
+    <i class="fa fa-3x fa-caret-left"></i> 
   </div>
 </div>

@@ -1,14 +1,14 @@
 <div style="width: 240px;">
-  <h3>{{manage ? 'Manage tags' : 'Filter tags'}}</h3>
+  <h6>{{manage ? 'Manage tags' : 'Filter tags'}}</h6>
   <span ng-hide="tags">There are no tags.</span>
 
-  <div ng-show="search.tags" class="button-group quarter-bottom-space">
+  <div ng-show="search.tags" class="button-group">
     <div class="ink-button red small all-100" ng-click="search.tags = undefined" style="border-radius: 2px; font-size: 16px;"><i class="fa fa-times"></i> Clear tag filters</div>
   </div>
 
   <div ng-hide="manage">
-    <div ng-repeat="tag in tags | orderBy: 'name'" class="button-group">
-      <div class="ink-button small all-100" ng-click="search.tags = tag.id" style="background:{{tag.color}}; color: #fff">
+    <div ng-repeat="tag in tags | orderBy: 'name'">
+      <div class="ink-button small all-100" ng-click="search.tags = tag.id" style="border-left: 10px solid {{tag.color}}; border-radius: 2px;">
         {{tag.name}}
       </div>
     </div>
