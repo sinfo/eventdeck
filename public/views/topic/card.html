@@ -1,0 +1,37 @@
+<div ng-hide="!topic._id || topic.deleted" class="card">
+    <div class="content full">
+      <a href="#/topic/{{topic._id}}">
+        <div class="kind">
+          {{topic.kind}} 
+          <span class="closed" ng-if="topic.closed"> Closed!</span>
+          <span class="duedate" ng-show="topic.show.duedate && topic.duedate">{{timeSince(topic.duedate)}}</span>
+        </div> 
+        
+        <div class="text" ng-bind-html="topic.text | linky"></div>
+      </a>
+
+      
+      <form class="poll" ng-if="topic.show.poll">
+        <div class="control-group">
+          <ul class="control unstyled">
+            <li ng-repeat="option in topic.poll.options">
+              <input type="checkbox" value="true" ng-click="selectOption(topic, option)" ng-checked="option.votes.indexOf(me.id) != -1" ng-disabled="{{topic.closed}}">
+              <span ng-if="topic.poll.kind == 'text'">{{option.content}}</span>
+              <img ng-if="topic.poll.kind == 'images'" ng-src="{{option.content}}" style="width:60%">
+              <span class="votes">{{option.votes.length}} votes</span>
+            </li>
+          </ul>
+        </div>
+      </form>
+
+      <div class="tags">
+        <span ng-repeat="tag in tags" ng-show="topic.tags.indexOf(tag.id) !== -1" style="color: {{tag.color}}">{{tag.name}}</span>
+      </div>
+
+      <div class="targets" ng-if="showTargets && topic.targets.length > 0">
+        <a ng-repeat="target in topic.targets" href="#/member/{{target}}" title="{{getMember(target).name}}">
+          <img ng-src="https://graph.facebook.com/{{getMember(target).facebook}}/picture?width=100&height=100">
+        </a>
+      </div>
+    </div>
+</div>
