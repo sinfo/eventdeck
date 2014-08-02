@@ -26,38 +26,38 @@
         </div>
       </div>
 
-      <form class="ink-form" ng-submit="submit()" >
+      <form class="ink-form" ng-submit="submit()" unsaved-warning-form>
         <div class="column-group horizontal-gutters">
           <div class="all-30 medium-30 small-100 tiny-100">
             <div class="control-group">
               <label for="name">Name</label>
               <div class="control">
-                <input id="name" ng-model="formData.name" type="text">
+                <input id="name" ng-model="formData.name" type="text" resettable>
               </div>
             </div>
             <div class="control-group">
               <label for="status">Status</label>
               <div class="control">
-                <select id="status" ng-model="formData.status" ng-options="s for s in statuses | orderBy: 'toString()'"></select>
+                <select id="status" ng-model="formData.status" ng-options="s for s in statuses | orderBy: 'toString()'" resettable></select>
               </div>
             </div>
             <div class="control-group">
               <label for="member">Member</label>
               <div class="control">
-                <select ng-model="formData.member" ng-options="m.id as m.name for m in members | orderBy: 'id'"></select>
+                <select ng-model="formData.member" ng-options="m.id as m.name for m in members | orderBy: 'id'" resettable></select>
               </div>
             </div>
             <div class="control-group">
               <label for="img">Image Url</label>
               <div class="control">
-                <input id="img" ng-model="formData.img" type="text">
+                <input id="img" ng-model="formData.img" type="text" resettable>
               </div>
               <img ng-show="formData.img" src="{{formData.img}}" width="100%" />
             </div>
             <div class="control-group">
               <label for="area">Area</label>
               <div class="control">
-                <input id="area" ng-model="formData.area" type="text">
+                <input id="area" ng-model="formData.area" type="text" resettable>
               </div>
             </div>
           </div>
@@ -65,68 +65,68 @@
             <div class="control-group">
               <label for="forum">Forum</label>
               <div class="control">
-                <input id="forum" ng-model="formData.forum" type="text">
+                <input id="forum" ng-model="formData.forum" type="text" resettable>
               </div>
             </div>
             <div class="control-group">
               <label for="description">Description</label>
               <div class="control">
-                <textarea id="description" ng-model="formData.description" type="text" rows="3"></textarea>
+                <textarea id="description" ng-model="formData.description" type="text" rows="3" resettable></textarea>
               </div>
             </div>
             <div class="control-group">
               <label for="history">History</label>
               <div class="control">
-                <textarea id="history" ng-model="formData.history" type="text" rows="5"></textarea>
+                <textarea id="history" ng-model="formData.history" type="text" rows="5" resettable></textarea>
               </div>
             </div>
             <div class="control-group">
               <label for="contacts">Contacts</label>
               <div class="control">
-                <textarea id="contacts" ng-model="formData.contacts" type="text" rows="6"></textarea>
+                <textarea id="contacts" ng-model="formData.contacts" type="text" rows="6" resettable></textarea>
               </div>
             </div>
             <div class="control-group">
               <input type="submit" id="submit" value="Submit" class="ink-button green" />
               <a class="ink-button blue" ng-click="showForum=!showForum"><i class="fa fa-comments"></i> Show Forum!</a>
-              <a class="ink-button orange" href="#/company/{{company.id}}"><i class="fa fa-back"></i><i class="fa fa-reply"></i>  Go back...</a>
+              <a class="ink-button orange" href="#/company/{{company.id}}"><i class="fa fa-back"></i><i class="fa fa-reply" unsaved-warning-clear></i>  Go back...</a>
             </div>
           </div>
           <div class="all-30 medium-30 small-100 tiny-100">
             <div class="control-group">
               <label for="kind">Participation Kind</label>
               <div class="control">
-                <input id="kind" ng-model="formData.participation.kind" type="text">
+                <input id="kind" ng-model="formData.participation.kind" type="text" resettable>
               </div>
             </div>
             <div class="control-group">
               <label for="price">Price</label>
               <div class="control">
-                <input id="price" ng-model="formData.participation.payment.price" type="text">
+                <input id="price" ng-model="formData.participation.payment.price" type="text" resettable>
               </div>
             </div>
             <div class="control-group">
               <label for="invoice">Invoice</label>
               <div class="control">
-                <input id="invoice" ng-model="formData.participation.payment.invoice" type="text">
+                <input id="invoice" ng-model="formData.participation.payment.invoice" type="text" resettable>
               </div>
             </div>
             <div class="control-group">
               <label for="date">Date</label>
               <div class="control">
-                <input id="date" ng-model="formData.participation.payment.date" type="text">
+                <input id="date" ng-model="formData.participation.payment.date" type="text" resettable>
               </div>
             </div>
             <div class="control-group">
               <label for="status">Status</label>
               <div class="control">
-                <input id="status" ng-model="formData.participation.payment.status" type="text">
+                <input id="status" ng-model="formData.participation.payment.status" type="text" resettable>
               </div>
             </div>
             <div class="control-group">
               <label for="via">Via</label>
               <div class="control">
-                <input id="via" ng-model="formData.participation.payment.via" type="text">
+                <input id="via" ng-model="formData.participation.payment.via" type="text" resettable>
               </div>
             </div><div class="control-group">
               <div class="control">

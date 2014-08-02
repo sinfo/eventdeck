@@ -2,7 +2,7 @@
 
 var facebookConfig = require('./../../../../../config').facebook;
 
-theToolController.controller("LoginController", function ($scope, $routeParams, $location, $http, $window) {
+theToolController.controller("LoginController", function ($rootScope, $scope, $routeParams, $location, $http, $window) {
 
   //================================INITIALIZATION================================
   $.ajaxSetup({cache: true});
@@ -56,7 +56,8 @@ theToolController.controller("LoginController", function ($scope, $routeParams, 
       $http.get(url_prefix + '/api/login/facebook?id='+response.authResponse.userID+'&token='+response.authResponse.accessToken).
         success(function(data, status, headers, config) {
           //$location.path('/');
-          $window.location.assign('/');
+          $window.location.assign($rootScope.nextPath);
+          $rootScope.update.all();
         }).
         error(function(data, status, headers, config) {
           $scope.loading = false;

@@ -10,15 +10,15 @@
 
   <div class="all-100 column-group horizontal-gutters">
     <div class="all-50">
-      <form class="ink-form">
+      <form class="ink-form" unsaved-warning-form>
         <div class="control-group">
           <div class="control">
-            <select id="kind" ng-model="communicationData.kind" ng-options="s for s in kinds | orderBy: 'toString()'"></select>
+            <select id="kind" ng-model="communicationData.kind" ng-options="s for s in kinds | orderBy: 'toString()'" resettable></select>
           </div>
         </div>
         <div class="control-group">
           <div class="control">
-            <textarea ng-model="communicationData.text" type="text" rows="4" style="font-size: 15px;"></textarea>
+            <textarea ng-model="communicationData.text" type="text" rows="4" style="font-size: 15px;" resettable></textarea>
           </div>
         </div>
         <div class="control-group">

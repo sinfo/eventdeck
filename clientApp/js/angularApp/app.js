@@ -6,6 +6,7 @@ angular.module("theTool", [
   "ngSanitize",
   "ngTouch",
   "infinite-scroll",
+  "unsavedChanges",
   "luegg.directives",
   "ngAudio",
   "theTool.filters",
