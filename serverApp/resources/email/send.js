@@ -9,7 +9,7 @@ exports = module.exports = send;
 
 function send(message, cb) {
   if(!message.html || message.html == '') {
-    mg.sendText('tool@bananamarket.eu',
+    mg.sendText(mgConfig.email,
       message.to,
       message.subject,
       message.text,
@@ -20,7 +20,7 @@ function send(message, cb) {
   } 
   else {
     mailcomposer.setMessageOption({
-      from: 'tool@bananamarket.eu',
+      from: mgConfig.email,
       to: message.to,
       cc: message.cc,
       subject: message.subject,
@@ -31,7 +31,7 @@ function send(message, cb) {
 
     mailcomposer.buildMessage(function(err, rawBody){
       if(err) { return cb(err) }
-      mg.sendRaw('tool@bananamarket.eu',
+      mg.sendRaw(mgConfig.email,
         message.to,
         rawBody,
         function(err) { 

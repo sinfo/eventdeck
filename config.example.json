@@ -1,10 +1,12 @@
 {
-  "url": "http://dev.bananamarket.eu",
-  "email" : {
-    "user": "YOUR EMAIL USER",
-    "password": "YOUR EMAIL PASSWORD",
-    "host": "smtp.gmail.com",
-    "ssl": true
+  "url": "http://tool.sinfo.org",
+  "mongo": {
+    "url": "mongodb://localhost/tool"
+  },
+  "mailgun": {
+    "email": "tool@sinfo.org",
+    "api": "YOUR MAILGUN KEY",
+    "public-api": "YOUR MAILGUN PUBLIC KEY"
   },
   "cookie": {
     "name": "login",
