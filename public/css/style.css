@@ -169,7 +169,7 @@ body.ink-drawer .right-drawer li.active > a {
   position: relative;
   float: left;
   width: 100px;
-  height: 150px;
+  height: 160px;
   background-repeat:no-repeat;
   background-position:center; 
   -webkit-background-size: cover;
@@ -339,6 +339,63 @@ body.ink-drawer .right-drawer li.active > a {
 .give-up:hover,
 .give-up {
   background: #333;
+}
+
+.suggestion:hover.ink-button,
+.suggestion.ink-button {
+  border-left: 10px solid #eb6420;
+  border-radius: 2px;
+  background: #ddd;
+}
+.selected:hover.ink-button,
+.selected.ink-button {
+  border-left: 10px solid #5319e7;
+  border-radius: 2px;
+  background: #ddd;
+}
+.approved:hover.ink-button,
+.approved.ink-button {
+  border-left: 10px solid #0052cc;
+  border-radius: 2px;
+  background: #ddd;
+}
+.contacted:hover.ink-button,
+.contacted.ink-button {
+  border-left: 10px solid #fbca04;
+  border-radius: 2px;
+  background: #ddd;
+}
+.in-conversations:hover.ink-button,
+.in-conversations.ink-button {
+  border-left: 10px solid #207de5;
+  border-radius: 2px;
+  background: #ddd;
+}
+.in-negotiations:hover.ink-button,
+.in-negotiations.ink-button {
+  border-left: 10px solid #006b75;
+  border-radius: 2px;
+  background: #ddd;
+}
+.closed-deal:hover.ink-button,
+.closed-deal,
+.accepted:hover.ink-button,
+.accepted.ink-button {
+  border-left: 10px solid #009800;
+  border-radius: 2px;
+  background: #ddd;
+}
+.rejected:hover.ink-button,
+.rejected.ink-button {
+  border-left: 10px solid #e11d21;
+  border-radius: 2px;
+  background: #ddd;
+}
+.give-up:hover.ink-button,
+.give-up.ink-button {
+  border-left: 10px solid #333;
+  border-radius: 2px;
+  background: #ddd;
 }
 
 .status {
