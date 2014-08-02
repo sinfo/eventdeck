@@ -1,13 +1,19 @@
 "use strict";
 
-theToolController.controller("MembersController", function ($scope, MemberFactory) {
-  $scope.setSearchRole = function (roleId) {
-    $scope.searchRoles=roleId;
-  };
+theToolController.controller("MembersController", function ($rootScope, $scope, MemberFactory) {
+  
+  $rootScope.update.timeout(runController);
 
-  MemberFactory.Member.getAll(function (response) {
-    $scope.memberPredicate = "name";
-    $scope.reverse = false;
-    $scope.members = response;
-  });
+  function runController(){
+
+    $scope.setSearchRole = function (roleId) {
+      $scope.searchRoles=roleId;
+    };
+
+    MemberFactory.Member.getAll(function (response) {
+      $scope.memberPredicate = "name";
+      $scope.reverse = false;
+      $scope.members = response;
+    });
+  }
 });

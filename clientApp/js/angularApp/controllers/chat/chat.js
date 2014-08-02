@@ -2,120 +2,125 @@
 
 theToolController.controller('ChatController', function ($rootScope, $scope, $http, $routeParams, $sce, ngAudio, SocketFactory, MessageFactory, ChatFactory, MemberFactory) {
 
-  $scope.error = {};
+  $rootScope.update.timeout(runController);
 
-  $scope.updating = false;
-  $scope.loading  = true;
-  $scope.messages = [];
-  $scope.online   = [];
- /* $scope.history  = function () {
-    setTimeout(function() {$scope.history()}, 3000);
-  }*/
+  function runController(){
 
-  console.log($scope.scroll);
+	  $scope.error = {};
 
-  console.log("Connecting");
+	  $scope.updating = false;
+	  $scope.loading  = true;
+	  $scope.messages = [];
+	  $scope.online   = [];
+	 /* $scope.history  = function () {
+	    setTimeout(function() {$scope.history()}, 3000);
+	  }*/
 
-  SocketFactory.connect('/chat');
+	  console.log($scope.scroll);
 
-  SocketFactory.on('connected', function () {
-    console.log(SocketFactory.socket);
-    SocketFactory.emit('auth', {id: $routeParams.id, user: $scope.me.id}, function () {
-      console.log('Auth success');
-    });
-  });
+	  console.log("Connecting");
 
-  SocketFactory.on('validation', function (response){
-    console.log(response);
-    if(!response.err){
-      $scope.chat     = response.chatData;
-      $scope.messages = response.messages;
-      $scope.room     = response.room;
+	  SocketFactory.connect('/chat');
 
-      for(var i = 0; i < $scope.chat.members.length; i++){
-        $scope.online.push({member: $scope.chat.members[i], on: false});
-        if(response.online.indexOf($scope.chat.members[i]) != -1){
-          $scope.online[i].on = true;
-        }
-        $scope.online[i].name = $scope.getMember($scope.online[i].member).name;
-      }
-      console.log($scope.online);
-      $scope.history = history;
-/*      $scope.$watch('scroll', function(newValue, oldValue, scope) {
-        if (!newValue) {history();}
-      });*/
-    }
-    else{
-      console.log(response.message);
-    }
-    $scope.loading  = false;
-  });
+	  SocketFactory.on('connected', function () {
+	    console.log(SocketFactory.socket);
+	    SocketFactory.emit('auth', {id: $routeParams.id, user: $scope.me.id}, function () {
+	      console.log('Auth success');
+	    });
+	  });
 
-  SocketFactory.on('user:connected', function (response) {
-    console.log("User connected: " + response.id);
-    for(var i = 0; i < $scope.online.length; i++){
-      if($scope.online[i].member === response.id){
-        $scope.online[i].on = true;
-        break;
-      }
-    }
-  });
+	  SocketFactory.on('validation', function (response){
+	    console.log(response);
+	    if(!response.err){
+	      $scope.chat     = response.chatData;
+	      $scope.messages = response.messages;
+	      $scope.room     = response.room;
 
-  SocketFactory.on('user:disconnected', function (response) {
-    console.log("User connected: " + response.id);
-    for(var i = 0; i < $scope.online.length; i++){
-      if($scope.online[i].member === response.id){
-        $scope.online[i].on = false;
-        break;
-      }
-    }
-  });
+	      for(var i = 0; i < $scope.chat.members.length; i++){
+	        $scope.online.push({member: $scope.chat.members[i], on: false});
+	        if(response.online.indexOf($scope.chat.members[i]) != -1){
+	          $scope.online[i].on = true;
+	        }
+	        $scope.online[i].name = $scope.getMember($scope.online[i].member).name;
+	      }
+	      console.log($scope.online);
+	      $scope.history = history;
+	/*      $scope.$watch('scroll', function(newValue, oldValue, scope) {
+	        if (!newValue) {history();}
+	      });*/
+	    }
+	    else{
+	      console.log(response.message);
+	    }
+	    $scope.loading  = false;
+	  });
 
-  SocketFactory.on('message', function (response) {
-    var message = response.message
-    $scope.messages.push(message);
-    if(message.member != $scope.me.id) {
-      ngAudio.play("audio/message.mp3");
-    }
-  });
+	  SocketFactory.on('user:connected', function (response) {
+	    console.log("User connected: " + response.id);
+	    for(var i = 0; i < $scope.online.length; i++){
+	      if($scope.online[i].member === response.id){
+	        $scope.online[i].on = true;
+	        break;
+	      }
+	    }
+	  });
 
-  SocketFactory.on('history-send', function (response) {
-    $scope.messages = $scope.messages.concat(response.messages);
-    $scope.updating = false;
-  });
+	  SocketFactory.on('user:disconnected', function (response) {
+	    console.log("User connected: " + response.id);
+	    for(var i = 0; i < $scope.online.length; i++){
+	      if($scope.online[i].member === response.id){
+	        $scope.online[i].on = false;
+	        break;
+	      }
+	    }
+	  });
 
-  $scope.$on('$locationChangeStart', function(){
-    console.log("On location change");
-    console.log(SocketFactory);
-    SocketFactory.disconnect();
-    delete SocketFactory.socket;
-  });
+	  SocketFactory.on('message', function (response) {
+	    var message = response.message
+	    $scope.messages.push(message);
+	    if(message.member != $scope.me.id) {
+	      ngAudio.play("audio/message.mp3");
+	    }
+	  });
 
-  $scope.submit = function() {
-    if ($scope.text == ""){
-      return;
-    }
+	  SocketFactory.on('history-send', function (response) {
+	    $scope.messages = $scope.messages.concat(response.messages);
+	    $scope.updating = false;
+	  });
 
-    var messageData = {
-      text   : $scope.text,
-      chatId : $routeParams.id,
-      member : $scope.me.id,
-    }
-    console.log(messageData);
+	  $scope.$on('$locationChangeStart', function(){
+	    console.log("On location change");
+	    console.log(SocketFactory);
+	    SocketFactory.disconnect();
+	    delete SocketFactory.socket;
+	  });
 
-    SocketFactory.emit('send', {room: $scope.room, message: messageData }, function() {
-      console.log('Message sent');
-      $scope.text = "";
-    });
-  };
+	  $scope.submit = function() {
+	    if ($scope.text == ""){
+	      return;
+	    }
 
-  function history () {
-    console.log('Start history request');
-    if(!$scope.updating){
-      $scope.updating = true;
-      SocketFactory.emit('history-get', {room: $scope.room, date: $scope.messages[$scope.messages.length-1].date }, function() {
-        console.log('Sent history request');
-      });
-    }
-  }
+	    var messageData = {
+	      text   : $scope.text,
+	      chatId : $routeParams.id,
+	      member : $scope.me.id,
+	    }
+	    console.log(messageData);
+
+	    SocketFactory.emit('send', {room: $scope.room, message: messageData }, function() {
+	      console.log('Message sent');
+	      $scope.text = "";
+	    });
+	  };
+
+	  function history () {
+	    console.log('Start history request');
+	    if(!$scope.updating){
+	      $scope.updating = true;
+	      SocketFactory.emit('history-get', {room: $scope.room, date: $scope.messages[$scope.messages.length-1].date }, function() {
+	        console.log('Sent history request');
+	      });
+	    }
+	  }
+	}
 });
