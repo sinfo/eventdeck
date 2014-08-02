@@ -1,24 +1,30 @@
 'use strict';
  
 theToolController
-  .controller('CreateSpeakerController', function ($scope, $http, $routeParams, $location, SpeakerFactory) {
-    $scope.submit = function() {
-      var speakerData = this.formData;
+  .controller('CreateSpeakerController', function ($rootScope, $scope, $http, $routeParams, $location, SpeakerFactory) {
+    
+    $rootScope.update.timeout(runController);
 
-      speakerData.status = 'Suggestion';
+    function runController(){
 
-      SpeakerFactory.Speaker.create(speakerData, function(response) {
-        if(response.error) {
-          $scope.error = response.error;
-        } else {
-          $scope.message = response.message;
+      $scope.submit = function() {
+        var speakerData = this.formData;
 
-          SpeakerFactory.Speaker.getAll(function (speakers) {
-            $scope.speakers = speakers;
-          });
-          
-          $location.path("/speaker/" + response.id);
-        }
-      });
-    };
+        speakerData.status = 'Suggestion';
+
+        SpeakerFactory.Speaker.create(speakerData, function(response) {
+          if(response.error) {
+            $scope.error = response.error;
+          } else {
+            $scope.message = response.message;
+
+            SpeakerFactory.Speaker.getAll(function (speakers) {
+              $scope.speakers = speakers;
+            });
+            
+            $location.path("/speaker/" + response.id);
+          }
+        });
+      };
+    }
   });

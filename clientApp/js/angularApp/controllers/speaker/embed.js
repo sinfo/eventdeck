@@ -1,64 +1,69 @@
 "use strict";
 
-theToolController.controller("SpeakerEmbedController", function ($scope) {
+theToolController.controller("SpeakerEmbedController", function ($rootScope, $scope) {
 
-  $scope.me = JSON.parse($scope.meJson);
-  $scope.members = JSON.parse($scope.membersJson);
-  $scope.roles = JSON.parse($scope.rolesJson);
+  $rootScope.update.timeout(runController);
 
-  if($scope.comments) {
-    $scope.speaker.comments = $scope.comments.filter(function(e) {
-      return e.thread == 'speaker-'+$scope.speaker.id;
-    })
-  }
+  function runController(){
 
-  $scope.getMember = function (memberId) {
-    var member = $scope.members.filter(function(o) {
-      return o.id == memberId;
-    });
+    $scope.me = JSON.parse($scope.meJson);
+    $scope.members = JSON.parse($scope.membersJson);
+    $scope.roles = JSON.parse($scope.rolesJson);
 
-    if(member.length>0) {
-      return member[0];
-    } else {
-      return {
-        name: "No one",
-        facebook: "100000456335972"
+    if($scope.comments) {
+      $scope.speaker.comments = $scope.comments.filter(function(e) {
+        return e.thread == 'speaker-'+$scope.speaker.id;
+      })
+    }
+
+    $scope.getMember = function (memberId) {
+      var member = $scope.members.filter(function(o) {
+        return o.id == memberId;
+      });
+
+      if(member.length>0) {
+        return member[0];
+      } else {
+        return {
+          name: "No one",
+          facebook: "100000456335972"
+        }
       }
-    }
-  };
+    };
 
-  $scope.timeSince =function (date) {
-    date = new Date(date);
-    var seconds = Math.floor((Date.now() - date) / 1000);
+    $scope.timeSince =function (date) {
+      date = new Date(date);
+      var seconds = Math.floor((Date.now() - date) / 1000);
 
-    var suffix = 'ago';
-    if(seconds < 0){
-      seconds = Math.abs(seconds);
-      suffix = 'to go';
-    }
+      var suffix = 'ago';
+      if(seconds < 0){
+        seconds = Math.abs(seconds);
+        suffix = 'to go';
+      }
 
-    var interval = Math.floor(seconds / 31536000);
+      var interval = Math.floor(seconds / 31536000);
 
-    if (interval > 1) {
-        return interval + " years " + suffix;
-    }
-    interval = Math.floor(seconds / 2592000);
-    if (interval > 1) {
-        return interval + " months " + suffix;
-    }
-    interval = Math.floor(seconds / 86400);
-    if (interval > 1) {
-        return interval + " days " + suffix;
-    }
-    interval = Math.floor(seconds / 3600);
-    if (interval > 1) {
-        return interval + " hours " + suffix;
-    }
-    interval = Math.floor(seconds / 60);
-    if (interval > 1) {
-        return interval + " minutes " + suffix;
-    }
-    return Math.floor(seconds) + " seconds " + suffix;
-  };
+      if (interval > 1) {
+          return interval + " years " + suffix;
+      }
+      interval = Math.floor(seconds / 2592000);
+      if (interval > 1) {
+          return interval + " months " + suffix;
+      }
+      interval = Math.floor(seconds / 86400);
+      if (interval > 1) {
+          return interval + " days " + suffix;
+      }
+      interval = Math.floor(seconds / 3600);
+      if (interval > 1) {
+          return interval + " hours " + suffix;
+      }
+      interval = Math.floor(seconds / 60);
+      if (interval > 1) {
+          return interval + " minutes " + suffix;
+      }
+      return Math.floor(seconds) + " seconds " + suffix;
+    };
+  }
 
 });

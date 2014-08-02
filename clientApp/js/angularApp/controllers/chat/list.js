@@ -1,12 +1,17 @@
 'use strict';
 
-theToolController.controller('ChatsController', function ($scope, ChatFactory) {
+theToolController.controller('ChatsController', function ($rootScope, $scope, ChatFactory) {
 
-  $scope.loading = true;
+  $rootScope.update.timeout(runController);
 
-  ChatFactory.Chat.getAll(function(chats) {
-    $scope.chats = chats;
-    $scope.loading = false;
-  });
+  function runController(){
+
+    $scope.loading = true;
+
+    ChatFactory.Chat.getAll(function(chats) {
+      $scope.chats = chats;
+      $scope.loading = false;
+    });
+  }
 
 });

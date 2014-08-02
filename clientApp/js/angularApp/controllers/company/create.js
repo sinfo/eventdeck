@@ -1,24 +1,29 @@
 'use strict';
  
 theToolController
-  .controller('CreateCompanyController', function ($scope, $http, $routeParams, $location, CompanyFactory) {
-    $scope.submit = function() {
-      var companyData = this.formData;
+  .controller('CreateCompanyController', function ($rootScope, $scope, $http, $routeParams, $location, CompanyFactory) {
+    $rootScope.update.timeout(runController);
 
-      CompanyFactory.Company.create(companyData, function(response) {
-        if(response.error) {
-          $scope.error = response.error;
-        } else {
-          $scope.message = response.message;
-          
-          CompanyFactory.Company.getAll(function (companies) {
-            $scope.companies = companies;
-          });
+    function runController(){
+      
+      $scope.submit = function() {
+        var companyData = this.formData;
 
-          $location.path("/company/" + response.id);
-        }
-      });
-    };
+        CompanyFactory.Company.create(companyData, function(response) {
+          if(response.error) {
+            $scope.error = response.error;
+          } else {
+            $scope.message = response.message;
+            
+            CompanyFactory.Company.getAll(function (companies) {
+              $scope.companies = companies;
+            });
 
-    $scope.statuses = ['Suggestion','Contacted','In Conversations','In Negotiations','Closed Deal','Rejected','Give Up'];
+            $location.path("/company/" + response.id);
+          }
+        });
+      };
+
+      $scope.statuses = ['Suggestion','Contacted','In Conversations','In Negotiations','Closed Deal','Rejected','Give Up'];
+    }
   });

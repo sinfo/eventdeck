@@ -1,24 +1,29 @@
 "use strict";
 
-theToolController.controller("MeetingEmbedController", function ($scope, MeetingFactory) {
+theToolController.controller("MeetingEmbedController", function ($rootScope, $scope, MeetingFactory) {
 
-  //================================INITIALIZATION================================
+  $rootScope.update.timeout(runController);
 
-  $scope.loading = true;
+  function runController(){
 
-  MeetingFactory.get({id: $scope.meetingId}, function (meeting) {
-    $scope.meeting = meeting;
+    //================================INITIALIZATION================================
 
-    $scope.loading = false;
-  });
+    $scope.loading = true;
+
+    MeetingFactory.get({id: $scope.meetingId}, function (meeting) {
+      $scope.meeting = meeting;
+
+      $scope.loading = false;
+    });
 
 
-  //===================================FUNCTIONS===================================
+    //===================================FUNCTIONS===================================
 
-  $scope.getMember = function (memberId) {
-    return $scope.members.filter(function (o) {
-      return o.id === memberId;
-    })[0];
-  };
+    $scope.getMember = function (memberId) {
+      return $scope.members.filter(function (o) {
+        return o.id === memberId;
+      })[0];
+    };
+  }
 
 });
