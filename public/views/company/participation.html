@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <form class="ink-form" ng-submit="submit()" >
+      <form class="ink-form" ng-submit="submit()" unsaved-warning-form>
         <div class="column-group horizontal-gutters">
           <div class="all-30 medium-30 small-100 tiny-100">
             <div class="control-group">
@@ -43,66 +43,66 @@
             <div class="control-group">
               <label>Logo on site</label>
               <div class="control">
-                <select ng-model="formData.participation.items.logos.site" ng-options="s for s in logoSizes | orderBy: 'toString()'"></select>
+                <select ng-model="formData.participation.items.logos.site" ng-options="s for s in logoSizes | orderBy: 'toString()'" resettable></select>
               </div>
             </div>
             <div class="control-group">
               <label>Logo on pens</label>
               <div class="control">
-              <input type="checkbox"  ng-model="formData.participation.items.logos.pens" value="true">
+              <input type="checkbox"  ng-model="formData.participation.items.logos.pens" value="true" resettable>
               </div>
             </div>
             <div class="control-group">
               <label>Logo on tshirts</label>
               <div class="control">
-                <select ng-model="formData.participation.items.logos.tshirts" ng-options="s for s in logoSizes | orderBy: 'toString()'"></select>
+                <select ng-model="formData.participation.items.logos.tshirts" ng-options="s for s in logoSizes | orderBy: 'toString()'" resettable></select>
               </div>
             </div>
             <div class="control-group">
               <label>Logo on merchandise</label>
               <div class="control">
-              <input type="checkbox"  ng-model="formData.participation.items.logos.merchandise" value="true">
+              <input type="checkbox"  ng-model="formData.participation.items.logos.merchandise" value="true" resettable>
               </div>
             </div>
             <div class="control-group">
               <label>Logo on banners</label>
               <div class="control">
-                <select ng-model="formData.participation.items.logos.banners" ng-options="s for s in logoSizes | orderBy: 'toString()'"></select>
+                <select ng-model="formData.participation.items.logos.banners" ng-options="s for s in logoSizes | orderBy: 'toString()'" resettable></select>
               </div>
             </div>
             <div class="control-group">
               <label>Logo on posters</label>
               <div class="control">
-                <select ng-model="formData.participation.items.logos.posters" ng-options="s for s in logoSizes | orderBy: 'toString()'"></select>
+                <select ng-model="formData.participation.items.logos.posters" ng-options="s for s in logoSizes | orderBy: 'toString()'" resettable></select>
               </div>
             </div>
             <div class="control-group">
               <label>Logo on flyers</label>
               <div class="control">
-                <select ng-model="formData.participation.items.logos.flyers" ng-options="s for s in logoSizes | orderBy: 'toString()'"></select>
+                <select ng-model="formData.participation.items.logos.flyers" ng-options="s for s in logoSizes | orderBy: 'toString()'" resettable></select>
               </div>
             </div>
             <div class="control-group">
               <label>Logo on folders</label>
               <div class="control">
-                <select ng-model="formData.participation.items.logos.folders" ng-options="s for s in logoSizes | orderBy: 'toString()'"></select>
+                <select ng-model="formData.participation.items.logos.folders" ng-options="s for s in logoSizes | orderBy: 'toString()'" resettable></select>
               </div>
             </div>
             <div class="control-group">
               <label>Logo on individuals</label>
               <div class="control">
-                <select ng-model="formData.participation.items.logos.individuals" ng-options="s for s in logoSizes | orderBy: 'toString()'"></select>
+                <select ng-model="formData.participation.items.logos.individuals" ng-options="s for s in logoSizes | orderBy: 'toString()'" resettable></select>
               </div>
             </div>
             <div class="control-group">
               <label>Logo on rollups</label>
               <div class="control">
-                <select ng-model="formData.participation.items.logos.rollups" ng-options="s for s in logoSizes | orderBy: 'toString()'"></select>
+                <select ng-model="formData.participation.items.logos.rollups" ng-options="s for s in logoSizes | orderBy: 'toString()'" resettable></select>
               </div>
             <div class="control-group">
               <label>Logo on showcase</label>
               <div class="control">
-                <select ng-model="formData.participation.items.logos.showcase" ng-options="s for s in logoSizes | orderBy: 'toString()'"></select>
+                <select ng-model="formData.participation.items.logos.showcase" ng-options="s for s in logoSizes | orderBy: 'toString()'" resettable></select>
               </div>
             </div>
           </div>
@@ -112,43 +112,43 @@
           <div class="control-group">
             <label>Stand days</label>
             <div class="control">
-              <select ng-model="formData.participation.items.stand" ng-options="s for s in standDays | orderBy: 'toString()'"></select>
+              <select ng-model="formData.participation.items.stand" ng-options="s for s in standDays | orderBy: 'toString()'" resettable></select>
             </div>
           </div>
           <div class="control-group">
             <label>Posts</label>
             <div class="control">
-              <select ng-model="formData.participation.items.posts" ng-options="s for s in postsNumbers | orderBy: 'toString()'"></select>
+              <select ng-model="formData.participation.items.posts" ng-options="s for s in postsNumbers | orderBy: 'toString()'" resettable></select>
             </div>
           </div>
           <div class="control-group">
             <label>Presentation</label>
             <div class="control">
-              <input type="checkbox"  ng-model="formData.participation.items.presentation" value="true">
+              <input type="checkbox"  ng-model="formData.participation.items.presentation" value="true" resettable>
             </div>
           </div>
           <div class="control-group">
             <label>Workshop</label>
             <div class="control">
-              <input type="checkbox"  ng-model="formData.participation.items.workshop" value="true">
+              <input type="checkbox"  ng-model="formData.participation.items.workshop" value="true" resettable>
             </div>
           </div>
           <div class="control-group">
             <label>Keynote</label>
             <div class="control">
-              <input type="checkbox"  ng-model="formData.participation.items.keynote" value="true">
+              <input type="checkbox"  ng-model="formData.participation.items.keynote" value="true" resettable>
             </div>
           </div>
           <div class="control-group">
             <label>Documentation</label>
             <div class="control">
-              <input type="checkbox"  ng-model="formData.participation.items.documentation" value="true">
+              <input type="checkbox"  ng-model="formData.participation.items.documentation" value="true" resettable>
             </div>
           </div>
           <div class="control-group">
             <label>Innovation Awards</label>
             <div class="control">
-              <input type="checkbox"  ng-model="formData.participation.items.innovationAwards" value="true">
+              <input type="checkbox"  ng-model="formData.participation.items.innovationAwards" value="true" resettable>
             </div>
           </div>
 
@@ -159,7 +159,7 @@
           <div class="all-100">
             <div class="control-group">
               <input type="submit" id="submit" value="Submit" class="ink-button green" />
-              <a class="ink-button orange" href="#/company/{{company.id}}/edit"><i class="fa fa-back"></i><i class="fa fa-reply"></i>  Go back...</a>
+              <a class="ink-button orange" href="#/company/{{company.id}}/edit" unsaved-warning-clear><i class="fa fa-back"></i><i class="fa fa-reply"></i>  Go back...</a>
             </div>
           </div>
         </div>
