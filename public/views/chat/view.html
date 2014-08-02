@@ -33,8 +33,12 @@
     </div>
   </div>
 
-  <div class="awesome-sidebar" ng-click="hideSidebar=!hideSidebar" title="Click to hide sidebar!" ng-hide="hideSidebar || loading" style="padding-bottom:120px;">
-    <h3>#{{chat.id}}</h3>
+  <div class="awesome-sidebar" title="Click to hide sidebar!" ng-hide="hideSidebar || loading" style="padding-bottom:120px;">
+    <div class="header">
+      <b title="Click to hide sidebar!">#{{chat.id}}</b>
+      <div ng-click="hideSidebar=!hideSidebar" class="push-right hide-button">HIDE</div>
+    </div>
+
     <h6><a href="#/chat/{{subchat.id}}/" ng-show="subchat.id!=chat.id" ng-repeat="subchat in chats | orderBy:'name':true">
       #{{subchat.id}}
     </a></h6>
