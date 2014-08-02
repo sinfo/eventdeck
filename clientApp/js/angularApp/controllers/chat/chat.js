@@ -8,8 +8,12 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 
 	  $scope.error = {};
 
+	  $scope.hideSidebar = true;
+
 	  $scope.updating = false;
 	  $scope.loading  = true;
+    $scope.auth     = false;
+    $scope.conected = false;
 	  $scope.messages = [];
 	  $scope.online   = [];
 	 /* $scope.history  = function () {
@@ -24,9 +28,13 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 
 	  SocketFactory.on('connected', function () {
 	    console.log(SocketFactory.socket);
-	    SocketFactory.emit('auth', {id: ($routeParams.id || 'geral'), user: $scope.me.id}, function () {
-	      console.log('Auth success');
-	    });
+      $scope.conected = true;
+      if(!$scope.auth){
+  	    SocketFactory.emit('auth', {id: ($routeParams.id || 'geral'), user: $scope.me.id}, function () {
+  	      console.log('Auth success');
+          $scope.auth = true;
+  	    });
+      }
 	  });
 
 	  SocketFactory.on('validation', function (response){
@@ -55,7 +63,7 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 	    $scope.loading  = false;
 	  });
 
-	  SocketFactory.on('user:connected', function (response) {
+	  SocketFactory.on('user-connected', function (response) {
 	    console.log("User connected: " + response.id);
 	    for(var i = 0; i < $scope.online.length; i++){
 	      if($scope.online[i].member === response.id){
@@ -65,7 +73,7 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 	    }
 	  });
 
-	  SocketFactory.on('user:disconnected', function (response) {
+	  SocketFactory.on('user-disconnected', function (response) {
 	    console.log("User connected: " + response.id);
 	    for(var i = 0; i < $scope.online.length; i++){
 	      if($scope.online[i].member === response.id){
@@ -76,7 +84,8 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 	  });
 
 	  SocketFactory.on('message', function (response) {
-	    var message = response.message
+	    var message = response.message;
+      console.log(message);
 	    $scope.messages.push(message);
 	    if(message.member != $scope.me.id) {
 	      ngAudio.play("audio/message.mp3");
@@ -86,6 +95,7 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 	  SocketFactory.on('history-send', function (response) {
 	    $scope.messages = $scope.messages.concat(response.messages);
 	    $scope.updating = false;
+      $scope.infiniteScrollDisabled = false;
 	  });
 
 	  $scope.$on('$locationChangeStart', function(){
@@ -116,6 +126,7 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 	  function history () {
 	    console.log('Start history request');
 	    if(!$scope.updating){
+        $scope.infiniteScrollDisabled = true;
 	      $scope.updating = true;
 	      SocketFactory.emit('history-get', {room: $scope.room, date: $scope.messages[$scope.messages.length-1].date }, function() {
 	        console.log('Sent history request');
