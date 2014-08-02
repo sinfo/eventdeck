@@ -1,0 +1,31 @@
+<div ng-hide="!speaker._id || speaker.deleted" class="card">
+  <a href="#/speaker/{{speaker.id}}">
+    <div class="header" style="background-image:url({{speaker.img}});">
+   
+    </div>
+
+    <div class="content">
+      <div class="name">{{speaker.name}}</div> 
+      <div class="status" ng-class="speaker.status.replace(' ','-').toLowerCase()">{{speaker.status}}</div> 
+      <a class="member" href="#/member/{{speaker.member}}">
+        <img ng-src="https://graph.facebook.com/{{getMember(speaker.member).facebook}}/picture"/>
+        <small>{{getMember(speaker.member).name}}</small>
+      </a>
+    </div>
+  </a>
+
+<!--
+
+  <div class="footer">
+    <div ng-if="speaker.showComments">
+      <br>
+      <comment-area thread="{{'speaker-' + speaker.id}}"></comment-area>
+    </div>
+  </div>
+<div class="all-15 align-right">
+  <small title="Show/Hide Comments" class="ink-button small green" ng-click="speaker.showComments = !speaker.showComments" style="width:60px">{{speaker.comments.length}} <i class="fa fa-comments"></i></small>
+  <br>
+  <small style="margin-right:4px"><subscription thread="{{'speaker-' + speaker.id}}"></subscription></small>
+</div>
+-->
+</div>
