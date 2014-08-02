@@ -12,6 +12,8 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 
 	  $scope.updating = false;
 	  $scope.loading  = true;
+    $scope.auth     = false;
+    $scope.conected = false;
 	  $scope.messages = [];
 	  $scope.online   = [];
 	 /* $scope.history  = function () {
@@ -26,9 +28,13 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 
 	  SocketFactory.on('connected', function () {
 	    console.log(SocketFactory.socket);
-	    SocketFactory.emit('auth', {id: ($routeParams.id || 'geral'), user: $scope.me.id}, function () {
-	      console.log('Auth success');
-	    });
+      $scope.conected = true;
+      if(!$scope.auth){
+  	    SocketFactory.emit('auth', {id: ($routeParams.id || 'geral'), user: $scope.me.id}, function () {
+  	      console.log('Auth success');
+          $scope.auth = true;
+  	    });
+      }
 	  });
 
 	  SocketFactory.on('validation', function (response){
@@ -57,7 +63,7 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 	    $scope.loading  = false;
 	  });
 
-	  SocketFactory.on('user:connected', function (response) {
+	  SocketFactory.on('user-connected', function (response) {
 	    console.log("User connected: " + response.id);
 	    for(var i = 0; i < $scope.online.length; i++){
 	      if($scope.online[i].member === response.id){
@@ -67,7 +73,7 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 	    }
 	  });
 
-	  SocketFactory.on('user:disconnected', function (response) {
+	  SocketFactory.on('user-disconnected', function (response) {
 	    console.log("User connected: " + response.id);
 	    for(var i = 0; i < $scope.online.length; i++){
 	      if($scope.online[i].member === response.id){
@@ -78,7 +84,8 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 	  });
 
 	  SocketFactory.on('message', function (response) {
-	    var message = response.message
+	    var message = response.message;
+      console.log(message);
 	    $scope.messages.push(message);
 	    if(message.member != $scope.me.id) {
 	      ngAudio.play("audio/message.mp3");
