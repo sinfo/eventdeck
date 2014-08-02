@@ -20,7 +20,7 @@ theToolController
 
       $scope.scroll = function() {
         if ($scope.limit <= $scope.speakers.length)
-          $scope.limit += 10;
+          $scope.limit += 4;
       };
 
       $scope.checkPermission = function (member) {
