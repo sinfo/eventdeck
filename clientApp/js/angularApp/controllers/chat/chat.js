@@ -24,7 +24,7 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 
 	  SocketFactory.on('connected', function () {
 	    console.log(SocketFactory.socket);
-	    SocketFactory.emit('auth', {id: $routeParams.id, user: $scope.me.id}, function () {
+	    SocketFactory.emit('auth', {id: ($routeParams.id || 'geral'), user: $scope.me.id}, function () {
 	      console.log('Auth success');
 	    });
 	  });
@@ -102,7 +102,7 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 
 	    var messageData = {
 	      text   : $scope.text,
-	      chatId : $routeParams.id,
+	      chatId : ($routeParams.id || 'geral'),
 	      member : $scope.me.id,
 	    }
 	    console.log(messageData);
