@@ -159,7 +159,7 @@ body.ink-drawer .right-drawer li.active > a {
   float:left;
   position: relative;
   width: 300px;
-  height: 150px;
+  height: auto;
   margin: 10px;
   box-shadow: 1px 1px 2px #999; 
   border-radius: 2px;
@@ -188,14 +188,48 @@ body.ink-drawer .right-drawer li.active > a {
   width: 200px;
   padding: 10px;
 }
-.card .content .name{
-  color: #666;
+.card .content.full {
+  width: 300px;
+}
+.card .content .name {
+  color: #333;
   font-size: 20px;
   font-weight: 500;
   margin-bottom: 10px;
 }
-.card .content .status{
+.card .content .status {
   margin-bottom: 10px;
+}
+.card .kind {
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.card .closed {
+  font-size: 15px;
+  color: firebrick;
+}
+.card .duedate {
+  font-size: 15px;
+  font-weight: 100;
+  color: #ccc;
+}
+.card .targets img {
+  width:25px;
+  margin: 0;
+}
+.card .tags span {
+  margin-right: 3px;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.card .poll .votes {
+  margin: auto;
+  font-weight: 100;
+  font-size: 12px;
+  width: 40%;
+  text-transform: uppercase;
 }
 
 .card img {
@@ -204,9 +238,12 @@ body.ink-drawer .right-drawer li.active > a {
 .card img.image {
   width:100px;
 }
-.card p {
-  margin-top:10px;
-  margin-bottom:0px;
+.card a {
+  color: #555;
+}
+.card .text {
+  font-size: 12px;
+  word-break:break-all;
 }
 
 .red { background: #E41B17; }

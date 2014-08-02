@@ -1,1 +1,1 @@
-require('./speaker');
+require('./card');
