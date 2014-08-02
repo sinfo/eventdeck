@@ -2,8 +2,8 @@
 <div ng-hide="loading">
   <h1>Chat {{chat.name}}</h1>
 </div>
-<div id="scroll-chat" scroll-glue  ng-hide="loading" style="position: absolute; top: 100px; left: 20px; overflow-y: scroll; height: 70%; width:70%; background:white">
-  <div infinite-scroll="history()" infinite-scroll-reverse="true" infinite-scroll-container="'#scroll-chat'" infinite-scroll-parent>
+<div id="scroll-chat"  ng-hide="loading" style="position: absolute; top: 100px; left: 20px; overflow-y: scroll; height: 70%; width:70%; background:white">
+  <div infinite-scroll="history()" infinite-scroll-distance="5" infinite-scroll-reverse="true" infinite-scroll-container="'#scroll-chat'" infinite-scroll-parent>
     <ul class="unstyled infinite-scroll">
       <li ng-repeat="message in messages | orderBy:'date':false">
         <div ng-if="message.kind == 'message'">
