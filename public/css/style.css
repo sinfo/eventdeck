@@ -470,6 +470,16 @@ a, a:visited, a:hover {
   border-left: 1px solid #ddd;
   overflow-y:scroll;
 }
+.awesome-sidebar .header {
+  font-size: 25px;
+  margin-bottom: 15px;
+}
+.awesome-sidebar .header .hide-button {
+  font-weight: 100;
+  font-size: 25px;
+  margin-bottom: 15px;
+  cursor:pointer;
+}
 .awesome-sidebar-button {
   position: fixed;
   top:40%;
