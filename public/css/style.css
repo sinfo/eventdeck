@@ -149,7 +149,8 @@ body.ink-drawer .right-drawer li.active > a {
 
 .activity {
   padding: 10px;
-  margin-bottom: 10px;
+  margin: 10px;
+  box-shadow: 1px 1px 2px #999; 
 }
 .activity img {
   width:25px;
@@ -526,6 +527,7 @@ a, a:visited, a:hover {
   background:#eee;
   border-left: 1px solid #ddd;
   overflow-y:scroll;
+  box-shadow: -3px 0px 50px 0px #999; 
 }
 .awesome-sidebar .header {
   font-size: 25px;
@@ -546,6 +548,7 @@ a, a:visited, a:hover {
   background:#eee;
   border: 1px solid #ddd;
   padding:5px;
+  box-shadow: -3px 0px 50px 0px #999; 
 }
 .awesome-bottombar {
   position: fixed; 
