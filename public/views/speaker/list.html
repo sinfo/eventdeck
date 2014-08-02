@@ -73,7 +73,7 @@
         <h3 ng-hide="loading || speakers">No speakers created yet.</h3>
         
         <div class="all-100" infinite-scroll="scroll()">
-          <speaker speaker-object="speaker" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments" ng-repeat="speaker in speakers | filter:searchSpeakers:strict | orderBy:speakerPredicate:reverse | limitTo: limit"></speaker>
+          <speaker-card speaker-object="speaker" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments" ng-repeat="speaker in speakers | filter:searchSpeakers:strict | orderBy:speakerPredicate:reverse | limitTo: limit"></speaker-card>
         </div>
       </div>
     </div>

@@ -1,1 +1,1 @@
-require('./company')
+require('./card');
