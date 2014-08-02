@@ -1,22 +1,28 @@
-<a href="#/communications"><h1>Communications</h1></a>
-
-<div ng-if="!communications">
-  <h3>Loading...</h3>
-</div>
-
-<div ng-if="communications">
-  <div class="half-bottom-space">
-    <div class="ink-button orange" ng-click="showOpen = true;">{{shownCommunications(true).length}} Pending Approval</div>
-    <div class="ink-button green" ng-click="showOpen = false;">{{shownCommunications(false).length}} Approved</div>
+<div class="ink-grid">
+  <div ng-if="!communications">
+    <h3>Loading...</h3>
   </div>
-  <h3>{{showOpen ? 'Pending' : 'Approved'}} communications</h3>
-  <div class="column-group" ng-repeat="communication in shownCommunications(showOpen) | orderBy: 'posted':'true'">
-    <div class="all-60">
-      <communication communication-object="{{communication}}" members="{{members}}" me="{{me}}" roles="{{roles}}" ></communication>
+
+  <div  ng-if="communications">
+    <div class="all-50">
+      <h1>{{showOpen ? 'Pending' : 'Approved'}} Communications</h1>
     </div>
-    <div class="all-40">
-      <speaker ng-if="communication.thread.indexOf('speaker')!=-1" speaker-object="getSpeaker(communication.thread.replace('speaker-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></speaker>
-      <company ng-if="communication.thread.indexOf('company')!=-1" company-object="getCompany(communication.thread.replace('company-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></company>
+    <div class="all-50">
+      <div class="button-group push-right">
+        <div class="ink-button orange" ng-click="showOpen=true;">{{shownCommunications(true).length}} Pending Approval</div>
+        <div class="ink-button green" ng-click="showOpen=false;">{{shownCommunications(false).length}} Approved</div>
+      </div>
+    </div>
+  <br><br><br>
+    <div class="column-group" ng-repeat="communication in shownCommunications(showOpen) | orderBy: 'posted':'true'">
+      <div class="all-30">
+        <speaker-card ng-if="communication.thread.indexOf('speaker')!=-1" speaker-object="getSpeaker(communication.thread.replace('speaker-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></speaker-card>
+        <company-card ng-if="communication.thread.indexOf('company')!=-1" company-object="getCompany(communication.thread.replace('company-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></company-card>
+      </div>
+      <div class="all-70">
+        <communication communication-object="{{communication}}" members="{{members}}" me="{{me}}" roles="{{roles}}" ></communication>
+      </div>
     </div>
   </div>
+
 </div>
