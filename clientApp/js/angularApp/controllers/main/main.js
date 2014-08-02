@@ -30,6 +30,24 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
 
   $rootScope.update = {
 
+    running: false,
+
+    timeout: function(cb){
+      console.log("Inside timeout!");
+      if(!$scope.ready){
+        $scope.loading = true;
+        console.log($rootScope.update.running);
+        if(!$rootScope.update.running){
+          $rootScope.update.all();
+        }
+        setTimeout(function() { $rootScope.update.timeout(cb) }, 3000);
+      }
+      else{
+        cb();
+        return;
+      }
+    },
+
     me: function(){
       MemberFactory.Me.get(function (me) {
         $scope.me = me;
@@ -87,6 +105,8 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
     },
 
     all: function(){
+      this.running = true;
+      factoriesReady = 0;
       console.log("Updating!");
       this.me();
       this.members();
@@ -107,7 +127,10 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
 
   function callback() {
     if (++factoriesReady == 8) {
+      $rootScope.update.running = false;
       $scope.ready = true;
+
+      console.log("Scope ready");
 
       $scope.update();
 

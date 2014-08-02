@@ -1,20 +1,25 @@
 'use strict';
 
 theToolController
-  .controller('CommunicationsController', function ($scope, $http, CommunicationFactory) {
-    $scope.loading = true;
+  .controller('CommunicationsController', function ($rootScope, $scope, $http, CommunicationFactory) {
+    $rootScope.update.timeout(runController);
 
-    CommunicationFactory.Communication.getAll(function(response) {
-      $scope.loading = false;
-      $scope.communications = response;
-    });
+    function runController(){
+      
+      $scope.loading = true;
 
-    $scope.showOpen = true;
-
-    $scope.shownCommunications = function (showOpen) {
-      return $scope.communications.filter(function(o) {
-        return (showOpen ? !o.approved : o.approved);
+      CommunicationFactory.Communication.getAll(function(response) {
+        $scope.loading = false;
+        $scope.communications = response;
       });
-    };
+
+      $scope.showOpen = true;
+
+      $scope.shownCommunications = function (showOpen) {
+        return $scope.communications.filter(function(o) {
+          return (showOpen ? !o.approved : o.approved);
+        });
+      };
+    }
   });
 

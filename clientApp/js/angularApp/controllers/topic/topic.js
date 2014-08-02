@@ -1,19 +1,24 @@
 'use strict';
 
-theToolController.controller('TopicController', function ($scope, $routeParams, $location, $window, TopicFactory, NotificationFactory) {
+theToolController.controller('TopicController', function ($rootScope, $scope, $routeParams, $location, $window, TopicFactory, NotificationFactory) {
 
-  $scope.loading = true;
+  $rootScope.update.timeout(runController);
 
-  TopicFactory.Topic.get({id: $routeParams.id}, function(result) {
-    $scope.topic = result;
+  function runController(){
 
-    $scope.topic.showComments = true;
+    $scope.loading = true;
 
-    NotificationFactory.Topic.getAll({id: $routeParams.id}, function(getData) {
-      $scope.topic.notifications = getData;
+    TopicFactory.Topic.get({id: $routeParams.id}, function(result) {
+      $scope.topic = result;
 
-      $scope.loading = false;
+      $scope.topic.showComments = true;
+
+      NotificationFactory.Topic.getAll({id: $routeParams.id}, function(getData) {
+        $scope.topic.notifications = getData;
+
+        $scope.loading = false;
+      });
     });
-  });
+  }
 
 });

@@ -83,7 +83,7 @@ function notify(memberId, thread, description, objectId, subscribers) {
         chatId: 'geral',
         member: memberId,
         kind:   'notification',
-        thread: thread,
+        source: thread,
         text:   description,
       }
       console.log(webSocketCl);
