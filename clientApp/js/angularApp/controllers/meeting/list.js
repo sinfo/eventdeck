@@ -1,52 +1,56 @@
 'use strict';
 
-theToolController.controller('MeetingsController', function ($scope, $location, MeetingFactory) {
+theToolController.controller('MeetingsController', function ($rootScope, $scope, $location, MeetingFactory) {
 
-  //================================INITIALIZATION================================
+  $rootScope.update.timeout(runController);
 
-  $scope.loading = true;
+  function runController(){
 
-  init();
+    //================================INITIALIZATION================================
 
-  function init() {
-    setTimeout(function() {
-      if ($scope.loading) {
-        init();
-      }
-    }, 1000);
+    $scope.loading = true;
 
-    MeetingFactory.getAll(function (meetings) {
-      $scope.meetings = meetings;
+    init();
 
-      for (var i = 0, j = $scope.meetings.length; i < j; i++) {
-        $scope.meetings[i].facebook = $scope.members.filter(function(o) {
-          return $scope.meetings[i].author == o.id;
-        })[0].facebook;
-      }
+    function init() {
+      setTimeout(function() {
+        if ($scope.loading) {
+          init();
+        }
+      }, 1000);
 
-      $scope.loading = false;
-    });
+      MeetingFactory.getAll(function (meetings) {
+        $scope.meetings = meetings;
+
+        for (var i = 0, j = $scope.meetings.length; i < j; i++) {
+          $scope.meetings[i].facebook = $scope.members.filter(function(o) {
+            return $scope.meetings[i].author == o.id;
+          })[0].facebook;
+        }
+
+        $scope.loading = false;
+      });
+    }
+
+
+    //===================================FUNCTIONS===================================
+
+    $scope.time = function(date) {
+      return $scope.timeSince(new Date(date));
+    };
+
+    $scope.createMeeting = function() {
+      var date = new Date();
+
+      MeetingFactory.create({
+        author: $scope.me.id,
+        title: date.toLocaleDateString("pt-PT") + " - Meeting",
+        date: date
+      }, function(response) {
+        if (response.success) {
+          $location.path("/meeting/" + response.id + "/edit");
+        }
+      });
+    };
   }
-
-
-  //===================================FUNCTIONS===================================
-
-  $scope.time = function(date) {
-    return $scope.timeSince(new Date(date));
-  };
-
-  $scope.createMeeting = function() {
-    var date = new Date();
-
-    MeetingFactory.create({
-      author: $scope.me.id,
-      title: date.toLocaleDateString("pt-PT") + " - Meeting",
-      date: date
-    }, function(response) {
-      if (response.success) {
-        $location.path("/meeting/" + response.id + "/edit");
-      }
-    });
-  };
-
 });
