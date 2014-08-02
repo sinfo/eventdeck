@@ -202,6 +202,7 @@ body.ink-drawer .right-drawer li.active > a {
   margin-bottom: 10px;
 }
 .card .kind {
+  color: #333;
   font-size: 20px;
   font-weight: 500;
   text-transform: uppercase;
@@ -457,21 +458,52 @@ a, a:visited, a:hover {
     outline: 0;
   }
 
-.chat-message {
-  box-shadow: 1px 1px 2px #999; 
-  margin: 5px;
-  padding: 5px;
-  border-radius: 2px;
-  width:70%;
-  word-break: break-all;
+.awesome-sidebar {
+  position: fixed; 
+  padding:20px;
+  padding-top:60px;
+  top:0;
+  right:0;
+  height:100%;
+  width: 300px;
+  background:#eee;
+  border-left: 1px solid #ddd;
+  overflow-y:scroll;
+}
+.awesome-sidebar-button {
+  position: fixed;
+  top:40%;
+  right:0;
+  height:auto;
+  width:auto;
+  background:#eee;
+  border: 1px solid #ddd;
+  padding:5px;
+}
+.awesome-bottombar {
+  position: fixed; 
+  bottom: 0;
+  left:0;
+  width: 100%;
+  background:#eee;
+  padding:20px;
+  border-top: 1px solid #ddd;
 }
 
-.chat-notification {
-  margin: 5px;
+#scroll-chat {
+  position: absolute; 
+  top: 0; 
+  overflow-y: scroll; 
+  height: 100%; 
+  width: 100%; 
+  background:white; 
+  padding-bottom:100px;
+  padding-top:60px;
+}
+
+.chat-message {
   padding: 10px;
-  width:70%;
-  float: left;
-  text-align: left;
+  border-top: 1px solid #ddd;
   word-break: break-all;
 }
 
