@@ -1,9 +1,10 @@
 {
-  "url": "http://dev.bananamarket.eu",
+  "url": "http://tool.sinfo.org",
   "mongo": {
     "url": "mongodb://localhost/tool"
   },
   "mailgun": {
+    "email": "tool@sinfo.org",
     "api": "YOUR MAILGUN KEY",
     "public-api": "YOUR MAILGUN PUBLIC KEY"
   },
