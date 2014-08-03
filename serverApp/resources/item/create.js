@@ -11,7 +11,7 @@ function create(request, reply) {
 
   var newItem = new Item(item);
 
-  newItem.save(function (err, reply){
+  newItem.save(function (err){
     if (err) {
       console.log("Error creating item.");
       reply({error: "Error creating item."});

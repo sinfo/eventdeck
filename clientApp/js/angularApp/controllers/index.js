@@ -12,3 +12,4 @@ require('./topic');
 require('./communication');
 require('./tag');
 require('./subscription');
+require('./admin');

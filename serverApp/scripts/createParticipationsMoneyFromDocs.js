@@ -24,8 +24,22 @@ Tabletop.init({
 
           if (result.length == 1) {
             //console.log(row);
+            if(!result[0].participations || !result[0].participations[0]) {
+              participation = {};
 
-            if(result[0].participation) { participation = result[0].participation; }
+              if(!result[0].participation) {
+                participation.kind = 'Sponsor';
+              } else {
+                participation.kind = result[0].participation.kind;
+              }
+
+              participation.event = 'xxi-sinfo';
+              participation.member = result[0].member;
+              participation.status = 'Closed Deal';
+            } 
+            else {
+              participation = result[0].participations[0];
+            }
 
             participation.payment = {};
 
@@ -37,7 +51,9 @@ Tabletop.init({
             participation.payment['status']  = row['estado'];
             participation.payment['via']     = row['via'];
 
-            Company.update({id: result[0].id}, {participation: participation}, {}, function (err, numAffected){
+            var participations = [participation];
+
+            Company.update({id: result[0].id}, {participations: participations}, {}, function (err, numAffected){
               if (err) {
                 callback('Hipcup on the DB' + err.detail);
               }

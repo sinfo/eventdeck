@@ -1,5 +1,6 @@
 var async    = require('async');
 var Item  = require('./../../db/models/item.js');
+var notification  = require('./../notification');
 
 module.exports = update;
 
@@ -30,7 +31,7 @@ function update(request, reply) {
   }
 
   function saveItem(cb) {
-    Item.update({_id: request.params.id}, item, function(err) {
+    Item.update({id: request.params.id}, item, function(err) {
       if (err) {
         cb(err);
       }

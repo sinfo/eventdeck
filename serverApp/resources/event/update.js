@@ -1,5 +1,6 @@
 var async    = require('async');
 var Event  = require('./../../db/models/event.js');
+var notification  = require('./../notification');
 
 module.exports = update;
 
@@ -30,7 +31,7 @@ function update(request, reply) {
   }
 
   function saveEvent(cb) {
-    Event.update({_id: request.params.id}, event, function(err) {
+    Event.update({id: request.params.id}, event, function(err) {
       if (err) {
         cb(err);
       }

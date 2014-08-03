@@ -16,3 +16,5 @@ require('./speaker');
 require('./subscription');
 require('./tag');
 require('./topic');
+require('./event');
+require('./item');
