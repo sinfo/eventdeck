@@ -1,0 +1,26 @@
+var mongoose = require('mongoose');
+
+var eventSchema = new mongoose.Schema({
+  id: String,
+  name: String,
+  kind: String,
+  description: String,
+  date: { type: Date },
+  duration: { type: Date },
+  updated: { type: Date }
+});
+
+eventSchema.statics.findById = function (id, cb) {
+  this.find({ _id: id }, cb);
+};
+
+eventSchema.statics.del = function (id, cb) {
+  this.remove({ _id: id }, cb);
+};
+
+eventSchema.statics.findAll = function (cb) {
+  this.find({},cb);
+};
+
+
+var Event = module.exports = mongoose.model('Event', eventSchema);

@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var communicationSchema = new mongoose.Schema({
   thread: String,
+  event: String,
   kind: String,
   member: String,
   text: String,
