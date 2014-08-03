@@ -2,9 +2,10 @@ var Hapi         = require("hapi");
 var SocketIO     = {server: require("socket.io"), client: require('socket.io-client')};
 var options      = require("./options");
 var cookieConfig = require("./../config").cookie;
+var port         = require("./../config").port;
 require("./db");
 
-var server = module.exports.hapi = new Hapi.Server(8765, options);
+var server = module.exports.hapi = new Hapi.Server(port, options);
 
 server.pack.require("hapi-auth-cookie", function (err) {
 
