@@ -1,6 +1,7 @@
 var async        = require('async');
 var Speaker      = require('./../../db/models/speaker.js');
 var notification = require('./../notification');
+var email        = require('./../email').speakerAttribute;
 
 module.exports = create;
 
@@ -53,8 +54,11 @@ function create(request, reply) {
     }
     else {
       var targets = [];
-      if(request.auth.credentials.id != speaker.member) {
-        targets.push(speaker.member);
+      if(typeof speaker.member !== undefined){
+        if(request.auth.credentials.id != speaker.member) {
+          targets.push(speaker.member);
+          email.send(speaker.member, speaker.id);
+        }
       }
       notification.notify(request.auth.credentials.id, 'speaker-'+speaker.id, 'created a new speaker', null, targets);
 

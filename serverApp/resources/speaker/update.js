@@ -77,8 +77,13 @@ function create(request, reply) {
     }
     else {
       var targets = [];
-      if(request.auth.credentials.id != speaker.member) {
-        targets.push(speaker.member);
+      if(typeof speaker.member !== undefined){
+        if(request.auth.credentials.id != speaker.member) {
+          targets.push(speaker.member);
+          if(typeof diffSpeaker.member !== undefined){
+            email.send(speaker.member, speaker.id);
+          }
+        }
       }
       notification.notify(request.auth.credentials.id, 'speaker-'+speaker.id, 'updated '+getEditionString(diffSpeaker), null, targets);
       
