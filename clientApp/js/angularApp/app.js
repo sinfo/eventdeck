@@ -16,6 +16,7 @@ angular.module("theTool", [
 ]).
 config(["$routeProvider", function($routeProvider) {
   $routeProvider.when("/"                         , {templateUrl: "views/chat/view.html",             controller: "ChatController"});
+  $routeProvider.when("/admin"                    , {templateUrl: "views/admin/index.html",           controller: "AdminController"});
   $routeProvider.when("/login"                    , {templateUrl: "views/auth/login.html",            controller: "LoginController"});
   $routeProvider.when("/login/:id/:code"          , {templateUrl: "views/auth/login.html",            controller: "LoginController"});
   $routeProvider.when("/companies/"               , {templateUrl: "views/company/list.html",          controller: "CompaniesController"});

@@ -11,11 +11,11 @@ var eventSchema = new mongoose.Schema({
 });
 
 eventSchema.statics.findById = function (id, cb) {
-  this.find({ _id: id }, cb);
+  this.find({ id: id }, cb);
 };
 
 eventSchema.statics.del = function (id, cb) {
-  this.remove({ _id: id }, cb);
+  this.remove({ id: id }, cb);
 };
 
 eventSchema.statics.findAll = function (cb) {

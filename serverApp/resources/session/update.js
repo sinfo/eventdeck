@@ -1,5 +1,6 @@
 var async    = require('async');
 var Session  = require('./../../db/models/session.js');
+var notification  = require('./../notification');
 
 module.exports = update;
 

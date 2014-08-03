@@ -11,7 +11,7 @@ function create(request, reply) {
 
   var newEvent = new Event(event);
 
-  newEvent.save(function (err, reply){
+  newEvent.save(function (err){
     if (err) {
       console.log("Error creating event.");
       reply({error: "Error creating event."});
