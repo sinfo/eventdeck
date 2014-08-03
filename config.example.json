@@ -1,5 +1,6 @@
 {
   "url": "http://tool.sinfo.org",
+  "port": 8080,
   "mongo": {
     "url": "mongodb://localhost/tool"
   },
