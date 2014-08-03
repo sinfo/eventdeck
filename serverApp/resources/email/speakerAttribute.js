@@ -5,7 +5,7 @@ var url_prefix = require('./../../../config').url;
 
 exports = module.exports = notify;
 
-function notify(memberId, company) {
+function notify(memberId, speaker) {
 
   var member  = {};
 
@@ -35,8 +35,8 @@ function notify(memberId, company) {
   function sendEmail(cb) {
     var message = {
       to:       member.name + "<" +member.mails.sinfo + ">",
-      subject: "[SINFO] New company for you: "+company.name+"!",
-      text:    "You are now the responsible member of "+company.name+"! \n\nCheck it out:\n"+url_prefix+"#/company/"+company.id, 
+      subject: "[SINFO] New speaker for you: "+speaker.name+"!",
+      text:    "You are now the responsible member of "+speaker.name+"! \n\nCheck it out:\n"+url_prefix+"#/speaker/"+speaker.id, 
     };
 
     // send the message and get a callback with an error or details of the message that was sent
