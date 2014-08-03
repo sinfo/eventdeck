@@ -11,7 +11,10 @@ var companySchema = new mongoose.Schema({
   contacts: String,
   history: String,
   member: String,
-  participation: {
+  participations: [{
+    event: String,
+    member: String,
+    status: String,
     kind: String,
     payment: {
       price: Number,
@@ -22,29 +25,11 @@ var companySchema = new mongoose.Schema({
       status: String,
       via: String
     },
-    items: {
-      logos: {
-        site: String,
-        pens: String,
-        tshirts: String,
-        merchandise: String,
-        banners: String,
-        posters: String,
-        flyers: String,
-        folders: String,
-        individuals: String,
-        rollups: String,
-        showcase: String
-      },
-      stand: Number,
-      presentation: Boolean,
-      documentation: Boolean,
-      posts: Number,
-      workshop: Boolean,
-      keynote: Boolean,
-      innovationAwards: Boolean
-    }
-  },
+    items: [{
+      id: String,
+      amount: Number
+    }]
+  }],
   area: String,
   accesses: [{
     date: { type: Date, default: Date.now },

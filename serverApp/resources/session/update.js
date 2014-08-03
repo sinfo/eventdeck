@@ -1,9 +1,9 @@
 var async    = require('async');
 var Session  = require('./../../db/models/session.js');
 
-module.exports = create;
+module.exports = update;
 
-function create(request, reply) {
+function update(request, reply) {
 
   var session = request.payload;
 
