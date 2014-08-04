@@ -1,19 +1,15 @@
-"use strict";
+'use strict';
 
-theToolController.controller("CompanyEmbedController", function ($rootScope, $scope) {
+theToolController.controller('CompanyEmbedController', function ($rootScope, $scope) {
 
   $rootScope.update.timeout(runController);
 
   function runController(){
 
-    $scope.me = JSON.parse($scope.meJson);
-    $scope.members = JSON.parse($scope.membersJson);
-    $scope.roles = JSON.parse($scope.rolesJson);
-
     if($scope.comments) {
       $scope.company.comments = $scope.comments.filter(function(e) {
         return e.thread == 'company-'+$scope.company.id;
-      })
+      });
     }
 
     $scope.getMember = function (memberId) {
@@ -25,9 +21,9 @@ theToolController.controller("CompanyEmbedController", function ($rootScope, $sc
         return member[0];
       } else {
         return {
-          name: "No one",
-          facebook: "100000456335972"
-        }
+          name: 'No one',
+          facebook: '100000456335972'
+        };
       }
     };
 
@@ -44,25 +40,25 @@ theToolController.controller("CompanyEmbedController", function ($rootScope, $sc
       var interval = Math.floor(seconds / 31536000);
 
       if (interval > 1) {
-          return interval + " years " + suffix;
+          return interval + ' years ' + suffix;
       }
       interval = Math.floor(seconds / 2592000);
       if (interval > 1) {
-          return interval + " months " + suffix;
+          return interval + ' months ' + suffix;
       }
       interval = Math.floor(seconds / 86400);
       if (interval > 1) {
-          return interval + " days " + suffix;
+          return interval + ' days ' + suffix;
       }
       interval = Math.floor(seconds / 3600);
       if (interval > 1) {
-          return interval + " hours " + suffix;
+          return interval + ' hours ' + suffix;
       }
       interval = Math.floor(seconds / 60);
       if (interval > 1) {
-          return interval + " minutes " + suffix;
+          return interval + ' minutes ' + suffix;
       }
-      return Math.floor(seconds) + " seconds " + suffix;
+      return Math.floor(seconds) + ' seconds ' + suffix;
     };
   }
 });

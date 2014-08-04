@@ -1,13 +1,13 @@
 'use strict';
 
 theToolController
-  .controller('SpeakersController', function ($rootScope, $scope, $http, $sce, SpeakerFactory, MemberFactory) {
+  .controller('SpeakersController', function ($rootScope, $scope, $http, $sce, SpeakerFactory) {
   
     $rootScope.update.timeout(runController);
 
     function runController(){
 
-      $scope.limit = 10;
+      $scope.limit = 20;
 
       $scope.statuses = ['Suggestion','Selected','Approved','Contacted','In Conversations','Accepted','Rejected','Give Up'];
 
@@ -20,7 +20,7 @@ theToolController
 
       $scope.scroll = function() {
         if ($scope.limit <= $scope.speakers.length)
-          $scope.limit += 4;
+          $scope.limit += 8;
       };
 
       $scope.checkPermission = function (member) {
@@ -28,7 +28,7 @@ theToolController
           return o.id == 'development-team' || o.id == 'coordination';
         });
 
-        if(roles.length == 0 && member.id != $scope.me.id) {
+        if(roles.length === 0 && member.id != $scope.me.id) {
           return false;
         }
 

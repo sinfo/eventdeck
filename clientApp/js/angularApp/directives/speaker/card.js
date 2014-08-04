@@ -8,11 +8,10 @@ theToolDirectives
       templateUrl: 'views/speaker/card.html',
       controller: 'SpeakerEmbedController',
       scope: {
-        speaker: '=speakerObject',
-        membersJson: '@members',
-        meJson: '@me',
-        rolesJson: '@roles',
-        comments: '=commentsArray'
+        speaker: '=speaker',
+        notifications: '=notifications',
+        me: '=me',
+        members: '=members'
       }
     };
-  })
+  });
