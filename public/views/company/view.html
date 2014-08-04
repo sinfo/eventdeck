@@ -8,7 +8,7 @@
     <div class="ink-grid">
       <div class="column-group horizontal-gutters">
         <div class="all-100">
-          <h1><span class="status small" ng-class="company.status.replace(' ','-').toLowerCase()">{{company.status}}</span> {{company.name}}</h1>
+          <h1>{{company.name}}</h1>
         </div>
       </div>
 
@@ -21,12 +21,6 @@
           </p>
           <img ng-show="company.img" ng-src="{{company.img}}" width="100%" />
           <br><br>
-          <p>
-            <a href="#/member/{{company.member}}">
-            <img ng-if="company.member" ng-src="https://graph.facebook.com/{{getMember(company.member).facebook}}/picture"/>
-            <b style="font-size: 20px; margin-left:12px;"> {{getMember(company.member).name}}</b>
-            </a>
-          </p>
           <b>Area: </b><div ng-bind-html="company.area"></div><br>
           <b>Description: </b><div ng-if="company.description" ng-bind-html="convertURLs(company.description)"></div>
           <br>
@@ -42,22 +36,6 @@
             <div ng-bind-html="convertEmails(convertURLs(company.contacts))"></div>
           </div>
           <br>
-        </div>
-        <div class="all-30 medium-30 small-100 tiny-100">
-          <div ng-if="company.participation">
-            <h3>Participation</h3>
-            <h6>{{company.participation.kind}}</h6>
-          </div>
-          <div ng-if="company.participation.payment">
-            <h3>Payment Details</h3>
-            <b>Price: </b>{{company.participation.payment.price}}<br>
-            <b>Total: </b>{{company.participation.payment.total}} (incl. IVA)<br>
-            <b>Invoice: </b>{{company.participation.payment.invoice}}<br>
-            <b>Date: </b>{{company.participation.payment.date}}<br>
-            <b>Status: </b>{{company.participation.payment.status}}<br>
-            <b>Via: </b>{{company.participation.payment.via}}<br>
-          </div>
-          <br>
           <div ng-if="company.accesses">
             <h3>Acesses</h3>
             <ul>
@@ -67,9 +45,48 @@
           <br>
           <div>
             <h3>Last Changes</h3>
-            <ul ng-if="company.notifications">
-              <li ng-repeat="notification in company.notifications | orderBy: 'posted':true | limitTo: 5">{{notification.description}} <small>{{timeSince(notification.posted)}}</small>.</li>
+            <ul ng-if="company.notifications" class="unstyled">
+              <li ng-repeat="notification in company.notifications | orderBy: 'posted':true | limitTo: 5">
+              <img title="{{notification.member}}" style="width:25px" ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture"/>
+              {{getMember(notification.member).name}} {{notification.description}} <small>{{timeSince(notification.posted)}}</small>.</li>
             </ul>
+          </div>
+        </div>
+        <div class="all-30 medium-30 small-100 tiny-100">
+          <div class="all-60"><h3>Participations</h3></div>
+          <div class="all-40"><a class="ink-button orange push-right" href="#/company/{{company.id}}/participation"><i class="fa fa-wrench"></i> Edit</a></div>
+          <div class="all-100"><h6 ng-if="!company.participations[0]">No participations to date</h6></div>
+          <div class="card" ng-repeat="participation in company.participations">
+            <div class="content full">
+              <h5>
+                {{getEvent(participation.event).name}} 
+                <span class="status" ng-class="participation.status.replace(' ','-').toLowerCase()">{{participation.status}}</span>
+              </h5>
+              <h6 ng-if="participation.member">
+                <a href="#/member/{{participation.member}}">
+                <img ng-if="participation.member" ng-src="https://graph.facebook.com/{{getMember(participation.member).facebook}}/picture"/>
+                <b> {{getMember(participation.member).name}}</b>
+                </a>
+              </h6>
+              <h6>{{participation.kind}}</h6>
+              <div class="small" ng-if="participation.payment">
+                <span ng-if="participation.payment.price"><b>Price: </b>{{participation.payment.price}}€<br></span>
+                <span ng-if="participation.payment.total"><b>Total: </b>{{participation.payment.total}}€ (incl. IVA)<br></span>
+                <span ng-if="participation.payment.invoice"><b>Invoice: </b>{{participation.payment.invoice}}<br></span>
+                <span ng-if="participation.payment.date"><b>Date: </b>{{participation.payment.date}}<br></span>
+                <span ng-if="participation.payment.status"><b>Status: </b>{{participation.payment.status}}<br></span>
+                <span ng-if="participation.payment.via"><b>Via: </b>{{participation.payment.via}}<br></span>
+              </div>
+              <br>
+              <div class="small" ng-if="participation.items[0]">
+                <b>Items</b><br>
+                <div ng-repeat="item in participation.items">
+                  <span ng-if="item.amount"><b>{{item.amount}}</b></span>
+                  {{getItem(item.id).name}} 
+                  <span ng-if="item.kind"> - <b>{{item.kind}}</b></span> 
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

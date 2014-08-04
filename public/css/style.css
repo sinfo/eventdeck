@@ -379,7 +379,7 @@ body.ink-drawer .right-drawer li.active > a {
   background: #ddd;
 }
 .closed-deal:hover.ink-button,
-.closed-deal,
+.closed-deal.ink-button,
 .accepted:hover.ink-button,
 .accepted.ink-button {
   border-left: 10px solid #009800;

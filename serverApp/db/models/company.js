@@ -27,7 +27,8 @@ var companySchema = new mongoose.Schema({
     },
     items: [{
       id: String,
-      amount: Number
+      amount: Number,
+      kind: String
     }]
   }],
   area: String,
