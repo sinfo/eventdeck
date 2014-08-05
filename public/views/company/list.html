@@ -1,7 +1,7 @@
 <div class="ink-grid">
 
   <div class="all-100" infinite-scroll="scroll()">
-    <company-card company="company" notifications="notifications" me="me" members="members" ng-repeat="company in companies | filter:searchCompanies:strict | orderBy:companyPredicate:reverse | limitTo: limit"></company-card>
+    <company-card company="company" notifications="notifications" me="me" members="members" ng-repeat="company in companies | filterEvent: activeEvent | filter:searchCompanies:strict | orderBy:companyPredicate:reverse | limitTo: limit"></company-card>
   </div>
 
   <div class="awesome-sidebar" ng-hide="hideSidebar || loading">
