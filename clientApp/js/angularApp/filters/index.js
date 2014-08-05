@@ -9,7 +9,6 @@ angular.module('theTool.filters', [])
   .filter('filterEvent', function(){
     return function(objs, event) {
           var result = objs;
-          console.log(event);
           if(event) {
             result = objs.filter(function(o) {
               return o.participations.filter(function(p) {
