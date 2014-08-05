@@ -13,6 +13,7 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
   $scope.searchCompanies = {};
   $scope.searchSpeakers = {};
   $scope.searchMembers = {};
+  $scope.activeEvent = {};
 
   $scope.me = {};
   $scope.members = [];
