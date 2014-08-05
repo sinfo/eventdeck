@@ -16,9 +16,6 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
     $scope.conected = false;
 	  $scope.messages = [];
 	  $scope.online   = [];
-	 /* $scope.history  = function () {
-	    setTimeout(function() {$scope.history()}, 3000);
-	  }*/
 
 	  console.log($scope.scroll);
 
@@ -27,7 +24,6 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 	  SocketFactory.connect('/chat');
 
 	  SocketFactory.on('connected', function () {
-	    console.log(SocketFactory.socket);
       $scope.conected = true;
       if(!$scope.auth){
   	    SocketFactory.emit('auth', {id: ($routeParams.id || 'geral'), user: $scope.me.id}, function () {
@@ -53,9 +49,6 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 	      }
 	      console.log($scope.online);
 	      $scope.history = history;
-	/*      $scope.$watch('scroll', function(newValue, oldValue, scope) {
-	        if (!newValue) {history();}
-	      });*/
 	    }
 	    else{
 	      console.log(response.message);
@@ -115,7 +108,6 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 	      chatId : ($routeParams.id || 'geral'),
 	      member : $scope.me.id,
 	    }
-	    console.log(messageData);
 
 	    SocketFactory.emit('send', {room: $scope.room, message: messageData }, function() {
 	      console.log('Message sent');
