@@ -82,7 +82,7 @@ function create(request, reply) {
         if(request.auth.credentials.id != speaker.member) {
           targets.push(speaker.member);
           if(typeof diffSpeaker.member !== undefined){
-            email.send(speaker.member, speaker.id);
+            email.send(speaker.member, speaker);
           }
         }
       }
