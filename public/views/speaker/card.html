@@ -7,9 +7,9 @@
     <div class="content">
       <div class="name">{{speaker.name}}</div> 
       <div class="status" ng-class="speaker.status.replace(' ','-').toLowerCase()">{{participation.status}}</div> 
-      <a class="member" href="#/member/{{speaker.member}}">
-        <img ng-src="https://graph.facebook.com/{{getMember(speaker.member).facebook}}/picture"/>
-        <small>{{getMember(speaker.member).name}}</small>
+      <a class="member" href="#/member/{{participation.member}}">
+        <img ng-src="https://graph.facebook.com/{{getMember(participation.member).facebook}}/picture"/>
+        <small>{{getMember(participation.member).name}}</small>
       </a>
     </div>
   </a>
