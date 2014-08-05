@@ -7,12 +7,13 @@ angular.module('theTool.filters', [])
     }
   }])
   .filter('filterEvent', function(){
-    return function(objs, activeEvent) {
+    return function(objs, event) {
           var result = objs;
-          if(activeEvent) {
+          console.log(event);
+          if(event) {
             result = objs.filter(function(o) {
               return o.participations.filter(function(p) {
-                return p.event === activeEvent;
+                return p.event === event;
               }).length > 0;
             });
           }
