@@ -9,6 +9,7 @@ theToolDirectives
       controller: 'SpeakerEmbedController',
       scope: {
         speaker: '=speaker',
+        event: '=event',
         notifications: '=notifications',
         me: '=me',
         members: '=members'
