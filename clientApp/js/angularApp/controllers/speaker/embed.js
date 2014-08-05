@@ -12,6 +12,13 @@ theToolController.controller('SpeakerEmbedController', function ($rootScope, $sc
       });
     }
 
+    $scope.participation = $scope.speaker.participations.filter(function(o) {
+      return o.id == $scope.event.id;
+    })[0];
+    console.log($scope.participation);
+
+
+
     $scope.getMember = function (memberId) {
       var member = $scope.members.filter(function(o) {
         return o.id == memberId;
