@@ -9,6 +9,7 @@ theToolDirectives
       controller: 'CompanyEmbedController',
       scope: {
         company: '=company',
+        event: '=event',
         notifications: '=notifications',
         me: '=me',
         members: '=members'
