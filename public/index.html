@@ -54,7 +54,7 @@
           <li ng-if="me._id" class="hide-all show-medium show-tiny show-small"><button class="fa fa-bars left-drawer-trigger" style="color:#333;"></button></li>
           <li class="logoPlaceholder"><a href="#/" class="logoPlaceholder">EventDeck</a></li>
           <li ng-if="me._id" class="show-all">
-            <select ng-model="$parent.activeEvent" ng-options="e.name for e in events | orderBy: ['kind', '-date']" ng-init="activeEvent = events[0].name"></select>
+            <select ng-model="$parent.activeEvent" ng-options="e.name for e in events | orderBy: ['kind', '-date']" ng-init="activeEvent = events[0]"></select>
           </li>
           <li ng-if="me._id" class="hide-medium hide-small hide-tiny">
             <input type="text" ng-model="search.name" ng-change="show()" ng-click="show()" placeholder="Super search!!!" style="width: 200px; border-radius: 5px; border: 0; padding: 5px; margin: 5px;">
