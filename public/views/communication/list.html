@@ -14,7 +14,7 @@
       </div>
     </div>
   <br><br><br>
-    <div class="column-group" ng-repeat="communication in shownCommunications(showOpen) | orderBy: 'posted':'true'">
+    <div class="column-group" ng-repeat="communication in shownCommunications(showOpen) | filter: {event: activeEvent.id} | orderBy: 'posted':'true'">
       <div class="all-30">
         <speaker-card ng-if="communication.thread.indexOf('speaker')!=-1" speaker="getSpeaker(communication.thread.replace('speaker-',''))" members="members" me="me" notifications="notifications"></speaker-card>
         <company-card ng-if="communication.thread.indexOf('company')!=-1" company="getCompany(communication.thread.replace('company-',''))" members="members" me="me" notifications="notifications"></company-card>
