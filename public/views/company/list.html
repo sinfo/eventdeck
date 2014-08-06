@@ -1,10 +1,10 @@
 <div class="ink-grid">
 
   <div class="all-100" infinite-scroll="scroll()">
-    <company-card company-object="company" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments" ng-repeat="company in companies | filter:searchCompanies:strict | orderBy:companyPredicate:reverse | limitTo: limit"></company-card>
+    <company-card company="company" event="currentEvent" ng-if="currentEvent.name" notifications="notifications" me="me" members="members" ng-repeat="company in companies | filterEvent: activeEvent.id | filter:searchCompanies:strict | orderBy:companyPredicate:reverse | limitTo: limit"></company-card>
   </div>
 
-  <div class="awesome-sidebar" ng-hide="hideSidebar || loading">
+  <div class="awesome-sidebar" ng-hide="hideSidebar">
     <div class="header">
       <b title="Click to hide sidebar!">Companies</b>
       <div ng-click="hideSidebar=!hideSidebar" class="push-right hide-button">HIDE</div>
@@ -35,6 +35,6 @@
   </div>
 
   <div class="awesome-sidebar-button" ng-click="hideSidebar=!hideSidebar" title="Click to show sidebar!" ng-show="hideSidebar">
-    <i class="fa fa-3x fa-caret-left"></i> 
+    <i style="font-size:50px" class="fa fa-caret-left"></i>  
   </div>
 </div>

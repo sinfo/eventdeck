@@ -6,11 +6,12 @@
 
     <div class="content">
       <div class="name">{{company.name}}</div> 
-      <div class="status" ng-class="company.status.replace(' ','-').toLowerCase()">{{company.status}}</div> 
-      <a class="member" href="#/member/{{company.member}}">
-        <img ng-src="https://graph.facebook.com/{{getMember(company.member).facebook}}/picture"/>
-        <small>{{getMember(company.member).name}}</small>
+      <div ng-if="participation" class="status" ng-class="participation.status.replace(' ','-').toLowerCase()">{{participation.status}}</div> 
+      <a ng-if="participation" class="member" href="#/member/{{participation.member}}">
+        <img ng-src="https://graph.facebook.com/{{getMember(participation.member).facebook}}/picture"/>
+        <small>{{getMember(participation.member).name}}</small>
       </a>
+      <div ng-if="!participation">Not assingned for {{event.name}}</div>
     </div>
   </a>
 

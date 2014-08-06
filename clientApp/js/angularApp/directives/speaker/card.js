@@ -3,16 +3,16 @@
 theToolDirectives
   .directive('speakerCard', function () {
     return {
-      restrict: 'EAC',
+      restrict: 'AEC',
       replace: true,
       templateUrl: 'views/speaker/card.html',
       controller: 'SpeakerEmbedController',
       scope: {
-        speaker: '=speakerObject',
-        membersJson: '@members',
-        meJson: '@me',
-        rolesJson: '@roles',
-        comments: '=commentsArray'
+        speaker: '=speaker',
+        event: '=event',
+        notifications: '=notifications',
+        me: '=me',
+        members: '=members'
       }
     };
-  })
+  });

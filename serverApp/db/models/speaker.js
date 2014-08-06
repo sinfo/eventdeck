@@ -10,6 +10,12 @@ var speakerSchema = new mongoose.Schema({
   contacts: String,
   member: String,
   paragraph: String,
+  participations: [{
+    event: String,
+    member: String,
+    status: String,
+    kind: String
+  }],
   updated: { type: Date, default: Date.now }
 });
 

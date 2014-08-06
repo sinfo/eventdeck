@@ -11,7 +11,7 @@ function create(request, reply) {
 
   var newSession = new Session(session);
 
-  newSession.save(function (err, reply){
+  newSession.save(function (err){
     if (err) {
       console.log("Error creating session.");
       reply({error: "Error creating session."});

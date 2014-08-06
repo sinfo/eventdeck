@@ -8,7 +8,7 @@
     <div class="ink-grid">
       <div class="column-group horizontal-gutters">
         <div class="all-100">
-          <h1><span class="status small" ng-class="speaker.status.replace(' ','-').toLowerCase()">{{speaker.status}}</span> {{speaker.name}}</h1>
+          <h1>{{speaker.name}}</h1>
         </div>
       </div>
 
@@ -22,25 +22,38 @@
           <p>
             <img ng-if="speaker.img" ng-src="{{speaker.img}}" width="100%" />
           </p>
-          <p>
-            <a href="#/member/{{speaker.member}}">
-            <img ng-src="https://graph.facebook.com/{{getMember(speaker.member).facebook}}/picture"/>
-            <b style="font-size: 20px; margin-left:12px;"> {{getMember(speaker.member).name}}</b>
-            </a>
-          </p>
         </div>
         <div class="all-40 medium-40 small-100 tiny-100">
+          <div ng-if="speaker.contacts">
+            <h3>Contacts</h3>
+            <div ng-bind-html="convertEmails(convertURLs(speaker.contacts))"></div>
+          </div>
+          <br><br>
           <div ng-if="speaker.description">
             <h3>Description: </h3>
             <div ng-bind-html="convertURLs(speaker.description)"></div>
           </div>
         </div>
         <div class="all-30 medium-30 small-100 tiny-100">
-          <div ng-if="speaker.contacts">
-            <h3>Contacts</h3>
-            <div ng-bind-html="convertEmails(convertURLs(speaker.contacts))"></div>
+          <div class="all-60"><h3>Participations</h3></div>
+          <div class="all-40"><a class="ink-button orange push-right" href="#/speaker/{{speaker.id}}/participations"><i class="fa fa-wrench"></i> Edit</a></div>
+          <div class="all-100"><h6 ng-if="!speaker.participations[0]">No participations to date</h6></div>
+          <div class="card" ng-repeat="participation in speaker.participations">
+            <div class="content full">
+              <h5>
+                {{getEvent(participation.event).name}} 
+                <span class="status" ng-class="participation.status.replace(' ','-').toLowerCase()">{{participation.status}}</span>
+              </h5>
+              <h6 ng-if="participation.member">
+                <a href="#/member/{{participation.member}}">
+                <img ng-if="participation.member" ng-src="https://graph.facebook.com/{{getMember(participation.member).facebook}}/picture"/>
+                <b> {{getMember(participation.member).name}}</b>
+                </a>
+              </h6>
+              <h6>{{participation.kind}}</h6>
+            </div>
           </div>
-          <br><br>
+
           <div ng-if="speaker.notifications">
             <h3>Last Changes</h3>
             <ul>

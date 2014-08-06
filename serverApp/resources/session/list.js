@@ -5,12 +5,11 @@ module.exports = list;
 function list(request, reply) {
 
   Session.findAll(function(err, result) {
-    if (!err && result && result.length > 0) {
-      reply(result);
+    if (err) {
+      return reply({error: "There was an error getting all the sessions."});
     }
-    else {
-      reply({error: "There was an error getting all sessions."});
-    }
+    
+    reply(result);
   });
 
 }
