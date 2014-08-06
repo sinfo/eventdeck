@@ -3,7 +3,7 @@
 theToolDirectives
   .directive('speakerCard', function () {
     return {
-      restrict: 'EAC',
+      restrict: 'AEC',
       replace: true,
       templateUrl: 'views/speaker/card.html',
       controller: 'SpeakerEmbedController',
