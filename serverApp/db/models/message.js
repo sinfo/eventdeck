@@ -22,7 +22,6 @@ messageSchema.statics.findByChatId = function (id, now, cb) {
     getFirst,
     getMessages,
   ], function(){
-    console.log(messages);
     cb(messages);
   });
 
