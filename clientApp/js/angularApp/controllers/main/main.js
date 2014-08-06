@@ -34,7 +34,7 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
 
   $scope.setCurrentEvent = function(event) {
     console.log(event);
-    $scope.currentEvent = event;
+    $scope.activeEvent = event;
   }
 
   $rootScope.update = {
