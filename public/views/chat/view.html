@@ -24,8 +24,8 @@
               </a>
             </div>
             <topic-card ng-if="message.source.indexOf('topic') !== -1" topic="getTopic(message.source.replace('topic-', ''))" members="members" me="me" roles="roles" tags="topicTags" comments="comments" notifications="notifications"></topic-card>
-            <speaker-card ng-if="message.source.indexOf('speaker')!=-1" speaker="getSpeaker(message.source.replace('speaker-',''))" members="members" me="me" notifications="notifications"></speaker-card>
-            <company-card ng-if="message.source.indexOf('company')!=-1" company="getCompany(message.source.replace('company-',''))" members="members" me="me" notifications="notifications"></company-card>
+            <speaker-card  event="currentEvent" ng-if="currentEvent.name && message.source.indexOf('speaker')!=-1" speaker="getSpeaker(message.source.replace('speaker-',''))" members="members" me="me" notifications="notifications"></speaker-card>
+            <company-card  event="currentEvent" ng-if="currentEvent.name && message.source.indexOf('company')!=-1" company="getCompany(message.source.replace('company-',''))" members="members" me="me" notifications="notifications"></company-card>
             <embed-meeting ng-if="message.source.indexOf('meeting-') != -1" meeting-id="message.source.replace('meeting-', '')" members="members"></embed-meeting>
           </div>
         </div>
