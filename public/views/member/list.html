@@ -4,7 +4,7 @@
     <member-card member-object="member" ng-repeat="member in members | filter:searchMembers:strict | filterRole: searchRoles.toString() | orderBy:memberPredicate:reverse"></member-card>
   </div>
 
-  <div class="awesome-sidebar" ng-hide="hideSidebar || loading">
+  <div class="awesome-sidebar" ng-hide="hideSidebar">
     <div class="header">
       <b title="Click to hide sidebar!">Members</b>
       <div ng-click="hideSidebar=!hideSidebar" class="push-right hide-button">HIDE</div>
@@ -33,6 +33,6 @@
   </div>
 
   <div class="awesome-sidebar-button" ng-click="hideSidebar=!hideSidebar" title="Click to show sidebar!" ng-show="hideSidebar">
-    <i class="fa fa-3x fa-caret-left"></i> 
+    <i style="font-size:50px" class="fa fa-caret-left"></i> 
   </div>
 </div>

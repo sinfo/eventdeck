@@ -11,13 +11,25 @@ setTimeout(function() {
 
     async.each(speakers, function(speaker, callback) {
       
-      var participations = [];
+      var participations = speaker.participations;
 
-      participations.push({
+      var newParticipation = {
         event: 'xxii-sinfo',
         member: speaker.member,
         status: speaker.status,
-      });
+      }
+
+      var found = false;
+      for(var p in participations) {
+        if(participations[p].event == newParticipation.event) {
+          participations[p] = newParticipation;
+          found = true;
+        }
+      }
+
+      if(!found) {
+        participations.push(newParticipation);
+      }
 
       Speaker.update({id: speaker.id}, {participations: participations}, function (err) {
         if (err) {

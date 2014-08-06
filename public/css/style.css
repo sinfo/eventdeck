@@ -1,3 +1,7 @@
+.fa {
+  font-size: inherit;
+}
+
 #topbar {
   position: fixed;
   z-index: 100;

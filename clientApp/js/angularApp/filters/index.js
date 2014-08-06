@@ -13,7 +13,7 @@ angular.module('theTool.filters', [])
             result = objs.filter(function(o) {
               return o.participations.filter(function(p) {
                 return p.event === event;
-              }).length > 0;
+              });//.length > 0;
             });
           }
           return result;

@@ -1,6 +1,7 @@
 var async        = require('async');
 var Speaker      = require('./../../db/models/speaker.js');
 var notification = require('./../notification');
+var email        = require('./../email').speakerAttribute;
 
 module.exports = create;
 
@@ -28,7 +29,7 @@ function create(request, reply) {
         cb();
       }
       else {
-        cb("Could not find speaker with id '" + speakerId + "'.");
+        cb('Could not find speaker with id ' + speakerId + '.');
       }
     }
   }
@@ -46,7 +47,7 @@ function create(request, reply) {
     if (request.payload.participations && !equals(request.payload.participations, speaker.participations)) { diffSpeaker.participations = request.payload.participations; }
 
     if (isEmpty(diffSpeaker)) {
-      cb("Nothing changed.");
+      cb('Nothing changed.');
     }
     else {
       diffSpeaker.updated = Date.now();
@@ -69,11 +70,11 @@ function create(request, reply) {
     if (err) {
       console.log(err);
       
-      if (err === "Nothing changed.") {
-        reply({error: "Nothing changed."})
+      if (err === 'Nothing changed.') {
+        reply({error: 'Nothing changed.'});
       }
       else {
-        reply({error: "There was an error updating the speaker."});
+        reply({error: 'There was an error updating the speaker.'});
       }
     }
     else {
@@ -88,7 +89,7 @@ function create(request, reply) {
       }
       notification.notify(request.auth.credentials.id, 'speaker-'+speaker.id, 'updated '+getEditionString(diffSpeaker), null, targets);
       
-      reply({success: "Speaker updated."});
+      reply({success: 'Speaker updated.'});
     }
   }
 }
@@ -96,7 +97,7 @@ function create(request, reply) {
 function getEditionString(diffObject) {
   var editionsArray = [];
   for(var propertyName in diffObject) {
-    if(propertyName != "updated"){
+    if(propertyName != 'updated'){
       editionsArray.push(propertyName);
     }
   }
@@ -111,11 +112,11 @@ function getEditionString(diffObject) {
 function equals(o1, o2) {
   if(typeof(o1) != typeof(o2)) { return false; }
 
-  if(typeof(o1) == "array" && o1.length != o2.length) { return false; } 
+  if(typeof(o1) == 'array' && o1.length != o2.length) { return false; } 
   
   for (var key in o1) {
     var type = typeof(o1[key]);
-    if (type == "object") {
+    if (type == 'object') {
       if (!equals(o1[key], o2[key]))
         return false;
     }
@@ -129,7 +130,8 @@ function equals(o1, o2) {
 }
 
 function isEmpty(o) {
-  for (key in o)
+  for (var key in o) {
     return false;
+  }
   return true;
 }
