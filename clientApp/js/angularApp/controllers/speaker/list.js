@@ -18,6 +18,8 @@ theToolController
         $scope.speakers = response;
       });
 
+      console.log($scope.activeEvent);
+
       $scope.scroll = function() {
         if ($scope.limit <= $scope.speakers.length)
           $scope.limit += 8;

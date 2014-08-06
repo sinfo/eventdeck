@@ -21,6 +21,9 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
   $scope.speakers = [];
   $scope.topics = [];
   $scope.notifications = [];
+  $rootScope.activeEvent= {
+    event: ''
+  };
 
   $scope.notificationsInfo = {
     number: 0,

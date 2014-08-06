@@ -12,7 +12,7 @@ theToolController.controller('CompanyEmbedController', function ($rootScope, $sc
       });
     }
 
-    if($scope.event.id) {
+    if($scope.event) {
       $scope.participation = $scope.company.participations.filter(function(o) {
         return o.event == $scope.event.id;
       })[0];
