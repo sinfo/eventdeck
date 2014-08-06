@@ -6,6 +6,20 @@ angular.module('theTool.filters', [])
       return String(text).replace(/\%VERSION\%/mg, version);
     }
   }])
+  .filter('filterEvent', function(){
+    return function(objs, event) {
+          var result = objs;
+          if(event) {
+            result = objs.filter(function(o) {
+              return o.participations.filter(function(p) {
+                return p.event === event;
+              });//.length > 0;
+            });
+          }
+          return result;
+      };
+
+  })
   .filter('filterRole', function() {
     return function(members, role) {
           var result = members;

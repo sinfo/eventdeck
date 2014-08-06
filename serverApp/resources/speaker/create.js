@@ -55,9 +55,9 @@ function create(request, reply) {
     else {
       var targets = [];
       if(typeof speaker.member !== undefined){
-        if(request.auth.credentials.id != speaker.member) {
+        if(request.auth.credentials.id != speaker.member){
           targets.push(speaker.member);
-          email.send(speaker.member, speaker.id);
+          email.send(speaker.member, speaker);
         }
       }
       notification.notify(request.auth.credentials.id, 'speaker-'+speaker.id, 'created a new speaker', null, targets);

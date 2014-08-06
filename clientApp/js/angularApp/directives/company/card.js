@@ -8,11 +8,11 @@ theToolDirectives
       templateUrl: 'views/company/card.html',
       controller: 'CompanyEmbedController',
       scope: {
-        company: '=companyObject',
-        membersJson: '@members',
-        meJson: '@me',
-        rolesJson: '@roles',
-        comments: '=commentsArray'
+        company: '=company',
+        event: '=event',
+        notifications: '=notifications',
+        me: '=me',
+        members: '=members'
       }
     };
-  })
+  });

@@ -1,6 +1,6 @@
 'use strict';
 
-theToolController.controller('MainController', function ($scope, $http, $routeParams, $sce, $location, $window, $rootScope, NotificationFactory, MemberFactory, CompanyFactory, SpeakerFactory, TopicFactory, RoleFactory, TagFactory, CommentFactory, ChatFactory) {
+theToolController.controller('MainController', function ($scope, $http, $routeParams, $sce, $location, $window, $rootScope, NotificationFactory, MemberFactory, CompanyFactory, SpeakerFactory, TopicFactory, RoleFactory, TagFactory, CommentFactory, ChatFactory, EventFactory, SessionFactory, ItemFactory) {
 
   //================================INITIALIZATION================================
 
@@ -13,6 +13,7 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
   $scope.searchCompanies = {};
   $scope.searchSpeakers = {};
   $scope.searchMembers = {};
+  $scope.activeEvent = {};
 
   $scope.me = {};
   $scope.members = [];
@@ -20,6 +21,9 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
   $scope.speakers = [];
   $scope.topics = [];
   $scope.notifications = [];
+  $rootScope.activeEvent= {
+    event: ''
+  };
 
   $scope.notificationsInfo = {
     number: 0,
@@ -27,6 +31,12 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
   };
 
   var factoriesReady = 0;
+
+  $scope.setCurrentEvent = function(event) {
+    console.log(event);
+    $scope.currentEvent = {};
+    setTimeout(function(){$scope.currentEvent = event;},10);
+  }
 
   $rootScope.update = {
 
@@ -109,6 +119,28 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
       });
     },
 
+    events: function() {
+      EventFactory.Event.getAll(function(events) {
+        $scope.events = events;
+        $scope.currentEvent = events[0];
+        callback();
+      });
+    },
+
+    sessions: function() {
+      SessionFactory.Session.getAll(function(sessions) {
+        $scope.sessions = sessions;
+        callback();
+      });
+    },
+
+    items: function() {
+      ItemFactory.Item.getAll(function(items) {
+        $scope.items = items;
+        callback();
+      });
+    },
+
     all: function(){
       this.running = true;
       factoriesReady = 0;
@@ -122,6 +154,9 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
       this.tags();
       this.comments();
       this.chats();
+      this.events();
+      this.sessions();
+      this.items();
     }
 
   }
@@ -132,7 +167,7 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
   //===================================FUNCTIONS===================================
 
   function callback() {
-    if (++factoriesReady == 9) {
+    if (++factoriesReady == 12) {
       $rootScope.update.running = false;
       $scope.ready = true;
 
@@ -253,6 +288,24 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
   $scope.getUnreadNotifications = function (thread) {
     return $scope.notifications.filter(function(o) {
       return o.thread == thread && o.unread.indexOf($scope.me.id) != -1;
+    })[0];
+  };
+
+  $scope.getEvent = function (eventId) {
+    return $scope.events.filter(function(o) {
+      return o.id == eventId;
+    })[0];
+  };
+
+  $scope.getSession = function (sessionId) {
+    return $scope.sessions.filter(function(o) {
+      return o._id == sessionId;
+    })[0];
+  };
+
+  $scope.getItem = function (itemId) {
+    return $scope.items.filter(function(o) {
+      return o.id == itemId;
     })[0];
   };
 
