@@ -11,7 +11,6 @@ function create(request, reply) {
       console.log(err);
       reply({error:"There was an error!"});
     } else{
-      console.log("Message Created: " + message._id);
       reply(message);
     }
   });
