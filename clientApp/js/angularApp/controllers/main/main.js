@@ -29,6 +29,11 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
 
   var factoriesReady = 0;
 
+  $scope.setCurrentEvent = function(event) {
+    console.log(event);
+    $scope.currentEvent = event;
+  }
+
   $rootScope.update = {
 
     running: false,
@@ -113,6 +118,7 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
     events: function() {
       EventFactory.Event.getAll(function(events) {
         $scope.events = events;
+        $scope.currentEvent = events[0];
         callback();
       });
     },

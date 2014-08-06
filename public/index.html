@@ -52,11 +52,10 @@
       <nav class="ink-navigation ink-grid ie7">
         <ul class="menu horizontal push-left medium-push-center small-push-center tiny-push-center" style="height: 44px;">
           <li ng-if="me._id" class="hide-all show-medium show-tiny show-small"><button class="fa fa-bars left-drawer-trigger" style="color:#333;"></button></li>
-          <li class="logoPlaceholder"><a href="#/" class="logoPlaceholder">EventDeck</a></li>
-          <li ng-if="me._id" class="show-all">
-            <select ng-model="$parent.activeEvent" ng-options="e.name for e in events | orderBy: ['kind', '-date']" ng-init="activeEvent = events[0]" style="width: 150px; border-radius: 5px; border: 0; padding: 5px; margin: 5px; font-weight:bold;">
-              <option value="" ng-selected="selected">All events</option>
-            </select>
+          <li class="logoPlaceholder"><a href="#/" class="logoPlaceholder">{{currentEvent.name}}</a>
+            <ul class="submenu">
+              <li ng-repeat="event in events | orderBy: ['kind', '-date']"><a ng-click="setCurrentEvent(event)">{{event.name}}</a></li>
+            </ul>
           </li>
           <li ng-if="me._id" class="hide-medium hide-small hide-tiny">
             <input type="text" ng-model="search.name" ng-change="show()" ng-click="show()" placeholder="Super search!!!" style="width: 200px; border-radius: 5px; border: 0; padding: 5px; margin: 5px;">
