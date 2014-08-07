@@ -13,41 +13,61 @@ setTimeout(function() {
       if (err) { callback(err); }
 
       if (result.length == 0) {
-        console.log("missing", jsonSpeaker.name);
+        // console.log('missing', jsonSpeaker.name);
+
+        // var speaker = {};
+
+        // speaker.id   = jsonSpeaker.id;
+        // speaker.name = jsonSpeaker.name;
+        // if (jsonSpeaker.img)          { speaker.img            = jsonSpeaker.img; }
+        // if (jsonSpeaker.description)  { speaker.description    = jsonSpeaker.description; }
+        // if (jsonSpeaker.status)       { speaker.status         = jsonSpeaker.status; }
+        // if (jsonSpeaker.contacts)     { speaker.contacts       = jsonSpeaker.contacts; }
+        // if (jsonSpeaker.participation){ speaker.participations = [jsonSpeaker.participation]; }
+        
+        // var newSpeaker = new Speaker(speaker);
+
+        // newSpeaker.save(function (err, reply){
+        //   if (err) {
+        //     console.log('ERROR',('Hipcup on the DB' + err.detail));
+        //   } else if(reply) {
+        //     console.log('SUCCESS', speaker);
+        //   } else { // same id        
+        //     console.log('ERROR',('Speaker ID exists'));
+        //   }
+
+        //   callback();
+        // });
+        callback();
+      } else if(result.length == 1) {
 
         var speaker = {};
+        if (!result[0].img && jsonSpeaker.img)                  { speaker.img            = jsonSpeaker.img; }
+        if (!result[0].description && jsonSpeaker.description)  { speaker.description    = jsonSpeaker.description; }
+        if (!result[0].status && jsonSpeaker.status)            { speaker.status         = jsonSpeaker.status; }
+        if (!result[0].contacts && jsonSpeaker.contacts)        { speaker.contacts       = jsonSpeaker.contacts; }
 
-        speaker.id   = jsonSpeaker.id;
-        speaker.name = jsonSpeaker.name;
-        if (jsonSpeaker.img)          { speaker.img         = jsonSpeaker.img; }
-        if (jsonSpeaker.description)  { speaker.description = jsonSpeaker.description; }
-        if (jsonSpeaker.status)       { speaker.status      = jsonSpeaker.status; }
-        if (jsonSpeaker.contacts)     { speaker.contacts    = jsonSpeaker.contacts; }
-        if (jsonSpeaker.forum["22"])  { speaker.forum       = jsonSpeaker.forum["22"]; }
-        if (jsonSpeaker.status["22"]) { speaker.status      = jsonSpeaker.status["22"]; }
-        if (jsonSpeaker.member["22"]) { speaker.member      = jsonSpeaker.member["22"]; }
+        speaker.participations = result[0].participations || [];
+        speaker.participations.push(jsonSpeaker.participation);
+
+        console.log('found', result[0].name, 'update', speaker);
         
-        var newSpeaker = new Speaker(speaker);
-
-        newSpeaker.save(function (err, reply){
+        Speaker.update({id: result[0].id}, speaker, function (err) {
           if (err) {
-            console.log("ERROR",('Hipcup on the DB' + err.detail));
-          } else if(reply) {
-            console.log("SUCCESS", speaker);
-          } else { // same id        
-            console.log("ERROR",('Speaker ID exists: '+request.payload.id));
+            return callback(err);
           }
-
+          console.log('done');
+  
           callback();
         });
       } else {
-        //console.log("found", result[0].name);
         callback();
       }
+
     });
 }, function(error) {
-  if(error) { console.log("Error!!", error); }
-  console.log("DONE");
+  if(error) { console.log('Error!!', error); }
+  console.log('DONE');
 });
 
 }, 3000);
