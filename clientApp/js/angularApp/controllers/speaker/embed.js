@@ -12,8 +12,6 @@ theToolController.controller('SpeakerEmbedController', function ($rootScope, $sc
       });
     }
 
-    console.log($scope.event);
-
     if($scope.event) {
       $scope.participation = $scope.speaker.participations.filter(function(o) {
         return o.event == $scope.event.id;

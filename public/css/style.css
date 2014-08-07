@@ -41,9 +41,9 @@
 }
 #topbar .ink-navigation ul li a.logoPlaceholder {
   margin-right: .5em;
-  padding: 10px;
+  padding: 7px;
   font-weight: bold;
-  font-size: 1.8em;
+  font-size: 30px;
   color: #333;
 }
 #topbar .ink-navigation ul li a.logoPlaceholder:hover {
