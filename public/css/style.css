@@ -307,43 +307,69 @@ body.ink-drawer .right-drawer li.active > a {
   min-width: 300px;
 }
 
+.suggestion.ink-button.current:hover,
+.suggestion.ink-button.current,
 .suggestion:hover,
 .suggestion {
   background: #eb6420;
 }
+.selected.ink-button.current:hover,
+.selected.ink-button.current,
 .selected:hover,
 .selected {
   background: #5319e7;
 }
+.approved.ink-button.current:hover,
+.approved.ink-button.current,
 .approved:hover,
 .approved {
   background: #0052cc;
 }
+.contacted.ink-button.current:hover,
+.contacted.ink-button.current,
 .contacted:hover,
 .contacted {
   background: #fbca04;
 }
+.in-conversations.ink-button.current:hover,
+.in-conversations.ink-button.current,
 .in-conversations:hover,
 .in-conversations {
   background: #207de5;
 }
+.in-negotiations.ink-button.current:hover,
+.in-negotiations.ink-button.current,
 .in-negotiations:hover,
 .in-negotiations {
   background: #006b75;
 }
+.closed-deal.ink-button.current:hover,
+.closed-deal.ink-button.current,
 .closed-deal:hover,
 .closed-deal,
+.accepted.ink-button.current:hover,
+.accepted.ink-button.current,
 .accepted:hover,
 .accepted {
   background: #009800;
 }
+.rejected.ink-button.current:hover,
+.rejected.ink-button.current,
 .rejected:hover,
 .rejected {
   background: #e11d21;
 }
+.give-up.ink-button.current:hover,
+.give-up.ink-button.current,
 .give-up:hover,
 .give-up {
   background: #333;
+}
+
+.current:hover, 
+.current {
+  background: #555;
+  color: white;
 }
 
 .suggestion:hover.ink-button,
