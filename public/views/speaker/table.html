@@ -23,7 +23,7 @@
         <div class="member-cell">
           <a href="#/member/{{member.id}}"><img ng-show="member.facebook" src="https://graph.facebook.com/{{member.facebook}}/picture"/> {{member.name}}</a>
         </div>
-        <div class="speaker-cell" title="{{speaker.status}}" ng-repeat="speaker in speakers | filterEvent: activeEvent.id | filter:{member:member.id}:strict | orderBy: '-date'" ng-class="speaker.status.replace(' ','-').toLowerCase()">
+        <div class="speaker-cell" title="{{speaker.status}}" ng-repeat="speaker in speakers | filterEvent: currenEvent.id | filter:{member:member.id}:strict | orderBy: '-date'" ng-class="speaker.status.replace(' ','-').toLowerCase()">
           <a href="#/speaker/{{speaker.id}}"><img ng-show="member.facebook" src="{{speaker.img}}"/> {{speaker.name}}</a>
         </div>
         <div ng-if="checkPermission(member)" class="add-new-cell small">
