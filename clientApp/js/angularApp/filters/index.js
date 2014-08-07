@@ -6,19 +6,24 @@ angular.module('theTool.filters', [])
       return String(text).replace(/\%VERSION\%/mg, version);
     }
   }])
-  .filter('filterEvent', function(){
-    return function(objs, event) {
-          var result = objs;
-          if(event) {
-            result = objs.filter(function(o) {
-              return o.participations.filter(function(p) {
-                return p.event === event;
-              });//.length > 0;
-            });
-          }
-          return result;
-      };
-
+  .filter('filterEventStatus', function(){
+    return function(objs, event, status) {
+      var result = objs;
+      if(event) {
+        result = objs.filter(function(o) {
+          return o.participations.filter(function(p) {
+            if(status && status !== '') {
+               console.log('status',status, p.event === event && p.status === status);
+              return p.event === event && p.status === status;
+            } else {
+              console.log('no status');
+              return p.event === event;
+            }
+          });//.length > 0;
+        });
+      }
+      return result;
+    };
   })
   .filter('filterRole', function() {
     return function(members, role) {
