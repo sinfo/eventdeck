@@ -13,14 +13,28 @@ theToolController
 
       $scope.speakerPredicate = 'updated';
       $scope.reverse = 'true';
+      $scope.filteredSpeakers = [];
+
+
       
       SpeakerFactory.Speaker.getAll(function(response) {
         $scope.speakers = response;
+        $scope.filteredSpeakers = $scope.speakers;
       });
 
       $scope.setSearchStatus = function (status) {
         $scope.searchStatus=status;
         console.log($scope.searchStatus);
+        $scope.filteredSpeakers = $scope.speakers.filter(function(o) {
+          return o.participations.filter(function(p) {
+            if($scope.searchStatus && $scope.searchStatus !== '') {
+              return p.event === event && p.status === $scope.searchStatus;
+            } else {
+              return p.event === event;
+            }
+          });
+        });
+        $scope.$apply();
       };
 
       $scope.scroll = function() {
@@ -74,6 +88,21 @@ theToolController
           });
         }
       };
+
+      $scope.$watch(['currentEvent', 'searchStatus'], function(newValues, oldValues, scope){
+        console.log('filtering speakers');
+        if($scope.speakers){
+          $scope.filteredSpeakers = $scope.speakers.filter(function(o) {
+            return o.participations.filter(function(p) {
+              if($scope.searchStatus && $scope.searchStatus !== '') {
+                return p.event === event && p.status === $scope.searchStatus;
+              } else {
+                return p.event === event;
+              }
+            });
+          });
+        }
+      });
     }
   });
   

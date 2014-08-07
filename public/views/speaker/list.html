@@ -1,7 +1,7 @@
 <div class="ink-grid">
 
   <div class="all-100" infinite-scroll="scroll()">
-    <speaker-card speaker="speaker" event="currentEvent" ng-if="currentEvent.name" notifications="notifications" me="me" members="members" ng-repeat="speaker in speakers | filterEventStatus:currentEvent.id:searchStatus | orderBy:speakerPredicate:reverse | limitTo: limit"></speaker-card>
+    <speaker-card speaker="speaker" event="currentEvent" ng-if="currentEvent.name" notifications="notifications" me="me" members="members" ng-repeat="speaker in filteredSpeakers | orderBy:speakerPredicate:reverse | limitTo: limit"></speaker-card>
   </div>
 
   <div class="awesome-sidebar" ng-hide="hideSidebar">
