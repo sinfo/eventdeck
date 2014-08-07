@@ -1,7 +1,7 @@
 'use strict';
 
 theToolController
-  .controller('SpeakerController', function ($rootScope, $scope, $window, $routeParams, $sce, SpeakerFactory, MemberFactory, NotificationFactory) {
+  .controller('SpeakerController', function ($rootScope, $scope, $location, $window, $routeParams, $sce, SpeakerFactory, MemberFactory, NotificationFactory) {
     
     $rootScope.update.timeout(runController);
 
@@ -26,6 +26,17 @@ theToolController
           } else {
             $scope.message = response.success;
           }
+        });
+      };
+
+      $scope.deleteSpeaker = function(speaker) {
+        SpeakerFactory.Speaker.delete({ id:speaker.id }, function(response) {
+          if(response.error) {
+            $scope.error = response.error;
+          } else {
+            $scope.message = response.success;
+          }
+          $location.path('#/speakers/');
         });
       };
 

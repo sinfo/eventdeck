@@ -18,6 +18,11 @@ theToolController
         $scope.speakers = response;
       });
 
+      $scope.setSearchStatus = function (status) {
+        $scope.searchStatus=status;
+        console.log($scope.searchStatus);
+      };
+
       $scope.scroll = function() {
         if ($scope.limit <= $scope.speakers.length)
           $scope.limit += 8;
