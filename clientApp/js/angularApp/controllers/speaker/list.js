@@ -44,7 +44,17 @@ theToolController
         var speakerData = newSpeaker;
         
         if(newSpeaker.id) {
-          SpeakerFactory.Speaker.update({ id: speakerData.id }, { member: member.id }, function(response) {
+          var participation = $scope.getParticipation(speakerData, $scope.currentEvent.id);
+          if(participation) {
+            participation.member = member.id;
+          } else {
+            speakerData.participations.push({
+              event: $scope.currentEvent.id,
+              status: 'Selected',
+              member: member.id
+            });
+          }
+          SpeakerFactory.Speaker.update({ id: speakerData.id }, { participations: speakerData.participations }, function(response) {
             if(response.error) {
               console.log(response);
               $scope.error = response.error;
@@ -57,8 +67,11 @@ theToolController
             }
           });
         } else {
-          speakerData.status = 'Selected';
-          speakerData.member = member.id;
+          speakerData.participations = [{
+            event: $scope.currentEvent.id,
+            status: 'Selected',
+            member: member.id
+          }];
 
           SpeakerFactory.Speaker.create(speakerData, function(response) {
             if(response.error) {
