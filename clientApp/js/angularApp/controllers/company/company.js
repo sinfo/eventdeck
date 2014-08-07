@@ -25,6 +25,7 @@ theToolController
             $scope.error = response.error;
           } else {
             $scope.message = response.success;
+            $location.path('company/'+companyData.id);
           }
         });
       };
