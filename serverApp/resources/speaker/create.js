@@ -54,7 +54,7 @@ function create(request, reply) {
     }
     else {
       var targets = [];
-      if(typeof speaker.member !== undefined){
+      if(speaker.member){
         if(request.auth.credentials.id != speaker.member){
           targets.push(speaker.member);
           email(speaker.member, speaker);
