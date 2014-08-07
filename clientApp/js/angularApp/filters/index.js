@@ -13,10 +13,8 @@ angular.module('theTool.filters', [])
         result = objs.filter(function(o) {
           return o.participations.filter(function(p) {
             if(status && status !== '') {
-               console.log('status',status, p.event === event && p.status === status);
               return p.event === event && p.status === status;
             } else {
-              console.log('no status');
               return p.event === event;
             }
           });//.length > 0;
