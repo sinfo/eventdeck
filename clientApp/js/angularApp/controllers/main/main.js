@@ -306,6 +306,12 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
     })[0];
   };
 
+  $scope.getParticipation = function (thing, eventId) {
+    return thing.participations.filter(function(o) {
+      return o.event == eventId;
+    })[0];
+  };
+
   $scope.show = function() {
     $scope.display = ($scope.search.name ? true : false);
   };
