@@ -8,6 +8,7 @@ angular.module('theTool.filters', [])
   }])
   .filter('filterEventStatus', function(){
     return function(objs, event, status) {
+      console.log(status);
       var result = objs;
       if(event) {
         result = objs.filter(function(o) {
