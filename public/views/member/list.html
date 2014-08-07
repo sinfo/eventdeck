@@ -1,7 +1,7 @@
 <div class="ink-grid">
 
   <div class="all-100" infinite-scroll="scroll()">
-    <member-card member-object="member" ng-repeat="member in members | filter:searchMembers:strict | filterRole: searchRoles.toString() | orderBy:memberPredicate:reverse"></member-card>
+    <member-card member-object="member" ng-repeat="member in members | filterRole: searchMembers.role | orderBy:memberPredicate:reverse"></member-card>
   </div>
 
   <div class="awesome-sidebar" ng-hide="hideSidebar">
@@ -11,15 +11,15 @@
     </div>
 
     <div class="button-group small">
-      <p class="ink-button {{searchMembers.id == undefined ? 'blue' : ''}}" ng-click="searchMembers={};setSearchRole()">All</p>
-      <p class="ink-button {{searchMembers.id == me.id ? 'blue' : ''}}" ng-click="searchMembers.id=me.id">Me</p>
+      <p class="ink-button {{searchMembers.id == undefined ? 'current' : ''}}" ng-click="searchMembers={};setSearchRole()">All</p>
+      <p class="ink-button {{searchMembers.id == me.id ? 'current' : ''}}" ng-click="searchMembers.id=me.id">Me</p>
     </div>
 
     <br>
 
     <h6>Filter Roles</h6>
     <div ng-repeat="role in roles | orderBy:'name'">
-      <a ng-click="setSearchRole(role.id)" class="ink-button small all-100">
+      <a ng-click="searchMembers.role=role.id" class="ink-button small all-100 {{role.id==searchMembers.role ? 'current' : '' }}">
         {{role.name}}
       </a>
     </div>

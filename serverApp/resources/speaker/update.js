@@ -113,10 +113,10 @@ function getEditionString(diffObject) {
 }
 
 function equals(o1, o2) {
+  if(o1.length && o2.length && o1.length != o2.length) { return false; } 
+  
   if(typeof(o1) != typeof(o2)) { return false; }
 
-  if(typeof(o1) == 'array' && o1.length != o2.length) { return false; } 
-  
   for (var key in o1) {
     var type = typeof(o1[key]);
     if (type == 'object') {

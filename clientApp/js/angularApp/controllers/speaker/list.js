@@ -22,10 +22,6 @@ theToolController
         //$scope.filteredSpeakers = $scope.speakers;
       });
 
-      $scope.setSearchStatus = function (status) {
-        $scope.searchSpeakers.status=status;
-      };
-
       $scope.scroll = function() {
         if ($scope.limit <= $scope.speakers.length)
           $scope.limit += 8;
