@@ -23,7 +23,7 @@ theToolController
       });
 
       $scope.setSearchStatus = function (status) {
-        $scope.searchStatus=status;
+        $scope.searchSpeakers.status=status;
       };
 
       $scope.scroll = function() {
