@@ -80,16 +80,14 @@ function create(request, reply) {
     else {
       var targets = [];
       var member;
-      member = typeof diffSpeaker.member !== undefined ? diffSpeaker.member : speaker.member;
-      if(typeof member !== undefined){
+      member = diffSpeaker.member ? diffSpeaker.member : speaker.member;
+      if(member){
         if(request.auth.credentials.id !== member) {
           targets.push(member);
-          if(typeof diffSpeaker.member !== undefined){
+          if(diffSpeaker.member){
             targets.push(speaker.member);
           }
-          if(typeof member !== undefined){
-            email(member, speaker);
-          }
+          email(member, speaker);
         }
       }
       notification.notify(request.auth.credentials.id, 'speaker-'+speaker.id, 'updated '+getEditionString(diffSpeaker), null, targets);
