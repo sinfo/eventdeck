@@ -8,17 +8,17 @@ angular.module('theTool.filters', [])
   }])
   .filter('filterEventStatus', function(){
     return function(objs, event, status) {
-      console.log(status);
+      //console.log(status);
       var result = objs;
       if(event) {
         result = objs.filter(function(o) {
           return o.participations.filter(function(p) {
             if(status && status !== '') {
-              return p.event === event && p.status === status;
+              return p.event === event.id && p.status === status;
             } else {
-              return p.event === event;
+              return p.event === event.id;
             }
-          });//.length > 0;
+          }).length > 0;
         });
       }
       return result;
