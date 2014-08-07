@@ -66,7 +66,17 @@ theToolController
         var companyData = newCompany;
         
         if(newCompany.id) {
-          CompanyFactory.Company.update({ id: companyData.id }, { member: member.id }, function(response) {
+          var participation = $scope.getParticipation(companyData, $scope.currentEvent.id);
+          if(participation) {
+            participation.member = member.id;
+          } else {
+            companyData.participations.push({
+              event: $scope.currentEvent.id,
+              status: 'Selected',
+              member: member.id
+            });
+          }
+          CompanyFactory.Company.update({ id: companyData.id }, { participations: companyData.participations }, function(response) {
             if(response.error) {
               console.log(response);
               $scope.error = response.error;
@@ -79,8 +89,11 @@ theToolController
             }
           });
         } else {
-          companyData.status = 'Selected';
-          companyData.member = member.id;
+          companyData.participations = [{
+            event: $scope.currentEvent.id,
+            status: 'Selected',
+            member: member.id
+          }];
 
           CompanyFactory.Company.create(companyData, function(response) {
             if(response.error) {
