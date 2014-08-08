@@ -54,6 +54,7 @@ messageSchema.statics.findAll = function (cb) {
 };
 
 messageSchema.statics.removeByThread = function (thread, cb) {
+<<<<<<< HEAD
   this.remove({source: thread}, cb);
 }
 
@@ -68,6 +69,9 @@ messageSchema.statics.removeByText = function (thread, text, cb) {
 
 messageSchema.statics.removeById = function (id, cb) {
   this.remove({_id: id}, cb);
+=======
+  this.find({source: thread}, cb);
+>>>>>>> 3582c2891ca35141b85db7c511ad099f9165cedc
 }
 
  
