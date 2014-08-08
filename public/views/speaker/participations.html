@@ -15,7 +15,9 @@
           <a ng-click="submit()" class="ink-button green"><i class="fa fa-check"></i> Save</a>
         </div>
 
-        <div ng-bind-html="convertURLs(speaker.history)"></div>
+        <div ng-if="speaker.history">
+          <div ng-bind-html="convertURLs(speaker.history)"></div>
+        </div>
         <div class="ink-alert basic success" ng-show="message">
           <!--<button class="ink-dismiss">&times;</button>-->
           <p><strong>Success!</strong>
