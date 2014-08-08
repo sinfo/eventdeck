@@ -52,7 +52,6 @@
             </div>
             <div class="control-group">
               <input type="submit" id="submit" value="Submit" class="ink-button green" />
-              <a class="ink-button blue" ng-click="showForum=!showForum"><i class="fa fa-comments"></i> Show Forum!</a>
               <a class="ink-button orange" href="#/speaker/{{speaker.id}}" unsaved-warning-clear><i class="fa fa-back"></i><i class="fa fa-reply"></i>  Go back...</a>
             </div>
           </div>
@@ -63,11 +62,6 @@
                 <textarea id="contacts" ng-model="formData.contacts" type="text" rows="10" resettable></textarea >
               </div>
             </div>
-          </div>
-        </div>
-        <div class="column-group horizontal-gutters">
-          <div class="all-100">
-            <iframe ng-show="showForum" ng-src="{{trustSrc(speaker.forum)}}" frameborder="0" width="100%" height="480"></iframe>
           </div>
         </div>
       </form>
