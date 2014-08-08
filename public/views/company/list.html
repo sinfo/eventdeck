@@ -1,25 +1,25 @@
 <div class="ink-grid">
 
   <div class="all-100" infinite-scroll="scroll()">
-    <company-card company-object="company" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments" ng-repeat="company in companies | filter:searchCompanies:strict | orderBy:companyPredicate:reverse | limitTo: limit"></company-card>
+    <company-card company="company" event="currentEvent" ng-if="currentEvent.name" notifications="notifications" me="me" members="members" ng-repeat="company in companies | filterEventStatus:currentEvent:searchCompanies | orderBy:companyPredicate:reverse | limitTo: limit"></company-card>
   </div>
 
-  <div class="awesome-sidebar" ng-hide="hideSidebar || loading">
+  <div class="awesome-sidebar" ng-hide="hideSidebar">
     <div class="header">
       <b title="Click to hide sidebar!">Companies</b>
       <div ng-click="hideSidebar=!hideSidebar" class="push-right hide-button">HIDE</div>
     </div>
 
     <div class="button-group small">
-      <p class="ink-button {{searchCompanies.member == undefined ? 'blue' : ''}}" ng-click="searchCompanies={}">All</p>
-      <p class="ink-button {{searchCompanies.member == me.id ? 'blue' : ''}}" ng-click="searchCompanies.member=me.id">Assigned to me</p>
+      <p class="ink-button {{searchCompanies.member == undefined ? 'current' : ''}}" ng-click="searchCompanies={}">All</p>
+      <p class="ink-button {{searchCompanies.member == me.id ? 'current' : ''}}" ng-click="searchCompanies.member=me.id">Assigned to me</p>
     </div>
 
     <br>
 
     <h6>Filter Status</h6>
     <div ng-repeat="status in statuses">
-      <div class="ink-button small all-100 {{status.replace(' ','-').toLowerCase()}}" ng-click="searchCompanies.status=status">
+      <div class="ink-button small all-100 {{status.replace(' ','-').toLowerCase()}} {{status==searchCompanies.status ? 'current' : '' }}" ng-click="searchCompanies.status=status">
         {{status}}
       </div>
     </div>
@@ -30,11 +30,10 @@
     <div>
       <div class="ink-button blue small all-100" ng-click="companyPredicate='name'; reverse=!reverse">Name <i class="fa fa-arrows-v"></i></div><br>
       <div class="ink-button blue small all-100" ng-click="companyPredicate='updated'; reverse=!reverse">Updated <i class="fa fa-arrows-v"></i></div><br>
-      <div class="ink-button blue small all-100" ng-click="companyPredicate='member'; reverse=!reverse">Member <i class="fa fa-arrows-v"></i></div>
     </div>
   </div>
 
   <div class="awesome-sidebar-button" ng-click="hideSidebar=!hideSidebar" title="Click to show sidebar!" ng-show="hideSidebar">
-    <i class="fa fa-3x fa-caret-left"></i> 
+    <i style="font-size:50px" class="fa fa-caret-left"></i>  
   </div>
 </div>

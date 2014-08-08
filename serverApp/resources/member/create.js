@@ -32,7 +32,7 @@ function create(request, reply) {
 
 }
 
-function save(member, reply) {
+function save(member) {
   member = new Member(member);
 
   member.save(function (err) {

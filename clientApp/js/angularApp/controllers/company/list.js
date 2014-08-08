@@ -1,7 +1,7 @@
 'use strict';
 
 theToolController
-  .controller('CompaniesController', function ($rootScope, $scope, $http, $sce, CompanyFactory, MemberFactory) {
+  .controller('CompaniesController', function ($rootScope, $scope, $http, $sce, CompanyFactory) {
     
     $rootScope.update.timeout(runController);
 
@@ -16,22 +16,22 @@ theToolController
             $scope.message = response.message;
           }
         });
-      }
+      };
 
       $scope.getClassFromPaymentStatus = function(participation) {
-        if(!participation) { return "grey"; }
-        if(!participation.payment) { return "grey"; }
-        if(!participation.payment.status) { return "grey"; }
+        if(!participation) { return 'grey'; }
+        if(!participation.payment) { return 'grey'; }
+        if(!participation.payment.status) { return 'grey'; }
         var status = participation.payment.status.toLowerCase();
 
-        if(status.indexOf("pago") != -1 || status.indexOf("emitido") != -1 || status.indexOf("recibo enviado") != -1) { return "lime"; } 
-        else if(status.indexOf("enviado") != -1) { return "orange"; }
-        else { return "grey"; }
-      }
+        if(status.indexOf('pago') != -1 || status.indexOf('emitido') != -1 || status.indexOf('recibo enviado') != -1) { return 'lime'; } 
+        else if(status.indexOf('enviado') != -1) { return 'orange'; }
+        else { return 'grey'; }
+      };
 
       $scope.paymentStatuses = ['Emitido', 'Recibo Enviado', 'Pago', 'Enviado'];
     
-      $scope.limit = 10;
+      $scope.limit = 20;
 
       $scope.statuses = ['Suggestion','Contacted','In Conversations','In Negotiations','Closed Deal','Rejected','Give Up'];
       
@@ -46,7 +46,7 @@ theToolController
 
       $scope.scroll = function() {
         if ($scope.limit <= $scope.companies.length)
-          $scope.limit += 4;
+          $scope.limit += 8;
       };
       
       $scope.checkPermission = function (member) {
@@ -54,7 +54,7 @@ theToolController
           return o.id == 'development-team' || o.id == 'coordination';
         });
 
-        if(roles.length == 0 && member.id != $scope.me.id) {
+        if(roles.length === 0 && member.id != $scope.me.id) {
           return false;
         }
 
@@ -66,7 +66,17 @@ theToolController
         var companyData = newCompany;
         
         if(newCompany.id) {
-          CompanyFactory.Company.update({ id: companyData.id }, { member: member.id }, function(response) {
+          var participation = $scope.getParticipation(companyData, $scope.currentEvent.id);
+          if(participation) {
+            participation.member = member.id;
+          } else {
+            companyData.participations.push({
+              event: $scope.currentEvent.id,
+              status: 'Selected',
+              member: member.id
+            });
+          }
+          CompanyFactory.Company.update({ id: companyData.id }, { participations: companyData.participations }, function(response) {
             if(response.error) {
               console.log(response);
               $scope.error = response.error;
@@ -79,8 +89,11 @@ theToolController
             }
           });
         } else {
-          companyData.status = 'Selected';
-          companyData.member = member.id;
+          companyData.participations = [{
+            event: $scope.currentEvent.id,
+            status: 'Selected',
+            member: member.id
+          }];
 
           CompanyFactory.Company.create(companyData, function(response) {
             if(response.error) {

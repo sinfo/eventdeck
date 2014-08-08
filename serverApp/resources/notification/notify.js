@@ -86,7 +86,6 @@ function notify(memberId, thread, description, objectId, subscribers) {
         source: thread,
         text:   description,
       }
-      console.log(webSocketCl);
       webSocketCl.emit('send', {room: 'geral', message: newMessage}, function(){
         console.log("Notification sent to chat!");
       });
