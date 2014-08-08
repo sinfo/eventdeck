@@ -1,7 +1,7 @@
 'use strict';
 
 theToolController
-  .controller('CompanyController', function ($rootScope, $scope, $http, $routeParams, $sce, CompanyFactory, MemberFactory, NotificationFactory) {
+  .controller('CompanyController', function ($rootScope, $scope, $http, $location, $routeParams, $sce, CompanyFactory, MemberFactory, NotificationFactory) {
 
     $rootScope.update.timeout(runController);
 
@@ -28,6 +28,29 @@ theToolController
             $location.path('company/'+companyData.id);
           }
         });
+      };
+
+      $scope.deleteCompany = function(company) {
+        CompanyFactory.Company.delete({ id:company.id }, function(response) {
+          if(response.error) {
+            $scope.error = response.error;
+          } else {
+            $scope.message = response.success;
+          }
+          $location.path('companies/');
+        });
+      };
+
+      $scope.checkPermission = function () {
+        var roles = $scope.me.roles.filter(function(o) {
+          return o.id == 'development-team' || o.id == 'coordination';
+        });
+
+        if(roles.length === 0) {
+          return false;
+        }
+
+        return true;
       };
 
       $scope.statuses = ['Suggestion','Contacted','In Conversations','In Negotiations','Closed Deal','Rejected','Give Up'];

@@ -15,8 +15,8 @@
       <div class="column-group horizontal-gutters">
         <div class="all-30 medium-30 small-100 tiny-100">
           <p class="button-group">
-            <a class="ink-button blue" href="{{company.forum}}" target="_blank"><i class="fa fa-comments"></i> Go to Forum!</a>
             <a class="ink-button orange" href="#/company/{{company.id}}/edit"><i class="fa fa-wrench"></i> Edit Company</a>
+            <a class="ink-button red" ng-if="checkPermission()" ng-click="deleteCompany(company)"><i class="fa fa-times"></i> Delete Company</a>
             <subscription thread="{{'company-' + company.id}}"></subscription>
           </p>
           <img ng-show="company.img" ng-src="{{company.img}}" width="100%" />
