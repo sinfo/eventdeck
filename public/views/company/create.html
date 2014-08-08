@@ -31,18 +31,6 @@
               </div>
             </div>
             <div class="control-group">
-              <label for="status">Status</label>
-              <div class="control">
-                <select id="status" ng-model="formData.status" ng-options="s for s in statuses | orderBy: 'toString()'" resettable></select>
-              </div>
-            </div>
-            <div class="control-group">
-              <label for="member">Member</label>
-              <div class="control">
-                <select ng-model="formData.member" ng-options="m.id as m.name for m in members | orderBy: 'id'" resettable></select>
-              </div>
-            </div>
-            <div class="control-group">
               <label for="img">Image Url</label>
               <div class="control">
                 <input id="img" ng-model="formData.img" type="text" resettable>
@@ -56,19 +44,13 @@
               </div>
             </div>
             <div class="control-group">
-              <label for="forum">Forum</label>
-              <div class="control">
-                <input id="forum" ng-model="formData.forum" type="text" resettable>
-              </div>
-            </div>
-          </div>
-          <div class="all-70 medium-60 small-100 tiny-100">
-            <div class="control-group">
               <label for="description">Description</label>
               <div class="control">
                 <textarea id="description" ng-model="formData.description" type="text" rows="3" resettable></textarea>
               </div>
             </div>
+          </div>
+          <div class="all-70 medium-60 small-100 tiny-100">
             <div class="control-group">
               <label for="history">History</label>
               <div class="control">
@@ -85,11 +67,6 @@
               <input type="submit" id="submit" value="Submit" class="ink-button green" />
               <a class="ink-button orange" href="#/companies" unsaved-warning-clear><i class="fa fa-back"></i><i class="fa fa-reply"></i>  Go back...</a>
             </div>
-          </div>
-        </div>
-        <div class="column-group horizontal-gutters">
-          <div class="all-100">
-            <iframe ng-show="showForum" ng-src="{{trustSrc(formData.forum)}}" frameborder="0" width="100%" height="480"></iframe>
           </div>
         </div>
       </form>
