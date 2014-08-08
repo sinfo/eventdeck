@@ -41,12 +41,12 @@ theToolController
         });
       };
 
-      $scope.checkPermission = function (speaker) {
+      $scope.checkPermission = function () {
         var roles = $scope.me.roles.filter(function(o) {
           return o.id == 'development-team' || o.id == 'coordination';
         });
 
-        if(roles.length === 0 && (speaker.status == 'Suggestion' || speaker.status == 'Selected')) {
+        if(roles.length === 0) {
           return false;
         }
 
