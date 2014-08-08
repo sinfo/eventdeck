@@ -25,7 +25,7 @@
       </div>
       <div class="all-100 column-group horizontal-gutters" ng-show="comment.editing">
         <div class="all-50">
-          <form class="ink-form" ng-submit="submitComment()" unsaved-warning-form>
+          <form name="commentForm" class="ink-form" ng-submit="submitComment()" unsaved-warning-form>
             <div class="control-group">
               <div class="control">
                 <textarea ng-model="comment.buffer" type="text" rows="2" style="font-size: 15px;" resettable></textarea>
@@ -47,10 +47,10 @@
 
   <div class="all-100 column-group horizontal-gutters">
     <div class="all-50">
-      <form class="ink-form" unsaved-warning-form>
+      <form class="ink-form">
         <div class="control-group">
           <div class="control">
-            <textarea ng-model="commentData.markdown" type="text" rows="2" style="font-size: 15px;" resettable></textarea>
+            <textarea ng-model="commentData.markdown" type="text" rows="2" style="font-size: 15px;"></textarea>
           </div>
         </div>
         <div class="control-group">

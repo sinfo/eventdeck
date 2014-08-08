@@ -63,6 +63,8 @@ theToolController.controller("CommentAreaController", function ($rootScope, $sco
         updated: date
       }, function (response) {
         $scope.commentData.markdown = "";
+        $scope.comment.buffer = "";
+        $scope.commentForm.$setPristine();
         loadComments();
       });
     }
