@@ -45,6 +45,12 @@
           </div>
           <div class="all-40 medium-40 small-100 tiny-100">
             <div class="control-group">
+              <label for="title">Title <small>(p.ex. "Founder of EventDeck")</small></label>
+              <div class="control">
+                <input id="title" ng-model="formData.title" type="text" resettable>
+              </div>
+            </div>
+            <div class="control-group">
               <label for="description">Description</label>
               <div class="control">
                 <textarea id="description" ng-model="formData.description" type="text" rows="10" resettable></textarea>

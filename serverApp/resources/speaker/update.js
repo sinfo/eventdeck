@@ -37,6 +37,7 @@ function create(request, reply) {
   function updateSpeaker(cb) {
     if (request.payload.id && request.payload.id != speaker.id)                                            { diffSpeaker.id             = request.payload.id; }
     if (request.payload.name && request.payload.name != speaker.name)                                      { diffSpeaker.name           = request.payload.name; }
+    if (request.payload.title && request.payload.title != speaker.title)                                   { diffSpeaker.title           = request.payload.title; }
     if (request.payload.img && request.payload.img != speaker.img)                                         { diffSpeaker.img            = request.payload.img; }
     if (request.payload.description && request.payload.description != speaker.description)                 { diffSpeaker.description    = request.payload.description; }
     if (request.payload.status && request.payload.status != speaker.status)                                { diffSpeaker.status         = request.payload.status; }

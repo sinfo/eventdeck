@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var speakerSchema = new mongoose.Schema({
   id: {type: String, unique: true},
   name: String,
+  title: { type: String, default: "" },
   status: String,
   description: String,
   img: String,
