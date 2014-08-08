@@ -54,7 +54,20 @@ messageSchema.statics.findAll = function (cb) {
 };
 
 messageSchema.statics.removeByThread = function (thread, cb) {
-  this.find({source: thread}, cb);
+  this.remove({source: thread}, cb);
+}
+
+messageSchema.statics.removeByText = function (thread, text, cb) {
+  if(thread){
+    this.remove({source: thread, text: new RegExp(text, 'i')}, cb); 
+  }
+  else{
+    this.remove({text: new RegExp(text, 'i')}, cb); 
+  }
+}
+
+messageSchema.statics.removeById = function (id, cb) {
+  this.remove({_id: id}, cb);
 }
 
  
