@@ -1,16 +1,18 @@
 <div ng-hide="!speaker._id || speaker.deleted" class="card">
-  <a href="#/speaker/{{speaker.id}}">
+  <a href="#/speaker/{{speaker.id}}" title="{{speaker.title}}">
     <div class="header" style="background-image:url({{speaker.img}});">
    
     </div>
 
     <div class="content">
-      <div class="name">{{speaker.name}}</div> 
-      <div class="status" ng-class="speaker.status.replace(' ','-').toLowerCase()">{{speaker.status}}</div> 
-      <a class="member" href="#/member/{{speaker.member}}">
-        <img ng-src="https://graph.facebook.com/{{getMember(speaker.member).facebook}}/picture"/>
-        <small>{{getMember(speaker.member).name}}</small>
+      <div class="unread" ng-show="getUnreadNotifications('speaker-'+speaker.id).length > 0">UNREAD!</div>
+      <div class="name">{{speaker.name}}</div>
+      <div ng-if="participation" class="status" ng-class="participation.status.replace(' ','-').toLowerCase()">{{participation.status}}</div> 
+      <a ng-if="participation" class="member" href="#/member/{{participation.member}}">
+        <img ng-src="https://graph.facebook.com/{{getMember(participation.member).facebook}}/picture"/>
+        <small>{{getMember(participation.member).name}}</small>
       </a>
+      <div ng-if="!participation">Not assingned for {{event.name}}</div>
     </div>
   </a>
 

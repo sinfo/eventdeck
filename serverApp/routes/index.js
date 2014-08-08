@@ -11,4 +11,6 @@ require('./chat');
 require('./topic');
 require('./communication');
 require('./session');
+require('./event');
+require('./item');
 require('./tag');

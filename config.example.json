@@ -1,11 +1,11 @@
 {
-  "url": "http://tool.sinfo.org",
+  "url": "http://deck.eventdeck.co",
   "port": 8080,
   "mongo": {
-    "url": "mongodb://localhost/tool"
+    "url": "mongodb://localhost/deck"
   },
   "mailgun": {
-    "email": "tool@sinfo.org",
+    "email": "deck@sinfo.org",
     "api": "YOUR MAILGUN KEY",
     "public-api": "YOUR MAILGUN PUBLIC KEY"
   },

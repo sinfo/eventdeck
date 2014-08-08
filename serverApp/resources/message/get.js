@@ -4,7 +4,6 @@ var Message        = require('./../../db/models/message.js');
 
 exports = module.exports = get;
 
-/// get Company
 
 function get(request, reply) {
 

@@ -1,9 +1,10 @@
 var async    = require('async');
 var Session  = require('./../../db/models/session.js');
+var notification  = require('./../notification');
 
-module.exports = create;
+module.exports = update;
 
-function create(request, reply) {
+function update(request, reply) {
 
   var session = request.payload;
 

@@ -11,13 +11,10 @@ var messageData;
 webSocket
   .of('/chat')
   .on('connection', function (socket) {
-    console.log("Connected to main chat!");
 
     socket.emit('connected');
 
     socket.on('auth', function(data, cbClient){
-      console.log("Chat ID: " + data.id);
-
       var room = data.id;
       var user = data.user;
       socket.nickname = user;
@@ -34,11 +31,8 @@ webSocket
     });
 
     socket.on('send', function(data, cbClient){
-      console.log("Sent message Chat ID: " + data.room);
-
       var room    = data.room;
-      messageData = data.message; 
-
+      messageData = data.message;
       async.series([
         createMessage,
         function(cb){
@@ -51,19 +45,16 @@ webSocket
     });
 
     socket.on('logout', function(data, cb){
-      console.log("Log out: " + socket.nickname);
       socket.disconnect();
       webSocket.of('/chat').in(data.room).emit('user-disconnected', {id: socket.nickname});
       cb();
     });
 
     socket.on('disconnect', function(){
-      console.log("Disconnected: " + socket.nickname);
       delete socket;
     });
 
     socket.on('history-get', function(data, cb){
-      console.log("Getting history: " + socket.nickname);
       var dateRef = data.date;
       var room = data.room;
       getMessages(room, dateRef, function(){
@@ -80,7 +71,6 @@ function getChat(chatID, memberID, cb){
       console.log('Chat id: ' + chatID + ' unavailable');
     } 
     else {
-      console.log('Logged in chat id: ' + chatID );
       message = 'Logged in chat with sucess';
       outChat = response;
       if(outChat.members.indexOf(memberID) === -1){
@@ -97,7 +87,6 @@ function getMessages(chatID, dateRef, cb){
       console.log('Chat id: ' + chatID + ' messages unavailable');
     } 
     else {
-      console.log('Got messages in chat id: ' + chatID );
       messages = response;
     }
     cb();
@@ -117,11 +106,9 @@ function done(err, room, socket, cb){
     var online  = [];
     socket.join(room);
     var clients = webSocket.of('/chat').sockets;
-    console.log("Currently Loged:");
     for(var i = 0; i < clients.length; i++){
       if(clients[i].connected  && clients[i].nickname){
         online[i] = clients[i].nickname;
-        console.log(clients[i].nickname);
       }
     }
     var data = {
@@ -155,8 +142,6 @@ function updateChat(room, cb){
     if(response.error) {
       console.log('Chat id: ' + room + ' update error!');
       console.log(response.error);
-    } else {
-      console.log('Chat id: ' + room + ' updated successfully!');
     }
     cb();
   });

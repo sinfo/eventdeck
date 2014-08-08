@@ -1,0 +1,85 @@
+<div class="ink-grid">
+  <h3>Events</h3>
+  <table class="ink-table alternating bordered small">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Kind</th>
+        <th>Date</th>
+        <th>Duration</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="event in events | orderBy:'item'">
+        <td ng-if="!event.editing">{{event.id}}</td>
+        <td ng-if="!event.editing">{{event.name}}</td>
+        <td ng-if="!event.editing">{{event.kind}}</td>
+        <td ng-if="!event.editing">{{event.date}}</td>
+        <td ng-if="!event.editing">{{event.duration}}</td>
+        <td ng-if="event.editing"><input type="text" ng-model="event.id"></td>
+        <td ng-if="event.editing"><input type="text" ng-model="event.name"></td>
+        <td ng-if="event.editing"><input type="text" ng-model="event.kind"></td>
+        <td ng-if="event.editing"><input type="date" ng-model="event.date"></td>
+        <td ng-if="event.editing"><input type="date" ng-model="event.duration"></td>
+        <td class="button-group">
+          <a ng-if="event.editing" class="ink-button" ng-click="event.editing=!event.editing"><i class="fa fa-reply"></i></a>
+          <a ng-if="!event.editing" class="ink-button" ng-click="event.editing=!event.editing"><i class="fa fa-edit"></i></a>
+          <a ng-if="event.editing" class="ink-button" ng-click="updateEvent(event)"><i class="fa fa-check"></i></a>
+          <a class="ink-button" ng-click="deleteEvent(event)"><i class="fa fa-times"></i></a>
+        </td>
+      </tr>
+      <tr>
+        <td><input type="text" ng-model="newEvent.id"></td>
+        <td><input type="text" ng-model="newEvent.name"></td>
+        <td><input type="text" ng-model="newEvent.kind"></td>
+        <td><input type="date" ng-model="newEvent.date"></td>
+        <td><input type="date" ng-model="newEvent.duration"></td>
+        <td><a class="ink-button" ng-click="addEvent(newEvent)">Add</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Items</h3>
+  <table class="ink-table alternating bordered small">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Min Price</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in items | orderBy:'item'">
+        <td ng-if="!item.editing">{{item.id}}</td>
+        <td ng-if="!item.editing">{{item.name}}</td>
+        <td ng-if="!item.editing">{{item.description}}</td>
+        <td ng-if="!item.editing">{{item.price}}</td>
+        <td ng-if="!item.editing">{{item.minPrice}}</td>
+        <td ng-if="item.editing"><input type="text" ng-model="item.id"></td>
+        <td ng-if="item.editing"><input type="text" ng-model="item.name"></td>
+        <td ng-if="item.editing"><input type="text" ng-model="item.description"></td>
+        <td ng-if="item.editing"><input type="text" ng-model="item.price"></td>
+        <td ng-if="item.editing"><input type="text" ng-model="item.minPrice"></td>
+        <td class="button-group">
+          <a ng-if="item.editing" class="ink-button" ng-click="item.editing=!item.editing"><i class="fa fa-reply"></i></a>
+          <a ng-if="!item.editing" class="ink-button" ng-click="item.editing=!item.editing"><i class="fa fa-edit"></i></a>
+          <a ng-if="item.editing" class="ink-button" ng-click="updateEvent(item)"><i class="fa fa-check"></i></a>
+          <a class="ink-button" ng-click="deleteItem(item)"><i class="fa fa-times"></i></a>
+        </td>
+      </tr>
+      <tr>
+        <td><input type="text" ng-model="newItem.id"></td>
+        <td><input type="text" ng-model="newItem.name"></td>
+        <td><input type="text" ng-model="newItem.description"></td>
+        <td><input type="text" ng-model="newItem.price"></td>
+        <td><input type="text" ng-model="newItem.minPrice"></td>
+        <td><a class="ink-button" ng-click="addItem(newItem)">Add</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

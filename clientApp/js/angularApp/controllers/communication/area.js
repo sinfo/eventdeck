@@ -73,6 +73,9 @@ theToolController.controller("CommunicationAreaController", function ($rootScope
         posted: date,
         updated: date
       }, function (response) {
+        $scope.communicationData.text = "";
+        $scope.communicationData.kind = "";
+        $scope.communicationForm.$setPristine();
         loadCommunications();
       });
     }

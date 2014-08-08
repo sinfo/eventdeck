@@ -56,7 +56,6 @@ function update(request, reply) {
       if (err) {
         return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
       }
-      console.log("Updated chat:", numAffected);
       cb();
     });
   }

@@ -1,0 +1,136 @@
+<div class="ink-grid">
+
+  <div ng-hide="company">
+    <h1>Loading...</h1>
+  </div>
+
+  <div ng-show="company">
+    <div class="column-group horizontal-gutters">
+      <div class="all-100">
+        <h3>Edit {{company.name}} Participations</h3>
+
+        <div class="button-group">
+          <a href="#/company/{{company.id}}" class="ink-button orange"><i class="fa fa-reply"></i> Back</a>
+          <a ng-click="company.participations.push({items:[],editing:true})" class="ink-button blue"><i class="fa fa-asterisk"></i> Add new</a>
+          <a ng-click="submit()" class="ink-button green"><i class="fa fa-check"></i> Save</a>
+        </div>
+
+        <div ng-bind-html="convertURLs(company.history)"></div>
+        <div class="ink-alert basic success" ng-show="message">
+          <!--<button class="ink-dismiss">&times;</button>-->
+          <p><strong>Success!</strong>
+            {{message}}
+          </p>
+        </div>
+        <div class="ink-alert basic error" ng-show="error">
+          <button class="ink-dismiss">&times;</button>
+          <p><strong>Error!</strong>
+            {{error}}
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="all-100">
+      <h6 ng-if="!company.participations[0]">No participations to date</h6>
+      <div class="card" ng-repeat="participation in company.participations" style="overflow:scroll">
+        <div class="content full">
+          <div ng-if="!participation.editing">
+            <h5>
+              {{getEvent(participation.event).name}} 
+              <span class="status" ng-class="participation.status.replace(' ','-').toLowerCase()">{{participation.status}}</span>
+            </h5>
+            <h6 ng-if="participation.member">
+              <a href="#/member/{{participation.member}}">
+              <img ng-if="participation.member" ng-src="https://graph.facebook.com/{{getMember(participation.member).facebook}}/picture"/>
+              <b> {{getMember(participation.member).name}}</b>
+              </a>
+            </h6>
+            <h6>{{participation.kind}}</h6>
+            <div class="small" ng-if="participation.payment">
+              <b>Payment Details</b><br>
+              <span ng-if="participation.payment.price"><b>Price: </b>{{participation.payment.price}}€<br></span>
+              <span ng-if="participation.payment.total"><b>Total: </b>{{participation.payment.total}}€ (incl. IVA)<br></span>
+              <span ng-if="participation.payment.invoice"><b>Invoice: </b>{{participation.payment.invoice}}<br></span>
+              <span ng-if="participation.payment.date"><b>Date: </b>{{participation.payment.date}}<br></span>
+              <span ng-if="participation.payment.status"><b>Status: </b>{{participation.payment.status}}<br></span>
+              <span ng-if="participation.payment.via"><b>Via: </b>{{participation.payment.via}}<br></span>
+            </div>
+            <br>
+            <div class="small" ng-if="participation.items[0]">
+              <b>Items</b><br>
+              <div ng-repeat="item in participation.items">
+                <span ng-if="item.amount"><b>{{item.amount}}</b></span>
+                {{getItem(item.id).name}} 
+                <span ng-if="item.kind"> - <b>{{item.kind}}</b></span> 
+              </div>
+            </div>
+          </div>
+          <div ng-if="participation.editing" class="content full">
+            <select ng-model="participation.event" ng-options="e.id as e.name for e in events | orderBy: 'id'" resettable></select>
+            <select id="status" ng-model="participation.status" ng-options="s for s in statuses | orderBy: 'toString()'" resettable></select>
+            <select ng-model="participation.member" ng-options="m.id as m.name for m in members | orderBy: 'id'" resettable></select>
+            <input type="text" placeholder="Participation Kind" ng-model="participation.kind">
+            <div class="small">
+              <b>Payment Details</b><br>
+              <input type="text" placeholder="Price" ng-model="participation.payment.price">
+              <input type="text" placeholder="Total" ng-model="participation.payment.total">
+              <input type="text" placeholder="Invoice" ng-model="participation.payment.invoice">
+              <input type="text" placeholder="Date" ng-model="participation.payment.date">
+              <input type="text" placeholder="Status" ng-model="participation.payment.status">
+              <input type="text" placeholder="Via" ng-model="participation.payment.via">
+            </div>
+            <br>
+            <div class="small">
+              <b>Items</b><br>
+              <table class="ink-table alternating bordered small"  style="table-layout:fixed;">
+                <thead>
+                  <tr>
+                    <th span="1" style="width: 40px;">Item</th>
+                    <th span="1" style="width: 20px;">Kind</th>
+                    <th span="1" style="width: 20px;">Amount</th>
+                    <th span="1" style="width: 20px;"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in participation.items | orderBy:'item'" style="height:10px; overflow:hidden">
+                    <td style="overflow:hidden" ng-if="!item.editing">{{getItem(item.id).name}}</td>
+                    <td style="overflow:hidden" ng-if="!item.editing">{{item.kind}}</td>
+                    <td style="overflow:hidden" ng-if="!item.editing">{{item.amount}}</td>
+                    <td style="overflow:hidden" ng-if="item.editing">
+                      <select style="width:100%" ng-model="item.id" ng-options="i.id as i.name for i in items | orderBy: 'id'" resettable></select>
+                    </td>
+                    <td style="overflow:hidden" ng-if="item.editing">
+                      <input style="width:100%" type="text" ng-model="item.kind">
+                    </td>
+                    <td style="overflow:hidden" ng-if="item.editing">
+                      <input style="width:100%" type="text" ng-model="item.amount">
+                    </td>
+                    <td style="overflow:hidden">
+                      <a ng-if="!item.editing" ng-click="item.editing=!item.editing"><i class="fa fa-edit"></i></a>
+                      <a ng-if="item.editing" ng-click="item.editing=!item.editing"><i class="fa fa-check"></i></a>
+                      <a ng-if="!item.editing" ng-click="participation.items.splice(participation.items.indexOf(item),1)"><i class="fa fa-times"></i></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><select style="width:100%" ng-model="newItem.id" ng-options="i.id as i.name for i in items | orderBy: 'id'" resettable></select></td>
+                    <td><input style="width:100%" type="text" ng-model="newItem.kind"></td>
+                    <td><input style="width:100%" type="text" ng-model="newItem.amount"></td>
+                    <td><a class="ink-button" ng-click="participation.items.push(newItem); newItem={}">Add</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+            
+          <div class="button-group small">
+            <a ng-if="!participation.editing" class="ink-button red" ng-click="company.participations.splice(company.participations.indexOf(participation),1)"><i class="fa fa-times"></i> Remove</a>
+            <a ng-if="!participation.editing" class="ink-button orange" ng-click="participation.editing=!participation.editing"><i class="fa fa-edit"></i> Edit</a>
+            <a ng-if="participation.editing" class="ink-button green" ng-click="participation.editing=!participation.editing"><i class="fa fa-reply"></i> Back</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
