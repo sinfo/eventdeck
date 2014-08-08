@@ -10,7 +10,7 @@
 
   <div class="all-100 column-group horizontal-gutters">
     <div class="all-50">
-      <form class="ink-form" unsaved-warning-form>
+      <form name="communicationForm" class="ink-form" unsaved-warning-form>
         <div class="control-group">
           <div class="control">
             <select id="kind" ng-model="communicationData.kind" ng-options="s for s in kinds | orderBy: 'toString()'" resettable></select>

@@ -14,10 +14,10 @@
       </div>
     </div>
   <br><br><br>
-    <div class="column-group" ng-repeat="communication in shownCommunications(showOpen) | orderBy: 'posted':'true'">
+    <div class="column-group" ng-repeat="communication in shownCommunications(showOpen) | filter: {event: activeEvent.id} | orderBy: 'posted':'true'">
       <div class="all-30">
-        <speaker-card ng-if="communication.thread.indexOf('speaker')!=-1" speaker-object="getSpeaker(communication.thread.replace('speaker-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></speaker-card>
-        <company-card ng-if="communication.thread.indexOf('company')!=-1" company-object="getCompany(communication.thread.replace('company-',''))" members="{{members}}" me="{{me}}" roles="{{roles}}" comments-array="comments"></company-card>
+        <speaker-card ng-if="communication.thread.indexOf('speaker')!=-1 && currentEvent.name" speaker="getSpeaker(communication.thread.replace('speaker-',''))" event="currentEvent" members="members" me="me" notifications="notifications"></speaker-card>
+        <company-card ng-if="communication.thread.indexOf('company')!=-1 && currentEvent.name" company="getCompany(communication.thread.replace('company-',''))" event="currentEvent" members="members" me="me" notifications="notifications"></company-card>
       </div>
       <div class="all-70">
         <communication communication-object="{{communication}}" members="{{members}}" me="{{me}}" roles="{{roles}}" ></communication>

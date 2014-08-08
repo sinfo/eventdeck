@@ -33,20 +33,20 @@
           <th>Via</th>
         </thead>
 
-        <tr ng-repeat="company in companies  | filter:{participation.payment:''} | orderBy:predicate:reverse" ng-class="getClassFromPaymentStatus(company.participation)">
+        <tr ng-if="getParticipation(company, currentEvent.id).payment" ng-repeat="company in companies | orderBy:predicate:reverse" ng-class="getClassFromPaymentStatus(getParticipation(company, currentEvent.id))">
           <td style="text-align:center; min-width: 300px;">
             <a href="#/company/{{company.id}}">{{company.name}}</a>
           </td>
-          <td style="text-align:center"><a href="#/member/{{company.member}}">{{company.member}}</a></td>
-          <td>€ {{company.participation.payment.price}}</td>
-          <td>€ {{company.participation.payment.iva}}</td>
-          <td>€ {{company.participation.payment.total}}</td>
-          <td>{{company.participation.payment.date}}</td>
-          <td>{{company.participation.payment.invoice}}</td>
+          <td style="text-align:center"><a href="#/member/{{getParticipation(company, currentEvent.id).member}}">{{company.member}}</a></td>
+          <td>€ {{getParticipation(company, currentEvent.id).payment.price}}</td>
+          <td>€ {{getParticipation(company, currentEvent.id).payment.iva}}</td>
+          <td>€ {{getParticipation(company, currentEvent.id).payment.total}}</td>
+          <td>{{getParticipation(company, currentEvent.id).payment.date}}</td>
+          <td>{{getParticipation(company, currentEvent.id).payment.invoice}}</td>
           <td>
-            <select ng-model="company.participation.payment.status" ng-options="s for s in paymentStatuses | orderBy: 'toString()'" ng-change="saveStatus(company)"></select>
+            <select ng-model="getParticipation(company, currentEvent.id).payment.status" ng-options="s for s in paymentStatuses | orderBy: 'toString()'" ng-change="saveStatus(company)"></select>
           </td>
-          <td>{{company.participation.payment.via}}</td>
+          <td>{{getParticipation(company, currentEvent.id).payment.via}}</td>
         </tr>
       </table>
     </div>

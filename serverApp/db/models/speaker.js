@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var speakerSchema = new mongoose.Schema({
   id: {type: String, unique: true},
   name: String,
+  title: { type: String, default: "" },
   status: String,
   description: String,
   img: String,
@@ -10,6 +11,12 @@ var speakerSchema = new mongoose.Schema({
   contacts: String,
   member: String,
   paragraph: String,
+  participations: [{
+    event: String,
+    member: String,
+    status: String,
+    kind: String
+  }],
   updated: { type: Date, default: Date.now }
 });
 

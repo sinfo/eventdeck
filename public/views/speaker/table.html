@@ -23,8 +23,8 @@
         <div class="member-cell">
           <a href="#/member/{{member.id}}"><img ng-show="member.facebook" src="https://graph.facebook.com/{{member.facebook}}/picture"/> {{member.name}}</a>
         </div>
-        <div class="speaker-cell" title="{{speaker.status}}" ng-repeat="speaker in speakers | filter:{member:member.id}:strict" ng-class="speaker.status.replace(' ','-').toLowerCase()">
-          <a href="#/speaker/{{speaker.id}}"><img ng-show="member.facebook" src="{{speaker.img}}"/> {{speaker.name}}</a>
+        <div class="speaker-cell" title="{{getParticipation(speaker, currentEvent.id).status}}" ng-repeat="speaker in speakers | filterEventStatus: currentEvent:{'member': member.id, 'status':''} | orderBy: '-date'" ng-class="getParticipation(speaker, currentEvent.id).status.replace(' ','-').toLowerCase()">
+          <a href="#/speaker/{{speaker.id}}"><img src="{{speaker.img}}"/> {{speaker.name}}</a>
         </div>
         <div ng-if="checkPermission(member)" class="add-new-cell small">
           <form class="ink-form" unsaved-warning-form>
@@ -39,7 +39,7 @@
             <li ng-repeat="speaker in speakers | filter:newSpeaker:strict">
               <a ng-click="addSpeaker(member, speaker); newSpeaker.name='';newSpeaker.id='';">
                 <img ng-src="{{speaker.img}}" style="height: 20px; max-width: 40px"> {{speaker.name}}
-                ( <img ng-src="https://graph.facebook.com/{{getMember(speaker.member).facebook}}/picture" style="height: 20px; max-width: 40px"> )
+                ( <img ng-src="https://graph.facebook.com/{{getMember(getParticipation(speaker, currentEvent.id).member).facebook}}/picture" style="height: 20px; max-width: 40px"> )
               </a>
             </li>
           </ul>

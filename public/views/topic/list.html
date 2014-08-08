@@ -4,7 +4,7 @@
     <topic-card topic="topic" members="members" me="me" roles="roles" tags="topicTags" comments="comments" notifications="notifications" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true' | limitTo: limit"></topic-card>
   </div>
 
-  <div class="awesome-sidebar" ng-hide="hideSidebar || loading" style="padding-bottom:120px;">
+  <div class="awesome-sidebar" ng-hide="hideSidebar" style="padding-bottom:120px;">
     <div class="header">
       <b title="Click to hide sidebar!">{{showOpen ? 'Open' : 'Closed'}} Topics</b>
       <div ng-click="hideSidebar=!hideSidebar" class="push-right hide-button">HIDE</div>
@@ -36,7 +36,7 @@
   </div>
 
   <div class="awesome-sidebar-button" ng-click="hideSidebar=!hideSidebar" title="Click to show sidebar!" ng-show="hideSidebar">
-    <i class="fa fa-3x fa-caret-left"></i> 
+    <i style="font-size:50px" class="fa fa-caret-left"></i> 
   </div>
 
 </div>

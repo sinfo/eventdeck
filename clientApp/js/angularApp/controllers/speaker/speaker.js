@@ -1,7 +1,7 @@
 'use strict';
 
 theToolController
-  .controller('SpeakerController', function ($rootScope, $scope, $window, $routeParams, $sce, SpeakerFactory, MemberFactory, NotificationFactory) {
+  .controller('SpeakerController', function ($rootScope, $scope, $location, $window, $routeParams, $sce, SpeakerFactory, MemberFactory, NotificationFactory) {
     
     $rootScope.update.timeout(runController);
 
@@ -9,13 +9,13 @@ theToolController
 
       $scope.trustSrc = function(src) {
         return $sce.trustAsResourceUrl(src+'#page-body');
-      }
+      };
 
       $scope.convertEmails = function(text) {
         var mailExp = /[\w\.\-]+\@([\w\-]+\.)+[\w]{2,4}(?![^<]*>)/ig;
         var twitterExp = /(^|[^@\w])@(\w{1,15})\b/g;
-        return text.replace(mailExp,"<a href='#/company/"+$routeParams.id+"/confirm?email=$&'>$&</a>").replace(twitterExp,"$1<a href='http://twitter.com/$2' target='_blank'>@$2</a>")
-      }
+        return text.replace(mailExp,'<a href="mailto:$&">$&</a>').replace(twitterExp,'$1<a href="http://twitter.com/$2" target="_blank">@$2</a>');
+      };
 
       $scope.submit = function() {
         var speakerData = this.formData;
@@ -25,16 +25,28 @@ theToolController
             $scope.error = response.error;
           } else {
             $scope.message = response.success;
+            $location.path('speaker/'+speakerData.id);
           }
         });
       };
 
-      $scope.checkPermission = function (speaker) {
+      $scope.deleteSpeaker = function(speaker) {
+        SpeakerFactory.Speaker.delete({ id:speaker.id }, function(response) {
+          if(response.error) {
+            $scope.error = response.error;
+          } else {
+            $scope.message = response.success;
+          }
+          $location.path('speakers/');
+        });
+      };
+
+      $scope.checkPermission = function () {
         var roles = $scope.me.roles.filter(function(o) {
           return o.id == 'development-team' || o.id == 'coordination';
         });
 
-        if(roles.length == 0 && (speaker.status == 'Suggestion' || speaker.status == 'Selected')) {
+        if(roles.length === 0) {
           return false;
         }
 
