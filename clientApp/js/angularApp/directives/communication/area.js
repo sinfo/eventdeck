@@ -9,6 +9,7 @@ theToolDirectives
       controller: 'CommunicationAreaController',
       scope: {
         thread: '@',
+        event: '=',
         membersJson: '@members',
         meJson: '@me',
         rolesJson: '@roles'
