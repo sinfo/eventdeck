@@ -65,12 +65,32 @@
 
       
       <div ng-if="speaker.status && speaker.status!='Suggestion'">
-        <h2 ng-click="hideCommunications=!hideCommunications" title="Click to show/hide communications"> 
-          Communications 
-          <i ng-show="hideCommunications" class="fa fa-chevron-circle-down" style="font-size:30px"></i> 
-          <i ng-hide="hideCommunications" class="fa fa-chevron-circle-up" style="font-size:30px"></i>
-        </h2>
-        <communication-area ng-hide="hideCommunications" thread="{{'speaker-' + speaker.id}}" members="{{members}}" me="{{me}}" roles="{{roles}}"></communication-area>
+        <nav class="ink-navigation">
+          <ul class="menu horizontal">
+            <li>
+              <h2 ng-click="hideCommunications=!hideCommunications" title="Click to show/hide communications"> 
+                Communications
+              </h2>
+            </li>
+            <li>
+              <a class="logoPlaceholder">
+                <i class="fa fa-circle-o-notch fa-spin" ng-if="!communicationEvent.name"></i> 
+                {{communicationEvent.name || 'Loading...'}} 
+                <i class="fa fa-caret-down" ng-if="communicationEvent.name"></i>
+              </a>
+              <ul class="submenu">
+                <li ng-repeat="event in events | orderBy: ['kind', '-date']">
+                    <a ng-click="setCommunicationEvent(event)">{{event.name}}</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <i ng-show="hideCommunications" class="fa fa-chevron-circle-down" style="font-size:30px"></i> 
+              <i ng-hide="hideCommunications" class="fa fa-chevron-circle-up" style="font-size:30px"></i>
+            </li>
+          </ul>
+        </nav>
+        <communication-area ng-hide="hideCommunications" thread="{{'speaker-' + speaker.id}}" event="communicationEvent" members="{{members}}" me="{{me}}" roles="{{roles}}"></communication-area>
       </div>
 
       <h2 ng-click="hideComments=!hideComments" title="Click to show/hide comments"> 

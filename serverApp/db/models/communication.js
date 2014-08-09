@@ -19,8 +19,9 @@ communicationSchema.statics.del = function (id, cb) {
   this.remove({ _id: id }, cb);
 };
 
-communicationSchema.statics.findByThread = function (id, cb) {
-  this.find({ thread: id }, cb);
+communicationSchema.statics.findByThread = function (request, cb) {
+  console.log(request);
+  this.find(request, cb);
 };
 
 communicationSchema.statics.findByThreadLast = function (id, cb) {

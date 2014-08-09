@@ -28,12 +28,14 @@ theToolController.controller("CommunicationAreaController", function ($rootScope
 
       var pageId = $scope.thread.substring($scope.thread.indexOf("-") + 1);
 
+      console.log($scope.event.id);
+
       if ($scope.thread.indexOf("company-") != -1) {
-        CommunicationFactory.Company.getAll({id: pageId}, gotCommunications);
+        CommunicationFactory.Company.getAll({id: pageId, event: $scope.event.id}, gotCommunications);
         $scope.kinds=['Email To', 'Email From', 'Meeting', 'Phone Call'];
       }
       else if ($scope.thread.indexOf("speaker-") != -1) {
-        CommunicationFactory.Speaker.getAll({id: pageId}, gotCommunications);
+        CommunicationFactory.Speaker.getAll({id: pageId, event: $scope.event.id}, gotCommunications);
       }
 
       function gotCommunications(communications) {
