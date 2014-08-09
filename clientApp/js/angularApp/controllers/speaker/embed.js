@@ -22,7 +22,6 @@ theToolController.controller('SpeakerEmbedController', function ($rootScope, $sc
       var notifications = $scope.notifications.filter(function(o) {
         return o.thread == thread && o.unread.indexOf($scope.me.id) != -1;
       });
-
       return notifications;
     };
 
