@@ -17,7 +17,7 @@ function list(request, reply) {
     return;
   }
 
-  Communication.findByThread(request.params, function (err, result) {
+  Communication.findByThread(request.params.thread, function (err, result) {
     if (err) {
       reply({error: "Error getting communications from '" + request.params.thread + "'."});
     }
