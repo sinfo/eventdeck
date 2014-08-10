@@ -37,9 +37,7 @@ theToolController.controller("CommunicationAreaController", function ($rootScope
       }
 
       function gotCommunications(communications) {
-        $scope.communications = communications.filter(function(o){
-          return o.event == $scope.event.id;
-        });
+        $scope.communications = communications;
 
         $scope.loading = false;
 
