@@ -289,7 +289,7 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
 
   $scope.getUnreadNotifications = function (thread) {
     return $scope.unreadNotifications.filter(function(o) {
-      return o.thread == thread && o.unread.indexOf($scope.me.id) != -1;
+      return o.thread == thread;
     })[0];
   };
 
