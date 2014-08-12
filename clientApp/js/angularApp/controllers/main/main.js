@@ -20,9 +20,10 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
   $scope.companies = [];
   $scope.speakers = [];
   $scope.topics = [];
-  $scope.notifications = [];
+  $scope.targetNotifications = [];
+  $scope.unreadNotifications = [];
 
-  $scope.notificationsInfo = {
+  $scope.targetInfo = {
     number: 0,
     text: " Loading..."
   };
@@ -184,23 +185,27 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
 
   $scope.update = function() {
     NotificationFactory.Notification.getAll(function (response) {
-      $scope.notifications = [];
-      $scope.notificationsInfo.number = 0;
+      $scope.targetNotifications = [];
+      $scope.unreadNotifications = [];
+      $scope.targetInfo.number = 0;
 
       for (var i = 0; i < response.length; i++) {
         if (response[i].targets.indexOf($scope.me.id) != -1) {
           if (response[i].unread.indexOf($scope.me.id) != -1) {
-            $scope.notificationsInfo.number++;
+            $scope.targetInfo.number++;
           }
-          $scope.notifications.unshift(response[i]);
+          $scope.targetNotifications.unshift(response[i]);
+        }
+        if (response[i].unread.indexOf($scope.me.id) != -1) {
+          $scope.unreadNotifications.unshift(response[i]);
         }
       }
 
-      if ($scope.notificationsInfo.number == 0) {
-        $scope.notificationsInfo.text = " No Notifications";
+      if ($scope.targetInfo.number == 0) {
+        $scope.targetInfo.text = " No Notifications";
       }
       else {
-        $scope.notificationsInfo.text = " " + $scope.notificationsInfo.number + " Notification" + ($scope.notificationsInfo.number > 1 ? "s" : "");
+        $scope.targetInfo.text = " " + $scope.targetInfo.number + " Notification" + ($scope.targetInfo.number > 1 ? "s" : "");
       }
     });
   }
@@ -283,7 +288,7 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
   };
 
   $scope.getUnreadNotifications = function (thread) {
-    return $scope.notifications.filter(function(o) {
+    return $scope.unreadNotifications.filter(function(o) {
       return o.thread == thread && o.unread.indexOf($scope.me.id) != -1;
     })[0];
   };
