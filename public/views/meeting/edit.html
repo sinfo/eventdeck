@@ -64,7 +64,7 @@
       <div class="all-100">
         <h1 ng-show="loading">Loading...</h1>
         <div ng-if="!topic.deleted" ng-repeat="topic in meeting.topics | orderBy:posted">
-          <topic topic="topic" members="members" me="me" roles="roles" tags="topicTags" notifications="notifications"></topic>
+          <topic topic="topic" members="members" me="me" roles="roles" tags="topicTags" notifications="unreadNotifications"></topic>
           <a class="ink-button red small" ng-click="removeTopic(topic)"><i class="fa fa-chevron-circle-up"></i> Remove topic without deleting it</a>
           <br><br>
         </div>

@@ -47,6 +47,6 @@ config(["$routeProvider", function($routeProvider) {
   $routeProvider.when("/chat/:id"                  , {templateUrl: "views/chat/view.html",             controller: "ChatController"});
   $routeProvider.when("/topics"                    , {templateUrl: "views/topic/list.html",            controller: "TopicsController"});
   $routeProvider.when("/topic/:id"                 , {templateUrl: "views/topic/view.html",            controller: "TopicController"});
-  $routeProvider.when("/communications"            , {templateUrl: "views/communication/list.html",    controller: "CommunicationsController"});
+  $routeProvider.when("/communications/:kind"      , {templateUrl: "views/communication/list.html",    controller: "CommunicationsController"});
   $routeProvider.otherwise({redirectTo: "/"});
 }]);
