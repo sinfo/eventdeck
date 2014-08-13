@@ -81,8 +81,8 @@
           </li>
         </ul>
         <ul ng-if="me._id" class="menu horizontal push-right hide-medium hide-small hide-tiny">
-          <li style="{{notificationsInfo.number == 0 ? 'border-color: FireBrick;' : 'border-color: #e11d21;'}}">
-            <a style="{{notificationsInfo.number == 0 ? 'color: FireBrick;' : 'color: #e11d21;'}}"><span><i class="fa fa-bell"></i> {{notificationsInfo.text}}</span></a>
+          <li style="{{targetInfo.number == 0 ? 'border-color: FireBrick;' : 'border-color: #e11d21;'}}">
+            <a style="{{targetInfo.number == 0 ? 'color: FireBrick;' : 'color: #e11d21;'}}"><span><i class="fa fa-bell"></i> {{targetInfo.text}}</span></a>
             <ul class="submenu" style="max-height: 400px; overflow: auto;">
               <li ng-repeat="notification in notifications | orderBy: 'posted':true" style="width: 600px;">
                 <a style="{{notification.unread.indexOf(me.id) != -1 ? 'font-weight: 700;' : ''}}" title="{{notification.posted | date:'medium'}}" href="#/{{notification.thread.replace('-','/')}}">
@@ -103,13 +103,14 @@
           </li>
           <li style="border-color: #009800;"><a style="color: #009800;" href="#/speakers"><i class="fa fa-graduation-cap"></i> Speakers</a>
             <ul class="submenu">
-              <li><a href="#/communications/" style="width:200px"><i class="fa fa-comments"></i> Communications</a></li>
+              <li><a href="#/communications/speaker/" style="width:200px"><i class="fa fa-comments"></i> Communications</a></li>
               <li><a href="#/speakers/table/" style="width:200px"><i class="fa fa-table"></i> By Member Table</a></li>
             <li><a href="#/speaker"><i class="fa fa-plus"></i> Create New</a></li>
             </ul>
           </li>
           <li style="border-color: #207de5;"><a style="color: #207de5;" href="#/companies"><i class="fa fa-building-o"></i> Companies</a>
             <ul class="submenu">
+              <li><a href="#/communications/company/" style="width:200px"><i class="fa fa-comments"></i> Communications</a></li>
               <li><a href="#/companies/table/" style="width:200px"><i class="fa fa-table"></i> By Member Table</a></li>
               <li><a href="#/companies/budget/" style="width:200px"><i class="fa fa-money"></i> Budget</a></li>
             <li><a href="#/company"><i class="fa fa-plus"></i> Create New</a></li>

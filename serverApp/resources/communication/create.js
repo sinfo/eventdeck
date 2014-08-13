@@ -28,7 +28,6 @@ function create(request, reply) {
             console.log(result.error);
           }
           else{
-            console.log('Communication reminders started!');
             async.each(result, function(member, memberDone){
               if(targets.indexOf(member.id) == -1){
                 targets.push(member.id);

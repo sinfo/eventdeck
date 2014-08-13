@@ -25,7 +25,7 @@
       </div>
       <div class="all-100 column-group horizontal-gutters" ng-show="comment.editing">
         <div class="all-50">
-          <form class="ink-form" ng-submit="submitComment()" unsaved-warning-form>
+          <form name="commentForm" class="ink-form" ng-submit="submitComment()" unsaved-warning-form>
             <div class="control-group">
               <div class="control">
                 <textarea ng-model="comment.buffer" type="text" rows="2" style="font-size: 15px;" resettable></textarea>

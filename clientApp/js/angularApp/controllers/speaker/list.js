@@ -14,6 +14,7 @@ theToolController
       $scope.speakerPredicate = 'updated';
       $scope.reverse = 'true';
       $scope.filteredSpeakers = [];
+      $scope.searchSpeakers = {unassigned: true, unassignedOnly: false};
 
 
       

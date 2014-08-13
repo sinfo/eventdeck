@@ -1,7 +1,7 @@
 <div class="ink-grid">
 
   <div class="all-100" infinite-scroll="scroll()">
-    <speaker-card speaker="speaker" event="currentEvent" ng-if="currentEvent.name" notifications="notifications" me="me" members="members" ng-repeat="speaker in speakers | filterEventStatus:currentEvent:searchSpeakers | orderBy:speakerPredicate:reverse | limitTo: limit"></speaker-card>
+    <speaker-card speaker="speaker" event="currentEvent" ng-if="currentEvent.name" notifications="unreadNotifications" me="me" members="members" ng-repeat="speaker in speakers | filterEventStatus:currentEvent:searchSpeakers | orderBy:speakerPredicate:reverse | limitTo: limit"></speaker-card>
   </div>
 
   <div class="awesome-sidebar" ng-hide="hideSidebar">
@@ -11,8 +11,12 @@
     </div>
 
     <div class="button-group small">
-      <p class="ink-button {{searchSpeakers.member == undefined ? 'current' : ''}}" ng-click="searchSpeakers={}; setSearchStatus();">All</p>
-      <p class="ink-button {{searchSpeakers.member == me.id ? 'current' : ''}}" ng-click="searchSpeakers.member=me.id">Assigned to me</p>
+      <p class="ink-button {{searchSpeakers.member == undefined && !searchSpeakers.unassignedOnly &&  searchSpeakers.unassigned ? 'current' : ''}}" ng-click="searchSpeakers={unassigned : true};">All</p>
+      <p class="ink-button {{searchSpeakers.member == undefined && !searchSpeakers.unassignedOnly && !searchSpeakers.unassigned ? 'current' : ''}}" ng-click="searchSpeakers={}; setSearchStatus();">Assigned</p>
+    </div>
+    <div class="button-group small">
+      <p class="ink-button {{searchSpeakers.member== me.id   && !searchSpeakers.unassignedOnly ? 'current' : ''}}" ng-click="searchSpeakers.member=me.id; searchSpeakers.unassigned = false; searchSpeakers.unassignedOnly = false;">Assigned to me</p>
+      <p class="ink-button {{searchSpeakers.unassignedOnly  ? 'current' : ''}}" ng-click="searchSpeakers.unassignedOnly = true">Unassigned only</p>
     </div>
 
     <br>
