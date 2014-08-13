@@ -8,10 +8,12 @@ angular.module('theTool.filters', [])
   }])
   .filter('filterEventStatus', function(){
     return function(objs, event, search) {
-      //console.log(status);
       var result = objs;
-      if(event) {
-        result = objs.filter(function(o) {
+      result = objs.filter(function(o) {
+        if(o.participations.length <= 0){
+          return search.unassigned || search.unassignedOnly;
+        }
+        if(event && !search.unassignedOnly) {
           return o.participations.filter(function(p) {
             if(search.status && search.status !== '' && search.member && search.member !== '') {
               return p.event === event.id && p.status === search.status && p.member === search.member;
@@ -23,8 +25,8 @@ angular.module('theTool.filters', [])
               return p.event === event.id;
             }
           }).length > 0;
-        });
-      }
+        }
+      });
       return result;
     };
   })
