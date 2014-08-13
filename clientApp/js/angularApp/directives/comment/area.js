@@ -8,7 +8,9 @@ theToolDirectives
       templateUrl: 'views/comment/area.html',
       controller: 'CommentAreaController',
       scope: {
-        thread: '@'
+        thread: '@',
+        me: '=',
+        members: '='
       }
     };
-  })
+  });
