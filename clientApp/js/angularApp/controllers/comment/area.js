@@ -12,13 +12,7 @@ theToolController.controller("CommentAreaController", function ($rootScope, $sco
       markdown: ""
     };
 
-    MemberFactory.Member.get({id: "me"}, function (me) {
-      $scope.me = me;
-    });
-
-    MemberFactory.Member.getAll(function (members) {
-      $scope.members = members;
-    });
+    console.log($scope.me, $scope.members);
 
     loadComments();
 
@@ -66,7 +60,7 @@ theToolController.controller("CommentAreaController", function ($rootScope, $sco
         $scope.commentForm.$setPristine();
         loadComments();
       });
-    }
+    };
 
     $scope.saveComment = function (comment) {
       if (comment.buffer === "") {
@@ -78,7 +72,7 @@ theToolController.controller("CommentAreaController", function ($rootScope, $sco
       comment.updated = Date.now();
 
       CommentFactory.Comment.update({id: comment._id}, comment, function (response) {
-        $scope.comment.buffer = "";
+        comment.buffer = "";
         comment.editing = false;
       });
     }
