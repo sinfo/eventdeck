@@ -98,7 +98,7 @@
         <i ng-show="hideComments" class="fa fa-chevron-circle-down" style="font-size:30px"></i> 
         <i ng-hide="hideComments" class="fa fa-chevron-circle-up" style="font-size:30px"></i>
       </h2>
-      <comment-area ng-hide="hideComments" thread="{{'speaker-' + speaker.id}}"></comment-area>
+      <comment-area ng-hide="hideComments" thread="{{'speaker-' + speaker.id}}" me="me" members="members"></comment-area>
 
     </div>
   </div>

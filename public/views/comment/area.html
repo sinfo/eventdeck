@@ -3,7 +3,7 @@
     <h3 class="all-100" ng-show="loading">Loading...</h3>
 
     <h3 class="all-100" ng-show="!loading && comments.length === 0">No comments posted yet.</h3>
-    <div class="all-100 activity" style="background: #eee; border-radius: 5px;" ng-hide="loading" ng-repeat="comment in comments | orderBy: 'posted':false">
+    <div class="all-100 activity" ng-hide="loading" ng-repeat="comment in comments | orderBy: 'posted':false">
       <div class="all-100">
         <div class="all-50">
           <a href="#/member/{{comment.member}}">
@@ -12,8 +12,8 @@
           </a>
           <small title="{{formatDate(comment.posted)}}">({{timeSince(comment.posted)}})</small>
         </div>
-        <div class="all-50 align-right">
-          <small>
+        <div class="all-50 push-right">
+          <small class="button-group push-right">
             <a class="ink-button green" ng-click="quoteComment(comment)">Quote</a>
             <a class="ink-button orange" ng-show="checkPermission(comment)" ng-click="comment.editing = true; comment.buffer = comment.markdown">Edit</a>
             <a class="ink-button red" ng-show="checkPermission(comment)" ng-click="deleteComment(comment)">Delete</a>
