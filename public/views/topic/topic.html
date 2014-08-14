@@ -41,7 +41,7 @@
 
       <div ng-if="topic.showComments">
         <br>
-        <comment-area thread="{{'topic-' + topic._id}}"></comment-area>
+        <comment-area thread="{{'topic-' + topic._id}}" me="me" members="members"></comment-area>
       </div>
     </div>
 
