@@ -31,7 +31,6 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
   var factoriesReady = 0;
 
   $scope.setCurrentEvent = function(event) {
-    console.log(event);
     $scope.currentEvent = {};
     setTimeout(function(){$scope.currentEvent = event;},10);
   }
