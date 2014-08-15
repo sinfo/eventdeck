@@ -1,7 +1,7 @@
 <div class="ink-grid">
 
   <div class="all-100" infinite-scroll="scroll()">
-    <speaker-card speaker="speaker" event="currentEvent" ng-if="currentEvent.name" notifications="unreadNotifications" me="me" members="members" ng-repeat="speaker in speakers | filterEventStatus:currentEvent:searchSpeakers | orderBy:speakerPredicate:reverse | limitTo: limit"></speaker-card>
+    <speaker-card speaker="speaker" event="currentEvent" ng-if="currentEvent.name" notifications="unreadNotifications" me="me" members="members" ng-repeat="speaker in speakers | filterEventStatus:currentEvent:searchSpeakers | orderBy:['-' + (unreadFirst ? 'unread' : ''), (reverse ? '-': '') + speakerPredicate] | limitTo: limit"></speaker-card>
   </div>
 
   <div class="awesome-sidebar" ng-hide="hideSidebar">
@@ -32,6 +32,7 @@
 
     <h6>Order by</h6>
     <div>
+      <div class="ink-button small all-100 {{unreadFirst ? 'current' : ''}}" ng-click="unreadFirst = !unreadFirst">Unread First</div><br>
       <div class="ink-button blue small all-100" ng-click="speakerPredicate='name'; reverse=!reverse">Name <i class="fa fa-arrows-v"></i></div><br>
       <div class="ink-button blue small all-100" ng-click="speakerPredicate='updated'; reverse=!reverse">Updated <i class="fa fa-arrows-v"></i></div><br>
     </div>

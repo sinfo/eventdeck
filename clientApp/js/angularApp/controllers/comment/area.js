@@ -12,8 +12,6 @@ theToolController.controller("CommentAreaController", function ($rootScope, $sco
       markdown: ""
     };
 
-    console.log($scope.me, $scope.members);
-
     loadComments();
 
     function loadComments() {

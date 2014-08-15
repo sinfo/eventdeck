@@ -5,6 +5,7 @@
     </div>
 
     <div class="content">
+      <div class="unread" ng-show="company.unread">UNREAD!</div>
       <div class="name">{{company.name}}</div> 
       <div ng-if="participation" class="status" ng-class="participation.status.replace(' ','-').toLowerCase()">{{participation.status}}</div> 
       <a ng-if="participation" class="member" href="#/member/{{participation.member}}">

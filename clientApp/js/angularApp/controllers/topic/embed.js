@@ -224,6 +224,8 @@ theToolController.controller("TopicEmbedController", function ($rootScope, $scop
       return notifications;
     };
 
+     $scope.topic.unread = $scope.getUnreadNotifications('topic-'+ $scope.topic._id).length > 0;
+
     $scope.timeSince =function (date) {
       date = new Date(date);
       var seconds = Math.floor((Date.now() - date) / 1000);

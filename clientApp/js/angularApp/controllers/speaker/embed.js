@@ -25,6 +25,8 @@ theToolController.controller('SpeakerEmbedController', function ($rootScope, $sc
       return notifications;
     };
 
+    $scope.speaker.unread = $scope.getUnreadNotifications('speaker-' + $scope.speaker.id).length > 0;
+
     $scope.getMember = function (memberId) {
       var member = $scope.members.filter(function(o) {
         return o.id == memberId;
