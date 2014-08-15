@@ -37,6 +37,7 @@ theToolController
       
       $scope.companyPredicate = 'updated';
       $scope.reverse = 'true';
+      $scope.unreadFirst = true;
 
       CompanyFactory.Company.getAll(function(response) {
         $scope.predicate = 'updated';

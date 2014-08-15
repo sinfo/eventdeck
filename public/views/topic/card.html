@@ -5,7 +5,7 @@
           {{topic.kind}} 
           <span class="closed" ng-if="topic.closed"> Closed!</span>
           <span class="duedate" ng-show="topic.show.duedate && topic.duedate">{{timeSince(topic.duedate)}}</span>
-          <span class="unread" ng-show="getUnreadNotifications('topic-'+topic._id).length > 0">UNREAD!</span>
+          <span class="unread" ng-show="topic.unread">UNREAD!</span>
         </div> 
         
         <div class="text" ng-bind-html="topic.text | linky"></div>
