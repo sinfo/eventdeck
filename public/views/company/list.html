@@ -1,7 +1,7 @@
 <div class="ink-grid">
 
   <div class="all-100" infinite-scroll="scroll()">
-    <company-card company="company" event="currentEvent" ng-if="currentEvent.name" notifications="unreadNotifications" me="me" members="members" ng-repeat="company in companies | filterEventStatus:currentEvent:searchCompanies | orderBy:companyPredicate:reverse | limitTo: limit"></company-card>
+    <company-card company="company" event="currentEvent" ng-if="currentEvent.name" notifications="unreadNotifications" me="me" members="members" ng-repeat="company in companies | filterEventStatus:currentEvent:searchCompanies | orderBy:['-unread', (reverse ? '-': '') + companyPredicate] | limitTo: limit"></company-card>
   </div>
 
   <div class="awesome-sidebar" ng-hide="hideSidebar">
