@@ -14,6 +14,8 @@ theToolController.controller("TopicsController", function ($rootScope, $scope, $
 
     $scope.searchTopics = {};
 
+    $scope.unreadFirst = true;
+
     TopicFactory.Topic.getAll(gotTopics);
 
     function gotTopics (topics) {
