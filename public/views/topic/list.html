@@ -1,7 +1,7 @@
 <div class="ink-grid">
 
   <div class="all-100" infinite-scroll="scroll()">
-    <topic-card topic="topic" members="members" me="me" roles="roles" tags="topicTags" comments="comments" notifications="unreadNotifications" ng-repeat="topic in shownTopics(showOpen) | orderBy: 'posted':'true' | limitTo: limit"></topic-card>
+    <topic-card topic="topic" members="members" me="me" roles="roles" tags="topicTags" comments="comments" notifications="unreadNotifications" ng-repeat="topic in shownTopics(showOpen) | orderBy: ['-unread' ,'-posted'] | limitTo: limit"></topic-card>
   </div>
 
   <div class="awesome-sidebar" ng-hide="hideSidebar" style="padding-bottom:120px;">
