@@ -1,4 +1,4 @@
-var members = require('./mambers');
+var members = require('./members');
 
 exports = module.exports = parse;
 
