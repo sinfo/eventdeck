@@ -1,1 +1,1 @@
-exports.parse = require('/parse');
+exports.parse = require('./parse');
