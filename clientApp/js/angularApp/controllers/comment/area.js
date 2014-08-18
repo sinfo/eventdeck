@@ -20,16 +20,30 @@ theToolController.controller("CommentAreaController", function ($rootScope, $sco
         return;
       }
 
-      var pageId = $scope.thread.substring($scope.thread.indexOf("-") + 1);
+      var threadId;
+      var threadType;
 
-      if ($scope.thread.indexOf("company-") != -1) {
-        CommentFactory.Company.getAll({id: pageId}, gotComments);
+      if($scope.subthread && $scope.subthread != '') {
+        threadType = $scope.subthread.split('-')[0];
+        threadId = $scope.subthread.substring($scope.subthread.indexOf("-") + 1);
+      } else {
+        threadType = $scope.thread.split('-')[0];
+        threadId = $scope.thread.substring($scope.thread.indexOf("-") + 1);
       }
-      else if ($scope.thread.indexOf("speaker-") != -1) {
-        CommentFactory.Speaker.getAll({id: pageId}, gotComments);
-      }
-      else if ($scope.thread.indexOf("topic-") != -1) {
-        CommentFactory.Topic.getAll({id: pageId}, gotComments);
+
+      switch(threadType) {
+        case "company": 
+          CommentFactory.Company.getAll({id: threadId}, gotComments);
+          break;
+        case "speaker": 
+          CommentFactory.Speaker.getAll({id: threadId}, gotComments);
+          break;
+        case "topic": 
+          CommentFactory.Topic.getAll({id: threadId}, gotComments);
+          break;
+        case "communication": 
+          CommentFactory.Communication.getAll({id: threadId}, gotComments);
+          break;
       }
 
       function gotComments(comments) {
@@ -48,6 +62,7 @@ theToolController.controller("CommentAreaController", function ($rootScope, $sco
       var date = Date.now();
       CommentFactory.Comment.create({
         thread: $scope.thread,
+        subthread: $scope.subthread,
         member: $scope.me.id,
         markdown: $scope.commentData.markdown,
         html: $scope.convertMarkdownToHtml($scope.commentData.markdown),
