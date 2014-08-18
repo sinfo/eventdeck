@@ -10,7 +10,7 @@ function parse(text, thread, objectId, memberId) {
     membersFound[i] = membersFound[i].replace('@','');
   }
 
-  if(membersFound.length > 0) {
+  if(membersFound && membersFound.length > 0) {
     notification.notify(memberId, thread, 'mentioned you', objectId, membersFound);
   }
 }

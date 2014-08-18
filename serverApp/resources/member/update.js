@@ -7,6 +7,8 @@ function update(request, reply) {
 
   var member = request.payload;
 
+  console.log('trying to update',request.params.id, 'with', member);
+
   if (member.facebook) {
     Request('http://graph.facebook.com/' + member.facebook, {
       method: 'GET',

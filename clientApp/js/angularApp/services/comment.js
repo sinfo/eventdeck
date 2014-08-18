@@ -17,6 +17,9 @@ theToolServices
       }),
       Topic: $resource(url_prefix+'/api/topic/:id/comments', null, {
         'getAll': {method: 'GET', isArray: true}
+      }),
+      Communication: $resource(url_prefix+'/api/communication/:id/comments', null, {
+        'getAll': {method: 'GET', isArray: true}
       })
     }
   })
