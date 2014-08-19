@@ -7,8 +7,7 @@ theToolServices
         'getAll': {method: 'GET', isArray: true},
         'update': {method: 'PUT'},
         'create': {method: 'POST'},
-        'delete': {method: 'DELETE'},
-        'approve': {method: 'POST'}
+        'delete': {method: 'DELETE'}
       }),
       Company: $resource(url_prefix+'/api/company/:id/communications', null, {
         'getAll': {method: 'GET', isArray: true}
