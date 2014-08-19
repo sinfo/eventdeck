@@ -48,15 +48,6 @@ server.route({
 });
 
 server.route({
-  method: 'POST',
-  path: '/api/communication/{id}',
-  config: {
-    handler: communication.approve,
-    auth: true
-  }
-});
-
-server.route({
   method: 'GET',
   path: '/api/communication/{id}/comments',
   config: {

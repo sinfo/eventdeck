@@ -40,9 +40,10 @@ theToolController.controller("CommunicationEmbedController", function ($rootScop
       });
     };
 
-    $scope.approveCommunication = function (communication) {
-      CommunicationFactory.Communication.approve({id: communication._id}, null, function (response) {
+    $scope.setCommunicationStatus = function (communication, status) {
+      CommunicationFactory.Communication.update({id: communication._id}, {status: status}, function (response) {
         $scope.communication.approved = true;
+        $scope.communication.status = status;
       });
     };
 
