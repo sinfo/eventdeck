@@ -8,10 +8,9 @@ theToolDirectives
       templateUrl: 'views/communication/communication.html',
       controller: 'CommunicationEmbedController',
       scope: {
-        communicationJson: '@communicationObject',
-        membersJson: '@members',
-        meJson: '@me',
-        rolesJson: '@roles'
+        communication: '=communicationObject',
+        members: '=',
+        me: '='
       }
     };
   })
