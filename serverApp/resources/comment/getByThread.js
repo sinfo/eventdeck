@@ -15,6 +15,9 @@ function list(request, reply) {
   else if (request.path.indexOf('/api/topic/') != -1) {
     threadId = 'topic-' + request.params.id;
   }
+  else if (request.path.indexOf('/api/communication/') != -1) {
+    threadId = 'communication-' + request.params.id;
+  }
   else {
     reply({error: "API path unknown."});
     return;
