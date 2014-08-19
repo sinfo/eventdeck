@@ -14,7 +14,8 @@
           <span ng-show="showComments">Hide Comments</span>
           <span ng-hide="showComments">Show Comments</span>
         </a>
-        <a class="ink-button green" ng-show="(communication.kind=='Email To' || communication.kind=='Inital Email Paragraph') && checkPermission(communication) && communication.member !== me.id" ng-click="approveCommunication(communication)">Approve</a>
+        <a class="ink-button green" ng-show="(communication.kind=='Email To' || communication.kind=='Inital Email Paragraph') && checkPermission(communication) && communication.member !== me.id && communication.status != 'reviewed'" ng-click="setCommunicationStatus(communication, 'reviewed')">Review</a>
+        <a class="ink-button green" ng-show="(communication.kind=='Email To' || communication.kind=='Inital Email Paragraph') && checkPermission(communication) && communication.member !== me.id && communication.status != 'approved'" ng-click="setCommunicationStatus(communication, 'approved')">Approve</a>
         <a class="ink-button blue" ng-show="communication.kind.indexOf('Paragraph')!=-1" href="/api/speaker/{{communication.thread.split('speaker-')[1]}}/sendInitialEmail" target="_blank">Preview</a>
         <a class="ink-button orange" ng-show="checkPermission(communication)" ng-click="communication.editing = true; communication.buffer = communication.text">Edit</a>
         <a class="ink-button red" ng-show="checkPermission(communication)" ng-click="deleteCommunication(communication)">Delete</a>
@@ -27,8 +28,9 @@
     <h6>
       <b>{{communication.kind}}</b>
       <span ng-show="communication.kind=='Email To' || communication.kind=='Inital Email Paragraph'">
-        <span class="ink-label green" ng-show="communication.approved">Approved!</span>
-        <span class="ink-label yellow" ng-hide="communication.approved">Not Approved Yet!</span>
+        <span class="ink-label green" ng-show="communication.status == 'approved'">Approved!</span>
+        <span class="ink-label yellow" ng-show="communication.status == 'reviewed'">Not Approved!</span>
+        <span class="ink-label yellow" ng-show="communication.status == 'pending-review'">Not Reviewed Yet!</span>
       </span>
     </h6>
     </a>

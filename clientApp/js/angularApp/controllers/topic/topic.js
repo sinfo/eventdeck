@@ -19,11 +19,7 @@ theToolController.controller('TopicController', function ($rootScope, $scope, $r
 
       $scope.topic.showComments = true;
 
-      NotificationFactory.Topic.getAll({id: $routeParams.id}, function(getData) {
-        $scope.topic.notifications = getData;
-
-        $scope.loading = false;
-      });
+      $scope.loading = false;
     });
   }
 

@@ -8,10 +8,8 @@ module.exports = create;
 function create(request, reply) {
 
   var communication = request.payload;
-  if(communication.kind === 'Email To' || communication.kind=== 'Inital Email Paragraph'){
-    communication.approved = false;
-  }
-
+  
+  communication.status = 'pending-review';
   communication.member = request.auth.credentials.id;
 
   var newCommunication = new Communication(communication);
