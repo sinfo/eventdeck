@@ -1,21 +1,21 @@
 <div ng-hide="communication.deleted" class="all-100 activity">
 
   <div class="all-100">
-    <div class="all-50">
+    <div class="all-40">
       <a href="#/member/{{communication.member}}">
         <img ng-src="{{'https://graph.facebook.com/' + getMember(communication.member).facebook + '/picture'}}"/>
         <small>{{getMember(communication.member).name}}</small>
       </a>
       <small title="{{formatDate(communication.posted)}}">({{timeSince(communication.posted)}})</small>
     </div>
-    <div class="all-50 align-right">
+    <div class="all-60 align-right small">
       <small class="button-group push-right">
         <a class="ink-button" ng-click="showComments=!showComments" title="Click to show/hide comments"> 
           <span ng-show="showComments">Hide Comments</span>
           <span ng-hide="showComments">Show Comments</span>
         </a>
         <a class="ink-button green" ng-show="(communication.kind=='Email To' || communication.kind=='Inital Email Paragraph') && checkPermission(communication) && communication.member !== me.id && communication.status != 'reviewed'" ng-click="setCommunicationStatus(communication, 'reviewed')">Review</a>
-        <a class="ink-button green" ng-show="(communication.kind=='Email To' || communication.kind=='Inital Email Paragraph') && checkPermission(communication) && communication.member !== me.id && communication.status != 'approved'" ng-click="setCommunicationStatus(communication, 'approved')">Approve</a>
+        <a class="ink-button green" ng-show="checkPermission(communication) && communication.member !== me.id && communication.status != 'approved'" ng-click="setCommunicationStatus(communication, 'approved')">Approve</a>
         <a class="ink-button blue" ng-show="communication.kind.indexOf('Paragraph')!=-1" href="/api/speaker/{{communication.thread.split('speaker-')[1]}}/sendInitialEmail" target="_blank">Preview</a>
         <a class="ink-button orange" ng-show="checkPermission(communication)" ng-click="communication.editing = true; communication.buffer = communication.text">Edit</a>
         <a class="ink-button red" ng-show="checkPermission(communication)" ng-click="deleteCommunication(communication)">Delete</a>

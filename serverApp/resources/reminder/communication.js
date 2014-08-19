@@ -50,7 +50,7 @@ function remind(remindDays, done) {
 
                 communication.getByThreadLast(thread, function(result){
                   if(today.getTime() - result.posted.getTime() > oneDay * remindDays){
-                    if(result.approved === undefined || result.approved){
+                    if(result.status === undefined || result.status === 'approved'){
                       console.log(thread);
                       notify('toolbot', thread, 'reminder: communications have been innactive for more than ' + remindDays + ' days.', null, result.member);
                     }

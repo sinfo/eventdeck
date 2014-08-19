@@ -10,7 +10,7 @@ function update(request, reply) {
 
   var savedCommunication;
 
-  var notificationText;
+  var notificationText = 'updated a communication';
 
   async.series([
     getCommunication,
@@ -38,9 +38,12 @@ function update(request, reply) {
       return o.id == 'development-team' || o.id == 'coordination';
     });
 
-    if(roles.length == 0) {
-      delete(communication.status);
-      return cb();
+    if(communication.status != savedCommunication.status) {
+      if(roles.length == 0) {
+        delete(communication.status);
+        return cb('You\'re not allowed to approve or review communications');
+      }
+      notificationText = 'changed communication status'
     }
 
     cb();
@@ -49,22 +52,20 @@ function update(request, reply) {
   function saveCommunication(cb) {
     Communication.update({_id: request.params.id}, communication, function(err) {
       if (err) {
-        cb(err);
+        return cb(err);
       }
-      else {
-        cb();
-      }
+      
+      cb();
     });
   }
 
   function done(err) {
     if (err) {
-      reply({error: "There was an error updating the communication."});
+      return reply({error: "There was an error updating the communication."});
     }
-    else {
-      notification.notify(request.auth.credentials.id, savedCommunication.thread, 'updated a communication', savedCommunication._id, [savedCommunication.member]);
-      
-      reply({success: 'Communication updated.'});
-    }
+    
+    notification.notify(request.auth.credentials.id, savedCommunication.thread, notificationText, savedCommunication._id, [savedCommunication.member]);
+    
+    reply({success: 'Communication updated.'});
   }
 }

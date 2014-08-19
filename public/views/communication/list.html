@@ -20,7 +20,7 @@
         <company-card ng-if="communication.thread.indexOf('company')!=-1" company="getCompany(communication.thread.replace('company-',''))" event="currentEvent" members="members" me="me" notifications="unreadNotifications"></company-card>
       </div>
       <div class="all-70">
-        <communication communication-object="{{communication}}" members="{{members}}" me="{{me}}" roles="{{roles}}" ></communication>
+        <communication communication-object="communication" members="members" me="me"></communication>
       </div>
     </div>
   </div>
