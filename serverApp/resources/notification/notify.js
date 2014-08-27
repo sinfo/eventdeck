@@ -26,11 +26,12 @@ function notify(memberId, thread, description, objectId, subscribers) {
     Member.findSubscribers(thread, gotMembers);
 
     function gotMembers(err, result) {
-      if (err)
+      if (err) {
         return cb(err);
+      }
 
       for(var member in result) {
-        if(targets.indexOf(result[member].id) != -1){
+        if(targets.indexOf(result[member].id) == -1){
           targets.push(result[member].id);
         }
       }

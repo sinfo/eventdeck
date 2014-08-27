@@ -45,10 +45,13 @@
           <br>
           <div>
             <h3>Last Changes</h3>
-            <ul ng-if="company.notifications" class="unstyled">
-              <li ng-repeat="notification in company.notifications | orderBy: 'posted':true | limitTo: 5">
-              <img title="{{notification.member}}" style="width:25px" ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture"/>
-              {{getMember(notification.member).name}} {{notification.description}} <small>{{timeSince(notification.posted)}}</small>.</li>
+            <ul class="unstyled">
+              <li ng-repeat="notification in company.notifications | orderBy: 'posted':true | limitTo: 10">
+                <a href="#/member/{{notification.member}}" title="{{getMember(notification.member).name}}">
+                  <img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:25px"/>
+                </a>
+                {{notification.description}} <small>{{timeSince(notification.posted)}}</small>.
+              </li>
             </ul>
           </div>
         </div>

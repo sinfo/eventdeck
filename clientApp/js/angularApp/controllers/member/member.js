@@ -31,15 +31,17 @@ theToolController.controller("MemberController", function ($rootScope, $scope, $
         return setTimeout(getMemberStuff, 1000);
       }
 
-      $scope.member.companies = $scope.companies.filter(function(e) {
+      $scope.memberStuff = {};
+
+      $scope.memberStuff.companies = $scope.companies.filter(function(e) {
         return e.member == $scope.member.id;
       })
 
-      $scope.member.speakers = $scope.speakers.filter(function(e) {
+      $scope.memberStuff.speakers = $scope.speakers.filter(function(e) {
         return e.member == $scope.member.id;
       })
 
-      $scope.member.comments = $scope.comments.filter(function(e) {
+      $scope.memberStuff.comments = $scope.comments.filter(function(e) {
         return e.member == $scope.member.id;
       })
     }
