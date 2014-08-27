@@ -20,7 +20,7 @@
                 <img ng-src="https://graph.facebook.com/{{getMember(message.member).facebook}}/picture" style="width:25px"/>
               </a>
               <a href="#/{{message.source.replace('-','/')}}">
-                <small title="{{timeSince(message.date)}}">{{message.text}}</small>
+                <small title="{{timeSince(message.date)}}">{{message.text}} <small>{{timeSince(message.date)}}</small></small>
               </a>
             </div>
             <topic-card ng-if="message.source.indexOf('topic') !== -1" topic="getTopic(message.source.replace('topic-', ''))" members="members" me="me" roles="roles" tags="topicTags" comments="comments" notifications="unreadNotifications"></topic-card>

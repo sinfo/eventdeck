@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var commentSchema = new mongoose.Schema({
   thread: String,
+  subthread: String,
   member: String,
   markdown: String,
   html: String,
@@ -18,7 +19,7 @@ commentSchema.statics.del = function (id, cb) {
 };
 
 commentSchema.statics.findByThread = function (id, cb) {
-  this.find({ thread: id }, cb);
+  this.find({ $or: [{ thread: id }, { subthread: id } ] }, cb);
 };
 
 commentSchema.statics.findByMember = function (id, cb) {
@@ -30,7 +31,7 @@ commentSchema.statics.findAll = function (cb) {
 };
 
 commentSchema.statics.removeByThread = function (id, cb) {
-  this.remove({ thread: id }, cb);
+  this.remove({ $or: [{ thread: id }, { subthread: id } ] }, cb);
 };
 
 
