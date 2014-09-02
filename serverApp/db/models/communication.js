@@ -6,6 +6,7 @@ var communicationSchema = new mongoose.Schema({
   kind: String,
   member: String,
   text: String,
+  status: String,
   approved: Boolean,
   posted: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now }

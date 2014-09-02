@@ -173,6 +173,8 @@ theToolController.controller("TopicEmbedController", function ($rootScope, $scop
     $scope.save = function (topic) {
       $scope.error = "";
 
+      console.log(topic);
+
       TopicFactory.Topic.update({id: topic._id}, topic, function (response) {
         if (response.success) {
           topic.editing = !topic.editing;
@@ -216,12 +218,15 @@ theToolController.controller("TopicEmbedController", function ($rootScope, $scop
     };
 
     $scope.getUnreadNotifications = function (thread) {
+      console.log(notifications);
       var notifications = $scope.notifications.filter(function(o) {
-        return o.thread == thread && o.unread.indexOf($scope.me.id) != -1;
+        return o.thread == thread;
       });
 
       return notifications;
     };
+
+     $scope.topic.unread = $scope.getUnreadNotifications('topic-'+ $scope.topic._id).length > 0;
 
     $scope.timeSince =function (date) {
       date = new Date(date);

@@ -11,13 +11,8 @@ theToolController.controller("CommunicationEmbedController", function ($rootScop
     $scope.success     = "";
     $scope.error       = "";
 
-    $scope.communication = JSON.parse($scope.communicationJson);
     $scope.communication.editing = false;
     $scope.communication.deleted = false;
-
-    $scope.me = JSON.parse($scope.meJson);
-    $scope.members = JSON.parse($scope.membersJson);
-    $scope.roles = JSON.parse($scope.rolesJson);
 
 
     $scope.saveCommunication = function (communication) {
@@ -30,7 +25,6 @@ theToolController.controller("CommunicationEmbedController", function ($rootScop
 
       CommunicationFactory.Communication.update({id: communication._id}, communication, function (response) {
         communication.editing = false;
-        communication.approved = false;
       });
     }
 
@@ -40,9 +34,9 @@ theToolController.controller("CommunicationEmbedController", function ($rootScop
       });
     };
 
-    $scope.approveCommunication = function (communication) {
-      CommunicationFactory.Communication.approve({id: communication._id}, null, function (response) {
-        $scope.communication.approved = true;
+    $scope.setCommunicationStatus = function (communication, status) {
+      CommunicationFactory.Communication.update({id: communication._id}, {status: status}, function (response) {
+        $scope.communication.status = status;
       });
     };
 

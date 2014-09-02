@@ -56,24 +56,29 @@
 
           <div ng-if="speaker.notifications">
             <h3>Last Changes</h3>
-            <ul>
-              <li ng-repeat="notification in speaker.notifications | orderBy: 'posted':true | limitTo: 5">{{notification.description}} <small>{{timeSince(notification.posted)}}</small>.</li>
+            <ul class="unstyled">
+              <li ng-repeat="notification in speaker.notifications | orderBy: 'posted':true | limitTo: 10">
+                <a href="#/member/{{notification.member}}" title="{{getMember(notification.member).name}}">
+                  <img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:25px"/>
+                </a>
+                {{notification.description}} <small>{{timeSince(notification.posted)}}</small>.
+              </li>
             </ul>
           </div>
         </div>
       </div>
 
       
-      <div ng-if="speaker.status && speaker.status!='Suggestion'">
+      <div ng-if="speaker.participations.length">
         <nav class="ink-navigation">
           <ul class="menu horizontal">
             <li>
-              <h2 ng-click="hideCommunications=!hideCommunications" title="Click to show/hide communications"> 
+              <h2> 
                 Communications
               </h2>
             </li>
             <li>
-              <a class="logoPlaceholder">
+              <a>
                 <i class="fa fa-circle-o-notch fa-spin" ng-if="!communicationEvent.name"></i> 
                 {{communicationEvent.name || 'Loading...'}} 
                 <i class="fa fa-caret-down" ng-if="communicationEvent.name"></i>
@@ -85,8 +90,10 @@
               </ul>
             </li>
             <li>
-              <i ng-show="hideCommunications" class="fa fa-chevron-circle-down" style="font-size:30px"></i> 
-              <i ng-hide="hideCommunications" class="fa fa-chevron-circle-up" style="font-size:30px"></i>
+              <span ng-click="hideCommunications=!hideCommunications" title="Click to show/hide communications"> 
+                <i ng-show="hideCommunications" class="fa fa-chevron-circle-down" style="font-size:30px"></i>
+                <i ng-hide="hideCommunications" class="fa fa-chevron-circle-up" style="font-size:30px"></i>
+              </span>
             </li>
           </ul>
         </nav>
@@ -98,7 +105,7 @@
         <i ng-show="hideComments" class="fa fa-chevron-circle-down" style="font-size:30px"></i> 
         <i ng-hide="hideComments" class="fa fa-chevron-circle-up" style="font-size:30px"></i>
       </h2>
-      <comment-area ng-hide="hideComments" thread="{{'speaker-' + speaker.id}}"></comment-area>
+      <comment-area ng-hide="hideComments" thread="{{'speaker-' + speaker.id}}" me="me" members="members"></comment-area>
 
     </div>
   </div>

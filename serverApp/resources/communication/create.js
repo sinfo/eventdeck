@@ -8,10 +8,8 @@ module.exports = create;
 function create(request, reply) {
 
   var communication = request.payload;
-  if(communication.kind === 'Email To' || communication.kind=== 'Inital Email Paragraph'){
-    communication.approved = false;
-  }
-
+  
+  communication.status = 'pending-review';
   communication.member = request.auth.credentials.id;
 
   var newCommunication = new Communication(communication);
@@ -28,7 +26,6 @@ function create(request, reply) {
             console.log(result.error);
           }
           else{
-            console.log('Communication reminders started!');
             async.each(result, function(member, memberDone){
               if(targets.indexOf(member.id) == -1){
                 targets.push(member.id);

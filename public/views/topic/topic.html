@@ -14,8 +14,8 @@
         <b>[{{topic.kind}}]</b> <span ng-bind-html="topic.text | linky"></span><i ng-if="topic.closed"> [Closed!]</i><i ng-show="topic.show.duedate && topic.duedate"> [{{timeSince(topic.duedate)}}]</i>
       </h5></a>
 
-      <div ng-if="topic.show.poll" class="ink-button small" ng-click="topic.show.pollOptions = !topic.show.pollOptions"><i class="fa fa-chevron-{{topic.show.pollOptions ? 'up': 'down'}}"></i> {{topic.show.pollOptions ? 'Hide' : 'Show'}} poll options</div>
-      <form ng-if="topic.show.pollOptions">
+      <!--<div ng-if="topic.show.poll" class="ink-button small" ng-click="topic.show.pollOptions = !topic.show.pollOptions"><i class="fa fa-chevron-{{topic.show.pollOptions ? 'up': 'down'}}"></i> {{topic.show.pollOptions ? 'Hide' : 'Show'}} poll options</div>-->
+      <form ng-if="topic.show.poll">
         <div class="control-group">
           <ul class="control unstyled">
             <li ng-repeat="option in topic.poll.options">
@@ -41,7 +41,7 @@
 
       <div ng-if="topic.showComments">
         <br>
-        <comment-area thread="{{'topic-' + topic._id}}"></comment-area>
+        <comment-area thread="{{'topic-' + topic._id}}" me="me" members="members"></comment-area>
       </div>
     </div>
 
