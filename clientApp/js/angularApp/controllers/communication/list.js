@@ -1,7 +1,7 @@
 'use strict';
 
 theToolController
-  .controller('CommunicationsController', function ($rootScope, $scope, $http, CommunicationFactory) {
+  .controller('CommunicationsController', function ($routeParams, $rootScope, $scope, $http, CommunicationFactory) {
     $rootScope.update.timeout(runController);
 
     function runController(){
@@ -17,7 +17,7 @@ theToolController
 
       $scope.shownCommunications = function (showOpen) {
         return $scope.communications.filter(function(o) {
-          return (showOpen ? !o.approved : o.approved);
+          return (showOpen ? !(o.status=='approved') : o.status=='approved') && $routeParams.kind == o.thread.split('-')[0];
         });
       };
     }

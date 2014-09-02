@@ -4,7 +4,7 @@ var Request = require('request');
 module.exports = update;
 
 function update(request, reply) {
-
+  
   var member = request.payload;
 
   if (member.facebook) {
@@ -27,8 +27,10 @@ function update(request, reply) {
   }
 
   function save(memberId, member) {
+
     Member.update({id: memberId}, member, function (err) {
       if (err) {
+        console.log(err);
         reply({error: 'There was an error updating the member.'});
       }
       else {

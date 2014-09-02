@@ -20,10 +20,12 @@ theToolController.controller('SpeakerEmbedController', function ($rootScope, $sc
 
     $scope.getUnreadNotifications = function (thread) {
       var notifications = $scope.notifications.filter(function(o) {
-        return o.thread == thread && o.unread.indexOf($scope.me.id) != -1;
+        return o.thread == thread;
       });
       return notifications;
     };
+
+    $scope.speaker.unread = $scope.getUnreadNotifications('speaker-' + $scope.speaker.id).length > 0;
 
     $scope.getMember = function (memberId) {
       var member = $scope.members.filter(function(o) {

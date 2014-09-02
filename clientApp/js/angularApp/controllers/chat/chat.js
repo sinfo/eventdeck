@@ -8,8 +8,6 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
 
     $scope.error = {};
 
-    $scope.hideSidebar = true;
-
     $scope.updating = false;
     $scope.loading  = true;
     $scope.auth     = false;

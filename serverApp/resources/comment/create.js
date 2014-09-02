@@ -1,6 +1,7 @@
 var Comment      = require('./../../db/models/comment.js');
 var markdown     = require('markdown').markdown;
 var notification = require('./../notification');
+var parser       = require('./../parser');
 var getTargets   = require('./../member').getTargetsByThread;
 
 module.exports = create;
@@ -26,6 +27,8 @@ function create(request, reply) {
 
         notification.notify(comment.member, comment.thread, 'posted a new comment', newComment._id, targets);
       });
+
+      parser.parse(comment.markdown, comment.thread, newComment._id, comment.member);
 
       reply({success: "Comment created."});
     }

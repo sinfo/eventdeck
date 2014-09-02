@@ -4,7 +4,7 @@
 
     <h3 class="all-100" ng-show="!loading && communications.length === 0">No communications posted yet.</h3>
     <div ng-if="communications" >
-      <communication communication-object="{{communication}}" members="{{members}}" me="{{me}}" roles="{{roles}}" ng-repeat="communication in communications | orderBy: 'posted':'true'"></communication>
+      <communication communication-object="communication" members="members" me="me" ng-repeat="communication in communications | filter:{event: event.id} | orderBy: 'posted':'true'"></communication>
     </div>
   </div>
 

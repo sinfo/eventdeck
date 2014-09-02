@@ -1,5 +1,6 @@
 var server = require('./../index.js').hapi;
 var communication = require('./../resources/communication');
+var comment = require('./../resources/comment');
 
 server.route({
   method: 'GET',
@@ -47,10 +48,10 @@ server.route({
 });
 
 server.route({
-  method: 'POST',
-  path: '/api/communication/{id}',
+  method: 'GET',
+  path: '/api/communication/{id}/comments',
   config: {
-    handler: communication.approve,
+    handler: comment.getByThread,
     auth: true
   }
 });
