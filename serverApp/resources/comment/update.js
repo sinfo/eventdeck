@@ -1,6 +1,7 @@
 var async    = require('async');
-var Comment  = require('./../../db/models/comment.js');
-var markdown = require( "markdown" ).markdown;
+var Comment  = require('../../db/models/comment.js');
+var markdown = require('markdown').markdown;
+var log = require('../../helpers/logger');
 
 module.exports = update;
 
@@ -21,16 +22,15 @@ function update(request, reply) {
 
     function gotComment(err, result) {
       if (err) {
-        cb(err);
+        return cb(err);
       }
-      else if (result && result.length > 0) {
-        savedComment = result[0];
-        comment.updated = Date.now();
-        cb();
+      if (!result || result.length < 1) {
+        return cb('Could not find the comment.');
       }
-      else {
-        cb("Could not find the comment.");
-      }
+      
+      savedComment = result[0];
+      comment.updated = Date.now();
+      cb();
     }
   }
 
@@ -39,7 +39,7 @@ function update(request, reply) {
       return o.id == 'development-team' || o.id == 'coordination';
     });
 
-    if(roles.length == 0 && savedComment.member != request.auth.credentials.id) {
+    if(roles.length === 0 && savedComment.member != request.auth.credentials.id) {
       return cb('You don\'t have permissions for this.');
     }
     
@@ -48,27 +48,28 @@ function update(request, reply) {
 
   function saveComment(cb) {
     if (savedComment.member != request.auth.credentials.id) {
-      return cb("You're not the author.");
+      return cb('You\'re not the author.');
     }
 
     comment.html = markdown.toHTML(request.payload.markdown);
 
     Comment.update({_id: request.params.id}, comment, function(err) {
       if (err) {
-        cb(err);
+        return cb(err);
       }
-      else {
-        cb();
-      }
+      
+      cb();
     });
   }
 
   function done(err) {
     if (err) {
-      reply({error: "There was an error updating the comment."});
+      log.error({err: err, username: request.auth.credentials.id}, '[comment] error updating comment');
+      return reply({error: 'There was an error updating the comment.'});
     }
-    else {
-      reply({success: "Comment updated."});
-    }
+    
+    log.info('[comment] %s updated a comment on %s', request.auth.credentials.id, savedComment.thread);
+  
+    reply({success: 'Comment updated.'});
   }
 }
