@@ -1,6 +1,7 @@
 var async = require('async');
 var Comment = require('./../../db/models/comment.js');
 var Notification = require('./../../db/models/notification.js');
+var log = require('../../helpers/logger');
 
 module.exports = remove;
 
@@ -19,15 +20,14 @@ function remove(request, reply) {
 
     function gotComment(err, result) {
       if (err) {
-        cb(err);
+        return cb(err);
       }
-      else if (result && result.length > 0) {
-        savedComment = result[0];
-        cb();
+      if (!result || result.length < 1) {
+        return cb('Could not find the comment with id '+ request.params.id);
       }
-      else {
-        cb('Could not find the comment.');
-      }
+
+      savedComment = result[0];
+      cb();
     }
   }
 
@@ -36,7 +36,7 @@ function remove(request, reply) {
       return o.id == 'development-team' || o.id == 'coordination';
     });
 
-    if(roles.length == 0 && savedComment.member != request.auth.credentials.id) {
+    if(roles.length === 0 && savedComment.member != request.auth.credentials.id) {
       return cb('You don\'t have permissions for this.');
     }
     
@@ -46,26 +46,27 @@ function remove(request, reply) {
   function deleteComment(cb) {
     Comment.del(request.params.id, function(err) {
       if (err) {
-        cb('Error on the database');
+        return cb(err);
       }
-      else {
-        Notification.removeBySource(request.params.id, function (err, result) {
-          if(err) { 
-            console.log(err); 
-          }
 
-          cb();
-        });
-      }
+      Notification.removeBySource(request.params.id, function (err) {
+        if(err) { 
+          return cb(err); 
+        }
+
+        cb();
+      });
     });
   }
 
   function done(err) {
     if (err) {
-      reply({error: err});
+      log.error({err: err, username: request.auth.credentials.id}, '[comment] error deleting comment');
+      return reply({error: 'Error deleting comment'});
     }
-    else {
-      reply({success: 'Comment deleted.'});
-    }
+    
+    log.info('[comment] %s deleted a comment on %s', request.auth.credentials.id, savedComment.thread);
+
+    reply({success: 'Comment deleted.'});
   }
 }
