@@ -17,7 +17,7 @@ theToolController
         $scope.error = null;
         $scope.message = null;
 
-        console.log("send email to ", $scope.email, " from ", $scope.companyId);
+        //console.log("send email to ", $scope.email, " from ", $scope.companyId);
 
         EmailFactory.Company.send({ id: $scope.companyId }, { email: $scope.email }, function(response) {
           $scope.loading = false;

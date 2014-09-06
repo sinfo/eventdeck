@@ -2,7 +2,7 @@
 
 theToolController
   .controller('SpeakerEmailController', function ($rootScope, $scope, $http, $routeParams, $sce, $location, EmailFactory) {
-    
+
     $rootScope.update.timeout(runController);
 
     function runController(){
@@ -18,7 +18,7 @@ theToolController
         $scope.error = null;
         $scope.message = null;
 
-        console.log("send email to ", $scope.email, " from ", $scope.speakerId);
+        //console.log("send email to ", $scope.email, " from ", $scope.speakerId);
 
         EmailFactory.Speaker.send({ id: $scope.speakerId }, { email: $scope.email }, function(response) {
           $scope.loading = false;

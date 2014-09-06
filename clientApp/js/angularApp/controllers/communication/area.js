@@ -65,7 +65,7 @@ theToolController.controller("CommunicationAreaController", function ($rootScope
 
       var date = Date.now();
 
-      console.log($scope.event);
+      //console.log($scope.event);
 
       CommunicationFactory.Communication.create({
         thread: $scope.thread,

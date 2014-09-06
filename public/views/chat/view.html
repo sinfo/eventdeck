@@ -44,14 +44,16 @@
     </a></h6>
 
     <div ng-repeat="user in online | orderBy:['-on', 'name']" style="margin-bottom:10px;">
-      <a href="#/member/{{user.member}}"><img ng-src="https://graph.facebook.com/{{getMember(user.member).facebook}}/picture" style="width:25px;"/></a>
-      <small>{{getMember(user.member).name}}</small>
+      <a href="#/member/{{user.member}}">
+        <img ng-src="https://graph.facebook.com/{{getMember(user.member).facebook}}/picture" style="width:25px;"/>
+        <small>{{getMember(user.member).name}}</small>
+      </a>
       <small ng-if="user.on" style="font-size:xx-small; color: LimeGreen">Online</small>
     </div>
   </div>
 
   <div class="awesome-sidebar-button" ng-click="hideSidebar=!hideSidebar" title="Click to show sidebar!" ng-show="hideSidebar">
-    <i class="fa fa-3x fa-caret-left"></i> 
+    <i class="fa fa-3x fa-caret-left"></i>
   </div>
 
   <div class="awesome-bottombar" ng-hide="loading">

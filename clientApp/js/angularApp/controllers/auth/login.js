@@ -13,7 +13,7 @@ theToolController.controller("LoginController", function ($rootScope, $scope, $r
   $scope.loading = false;
   $scope.showIdInput = true;
   $scope.showCodeInput = false;
-  
+
   if($scope.me.id) {
     //$location.path('/');
     $window.location.assign('/');
@@ -66,16 +66,16 @@ theToolController.controller("LoginController", function ($rootScope, $scope, $r
         }).
         error(function(data, status, headers, config) {
           $scope.loading = false;
-          console.log("ERROR", data);
+          //console.log("ERROR", data);
         });
     }
   };
 
   $scope.sendEmail = function (memberId) {
     $scope.loading = true;
-    $scope.loginInfo = "Sending email...";  
+    $scope.loginInfo = "Sending email...";
     $scope.showIdInput = false;
-    console.log("Sending email...");
+    //console.log("Sending email...");
 
     $http.get(url_prefix + '/api/login/' + memberId).
       success(function(data, status, headers, config) {
@@ -88,19 +88,19 @@ theToolController.controller("LoginController", function ($rootScope, $scope, $r
         $scope.loading = false;
         setInfo("Email sent!");
         $scope.showCodeInput = true;
-        console.log("Email sent!")
+        //console.log("Email sent!")
       }).
       error(function(data, status, headers, config) {
         $scope.loading = false;
         setInfo("There was an error...");
         $scope.showIdInput = true;
-        console.log("ERROR", data);
+        //console.log("ERROR", data);
       });
   }
 
   $scope.submitCode = function (memberId, memberCode) {
     $scope.loading = true;
-    $scope.loginInfo = "Verifying code...";  
+    $scope.loginInfo = "Verifying code...";
     $scope.showCodeInput = false;
 
     $http.get(url_prefix + '/api/login/' + memberId + '/' + memberCode).
