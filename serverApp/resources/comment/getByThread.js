@@ -1,4 +1,5 @@
 var Comment = require('./../../db/models/comment.js');
+var log = require('../../helpers/logger');
 
 module.exports = list;
 
@@ -19,17 +20,17 @@ function list(request, reply) {
     threadId = 'communication-' + request.params.id;
   }
   else {
-    reply({error: "API path unknown."});
-    return;
+    log.error({err: 'API path unknown.', username: request.auth.credentials.id}, '[comment] error getting comments for', request.params.id);
+    return reply({error: 'API path unknown.'});
   }
 
   Comment.findByThread(threadId, function(err, result) {
     if (err) {
-      reply({error: "There was an error getting the comments from '" + threadId + "'."});
+      log.error({err: err, username: request.auth.credentials.id}, '[comment] error getting comments for', request.params.id);
+      return reply({error: 'There was an error getting the comments from \'' + threadId + '\'.'});
     }
-    else {
-      reply(result);
-    }
+    
+    reply(result);
   });
 
 }
