@@ -1,7 +1,7 @@
 "use strict";
 
 theToolController.controller("AdminController", function ($rootScope, $scope, EventFactory, ItemFactory) {
-  
+
   $rootScope.update.timeout(runController);
 
   function runController(){
@@ -19,7 +19,7 @@ theToolController.controller("AdminController", function ($rootScope, $scope, Ev
         if(response.error) {
           $scope.error = response.error;
         }
-        
+
         EventFactory.Event.getAll(function (response) {
           $scope.events = response;
         });
@@ -31,7 +31,7 @@ theToolController.controller("AdminController", function ($rootScope, $scope, Ev
         if(response.error) {
           $scope.error = response.error;
         }
-        
+
         ItemFactory.Item.getAll(function (response) {
           $scope.items = response;
         });
@@ -41,10 +41,10 @@ theToolController.controller("AdminController", function ($rootScope, $scope, Ev
     $scope.updateEvent = function (event) {
       EventFactory.Event.update({id: event.id}, event, function (response) {
         if(response.error) {
-          console.log(response.error);
+          //console.log(response.error);
           return $scope.error = response.error;
         }
-        event.editing = false;  
+        event.editing = false;
       });
     };
 
@@ -62,7 +62,7 @@ theToolController.controller("AdminController", function ($rootScope, $scope, Ev
         if(response.error) {
           $scope.error = response.error;
         }
-        
+
         EventFactory.Event.getAll(function (response) {
           $scope.events = response;
         });
@@ -74,7 +74,7 @@ theToolController.controller("AdminController", function ($rootScope, $scope, Ev
         if(response.error) {
           $scope.error = response.error;
         }
-        
+
         ItemFactory.Item.getAll(function (response) {
           $scope.items = response;
         });

@@ -162,10 +162,10 @@ theToolController.controller("TopicEmbedController", function ($rootScope, $scop
 
       TopicFactory.Topic.update({id: updatedTopic._id}, updatedTopic, function (response) {
         if (response.error) {
-          console.log("There was an error. Please contact the Dev Team and give them the details about the error.");
+          //console.log("There was an error. Please contact the Dev Team and give them the details about the error.");
         }
         else if (response.success) {
-          //console.log(response.success);
+          ////console.log(response.success);
         }
       });
     };
@@ -173,7 +173,7 @@ theToolController.controller("TopicEmbedController", function ($rootScope, $scop
     $scope.save = function (topic) {
       $scope.error = "";
 
-      console.log(topic);
+      //console.log(topic);
 
       TopicFactory.Topic.update({id: topic._id}, topic, function (response) {
         if (response.success) {
@@ -218,7 +218,7 @@ theToolController.controller("TopicEmbedController", function ($rootScope, $scop
     };
 
     $scope.getUnreadNotifications = function (thread) {
-      console.log(notifications);
+      //console.log(notifications);
       var notifications = $scope.notifications.filter(function(o) {
         return o.thread == thread;
       });

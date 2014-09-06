@@ -2,7 +2,7 @@
 
 theToolController
   .controller('CompaniesController', function ($rootScope, $scope, $http, $sce, CompanyFactory) {
-    
+
     $rootScope.update.timeout(runController);
 
     function runController(){
@@ -24,17 +24,17 @@ theToolController
         if(!participation.payment.status) { return 'grey'; }
         var status = participation.payment.status.toLowerCase();
 
-        if(status.indexOf('pago') != -1 || status.indexOf('emitido') != -1 || status.indexOf('recibo enviado') != -1) { return 'lime'; } 
+        if(status.indexOf('pago') != -1 || status.indexOf('emitido') != -1 || status.indexOf('recibo enviado') != -1) { return 'lime'; }
         else if(status.indexOf('enviado') != -1) { return 'orange'; }
         else { return 'grey'; }
       };
 
       $scope.paymentStatuses = ['Emitido', 'Recibo Enviado', 'Pago', 'Enviado'];
-    
+
       $scope.limit = 20;
 
       $scope.statuses = ['Suggestion','Contacted','In Conversations','In Negotiations','Closed Deal','Rejected','Give Up'];
-      
+
       $scope.companyPredicate = 'updated';
       $scope.reverse = 'true';
       $scope.unreadFirst = true;
@@ -49,7 +49,7 @@ theToolController
         if ($scope.limit <= $scope.companies.length)
           $scope.limit += 8;
       };
-      
+
       $scope.checkPermission = function (member) {
         var roles = $scope.me.roles.filter(function(o) {
           return o.id == 'development-team' || o.id == 'coordination';
@@ -63,9 +63,9 @@ theToolController
       };
 
       $scope.addCompany = function(member, newCompany) {
-        console.log(newCompany);
+        //console.log(newCompany);
         var companyData = newCompany;
-        
+
         if(newCompany.id) {
           var participation = $scope.getParticipation(companyData, $scope.currentEvent.id);
           if(participation) {
@@ -79,7 +79,7 @@ theToolController
           }
           CompanyFactory.Company.update({ id: companyData.id }, { participations: companyData.participations }, function(response) {
             if(response.error) {
-              console.log(response);
+              //console.log(response);
               $scope.error = response.error;
             } else {
               $scope.message = response.success;
@@ -113,4 +113,4 @@ theToolController
 
 
 });
-  
+
