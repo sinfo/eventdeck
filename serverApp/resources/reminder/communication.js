@@ -1,9 +1,10 @@
 var async         = require('async');
-var Notification  = require('./../../db/models/notification');
-var notify        = require('./../notification').notify;
-var communication = require('./../communication');
-var Speaker       = require('./../speaker');
-var Member        = require('./../member');
+var Notification  = require('../../db/models/notification');
+var notify        = require('../notification').notify;
+var communication = require('../communication');
+var Speaker       = require('../speaker');
+var Member        = require('../member');
+var log           = require('../../helpers/logger');
 
 module.exports = remind;
 
@@ -22,7 +23,7 @@ function remind(remindDays, done) {
       console.log(result.error);
     }
     else{
-      console.log('Communication reminders started!');
+      log.info('Communication reminders started!');
       async.each(result, function(member, memberDone){
         coordination.push(member.id);
         memberDone();
@@ -38,7 +39,7 @@ function remind(remindDays, done) {
       async.each(threads, function(thread, threadDone) {
 
         Notification.findByThreadAndDate(thread, week, function(err, notifications) {
-          if(!err && notifications.length == 0) {
+          if(!err && notifications.length === 0) {
             var speakerId = thread.split('speaker-')[1];
 
             Speaker.get({params: {id: speakerId}, auth: {credentials: {id: 'toolbot'}}}, function(speaker){
@@ -63,16 +64,16 @@ function remind(remindDays, done) {
                 });
               }
               else{
-                console.log('Speaker ' + speaker.id + ' status: ' + speaker.status + ' not reminded.');
+                log.debug('Speaker ' + speaker.id + ' status: ' + speaker.status + ' not reminded.');
                 threadDone(); 
               }
             });
           } else {
-            console.log(thread + ' already notified in the past week.');
+            log.debug(thread + ' already notified in the past week.');
             threadDone();
           }
         });
       }, done);
-    })
+    });
   }
 }
