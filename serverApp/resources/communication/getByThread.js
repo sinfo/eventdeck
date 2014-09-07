@@ -1,28 +1,30 @@
-var Communication = require('./../../db/models/communication.js');
+var Communication = require('../../db/models/communication.js');
+var log = require('../../helpers/logger');
 
 module.exports = list;
 
 function list(request, reply) {
 
-  console.log(request.params);
+  var threadId;
 
   if (request.path.indexOf('/api/company/') != -1) {
-    request.params.thread = 'company-' + request.params.id;
+    threadId = 'company-' + request.params.id;
   }
   else if (request.path.indexOf('/api/speaker/') != -1) {
-    request.params.thread = 'speaker-' + request.params.id;
+    threadId = 'speaker-' + request.params.id;
   }
   else {
-    reply({error: "API path unknown."});
-    return;
+    log.error({err: 'API path unknown.', username: request.auth.credentials.id}, '[communication] error getting communications for', request.params.id);
+    return reply({error: 'API path unknown.'});
   }
 
-  Communication.findByThread(request.params.thread, function (err, result) {
+  Communication.findByThread(threadId, function(err, result) {
     if (err) {
-      reply({error: "Error getting communications from '" + request.params.thread + "'."});
+      log.error({err: err, username: request.auth.credentials.id}, '[communication] error getting communications for', request.params.id);
+      return reply({error: 'There was an error getting the communications from \'' + threadId + '\'.'});
     }
-    else {
-      reply(result);
-    }
+    
+    reply(result);
   });
+
 }

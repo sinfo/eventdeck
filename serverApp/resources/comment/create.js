@@ -31,7 +31,7 @@ function create(request, reply) {
 
     parser.parse(comment.markdown, comment.thread, newComment._id, comment.member);
 
-    log.info('[comment] %s created new comment on %s', comment.member, comment.thread, comment);
+    log.info('[comment] %s created new comment on %s', comment.member, comment.thread);
 
     reply({success: 'Comment created.'});
   });

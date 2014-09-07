@@ -1,6 +1,7 @@
 var async = require('async');
 var Communication  = require('./../../db/models/communication.js');
 var notification  = require('./../notification');
+var log = require('../../helpers/logger');
 
 module.exports = update;
 
@@ -22,14 +23,13 @@ function update(request, reply) {
     Communication.findById(request.params.id, gotCommunication);
 
     function gotCommunication(err, result) {
-      if (!err && result && result.length > 0) {
-        savedCommunication = result[0];
-        communication.updated = Date.now();
-        cb();
+      if (err || !result || result.length < 1) {
+        return cb(err || 'error getting communication');
       }
-      else {
-        cb(err);
-      }
+
+      savedCommunication = result[0];
+      communication.updated = Date.now();
+      cb();
     }
   }
 
@@ -39,11 +39,11 @@ function update(request, reply) {
     });
 
     if(communication.status != savedCommunication.status) {
-      if(roles.length == 0) {
+      if(roles.length === 0) {
         delete(communication.status);
         return cb('You\'re not allowed to approve or review communications');
       }
-      notificationText = 'changed communication status'
+      notificationText = 'changed communication status';
     }
 
     cb();
@@ -61,9 +61,12 @@ function update(request, reply) {
 
   function done(err) {
     if (err) {
-      return reply({error: "There was an error updating the communication."});
+      log.error({err: err, username: request.auth.credentials.id}, '[communication] error updating communication');
+      return reply({error: 'There was an error updating the communication.'});
     }
     
+    log.info('[communication] %s updated a communication on %s', request.auth.credentials.id, savedCommunication.thread);
+  
     notification.notify(request.auth.credentials.id, savedCommunication.thread, notificationText, savedCommunication._id, [savedCommunication.member]);
     
     reply({success: 'Communication updated.'});
