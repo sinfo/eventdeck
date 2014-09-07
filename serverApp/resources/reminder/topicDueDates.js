@@ -22,7 +22,7 @@ function remind(done) {
 
       async.each(topics, function(topic, topicDone) {
         Notification.findByThreadAndDate('topic-'+topic._id, yesterday, function(err, notifications) {
-          if(!err && notifications.length == 0) {
+          if(!err && notifications.length === 0) {
             getTargets('topic-'+topic._id, function(err, targets) {
               if(err) { console.log(err); }
 
@@ -36,5 +36,5 @@ function remind(done) {
         });
       }, daysDone);
     });
-  }, done)
+  }, done);
 }
