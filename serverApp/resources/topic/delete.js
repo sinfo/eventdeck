@@ -1,7 +1,6 @@
-var Topic        = require('./../../db/models/topic.js');
-var Notification = require('./../../db/models/notification.js');
-var Comment      = require('./../../db/models/comment.js');
-var Meeting      = require('./../../db/models/meeting.js');
+var Topic        = require('../../db/models/topic');
+var Notification = require('../../db/models/notification');
+var Comment      = require('../../db/models/comment');
 
 module.exports = del;
 
@@ -11,21 +10,22 @@ function del(request, reply) {
 
   Topic.del(topicId, function (err) {
     if (err) {
-      reply({error: "There was an error deleting the topic with id '" + topicId + "'."});
+      return reply({error: 'There was an error deleting the topic with id \'' + topicId + '\'.'});
     }
-    else {
-      Notification.removeByThread('topic-'+topicId, function (err, result) {
-        if(err) { 
-          console.log(err); 
-        }
-      });
 
-      Comment.removeByThread('topic-'+topicId, function (err, result) {
-        //console.log("Comments removed", result);
-      });
+    Notification.removeByThread('topic-'+topicId, function (err) {
+      if(err) { 
+        console.log(err); 
+      }
+    });
 
-      reply({success: "Topic deleted."});
-    }
+    Comment.removeByThread('topic-'+topicId, function (err) {
+      if(err) { 
+        console.log(err); 
+      }
+    });
+
+    reply({success: 'Topic deleted.'});
   });
 
 }

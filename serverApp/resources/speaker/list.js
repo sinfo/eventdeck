@@ -1,4 +1,4 @@
-var Speaker = require('./../../db/models/speaker.js');
+var Speaker = require('../../db/models/speaker');
 
 module.exports = list;
 
@@ -6,14 +6,13 @@ function list(request, reply) {
 
   Speaker.findAll(function (err, result) {
     if (err){
-      reply({error: "There was an error getting all speakers."});
+      return reply({error: 'There was an error getting all speakers.'});
     }
-    else if (result && result.length > 0) {
-      reply(result);
+    if (!result || result.length < 1) {
+      return reply({error: 'There are no speakers.'});
     }
-    else {
-      reply({error: "There are no speakers."});
-    }
+
+    reply(result);
   });
 
 }

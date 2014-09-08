@@ -1,5 +1,5 @@
-var Topic         = require('./../../db/models/topic.js');
-var notification  = require('./../notification');
+var Topic         = require('../../db/models/topic');
+var notification  = require('../notification');
 
 module.exports = create;
 
@@ -14,13 +14,12 @@ function create(request, reply) {
 
   newTopic.save(function (err){
     if (err) {
-      reply({error: "There was an error creating the topic."});
+      return reply({error: 'There was an error creating the topic.'});
     }
-    else {
-      reply({success: "Topic created.", id: newTopic._id});
 
-      notification.notify(request.auth.credentials.id, 'topic-'+newTopic._id, 'created a new topic', null);
-    }
+    reply({success: 'Topic created.', id: newTopic._id});
+
+    notification.notify(request.auth.credentials.id, 'topic-'+newTopic._id, 'created a new topic', null);
   });
 
 }

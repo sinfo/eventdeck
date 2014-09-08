@@ -11,16 +11,15 @@ function get(request, reply) {
 
   Member.find({id: memberId}, function (err, result) {
     if (err || !result || result.length < 1) {
-      reply({error: "There was an error getting the member."});
+      return reply({error: "There was an error getting the member."});
+    }
+
+    var member = result[0];
+    if (member.subscriptions.all || member.subscriptions.threads.indexOf(source + "-" + sourceId) !== -1) {
+      reply({success: "subscribed"});
     }
     else {
-      var member = result[0];
-      if (member.subscriptions.all || member.subscriptions.threads.indexOf(source + "-" + sourceId) !== -1) {
-        reply({success: "subscribed"});
-      }
-      else {
-        reply({success: "unsubscribed"});
-      }
+      reply({success: "unsubscribed"});
     }
   });
 

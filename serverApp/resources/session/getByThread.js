@@ -1,4 +1,4 @@
-var Session = require('./../../db/models/session.js');
+var Session = require('../../db/models/session');
 
 module.exports = list;
 
@@ -13,16 +13,14 @@ function list(request, reply) {
     threadId = 'speaker-' + request.params.id;
   }
   else {
-    reply({error: "API path unknown."});
-    return;
+    return reply({error: 'API path unknown.'});
   }
 
   Session.findByThread(threadId, function(err, result) {
     if (err) {
-      reply({error: "Error getting sessions from '" + threadId + "'."});
+      return reply({error: 'Error getting sessions from \'' + threadId + '\'.'});
     }
-    else {
-      reply(result);
-    }
+    
+    reply(result);
   });
 }

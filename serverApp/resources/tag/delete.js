@@ -1,4 +1,4 @@
-var Tag = require('./../../db/models/tag.js');
+var Tag = require('../../db/models/tag');
 
 module.exports = remove;
 
@@ -6,11 +6,10 @@ function remove(request, reply) {
 
   Tag.del(request.params.id, function (err) {
     if (err) {
-      reply({error: "There was an error deleting the tag."});
+      return reply({error: 'There was an error deleting the tag.'});
     }
-    else {
-      reply({success: "Tag deleted."});
-    }
+    
+    reply({success: 'Tag deleted.'});
   });
 
 }

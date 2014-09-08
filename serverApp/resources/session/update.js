@@ -1,6 +1,6 @@
 var async    = require('async');
-var Session  = require('./../../db/models/session.js');
-var notification  = require('./../notification');
+var Session  = require('../../db/models/session');
+var notification  = require('../notification');
 
 module.exports = update;
 
@@ -19,14 +19,13 @@ function update(request, reply) {
     Session.findById(request.params.id, gotSession);
 
     function gotSession(err, result) {
-      if (!err && result && result.length > 0) {
-        savedSession = result[0];
-        session.updated = Date.now();
-        cb();
+      if (err || !result || result.length < 1) {
+        return cb(err || 'Couldn\'t find any session');
       }
-      else {
-        cb(err);
-      }
+
+      savedSession = result[0];
+      session.updated = Date.now();
+      cb();
     }
   }
 
@@ -43,12 +42,11 @@ function update(request, reply) {
 
   function done(err) {
     if (err) {
-      reply({error: "There was an error updating the session."});
+      return reply({error: 'There was an error updating the session.'});
     }
-    else {
-      notification.notify(request.auth.credentials.id, 'session-'+session.id, 'updated a session', null);
 
-      reply({success: "Session updated."});
-    }
+    notification.notify(request.auth.credentials.id, 'session-'+session.id, 'updated a session', null);
+
+    reply({success: 'Session updated.'});
   }
 }

@@ -1,5 +1,4 @@
-var Hapi  = require('hapi');
-var Topic = require('./../../db/models/topic.js');
+var Topic = require('../../db/models/topic');
 
 exports = module.exports = list;
 
@@ -7,11 +6,10 @@ function list(request, reply) {
 
   Topic.findByDuedate(request.params.start, request.params.end, function (err, result) {
     if (err) {
-      reply(err);
+      return reply(err);
     }
-    else {
-      reply(result);
-    }
+
+    reply(result);
   });
 
 }

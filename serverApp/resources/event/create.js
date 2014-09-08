@@ -1,5 +1,5 @@
-var Event = require('./../../db/models/event.js');
-var notification  = require('./../notification');
+var Event = require('../../db/models/event');
+var notification  = require('../notification');
 
 module.exports = create;
 
@@ -13,14 +13,13 @@ function create(request, reply) {
 
   newEvent.save(function (err){
     if (err) {
-      console.log("Error creating event.");
-      reply({error: "Error creating event."});
+      console.log('Error creating event.');
+      return reply({error: 'Error creating event.'});
     }
-    else {
-      notification.notify(request.auth.credentials.id, 'event-'+event.id, 'created a new event', null);
+    
+    notification.notify(request.auth.credentials.id, 'event-'+event.id, 'created a new event', null);
 
-      reply({success: "Event created."});
-    }
+    reply({success: 'Event created.'});
   });
 
 }

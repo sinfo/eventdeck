@@ -1,5 +1,5 @@
-var Speaker      = require('./../../db/models/speaker.js');
-var notification = require('./../notification');
+var Speaker      = require('../../db/models/speaker');
+var notification = require('../notification');
 
 module.exports = get;
 
@@ -9,14 +9,13 @@ function get(request, reply) {
 
   Speaker.findById(speakerId, function (err, result) {
     if (err) {
-      reply({error: "There was an error getting the speaker."});
+      return reply({error: 'There was an error getting the speaker.'});
     }
-    else if (result && result.length > 0) {
-      reply(result[0]);
+    if (!result || result.length < 1) {
+      return reply({error: 'Could not find speaker with id \'' + speakerId + '\'.'});
     }
-    else {
-      reply({error: "Could not find speaker with id '" + speakerId + "'."})
-    }
+    
+    reply(result[0]);
 
     notification.read(request.auth.credentials.id, 'speaker-' + speakerId);
   });
