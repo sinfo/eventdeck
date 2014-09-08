@@ -14,11 +14,11 @@ function list(request, reply) {
 
     for(var i=0; i<result.length; i++) {
       if(rolesIds.indexOf(result[i].id) == -1) {
-        rolesIds.push(result[i].id)
+        rolesIds.push(result[i].id);
         roles.push({
           name: result[i].name,
           id: result[i].id
-        })
+        });
       }
     }
 
