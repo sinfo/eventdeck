@@ -1,4 +1,4 @@
-var Member = require('./../../db/models/member.js');
+var Member = require('../../db/models/member');
 
 module.exports = del;
 
@@ -6,11 +6,10 @@ function del(request, reply) {
 
   Member.remove({id: request.params.id}, function (err) {
     if (err) {
-      reply({error: "There was an error deleting the member."});
+      return reply({error: 'There was an error deleting the member.'});
     }
-    else {
-      reply({success: "Member deleted."});
-    }
+    
+    reply({success: 'Member deleted.'});
   });
 
 }

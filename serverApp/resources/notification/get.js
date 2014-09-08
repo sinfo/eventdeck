@@ -1,4 +1,4 @@
-var Notification = require('./../../db/models/notification.js');
+var Notification = require('../../db/models/notification');
 
 module.exports = get;
 
@@ -6,14 +6,13 @@ function get(request, reply) {
 
   Notification.findById(request.params.id, function (err, result) {
     if (err) {
-      reply({error: "There was an error getting the notification."});
+      return reply({error: 'There was an error getting the notification.'});
     }
-    else if (result && result.length > 0) {
-    	reply(result[0]);
+    if (!result || result.length < 1) {
+    	return reply(result[0]);
     }
-    else {
-      reply({error: "Could not find the notification."});
-    }
+    
+    reply({error: 'Could not find the notification.'});
   });
 
 }

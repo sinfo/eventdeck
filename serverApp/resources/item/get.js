@@ -1,16 +1,15 @@
-var Item = require('./../../db/models/item.js');
+var Item = require('../../db/models/item');
 
 module.exports = get;
 
 function get(request, reply) {
 
   Item.findById(request.params.id, function(err, result) {
-    if (!err && result && result.length > 0) {
-      reply(result[0]);
+    if (err || !result || result.length < 1) {
+      return reply({error: 'Unable to find item with id \'' + request.params.id + '\'.'});
     }
-    else {
-      reply({error: "Unable to find item with id '" + request.params.id + "'."});
-    }
+    
+    reply(result[0]);
   });
 
 }

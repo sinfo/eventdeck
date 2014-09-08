@@ -1,7 +1,7 @@
 var async        = require('async');
-var Speaker      = require('./../../db/models/speaker.js');
-var notification = require('./../notification');
-var email        = require('./../email').speakerAttribute;
+var Speaker      = require('../../db/models/speaker');
+var notification = require('../notification');
+var email        = require('../email').speakerAttribute;
 
 module.exports = create;
 
@@ -15,24 +15,22 @@ function create(request, reply) {
   ], done);
 
   function checkSpeaker(cb) {
-    if (speaker.name) {
-      speaker.id = createId(request.payload.name);
+    if (!speaker.name) {
+      return cb('No name specified.');
+    }
 
-      Speaker.findById(speaker.id, function (err, result) {
-        if (err) {
-          return cb(err);
-        }
-        else if (result && result.length > 0) {
-          return cb("Speaker id '" + speaker.id + "' already exists.");
-        }
-        else {
-          return cb();
-        }
-      });
-    }
-    else {
-      return cb("No name specified.");
-    }
+    speaker.id = createId(request.payload.name);
+
+    Speaker.findById(speaker.id, function (err, result) {
+      if (err) {
+        return cb(err);
+      }
+      if (result && result.length > 0) {
+        return cb('Speaker id \'' + speaker.id + '\' already exists.');
+      }
+      
+      cb();
+    });
   }
 
   function saveSpeaker(cb) {
@@ -42,28 +40,26 @@ function create(request, reply) {
       if (err) {
         return cb(err);
       }
-      else {
-        return cb();
-      }
+      
+      return cb();
     });
   }
 
   function done(err) {
     if (err) {
-      reply({error: "There was an error creating the speaker."});
+      return reply({error: 'There was an error creating the speaker.'});
     }
-    else {
-      var targets = [];
-      if(speaker.member){
-        if(request.auth.credentials.id != speaker.member){
-          targets.push(speaker.member);
-          email(speaker.member, speaker);
-        }
-      }
-      notification.notify(request.auth.credentials.id, 'speaker-'+speaker.id, 'created a new speaker', null, targets);
 
-      reply({success: "Speaker created.", id:speaker.id});
+    var targets = [];
+    if(speaker.member){
+      if(request.auth.credentials.id != speaker.member){
+        targets.push(speaker.member);
+        email(speaker.member, speaker);
+      }
     }
+    notification.notify(request.auth.credentials.id, 'speaker-'+speaker.id, 'created a new speaker', null, targets);
+
+    reply({success: 'Speaker created.', id:speaker.id});
   }
 }
 

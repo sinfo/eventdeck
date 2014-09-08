@@ -1,5 +1,5 @@
-var Item = require('./../../db/models/item.js');
-var notification  = require('./../notification');
+var Item = require('../../db/models/item');
+var notification  = require('../notification');
 
 module.exports = create;
 
@@ -13,14 +13,13 @@ function create(request, reply) {
 
   newItem.save(function (err){
     if (err) {
-      console.log("Error creating item.");
-      reply({error: "Error creating item."});
+      console.log('Error creating item.');
+      return reply({error: 'Error creating item.'});
     }
-    else {
-      notification.notify(request.auth.credentials.id, 'item-'+item.id, 'created a new item', null);
+    
+    notification.notify(request.auth.credentials.id, 'item-'+item.id, 'created a new item', null);
 
-      reply({success: "Item created."});
-    }
+    reply({success: 'Item created.'});
   });
 
 }
