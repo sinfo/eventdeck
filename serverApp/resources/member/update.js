@@ -1,4 +1,4 @@
-var Member  = require('./../../db/models/member.js');
+var Member  = require('../../db/models/member');
 var Request = require('request');
 
 module.exports = update;

@@ -1,4 +1,3 @@
-var async   = require('async');
 var Company = require('../../db/models/company');
 var Speaker = require('../../db/models/speaker');
 var Topic   = require('../../db/models/topic');

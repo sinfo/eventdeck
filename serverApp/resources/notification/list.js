@@ -1,4 +1,4 @@
-var Notification = require('./../../db/models/notification.js');
+var Notification = require('../../db/models/notification');
 
 module.exports = list;
 
@@ -6,14 +6,13 @@ function list(request, reply) {
 
   Notification.findAll(function (err, result) {
     if (err) {
-      reply({error: "There was an error getting all the notifications."});
+      return reply({error: 'There was an error getting all the notifications.'});
     }
-    else if (result && result.length > 0) {
-    	reply(result);
+    if (!result || result.length < 1) {
+      return reply({error: 'There are no notifications.'});
     }
-    else {
-      reply({error: "There are no notifications."});
-    }
+
+    reply(result);
   });
 
 }
