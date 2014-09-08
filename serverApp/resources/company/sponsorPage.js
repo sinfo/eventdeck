@@ -1,5 +1,6 @@
 var async   = require('async');
 var Company = require('./../../db/models/company.js');
+var log = require('../../helpers/logger');
 
 module.exports = track;
 
@@ -19,15 +20,14 @@ function track(request, reply) {
 
     function gotCompany(err, result) {
       if (err) {
-        cb(err);
+        return cb(err);
       }
-      else if (result && result.length > 0) {
-        company = result[0];
-        cb();
+      if (!result || result.length < 1) {
+        return cb('Could not find company \'' + request.params.id + '\'.');
       }
-      else {
-        cb("Could not find company '" + request.params.id + "'.");
-      }
+      
+      company = result[0];
+      cb();
     }
   }
 
@@ -40,25 +40,25 @@ function track(request, reply) {
   }
 
   function saveCompany(cb) {
-    if(!request.auth.isAuthenticated) {
-      Company.update({ id: company.id }, { $push: {accesses: access} }, function (err){
-        if (err) {
-          cb(err);
-        }
-        else {
-          cb();
-        }
-      });
+    if(request.auth.isAuthenticated) {
+      return cb('Viewer is a member.');
     }
-    else {
-      cb("Viewer is a member.");
-    }
+
+    Company.update({ id: company.id }, { $push: {accesses: access} }, function (err){
+      if (err) {
+        return cb(err);
+      }
+      
+      cb();
+    });
   }
 
   function done(err) {
     if (err) {
-      console.log("Error in page tracker for '" + request.params.id + "'.");
+      log.error({err: err}, '[company] error tracking page view from %s', request.params.id);
     }
+
+    log.info('[company] sponsor page access from %s', request.params.id);
 
     reply.view('sponsor.html', {
       name: company.name
