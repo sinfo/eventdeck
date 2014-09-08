@@ -1,5 +1,6 @@
-var Company      = require('./../../db/models/company.js');
+var Company      = require('./../../db/models/company');
 var notification = require('./../notification');
+var log = require('../../helpers/logger');
 
 module.exports = get;
 
@@ -9,15 +10,16 @@ function get(request, reply) {
 
   Company.findById(companyId, function (err, result) {
     if (err) {
-      reply({error: "Error getting company with id '" + companyId + "'."});
+      log.error({err: err, username: request.auth.credentials.id}, '[company] error getting company');
+      return reply({error: 'There was an error getting company with id \'' + companyId + '\'.'});
     }
-    else if (result && result.length > 0) {
-      reply(result[0]);
+    if (!result || result.length < 1) {
+      log.error({err: err, username: request.auth.credentials.id}, '[company] could not find the company with id '+request.params.id);
+      return reply({error: 'Could not find company with id \'' + companyId + '\'.'});
     }
-    else {
-      reply({error: "Could not find company with id '" + companyId + "'."});
-    }
-
+      
+    reply(result[0]);
+    
     notification.read(request.auth.credentials.id, 'company-' + companyId);
   });
 
