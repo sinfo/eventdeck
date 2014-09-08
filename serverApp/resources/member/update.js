@@ -13,13 +13,12 @@ function update(request, reply) {
       json: true
     },
     function (error, response, result) {
-      if (!error && response.statusCode == 200) {
-        member.facebookId = result.id;
-        save(request.params.id, member);
+      if (error || response.statusCode != 200) {
+        return reply({error: 'There was an error creating the member.'});
       }
-      else {
-        reply({error: 'There was an error updating the member.'});
-      }
+
+      member.facebookId = result.id;
+      save(member, reply);
     });
   }
   else {
@@ -31,11 +30,10 @@ function update(request, reply) {
     Member.update({id: memberId}, member, function (err) {
       if (err) {
         console.log(err);
-        reply({error: 'There was an error updating the member.'});
+        return reply({error: 'There was an error updating the member.'});
       }
-      else {
-        reply({success: 'Member updated.'});
-      }
+      
+      reply({success: 'Member updated.'});
     });
   }
 }

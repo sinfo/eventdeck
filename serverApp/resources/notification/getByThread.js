@@ -1,6 +1,5 @@
 var async          = require('async');
-var Notification   = require('./../../db/models/notification.js');
-var Hapi           = require('hapi');
+var Notification   = require('../../db/models/notification');
 
 module.exports = list;
 
@@ -35,9 +34,9 @@ function list(request, reply) {
 
   function done(err) {
     if (err) {
-      reply(Hapi.error.badRequest(err.detail));
-    } else {
-      reply(notifications);
-    }
+      return reply({error: 'There was an error listing the notifications'});
+    } 
+
+    reply(notifications);
   }
 }

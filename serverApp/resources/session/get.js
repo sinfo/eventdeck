@@ -1,16 +1,15 @@
-var Session = require('./../../db/models/session.js');
+var Session = require('../../db/models/session');
 
 module.exports = get;
 
 function get(request, reply) {
 
   Session.findById(request.params.id, function(err, result) {
-    if (!err && result && result.length > 0) {
-      reply(result[0]);
+    if (err || !result || result.length < 1) {
+      return reply({error: 'Unable to find session with id \'' + request.params.id + '\'.'});
     }
-    else {
-      reply({error: "Unable to find session with id '" + request.params.id + "'."});
-    }
+
+    reply(result[0]);
   });
 
 }

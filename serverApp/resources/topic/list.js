@@ -1,4 +1,4 @@
-var Topic = require('./../../db/models/topic.js');
+var Topic = require('../../db/models/topic');
 
 module.exports = list;
 
@@ -7,10 +7,9 @@ function list(request, reply) {
 
   function gotTopic(err, result) {
     if (err) {
-      reply({error: "There was an error getting all topics."});
+      return reply({error: 'There was an error getting all topics.'});
     }
-    else {
-      reply(result);
-    }
+    
+    reply(result);
   }
 }

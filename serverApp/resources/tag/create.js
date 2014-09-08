@@ -1,4 +1,4 @@
-var Tag = require('./../../db/models/tag.js');
+var Tag = require('../../db/models/tag');
 
 module.exports = create;
 
@@ -7,7 +7,7 @@ function create(request, reply) {
   var tag = request.payload;
   
   if(!tag.name) {
-    return reply({error: "You must provide a name."});
+    return reply({error: 'You must provide a name.'});
   }
 
   tag.id = createId(tag.name);
@@ -16,12 +16,11 @@ function create(request, reply) {
 
   newTag.save(function (err) {
     if (err) {
-      console.log("Error creating tag.");
-      reply({error: "Error creating tag."});
+      console.log('Error creating tag.');
+      return reply({error: 'Error creating tag.'});
     }
-    else {
-      reply({success: "Tag created.", tag:newTag});
-    }
+    
+    reply({success: 'Tag created.', tag:newTag});
   });
 }
 

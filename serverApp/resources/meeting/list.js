@@ -1,4 +1,4 @@
-var Meeting = require('./../../db/models/meeting.js');
+var Meeting = require('../../db/models/meeting');
 
 module.exports = list;
 
@@ -8,11 +8,10 @@ function list(request, reply) {
 
   function gotMeetings(err, result) {
     if (err) {
-      reply({error: "There was an error getting all the meetings."});
+      return reply({error: 'There was an error getting all the meetings.'});
     }
-    else {
-      reply(result);
-    }
+    
+    reply(result);
   }
 
 }

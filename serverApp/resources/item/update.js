@@ -1,6 +1,6 @@
 var async    = require('async');
-var Item  = require('./../../db/models/item.js');
-var notification  = require('./../notification');
+var Item  = require('../../db/models/item');
+var notification  = require('../notification');
 
 module.exports = update;
 
@@ -19,14 +19,13 @@ function update(request, reply) {
     Item.findById(request.params.id, gotItem);
 
     function gotItem(err, result) {
-      if (!err && result && result.length > 0) {
-        savedItem = result[0];
-        item.updated = Date.now();
-        cb();
+      if (err || !result || result.length < 1) {
+        return cb(err);
       }
-      else {
-        cb(err);
-      }
+
+      savedItem = result[0];
+      item.updated = Date.now();
+      cb();
     }
   }
 
@@ -43,12 +42,11 @@ function update(request, reply) {
 
   function done(err) {
     if (err) {
-      reply({error: "There was an error updating the item."});
+      return reply({error: 'There was an error updating the item.'});
     }
-    else {
-      notification.notify(request.auth.credentials.id, 'item-'+item.id, 'updated an item', null);
+    
+    notification.notify(request.auth.credentials.id, 'item-'+item.id, 'updated an item', null);
 
-      reply({success: "Item updated."});
-    }
+    reply({success: 'Item updated.'});
   }
 }

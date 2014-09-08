@@ -11,11 +11,10 @@ function add(request, reply) {
 
   Member.update({id: memberId}, {$push: {"subscriptions.threads": source + "-" + sourceId}}, function (err) {
     if (err) {
-      reply({error: "There was an error updating the member."});
+      return reply({error: "There was an error updating the member."});
     }
-    else {
-      reply({success: "Member updated."});
-    }
+    
+    reply({success: "Member updated."});
   });
 
 }

@@ -1,4 +1,4 @@
-var Speaker = require('./../../db/models/speaker.js');
+var Speaker = require('../../db/models/speaker');
 
 module.exports = list;
 
@@ -8,11 +8,10 @@ function list(request, reply) {
 
   Speaker.findByMember(memberId, function (err, result) {
     if (err){
-      reply({error: "There was an error getting speakers of '" + memberId + "'."});
+      return reply({error: 'There was an error getting speakers of \'' + memberId + '\'.'});
     }
-    else {
-      reply(result);
-    }
+    
+    reply(result);
   });
 
 }

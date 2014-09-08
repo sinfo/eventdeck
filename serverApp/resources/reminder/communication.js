@@ -20,10 +20,10 @@ function remind(remindDays, done) {
 
   Member.getByRole({params: {id: 'coordination'}}, function(result){
     if(result.error){
-      console.log(result.error);
+      done(result.error);
     }
     else{
-      log.info('Communication reminders started!');
+      log.info('[reminder]', 'Communication reminders started!');
       async.each(result, function(member, memberDone){
         coordination.push(member.id);
         memberDone();
@@ -39,20 +39,22 @@ function remind(remindDays, done) {
       async.each(threads, function(thread, threadDone) {
 
         Notification.findByThreadAndDate(thread, week, function(err, notifications) {
-          if(!err && notifications.length === 0) {
+          if(err) { return threadDone(err); }
+
+          if(notifications.length === 0) {
             var speakerId = thread.split('speaker-')[1];
 
             Speaker.get({params: {id: speakerId}, auth: {credentials: {id: 'toolbot'}}}, function(speaker){
               if(speaker.error){
-                console.log(speaker.error);
-                threadDone();
+                return threadDone(speaker.error);
               }
-              else if(speaker.status !== 'Give Up' && speaker.status !== 'Rejected') {
+              
+              if(speaker.status !== 'Give Up' && speaker.status !== 'Rejected') {
 
                 communication.getByThreadLast(thread, function(result){
                   if(today.getTime() - result.posted.getTime() > oneDay * remindDays){
                     if(result.status === undefined || result.status === 'approved'){
-                      console.log(thread);
+                      log.debug('[reminder]', thread);
                       notify('toolbot', thread, 'reminder: communications have been innactive for more than ' + remindDays + ' days.', null, result.member);
                     }
                     else{
@@ -64,12 +66,12 @@ function remind(remindDays, done) {
                 });
               }
               else{
-                log.debug('Speaker ' + speaker.id + ' status: ' + speaker.status + ' not reminded.');
+                log.debug('[reminder]', 'Speaker ' + speaker.id + ' status: ' + speaker.status + ' not reminded.');
                 threadDone(); 
               }
             });
           } else {
-            log.debug(thread + ' already notified in the past week.');
+            log.debug('[reminder]', thread + ' already notified in the past week.');
             threadDone();
           }
         });
