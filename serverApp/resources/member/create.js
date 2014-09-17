@@ -28,7 +28,7 @@ function create(request, reply) {
     });
   }
   else {
-    save(member, reply);
+    save(member);
   }
 
   function save(member) {
@@ -45,4 +45,3 @@ function create(request, reply) {
     });
   }
 }
-

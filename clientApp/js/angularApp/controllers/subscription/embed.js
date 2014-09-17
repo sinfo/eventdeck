@@ -25,14 +25,14 @@ theToolController.controller("SubscriptionController", function ($rootScope, $sc
       break;
     }
 
-    console.log('THREAD', $scope.thread, threadKind, threadId);
-    console.log('FACTORYYY', SubscriptionFactory.Company, SubscriptionFactory.Speaker, SubscriptionFactory.Topic, Factory);
+    //console.log('THREAD', $scope.thread, threadKind, threadId);
+    //console.log('FACTORYYY', SubscriptionFactory.Company, SubscriptionFactory.Speaker, SubscriptionFactory.Topic, Factory);
 
     $scope.isSubscribed = false;
 
     $scope.getStatus = function () {
       Factory.get({id: threadId}, function(response) {
-        console.log('STATUS',response.success)
+        //console.log('STATUS',response.success)
         if(response.success == 'subscribed') {
           $scope.isSubscribed = true;
         } else {
@@ -42,14 +42,14 @@ theToolController.controller("SubscriptionController", function ($rootScope, $sc
     };
 
     $scope.subscribe = function () {
-      console.log('ADDD', threadKind, threadId);
+      //console.log('ADDD', threadKind, threadId);
       Factory.add({id: threadId}, {}, function(response) {
         $scope.getStatus();
       })
     };
 
     $scope.unsubscribe = function () {
-      console.log('DELETE', threadKind, threadId);
+      //console.log('DELETE', threadKind, threadId);
       Factory.remove({id: threadId}, function(response) {
         $scope.getStatus();
       })

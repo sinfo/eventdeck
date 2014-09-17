@@ -67,7 +67,7 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
       });
     },
 
-    companies: function(){    
+    companies: function(){
       CompanyFactory.Company.getAll(function (companies) {
         $scope.companies = companies;
         callback();
@@ -141,7 +141,7 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
     all: function(){
       this.running = true;
       factoriesReady = 0;
-      console.log("Updating!");
+      //console.log("Updating!");
       this.me();
       this.members();
       this.companies();
@@ -344,7 +344,7 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
         $window.location.assign('/');
       }).
       error(function(data, status, headers, config) {
-        console.log("ERROR", data);
+        //console.log("ERROR", data);
         $window.location.assign('/');
       });
   }

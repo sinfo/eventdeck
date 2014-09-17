@@ -2,7 +2,7 @@
 
 theToolController
   .controller('SpeakersController', function ($rootScope, $scope, $http, $sce, SpeakerFactory) {
-  
+
     $rootScope.update.timeout(runController);
 
     function runController(){
@@ -18,7 +18,7 @@ theToolController
       $scope.unreadFirst = true;
 
 
-      
+
       SpeakerFactory.Speaker.getAll(function(response) {
         $scope.speakers = response;
         //$scope.filteredSpeakers = $scope.speakers;
@@ -42,9 +42,9 @@ theToolController
       };
 
       $scope.addSpeaker = function(member, newSpeaker) {
-        console.log(newSpeaker);
+        //console.log(newSpeaker);
         var speakerData = newSpeaker;
-        
+
         if(newSpeaker.id) {
           var participation = $scope.getParticipation(speakerData, $scope.currentEvent.id);
           if(participation) {
@@ -58,7 +58,7 @@ theToolController
           }
           SpeakerFactory.Speaker.update({ id: speakerData.id }, { participations: speakerData.participations }, function(response) {
             if(response.error) {
-              console.log(response);
+              //console.log(response);
               $scope.error = response.error;
             } else {
               $scope.message = response.success;
@@ -90,7 +90,7 @@ theToolController
       };
 
       // $scope.$watch(['currentEvent', 'searchStatus'], function(newValues, oldValues, scope){
-      //   console.log('filtering speakers by',$scope.searchStatus,$scope.currentEvent);
+      //   //console.log('filtering speakers by',$scope.searchStatus,$scope.currentEvent);
       //   if($scope.speakers){
       //     $scope.filteredSpeakers = $scope.speakers.filter(function(o) {
       //       return o.participations.filter(function(p) {
@@ -105,4 +105,4 @@ theToolController
       // });
     }
   });
-  
+
