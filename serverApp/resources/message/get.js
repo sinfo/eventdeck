@@ -1,5 +1,4 @@
 var Hapi           = require('hapi');
-var async          = require('async');
 var Message        = require('./../../db/models/message.js');
 
 exports = module.exports = get;

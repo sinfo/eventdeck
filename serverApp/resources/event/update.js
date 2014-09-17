@@ -1,6 +1,7 @@
 var async    = require('async');
-var Event  = require('./../../db/models/event.js');
-var notification  = require('./../notification');
+var Event  = require('../../db/models/event');
+var notification  = require('../notification');
+var log = require('../../helpers/logger');
 
 module.exports = update;
 
@@ -19,36 +20,36 @@ function update(request, reply) {
     Event.findById(request.params.id, gotEvent);
 
     function gotEvent(err, result) {
-      if (!err && result && result.length > 0) {
-        savedEvent = result[0];
-        event.updated = Date.now();
-        cb();
+      if (err || !result || result.length < 1) {
+        return cb(err);
       }
-      else {
-        cb(err);
-      }
+      
+      savedEvent = result[0];
+      event.updated = Date.now();
+      cb();
     }
   }
 
   function saveEvent(cb) {
     Event.update({id: request.params.id}, event, function(err) {
       if (err) {
-        cb(err);
+        return cb(err);
       }
-      else {
-        cb();
-      }
+   
+      cb();
     });
   }
 
   function done(err) {
     if (err) {
-      reply({error: "There was an error updating the event."});
+      log.error({err: err, username: request.auth.credentials.id}, '[event] error updating event %s', request.params.id);
+      return reply({error: 'There was an error updating the event.'});
     }
-    else {
-      notification.notify(request.auth.credentials.id, 'event-'+event.id, 'updated an event', null);
+    
+    log.info({username: request.auth.credentials.id}, '[event] updated event %s', request.params.id);
+      
+    notification.notify(request.auth.credentials.id, 'event-'+event.id, 'updated an event', null);
 
-      reply({success: "Event updated."});
-    }
+    reply({success: 'Event updated.'});
   }
 }

@@ -1,6 +1,6 @@
-var async          = require('async');
 var Message        = require('./../../db/models/message.js');
 var Hapi           = require('hapi');
+var log = require('../../helpers/logger');
 
 module.exports = list;
 

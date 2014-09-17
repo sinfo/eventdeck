@@ -1,13 +1,15 @@
-var async = require('async')
-var email = require('./../email');
-var Member = require("./../../db/models/member.js");
-var url_prefix = require('./../../../config').url;
+var async = require('async');
+var email = require('../email');
+var Member = require('../../db/models/member');
+var url_prefix = require('../../../config').url;
+var log = require('../../helpers/logger');
 
 module.exports = sendCode;
 
 function sendCode(request, reply) {
   
   if (request.auth.isAuthenticated) {
+    log.warn('[auth]', request.auth.credentials.id, 'tried to login again with', request.params.id);
     return reply({error: 'You\'re already authenticated'});
   }
 
@@ -44,8 +46,8 @@ function sendCode(request, reply) {
       created: Date.now()
     });
 
-    console.log('LOGIN CODE', loginCode);
-    console.log('ALL LOGIN CODES', member.loginCodes);
+    log.debug('[auth] LOGIN CODE', loginCode);
+    log.debug('[auth] ALL LOGIN CODES', member.loginCodes);
 
     Member.update({id: memberId}, {loginCodes: member.loginCodes}, function (err) {
       if (err) {
@@ -60,25 +62,22 @@ function sendCode(request, reply) {
 
   function sendEmail(cb) {
     var message = {
-      to:       member.name + "<" +member.mails.sinfo + ">",
-      subject: "[SINFO] Login code for The Tool!",
-      text:    "Hey "+member.name+"!\n\n Here is your code for logging in on The Tool: "+loginCode+"\n\n"+url_prefix+"#/login/"+member.id+"/"+loginCode,
+      to:       member.name + '<' +member.mails.sinfo + '>',
+      subject: '[SINFO] Login code for The Tool!',
+      text:    'Hey '+member.name+'!\n\n Here is your code for logging in on The Tool: '+loginCode+'\n\n'+url_prefix+'#/login/'+member.id+'/'+loginCode,
     };
   
     // send the message and get a callback with an error or details of the message that was sent
-    email.send(message, function(err, message) {
-      if(err) { cb('There was an error sending the email'); }
-      console.log(err)
-      cb();
-    });
+    email.send(message, cb); 
   }
 
   function done(err) {
     if(err) { 
-      console.log(err);
+      log.error('[auth] Error sending login code email', err); 
       return reply({error:'There was an error!'});
     }
     
+    log.info('[auth] Login code email sent to', member.id); 
     reply({success:'Mail sent!'});
   }
 }

@@ -9,6 +9,7 @@ theToolDirectives
       controller: 'CommentAreaController',
       scope: {
         thread: '@',
+        subthread: '@',
         me: '=',
         members: '='
       }

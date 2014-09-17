@@ -1,5 +1,6 @@
 var async = require('async');
-var Tag  = require('./../../db/models/tag.js');
+var Tag  = require('../../db/models/tag');
+var log = require('../../helpers/logger');
 
 module.exports = update;
 
@@ -18,7 +19,7 @@ function update(request, reply) {
     Tag.findById(request.params.id, gotTag);
 
     function gotTag(err, result) {
-      if (!err && result && result.length > 0) {
+      if (!err && !result || result.length < 1) {
         savedTag = result[0];
         cb();
       }
@@ -29,22 +30,16 @@ function update(request, reply) {
   }
 
   function saveTag(cb) {
-    Tag.update({id: request.params.id}, tag, function(err) {
-      if (err) {
-        cb(err);
-      }
-      else {
-        cb();
-      }
-    });
+    Tag.update({id: request.params.id}, tag, cb);
   }
 
   function done(err) {
     if (err) {
-      reply({error: "There was an error updating the tag."});
+      log.error({err: err, username: request.auth.credentials.id, tag: request.params.id}, '[tag] error updating tag');
+      return reply({error: 'There was an error updating the tag.'});
     }
-    else {
-      reply({success: "Tag updated."});
-    }
+    
+    log.info({username: request.auth.credentials.id, tag: request.params.id}, '[tag] updated tag');
+    reply({success: 'Tag updated.'});
   }
 }

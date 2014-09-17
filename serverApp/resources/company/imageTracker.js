@@ -1,5 +1,6 @@
 var async   = require('async');
-var Company = require('./../../db/models/company.js');
+var Company = require('../../db/models/company');
+var log = require('../../helpers/logger');
 
 module.exports = track;
 
@@ -19,15 +20,14 @@ function track(request, reply) {
 
     function gotCompany(err, result) {
       if (err) {
-        cb(err);
+        return cb(err);
       }
-      else if (result && result.length > 0) {
-        company = result[0];
-        cb();
+      if (!result || result.length < 1) {
+        cb('Company not found.');
       }
-      else {
-        cb("Company not found.");
-      }
+
+      company = result[0];
+      cb();
     }
   }
 
@@ -41,27 +41,26 @@ function track(request, reply) {
   }
 
   function saveCompany(cb) {
-    if (!request.auth.isAuthenticated) {
-      Company.update({ id: company.id }, { $push: {accesses: access} }, function (err){
-        if (err) {
-          cb(err);
-        }
-        else {
-          cb();
-        }
-      });
+    if (request.auth.isAuthenticated) {
+      return cb('Viewer is a member.');
     }
-    else {
-      cb("Viewer is a member.");
-    }
+
+    Company.update({ id: company.id }, { $push: {accesses: access} }, function (err){
+      if (err) {
+        return cb(err);
+      }
+
+      cb();
+    });
   }
 
   function done(err) {
     if (err) {
-      console.log("Error in email tracker for '" + request.params.id + "'.");
+      log.error({err: err}, '[company] error tracking email from %s', request.params.id);
     }
 
-    reply.file("./public/img/logo.jpg").type("image/jpg");
+    log.info('[company] email image access from %s', request.params.id);
+    reply.file('./public/img/logo.jpg').type('image/jpg');
   }
 
 }

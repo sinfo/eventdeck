@@ -1,7 +1,8 @@
 var async        = require('async');
-var Speaker      = require('./../../db/models/speaker.js');
-var notification = require('./../notification');
-var email        = require('./../email').speakerAttribute;
+var Speaker      = require('../../db/models/speaker');
+var notification = require('../notification');
+var email        = require('../email').speakerAttribute;
+var log = require('../../helpers/logger');
 
 module.exports = create;
 
@@ -22,15 +23,14 @@ function create(request, reply) {
 
     function gotSpeaker(err, result) {
       if (err) {
-        cb(err);
+        return cb(err);
       }
-      else if (result && result.length > 0) {
-        speaker = result[0];
-        cb();
+      if (!result || result.length < 1) {
+        return cb('Could not find speaker with id ' + speakerId + '.');
       }
-      else {
-        cb('Could not find speaker with id ' + speakerId + '.');
-      }
+
+      speaker = result[0];
+      cb();
     }
   }
 
@@ -59,42 +59,43 @@ function create(request, reply) {
   function saveSpeaker(cb) {
     Speaker.update({id: speaker.id}, diffSpeaker, function (err) {
       if (err) {
-        cb(err);
+        return cb(err);
       }
-      else {
-        cb();
-      }
+      
+      cb();
     });
   }
 
   function done(err) {
     if (err) {
-      console.log(err);
+      log.error({err: err, username: request.auth.credentials.id, speaker: request.params.id}, '[speaker] error updating the speaker');
       
       if (err === 'Nothing changed.') {
-        reply({error: 'Nothing changed.'});
+        return reply({error: 'Nothing changed.'});
       }
       else {
-        reply({error: 'There was an error updating the speaker.'});
+        return reply({error: 'There was an error updating the speaker.'});
       }
     }
-    else {
-      var targets = [];
-      var member;
-      member = diffSpeaker.member ? diffSpeaker.member : speaker.member;
-      if(member){
-        if(request.auth.credentials.id !== member) {
-          targets.push(member);
-          if(diffSpeaker.member){
-            targets.push(speaker.member);
-          }
-          email(member, speaker);
+
+    var targets = [];
+    var member;
+    member = diffSpeaker.member ? diffSpeaker.member : speaker.member;
+    if(member){
+      if(request.auth.credentials.id !== member) {
+        targets.push(member);
+        if(diffSpeaker.member){
+          targets.push(speaker.member);
         }
+        email(member, speaker);
       }
-      notification.notify(request.auth.credentials.id, 'speaker-'+speaker.id, 'updated '+getEditionString(diffSpeaker), null, targets);
-      
-      reply({success: 'Speaker updated.'});
     }
+
+    log.info({username: request.auth.credentials.id, speaker: request.params.id}, '[speaker] speaker updated');
+
+    notification.notify(request.auth.credentials.id, 'speaker-'+speaker.id, 'updated '+getEditionString(diffSpeaker), null, targets);
+    
+    reply({success: 'Speaker updated.'});
   }
 }
 

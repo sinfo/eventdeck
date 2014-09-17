@@ -17,7 +17,7 @@ theToolController
 
       $scope.shownCommunications = function (showOpen) {
         return $scope.communications.filter(function(o) {
-          return (showOpen ? !o.approved : o.approved) && $routeParams.kind == o.thread.split('-')[0];
+          return (showOpen ? !(o.status=='approved') : o.status=='approved') && $routeParams.kind == o.thread.split('-')[0];
         });
       };
     }
