@@ -36,9 +36,9 @@ function facebook(request, reply) {
       return reply({error: 'Error logging in with Facebook.'});
     }     
   
-    Member.findByFacebookId(request.url.query.id, function (error, result) {
-      if (error || result || result.length < 1) {
-        log.error('[auth] Couldn\'t find members with facebook id', request.url.query.id);
+    Member.findByFacebookId(request.url.query.id, function (err, result) {
+      if (err || !result || result.length < 1) {
+        log.error({err: err, facebookId: request.url.query.id}, '[auth] Couldn\'t find members with facebook id');
         return reply({error: 'Error logging in with Facebook.'});
       }
 
