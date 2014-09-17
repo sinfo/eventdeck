@@ -1,6 +1,6 @@
 var async          = require('async');
-var Notification   = require('./../../db/models/notification.js');
-var Hapi           = require('hapi');
+var Notification   = require('../../db/models/notification');
+var log = require('../../helpers/logger');
 
 module.exports = list;
 
@@ -27,7 +27,7 @@ function list(request, reply) {
     Notification.findByThread(threadId, gotNotifications);
 
     function gotNotifications(err, result) {
-      if (err) cb(err);
+      if (err) { return cb(err); }
       notifications = result;
       cb();
     }
@@ -35,9 +35,10 @@ function list(request, reply) {
 
   function done(err) {
     if (err) {
-      reply(Hapi.error.badRequest(err.detail));
-    } else {
-      reply(notifications);
-    }
+      log.error({err: err, username: request.auth.credentials.id, thread: threadId}, '[notification] error listing notifications');
+      return reply({error: 'There was an error listing the notifications'});
+    } 
+
+    reply(notifications);
   }
 }

@@ -13,6 +13,10 @@ itemSchema.statics.findById = function (id, cb) {
   this.find({id: id }, cb);
 };
 
+itemSchema.statics.del = function (id, cb) {
+  this.remove({ id: id }, cb);
+};
+
 itemSchema.statics.findAll = function (cb) {
   this.find({}, cb);
 };

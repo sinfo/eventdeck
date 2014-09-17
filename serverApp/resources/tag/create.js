@@ -1,4 +1,5 @@
-var Tag = require('./../../db/models/tag.js');
+var Tag = require('../../db/models/tag');
+var log = require('../../helpers/logger');
 
 module.exports = create;
 
@@ -7,7 +8,7 @@ function create(request, reply) {
   var tag = request.payload;
   
   if(!tag.name) {
-    return reply({error: "You must provide a name."});
+    return reply({error: 'You must provide a name.'});
   }
 
   tag.id = createId(tag.name);
@@ -16,12 +17,12 @@ function create(request, reply) {
 
   newTag.save(function (err) {
     if (err) {
-      console.log("Error creating tag.");
-      reply({error: "Error creating tag."});
+      log.error({err: err, username: request.auth.credentials.id, tag: newTag}, '[tag] error creating new tag');
+      return reply({error: 'Error creating tag.'});
     }
-    else {
-      reply({success: "Tag created.", tag:newTag});
-    }
+    
+    log.info({username: request.auth.credentials.id, tag: tag.id}, '[tag] new tag created');
+    reply({success: 'Tag created.', tag:newTag});
   });
 }
 

@@ -173,6 +173,8 @@ theToolController.controller("TopicEmbedController", function ($rootScope, $scop
     $scope.save = function (topic) {
       $scope.error = "";
 
+      console.log(topic);
+
       TopicFactory.Topic.update({id: topic._id}, topic, function (response) {
         if (response.success) {
           topic.editing = !topic.editing;

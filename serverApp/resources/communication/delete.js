@@ -1,6 +1,7 @@
 var async = require('async');
-var Communication = require('./../../db/models/communication.js');
-var Notification = require('./../../db/models/notification.js');
+var Communication = require('../../db/models/communication.js');
+var Notification = require('../../db/models/notification.js');
+var log = require('../../helpers/logger');
 
 module.exports = remove;
 
@@ -19,15 +20,14 @@ function remove(request, reply) {
 
     function gotCommunication(err, result) {
       if (err) {
-        cb(err);
+        return cb(err);
       }
-      else if (result && result.length > 0) {
-        savedCommunication = result[0];
-        cb();
+      if (!result || result.length < 1) {
+        return cb('Could not find the communication with id '+request.params.id);
       }
-      else {
-        cb('Could not find the communication.');
-      }
+
+      savedCommunication = result[0];
+      cb();
     }
   }
 
@@ -36,7 +36,7 @@ function remove(request, reply) {
       return o.id == 'development-team' || o.id == 'coordination';
     });
 
-    if(roles.length == 0 && savedCommunication.member != request.auth.credentials.id) {
+    if(roles.length === 0 && savedCommunication.member != request.auth.credentials.id) {
       return cb('You don\'t have permissions for this.');
     }
     
@@ -46,26 +46,26 @@ function remove(request, reply) {
   function deleteCommunication(cb) {
     Communication.del(request.params.id, function(err) {
       if (err) {
-        cb('Error on the database');
+        return cb('Error on the database');
       }
-      else {
-        Notification.removeBySource(request.params.id, function (err, result) {
-          if(err) { 
-            console.log(err); 
-          }
 
-          cb();
-        });
-      }
+      Notification.removeBySource(request.params.id, function (err) {
+        if(err) { 
+          return cb(err); 
+        }
+
+        cb();
+      });
     });
   }
 
   function done(err) {
     if (err) {
-      reply({error: err});
+      log.error({err: err, username: request.auth.credentials.id}, '[communication] error deleting communication');
+      return reply({error: 'Error deleting communication'});
     }
-    else {
-      reply({success: 'Communication deleted.'});
-    }
+    
+    log.info('[communication] %s deleted a communication on %s', request.auth.credentials.id, savedCommunication.thread);
+    reply({success: 'Communication deleted.'}); 
   }
 }

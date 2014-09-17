@@ -1,6 +1,7 @@
 var async        = require('async');
-var Company      = require('./../../db/models/company.js');
-var notification = require('./../notification');
+var Company      = require('../../db/models/company');
+var notification = require('../notification');
+var log          = require('../../helpers/logger');
 
 module.exports = create;
 
@@ -19,47 +20,40 @@ function create(request, reply) {
 
       Company.findById(company.id, function (err, result) {
         if (err) {
-          cb(err);
+          return cb(err);
         }
-        else if (result && result.length > 0) {
-          cb("Company id '" + company.id + "'already exists.");
+        if (result && result.length > 0) {
+          return cb('Company id \'' + company.id + '\'already exists.');
         }
-        else {
-          cb();
-        }
+        
+        cb();
       });
     }
     else {
-      cb("Company name was not specified.");
+      cb('Company name was not specified.');
     }
   }
 
   function saveCompany(cb) {
     var newCompany = new Company(company);
 
-    newCompany.save(function (err){
-      if (err) {
-        cb(err);
-      }
-      else {
-        cb();
-      }
-    });
+    newCompany.save(cb);
   }
 
   function done(err) {
     if (err) {
-      reply({error: "Error creating the company."});
+      log.error({err: err, username: request.auth.credentials.id, company: company}, '[company] error creating company');
+      return reply({error: 'Error creating the company.'});
     }
-    else {
-      var targets = [];
-      if(request.auth.credentials.id != company.member) {
-        targets.push(company.member);
-      }
-      notification.notify(request.auth.credentials.id, 'company-'+company.id, 'created a new company', null);
 
-      reply({success: "Company created.", id:company.id});
+    var targets = [];
+    if(request.auth.credentials.id != company.member) {
+      targets.push(company.member);
     }
+    notification.notify(request.auth.credentials.id, 'company-'+company.id, 'created a new company', null);
+
+    log.info({username: request.auth.credentials.id, company: company.id}, '[company] new company created');
+    reply({success: 'Company created.', id:company.id});
   }
 }
 
