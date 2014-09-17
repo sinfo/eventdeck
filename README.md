@@ -8,7 +8,7 @@ EventDeck is a tool being built internally at [SINFO](http://sinfo.org) to help 
   1. Clone the repo: <code>git clone git@github.com:sinfo/eventdeck.git</code>
   2. Enter the directory: <code>cd eventdeck</code>
   3. Install the dependencies: <code>npm install</code>
-  4. Create a <code>config.json</code> file using the same structure as <code>config.example.json</code>
+  4. Create a <code>config.js</code> file using the same structure as <code>config.example.js</code>
   5. Start the server using <code>npm start</code> or <code>forever start serverApp/index.js</code>
 
 ### Maintance:
