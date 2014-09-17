@@ -15,7 +15,7 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
     $scope.messages = [];
     $scope.online   = [];
 
-    console.log("Connecting");
+    //console.log("Connecting");
 
     SocketFactory.connect('/chat');
 
@@ -23,7 +23,7 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
       $scope.conected = true;
       if(!$scope.auth){
         SocketFactory.emit('auth', {id: ($routeParams.id || 'geral'), user: $scope.me.id}, function () {
-          console.log('Auth success');
+          //console.log('Auth success');
           $scope.auth = true;
         });
       }
@@ -45,13 +45,13 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
         $scope.history = history;
       }
       else{
-        console.log(response.message);
+        //console.log(response.message);
       }
       $scope.loading  = false;
     });
 
     SocketFactory.on('user-connected', function (response) {
-      console.log("User connected: " + response.id);
+      //console.log("User connected: " + response.id);
       for(var i = 0; i < $scope.online.length; i++){
         if($scope.online[i].member === response.id){
           $scope.online[i].on = true;
@@ -61,7 +61,7 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
     });
 
     SocketFactory.on('user-disconnected', function (response) {
-      console.log("User connected: " + response.id);
+      //console.log("User connected: " + response.id);
       for(var i = 0; i < $scope.online.length; i++){
         if($scope.online[i].member === response.id){
           $scope.online[i].on = false;
@@ -101,18 +101,18 @@ theToolController.controller('ChatController', function ($rootScope, $scope, $ht
       }
 
       SocketFactory.emit('send', {room: $scope.room, message: messageData }, function() {
-        console.log('Message sent');
+        //console.log('Message sent');
         $scope.text = "";
       });
     };
 
     function history () {
-      console.log('Start history request');
+      //console.log('Start history request');
       if(!$scope.updating){
         $scope.infiniteScrollDisabled = true;
         $scope.updating = true;
         SocketFactory.emit('history-get', {room: $scope.room, date: $scope.messages[$scope.messages.length-1].date }, function() {
-          console.log('Sent history request');
+          //console.log('Sent history request');
         });
       }
     }
