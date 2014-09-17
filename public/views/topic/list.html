@@ -1,7 +1,7 @@
 <div class="ink-grid">
 
   <div class="all-100" infinite-scroll="scroll()">
-    <topic-card topic="topic" members="members" me="me" roles="roles" tags="topicTags" comments="comments" notifications="unreadNotifications" ng-repeat="topic in shownTopics(showOpen) | orderBy: ['-unread' ,'-posted'] | limitTo: limit"></topic-card>
+    <topic-card topic="topic" members="members" me="me" roles="roles" tags="topicTags" comments="comments" notifications="unreadNotifications" ng-repeat="topic in shownTopics(showOpen) | orderBy: ['-' + (unreadFirst ? 'unread' : ''), '-posted'] | limitTo: limit"></topic-card>
   </div>
 
   <div class="awesome-sidebar" ng-hide="hideSidebar" style="padding-bottom:120px;">
@@ -13,6 +13,10 @@
     <div class="button-group small">
       <div class="ink-button green" ng-click="showOpen = true;" style="border-right: 1px solid white;">{{count(true)}} Open</div>
       <div class="ink-button red" ng-click="showOpen = false;" style="border-left: 0px;">{{count(false)}} Closed</div>
+    </div>
+
+    <div class="button-group small">
+      <div class="ink-button all-80 {{unreadFirst ? 'blue' : ''}}" ng-click="unreadFirst = !unreadFirst">Unread First</div>
     </div>
 
     <div class="button-group small">

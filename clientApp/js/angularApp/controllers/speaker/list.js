@@ -15,6 +15,7 @@ theToolController
       $scope.reverse = 'true';
       $scope.filteredSpeakers = [];
       $scope.searchSpeakers = {unassigned: true, unassignedOnly: false};
+      $scope.unreadFirst = true;
 
 
       
