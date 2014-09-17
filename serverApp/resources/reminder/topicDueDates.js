@@ -3,6 +3,7 @@ var Topic = require('./../../db/models/topic');
 var Notification = require('./../../db/models/notification');
 var notify = require('./../notification').notify;
 var getTargets   = require('./../member').getTargetsByThread;
+var log = require('../../helpers/logger');
 
 
 module.exports = remind;

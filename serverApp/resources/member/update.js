@@ -1,5 +1,6 @@
 var Member  = require('../../db/models/member');
 var Request = require('request');
+var log = require('../../helpers/logger');
 
 module.exports = update;
 
@@ -12,9 +13,10 @@ function update(request, reply) {
       method: 'GET',
       json: true
     },
-    function (error, response, result) {
-      if (error || response.statusCode != 200) {
-        return reply({error: 'There was an error creating the member.'});
+    function (err, response, result) {
+      if (err || response.statusCode != 200) {
+        log.error({err: err || response.statusCode, username: request.auth.credentials.id, member: member}, '[member] error updating member (getting facebook id)');
+        return reply({error: 'There was an error updating the member.'});
       }
 
       member.facebookId = result.id;
@@ -29,10 +31,11 @@ function update(request, reply) {
 
     Member.update({id: memberId}, member, function (err) {
       if (err) {
-        console.log(err);
+        log.error({err: err, username: request.auth.credentials.id, member: member}, '[member] error updating member');
         return reply({error: 'There was an error updating the member.'});
       }
       
+      log.info({username: request.auth.credentials.id, member: member.id}, '[member] member updated');
       reply({success: 'Member updated.'});
     });
   }

@@ -77,11 +77,11 @@ function send(request, reply) {
 
   function done(err) {
     if (err) {
-      log.error({err: err, username: request.auth.credentials.id}, '[company] error sending initial email of %s', request.params.id);
+      log.error({err: err, username: request.auth.credentials.id, company: request.params.id}, '[company] error sending initial email');
       return reply({error: 'There was an error sending the email.'});
     } 
 
-    log.info('[company] %s sent inital email to %s', request.auth.credentials.id, request.params.id);
+    log.info({username: request.auth.credentials.id, company: request.params.id}, '[company] sent inital email');
     reply({success: 'Email sent.'});
   }
 

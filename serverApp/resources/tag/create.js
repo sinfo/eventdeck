@@ -1,4 +1,5 @@
 var Tag = require('../../db/models/tag');
+var log = require('../../helpers/logger');
 
 module.exports = create;
 
@@ -16,10 +17,11 @@ function create(request, reply) {
 
   newTag.save(function (err) {
     if (err) {
-      console.log('Error creating tag.');
+      log.error({err: err, username: request.auth.credentials.id, tag: newTag}, '[tag] error creating new tag');
       return reply({error: 'Error creating tag.'});
     }
     
+    log.info({username: request.auth.credentials.id, tag: tag.id}, '[tag] new tag created');
     reply({success: 'Tag created.', tag:newTag});
   });
 }

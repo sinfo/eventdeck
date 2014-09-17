@@ -2,6 +2,7 @@ var async        = require('async');
 var Speaker      = require('../../db/models/speaker');
 var notification = require('../notification');
 var email        = require('../email').speakerAttribute;
+var log = require('../../helpers/logger');
 
 module.exports = create;
 
@@ -36,17 +37,12 @@ function create(request, reply) {
   function saveSpeaker(cb) {
     var newSpeaker = new Speaker(speaker);
 
-    newSpeaker.save(function (err) {
-      if (err) {
-        return cb(err);
-      }
-      
-      return cb();
-    });
+    newSpeaker.save(cb);
   }
 
   function done(err) {
     if (err) {
+      log.error({err: err, username: request.auth.credentials.id, speaker: speaker}, '[speaker] error creating speaker');
       return reply({error: 'There was an error creating the speaker.'});
     }
 
@@ -59,6 +55,7 @@ function create(request, reply) {
     }
     notification.notify(request.auth.credentials.id, 'speaker-'+speaker.id, 'created a new speaker', null, targets);
 
+    log.info({username: request.auth.credentials.id, speaker: speaker.id}, '[speaker] new speaker created');
     reply({success: 'Speaker created.', id:speaker.id});
   }
 }

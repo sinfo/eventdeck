@@ -11,35 +11,36 @@ function del(request, reply) {
   var companyId = request.params.id;
 
   if (!checkPermissions()) {
-    log.warn({username: request.auth.credentials.id}, '[company] %s tried to delete the company %s', request.auth.credentials.id, companyId);
+    log.warn({username: request.auth.credentials.id, company: companyId}, '[company] tried to delete the company');
     return reply({error: 'You do not have permissions to delete a company.'});
   }
   
   Company.remove({id: companyId}, function (err) {
     if (err) {
-      log.error({err: err, username: request.auth.credentials.id}, '[company] error deleting company %s', companyId);
+      log.error({err: err, username: request.auth.credentials.id, company: companyId}, '[company] error deleting company');
       return reply({error: 'There was an error deleting the company.'});
     }
     
-    Comment.removeByThread('company-' + companyId, function (err) {
+    var thread = 'company-' + companyId;
+    Comment.removeByThread(thread, function (err) {
       if(err) {
-        log.error({err: err, username: request.auth.credentials.id}, '[company] error deleting comments from %s', companyId);
+        log.error({err: err, username: request.auth.credentials.id, company: companyId, thread: thread}, '[company] error deleting comments');
       }
     });
 
-    Communication.removeByThread('company-' + companyId, function (err) {
+    Communication.removeByThread(thread, function (err) {
       if(err) {
-        log.error({err: err, username: request.auth.credentials.id}, '[company] error deleting communications from %s', companyId);
+        log.error({err: err, username: request.auth.credentials.id, company: companyId, thread: thread}, '[company] error deleting communications');
       }
     });
 
-    Notification.removeByThread('company-' + companyId, function (err) {
+    Notification.removeByThread(thread, function (err) {
       if(err) {
-        log.error({err: err, username: request.auth.credentials.id}, '[company] error deleting notifications from %s', companyId);
+        log.error({err: err, username: request.auth.credentials.id, company: companyId, thread: thread}, '[company] error deleting notifications');
       }
     });
 
-    log.info('[company] %s deleted the company %s', request.auth.credentials.id, companyId);
+    log.info({username: request.auth.credentials.id, company: companyId}, '[company] deleted the company');
 
     reply({success: 'Company deleted.'});
   });
