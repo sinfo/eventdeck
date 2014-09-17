@@ -49,7 +49,7 @@ theToolController.controller("AdminController", function ($rootScope, $scope, Ev
     };
 
     $scope.updateItem = function (item) {
-      ItemFactory.Item.update({id: item.id}, event, function (response) {
+      ItemFactory.Item.update({id: item.id}, item, function (response) {
         if(response.error) {
           $scope.error = response.error;
         }

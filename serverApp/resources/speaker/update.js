@@ -2,6 +2,7 @@ var async        = require('async');
 var Speaker      = require('../../db/models/speaker');
 var notification = require('../notification');
 var email        = require('../email').speakerAttribute;
+var log = require('../../helpers/logger');
 
 module.exports = create;
 
@@ -67,7 +68,7 @@ function create(request, reply) {
 
   function done(err) {
     if (err) {
-      console.log(err);
+      log.error({err: err, username: request.auth.credentials.id, speaker: request.params.id}, '[speaker] error updating the speaker');
       
       if (err === 'Nothing changed.') {
         return reply({error: 'Nothing changed.'});
@@ -89,6 +90,9 @@ function create(request, reply) {
         email(member, speaker);
       }
     }
+
+    log.info({username: request.auth.credentials.id, speaker: request.params.id}, '[speaker] speaker updated');
+
     notification.notify(request.auth.credentials.id, 'speaker-'+speaker.id, 'updated '+getEditionString(diffSpeaker), null, targets);
     
     reply({success: 'Speaker updated.'});

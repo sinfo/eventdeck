@@ -1,5 +1,6 @@
 var Member  = require('../../db/models/member');
 var Request = require('request');
+var log = require('../../helpers/logger');
 
 module.exports = create;
 
@@ -16,8 +17,9 @@ function create(request, reply) {
       method: 'GET',
       json: true
     },
-    function (error, response, result) {
-      if (error || response.statusCode != 200) {
+    function (err, response, result) {
+      if (err || response.statusCode != 200) {
+        log.error({err: err || response.statusCode, username: request.auth.credentials.id, member: member}, '[member] error creating new member (getting facebook id)');
         return reply({error: 'There was an error creating the member.'});
       }
 
@@ -34,10 +36,11 @@ function create(request, reply) {
 
     member.save(function (err) {
       if (err) {
-        console.log(err);
+        log.error({err: err, username: request.auth.credentials.id, member: member}, '[member] error creating new member');
         return reply({error: 'There was an error creating the member.'});
       }
       
+      log.info({username: request.auth.credentials.id, member: member.id}, '[member] new member created');
       reply({success: 'Member created.', id: member.id});
     });
   }

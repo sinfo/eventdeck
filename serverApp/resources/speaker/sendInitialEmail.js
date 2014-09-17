@@ -2,6 +2,7 @@ var async         = require('async');
 var Speaker       = require('../../db/models/speaker');
 var Member        = require('../../db/models/member');
 var Communication = require('../../db/models/communication');
+var log = require('../../helpers/logger');
 
 module.exports = get;
 
@@ -74,9 +75,11 @@ function get(request, reply) {
 
   function done(err) {
     if (err) {
+      log.error({err: err, username: request.auth.credentials.id, speaker: request.params.id}, '[speaker] error previewing initial email');
       return reply.view('error.html', { error: 'There was an error.' });
     }
 
+    log.info({username: request.auth.credentials.id, speaker: request.params.id}, '[speaker] sent inital email');
     reply.view('speakerTemplate.html', {
       signature: signature,
       speaker: speaker

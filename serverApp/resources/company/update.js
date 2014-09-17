@@ -81,7 +81,7 @@ function update(request, reply) {
 
   function done(err) {
     if (err) {
-      log.error({err: err, username: request.auth.credentials.id}, '[company] error updating the company %s', request.params.id);
+      log.error({err: err, username: request.auth.credentials.id, company: request.params.id}, '[company] error updating the company');
 
       if (err == 'Nothing changed.') {
         return reply({error: 'Nothing changed.'});
@@ -100,7 +100,7 @@ function update(request, reply) {
       targets.push(company.member);
     }
 
-    log.info('[company] %s updated the company %s', request.auth.credentials.id, company.id);
+    log.info({username: request.auth.credentials.id, company: request.params.id}, '[company] company updated');
 
     notification.notify(request.auth.credentials.id, 'company-'+company.id, 'updated '+getEditionString(diffCompany), null, targets);
 

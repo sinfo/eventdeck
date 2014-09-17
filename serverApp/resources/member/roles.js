@@ -1,4 +1,5 @@
 var Member = require('../../db/models/member');
+var log = require('../../helpers/logger');
 
 module.exports = list;
 
@@ -6,6 +7,7 @@ function list(request, reply) {
 
   Member.findAllRoles(function (err, result) {
     if (err) {
+      log.error({err: err, username: request.auth.credentials.id}, '[member] error listing roles');
       return reply({error: 'There was an error getting all the roles.'});
     }
     

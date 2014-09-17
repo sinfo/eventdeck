@@ -14,7 +14,7 @@ function get(request, reply) {
       return reply({error: 'There was an error getting company with id \'' + companyId + '\'.'});
     }
     if (!result || result.length < 1) {
-      log.error({err: err, username: request.auth.credentials.id}, '[company] could not find the company with id '+request.params.id);
+      log.error({err: err, username: request.auth.credentials.id, company: request.params.id}, '[company] couldn\'t find company');
       return reply({error: 'Could not find company with id \'' + companyId + '\'.'});
     }
       
