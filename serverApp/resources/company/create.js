@@ -37,18 +37,12 @@ function create(request, reply) {
   function saveCompany(cb) {
     var newCompany = new Company(company);
 
-    newCompany.save(function (err){
-      if (err) {
-        return cb(err);
-      }
-    
-      cb();
-    });
+    newCompany.save(cb);
   }
 
   function done(err) {
     if (err) {
-      log.error({err: err, username: request.auth.credentials.id}, '[company] error creating company');
+      log.error({err: err, username: request.auth.credentials.id, company: company}, '[company] error creating company');
       return reply({error: 'Error creating the company.'});
     }
 
@@ -58,7 +52,7 @@ function create(request, reply) {
     }
     notification.notify(request.auth.credentials.id, 'company-'+company.id, 'created a new company', null);
 
-    log.info('[company] %s created new company (%s)', request.auth.credentials.id, company.id);
+    log.info({username: request.auth.credentials.id, company: company.id}, '[company] new company created');
     reply({success: 'Company created.', id:company.id});
   }
 }

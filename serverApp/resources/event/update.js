@@ -1,6 +1,7 @@
 var async    = require('async');
 var Event  = require('../../db/models/event');
 var notification  = require('../notification');
+var log = require('../../helpers/logger');
 
 module.exports = update;
 
@@ -41,9 +42,12 @@ function update(request, reply) {
 
   function done(err) {
     if (err) {
+      log.error({err: err, username: request.auth.credentials.id}, '[event] error updating event %s', request.params.id);
       return reply({error: 'There was an error updating the event.'});
     }
-
+    
+    log.info({username: request.auth.credentials.id}, '[event] updated event %s', request.params.id);
+      
     notification.notify(request.auth.credentials.id, 'event-'+event.id, 'updated an event', null);
 
     reply({success: 'Event updated.'});

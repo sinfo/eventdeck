@@ -68,7 +68,7 @@
         <td class="button-group">
           <a ng-if="item.editing" class="ink-button" ng-click="item.editing=!item.editing"><i class="fa fa-reply"></i></a>
           <a ng-if="!item.editing" class="ink-button" ng-click="item.editing=!item.editing"><i class="fa fa-edit"></i></a>
-          <a ng-if="item.editing" class="ink-button" ng-click="updateEvent(item)"><i class="fa fa-check"></i></a>
+          <a ng-if="item.editing" class="ink-button" ng-click="updateItem(item)"><i class="fa fa-check"></i></a>
           <a class="ink-button" ng-click="deleteItem(item)"><i class="fa fa-times"></i></a>
         </td>
       </tr>

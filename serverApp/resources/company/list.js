@@ -6,8 +6,8 @@ module.exports = list;
 function list(request, reply) {
 
   Company.findAll(function (err, result) {
-    if (err || !result || result.length < 1) {
-      log.error({err: (err || 'No companies found')}, '[company] error getting all companies');
+    if (err) {
+      log.error({err: err, username: request.auth.credentials.id}, '[company] error getting all companies');
       return reply({error: 'Error getting all companies.'});
     }
     

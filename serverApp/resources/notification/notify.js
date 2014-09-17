@@ -2,6 +2,7 @@ var async        = require('async');
 var Member       = require('../../db/models/member');
 var Notification = require('../../db/models/notification');
 var webSocketCl  = require('../../index.js').webSocket.client;
+var log = require('../../helpers/logger');
 
 exports = module.exports = notify;
 
@@ -77,7 +78,7 @@ function notify(memberId, thread, description, objectId, subscribers) {
 
   function done(err) {
     if (err) {
-      return console.log('There was an error! '+ err);
+      return log.error({err: err}, '[notification] error creating notification');
     } 
 
     var newMessage = {
@@ -88,8 +89,9 @@ function notify(memberId, thread, description, objectId, subscribers) {
       text:   description,
     };
     webSocketCl.emit('send', {room: 'geral', message: newMessage}, function(){
-      console.log('Notification sent to chat!');
+      log.debug('[notification] notification sent to chat');
     });
-    console.log(memberId+' '+description+' on '+thread+' (objectId:'+objectId+')');
+    
+    log.info({ thread: thread, description: memberId+' '+description+' on '+thread+' (objectId:'+objectId+')' }, '[notification] notification created');
   }
 }

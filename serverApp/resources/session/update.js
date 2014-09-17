@@ -1,6 +1,7 @@
 var async    = require('async');
 var Session  = require('../../db/models/session');
 var notification  = require('../notification');
+var log = require('../../helpers/logger');
 
 module.exports = update;
 
@@ -30,21 +31,16 @@ function update(request, reply) {
   }
 
   function saveSession(cb) {
-    Session.update({_id: request.params.id}, session, function(err) {
-      if (err) {
-        cb(err);
-      }
-      else {
-        cb();
-      }
-    });
+    Session.update({_id: request.params.id}, session, cb);
   }
 
   function done(err) {
     if (err) {
+      log.error({err: err, username: request.auth.credentials.id, session: request.params.id}, '[session] error updating session');
       return reply({error: 'There was an error updating the session.'});
     }
 
+    log.info({username: request.auth.credentials.id, session: request.params.id}, '[session] updated session');
     notification.notify(request.auth.credentials.id, 'session-'+session.id, 'updated a session', null);
 
     reply({success: 'Session updated.'});

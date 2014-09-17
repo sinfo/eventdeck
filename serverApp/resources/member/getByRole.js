@@ -1,4 +1,5 @@
 var Member = require('../../db/models/member');
+var log = require('../../helpers/logger');
 
 module.exports = get;
 
@@ -8,10 +9,8 @@ function get(request, reply) {
 
   Member.findByRole(roleId, function (err, result) {
     if (err) {
+      log.error({err: err, username: request.auth.credentials.id, role: request.params.id}, '[member] error getting members by role');
       return reply({error: 'There was an error getting the members by role.'});
-    }
-    if (!result || result.length < 1) {
-      return reply({error: 'Could not find members with role \'' + roleId + '\'.'});
     }
     
     reply(result);
