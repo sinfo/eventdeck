@@ -73,11 +73,11 @@ function sendCode(request, reply) {
 
   function done(err) {
     if(err) { 
-      log.error('[auth] Error sending login code email', err); 
+      log.error({err: err, member: member.id}, '[auth] Error sending login code email'); 
       return reply({error:'There was an error!'});
     }
     
-    log.info('[auth] Login code email sent to', member.id); 
+    log.info({member: member.id}, '[auth] Login code email sent'); 
     reply({success:'Mail sent!'});
   }
 }
