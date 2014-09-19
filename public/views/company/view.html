@@ -46,7 +46,7 @@
           <div>
             <h3>Last Changes</h3>
             <ul class="unstyled">
-              <li ng-repeat="notification in company.notifications | orderBy: 'posted':true | limitTo: 10">
+              <li ng-repeat="notification in companyNotifications | orderBy: 'posted':true | limitTo: 10">
                 <a href="#/member/{{notification.member}}" title="{{getMember(notification.member).name}}">
                   <img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:25px"/>
                 </a>

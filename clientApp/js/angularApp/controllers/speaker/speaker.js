@@ -26,8 +26,6 @@ theToolController
       $scope.submit = function() {
         var speakerData = this.formData;
 
-        speakerData.notifications = undefined;
-
         SpeakerFactory.Speaker.update({ id:speakerData.id }, speakerData, function(response) {
           if(response.error) {
             $scope.error = response.error;
@@ -69,7 +67,7 @@ theToolController
         $scope.speaker = $scope.formData = response;
 
         NotificationFactory.Speaker.getAll({id: $routeParams.id}, function(getData) {
-          $scope.speaker.notifications = getData;
+          $scope.speakerNotifications = getData;
 
           $scope.loading = false;
         });
