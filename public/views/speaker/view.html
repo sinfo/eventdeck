@@ -54,7 +54,7 @@
             </div>
           </div>
 
-          <div ng-if="speaker.notifications">
+          <div ng-if="speakerNotifications">
             <h3>Last Changes</h3>
             <ul class="unstyled">
               <li ng-repeat="notification in speakerNotifications | orderBy: 'posted':true | limitTo: 10">
