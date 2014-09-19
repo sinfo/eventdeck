@@ -26,6 +26,10 @@ theToolController
       $scope.submit = function() {
         var speakerData = this.formData;
 
+        speakerData.notifications = undefined;
+
+        console.log(speakerData);
+
         SpeakerFactory.Speaker.update({ id:speakerData.id }, speakerData, function(response) {
           if(response.error) {
             $scope.error = response.error;
