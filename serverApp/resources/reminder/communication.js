@@ -43,15 +43,17 @@ function remind(remindDays, done) {
 
           if(notifications.length === 0) {
             var speakerId = thread.split('speaker-')[1];
+            var request = {params: {id: speakerId}, auth: {credentials: {id: 'toolbot'}}};
 
-            Speaker.get({params: {id: speakerId}, auth: {credentials: {id: 'toolbot'}}}, function(speaker){
+            Speaker.get(request, function(speaker){
               if(speaker.error){
                 return threadDone(speaker.error);
               }
               
               if(speaker.status !== 'Give Up' && speaker.status !== 'Rejected') {
 
-                communication.getByThreadLast(thread, function(result){
+                request.path = '/api/speaker/' + speakerId;
+                communication.getByThreadLast(request, function(result){
                   if(today.getTime() - result.posted.getTime() > oneDay * remindDays){
                     if(result.status === undefined || result.status === 'approved'){
                       log.debug('[reminder]', thread);
