@@ -10,13 +10,11 @@ function get(request, reply) {
 
   var speakerId = request.params.id;
   var speaker   = {};
-  var member    = {};
-  var signature = '';
 
   async.series([
     getSpeaker,
     getCommunications,
-    getMember
+    // getMember
   ], done);
 
   function getSpeaker(cb) {
@@ -56,23 +54,6 @@ function get(request, reply) {
     }
   }
 
-  function getMember(cb) {
-    Member.findById(speaker.member, gotMember);
-
-    function gotMember(err, result) {
-      if (err) {
-        return cb(err);
-      }
-      else if (!result || result.length < 1) {
-        return cb('Could not find member with id \'' + speaker.member + '\'.');
-      }
-
-      member = result[0];
-      signature = '<table style=\'color: rgb(0, 0, 0); font-family:helvetica,arial;font-size:13px;\'><tbody><tr><td style=\'font-family: arial, sans-serif; margin: 0px;\'><a href=\'http://www.facebook.com/sinfoist\' target=\'_blank\'><img src=\'http://static.sinfo.org/SINFO_21/Assinatura/facebook.png\' /></a> <br /><a href=\'http://www.twitter.com/sinfo_ist\' target=\'_blank\'><img src=\'http://static.sinfo.org/SINFO_21/Assinatura/twitter.png\' /></a> <br /><a href=\'http://www.youtube.com/sinfoist\' target=\'_blank\'><img src=\'http://static.sinfo.org/SINFO_21/Assinatura/youtube.png\' /></a> <br /><a href=\'mailto:geral@sinfo.org\' target=\'_blank\'><img src=\'http://static.sinfo.org/SINFO_21/Assinatura/email.png\' /></a></td><td style=\'font-family: arial, sans-serif; margin: 0px; padding: 0px 10px;\'><a href=\'http://sinfo.org/\' target=\'_blank\'><img src=\'http://static.sinfo.org/SINFO_21/Assinatura/Logo%20Fundo%20Branco.png\' width=\'125px\' /></a></td><td style=\'font-family: arial, sans-serif; margin: 0px;\'><b>'+member.name+'</b> <br />'+member.roles[0].name+'<br /><a href=\'mailto:'+member.mails.sinfo+'\' target=\'_blank\'>'+member.mails.sinfo+'</a> <br />(+351) '+member.phones[0].split(' (')[0]+' </td></tr></tbody></table>';
-      cb();
-    }
-  }
-
   function done(err) {
     if (err) {
       log.error({err: err, username: request.auth.credentials.id, speaker: request.params.id}, '[speaker] error previewing initial email');
@@ -81,7 +62,6 @@ function get(request, reply) {
 
     log.info({username: request.auth.credentials.id, speaker: request.params.id}, '[speaker] sent inital email');
     reply.view('speakerTemplate.html', {
-      signature: signature,
       speaker: speaker
     });
   }
