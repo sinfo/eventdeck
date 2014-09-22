@@ -43,6 +43,9 @@ function remind(remindDays, done) {
 
           if(notifications.length === 0) {
             var speakerId = thread.split('speaker-')[1];
+            if(!speakerId){
+              threadDone();
+            }
             var request = {params: {id: speakerId}, auth: {credentials: {id: 'toolbot'}}};
 
             Speaker.get(request, function(speaker){
@@ -53,11 +56,13 @@ function remind(remindDays, done) {
               if(speaker.status !== 'Give Up' && speaker.status !== 'Rejected') {
 
                 request.path = '/api/speaker/' + speakerId;
+
                 communication.getByThreadLast(request, function(result){
+
                   if(today.getTime() - result.posted.getTime() > oneDay * remindDays){
                     if(result.status === undefined || result.status === 'approved'){
                       log.debug('[reminder]', thread);
-                      notify('toolbot', thread, 'reminder: communications have been innactive for more than ' + remindDays + ' days.', null, result.member);
+                      notify('toolbot', thread, 'reminder: communications have been innactive for more than ' + remindDays + ' days.', null, [result.member]);
                     }
                     else{
                       approvalTargets = [result.member].concat(coordination);
