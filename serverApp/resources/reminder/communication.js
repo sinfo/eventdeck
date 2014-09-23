@@ -1,7 +1,8 @@
 var async         = require('async');
 var Notification  = require('../../db/models/notification');
 var notify        = require('../notification').notify;
-var communication = require('../communication');
+var Communication = require('../communication');
+var Event         = require('../event');
 var Speaker       = require('../speaker');
 var Member        = require('../member');
 var log           = require('../../helpers/logger');
@@ -34,55 +35,72 @@ function remind(remindDays, done) {
   });
 
   function notifyThreads(){
-    communication.getThreads(function(threads){
 
-      async.each(threads, function(thread, threadDone) {
+    Event.getLast(null, function(lastEvent){
 
-        Notification.findByThreadAndDate(thread, week, function(err, notifications) {
-          if(err) { return threadDone(err); }
+      Communication.getThreads(function(threads){
 
-          if(notifications.length === 0) {
-            var speakerId = thread.split('speaker-')[1];
-            if(!speakerId){
+        async.each(threads, function(thread, threadDone) {
+
+          Notification.findByThreadAndDate(thread, week, function(err, notifications) {
+            if(err) { return threadDone(err); }
+
+            if(notifications.length === 0) {
+              var speakerId = thread.split('speaker-')[1];
+              var request = {params: {id: speakerId}, auth: {credentials: {id: 'toolbot'}}};
+              var speakerStatus;
+
+              if(!speakerId){
+                return threadDone();
+              }
+
+              Speaker.get(request, function(speaker){
+                if(speaker.error){
+                  return threadDone(speaker.error);
+                }
+
+                speaker.participations.every(function(participation){
+                  if(participation.event === lastEvent.id){
+                    speakerStatus = participation.status;
+                    return false;
+                  }
+                  return true;
+                });
+
+                log.debug(speakerStatus);
+                if(speakerStatus !== 'Give Up' && speakerStatus !== 'Rejected') {
+
+                  request.path = '/api/speaker/' + speakerId;
+
+                  Communication.getByThreadLast(request, function(result){
+
+                    if(today.getTime() - result.posted.getTime() > oneDay * remindDays){
+                      if(result.status === undefined || result.status === 'approved'){
+                        log.debug('[reminder]', thread);
+                        notify('toolbot', thread, 'reminder: communications have been innactive for more than ' + remindDays + ' days.', null, [result.member]);
+                      }
+                      else{
+                        approvalTargets = [result.member].concat(coordination);
+                        notify('toolbot', thread, 'reminder: communication peding approval for more than ' + remindDays + ' days.', null, approvalTargets);
+                      }
+                    }
+                    threadDone();
+                  });
+                }
+                else{
+                  log.debug('[reminder]', 'Speaker ' + speaker.id + ' status: ' + speaker.status + ' not reminded.');
+                  threadDone(); 
+                }
+              });
+            } else {
+              log.debug('[reminder]', thread + ' already notified in the past week.');
               threadDone();
             }
-            var request = {params: {id: speakerId}, auth: {credentials: {id: 'toolbot'}}};
-
-            Speaker.get(request, function(speaker){
-              if(speaker.error){
-                return threadDone(speaker.error);
-              }
-              
-              if(speaker.status !== 'Give Up' && speaker.status !== 'Rejected') {
-
-                request.path = '/api/speaker/' + speakerId;
-
-                communication.getByThreadLast(request, function(result){
-
-                  if(today.getTime() - result.posted.getTime() > oneDay * remindDays){
-                    if(result.status === undefined || result.status === 'approved'){
-                      log.debug('[reminder]', thread);
-                      notify('toolbot', thread, 'reminder: communications have been innactive for more than ' + remindDays + ' days.', null, [result.member]);
-                    }
-                    else{
-                      approvalTargets = [result.member].concat(coordination);
-                      notify('toolbot', thread, 'reminder: communication peding approval for more than ' + remindDays + ' days.', null, approvalTargets);
-                    }
-                  }
-                  threadDone();
-                });
-              }
-              else{
-                log.debug('[reminder]', 'Speaker ' + speaker.id + ' status: ' + speaker.status + ' not reminded.');
-                threadDone(); 
-              }
-            });
-          } else {
-            log.debug('[reminder]', thread + ' already notified in the past week.');
-            threadDone();
-          }
-        });
-      }, done);
+          });
+        }, done);
+      });
     });
+
+
   }
 }

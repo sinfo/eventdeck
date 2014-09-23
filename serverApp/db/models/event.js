@@ -22,5 +22,9 @@ eventSchema.statics.findAll = function (cb) {
   this.find({},cb);
 };
 
+eventSchema.statics.findLast = function (cb) {
+  this.find().sort('-date').limit(1).exec(cb);
+};
+
 
 var Event = module.exports = mongoose.model('Event', eventSchema);
