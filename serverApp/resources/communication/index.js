@@ -6,3 +6,4 @@ exports.get         	= require('./get');
 exports.getByThread 	= require('./getByThread');
 exports.getByThreadLast = require('./getByThreadLast');
 exports.getThreads 		= require('./getThreads');
+exports.getByEvent 		= require('./getByEvent');

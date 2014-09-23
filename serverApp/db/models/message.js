@@ -55,7 +55,7 @@ messageSchema.statics.findAll = function (cb) {
 
 messageSchema.statics.removeByThread = function (thread, cb) {
   this.find({source: thread}, cb);
-}
+};
 
  
 var Message = module.exports = mongoose.model('Message', messageSchema);

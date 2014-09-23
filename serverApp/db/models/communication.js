@@ -28,6 +28,10 @@ communicationSchema.statics.findByThreadLast = function (id, cb) {
   this.findOne({ thread: id }).sort('-posted').exec(cb);
 };
 
+communicationSchema.statics.findByEvent = function (event, cb) {
+  this.find({event: event}, cb);
+};
+
 communicationSchema.statics.findAll = function (cb) {
   this.find({},cb);
 };
