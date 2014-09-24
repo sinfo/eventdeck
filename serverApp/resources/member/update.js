@@ -5,7 +5,7 @@ var log = require('../../helpers/logger');
 module.exports = update;
 
 function update(request, reply) {
-  
+
   var member = request.payload;
 
   if (member.facebook) {
@@ -20,21 +20,20 @@ function update(request, reply) {
       }
 
       member.facebookId = result.id;
-      save(member, reply);
+      save(member.id, member);
     });
   }
   else {
-    save(request.params.id, member);
+    save(member.id, member);
   }
 
   function save(memberId, member) {
-
     Member.update({id: memberId}, member, function (err) {
       if (err) {
         log.error({err: err, username: request.auth.credentials.id, member: member}, '[member] error updating member');
         return reply({error: 'There was an error updating the member.'});
       }
-      
+
       log.info({username: request.auth.credentials.id, member: member.id}, '[member] member updated');
       reply({success: 'Member updated.'});
     });
