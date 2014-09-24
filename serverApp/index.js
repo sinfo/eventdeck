@@ -33,7 +33,9 @@ server.pack.require('hapi-auth-cookie', function (err) {
     var sockets = require('./sockets');
     webSocket.client = module.exports.webSocket.client = SocketIO.client.connect('http://localhost:' + server.info.port + '/chat');
     var routes = require('./routes');
-    var crono   = require('./scripts/crono');
+    var crono  = require('./scripts/crono');
+    var reminders = require('./resources/reminder');
+    reminders(null, function(stuff){});
     crono.reminder.start();
   });
 

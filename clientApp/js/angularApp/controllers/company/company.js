@@ -64,7 +64,7 @@ theToolController
         $scope.company = $scope.formData = response;
 
         NotificationFactory.Company.getAll({id: $routeParams.id}, function(getData) {
-          $scope.company.notifications = getData;
+          $scope.companyNotifications = getData;
 
           $scope.loading = false;
         });
