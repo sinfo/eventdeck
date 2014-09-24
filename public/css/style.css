@@ -20,6 +20,14 @@
 #topbar .ink-navigation {
   *zoom: 1;
 }
+
+.ink-navigation ul.menu.horizontal > li:first-child,
+.ink-navigation ul.menu.horizontal > li:first-child a,
+.ink-navigation ul.menu.horizontal > li:last-child,
+.ink-navigation ul.menu.horizontal > li:last-child a {
+  border-radius: 0;
+}
+
 #topbar .ink-navigation ul.push-right li {
   border-top: 6px solid #333;
   font-size: 14px;
