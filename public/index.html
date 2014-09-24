@@ -54,7 +54,7 @@
           <li ng-if="me._id" class="hide-all show-medium show-tiny show-small"><button class="fa fa-bars left-drawer-trigger" style="color:#333;"></button></li>
           <li><a class="logo" href="#/">EventDeck</a></li>
           <li>
-            <a class="logoPlaceholder">
+            <a class="logoPlaceholder" style="height: 44px; vertical-align: middle;" >
               <i class="fa fa-circle-o-notch fa-spin" ng-if="!currentEvent.name"></i>
               {{currentEvent.name || 'Loading...'}}
               <i class="fa fa-caret-down" ng-if="currentEvent.name"></i>
@@ -63,7 +63,7 @@
               <li ng-repeat="event in events | orderBy: ['kind', '-date']"><a ng-click="setCurrentEvent(event)">{{event.name}}</a></li>
             </ul>
           </li>
-          <li ng-if="me._id" class="hide-medium hide-small hide-tiny">
+          <li ng-if="me._id" class="hide-large hide-medium hide-small hide-tiny">
             <input type="text" ng-model="search.name" ng-change="show()" ng-click="show()" placeholder="Super search!!!" style="width: 200px; border-radius: 5px; border: 0; padding: 5px; margin: 5px;">
             <ul ng-if="search.name && search.name.length > 1" class="submenu" style="width: 300px; max-height: 400px; overflow: auto; display: {{display ? 'block' : 'none'}};">
               <li ng-repeat="company in companies | filter:search:strict">
@@ -117,7 +117,7 @@
             <li><a href="#/company"><i class="fa fa-plus"></i> Create New</a></li>
             </ul>
           </li>
-          <li style="border-color: #fbca04;"><a style="color: #fbca04;" href="#/members"><i class="fa fa-users"></i> Members</a>
+          <li style="border-color: #cf2fb9;"><a style="color: #cf2fb9;" href="#/members"><i class="fa fa-users"></i> Members</a>
             <ul class="submenu">
               <li><a href="#/member/me" style="width: 200px;"><i class="fa fa-user"></i> Me</a></li>
               <li><a ng-click="logout()" style="width: 200px;">Log Out <i class="fa fa-sign-out"></i></a></li>
@@ -172,7 +172,7 @@
             <li><a href="#/company"><i class="fa fa-plus"></i> Create New</a></li>
           </ul>
         </li>
-        <li><a href="#/members" style="background:#fbca04"><i class="fa fa-users"></i> Members</a>
+        <li><a href="#/members" style="background:#cf2fb9"><i class="fa fa-users"></i> Members</a>
           <ul class="submenu" style="margin: 0px 20px 0px;">
             <li><a href="#/member/me" style="width:200px"><i class="fa fa-user"></i> Me</a></li>
             <li><a ng-click="logout()" style="width:200px">Log Out <i class="fa fa-sign-out"></i></a></li>
