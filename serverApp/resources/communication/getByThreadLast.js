@@ -18,7 +18,7 @@ function list(request, reply) {
     return reply({error: 'API path unknown.'});
   }
 
-  Communication.findByThreadLast(request, function (err, result) {
+  Communication.findByThreadLast(threadId, function (err, result) {
     if (err) {
       log.error({err: err, username: request.auth.credentials.id}, '[communication] error getting communications for', request.params.id);
       return reply({error: 'There was an error getting the communications from \'' + threadId + '\'.'});
