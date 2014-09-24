@@ -32,18 +32,21 @@
   border-top: 6px solid #333;
   font-size: 14px;
 }
+
 #topbar .ink-navigation ul.push-right ul li {
   border-top: 0px solid #333;
 }
+
 #topbar .ink-navigation ul li a {
   padding: 5 10px;
-  font-weight: 300;
   line-height: 24px;
-  *height: auto;
+  font-weight: normal;
 }
+
 #topbar .ink-navigation ul li a:hover {
   background: #fff;
 }
+
 #topbar .ink-navigation ul li ul.submenu li a {
   color: #333;
 }
