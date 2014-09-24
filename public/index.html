@@ -65,7 +65,7 @@
           </li>
           <li ng-if="me._id" class="hide-large hide-medium hide-small hide-tiny">
             <input type="text" ng-model="search.name" ng-change="show()" ng-click="show()" placeholder="Super search!!!" style="width: 200px; border-radius: 5px; border: 0; padding: 5px; margin: 5px;">
-            <ul ng-if="search.name && search.name.length > 1" class="submenu" style="width: 300px; max-height: 400px; overflow-y: auto; overflow-x: hidden; display: {{display ? 'block' : 'none'}};">
+            <ul ng-if="search.name && search.name.length > 1" class="submenu" style="width: 300px; max-height: 400px; overflow: auto; display: {{display ? 'block' : 'none'}};">
               <li ng-repeat="company in companies | filter:search:strict">
                 <a ng-click="hide()" href="#/company/{{company.id}}"><img ng-src="{{company.img}}" style="height: 20px; max-width: 40px"> {{company.name}}</a>
               </li>
@@ -84,7 +84,7 @@
         <ul ng-if="me._id" class="menu horizontal push-right hide-medium hide-small hide-tiny">
           <li style="{{targetInfo.number == 0 ? 'border-color: FireBrick;' : 'border-color: #e11d21;'}}">
             <a style="{{targetInfo.number == 0 ? 'color: FireBrick;' : 'color: #e11d21;'}}"><span><i class="fa fa-bell"></i> {{targetInfo.text}}</span></a>
-            <ul class="submenu" style="max-height: 400px; overflow: auto;">
+            <ul class="submenu" style="max-height: 400px; overflow-x: hidden;">
               <li ng-repeat="notification in targetNotifications | orderBy: 'posted':true" style="width: 600px;">
                 <a style="{{notification.unread.indexOf(me.id) != -1 ? 'font-weight: 700;' : ''}}" title="{{notification.posted | date:'medium'}}" href="#/{{notification.thread.replace('-','/')}}">
                   <img ng-src="https://graph.facebook.com/{{getMember(notification.member).facebook}}/picture" style="width:20px">
