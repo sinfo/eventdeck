@@ -52,9 +52,9 @@
       <nav class="ink-navigation ink-grid ie7">
         <ul class="menu horizontal push-left medium-push-center small-push-center tiny-push-center" style="height: 44px;">
           <li ng-if="me._id" class="hide-all show-medium show-tiny show-small"><button class="fa fa-bars left-drawer-trigger" style="color:#333;"></button></li>
-          <li><a class="logo" href="#/">EventDeck</a></li>
-          <li>
-            <a class="logoPlaceholder" style="height: 44px; vertical-align: middle;" >
+          <li class="title logo"><a href="#/">EventDeck</a></li>
+          <li class="title selector">
+            <a>
               <i class="fa fa-circle-o-notch fa-spin" ng-if="!currentEvent.name"></i>
               {{currentEvent.name || 'Loading...'}}
               <i class="fa fa-caret-down" ng-if="currentEvent.name"></i>
