@@ -51,33 +51,24 @@
   color: #333;
 }
 
-#topbar .ink-navigation ul li a.logo {
+#topbar .ink-navigation ul li.title > a {
   margin-right: .5em;
-  padding: 7px;
+  padding: 0 7px;
   font-weight: bold;
   font-size: 30px;
   color: #333;
   height: 44px;
   line-height: 44px;
-  padding: 0;
 }
 
-#topbar .ink-navigation ul li a.logo:hover {
-  background: none;
-}
-
-#topbar .ink-navigation ul li a.logoPlaceholder {
-  margin-right: .5em;
-  padding: 0px;
-  font-weight: bold;
+#topbar .ink-navigation ul li.title.selector > a {
   font-size: 20px;
-  color: #333;
-  height:44px;
-  line-height: 44px;
 }
-#topbar .ink-navigation ul li a.logoPlaceholder:hover {
+
+#topbar .ink-navigation ul li.title.logo > a:hover {
   background: none;
 }
+
 #topbar .ink-navigation ul li button.fa-bars {
   font-size: 21px;
   background: none;
@@ -87,6 +78,7 @@
   padding: .8em .8em .8em 0;
   float: left;
 }
+
 #topbar .ink-navigation:after {
   content: "";
   display: table;
