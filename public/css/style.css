@@ -57,10 +57,12 @@
 
 #topbar .ink-navigation ul li a.logoPlaceholder {
   margin-right: .5em;
-  padding: 7px;
+  padding: 0px;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 20px;
   color: #333;
+  height:44px;
+  line-height: 44px;
 }
 #topbar .ink-navigation ul li a.logoPlaceholder:hover {
   background: none;
