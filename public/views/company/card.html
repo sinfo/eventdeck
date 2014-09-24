@@ -1,18 +1,18 @@
 <div ng-hide="!company._id || company.deleted" class="card">
   <a href="#/company/{{company.id}}">
     <div class="header wide" style="background-image:url({{company.img}});">
-   
+
     </div>
 
     <div class="content">
       <div class="unread" ng-show="company.unread">UNREAD!</div>
-      <div class="name">{{company.name}}</div> 
-      <div ng-if="participation" class="status" ng-class="participation.status.replace(' ','-').toLowerCase()">{{participation.status}}</div> 
+      <div class="name">{{company.name}}</div>
+      <div ng-if="participation" class="status" ng-class="participation.status.replace(' ','-').toLowerCase()">{{participation.status}}</div>
       <a ng-if="participation" class="member" href="#/member/{{participation.member}}">
         <img ng-src="https://graph.facebook.com/{{getMember(participation.member).facebook}}/picture"/>
         <small>{{getMember(participation.member).name}}</small>
       </a>
-      <div ng-if="!participation">Not assingned for {{event.name}}</div>
+      <div ng-if="!participation">Not assigned for {{event.name}}</div>
     </div>
   </a>
 
