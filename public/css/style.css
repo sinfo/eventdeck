@@ -154,7 +154,7 @@ body.ink-drawer .right-drawer li.active > a {
 .activity {
   padding: 10px;
   margin: 10px;
-  box-shadow: 1px 1px 2px #999; 
+  box-shadow: 1px 1px 2px #999;
 }
 .activity img {
   width: 25px;
@@ -167,7 +167,7 @@ body.ink-drawer .right-drawer li.active > a {
   width: 300px;
   height: auto;
   margin: 10px;
-  box-shadow: 1px 1px 2px #999; 
+  box-shadow: 1px 1px 2px #999;
   border-radius: 2px;
 }
 .card .header {
@@ -176,7 +176,7 @@ body.ink-drawer .right-drawer li.active > a {
   width: 100px;
   height: 160px;
   background-repeat:no-repeat;
-  background-position:center; 
+  background-position:center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -367,7 +367,7 @@ body.ink-drawer .right-drawer li.active > a {
   background: #333;
 }
 
-.current:hover, 
+.current:hover,
 .current {
   background: #555;
   color: white;
@@ -548,7 +548,7 @@ a, a:visited, a:hover {
   }
 
 .awesome-sidebar {
-  position: fixed; 
+  position: fixed;
   padding:20px;
   padding-top:60px;
   top:0;
@@ -558,7 +558,7 @@ a, a:visited, a:hover {
   background:#eee;
   border-left: 1px solid #ddd;
   overflow-y:scroll;
-  box-shadow: -3px 0px 50px 0px #999; 
+  box-shadow: -3px 0px 50px 0px #999;
 }
 .awesome-sidebar .header {
   font-size: 25px;
@@ -579,10 +579,10 @@ a, a:visited, a:hover {
   background:#eee;
   border: 1px solid #ddd;
   padding:5px;
-  box-shadow: -3px 0px 50px 0px #999; 
+  box-shadow: -3px 0px 50px 0px #999;
 }
 .awesome-bottombar {
-  position: fixed; 
+  position: fixed;
   bottom: 0;
   left:0;
   width: 100%;
@@ -592,14 +592,14 @@ a, a:visited, a:hover {
 }
 
 #scroll-chat {
-  position: absolute; 
-  top: 0; 
-  overflow-y: scroll; 
-  height: 100%; 
-  width: 100%; 
-  background:white; 
-  padding-bottom:100px;
-  padding-top:60px;
+  position: absolute;
+  top: 0;
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+  background: white;
+  padding-bottom: 100px;
+  padding-top: 43px;
 }
 
 .chat-message {
