@@ -39,6 +39,22 @@
 #topbar .ink-navigation ul li ul.submenu li a {
   color: #333;
 }
+
+#topbar .ink-navigation ul li a.logo {
+  margin-right: .5em;
+  padding: 7px;
+  font-weight: bold;
+  font-size: 30px;
+  color: #333;
+  height: 44px;
+  line-height: 44px;
+  padding: 0;
+}
+
+#topbar .ink-navigation ul li a.logo:hover {
+  background: none;
+}
+
 #topbar .ink-navigation ul li a.logoPlaceholder {
   margin-right: .5em;
   padding: 7px;
@@ -619,78 +635,77 @@ a, a:visited, a:hover {
 }
 
 .button {
-    background: #19ACCD;
-    color: #fefefe;
-    text-transform: uppercase;
-    text-align: center;
-    cursor: pointer;
-    font: normal normal 15px/2 "KlavikaRegularPlain", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    display: inline-block;
-    padding: 0 15px;
-    border:none;
-  }
+  background: #19ACCD;
+  color: #fefefe;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  font: normal normal 15px/2 "KlavikaRegularPlain", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: inline-block;
+  padding: 0 15px;
+  border:none;
+}
 
 .button:hover {
-    background: #19ACCD;
-    color: #fefefe;
-    text-transform: uppercase;
-    text-align: center;
-    cursor: pointer;
-    font: normal normal 15px/2 "KlavikaRegularPlain", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    display: inline-block;
-    padding: 0 15px;
-    border:none;
-  }
+  background: #19ACCD;
+  color: #fefefe;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  font: normal normal 15px/2 "KlavikaRegularPlain", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: inline-block;
+  padding: 0 15px;
+  border:none;
+}
 
-  .button.icon {
-    padding: 0 15px 0 0;
-    margin-right: 5px;
-  }
+.button.icon {
+  padding: 0 15px 0 0;
+  margin-right: 5px;
+}
 
-  .button.icon:before {
-    font: normal normal 15px/2 "Entypo";
-    font-variant: normal;
-    text-transform: none;
-    float: left;
-    border-right: 1px solid #76CEE2;
-    margin-right: 15px;
-    padding: 0 14px;
-    speak: none;
-    color: #fefefe;
-  }
+.button.icon:before {
+  font: normal normal 15px/2 "Entypo";
+  font-variant: normal;
+  text-transform: none;
+  float: left;
+  border-right: 1px solid #76CEE2;
+  margin-right: 15px;
+  padding: 0 14px;
+  speak: none;
+  color: #fefefe;
+}
 
-  .button.disabled, .tag.disabled {
-    background: transparent;
-    border: 1px dotted #ccc;
-    color: #575759;
-  }
+.button.disabled, .tag.disabled {
+  background: transparent;
+  border: 1px dotted #ccc;
+  color: #575759;
+}
 
-  .button.icon.disabled:before {border-right: 1px solid #ccc; color: #575759}
+.button.icon.disabled:before {border-right: 1px solid #ccc; color: #575759}
 
-  .button.icon.fenixedu:before {
-    content: '';
-    width: 20px;
-    height: 30px;
-    float: left;
-    border-right: 1px solid #FFFFFF;
-    background: rgba(0, 0, 0, 0) url('/img/fenixedu_white.svg') no-repeat 50% 40%;
-    background-size: 55%;
-  }
+.button.icon.fenixedu:before {
+  content: '';
+  width: 20px;
+  height: 30px;
+  float: left;
+  border-right: 1px solid #FFFFFF;
+  background: rgba(0, 0, 0, 0) url('/img/fenixedu_white.svg') no-repeat 50% 40%;
+  background-size: 55%;
+}
 
-  /*@font-face { font-family: 'FontAwesome'; src: local('FontAwesome'); }*/
+/*@font-face { font-family: 'FontAwesome'; src: local('FontAwesome'); }*/
 
-  .button.icon.facebook:before {
-    font-family: 'FontAwesome';
-    content: "\f09a";
-    width: 20px;
-    height: 30px;
-    float: left;
-    border-right: 1px solid #FFFFFF;
-    background-size: 55%;
-  }
+.button.icon.facebook:before {
+  font-family: 'FontAwesome';
+  content: "\f09a";
+  width: 20px;
+  height: 30px;
+  float: left;
+  border-right: 1px solid #FFFFFF;
+  background-size: 55%;
+}
 
-  .no-svg .button.icon.fenixedu:before {
-    background: rgba(0, 0, 0, 0) url('/img/fenixedu_white.png') no-repeat 50% 50%;
-    background-size: 55%;
-  }
-
+.no-svg .button.icon.fenixedu:before {
+  background: rgba(0, 0, 0, 0) url('/img/fenixedu_white.png') no-repeat 50% 50%;
+  background-size: 55%;
+}
