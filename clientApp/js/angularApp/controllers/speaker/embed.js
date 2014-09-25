@@ -6,12 +6,6 @@ theToolController.controller('SpeakerEmbedController', function ($rootScope, $sc
 
   function runController(){
 
-    if($scope.comments) {
-      $scope.speaker.comments = $scope.comments.filter(function(e) {
-        return e.thread == 'speaker-'+$scope.speaker.id;
-      });
-    }
-
     if($scope.event) {
       $scope.participation = $scope.speaker.participations.filter(function(o) {
         return o.event == $scope.event.id;

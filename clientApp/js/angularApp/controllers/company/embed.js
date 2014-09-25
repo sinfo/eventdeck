@@ -6,12 +6,6 @@ theToolController.controller('CompanyEmbedController', function ($rootScope, $sc
 
   function runController(){
 
-    if($scope.comments) {
-      $scope.company.comments = $scope.comments.filter(function(e) {
-        return e.thread == 'company-'+$scope.company.id;
-      });
-    }
-
     if($scope.event) {
       $scope.participation = $scope.company.participations.filter(function(o) {
         return o.event == $scope.event.id;
