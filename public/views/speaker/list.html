@@ -15,7 +15,7 @@
       <p class="ink-button {{searchSpeakers.member == undefined && !searchSpeakers.unassignedOnly && !searchSpeakers.unassigned ? 'current' : ''}}" ng-click="searchSpeakers={}; setSearchStatus();">Assigned</p>
     </div>
     <div class="button-group small">
-      <p class="ink-button {{searchSpeakers.member== me.id   && !searchSpeakers.unassignedOnly ? 'current' : ''}}" ng-click="searchSpeakers.member=me.id; searchSpeakers.unassigned = false; searchSpeakers.unassignedOnly = false;">Assigned to me</p>
+      <p class="ink-button {{searchSpeakers.member== me.id && !searchSpeakers.unassignedOnly ? 'current' : ''}}" ng-click="searchSpeakers.member=me.id; searchSpeakers.unassigned = false; searchSpeakers.unassignedOnly = false;">Assigned to me</p>
       <p class="ink-button {{searchSpeakers.unassignedOnly  ? 'current' : ''}}" ng-click="searchSpeakers.unassignedOnly = true">Unassigned only</p>
     </div>
 
@@ -23,8 +23,8 @@
 
     <h6>Filter Status</h6>
     <div ng-repeat="status in statuses">
-      <div class="ink-button small all-100 {{status.replace(' ','-').toLowerCase()}} {{status==searchSpeakers.status ? 'current' : '' }}" ng-click="searchSpeakers.status=status">
-        {{status}}
+      <div class="ink-button small all-100 {{status==searchSpeakers.status ? 'current' : '' }}" ng-click="searchSpeakers.status=status.name" style="border-left: 10px solid {{status.color}}; border-radius: 2px; background: #ddd; ">
+        {{status.name}}
       </div>
     </div>
 

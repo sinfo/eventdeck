@@ -1,5 +1,7 @@
 'use strict';
 
+var statuses = require('../../../../../options').statuses.speaker;
+
 theToolController
   .controller('SpeakersController', function ($rootScope, $scope, $http, $sce, SpeakerFactory) {
 
@@ -9,15 +11,15 @@ theToolController
 
       $scope.limit = 20;
 
-      $scope.statuses = ['Suggestion','Selected','Approved','Contacted','In Conversations','Accepted','Rejected','Give Up'];
+      console.log(statuses);
 
+      $scope.statuses = statuses;
+      
       $scope.speakerPredicate = 'updated';
       $scope.reverse = 'true';
       $scope.filteredSpeakers = [];
       $scope.searchSpeakers = {unassigned: true, unassignedOnly: false};
       $scope.unreadFirst = true;
-
-
 
       SpeakerFactory.Speaker.getAll(function(response) {
         $scope.speakers = response;
@@ -26,7 +28,7 @@ theToolController
 
       $scope.scroll = function() {
         if ($scope.limit <= $scope.speakers.length)
-          $scope.limit += 8;
+          $scope.limit += 1;
       };
 
       $scope.checkPermission = function (member) {
