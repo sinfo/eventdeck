@@ -1,6 +1,7 @@
 var Hapi  = require('hapi');
 var async = require('async');
 var Chat  = require('./../../db/models/chat.js');
+var log = require('../../helpers/logger');
 
 exports = module.exports = update;
 
