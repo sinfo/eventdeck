@@ -47,7 +47,7 @@ theToolController
 
       $scope.scroll = function() {
         if ($scope.limit <= $scope.companies.length)
-          $scope.limit += 8;
+          $scope.limit += 1;
       };
 
       $scope.checkPermission = function (member) {
