@@ -43,10 +43,12 @@ function create(request, reply) {
 
     newChat.save(function (err, reply){
       if (err) {
+        log.error({err: err, username: request.auth.credentials.id}, '[chat] error creating chat', newChat);
         return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
       } else if(reply) {
         return cb();
       } else { // same id
+        log.error({err: err, username: request.auth.credentials.id}, '[chat] chat id already exists: ' + request.payload.id);
         return cb(Hapi.error.conflict('Chat ID exists: '+request.payload.id));
       }
     });
@@ -54,6 +56,7 @@ function create(request, reply) {
 
   function done(err) {
     if (err) {
+      log.error({err: err, username: request.auth.credentials.id}, '[chat] error creating chat', newChat);
       reply({error:"There was an error!"});
     } else {
       reply({message:"Chat Updated!"});

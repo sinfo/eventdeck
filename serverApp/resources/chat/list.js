@@ -10,6 +10,7 @@ function list(request, reply) {
       reply(result);
     }
     else {
+      log.error({err: err, username: request.auth.credentials.id}, '[chat] error getting chats');
       reply("There was an error getting all chats.");
     }
   });

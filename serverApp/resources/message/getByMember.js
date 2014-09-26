@@ -15,7 +15,10 @@ function list(request, reply) {
     Message.findByMember(memberId, gotMessage);
 
     function gotMessage(err, result) {
-      if (err) cb(err);
+      if (err){
+        log.error({err: err, username: request.auth.credentials.id}, '[message] error getting message by memberId: ' + request.params.id);
+        cb(err);
+      }
       message = result;
       cb();
     }
@@ -23,6 +26,7 @@ function list(request, reply) {
 
   function done(err) {
     if (err) {
+      log.error({err: err, username: request.auth.credentials.id}, '[message] error getting message by memberId: ' + request.params.id);
       reply(Hapi.error.badRequest(err.detail));
     } else {
       reply(message);

@@ -16,6 +16,7 @@ function get(request, reply) {
 
     function gotMessage(err, result) {
       if (err) {
+        log.error({err: err, username: request.auth.credentials.id}, '[message] error getting message ' + request.params.id);
         cb(err);
       }
 
@@ -24,6 +25,7 @@ function get(request, reply) {
         cb();
       }
       else {
+        log.error({err: err, username: request.auth.credentials.id}, '[message] no message with ID: ' + request.params.id);
         cb(Hapi.error.conflict('No message with the ID: ' + messageId));
       }
     }
@@ -31,6 +33,7 @@ function get(request, reply) {
 
   function done(err) {
     if (err) {
+      log.error({err: err, username: request.auth.credentials.id}, '[message] error getting message' + request.params.id);
       reply(Hapi.error.badRequest(err.detail));
     } else {
       reply(message);
