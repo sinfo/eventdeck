@@ -8,8 +8,8 @@ function create(request, reply) {
   message = new Message(request.payload);
   message.save(function (err){
     if (err) {
-      console.log(err);
-      reply({error:"There was an error!"});
+      log.error({err: err, username: request.auth.credentials.id}, '[message] error creating message', message);
+      reply({error:"There was an error! "});
     } else{
       reply(message);
     }

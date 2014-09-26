@@ -23,6 +23,7 @@ function list(request, reply) {
 
   function done(err) {
     if (err) {
+      log.error({err: err, username: request.auth.credentials.id}, '[message] error getting message by chatId: ' + request.params.id);
       reply(Hapi.error.badRequest(err.detail));
     } else {
       reply(messages);
