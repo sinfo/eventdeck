@@ -2,6 +2,7 @@ var webSocket = require('./../index.js').webSocket.server;
 var async = require('async');
 var Chat = require('./../resources/chat');
 var Message = require('./../resources/message');
+var log = require('../helpers/logger');
 
 var outChat;
 var messages;
