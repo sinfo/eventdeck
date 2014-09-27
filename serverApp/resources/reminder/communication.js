@@ -67,7 +67,6 @@ function remind(remindDays, done) {
                   return true;
                 });
 
-                log.debug(speakerStatus);
                 if(speakerStatus !== 'Give Up' && speakerStatus !== 'Rejected') {
 
                   request.path = '/api/speaker/' + speakerId;
