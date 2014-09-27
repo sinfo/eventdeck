@@ -1,4 +1,5 @@
 var Message = require('./../../db/models/message.js');
+var log = require('../../helpers/logger');
 
 exports = module.exports = list;
 
