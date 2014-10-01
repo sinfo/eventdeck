@@ -31,6 +31,8 @@ serverApp/emailConfig.json
 serverApp/resources/auth/facebookConfig.js
 sftp-config.json
 
+public/js/theTool.js
+
 chromeExtension.*
 
 phonegap/platforms

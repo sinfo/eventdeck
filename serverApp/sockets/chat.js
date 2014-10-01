@@ -2,6 +2,7 @@ var webSocket = require('./../index.js').webSocket.server;
 var async = require('async');
 var Chat = require('./../resources/chat');
 var Message = require('./../resources/message');
+var log = require('./../helpers/logger');
 
 var outChat;
 var messages;
@@ -14,16 +15,18 @@ webSocket
 
     socket.emit('connected');
 
+    log.debug("[sockets-chat] New user connected");
+
     socket.on('auth', function(data, cbClient){
       var room = data.id;
       var user = data.user;
       socket.nickname = user;
       async.parallel([
         function(cb){
-          getChat(room, user, cb)
+          getChat(room, user, cb);
         },
         function(cb){
-          getMessages(room, Date.now(), cb)
+          getMessages(room, Date.now(), cb);
         }
       ], function(err, results){
           done(err, room, socket, cbClient);
@@ -36,17 +39,19 @@ webSocket
       async.series([
         createMessage,
         function(cb){
-          updateChat(room, cb)
+          updateChat(room, cb);
         }
       ], function(){
           webSocket.of('/chat').in(room).emit('message', {message: messageData});
+          log.debug("[sockets-chat] New message from " + socket.nickname + " sent");
           cbClient();
       });
     });
 
     socket.on('logout', function(data, cb){
-      socket.disconnect();
       webSocket.of('/chat').in(data.room).emit('user-disconnected', {id: socket.nickname});
+      log.debug("[sockets-chat] User " + socket.nickname + " disconnected");
+      socket.disconnect();
       cb();
     });
 
@@ -60,7 +65,7 @@ webSocket
       getMessages(room, dateRef, function(){
         webSocket.of('/chat').in(room).emit('history-send', {messages: messages});
         cb();
-      })
+      });
     });
 
   });
@@ -68,7 +73,7 @@ webSocket
 function getChat(chatID, memberID, cb){
   Chat.get({params:{id: chatID}}, function(response) {
     if(response.error) {
-      console.log('Chat id: ' + chatID + ' unavailable');
+      log.error('[sockets-chat] Chat id: ' + chatID + ' unavailable');
     } 
     else {
       message = 'Logged in chat with sucess';
@@ -84,7 +89,7 @@ function getChat(chatID, memberID, cb){
 function getMessages(chatID, dateRef, cb){
   Message.getByChatId({params:{id: chatID, date: dateRef}}, function(response){
     if(response.error) {
-      console.log('Chat id: ' + chatID + ' messages unavailable');
+      log.error('[sockets-chat] Chat id: ' + chatID + ' messages unavailable');
     } 
     else {
       messages = response;
@@ -97,7 +102,7 @@ function done(err, room, socket, cb){
   var data = {};
   if(err){
     if(err === 'member'){
-      console.log('Invalid member in chat: ' + room );
+      log.error('[sockets-chat] Invalid member in chat: ' + room );
       data.message = "You're not allowed into this chat!";
       data.err     = true;
     }
@@ -118,7 +123,7 @@ function done(err, room, socket, cb){
       message  : message,
       online   : online,
       err      : false
-    }
+    };
     webSocket.of('/chat').in(room).emit('user-connected', {id: socket.nickname});
   }
   socket.emit("validation", data);
@@ -128,8 +133,7 @@ function done(err, room, socket, cb){
 function createMessage(cb){
   Message.create({payload: messageData}, function(response){
     if(response.error) {
-      console.log('Message creation error!');
-      console.log(response.error);
+      log.error('[sockets-chat] Message creation error!', response.error);
     } else {
       messageData = response;
     }
@@ -140,8 +144,7 @@ function createMessage(cb){
 function updateChat(room, cb){
   Chat.update({params: { id: room}, payload: {message: messageData.id}}, function(response) {
     if(response.error) {
-      console.log('Chat id: ' + room + ' update error!');
-      console.log(response.error);
+      log.error('[sockets-chat] Chat id: ' + room + ' update error!', response.error);
     }
     cb();
   });
