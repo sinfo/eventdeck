@@ -1,5 +1,7 @@
 'use strict';
 
+var statuses = require('../../../../../options').statuses.company;
+
 theToolController
   .controller('CompanyController', function ($rootScope, $scope, $http, $location, $routeParams, $sce, CompanyFactory, MemberFactory, NotificationFactory) {
 
@@ -53,7 +55,7 @@ theToolController
         return true;
       };
 
-      $scope.statuses = ['Suggestion','Contacted','In Conversations','In Negotiations','Closed Deal','Rejected','Give Up'];
+      $scope.statuses = statuses;
       $scope.logoSizes = [null, 'S','M','L'];
       $scope.standDays = [null, 1,2,3,4,5];
       $scope.postsNumbers = [null, 1,2,3,4,5];

@@ -1,5 +1,5 @@
 'use strict';
- 
+
 theToolController
   .controller('CreateCompanyController', function ($rootScope, $scope, $http, $routeParams, $location, CompanyFactory) {
     $rootScope.update.timeout(runController);
@@ -23,7 +23,5 @@ theToolController
           }
         });
       };
-
-      $scope.statuses = ['Suggestion','Contacted','In Conversations','In Negotiations','Closed Deal','Rejected','Give Up'];
     }
   });

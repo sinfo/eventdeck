@@ -1,5 +1,7 @@
 'use strict';
 
+var statuses = require('../../../../../options').statuses.speaker;
+
 theToolController
   .controller('SpeakerController', function ($rootScope, $scope, $location, $window, $routeParams, $sce, SpeakerFactory, MemberFactory, NotificationFactory) {
     
@@ -59,7 +61,7 @@ theToolController
         return true;
       };
 
-      $scope.statuses = ['Suggestion','Selected','Approved','Contacted','In Conversations','Accepted','Rejected','Give Up'];
+      $scope.statuses = statuses;
 
       $scope.speaker = $scope.formData = $scope.getSpeaker($routeParams.id);
 

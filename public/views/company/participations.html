@@ -69,7 +69,7 @@
           </div>
           <div ng-if="participation.editing" class="content full">
             <select ng-model="participation.event" ng-options="e.id as e.name for e in events | orderBy: 'id'" resettable></select>
-            <select id="status" ng-model="participation.status" ng-options="s for s in statuses | orderBy: 'toString()'" resettable></select>
+            <select id="status" ng-model="participation.status" ng-options="s.name as s.name for s in statuses | orderBy: 'toString()'" resettable></select>
             <select ng-model="participation.member" ng-options="m.id as m.name for m in members | orderBy: 'id'" resettable></select>
             <input type="text" placeholder="Participation Kind" ng-model="participation.kind">
             <div class="small">
