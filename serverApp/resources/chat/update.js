@@ -1,6 +1,7 @@
 var Hapi  = require('hapi');
 var async = require('async');
 var Chat  = require('./../../db/models/chat.js');
+var log = require('../../helpers/logger');
 
 exports = module.exports = update;
 
@@ -21,6 +22,7 @@ function update(request, reply) {
 
     function gotChat(err, result) {
       if (err) {
+        log.error({err: err, username: request.auth.credentials.id}, '[chat] error getting chat: ' + request.params.id);
         cb(err);
       }
       if (result.length > 0) {
@@ -28,6 +30,7 @@ function update(request, reply) {
         cb();
       }
       else {
+        log.error({err: err, username: request.auth.credentials.id}, '[chat] no chat with id: ' + request.params.id);
         cb(Hapi.error.conflict('No chat with the ID: ' + chatId));
       }
     }
@@ -54,6 +57,7 @@ function update(request, reply) {
     var query = { _id: chat._id };
     Chat.update(query, diffChat, {}, function (err, numAffected){
       if (err) {
+        log.error({err: err, username: request.auth.credentials.id}, '[chat] error updating chat: ' + request.params.id);
         return cb(Hapi.error.internal('Hipcup on the DB' + err.detail));
       }
       cb();
@@ -62,6 +66,7 @@ function update(request, reply) {
 
   function done(err) {
     if (err) {
+      log.error({err: err, username: request.auth.credentials.id}, '[chat] error updating chat: ' + request.params.id);
       reply({error:"There was an error!"});
     } else {
       reply({message:'Chat Updated!'});
