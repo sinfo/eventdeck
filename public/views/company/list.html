@@ -19,8 +19,8 @@
 
     <h6>Filter Status</h6>
     <div ng-repeat="status in statuses">
-      <div class="ink-button small all-100 {{status.replace(' ','-').toLowerCase()}} {{status==searchCompanies.status ? 'current' : '' }}" ng-click="searchCompanies.status=status">
-        {{status}}
+      <div class="ink-button small all-100 {{status==searchCompanies.status ? 'current' : '' }}" ng-click="searchCompanies.status=status.name" style="border-left: 10px solid {{status.color}}; border-radius: 2px; background: #ddd; ">
+        {{status.name}}
       </div>
     </div>
 
