@@ -1,12 +1,12 @@
 {
   "name": "eventdeck",
   "version": "0.0.0",
-  "description": "eventdeck ========",
+  "description": "eventdeck",
   "main": "index.js",
   "scripts": {
-    "start": "node serverApp/index.js | bunyan",
-    "mon": "node_modules/.bin/nodemon serverApp/index.js | bunyan",
-    "dist": "node_modules/.bin/browserify -t brfs --debug -e clientApp/js/theTool.js -o public/js/theTool.js",
+    "start": "NODE_PATH=. node server/index.js | bunyan",
+    "mon": "NODE_PATH=. node_modules/.bin/nodemon server/index.js | bunyan",
+    "dist": "node_modules/.bin/browserify -t brfs --debug -e client/js/eventdeck.js -o public/js/eventdeck.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -14,14 +14,14 @@
     "url": "git://github.com/SINFO/eventdeck.git"
   },
   "author": "Francisco Dias <francisco@baiodias.com> (http://franciscodias.net/)",
-  "license": "BSD-2-Clause",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/SINFO/eventdeck/issues"
   },
   "homepage": "https://github.com/SINFO/eventdeck",
   "dependencies": {
     "cron": "~1.0.4",
-    "hapi": "~3.0.0",
+    "hapi": "~3.0.2",
     "hapi-auth-cookie": "~1.0.2",
     "handlebars": "~2.0.0-alpha.2",
     "async": "~0.2.9",

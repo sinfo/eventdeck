@@ -26,12 +26,12 @@ node_modules
 
 config.js
 config.json
-serverApp/cookieConfig.js
-serverApp/emailConfig.json
-serverApp/resources/auth/facebookConfig.js
+server/cookieConfig.js
+server/emailConfig.json
+server/resources/auth/facebookConfig.js
 sftp-config.json
 
-public/js/theTool.js
+public/js/eventdeck.js
 
 chromeExtension.*
 

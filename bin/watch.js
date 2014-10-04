@@ -10,9 +10,9 @@ var executing = false;
 var pending = false;
 
 var watch = [
-  'clientApp/js/**/*.js',
-  'clientApp/css/**/*.scss',
-  'serverApp/public/partials/*.html',
+  'client/js/**/*.js',
+  'client/css/**/*.scss',
+  'server/public/partials/*.html',
 ];
 
 gaze(watch, watcher);
