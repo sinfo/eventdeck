@@ -54,6 +54,12 @@ server.route({
 
 server.route({
   method: 'GET',
+  path: '/api/communication/{id}/comments',
+  config: handlers.getByThread
+});
+
+server.route({
+  method: 'GET',
   path: '/api/member/{id}/comments',
   config: handlers.getByMember
 });
