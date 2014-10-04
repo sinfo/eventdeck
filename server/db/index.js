@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-var mongo_url = require('../../config').mongo.url;
-var log = require('../helpers/logger');
+var mongo_url = require('config').mongo.url;
+var log = require('server/helpers/logger');
 
 mongoose.connect(mongo_url);
 var db = mongoose.connection;

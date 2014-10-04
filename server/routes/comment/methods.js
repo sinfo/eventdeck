@@ -1,0 +1,111 @@
+var Boom = require('boom');
+var server = require('server').hapi;
+var log = require('server/helpers/logger');
+var threadFromPath = require('server/helpers/threadFromPath');
+var Comment = require('server/db/models/comment');
+
+
+server.method('comment.create', create, {});
+server.method('comment.update', update, {});
+server.method('comment.get', get, {});
+server.method('comment.getByMember', getByMember, {});
+server.method('comment.getByThread', getByThread, {});
+server.method('comment.list', list, {});
+server.method('comment.remove', remove, {});
+
+
+function create(comment, memberId, cb) {
+  comment.member = memberId;
+  comment.posted = Date.now();
+  comment.updated = Date.now();
+
+  Comment.create(comment, function(err, _comment) {
+    if (err) {
+      log.error({ err: err, comment: comment}, 'error creating comment');
+      return cb(Boom.internal());
+    }
+
+    cb(null, _comment);
+  });
+};
+
+function update(id, comment, cb) {
+  comment.updated = Date.now();
+
+  Comment.findOneAndUpdate({_id: id}, comment, function(err, _comment) {
+    if (err) {
+      log.error({ err: err, comment: id}, 'error updating comment');
+      return cb(Boom.internal());
+    }
+    if (!_comment) {
+      log.warn({ err: 'not found', comment: id}, 'error updating comment');
+      return cb(Boom.notFound());
+    }
+
+    cb(null, _comment);
+  });
+};
+
+function get(id, cb) {
+  Comment.findOne({_id: id}, function(err, comment) {
+    if (err) {
+      log.error({ err: err, comment: id}, 'error getting comment');
+      return cb(Boom.internal());
+    }
+    if (!comment) {
+      log.warn({ err: 'not found', comment: id}, 'error getting comment');
+      return cb(Boom.notFound());
+    }
+
+    cb(null, comment);
+  });
+};
+
+function getByMember(memberId, cb) {
+  Comment.find({member: memberId}, function(err, comments) {
+    if (err) {
+      log.error({ err: err, member: memberId}, 'error getting comments');
+      return cb(Boom.internal());
+    }
+
+    cb(null, comments);
+  });
+};
+
+function getByThread(path, id, cb) {
+  var thread = threadFromPath(path, id);
+  Comment.find({thread: thread}, function(err, comments) {
+    if (err) {
+      log.error({ err: err, thread: thread}, 'error getting comments');
+      return cb(Boom.internal());
+    }
+
+    cb(null, comments);
+  });
+};
+
+function list(cb) {
+  Comment.find({}, function(err, comments) {
+    if (err) {
+      log.error({ err: err}, 'error getting all comments');
+      return cb(Boom.internal());
+    }
+    
+    cb(null, comments);
+  });
+};
+
+function remove(id, cb) {
+  Comment.findOneAndRemove({_id: id}, function(err, comment){
+    if (err) {
+      log.error({ err: err, comment: id}, 'error deleting comment');
+      return cb(Boom.internal());
+    }
+    if (!comment) {
+      log.error({ err: err, comment: id}, 'error deleting comment');
+      return cb(Boom.notFound());
+    }
+
+    return cb(null, comment);
+  });
+};
