@@ -17,8 +17,7 @@ var topicSchema = new mongoose.Schema({
   duedate: {type: Date},
   meetings: [String],
   tags: [String],
-  root: String,
-  posted: {type: Date}
+  root: String
 });
 
 topicSchema.statics.del = function (id, cb) {
