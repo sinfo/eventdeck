@@ -2,7 +2,7 @@ var Boom = require('boom');
 var server = require('server').hapi;
 var log = require('server/helpers/logger');
 var threadFromPath = require('server/helpers/threadFromPath');
-var communication = require('server/db/models/communication');
+var Communication = require('server/db/models/communication');
 
 
 server.method('communication.create', create, {});
@@ -21,7 +21,7 @@ function create(communication, memberId, cb) {
   communication.posted = Date.now();
   communication.updated = Date.now();
 
-  communication.create(communication, function(err, _communication) {
+  Communication.create(communication, function(err, _communication) {
     if (err) {
       log.error({ err: err, communication: communication}, 'error creating communication');
       return cb(Boom.internal());
@@ -34,7 +34,7 @@ function create(communication, memberId, cb) {
 function update(id, communication, cb) {
   communication.updated = Date.now();
 
-  communication.findOneAndUpdate({_id: id}, communication, function(err, _communication) {
+  Communication.findOneAndUpdate({_id: id}, communication, function(err, _communication) {
     if (err) {
       log.error({ err: err, communication: id}, 'error updating communication');
       return cb(Boom.internal());
@@ -49,7 +49,7 @@ function update(id, communication, cb) {
 };
 
 function get(id, cb) {
-  communication.findOne({_id: id}, function(err, communication) {
+  Communication.findOne({_id: id}, function(err, communication) {
     if (err) {
       log.error({ err: err, communication: id}, 'error getting communication');
       return cb(Boom.internal());
@@ -64,7 +64,7 @@ function get(id, cb) {
 };
 
 function getByMember(memberId, cb) {
-  communication.find({member: memberId}, function(err, communications) {
+  Communication.find({member: memberId}, function(err, communications) {
     if (err) {
       log.error({ err: err, member: memberId}, 'error getting communications');
       return cb(Boom.internal());
@@ -76,7 +76,7 @@ function getByMember(memberId, cb) {
 
 function getByThread(path, id, cb) {
   var thread = threadFromPath(path, id);
-  communication.find({thread: thread}, function(err, communications) {
+  Communication.find({thread: thread}, function(err, communications) {
     if (err) {
       log.error({ err: err, thread: thread}, 'error getting communications');
       return cb(Boom.internal());
@@ -87,7 +87,7 @@ function getByThread(path, id, cb) {
 };
 
 function getByEvent(eventId, cb) {
-  communication.find({event: eventId}, function(err, communications) {
+  Communication.find({event: eventId}, function(err, communications) {
     if (err) {
       log.error({ err: err, event: eventId}, 'error getting communications');
       return cb(Boom.internal());
@@ -98,7 +98,7 @@ function getByEvent(eventId, cb) {
 };
 
 function list(cb) {
-  communication.find({}, function(err, communications) {
+  Communication.find({}, function(err, communications) {
     if (err) {
       log.error({ err: err}, 'error getting all communications');
       return cb(Boom.internal());
@@ -109,7 +109,7 @@ function list(cb) {
 };
 
 function remove(id, cb) {
-  communication.findOneAndRemove({_id: id}, function(err, communication){
+  Communication.findOneAndRemove({_id: id}, function(err, communication){
     if (err) {
       log.error({ err: err, communication: id}, 'error deleting communication');
       return cb(Boom.internal());

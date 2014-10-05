@@ -2,19 +2,26 @@ var mongoose = require('mongoose');
 
 var memberSchema = new mongoose.Schema({
   id: {type: String, unique: true},
-  istId: String,
   name: String,
+  img: String,
   roles: [{
     id: String,
     name: String,
     isTeamLeader: Boolean
   }],
-  facebook: String,
-  facebookId: String,
+  facebook: {
+    id: {type: String, unique: true},
+    username: String
+  }
   skype: String,
   phones: [String],
-  mails: Object,
-  fenixedu: Object,
+  mails: {
+    main: String, // previously mails.sinfo
+    institutional: String, // previously mails.ist
+    dropbox: String,
+    google: String,
+    microsoft: String // previously mails.msn
+  },
   loginCodes: [{
     code: String,
     created: {type: Date}

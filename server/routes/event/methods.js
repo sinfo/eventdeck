@@ -29,7 +29,7 @@ function create(event, memberId, cb) {
 function update(id, event, cb) {
   event.updated = Date.now();
 
-  Event.findOneAndUpdate({id: id}, event, function(err, _event) {
+  Event.findOneAndUpdate({$or:[{id: id}, {_id: id}}, event, function(err, _event) {
     if (err) {
       log.error({ err: err, event: id}, 'error updating event');
       return cb(Boom.internal());
@@ -44,7 +44,7 @@ function update(id, event, cb) {
 };
 
 function get(id, cb) {
-  Event.findOne({id: id}, function(err, event) {
+  Event.findOne({$or:[{id: id}, {_id: id}}, function(err, event) {
     if (err) {
       log.error({ err: err, event: id}, 'error getting event');
       return cb(Boom.internal());
@@ -70,7 +70,7 @@ function list(cb) {
 };
 
 function remove(id, cb) {
-  Event.findOneAndRemove({id: id}, function(err, event){
+  Event.findOneAndRemove({$or:[{id: id}, {_id: id}}, function(err, event){
     if (err) {
       log.error({ err: err, event: id}, 'error deleting event');
       return cb(Boom.internal());
