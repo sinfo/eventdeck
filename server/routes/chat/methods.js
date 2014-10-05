@@ -23,7 +23,7 @@ function create(chat, memberId, cb) {
 };
 
 function update(id, chat, cb) {
-  Chat.findOneAndUpdate({_id: id}, chat, function(err, _chat) {
+  Chat.findOneAndUpdate({id: id}, chat, function(err, _chat) {
     if (err) {
       log.error({ err: err, chat: id}, 'error updating chat');
       return cb(Boom.internal());
@@ -38,7 +38,7 @@ function update(id, chat, cb) {
 };
 
 function get(id, cb) {
-  Chat.findOne({_id: id}, function(err, chat) {
+  Chat.findOne({id: id}, function(err, chat) {
     if (err) {
       log.error({ err: err, chat: id}, 'error getting chat');
       return cb(Boom.internal());
@@ -64,7 +64,7 @@ function list(cb) {
 };
 
 function remove(id, cb) {
-  Chat.findOneAndRemove({_id: id}, function(err, chat){
+  Chat.findOneAndRemove({id: id}, function(err, chat){
     if (err) {
       log.error({ err: err, chat: id}, 'error deleting chat');
       return cb(Boom.internal());
