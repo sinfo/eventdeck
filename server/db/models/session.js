@@ -4,13 +4,15 @@ var sessionSchema = new mongoose.Schema({
   id: String,
   name: String,
   kind: String,
-  thread: String,
+  img: String,
   place: String,
   description: String,
   speakers: [{
-    name: String,
-    position: String
+    id: String, // for main speakers
+    name: String, // for other speakers
+    position: String // for other speakers
   }],
+  companies: [ String ],
   date: { type: Date },
   duration: { type: Date },
   updated: { type: Date }

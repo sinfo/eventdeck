@@ -4,13 +4,9 @@ var speakerSchema = new mongoose.Schema({
   id: {type: String, unique: true},
   name: String,
   title: { type: String, default: "" },
-  status: String,
   description: String,
   img: String,
-  forum: Object,
   contacts: String,
-  member: String,
-  paragraph: String,
   participations: [{
     event: String,
     member: String,

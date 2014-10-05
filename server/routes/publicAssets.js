@@ -1,4 +1,4 @@
-var server = require('./../index.js').hapi;
+var server = require('server').hapi;
 
 var publicAssets = { 
   method: 'GET', 

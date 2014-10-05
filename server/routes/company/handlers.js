@@ -22,7 +22,7 @@ exports.create = {
       area: Joi.string().description('area of the company'),
       participations: Joi.array().description('participations of the company'),
       accesses: Joi.string().description('accesses of the company'),
-      updated: Joi.date().description('Date the company was last updated'),
+      updated: Joi.date().description('date the company was last updated'),
     }
   },
   pre: [
@@ -41,7 +41,7 @@ exports.update = {
   auth: true,
   validate: {
     params: {
-      id: Joi.string().required().description('dd of the company we want to update'),
+      id: Joi.string().required().description('id of the company we want to update'),
     },
     payload: {
       id: Joi.string().description('id of the company'),
@@ -54,7 +54,7 @@ exports.update = {
       area: Joi.string().description('area of the company'),
       participations: Joi.array().description('participations of the company'),
       accesses: Joi.string().description('accesses of the company'),
-      updated: Joi.date().description('Date the company was last updated'),
+      updated: Joi.date().description('date the company was last updated'),
     }
   },
   pre: [
@@ -75,7 +75,7 @@ exports.get = {
   auth: true,
   validate: {
     params: {
-      id: Joi.string().required().description('dd of the company we want to retrieve'),
+      id: Joi.string().required().description('id of the company we want to retrieve'),
     }
   },
   pre: [
@@ -93,7 +93,7 @@ exports.getByMember = {
   auth: true,
   validate: {
     params: {
-      id: Joi.string().required().description('dd of the member'),
+      id: Joi.string().required().description('id of the member'),
     }
   },
   pre: [
@@ -123,7 +123,7 @@ exports.remove = {
   validate: {
     params: {
      // TODO: CHECK PERMISSIONS
-     id: Joi.string().required().description('Id of the company we want to remove'),
+     id: Joi.string().required().description('id of the company we want to remove'),
      // TODO: REMOVE NOTIFICATIONS
      // TODO: REMOVE COMMENTS
      // TODO: REMOVE COMMUNICATIONS
