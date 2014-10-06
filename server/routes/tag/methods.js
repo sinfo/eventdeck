@@ -26,7 +26,7 @@ function create(tag, memberId, cb) {
 };
 
 function update(id, tag, cb) {
-  Tag.findOneAndUpdate({$or:[{id: id}, {_id: id}]}, tag, function(err, _tag) {
+  Tag.findOneAndUpdate({id: id}, tag, function(err, _tag) {
     if (err) {
       log.error({ err: err, tag: id}, 'error updating tag');
       return cb(Boom.internal());
@@ -41,7 +41,7 @@ function update(id, tag, cb) {
 };
 
 function get(id, cb) {
-  Tag.findOne({$or:[{id: id}, {_id: id}]}, function(err, tag) {
+  Tag.findOne({id: id}, function(err, tag) {
     if (err) {
       log.error({ err: err, tag: id}, 'error getting tag');
       return cb(Boom.internal());
@@ -67,7 +67,7 @@ function list(cb) {
 };
 
 function remove(id, cb) {
-  Tag.findOneAndRemove({$or:[{id: id}, {_id: id}]}, function(err, tag){
+  Tag.findOneAndRemove({id: id}, function(err, tag){
     if (err) {
       log.error({ err: err, tag: id}, 'error deleting tag');
       return cb(Boom.internal());

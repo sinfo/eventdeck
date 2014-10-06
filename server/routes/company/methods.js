@@ -31,7 +31,7 @@ function create(company, memberId, cb) {
 function update(id, company, cb) {
   company.updated = Date.now();
 
-  Company.findOneAndUpdate({$or:[{id: id}, {_id: id}]}, company, function(err, _company) {
+  Company.findOneAndUpdate({id: id}, company, function(err, _company) {
     if (err) {
       log.error({ err: err, company: id}, 'error updating company');
       return cb(Boom.internal());
@@ -46,7 +46,7 @@ function update(id, company, cb) {
 };
 
 function get(id, cb) {
-  Company.findOne({$or:[{id: id}, {_id: id}]}, function(err, company) {
+  Company.findOne({id: id}, function(err, company) {
     if (err) {
       log.error({ err: err, company: id}, 'error getting company');
       return cb(Boom.internal());
@@ -83,7 +83,7 @@ function list(cb) {
 };
 
 function remove(id, cb) {
-  Company.findOneAndRemove({$or:[{id: id}, {_id: id}]}, function(err, company){
+  Company.findOneAndRemove({id: id}, function(err, company){
     if (err) {
       log.error({ err: err, company: id}, 'error deleting company');
       return cb(Boom.internal());

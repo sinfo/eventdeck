@@ -11,26 +11,35 @@ server.method('auth.verifyCode', verifyCode, {});
 function createCode(memberId, cb) {
   server.methods.member.createLoginCode(memberId, function(err, member, loginCode) {
     if(err) {
-      return err;
+      log.error({ err: err, member: memberId}, 'error creating code');
+      return cb(Boom.internal('error creating code'));
     }
+
     var message = {
       to: member.name + '<' +member.mails.sinfo + '>',
       subject: '[SINFO] Login code for Deck!',
       text: 'Hey '+member.name+'!\n\n Here is your code for logging in on EventDeck: '+loginCode+'\n\n'+url_prefix+'#/login/'+member.id+'/'+loginCode,
     };
 
-    server.methods.email.send(message, cb)
+    server.methods.email.send(message, function(err) {
+      if(err) {
+        log.error({err: err} );
+        log.error({ err: err, member: memberId}, 'error sending code');
+        return cb(Boom.internal('error sending email'));
+      }
+      cb(null, member);
+    });
   });
 };
 
 function verifyCode(memberId, loginCode, cb) {
   server.methods.member.get(memberId, 'id,loginCodes', function(err, _member) {
     if (err) {
-      log.error({ err: err, tag: id}, 'error updating tag');
+      log.error({ err: err, member: memberId}, 'error verifying code');
       return cb(Boom.internal());
     }
     if (!_member) {
-      log.warn({ err: 'not found', tag: id}, 'error updating tag');
+      log.warn({ err: 'not found', member: memberId}, 'error verifying code');
       return cb(Boom.notFound());
     }
 

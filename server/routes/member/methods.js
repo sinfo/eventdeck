@@ -33,7 +33,7 @@ function create(member, cb) {
 };
 
 function update(id, member, cb) {
-  Member.findOneAndUpdate({$or:[{id: id}, {_id: id}]}, member, function(err, _member) {
+  Member.findOneAndUpdate({id: id}, member, function(err, _member) {
     if (err) {
       log.error({ err: err, member: id}, 'error updating member');
       return cb(Boom.internal());
@@ -50,7 +50,7 @@ function update(id, member, cb) {
 function createLoginCode(id, cb) {
   var loginCode = randtoken.generate(4).toUpperCase();
 
-  Member.findOneAndUpdate({$or:[{id: id}, {_id: id}]}, {$push: {'loginCode': {code: loginCode, created: new Date()}}}, function(err, _member) {
+  Member.findOneAndUpdate({id: id}, {$push: {'loginCode': {code: loginCode, created: new Date()}}}, function(err, _member) {
     if (err) {
       log.error({ err: err, member: id}, 'error creating login code for member');
       return cb(Boom.internal());
@@ -67,7 +67,7 @@ function createLoginCode(id, cb) {
 function get(id, fields, cb) {
   cb = cb || fields; // fields is optional
 
-  Member.findOne({$or:[{id: id}, {_id: id}, {'facebook.id': id}]}, fieldsParser(fields), function(err, member) {
+  Member.findOne({$or:[{id: id}, {'facebook.id': id}]}, fieldsParser(fields), function(err, member) {
     if (err) {
       log.error({ err: err, member: id}, 'error getting member');
       return cb(Boom.internal());
@@ -128,7 +128,7 @@ function list(fields, cb) {
 };
 
 function remove(id, cb) {
-  Member.findOneAndRemove({$or:[{id: id}, {_id: id}]}, function(err, member){
+  Member.findOneAndRemove({id: id}, function(err, member){
     if (err) {
       log.error({ err: err, member: id}, 'error deleting member');
       return cb(Boom.internal());

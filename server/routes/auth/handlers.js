@@ -15,7 +15,7 @@ exports.createCode = {
     { method: 'auth.createCode(params.id)', assign: 'member' }
   ],
   handler: function (request, reply) {
-    log.info({member: member.id}, '[auth] login code email sent'); 
+    log.info('[auth] login code email sent'); 
     reply({success: 'email sent'});
   },
   description: 'Creates and sends a login code to the member'

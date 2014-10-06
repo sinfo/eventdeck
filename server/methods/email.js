@@ -21,6 +21,7 @@ function send(message, cb) {
       message.text,
       function(err) { 
         if(err) { return cb(err); }
+        
         cb();
       });
   } 
@@ -42,6 +43,7 @@ function send(message, cb) {
         rawBody,
         function(err) { 
           if(err) { return cb(err); }
+
           cb();
         });
     });
