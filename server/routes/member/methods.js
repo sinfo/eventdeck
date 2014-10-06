@@ -50,7 +50,7 @@ function update(id, member, cb) {
 function createLoginCode(id, cb) {
   var loginCode = randtoken.generate(4).toUpperCase();
 
-  Member.findOneAndUpdate({id: id}, {$push: {'loginCode': {code: loginCode, created: new Date()}}}, function(err, _member) {
+  Member.findOneAndUpdate({id: id}, {$push: {'loginCodes': {code: loginCode, created: new Date()}}}, function(err, _member) {
     if (err) {
       log.error({ err: err, member: id}, 'error creating login code for member');
       return cb(Boom.internal());
@@ -60,7 +60,9 @@ function createLoginCode(id, cb) {
       return cb(Boom.notFound());
     }
 
-    cb(null, _member, loginCode);
+    log.info({member: id, loginCode: loginCode}, 'login code created');
+
+    cb(null, {member: _member, loginCode: loginCode} );
   });
 };
 

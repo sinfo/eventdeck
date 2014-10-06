@@ -31,11 +31,11 @@ exports.loginWithCode = {
     }
   },
   pre: [
-    { method: 'auth.verifyCode(auth.credentials.id, auth.credentials.code)', assign: 'member' }
+    { method: 'auth.verifyCode(params.id, params.code)', assign: 'member' }
   ],
   handler: function (request, reply) {
-    log.info({member: member.id}, '[auth] logged in using code'); 
-    request.auth.session.set(member);
+    log.info({member: request.pre.member.id}, '[auth] logged in using code'); 
+    request.auth.session.set(request.pre.member);
     reply({success: 'logged in'});
   },
   description: 'Let\'s a member log in using a code'

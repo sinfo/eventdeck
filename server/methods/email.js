@@ -14,13 +14,14 @@ server.method('email.send', send, {});
 exports = module.exports = send;
 
 function send(message, cb) {
+  log.debug({message: message, mg: mgConfig}, 'sending email');
   if(!message.html || message.html === '') {
     mg.sendText(mgConfig.email,
       message.to,
       message.subject,
       message.text,
       function(err) { 
-        if(err) { return cb(err); }
+        if(err) { return cb('error on mailgun'); }
         
         cb();
       });

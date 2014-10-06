@@ -9,21 +9,26 @@ server.method('auth.verifyCode', verifyCode, {});
 
 
 function createCode(memberId, cb) {
-  server.methods.member.createLoginCode(memberId, function(err, member, loginCode) {
+  server.methods.member.createLoginCode(memberId, function(err, result) {
     if(err) {
       log.error({ err: err, member: memberId}, 'error creating code');
       return cb(Boom.internal('error creating code'));
     }
 
+    var member = result.member;
+    var loginCode = result.loginCode;
+
+    log.info({member: memberId, loginCode: loginCode}, 'login code created');
+
     var message = {
-      to: member.name + '<' +member.mails.sinfo + '>',
+      to: member.name + '<' +member.mails.main + '>',
       subject: '[SINFO] Login code for Deck!',
       text: 'Hey '+member.name+'!\n\n Here is your code for logging in on EventDeck: '+loginCode+'\n\n'+url_prefix+'#/login/'+member.id+'/'+loginCode,
     };
 
     server.methods.email.send(message, function(err) {
       if(err) {
-        log.error({err: err} );
+        log.warn(err);
         log.error({ err: err, member: memberId}, 'error sending code');
         return cb(Boom.internal('error sending email'));
       }
@@ -33,14 +38,10 @@ function createCode(memberId, cb) {
 };
 
 function verifyCode(memberId, loginCode, cb) {
-  server.methods.member.get(memberId, 'id,loginCodes', function(err, _member) {
+  server.methods.member.get(memberId, 'id,loginCodes', function(err, member) {
     if (err) {
-      log.error({ err: err, member: memberId}, 'error verifying code');
-      return cb(Boom.internal());
-    }
-    if (!_member) {
-      log.warn({ err: 'not found', member: memberId}, 'error verifying code');
-      return cb(Boom.notFound());
+      log.error({ err: err, member: memberId}, 'error finding member');
+      return cb(err);
     }
 
     var index = member.loginCodes.map(function (o) {
@@ -48,10 +49,10 @@ function verifyCode(memberId, loginCode, cb) {
     }).indexOf(loginCode);
 
     if (index === -1 || member.loginCodes[index].created - new Date() > 5*60*1000) {
-      log.warn({member: memberId, loginCode: loginCode, loginCodes: _member.loginCodes}, '[auth] member tried to login with an invalid code');
+      log.warn({member: memberId, loginCode: loginCode, loginCodes: member.loginCodes}, '[auth] member tried to login with an invalid code');
       return cb(Boom.unauthorized());
     }
 
-    cb(null, _member);
+    cb(null, member);
   });
 };

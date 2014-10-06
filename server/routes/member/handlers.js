@@ -99,8 +99,8 @@ exports.get = {
 exports.getMe = {
   auth: 'session',
   validate: {
-    params: {
-      id: Joi.string().required().description('id of the member we want to retrieve'),
+    query: {
+      
     }
   },
   pre: [
