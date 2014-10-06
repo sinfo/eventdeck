@@ -1,9 +1,15 @@
+var Boom = require('boom');
+var server = require('server').hapi;
+var log = require('server/helpers/logger');
 var Mailgun = require('mailgun').Mailgun;
-var mgConfig = require('../../../config').mailgun;
-var mg = new Mailgun(mgConfig.api);
+var mgConfig = require('config').mailgun;
 
 var MailComposer = require('mailcomposer').MailComposer;
+
+var mg = new Mailgun(mgConfig.api);
 var mailcomposer = new MailComposer();
+
+server.method('email.send', send, {});
 
 exports = module.exports = send;
 

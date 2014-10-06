@@ -7,7 +7,6 @@ var Notification = require('server/db/models/notification');
 
 server.method('notification.notify', notify, {});
 server.method('notification.create', create, {});
-server.method('notification.update', update, {});
 server.method('notification.get', get, {});
 server.method('notification.list', list, {});
 server.method('notification.remove', remove, {});
@@ -48,7 +47,7 @@ function notify(memberId, thread, description, objectId, targets, cb) {
 
       create(notification, cb);
     });
-  }
+  });
 };
 
 function create(notification, cb) {

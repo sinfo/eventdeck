@@ -5,7 +5,7 @@ var log = require('server/helpers/logger');
 var handlers = module.exports;
 
 exports.get = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('Id of the notification we want to retrieve'),
@@ -22,7 +22,7 @@ exports.get = {
 
 
 exports.getByMember = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('Id of the member'),
@@ -39,7 +39,7 @@ exports.getByMember = {
 
 
 exports.getByThread = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('Id of the thread'),
@@ -55,7 +55,7 @@ exports.getByThread = {
 };
 
 exports.list = {
-  auth: true,
+  auth: 'session',
   pre: [
     { method: 'notification.list()', assign: 'notifications' }
   ],

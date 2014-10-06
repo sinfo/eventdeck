@@ -6,7 +6,7 @@ var handlers = module.exports;
 
 
 exports.create = {
-  auth: true,
+  auth: 'session',
   validate: {
     payload: {
       author: Joi.string().description('author of the topic'),
@@ -38,7 +38,7 @@ exports.create = {
 
 
 exports.update = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('id of the topic we want to update'),
@@ -74,7 +74,7 @@ exports.update = {
 
 
 exports.get = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('id of the topic we want to retrieve'),
@@ -92,7 +92,7 @@ exports.get = {
 
 
 exports.getByMember = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('id of the member'),
@@ -109,7 +109,7 @@ exports.getByMember = {
 
 
 exports.findByTag = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('id of the tag'),
@@ -126,7 +126,7 @@ exports.findByTag = {
 
 
 exports.getByMeeting = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('id of the meeting'),
@@ -143,7 +143,7 @@ exports.getByMeeting = {
 
 
 exports.list = {
-  auth: true,
+  auth: 'session',
   pre: [
     { method: 'topic.list()', assign: 'topics' }
   ],
@@ -155,7 +155,7 @@ exports.list = {
 
 
 exports.remove = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
      // TODO: CHECK PERMISSIONS

@@ -5,7 +5,7 @@ var log = require('server/helpers/logger');
 var handlers = module.exports;
 
 exports.get = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('id of the message we want to retrieve'),
@@ -22,7 +22,7 @@ exports.get = {
 
 
 exports.list = {
-  auth: true,
+  auth: 'session',
   pre: [
     { method: 'message.list()', assign: 'messages' }
   ],

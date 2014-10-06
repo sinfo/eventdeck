@@ -5,7 +5,7 @@ var log = require('server/helpers/logger');
 var handlers = module.exports;
 
 exports.create = {
-  auth: true,
+  auth: 'session',
   validate: {
     payload: {
       thread: Joi.string().required().description('Thread of the communication'),
@@ -33,7 +33,7 @@ exports.create = {
 
 
 exports.update = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('Id of the communication we want to update'),
@@ -62,7 +62,7 @@ exports.update = {
 
 
 exports.get = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('Id of the communication we want to retrieve'),
@@ -79,7 +79,7 @@ exports.get = {
 
 
 exports.getByMember = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('Id of the member'),
@@ -96,7 +96,7 @@ exports.getByMember = {
 
 
 exports.getByThread = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('Id of the thread'),
@@ -112,7 +112,7 @@ exports.getByThread = {
 };
 
 exports.getByEvent = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('Id of the event'),
@@ -129,7 +129,7 @@ exports.getByEvent = {
 
 
 exports.list = {
-  auth: true,
+  auth: 'session',
   pre: [
     { method: 'communication.list()', assign: 'communications' }
   ],
@@ -141,7 +141,7 @@ exports.list = {
 
 
 exports.remove = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
      id: Joi.string().required().description('Id of the communication we want to remove'),

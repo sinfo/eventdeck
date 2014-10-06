@@ -5,7 +5,7 @@ var log = require('server/helpers/logger');
 var handlers = module.exports;
 
 exports.create = {
-  auth: true,
+  auth: 'session',
   validate: {
     payload: {
       id: Joi.string().description('id of the tag'),
@@ -24,7 +24,7 @@ exports.create = {
 
 
 exports.update = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('id of the tag we want to update'),
@@ -47,7 +47,7 @@ exports.update = {
 
 
 exports.get = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('id of the tag we want to retrieve'),
@@ -65,7 +65,7 @@ exports.get = {
 
 
 exports.list = {
-  auth: true,
+  auth: 'session',
   pre: [
     { method: 'tag.list()', assign: 'tags' }
   ],
@@ -77,7 +77,7 @@ exports.list = {
 
 
 exports.remove = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
      id: Joi.string().required().description('id of the tag we want to remove'),

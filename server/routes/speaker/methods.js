@@ -31,7 +31,7 @@ function create(speaker, memberId, cb) {
 function update(id, speaker, cb) {
   speaker.updated = Date.now();
 
-  Speaker.findOneAndUpdate({$or:[{id: id}, {_id: id}}, speaker, function(err, _speaker) {
+  Speaker.findOneAndUpdate({$or:[{id: id}, {_id: id}]}, speaker, function(err, _speaker) {
     if (err) {
       log.error({ err: err, speaker: id}, 'error updating speaker');
       return cb(Boom.internal());
@@ -46,7 +46,7 @@ function update(id, speaker, cb) {
 };
 
 function get(id, cb) {
-  Speaker.findOne({$or:[{id: id}, {_id: id}}, function(err, speaker) {
+  Speaker.findOne({$or:[{id: id}, {_id: id}]}, function(err, speaker) {
     if (err) {
       log.error({ err: err, speaker: id}, 'error getting speaker');
       return cb(Boom.internal());
@@ -83,7 +83,7 @@ function list(cb) {
 };
 
 function remove(id, cb) {
-  Speaker.findOneAndRemove({$or:[{id: id}, {_id: id}}, function(err, speaker){
+  Speaker.findOneAndRemove({$or:[{id: id}, {_id: id}]}, function(err, speaker){
     if (err) {
       log.error({ err: err, speaker: id}, 'error deleting speaker');
       return cb(Boom.internal());

@@ -8,7 +8,7 @@ var handlers = module.exports;
 // TODO: EMAIL TRACKER
 
 exports.create = {
-  auth: true,
+  auth: 'session',
   validate: {
     payload: {
       id: Joi.string().description('id of the speaker'),
@@ -35,7 +35,7 @@ exports.create = {
 
 
 exports.update = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('id of the speaker we want to update'),
@@ -67,7 +67,7 @@ exports.update = {
 
 
 exports.get = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('id of the speaker we want to retrieve'),
@@ -85,7 +85,7 @@ exports.get = {
 
 
 exports.getByMember = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('id of the member'),
@@ -102,7 +102,7 @@ exports.getByMember = {
 
 
 exports.list = {
-  auth: true,
+  auth: 'session',
   pre: [
     { method: 'speaker.list()', assign: 'speakers' }
   ],
@@ -114,7 +114,7 @@ exports.list = {
 
 
 exports.remove = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
      // TODO: CHECK PERMISSIONS

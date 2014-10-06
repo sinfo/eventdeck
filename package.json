@@ -21,8 +21,6 @@
   "homepage": "https://github.com/SINFO/eventdeck",
   "dependencies": {
     "cron": "~1.0.4",
-    "hapi": "~3.0.2",
-    "hapi-auth-cookie": "~1.0.2",
     "handlebars": "~2.0.0-alpha.2",
     "async": "~0.2.9",
     "mongoose": "~3.8.4",
@@ -36,7 +34,10 @@
     "bunyan": "~1.0.1",
     "slug": "~0.7.1",
     "boom": "~2.5.1",
-    "joi": "~4.7.0"
+    "joi": "~4.7.0",
+    "rand-token": "~0.2.1",
+    "hapi": "~6.11.0",
+    "hapi-auth-cookie": "~1.3.2"
   },
   "devDependencies": {
     "nodemon": "~0.7.10",

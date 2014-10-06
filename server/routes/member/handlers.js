@@ -6,7 +6,7 @@ var handlers = module.exports;
 
 
 exports.create = {
-  auth: true,
+  auth: 'session',
   validate: {
     payload: {
       id: Joi.string().description('id of the member'),
@@ -41,7 +41,7 @@ exports.create = {
 
 
 exports.update = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('id of the member we want to update'),
@@ -80,7 +80,7 @@ exports.update = {
 
 
 exports.get = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('id of the member we want to retrieve'),
@@ -97,7 +97,7 @@ exports.get = {
 
 
 exports.getMe = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('id of the member we want to retrieve'),
@@ -114,7 +114,7 @@ exports.getMe = {
 
 
 exports.getByRole = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('id of the role'),
@@ -131,7 +131,7 @@ exports.getByRole = {
 
 
 exports.getTeamLeaders = {
-  auth: true,
+  auth: 'session',
   pre: [
     { method: 'member.getTeamLeaders()', assign: 'members' }
   ],
@@ -143,7 +143,7 @@ exports.getTeamLeaders = {
 
 
 exports.getSubscribers = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('id of the thread'),
@@ -160,7 +160,7 @@ exports.getSubscribers = {
 
 
 exports.list = {
-  auth: true,
+  auth: 'session',
   pre: [
     { method: 'member.list()', assign: 'members' }
   ],
@@ -172,7 +172,7 @@ exports.list = {
 
 
 exports.remove = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
      // TODO: CHECK PERMISSIONS

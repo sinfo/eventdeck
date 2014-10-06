@@ -26,7 +26,7 @@ function create(session, memberId, cb) {
 };
 
 function update(id, session, cb) {
-  Session.findOneAndUpdate({$or:[{id: id}, {_id: id}}, session, function(err, _session) {
+  Session.findOneAndUpdate({$or:[{id: id}, {_id: id}]}, session, function(err, _session) {
     if (err) {
       log.error({ err: err, session: id}, 'error updating session');
       return cb(Boom.internal());
@@ -41,7 +41,7 @@ function update(id, session, cb) {
 };
 
 function get(id, cb) {
-  Session.findOne({$or:[{id: id}, {_id: id}}, function(err, session) {
+  Session.findOne({$or:[{id: id}, {_id: id}]}, function(err, session) {
     if (err) {
       log.error({ err: err, session: id}, 'error getting session');
       return cb(Boom.internal());
@@ -67,7 +67,7 @@ function list(cb) {
 };
 
 function remove(id, cb) {
-  Session.findOneAndRemove({$or:[{id: id}, {_id: id}}, function(err, session){
+  Session.findOneAndRemove({$or:[{id: id}, {_id: id}]}, function(err, session){
     if (err) {
       log.error({ err: err, session: id}, 'error deleting session');
       return cb(Boom.internal());

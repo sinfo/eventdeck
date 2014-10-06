@@ -5,7 +5,7 @@ var log = require('server/helpers/logger');
 var handlers = module.exports;
 
 exports.create = {
-  auth: true,
+  auth: 'session',
   validate: {
     payload: {
       thread: Joi.string().required().description('Thread of the comment'),
@@ -31,7 +31,7 @@ exports.create = {
 
 
 exports.update = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('Id of the comment we want to update'),
@@ -58,7 +58,7 @@ exports.update = {
 
 
 exports.get = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('Id of the comment we want to retrieve'),
@@ -75,7 +75,7 @@ exports.get = {
 
 
 exports.getByMember = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('Id of the member'),
@@ -92,7 +92,7 @@ exports.getByMember = {
 
 
 exports.getByThread = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('Id of the thread'),
@@ -109,7 +109,7 @@ exports.getByThread = {
 
 
 exports.list = {
-  auth: true,
+  auth: 'session',
   pre: [
     { method: 'comment.list()', assign: 'comments' }
   ],
@@ -121,7 +121,7 @@ exports.list = {
 
 
 exports.remove = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
      // TODO: CHECK PERMISSIONS

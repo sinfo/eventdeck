@@ -5,7 +5,7 @@ var log = require('server/helpers/logger');
 var handlers = module.exports;
 
 exports.create = {
-  auth: true,
+  auth: 'session',
   validate: {
     payload: {
       author: Joi.string().description('author of the meeting'),
@@ -27,7 +27,7 @@ exports.create = {
 
 
 exports.update = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('id of the meeting we want to update'),
@@ -53,7 +53,7 @@ exports.update = {
 
 
 exports.get = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('id of the meeting we want to retrieve'),
@@ -73,7 +73,7 @@ exports.get = {
 
 
 exports.list = {
-  auth: true,
+  auth: 'session',
   pre: [
     { method: 'meeting.list()', assign: 'meetings' }
   ],
@@ -85,7 +85,7 @@ exports.list = {
 
 
 exports.remove = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
      // TODO: CHECK PERMISSIONS

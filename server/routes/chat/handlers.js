@@ -5,7 +5,7 @@ var log = require('server/helpers/logger');
 var handlers = module.exports;
 
 exports.create = {
-  auth: true,
+  auth: 'session',
   validate: {
     payload: {
       id: Joi.string().description('Id of the chat'),
@@ -26,7 +26,7 @@ exports.create = {
 
 
 exports.update = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('Id of the chat we want to update'),
@@ -50,7 +50,7 @@ exports.update = {
 
 
 exports.get = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('Id of the chat we want to retrieve'),
@@ -67,7 +67,7 @@ exports.get = {
 
 
 exports.list = {
-  auth: true,
+  auth: 'session',
   pre: [
     { method: 'chat.list()', assign: 'chats' }
   ],
@@ -79,7 +79,7 @@ exports.list = {
 
 
 exports.remove = {
-  auth: true,
+  auth: 'session',
   validate: {
     params: {
       id: Joi.string().required().description('Id of the chat we want to remove'),

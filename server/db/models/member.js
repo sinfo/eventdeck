@@ -12,7 +12,7 @@ var memberSchema = new mongoose.Schema({
   facebook: {
     id: {type: String, unique: true},
     username: String
-  }
+  },
   skype: String,
   phones: [String],
   mails: {
