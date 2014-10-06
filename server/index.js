@@ -10,7 +10,11 @@ require('./db');
     
 var server = module.exports.hapi = new Hapi.Server(port);
 
-server.pack.register(require('hapi-auth-cookie'), function (err) {
+server.pack.register([
+    require('lout'),
+    require('hapi-auth-cookie')
+  ], 
+  function (err) {
 
   server.auth.strategy('session', 'cookie', {
     cookie: cookieConfig.name,

@@ -82,12 +82,15 @@ exports.update = {
 exports.get = {
   auth: 'session',
   validate: {
+    query: {
+      fields: Joi.string().default('id,name,img,mails,facebook,phones').description('Fields we want to retrieve'),
+    },
     params: {
       id: Joi.string().required().description('id of the member we want to retrieve'),
     }
   },
   pre: [
-    { method: 'member.get(params.id)', assign: 'member' }
+    { method: 'member.get(params.id, query.fields)', assign: 'member' }
   ],
   handler: function (request, reply) {
     reply(request.pre.member);
@@ -100,11 +103,11 @@ exports.getMe = {
   auth: 'session',
   validate: {
     query: {
-      
+      fields: Joi.string().default('id,name,img').description('Fields we want to retrieve'),
     }
   },
   pre: [
-    { method: 'member.get(auth.credentials.id)', assign: 'member' }
+    { method: 'member.get(auth.credentials.id, query.fields)', assign: 'member' }
   ],
   handler: function (request, reply) {
     reply(request.pre.member);
@@ -116,6 +119,9 @@ exports.getMe = {
 exports.getByRole = {
   auth: 'session',
   validate: {
+    query: {
+      fields: Joi.string().default('id,name').description('Fields we want to retrieve'),
+    },
     params: {
       id: Joi.string().required().description('id of the role'),
     }
@@ -132,6 +138,11 @@ exports.getByRole = {
 
 exports.getTeamLeaders = {
   auth: 'session',
+  validate: {
+    query: {
+      fields: Joi.string().default('id,name').description('Fields we want to retrieve'),
+    },
+  },  
   pre: [
     { method: 'member.getTeamLeaders()', assign: 'members' }
   ],
@@ -145,6 +156,9 @@ exports.getTeamLeaders = {
 exports.getSubscribers = {
   auth: 'session',
   validate: {
+    query: {
+      fields: Joi.string().default('id,name').description('Fields we want to retrieve'),
+    },
     params: {
       id: Joi.string().required().description('id of the thread'),
     }
@@ -161,8 +175,13 @@ exports.getSubscribers = {
 
 exports.list = {
   auth: 'session',
+  validate: {
+    query: {
+      fields: Joi.string().default('id,name,img,facebook').description('Fields we want to retrieve'),
+    }
+  },
   pre: [
-    { method: 'member.list()', assign: 'members' }
+    { method: 'member.list(query.fields)', assign: 'members' }
   ],
   handler: function (request, reply) {
     reply(request.pre.members);
