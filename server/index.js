@@ -1,18 +1,18 @@
 var Hapi = require('hapi');
 var SocketIO = {server: require('socket.io'), client: require('socket.io-client')};
 var cookieConfig = require('config').cookie;
-var port = require('config').port;
+var config = require('config');
 var log = require('server/helpers/logger');
 
 log.error('### Starting EventDeck ###');
 
 require('./db');
     
-var server = module.exports.hapi = new Hapi.Server(port);
+var server = module.exports.hapi = new Hapi.Server(config.port);
 
 server.pack.register([
-    require('lout'),
-    require('hapi-auth-cookie')
+    { plugin: require('hapi-swagger'), options: config.swagger }, 
+    require('hapi-auth-cookie'),
   ], 
   function (err) {
 

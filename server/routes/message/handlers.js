@@ -6,6 +6,7 @@ var handlers = module.exports;
 
 exports.get = {
   auth: 'session',
+  tags: ['api','message'],
   validate: {
     params: {
       id: Joi.string().required().description('id of the message we want to retrieve'),
@@ -23,6 +24,7 @@ exports.get = {
 
 exports.list = {
   auth: 'session',
+  tags: ['api','message'],
   pre: [
     { method: 'message.list()', assign: 'messages' }
   ],

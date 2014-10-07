@@ -7,10 +7,11 @@ var handlers = module.exports;
 
 exports.create = {
   auth: 'session',
+  tags: ['api','member'],
   validate: {
     payload: {
       id: Joi.string().description('id of the member'),
-      name: Joi.string().description('name of the member'),
+      name: Joi.string().required().description('name of the member'),
       img: Joi.string().description('image of the member'),
       roles: Joi.array().description('roles of the member'),
       facebook: {
@@ -42,6 +43,7 @@ exports.create = {
 
 exports.update = {
   auth: 'session',
+  tags: ['api','member'],
   validate: {
     params: {
       id: Joi.string().required().description('id of the member we want to update'),
@@ -81,6 +83,7 @@ exports.update = {
 
 exports.get = {
   auth: 'session',
+  tags: ['api','member'],
   validate: {
     query: {
       fields: Joi.string().default('id,name,img,mails,facebook,phones').description('Fields we want to retrieve'),
@@ -101,6 +104,7 @@ exports.get = {
 
 exports.getMe = {
   auth: 'session',
+  tags: ['api','member'],
   validate: {
     query: {
       fields: Joi.string().default('id,name,img').description('Fields we want to retrieve'),
@@ -118,6 +122,7 @@ exports.getMe = {
 
 exports.getByRole = {
   auth: 'session',
+  tags: ['api','member'],
   validate: {
     query: {
       fields: Joi.string().default('id,name').description('Fields we want to retrieve'),
@@ -138,6 +143,7 @@ exports.getByRole = {
 
 exports.getTeamLeaders = {
   auth: 'session',
+  tags: ['api','member'],
   validate: {
     query: {
       fields: Joi.string().default('id,name').description('Fields we want to retrieve'),
@@ -155,6 +161,7 @@ exports.getTeamLeaders = {
 
 exports.getSubscribers = {
   auth: 'session',
+  tags: ['api','member'],
   validate: {
     query: {
       fields: Joi.string().default('id,name').description('Fields we want to retrieve'),
@@ -175,6 +182,7 @@ exports.getSubscribers = {
 
 exports.list = {
   auth: 'session',
+  tags: ['api','member'],
   validate: {
     query: {
       fields: Joi.string().default('id,name,img,facebook').description('Fields we want to retrieve'),
@@ -192,6 +200,7 @@ exports.list = {
 
 exports.remove = {
   auth: 'session',
+  tags: ['api','member'],
   validate: {
     params: {
      // TODO: CHECK PERMISSIONS

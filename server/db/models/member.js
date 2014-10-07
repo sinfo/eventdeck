@@ -10,7 +10,7 @@ var memberSchema = new mongoose.Schema({
     isTeamLeader: Boolean
   }],
   facebook: {
-    id: {type: String, unique: true},
+    id: {type: String, unique: true, sparse: true},
     username: String
   },
   skype: String,

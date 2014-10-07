@@ -6,6 +6,7 @@ var handlers = module.exports;
 
 exports.create = {
   auth: 'session',
+  tags: ['api','comment'],
   validate: {
     payload: {
       thread: Joi.string().required().description('Thread of the comment'),
@@ -32,6 +33,7 @@ exports.create = {
 
 exports.update = {
   auth: 'session',
+  tags: ['api','comment'],
   validate: {
     params: {
       id: Joi.string().required().description('Id of the comment we want to update'),
@@ -59,6 +61,7 @@ exports.update = {
 
 exports.get = {
   auth: 'session',
+  tags: ['api','comment'],
   validate: {
     params: {
       id: Joi.string().required().description('Id of the comment we want to retrieve'),
@@ -76,6 +79,7 @@ exports.get = {
 
 exports.getByMember = {
   auth: 'session',
+  tags: ['api','comment'],
   validate: {
     params: {
       id: Joi.string().required().description('Id of the member'),
@@ -93,6 +97,7 @@ exports.getByMember = {
 
 exports.getByThread = {
   auth: 'session',
+  tags: ['api','comment'],
   validate: {
     params: {
       id: Joi.string().required().description('Id of the thread'),
@@ -110,6 +115,7 @@ exports.getByThread = {
 
 exports.list = {
   auth: 'session',
+  tags: ['api','comment'],
   pre: [
     { method: 'comment.list()', assign: 'comments' }
   ],
@@ -122,6 +128,7 @@ exports.list = {
 
 exports.remove = {
   auth: 'session',
+  tags: ['api','comment'],
   validate: {
     params: {
      // TODO: CHECK PERMISSIONS

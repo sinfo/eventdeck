@@ -6,6 +6,7 @@ var handlers = module.exports;
 
 exports.get = {
   auth: 'session',
+  tags: ['api','notification'],
   validate: {
     params: {
       id: Joi.string().required().description('Id of the notification we want to retrieve'),
@@ -23,6 +24,7 @@ exports.get = {
 
 exports.getByMember = {
   auth: 'session',
+  tags: ['api','notification'],
   validate: {
     params: {
       id: Joi.string().required().description('Id of the member'),
@@ -40,6 +42,7 @@ exports.getByMember = {
 
 exports.getByThread = {
   auth: 'session',
+  tags: ['api','notification'],
   validate: {
     params: {
       id: Joi.string().required().description('Id of the thread'),
@@ -56,6 +59,7 @@ exports.getByThread = {
 
 exports.list = {
   auth: 'session',
+  tags: ['api','notification'],
   pre: [
     { method: 'notification.list()', assign: 'notifications' }
   ],

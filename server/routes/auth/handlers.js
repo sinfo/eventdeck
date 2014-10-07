@@ -6,6 +6,7 @@ var handlers = module.exports;
 
 exports.createCode = {
   auth: false,
+  tags: ['api','auth'],
   validate: {
     params: {
       id: Joi.string().description('id of the member'),
@@ -24,6 +25,7 @@ exports.createCode = {
 
 exports.loginWithCode = {
   auth: false,
+  tags: ['api','auth'],
   validate: {
     params: {
       id: Joi.string().description('id of the member'),
@@ -44,6 +46,7 @@ exports.loginWithCode = {
 
 exports.logout = {
   auth: 'session',
+  tags: ['api','auth'],
   handler: function (request, reply) {
     request.auth.session.clear();
     reply({success: 'your session is cleared'});

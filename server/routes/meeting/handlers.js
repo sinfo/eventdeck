@@ -6,6 +6,7 @@ var handlers = module.exports;
 
 exports.create = {
   auth: 'session',
+  tags: ['api','meeting'],
   validate: {
     payload: {
       author: Joi.string().description('author of the meeting'),
@@ -28,6 +29,7 @@ exports.create = {
 
 exports.update = {
   auth: 'session',
+  tags: ['api','meeting'],
   validate: {
     params: {
       id: Joi.string().required().description('id of the meeting we want to update'),
@@ -54,6 +56,7 @@ exports.update = {
 
 exports.get = {
   auth: 'session',
+  tags: ['api','meeting'],
   validate: {
     params: {
       id: Joi.string().required().description('id of the meeting we want to retrieve'),
@@ -74,6 +77,7 @@ exports.get = {
 
 exports.list = {
   auth: 'session',
+  tags: ['api','meeting'],
   pre: [
     { method: 'meeting.list()', assign: 'meetings' }
   ],
@@ -86,6 +90,7 @@ exports.list = {
 
 exports.remove = {
   auth: 'session',
+  tags: ['api','meeting'],
   validate: {
     params: {
      // TODO: CHECK PERMISSIONS

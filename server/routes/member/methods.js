@@ -4,6 +4,7 @@ var server = require('server').hapi;
 var log = require('server/helpers/logger');
 var threadFromPath = require('server/helpers/threadFromPath');
 var fieldsParser = require('server/helpers/fieldsParser');
+var dupKeyParser = require('server/helpers/dupKeyParser');
 var randtoken = require('rand-token');
 var Member = require('server/db/models/member');
 
@@ -20,10 +21,15 @@ server.method('member.remove', remove, {});
 
 
 function create(member, cb) {
-  member.id = member.id || slug(member.name);
+  member.id = member.id || slug(member.name).toLowerCase();
 
   Member.create(member, function(err, _member) {
     if (err) {
+      if(err.code == 11000) {
+        log.warn({err:err, requestedMember: member.id}, 'member is a duplicate');
+        return cb(Boom.conflict(dupKeyParser(err.err)+' is a duplicate'));
+      }
+
       log.error({ err: err, member: member}, 'error creating member');
       return cb(Boom.internal());
     }

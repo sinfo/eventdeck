@@ -9,6 +9,7 @@ var handlers = module.exports;
 
 exports.create = {
   auth: 'session',
+  tags: ['api','speaker'],
   validate: {
     payload: {
       id: Joi.string().description('id of the speaker'),
@@ -36,6 +37,7 @@ exports.create = {
 
 exports.update = {
   auth: 'session',
+  tags: ['api','speaker'],
   validate: {
     params: {
       id: Joi.string().required().description('id of the speaker we want to update'),
@@ -68,6 +70,7 @@ exports.update = {
 
 exports.get = {
   auth: 'session',
+  tags: ['api','speaker'],
   validate: {
     params: {
       id: Joi.string().required().description('id of the speaker we want to retrieve'),
@@ -86,6 +89,7 @@ exports.get = {
 
 exports.getByMember = {
   auth: 'session',
+  tags: ['api','speaker'],
   validate: {
     params: {
       id: Joi.string().required().description('id of the member'),
@@ -103,6 +107,7 @@ exports.getByMember = {
 
 exports.list = {
   auth: 'session',
+  tags: ['api','speaker'],
   pre: [
     { method: 'speaker.list()', assign: 'speakers' }
   ],
@@ -115,6 +120,7 @@ exports.list = {
 
 exports.remove = {
   auth: 'session',
+  tags: ['api','speaker'],
   validate: {
     params: {
      // TODO: CHECK PERMISSIONS

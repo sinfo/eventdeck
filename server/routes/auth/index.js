@@ -12,18 +12,18 @@ require('./methods');
 
 server.route({
   method: 'GET',
-  path: '/api/login/{id}',
+  path: '/api/auth/login/{id}',
   config: handlers.createCode
 });
 
 server.route({
   method: 'GET',
-  path: '/api/login/{id}/{code}',
+  path: '/api/auth/login/{id}/{code}',
   config: handlers.loginWithCode
 });
 
 server.route({
   method: 'GET',
-  path: '/api/logout',
+  path: '/api/auth/logout',
   config: handlers.logout
 });

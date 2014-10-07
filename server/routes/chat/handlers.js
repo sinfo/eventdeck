@@ -6,6 +6,7 @@ var handlers = module.exports;
 
 exports.create = {
   auth: 'session',
+  tags: ['api','chat'],
   validate: {
     payload: {
       id: Joi.string().description('Id of the chat'),
@@ -27,6 +28,7 @@ exports.create = {
 
 exports.update = {
   auth: 'session',
+  tags: ['api','chat'],
   validate: {
     params: {
       id: Joi.string().required().description('Id of the chat we want to update'),
@@ -51,6 +53,7 @@ exports.update = {
 
 exports.get = {
   auth: 'session',
+  tags: ['api','chat'],
   validate: {
     params: {
       id: Joi.string().required().description('Id of the chat we want to retrieve'),
@@ -68,6 +71,7 @@ exports.get = {
 
 exports.list = {
   auth: 'session',
+  tags: ['api','chat'],
   pre: [
     { method: 'chat.list()', assign: 'chats' }
   ],
@@ -80,6 +84,7 @@ exports.list = {
 
 exports.remove = {
   auth: 'session',
+  tags: ['api','chat'],
   validate: {
     params: {
       id: Joi.string().required().description('Id of the chat we want to remove'),
