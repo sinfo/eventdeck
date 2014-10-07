@@ -6,9 +6,9 @@ var log = require('server/helpers/logger');
 
 log.error('### Starting EventDeck ###');
 
-require('./db');
-    
 var server = module.exports.hapi = new Hapi.Server(config.port);
+
+require('./db');
 
 server.pack.register([
     { plugin: require('hapi-swagger'), options: config.swagger }, 
@@ -28,8 +28,8 @@ server.pack.register([
     isSecure: false,
   });
 
-  require('./methods');
-  var routes = require('./routes');
+  require('./resources');
+  require('./routes');
 
   server.start(function () {
     log.info('Server started at: ' + server.info.uri);

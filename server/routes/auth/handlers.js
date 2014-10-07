@@ -9,7 +9,7 @@ exports.createCode = {
   tags: ['api','auth'],
   validate: {
     params: {
-      id: Joi.string().description('id of the member'),
+      id: Joi.string().required().description('id of the member'),
     }
   },
   pre: [
