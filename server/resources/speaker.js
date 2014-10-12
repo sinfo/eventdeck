@@ -10,6 +10,7 @@ server.method('speaker.create', create, {});
 server.method('speaker.update', update, {});
 server.method('speaker.get', get, {});
 server.method('speaker.getByMember', getByMember, {});
+server.method('speaker.getByEvent', getByEvent, {});
 server.method('speaker.list', list, {});
 server.method('speaker.remove', remove, {});
 
@@ -64,6 +65,17 @@ function getByMember(memberId, cb) {
   Speaker.find({ participations: { $elemMatch: { member: memberId } } }, function(err, speaker) {
     if (err) {
       log.error({ err: err, member: memberId}, 'error getting speaker');
+      return cb(Boom.internal());
+    }
+
+    cb(null, speaker);
+  });
+};
+
+function getByEvent(eventId, cb) {
+  Speaer.find({ participations: { $elemMatch: { event: eventId } } }, function(err, speaker) {
+    if (err) {
+      log.error({ err: err, event: eventId}, 'error getting speaker');
       return cb(Boom.internal());
     }
 

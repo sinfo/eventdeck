@@ -37,3 +37,9 @@ server.route({
   path: '/api/members/{id}/companies',
   config: handlers.getByMember
 });
+
+server.route({
+  method: 'GET',
+  path: '/api/events/{id}/companies',
+  config: handlers.getByEvent
+});

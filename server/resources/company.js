@@ -3,6 +3,7 @@ var slug = require('slug');
 var server = require('server').hapi;
 var log = require('server/helpers/logger');
 var threadFromPath = require('server/helpers/threadFromPath');
+var fieldsParser = require('server/helpers/fieldsParser');
 var Company = require('server/db/models/company');
 
 
@@ -10,6 +11,7 @@ server.method('company.create', create, {});
 server.method('company.update', update, {});
 server.method('company.get', get, {});
 server.method('company.getByMember', getByMember, {});
+server.method('company.getByEvent', getByEvent, {});
 server.method('company.list', list, {});
 server.method('company.remove', remove, {});
 
@@ -24,7 +26,7 @@ function create(company, memberId, cb) {
       return cb(Boom.internal());
     }
 
-    cb(null, _company);
+    cb(_company);
   });
 };
 
@@ -41,12 +43,14 @@ function update(id, company, cb) {
       return cb(Boom.notFound());
     }
 
-    cb(null, _company);
+    cb(_company);
   });
 };
 
-function get(id, cb) {
-  Company.findOne({id: id}, function(err, company) {
+function get(id, fields, cb) {
+  cb = cb || fields; // fields is optional
+
+  Company.findOne({id: id}, fieldsParser(fields), function(err, company) {
     if (err) {
       log.error({ err: err, company: id}, 'error getting company');
       return cb(Boom.internal());
@@ -56,29 +60,46 @@ function get(id, cb) {
       return cb(Boom.notFound());
     }
 
-    cb(null, company);
+    cb(company);
   });
 };
 
-function getByMember(memberId, cb) {
-  Company.find({ participations: { $elemMatch: { member: memberId } } }, function(err, companies) {
+function getByMember(memberId, fields, cb) {
+  cb = cb || fields; // fields is optional
+
+  Company.find({ participations: { $elemMatch: { member: memberId } } }, fieldsParser(fields), function(err, companies) {
     if (err) {
       log.error({ err: err, member: memberId}, 'error getting companies');
       return cb(Boom.internal());
     }
 
-    cb(null, companies);
+    cb(companies);
   });
 };
 
-function list(cb) {
-  Company.find({}, function(err, companies) {
+function getByEvent(eventId, fields, cb) {
+  cb = cb || fields; // fields is optional
+
+  Company.find({ participations: { $elemMatch: { event: eventId } } }, fieldsParser(fields), function(err, companies) {
+    if (err) {
+      log.error({ err: err, event: eventId}, 'error getting companies');
+      return cb(Boom.internal());
+    }
+
+    cb(companies);
+  });
+};
+
+function list(fields, cb) {
+  cb = cb || fields; // fields is optional
+
+  Company.find({}, fieldsParser(fields), function(err, companies) {
     if (err) {
       log.error({ err: err}, 'error getting all companies');
       return cb(Boom.internal());
     }
     
-    cb(null, companies);
+    cb(companies);
   });
 };
 
@@ -93,6 +114,6 @@ function remove(id, cb) {
       return cb(Boom.notFound());
     }
 
-    return cb(null, company);
+    return cb(company);
   });
 };

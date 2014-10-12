@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var companySchema = new mongoose.Schema({
+var schema = new mongoose.Schema({
   id: {type: String, unique: true},
   name: String,
   description: String,
@@ -30,26 +30,26 @@ var companySchema = new mongoose.Schema({
   }],
   area: String,
   accesses: [{
-    date: { type: Date, default: Date.now },
+    date: Date,
     where: String
   }],
-  updated: { type: Date, default: Date.now }
+  updated: Date
 });
 
-companySchema.statics.findById = function (id, cb) {
+schema.statics.findById = function (id, cb) {
   this.find({ id: id }, cb);
 };
 
-companySchema.statics.findByName = function (id, cb) {
+schema.statics.findByName = function (id, cb) {
   this.find({ name: id }, cb);
 };
 
-companySchema.statics.findByMember = function (id, cb) {
+schema.statics.findByMember = function (id, cb) {
   this.find({ member: id }, cb);
 };
 
-companySchema.statics.findAll = function (cb) {
+schema.statics.findAll = function (cb) {
   this.find({},cb);
 };
 
-var Company = module.exports = mongoose.model('Company', companySchema);
+var Company = module.exports = mongoose.model('Company', schema);

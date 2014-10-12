@@ -36,7 +36,7 @@ exports.update = {
   tags: ['api','event'],
   validate: {
     params: {
-      id: Joi.string().required().description('dd of the event we want to update'),
+      id: Joi.string().required().description('id of the event we want to update'),
     },
     payload: {
       id: Joi.string().description('id of the event'),
@@ -65,11 +65,14 @@ exports.get = {
   tags: ['api','event'],
   validate: {
     params: {
-      id: Joi.string().required().description('dd of the event we want to retrieve'),
+      id: Joi.string().required().description('id of the event we want to retrieve'),
+    },
+    query: {
+      fields: Joi.string().default('id,name,kind,date').description('Fields we want to retrieve'),
     }
   },
   pre: [
-    { method: 'event.get(params.id)', assign: 'event' }
+    { method: 'event.get(params.id, query.fields)', assign: 'event' }
     // TODO: READ NOTIFICATIONS
   ],
   handler: function (request, reply) {
@@ -82,8 +85,13 @@ exports.get = {
 exports.list = {
   auth: 'session',
   tags: ['api','event'],
+  validate: {
+    query: {
+      fields: Joi.string().default('id,name,kind,date').description('Fields we want to retrieve'),
+    }
+  },
   pre: [
-    { method: 'event.list()', assign: 'events' }
+    { method: 'event.list(query.fields)', assign: 'events' }
   ],
   handler: function (request, reply) {
     reply(request.pre.events);

@@ -2,6 +2,7 @@ var Boom = require('boom');
 var slug = require('slug');
 var server = require('server').hapi;
 var log = require('server/helpers/logger');
+var fieldsParser = require('server/helpers/fieldsParser');
 var Event = require('server/db/models/event');
 
 
@@ -22,7 +23,7 @@ function create(event, memberId, cb) {
       return cb(Boom.internal());
     }
 
-    cb(null, _event);
+    cb(_event);
   });
 };
 
@@ -39,12 +40,14 @@ function update(id, event, cb) {
       return cb(Boom.notFound());
     }
 
-    cb(null, _event);
+    cb(_event);
   });
 };
 
-function get(id, cb) {
-  Event.findOne({id: id}, function(err, event) {
+function get(id, fields, cb) {
+  cb = cb || fields; // fields is optional
+
+  Event.findOne({id: id}, fieldsParser(fields), function(err, event) {
     if (err) {
       log.error({ err: err, event: id}, 'error getting event');
       return cb(Boom.internal());
@@ -54,18 +57,20 @@ function get(id, cb) {
       return cb(Boom.notFound());
     }
 
-    cb(null, event);
+    cb(event);
   });
 };
 
-function list(cb) {
-  Event.find({}, function(err, events) {
+function list(fields, cb) {
+  cb = cb || fields; // fields is optional
+
+  Event.find({}, fieldsParser(fields), function(err, events) {
     if (err) {
       log.error({ err: err}, 'error getting all events');
       return cb(Boom.internal());
     }
     
-    cb(null, events);
+    cb(events);
   });
 };
 
@@ -80,6 +85,6 @@ function remove(id, cb) {
       return cb(Boom.notFound());
     }
 
-    return cb(null, event);
+    return cb(event);
   });
 };

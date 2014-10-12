@@ -79,10 +79,13 @@ exports.get = {
   validate: {
     params: {
       id: Joi.string().required().description('id of the company we want to retrieve'),
-    }
+    },
+    query: {
+      fields: Joi.string().default('id,name,img').description('Fields we want to retrieve'),
+    }    
   },
   pre: [
-    { method: 'company.get(params.id)', assign: 'company' }
+    { method: 'company.get(params.id, query.fields)', assign: 'company' }
     // TODO: READ NOTIFICATIONS
   ],
   handler: function (request, reply) {
@@ -98,10 +101,13 @@ exports.getByMember = {
   validate: {
     params: {
       id: Joi.string().required().description('id of the member'),
-    }
+    },
+    query: {
+      fields: Joi.string().default('id,name,img').description('Fields we want to retrieve'),
+    }    
   },
   pre: [
-    { method: 'company.getByMember(params.id)', assign: 'companies' }
+    { method: 'company.getByMember(params.id, query.fields)', assign: 'companies' }
   ],
   handler: function (request, reply) {
     reply(request.pre.companies);
@@ -110,11 +116,37 @@ exports.getByMember = {
 };
 
 
+exports.getByEvent = {
+  auth: 'session',
+  tags: ['api','company'],
+  validate: {
+    params: {
+      id: Joi.string().required().description('id of the event'),
+    },
+    query: {
+      fields: Joi.string().default('id,name,img').description('Fields we want to retrieve'),
+    }    
+  },
+  pre: [
+    { method: 'company.getByEvent(params.id, query.fields)', assign: 'companies' }
+  ],
+  handler: function (request, reply) {
+    reply(request.pre.companies);
+  },
+  description: 'Gets companies associated to a given event'
+};
+
+
 exports.list = {
   auth: 'session',
   tags: ['api','company'],
+  validate: {
+    query: {
+      fields: Joi.string().default('id,name,img').description('Fields we want to retrieve'),
+    }    
+  },
   pre: [
-    { method: 'company.list()', assign: 'companies' }
+    { method: 'company.list(query.fields)', assign: 'companies' }
   ],
   handler: function (request, reply) {
     reply(request.pre.companies);
