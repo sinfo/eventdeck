@@ -89,8 +89,10 @@ function get(id, fields, cb) {
   });
 };
 
-function getByRole(roleId, cb) {
-  Member.find({'roles.id': roleId}, function(err, members) {
+function getByRole(roleId, fields, cb) {
+  cb = cb || fields; // fields is optional
+
+  Member.find({'roles.id': roleId}, fieldsParser(fields), function(err, members) {
     if (err) {
       log.error({ err: err, member: memberId}, 'error getting members');
       return cb(Boom.internal());
@@ -100,8 +102,10 @@ function getByRole(roleId, cb) {
   });
 };
 
-function getTeamLeaders(cb) {
-  Member.find({'roles.isTeamLeader': true}, function(err, members) {
+function getTeamLeaders(fields, cb) {
+  cb = cb || fields; // fields is optional
+
+  Member.find({'roles.isTeamLeader': true}, fieldsParser(fields), function(err, members) {
     if (err) {
       log.error({ err: err, isTeamLeader: true}, 'error getting members');
       return cb(Boom.internal());
