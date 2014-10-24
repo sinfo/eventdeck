@@ -29,7 +29,7 @@ exports.create = {
     // TODO: CREATE NOTIFICATION
   ],
   handler: function (request, reply) {
-    reply(request.pre.speaker).created('/api/speakers/'+request.pre.speaker.id);
+    reply(request.pre.speaker).created('/speakers/'+request.pre.speaker.id);
   },
   description: 'Creates a new speaker'
 };

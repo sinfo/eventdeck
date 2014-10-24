@@ -32,7 +32,7 @@ exports.create = {
     // TODO: CREATE NOTIFICATION
   ],
   handler: function (request, reply) {
-    reply(request.pre.topic).created('/api/topics/'+request.pre.topic.id);
+    reply(request.pre.topic).created('/topics/'+request.pre.topic.id);
   },
   description: 'Creates a new topic'
 };

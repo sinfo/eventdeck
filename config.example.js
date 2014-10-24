@@ -28,5 +28,10 @@ config.bunyan = {
   level: process.env.EVENTDECK_LOG_LEVEL || 'trace'
 };
 
+config.swagger = {
+  pathPrefixSize: 1,
+  apiVersion: pack.version
+};
+
 
 module.exports = config;

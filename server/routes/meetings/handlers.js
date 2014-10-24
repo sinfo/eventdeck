@@ -21,7 +21,7 @@ exports.create = {
     // TODO: CREATE NOTIFICATION
   ],
   handler: function (request, reply) {
-    reply(request.pre.meeting).created('/api/meetings/'+request.pre.meeting.id);
+    reply(request.pre.meeting).created('/meetings/'+request.pre.meeting.id);
   },
   description: 'Creates a new meeting'
 };

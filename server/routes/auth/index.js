@@ -4,24 +4,24 @@ var handlers = require('./handlers');
 
 // server.route({
 //   method: 'GET',
-//   path: '/api/login/facebook',
+//   path: '/login/facebook',
 //   config: handlers.facebook
 // });
 
 server.route({
   method: 'GET',
-  path: '/api/auth/login/{id}',
+  path: '/auth/login/{id}',
   config: handlers.createCode
 });
 
 server.route({
   method: 'GET',
-  path: '/api/auth/login/{id}/{code}',
+  path: '/auth/login/{id}/{code}',
   config: handlers.loginWithCode
 });
 
 server.route({
   method: 'GET',
-  path: '/api/auth/logout',
+  path: '/auth/logout',
   config: handlers.logout
 });

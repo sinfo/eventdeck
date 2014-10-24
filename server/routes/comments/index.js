@@ -4,60 +4,60 @@ var handlers = require('./handlers');
 
 server.route({
   method: 'GET',
-  path: '/api/comments',
+  path: '/comments',
   config: handlers.list
 });
 
 server.route({
   method: 'GET',
-  path: '/api/comments/{id}',
+  path: '/comments/{id}',
   config: handlers.get
 });
 
 server.route({
   method: 'POST',
-  path: '/api/comments',
+  path: '/comments',
   config: handlers.create
 });
 
 server.route({
   method: 'PUT',
-  path: '/api/comments/{id}',
+  path: '/comments/{id}',
   config: handlers.update
 });
 
 server.route({
   method: 'DELETE',
-  path: '/api/comments/{id}',
+  path: '/comments/{id}',
   config: handlers.remove
 });
 
 server.route({
   method: 'GET',
-  path: '/api/companies/{id}/comments',
+  path: '/companies/{id}/comments',
   config: handlers.getByThread
 });
 
 server.route({
   method: 'GET',
-  path: '/api/speakers/{id}/comments',
+  path: '/speakers/{id}/comments',
   config: handlers.getByThread
 });
 
 server.route({
   method: 'GET',
-  path: '/api/topics/{id}/comments',
+  path: '/topics/{id}/comments',
   config: handlers.getByThread
 });
 
 server.route({
   method: 'GET',
-  path: '/api/communications/{id}/comments',
+  path: '/communications/{id}/comments',
   config: handlers.getByThread
 });
 
 server.route({
   method: 'GET',
-  path: '/api/members/{id}/comments',
+  path: '/members/{id}/comments',
   config: handlers.getByMember
 });

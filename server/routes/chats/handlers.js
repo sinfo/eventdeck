@@ -20,7 +20,7 @@ exports.create = {
     { method: 'chat.create(payload, auth.credentials.id)', assign: 'chat' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.chat).created('/api/chats/'+request.pre.chat._id);
+    reply(request.pre.chat).created('/chats/'+request.pre.chat._id);
   },
   description: 'Creates a new chat'
 };

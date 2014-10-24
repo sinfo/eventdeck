@@ -32,7 +32,7 @@ exports.create = {
     // TODO: CREATE NOTIFICATION
   ],
   handler: function (request, reply) {
-    reply(request.pre.company).created('/api/companies/'+request.pre.company.id);
+    reply(request.pre.company).created('/companies/'+request.pre.company.id);
   },
   description: 'Creates a new company'
 };

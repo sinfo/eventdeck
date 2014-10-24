@@ -4,36 +4,36 @@ var handlers = require('./handlers');
 
 server.route({
   method: 'GET',
-  path: '/api/topics',
+  path: '/topics',
   config: handlers.list
 });
 
 server.route({
   method: 'GET',
-  path: '/api/topics/{id}',
+  path: '/topics/{id}',
   config: handlers.get
 });
 
 server.route({
   method: 'POST',
-  path: '/api/topics',
+  path: '/topics',
   config: handlers.create
 });
 
 server.route({
   method: 'PUT',
-  path: '/api/topics/{id}',
+  path: '/topics/{id}',
   config: handlers.update
 });
 
 server.route({
   method: 'DELETE',
-  path: '/api/topics/{id}',
+  path: '/topics/{id}',
   config: handlers.remove
 });
 
 server.route({
   method: 'GET',
-  path: '/api/members/{id}/topics',
+  path: '/members/{id}/topics',
   config: handlers.getByMember
 });

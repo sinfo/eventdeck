@@ -4,66 +4,66 @@ var handlers = require('./handlers');
 
 server.route({
   method: 'GET',
-  path: '/api/members',
+  path: '/members',
   config: handlers.list
 });
 
 server.route({
   method: 'GET',
-  path: '/api/members/{id}',
+  path: '/members/{id}',
   config: handlers.get
 });
 
 server.route({
   method: 'GET',
-  path: '/api/members/me',
+  path: '/members/me',
   config: handlers.getMe
 });
 
 server.route({
   method: 'POST',
-  path: '/api/members',
+  path: '/members',
   config: handlers.create
 });
 
 server.route({
   method: 'PUT',
-  path: '/api/members/{id}',
+  path: '/members/{id}',
   config: handlers.update
 });
 
 server.route({
   method: 'DELETE',
-  path: '/api/members/{id}',
+  path: '/members/{id}',
   config: handlers.remove
 });
 
 server.route({
   method: 'GET',
-  path: '/api/role/{id}/members',
+  path: '/role/{id}/members',
   config: handlers.getByRole
 });
 
 server.route({
   method: 'GET',
-  path: '/api/role/teamleaders',
+  path: '/role/teamleaders',
   config: handlers.getTeamLeaders
 });
 
 server.route({
   method: 'GET',
-  path: '/api/companies/{id}/subscribers',
+  path: '/companies/{id}/subscribers',
   config: handlers.getSubscribers
 });
 
 server.route({
   method: 'GET',
-  path: '/api/speakers/{id}/subscribers',
+  path: '/speakers/{id}/subscribers',
   config: handlers.getSubscribers
 });
 
 server.route({
   method: 'GET',
-  path: '/api/topics/{id}/subscribers',
+  path: '/topics/{id}/subscribers',
   config: handlers.getSubscribers
 });
