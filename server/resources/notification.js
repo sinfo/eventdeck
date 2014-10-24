@@ -15,7 +15,7 @@ server.method('notification.getByThread', getByThread, {});
 server.method('notification.removeByThread', removeByThread, {});
 
 
-function notify(memberId, thread, description, objectId, targets, cb) {
+function notify(memberId, thread, description, objectId, cb) {
   server.methods.member.list('id', function gotMembers(err, _members) {
     if (err) {
       log.error({ err: err, thread: thread}, 'error creating notification');

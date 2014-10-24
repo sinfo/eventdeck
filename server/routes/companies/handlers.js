@@ -160,15 +160,15 @@ exports.remove = {
   tags: ['api','company'],
   validate: {
     params: {
-     // TODO: CHECK PERMISSIONS
-     id: Joi.string().required().description('id of the company we want to remove'),
-     // TODO: REMOVE NOTIFICATIONS
-     // TODO: REMOVE COMMENTS
-     // TODO: REMOVE COMMUNICATIONS
+      id: Joi.string().required().description('id of the company we want to remove'),
     }
   },
   pre: [
-    { method: 'company.remove(params.id)', assign: 'company' }
+    { method: 'authorization.isAdmin(auth.credentials)' },
+    { method: 'company.remove(params.id)', assign: 'company' },
+    // TODO: REMOVE NOTIFICATIONS
+    // TODO: REMOVE COMMENTS
+    // TODO: REMOVE COMMUNICATIONS
   ],
   handler: function (request, reply) {
     reply(request.pre.company);

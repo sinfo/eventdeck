@@ -1,4 +1,5 @@
 require('./auth');
+require('./authorization');
 require('./chat');
 require('./comment');
 require('./communication');
