@@ -22,7 +22,7 @@ exports.create = {
       history: Joi.string().description('history of the company'),
       area: Joi.string().description('area of the company'),
       participations: Joi.array().description('participations of the company'),
-      accesses: Joi.string().description('accesses of the company'),
+      accesses: Joi.array().description('accesses of the company'),
       updated: Joi.date().description('date the company was last updated'),
     }
   },
@@ -55,7 +55,7 @@ exports.update = {
       history: Joi.string().description('history of the company'),
       area: Joi.string().description('area of the company'),
       participations: Joi.array().description('participations of the company'),
-      accesses: Joi.string().description('accesses of the company'),
+      accesses: Joi.array().description('accesses of the company'),
       updated: Joi.date().description('date the company was last updated'),
     }
   },
@@ -104,10 +104,13 @@ exports.getByMember = {
     },
     query: {
       fields: Joi.string().default('id,name,img').description('Fields we want to retrieve'),
-    }    
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
+    }
   },
   pre: [
-    { method: 'company.getByMember(params.id, query.fields)', assign: 'companies' }
+    { method: 'company.getByMember(params.id, query)', assign: 'companies' }
   ],
   handler: function (request, reply) {
     reply(request.pre.companies);
@@ -125,10 +128,13 @@ exports.getByEvent = {
     },
     query: {
       fields: Joi.string().default('id,name,img').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
     }    
   },
   pre: [
-    { method: 'company.getByEvent(params.id, query.fields)', assign: 'companies' }
+    { method: 'company.getByEvent(params.id, query)', assign: 'companies' }
   ],
   handler: function (request, reply) {
     reply(request.pre.companies);
@@ -143,10 +149,13 @@ exports.list = {
   validate: {
     query: {
       fields: Joi.string().default('id,name,img').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
     }    
   },
   pre: [
-    { method: 'company.list(query.fields)', assign: 'companies' }
+    { method: 'company.list(query)', assign: 'companies' }
   ],
   handler: function (request, reply) {
     reply(request.pre.companies);

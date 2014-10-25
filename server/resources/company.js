@@ -3,7 +3,7 @@ var slug = require('slug');
 var server = require('server').hapi;
 var log = require('server/helpers/logger');
 var threadFromPath = require('server/helpers/threadFromPath');
-var fieldsParser = require('server/helpers/fieldsParser');
+var parser = require('server/helpers/fieldsParser');
 var Company = require('server/db/models/company');
 
 
@@ -50,7 +50,7 @@ function update(id, company, cb) {
 function get(id, fields, cb) {
   cb = cb || fields; // fields is optional
 
-  Company.findOne({id: id}, fieldsParser(fields), function(err, company) {
+  Company.findOne({id: id}, parser(fields), function(err, company) {
     if (err) {
       log.error({ err: err, company: id}, 'error getting company');
       return cb(Boom.internal());
@@ -67,7 +67,15 @@ function get(id, fields, cb) {
 function getByMember(memberId, fields, cb) {
   cb = cb || fields; // fields is optional
 
-  Company.find({ participations: { $elemMatch: { member: memberId } } }, fieldsParser(fields), function(err, companies) {
+  var filter = { participations: { $elemMatch: { event: eventId } } };
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  }
+
+  Company.find(filter, fields, options, function(err, companies) {
     if (err) {
       log.error({ err: err, member: memberId}, 'error getting companies');
       return cb(Boom.internal());
@@ -80,7 +88,15 @@ function getByMember(memberId, fields, cb) {
 function getByEvent(eventId, fields, cb) {
   cb = cb || fields; // fields is optional
 
-  Company.find({ participations: { $elemMatch: { event: eventId } } }, fieldsParser(fields), function(err, companies) {
+  var filter = { participations: { $elemMatch: { event: eventId } } };
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  }
+
+  Company.find(filter, fields, options, function(err, companies) {
     if (err) {
       log.error({ err: err, event: eventId}, 'error getting companies');
       return cb(Boom.internal());
@@ -90,10 +106,18 @@ function getByEvent(eventId, fields, cb) {
   });
 };
 
-function list(fields, cb) {
-  cb = cb || fields; // fields is optional
+function list(query, cb) {
+  cb = cb || query; // fields is optional
 
-  Company.find({}, fieldsParser(fields), function(err, companies) {
+  var filter = {};
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  }
+
+  Company.find(filter, fields, options, function(err, companies) {
     if (err) {
       log.error({ err: err}, 'error getting all companies');
       return cb(Boom.internal());
