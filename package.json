@@ -4,8 +4,8 @@
   "description": "eventdeck",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_PATH=. node server/index.js | bunyan",
-    "mon": "NODE_PATH=. node_modules/.bin/nodemon server/index.js | bunyan",
+    "start": "NODE_PATH=. node server/index.js | node_modules/.bin/bunyan",
+    "mon": "NODE_PATH=. node_modules/.bin/nodemon server/index.js | node_modules/.bin/bunyan",
     "dist": "node_modules/.bin/browserify -t brfs --debug -e client/js/eventdeck.js -o public/js/eventdeck.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -31,7 +31,6 @@
     "request": "~2.36.0",
     "mailgun": "~0.4.2",
     "mailcomposer": "~0.2.12",
-    "bunyan": "~1.0.1",
     "slug": "~0.7.1",
     "boom": "~2.5.1",
     "joi": "~4.7.0",
@@ -42,6 +41,7 @@
     "hapi-swagger": "~0.3.0"
   },
   "devDependencies": {
+    "bunyan": "~1.0.1",
     "nodemon": "~0.7.10",
     "colors": "~0.6.2",
     "gaze": "~0.4.3",
