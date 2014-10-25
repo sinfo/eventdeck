@@ -12,7 +12,7 @@ function createCode(memberId, cb) {
   server.methods.member.createLoginCode(memberId, function(err, result) {
     if(err) {
       log.error({ err: err, member: memberId}, 'error creating code');
-      return cb(Boom.internal('error creating code'));
+      return cb(err);
     }
 
     var member = result.member;

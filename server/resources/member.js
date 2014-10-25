@@ -63,7 +63,7 @@ function createLoginCode(id, cb) {
     }
     if (!_member) {
       log.warn({ err: 'not found', member: id}, 'error creating login code for member');
-      return cb(Boom.notFound());
+      return cb(Boom.notFound('member not found'));
     }
 
     log.info({member: id, loginCode: loginCode}, 'login code created');
