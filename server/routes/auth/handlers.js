@@ -40,7 +40,7 @@ exports.loginWithCode = {
     request.auth.session.set(request.pre.member);
     reply({success: 'logged in'});
   },
-  description: 'Let\'s a member log in using a code'
+  description: 'Lets a member log in using a code'
 };
 
 
@@ -51,7 +51,7 @@ exports.logout = {
     request.auth.session.clear();
     reply({success: 'your session is cleared'});
   },
-  description: 'Let\'s a member log out'
+  description: 'Lets a member log out'
 };
 
 
