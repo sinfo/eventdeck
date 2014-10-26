@@ -40,13 +40,13 @@ server.route({
 
 server.route({
   method: 'GET',
-  path: '/role/{id}/members',
+  path: '/roles/{id}/members',
   config: handlers.getByRole
 });
 
 server.route({
   method: 'GET',
-  path: '/role/teamleaders',
+  path: '/roles/teamleaders',
   config: handlers.getTeamLeaders
 });
 
