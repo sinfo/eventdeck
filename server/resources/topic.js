@@ -33,8 +33,8 @@ function create(topic, memberId, cb) {
 
 function update(id, topic, cb) {
   topic.updated = Date.now();
-
-  Topic.findOneAndUpdate({_id: id}, topic, function(err, _topic) {
+  var filter = {_id:id};
+  Topic.findOneAndUpdate(filter, topic, function(err, _topic) {
     if (err) {
       log.error({ err: err, topic: id}, 'error updating topic');
       return cb(Boom.internal());
@@ -49,7 +49,8 @@ function update(id, topic, cb) {
 };
 
 function get(id, cb) {
-  Topic.findOne({_id: id}, function(err, topic) {
+  var filter = {_id:id};
+  Topic.findOne(filter, function(err, topic) {
     if (err) {
       log.error({ err: err, topic: id}, 'error getting topic');
       return cb(Boom.internal());
@@ -76,8 +77,8 @@ function getByMember(memberId, cb) {
 };
 
 function getByDueDate(start, end, cb) {
-  var filter = duedate: {$gte: start, $lt: end} };
-  Topic.find({ date, function(err, topics) {
+  var filter = {duedate: {$gte: start, $lt: end} };
+  Topic.find( filter, function(err, topics) {
     if (err) {
       log.error({ err: err, member: memberId}, 'error getting topics');
       return cb(Boom.internal());
@@ -88,8 +89,8 @@ function getByDueDate(start, end, cb) {
 };
 
 function getByTag(tagId, cb) {
-  var filter = tags: {$in: [tagId]}};
-  Topic.find(tag, function(err, topics) {
+  var filter = {tags: {$in: [tagId]}};
+  Topic.find(filter, function(err, topics) {
     if (err) {
       log.error({ err: err, tag: tagId}, 'error getting topics');
       return cb(Boom.internal());
@@ -100,8 +101,8 @@ function getByTag(tagId, cb) {
 };
 
 function getByMeeting(meetingId, cb) {
-  var filter = meetings: {$in: [meetingId]}};
-  Topic.find({filter, function(err, topics) {
+  var filter = {meetings: {$in: [meetingId]}};
+  Topic.find(filter, function(err, topics) {
     if (err) {
       log.error({ err: err, meeting: meetingId}, 'error getting topics');
       return cb(Boom.internal());
@@ -123,7 +124,8 @@ function list(cb) {
 };
 
 function remove(id, cb) {
-  Topic.findOneAndRemove({_id: id}, function(err, topic){
+  var filter = {_id:id};
+  Topic.findOneAndRemove(filter, function(err, topic){
     if (err) {
       log.error({ err: err, topic: id}, 'error deleting topic');
       return cb(Boom.internal());

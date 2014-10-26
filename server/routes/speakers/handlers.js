@@ -77,8 +77,8 @@ exports.get = {
     }
   },
   pre: [
-    { method: 'speaker.get(params.id)', assign: 'speaker' }
-    // TODO: READ NOTIFICATIONS
+    { method: 'speaker.get(params.id)', assign: 'speaker' },
+    { method: 'access.save(auth.credentials.id, path, params.id)' }
   ],
   handler: function (request, reply) {
     reply(request.pre.speaker);

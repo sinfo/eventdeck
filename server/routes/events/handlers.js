@@ -72,8 +72,8 @@ exports.get = {
     }
   },
   pre: [
-    { method: 'event.get(params.id, query)', assign: 'event' }
-    // TODO: READ NOTIFICATIONS
+    { method: 'event.get(params.id, query)', assign: 'event' },
+    { method: 'access.save(auth.credentials.id, path, params.id)' }
   ],
   handler: function (request, reply) {
     reply(request.pre.event);

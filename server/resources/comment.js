@@ -31,8 +31,9 @@ function create(comment, memberId, cb) {
 
 function update(id, comment, cb) {
   comment.updated = Date.now();
+  var filter = {_id: id};
 
-  Comment.findOneAndUpdate({_id: id}, comment, function(err, _comment) {
+  Comment.findOneAndUpdate(filter, comment, function(err, _comment) {
     if (err) {
       log.error({ err: err, comment: id}, 'error updating comment');
       return cb(Boom.internal());
@@ -47,7 +48,9 @@ function update(id, comment, cb) {
 };
 
 function get(id, cb) {
-  Comment.findOne({_id: id}, function(err, comment) {
+  var filter ={_id: id};
+
+  Comment.findOne(filter, function(err, comment) {
     if (err) {
       log.error({ err: err, comment: id}, 'error getting comment');
       return cb(Boom.internal());
@@ -62,7 +65,9 @@ function get(id, cb) {
 };
 
 function getByMember(memberId, cb) {
-  Comment.find({member: memberId}, function(err, comments) {
+  var filter ={member:memberId};
+
+  Comment.find(filter, function(err, comments) {
     if (err) {
       log.error({ err: err, member: memberId}, 'error getting comments');
       return cb(Boom.internal());
@@ -74,7 +79,8 @@ function getByMember(memberId, cb) {
 
 function getByThread(path, id, cb) {
   var thread = threadFromPath(path, id);
-  Comment.find({thread: thread}, function(err, comments) {
+  var filter = {thread:thread};
+  Comment.find(filter, function(err, comments) {
     if (err) {
       log.error({ err: err, thread: thread}, 'error getting comments');
       return cb(Boom.internal());
@@ -96,7 +102,9 @@ function list(cb) {
 };
 
 function remove(id, cb) {
-  Comment.findOneAndRemove({_id: id}, function(err, comment){
+  var filter = {_id:id};
+
+  Comment.findOneAndRemove(filter, function(err, comment){
     if (err) {
       log.error({ err: err, comment: id}, 'error deleting comment');
       return cb(Boom.internal());

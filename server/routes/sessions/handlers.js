@@ -75,8 +75,8 @@ exports.get = {
     }
   },
   pre: [
-    { method: 'session.get(params.id)', assign: 'session' }
-    // TODO: READ NOTIFICATIONS
+    { method: 'session.get(params.id)', assign: 'session' },
+    { method: 'access.save(auth.credentials.id, path, params.id)' }
   ],
   handler: function (request, reply) {
     reply(request.pre.session);

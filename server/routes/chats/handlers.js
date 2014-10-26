@@ -56,11 +56,12 @@ exports.get = {
   tags: ['api','chat'],
   validate: {
     params: {
-      id: Joi.string().required().description('Id of the chat we want to retrieve'),
+      id: Joi.string().required().description('Id of the chat we want to retrieve')
     }
   },
   pre: [
-    { method: 'chat.get(params.id)', assign: 'chat' }
+    { method: 'chat.get(params.id)', assign: 'chat' },
+    { method: 'access.save(auth.credentials.id, path, params.id)' }
   ],
   handler: function (request, reply) {
     reply(request.pre.chat);

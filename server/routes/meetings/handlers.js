@@ -63,12 +63,12 @@ exports.get = {
     }
   },
   pre: [
-    { method: 'meeting.get(params.id)', assign: 'meeting' }
+    { method: 'meeting.get(params.id)', assign: 'meeting' },
     // TODO: GET MEETING TOPICS
-    // TODO: READ NOTIFICATIONS
+    { method: 'access.save(auth.credentials.id, path, params.id)' }
   ],
   handler: function (request, reply) {
-    // TODO ADD TOPICSTO MEETING
+    // TODO ADD TOPICS TO MEETING
     reply(request.pre.meeting);
   },
   description: 'Gets a meeting'

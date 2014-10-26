@@ -62,7 +62,8 @@ function create(notification, cb) {
 };
 
 function get(id, cb) {
-  Notification.findOne({_id: id}, function(err, notification) {
+  var filter = {_id: id};
+  Notification.findOne(filter, function(err, notification) {
     if (err) {
       log.error({ err: err, notification: id}, 'error getting notification');
       return cb(Boom.internal());
@@ -78,7 +79,8 @@ function get(id, cb) {
 
 function getByThread(path, id, cb) {
   var thread = threadFromPath(path, id);
-  Notification.find({thread: thread}, function(err, notifications) {
+  var filter ={thread:thread};
+  Notification.find(filter, function(err, notifications) {
     if (err) {
       log.error({ err: err, thread: thread}, 'error getting notifications');
       return cb(Boom.internal());
@@ -90,7 +92,8 @@ function getByThread(path, id, cb) {
 
 function readThread(path, id, memberId, cb) {
   var thread = threadFromPath(path, id);
-  Notification.update({thread: thread}, { $pull: { unread: memberId } }, function(err) {
+  var filter = {thread:thread}; 
+  Notification.update(filter, { $pull: { unread: memberId } }, function(err) {
     if (err) {
       log.error({ err: err, thread: thread}, 'error reading notifications');
       return cb(Boom.internal());
@@ -112,7 +115,8 @@ function list(cb) {
 };
 
 function remove(id, cb) {
-  Notification.findOneAndRemove({_id: id}, function(err, notification){
+  var filter ={id:id};
+  Notification.findOneAndRemove(filter, function(err, notification){
     if (err) {
       log.error({ err: err, notification: id}, 'error deleting notification');
       return cb(Boom.internal());
@@ -128,7 +132,8 @@ function remove(id, cb) {
 
 function removeByThread(path, id, cb) {
   var thread = threadFromPath(path, id);
-  Notification.remove({thread: thread}, function(err, notifications) {
+  var fitler = {thread: thread};
+  Notification.remove(filter, function(err, notifications) {
     if (err) {
       log.error({ err: err, thread: thread}, 'error getting notifications');
       return cb(Boom.internal());

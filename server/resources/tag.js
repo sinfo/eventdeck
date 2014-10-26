@@ -26,7 +26,8 @@ function create(tag, memberId, cb) {
 };
 
 function update(id, tag, cb) {
-  Tag.findOneAndUpdate({id: id}, tag, function(err, _tag) {
+  var filter = {id:id};
+  Tag.findOneAndUpdate(filter, tag, function(err, _tag) {
     if (err) {
       log.error({ err: err, tag: id}, 'error updating tag');
       return cb(Boom.internal());
@@ -41,7 +42,8 @@ function update(id, tag, cb) {
 };
 
 function get(id, cb) {
-  Tag.findOne({id: id}, function(err, tag) {
+  var filter = {id:id};
+  Tag.findOne(filter, function(err, tag) {
     if (err) {
       log.error({ err: err, tag: id}, 'error getting tag');
       return cb(Boom.internal());
@@ -67,7 +69,8 @@ function list(cb) {
 };
 
 function remove(id, cb) {
-  Tag.findOneAndRemove({id: id}, function(err, tag){
+  var filter = {id:id};
+  Tag.findOneAndRemove(filter, function(err, tag){
     if (err) {
       log.error({ err: err, tag: id}, 'error deleting tag');
       return cb(Boom.internal());

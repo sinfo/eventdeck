@@ -56,8 +56,8 @@ function update(id, member, cb) {
 function createLoginCode(id, cb) {
   var loginCode = randtoken.generate(4).toUpperCase();
   var code = {$push: {'loginCodes': {code: loginCode, created: new Date()}}};
-
-  Member.findOneAndUpdate({id: id},code , function(err, _member) {
+  var filter = {_id: id};
+  Member.findOneAndUpdate(filter,code , function(err, _member) {
     if (err) {
       log.error({ err: err, member: id}, 'error creating login code for member');
       return cb(Boom.internal());
@@ -169,7 +169,8 @@ function list(query, cb) {
 };
 
 function remove(id, cb) {
-  Member.findOneAndRemove({id: id}, function(err, member){
+  var filter = {_id: id};
+  Member.findOneAndRemove(filter, function(err, member){
     if (err) {
       log.error({ err: err, member: id}, 'error deleting member');
       return cb(Boom.internal());
