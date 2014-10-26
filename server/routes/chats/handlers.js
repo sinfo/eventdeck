@@ -57,10 +57,13 @@ exports.get = {
   validate: {
     params: {
       id: Joi.string().required().description('Id of the chat we want to retrieve')
-    }
+    },
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+    }  
   },
   pre: [
-    { method: 'chat.get(params.id)', assign: 'chat' },
+    { method: 'chat.get(params.id,query)', assign: 'chat' },
     { method: 'access.save(auth.credentials.id, path, params.id)' }
   ],
   handler: function (request, reply) {

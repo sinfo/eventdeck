@@ -25,13 +25,19 @@ exports.get = {
 exports.getByMember = {
   auth: 'session',
   tags: ['api','notification'],
-  validate: {
+    validate: {
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
+    },
     params: {
       id: Joi.string().required().description('Id of the member'),
     }
   },
   pre: [
-    { method: 'notification.getByMember(params.id)', assign: 'notifications' }
+    { method: 'notification.getByMember(params.id,query)', assign: 'notifications' }
   ],
   handler: function (request, reply) {
     reply(request.pre.notifications);
@@ -44,12 +50,18 @@ exports.getByThread = {
   auth: 'session',
   tags: ['api','notification'],
   validate: {
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
+    },
     params: {
       id: Joi.string().required().description('Id of the thread'),
     }
   },
   pre: [
-    { method: 'notification.getByThread(path, params.id)', assign: 'notifications' }
+    { method: 'notification.getByThread(path, params.id,query)', assign: 'notifications' }
   ],
   handler: function (request, reply) {
     reply(request.pre.notifications);
@@ -60,8 +72,16 @@ exports.getByThread = {
 exports.list = {
   auth: 'session',
   tags: ['api','notification'],
+  validate: {
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
+    }
+  },
   pre: [
-    { method: 'notification.list()', assign: 'notifications' }
+    { method: 'notification.list(query)', assign: 'notifications' }
   ],
   handler: function (request, reply) {
     reply(request.pre.notifications);

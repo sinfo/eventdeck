@@ -79,12 +79,15 @@ exports.get = {
   auth: 'session',
   tags: ['api','topic'],
   validate: {
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+    },
     params: {
       id: Joi.string().required().description('id of the topic we want to retrieve'),
     }
   },
   pre: [
-    { method: 'topic.get(params.id)', assign: 'topic' },
+    { method: 'topic.get(params.id,query)', assign: 'topic' },
     { method: 'access.save(auth.credentials.id, path, params.id)' }
   ],
   handler: function (request, reply) {
@@ -98,12 +101,18 @@ exports.getByMember = {
   auth: 'session',
   tags: ['api','topic'],
   validate: {
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
+  },
     params: {
       id: Joi.string().required().description('id of the member'),
     }
   },
   pre: [
-    { method: 'topic.getByMember(params.id)', assign: 'topics' }
+    { method: 'topic.getByMember(params.id,query)', assign: 'topics' }
   ],
   handler: function (request, reply) {
     reply(request.pre.topics);
@@ -134,12 +143,18 @@ exports.getByMeeting = {
   auth: 'session',
   tags: ['api','topic'],
   validate: {
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
+    },
     params: {
       id: Joi.string().required().description('id of the meeting'),
     }
   },
   pre: [
-    { method: 'topic.getByMeeting(params.id)', assign: 'topics' }
+    { method: 'topic.getByMeeting(params.id,query)', assign: 'topics' }
   ],
   handler: function (request, reply) {
     reply(request.pre.topics);
@@ -151,8 +166,16 @@ exports.getByMeeting = {
 exports.list = {
   auth: 'session',
   tags: ['api','topic'],
+  validate: {
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
+    }
+  },
   pre: [
-    { method: 'topic.list()', assign: 'topics' }
+    { method: 'topic.list(query)', assign: 'topics' }
   ],
   handler: function (request, reply) {
     reply(request.pre.topics);

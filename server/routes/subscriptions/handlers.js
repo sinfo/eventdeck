@@ -27,11 +27,14 @@ exports.get = {
   tags: ['api','subscription'],
   validate: {
     query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+    },
+    query: {
       thread: Joi.string().description('thread of the subscription'),
     }
   },
   pre: [
-    { method: 'subscription.get(query.thread, auth.credentials.id)', assign: 'subscription' }
+    { method: 'subscription.get(query.thread, auth.credentials.id,query)', assign: 'subscription' }
     // TODO: READ NOTIFICATIONS
   ],
   handler: function (request, reply) {

@@ -72,12 +72,15 @@ exports.get = {
   auth: 'session',
   tags: ['api','speaker'],
   validate: {
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+  },
     params: {
       id: Joi.string().required().description('id of the speaker we want to retrieve'),
     }
   },
   pre: [
-    { method: 'speaker.get(params.id)', assign: 'speaker' },
+    { method: 'speaker.get(params.id,query)', assign: 'speaker' },
     { method: 'access.save(auth.credentials.id, path, params.id)' }
   ],
   handler: function (request, reply) {
@@ -90,13 +93,19 @@ exports.get = {
 exports.getByMember = {
   auth: 'session',
   tags: ['api','speaker'],
-  validate: {
+   validate: {
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
+    },
     params: {
       id: Joi.string().required().description('id of the member'),
     }
   },
   pre: [
-    { method: 'speaker.getByMember(params.id)', assign: 'speakers' }
+    { method: 'speaker.getByMember(params.id,query)', assign: 'speakers' }
   ],
   handler: function (request, reply) {
     reply(request.pre.speakers);
@@ -108,8 +117,16 @@ exports.getByMember = {
 exports.list = {
   auth: 'session',
   tags: ['api','speaker'],
+  validate: {
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
+    }
+  },
   pre: [
-    { method: 'speaker.list()', assign: 'speakers' }
+    { method: 'speaker.list(query)', assign: 'speakers' }
   ],
   handler: function (request, reply) {
     reply(request.pre.speakers);

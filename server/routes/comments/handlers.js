@@ -55,10 +55,13 @@ exports.get = {
   validate: {
     params: {
       id: Joi.string().required().description('Id of the comment we want to retrieve'),
-    }
+    },
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+    }   
   },
   pre: [
-    { method: 'comment.get(params.id)', assign: 'comment' }
+    { method: 'comment.get(params.id,query)', assign: 'comment' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.comment));
@@ -73,10 +76,16 @@ exports.getByMember = {
   validate: {
     params: {
       id: Joi.string().required().description('Id of the member'),
+    },
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
     }
   },
   pre: [
-    { method: 'comment.getByMember(params.id)', assign: 'comments' }
+    { method: 'comment.getByMember(params.id,query)', assign: 'comments' }
   ],
   handler: function (request, reply) {
     reply(request.pre.comments);
@@ -91,10 +100,16 @@ exports.getByThread = {
   validate: {
     params: {
       id: Joi.string().required().description('Id of the thread'),
+    },
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
     }
   },
   pre: [
-    { method: 'comment.getByThread(path, params.id)', assign: 'comments' }
+    { method: 'comment.getByThread(path, params.id,query)', assign: 'comments' }
   ],
   handler: function (request, reply) {
     reply(request.pre.comments);
@@ -106,8 +121,16 @@ exports.getByThread = {
 exports.list = {
   auth: 'session',
   tags: ['api','comment'],
+  validate: {
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
+    }
+  },
   pre: [
-    { method: 'comment.list()', assign: 'comments' }
+    { method: 'comment.list(query)', assign: 'comments' }
   ],
   handler: function (request, reply) {
     reply(request.pre.comments.map(render));
