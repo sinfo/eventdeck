@@ -48,6 +48,7 @@ function get(id, query, cb) {
   cb = cb || query; // fields is optional
 
   var fields = parser(query.fields);
+
   Event.findOne({id: id}, fields, function(err, event) {
     if (err) {
       log.error({ err: err, event: id}, 'error getting event');

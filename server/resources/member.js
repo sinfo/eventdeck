@@ -135,9 +135,17 @@ function getTeamLeaders(query, cb) {
   });
 }
 
-function getSubscribers(thread, cb) {
+function getSubscribers(thread,query, cb) {
+  cb = cb||query;
+
   var filter = {$or:[{'subscriptions.threads': thread}, {'subscriptions.all': true}]};
-  Member.find(filter, function(err, members) {
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+  Member.find(filter,fields,options, function(err, members) {
     if (err) {
       log.error({ err: err, thread: thread}, 'error getting members');
       return cb(Boom.internal());

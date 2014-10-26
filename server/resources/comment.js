@@ -47,10 +47,12 @@ function update(id, comment, cb) {
   });
 }
 
-function get(id, cb) {
+function get(id,query, cb) {
+  cb = cb||query;
   var filter ={_id: id};
+  var fields = parser(query.fields);
 
-  Comment.findOne(filter, function(err, comment) {
+  Comment.findOne(filter,fields, function(err, comment) {
     if (err) {
       log.error({ err: err, comment: id}, 'error getting comment');
       return cb(Boom.internal());
@@ -64,10 +66,16 @@ function get(id, cb) {
   });
 }
 
-function getByMember(memberId, cb) {
+function getByMember(memberId,query, cb) {
+  cb= cb||query;
   var filter ={member:memberId};
-
-  Comment.find(filter, function(err, comments) {
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+  Comment.find(filter,fields,options, function(err, comments) {
     if (err) {
       log.error({ err: err, member: memberId}, 'error getting comments');
       return cb(Boom.internal());
@@ -77,10 +85,17 @@ function getByMember(memberId, cb) {
   });
 }
 
-function getByThread(path, id, cb) {
+function getByThread(path, id,query, cb) {
+  cb = cb||query;
   var thread = threadFromPath(path, id);
   var filter = {thread:thread};
-  Comment.find(filter, function(err, comments) {
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+  Comment.find(filter,fields,filter, function(err, comments) {
     if (err) {
       log.error({ err: err, thread: thread}, 'error getting comments');
       return cb(Boom.internal());
@@ -90,8 +105,17 @@ function getByThread(path, id, cb) {
   });
 }
 
-function list(cb) {
-  Comment.find({}, function(err, comments) {
+function list(query, cb) {
+  cb = cb || query; // fields is optional
+
+  var filter = {};
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+  Comment.find(filters,fields,options, function(err, comments) {
     if (err) {
       log.error({ err: err}, 'error getting all comments');
       return cb(Boom.internal());

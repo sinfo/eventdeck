@@ -8,8 +8,13 @@ server.method('message.get', get, {});
 server.method('message.list', list, {});
 server.method('message.getByChat', getByChat, {});
 
-function get(id, cb) {
-  Message.findOne({_id: id}, function(err, message) {
+function get(id,query, cb) {
+  cb = cb || query; // fields is optional
+
+  var fields = parser(query.fields);
+  var filter = {_id: id};
+  
+  Message.findOne(filter, fields, function(err, message) {
     if (err) {
       log.error({ err: err, message: id}, 'error getting message');
       return cb(Boom.internal());
@@ -43,8 +48,17 @@ function getByChat(chatId, query, cb){
   });
 }
 
-function list(cb) {
-  Message.find({}, function(err, messages) {
+function list(query, cb) {
+  cb = cb || query; // fields is optional
+
+  var filter = {};
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+  Message.find(filter,fields,options, function(err, messages) {
     if (err) {
       log.error({ err: err}, 'error getting all messages');
       return cb(Boom.internal());

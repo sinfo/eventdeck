@@ -41,9 +41,12 @@ function update(id, tag, cb) {
   });
 }
 
-function get(id, cb) {
+function get(id,query, cb) {
+  cb = cb || query; // fields is optional
   var filter = {id:id};
-  Tag.findOne(filter, function(err, tag) {
+
+  var fields = parser(query.fields);
+  Tag.findOne(filter,fields, function(err, tag) {
     if (err) {
       log.error({ err: err, tag: id}, 'error getting tag');
       return cb(Boom.internal());
@@ -57,17 +60,26 @@ function get(id, cb) {
   });
 }
 
-function list(cb) {
-  Tag.find({}, function(err, tags) {
+function list(query, cb) {
+  cb = cb || query; // fields is optional
+
+  var filter = {};
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+
+  Tag.find(filter, fields, options, function(err, companies) {
     if (err) {
-      log.error({ err: err}, 'error getting all tags');
+      log.error({ err: err}, 'error getting all companies');
       return cb(Boom.internal());
     }
     
-    cb(null, tags);
+    cb(null, companies);
   });
 }
-
 function remove(id, cb) {
   var filter = {id:id};
   Tag.findOneAndRemove(filter, function(err, tag){

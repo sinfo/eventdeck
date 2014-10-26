@@ -46,9 +46,12 @@ function update(id, speaker, cb) {
   });
 }
 
-function get(id, cb) {
+function get(id,query, cb) {
+  cb = cb || query; // fields is optional
+
+  var fields = parser(query.fields);
   var filter = {id:id};
-  Speaker.findOne(filter, function(err, speaker) {
+  Speaker.findOne(filter,fields, function(err, speaker) {
     if (err) {
       log.error({ err: err, speaker: id}, 'error getting speaker');
       return cb(Boom.internal());
@@ -62,8 +65,16 @@ function get(id, cb) {
   });
 }
 
-function getByMember(memberId, cb) {
-  Speaker.find({ participations: { $elemMatch: { member: memberId } } }, function(err, speaker) {
+function getByMember(memberId,query, cb) {
+  cb = cb || query;
+  var filter = { participations: { $elemMatch: { member: memberId } } };
+  var fields = query.fields;
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+  Speaker.find(filter,fields,options, function(err, speaker) {
     if (err) {
       log.error({ err: err, member: memberId}, 'error getting speaker');
       return cb(Boom.internal());
@@ -73,20 +84,34 @@ function getByMember(memberId, cb) {
   });
 }
 
-function getByEvent(eventId, cb) {
+function getByEvent(eventId,query, cb) {
+  cb = cb||query;
   var filter = { participations: { $elemMatch: { event: eventId } } };
-  Speaer.find(filter, function(err, speaker) {
+  var fields = query.fields;
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+  Speaker.find(filter,fields,options, function(err, speaker) {
     if (err) {
       log.error({ err: err, event: eventId}, 'error getting speaker');
-      return cb(Boom.internal());
     }
 
     cb(null, speaker);
   });
 }
 
-function list(cb) {
-  Speaker.find({}, function(err, speaker) {
+function list(query,cb) {
+  cb = cb ||query;
+  var filter = {};
+  var fields = query.fields;
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+  Speaker.find(filter,fields,options, function(err, speaker) {
     if (err) {
       log.error({ err: err}, 'error getting all speaker');
       return cb(Boom.internal());

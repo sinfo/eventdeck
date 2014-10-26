@@ -41,9 +41,12 @@ function update(id, session, cb) {
   });
 }
 
-function get(id, cb) {
+function get(id,query, cb) {
+  cb = cb||query;
   var filter = {id:id};
-  Session.findOne(filter, function(err, session) {
+  var fields = query.fields;
+
+  Session.findOne(filter, fields, function(err, session) {
     if (err) {
       log.error({ err: err, session: id}, 'error getting session');
       return cb(Boom.internal());
@@ -57,8 +60,16 @@ function get(id, cb) {
   });
 }
 
-function list(cb) {
-  Session.find({}, function(err, sessions) {
+function list(query,cb) {
+  cb = cb ||query;
+  var filter = {};
+  var fields = query.fields;
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+  Session.find(filter,fields,options, function(err, sessions) {
     if (err) {
       log.error({ err: err}, 'error getting all sessions');
       return cb(Boom.internal());
