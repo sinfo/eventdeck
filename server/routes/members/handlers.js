@@ -93,7 +93,8 @@ exports.get = {
     }
   },
   pre: [
-    { method: 'member.get(params.id, query)', assign: 'member' }
+    { method: 'member.get(params.id, query)', assign: 'member' },
+    { method: 'access.save(auth.credentials.id, path, params.id)' }
   ],
   handler: function (request, reply) {
     reply(request.pre.member);

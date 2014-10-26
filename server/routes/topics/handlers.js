@@ -84,8 +84,8 @@ exports.get = {
     }
   },
   pre: [
-    { method: 'topic.get(params.id)', assign: 'topic' }
-    // TODO: READ NOTIFICATIONS
+    { method: 'topic.get(params.id)', assign: 'topic' },
+    { method: 'access.save(auth.credentials.id, path, params.id)' }
   ],
   handler: function (request, reply) {
     reply(request.pre.topic);
