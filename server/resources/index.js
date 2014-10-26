@@ -1,3 +1,4 @@
+require('./access');
 require('./auth');
 require('./authorization');
 require('./chat');

@@ -85,8 +85,8 @@ exports.get = {
     }    
   },
   pre: [
-    { method: 'company.get(params.id, query.fields)', assign: 'company' }
-    // TODO: READ NOTIFICATIONS
+    { method: 'company.get(params.id, query.fields)', assign: 'company' },
+    { method: 'access.save(auth.credentials.id, path, params.id)' }
   ],
   handler: function (request, reply) {
     reply(request.pre.company);
