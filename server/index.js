@@ -33,11 +33,11 @@ server.pack.register([
 
   server.start(function () {
     log.info('Server started at: ' + server.info.uri);
-    // var webSocket = module.exports.webSocket = {
-    //   server: SocketIO.server.listen(server.listener)
-    // };
-    // var sockets = require('./sockets');
-    // webSocket.client = module.exports.webSocket.client = SocketIO.client.connect('http://localhost:' + server.info.port + '/chat');
+    var webSocket = module.exports.webSocket = {
+      server: SocketIO.server.listen(server.listener)
+    };
+    require('./sockets');
+    webSocket.client = module.exports.webSocket.client = SocketIO.client.connect('http://localhost:' + server.info.port + '/chat');
     // var crono  = require('./scripts/crono');
     // var reminders = require('./resources/reminder');
     // reminders(null, function(stuff){});
