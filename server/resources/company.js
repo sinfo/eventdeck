@@ -26,9 +26,9 @@ function create(company, memberId, cb) {
       return cb(Boom.internal());
     }
 
-    cb(_company);
+    cb(null, _company);
   });
-};
+}
 
 function update(id, company, cb) {
   company.updated = Date.now();
@@ -43,9 +43,9 @@ function update(id, company, cb) {
       return cb(Boom.notFound());
     }
 
-    cb(_company);
+    cb(null, _company);
   });
-};
+}
 
 function get(id, query, cb) {
   cb = cb || query; // fields is optional
@@ -61,9 +61,9 @@ function get(id, query, cb) {
       return cb(Boom.notFound());
     }
 
-    cb(company);
+    cb(null, company);
   });
-};
+}
 
 function getByMember(memberId, query, cb) {
   cb = cb || query; // fields is optional
@@ -74,7 +74,7 @@ function getByMember(memberId, query, cb) {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
-  }
+  };
 
   Company.find(filter, fields, options, function(err, companies) {
     if (err) {
@@ -82,9 +82,9 @@ function getByMember(memberId, query, cb) {
       return cb(Boom.internal());
     }
 
-    cb(companies);
+    cb(null, companies);
   });
-};
+}
 
 function getByEvent(eventId, query, cb) {
   cb = cb || query; // fields is optional
@@ -95,7 +95,7 @@ function getByEvent(eventId, query, cb) {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
-  }
+  };
 
   Company.find(filter, fields, options, function(err, companies) {
     if (err) {
@@ -103,9 +103,9 @@ function getByEvent(eventId, query, cb) {
       return cb(Boom.internal());
     }
 
-    cb(companies);
+    cb(null, companies);
   });
-};
+}
 
 function list(query, cb) {
   cb = cb || query; // fields is optional
@@ -116,7 +116,7 @@ function list(query, cb) {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
-  }
+  };
 
   Company.find(filter, fields, options, function(err, companies) {
     if (err) {
@@ -124,9 +124,9 @@ function list(query, cb) {
       return cb(Boom.internal());
     }
     
-    cb(companies);
+    cb(null, companies);
   });
-};
+}
 
 function remove(id, cb) {
   Company.findOneAndRemove({id: id}, function(err, company){
@@ -139,6 +139,6 @@ function remove(id, cb) {
       return cb(Boom.notFound());
     }
 
-    return cb(company);
+    return cb(null, company);
   });
-};
+}

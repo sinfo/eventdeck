@@ -23,7 +23,7 @@ function create(item, memberId, cb) {
 
     cb(null, _item);
   });
-};
+}
 
 function update(id, item, cb) {
     var filter = {_id: id};
@@ -39,7 +39,7 @@ function update(id, item, cb) {
 
     cb(null, _item);
   });
-};
+}
 
 function get(id, cb) {
   var filter = {_id: id};
@@ -55,7 +55,7 @@ function get(id, cb) {
 
     cb(null, item);
   });
-};
+}
 
 function list(cb) {
   Item.find({}, function(err, items) {
@@ -66,7 +66,7 @@ function list(cb) {
     
     cb(null, items);
   });
-};
+}
 
 function remove(id, cb) {
   var filter = {_id: id};
@@ -82,4 +82,4 @@ function remove(id, cb) {
 
     return cb(null, item);
   });
-};
+}

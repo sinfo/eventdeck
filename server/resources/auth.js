@@ -35,7 +35,7 @@ function createCode(memberId, cb) {
       cb(null, member);
     });
   });
-};
+}
 
 function verifyCode(memberId, loginCode, cb) {
   server.methods.member.get(memberId, 'id,loginCodes', function(err, member) {
@@ -55,4 +55,4 @@ function verifyCode(memberId, loginCode, cb) {
 
     cb(null, member);
   });
-};
+}

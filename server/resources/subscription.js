@@ -19,9 +19,9 @@ function create(thread, memberId, cb) {
       return cb(Boom.internal());
     }
 
-    cb(_subscription);
+    cb(null, _subscription);
   });
-};
+}
 
 function get(thread, memberId, cb) {
   var filter = { member: memberId, thread: thread };
@@ -36,9 +36,9 @@ function get(thread, memberId, cb) {
       return cb(Boom.notFound('member is not subscribed to this thread'));
     }
 
-    cb(subscription);
+    cb(null, subscription);
   });
-};
+}
 
 function remove(thread, memberId, cb) {
   var filter = { thread: thread, member: memberId };
@@ -53,9 +53,9 @@ function remove(thread, memberId, cb) {
       return cb(Boom.notFound('member was not subscribed to this thread'));
     }
 
-    return cb(subscription);
+    return cb(null, subscription);
   });
-};
+}
 
 function getByMember(memberId, cb) {
   var filter = { member: memberId };
@@ -66,9 +66,9 @@ function getByMember(memberId, cb) {
       return cb(Boom.internal());
     }
 
-    cb(subscriptions);
+    cb(null, subscriptions);
   });
-};
+}
 
 function getByThread(thread, cb) {
   var filter = { thread: thread };
@@ -79,7 +79,7 @@ function getByThread(thread, cb) {
       return cb(Boom.internal());
     }
 
-    cb(subscriptions);
+    cb(null, subscriptions);
   });
-};
+}
 

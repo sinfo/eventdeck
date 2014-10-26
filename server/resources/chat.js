@@ -20,7 +20,7 @@ function create(chat, memberId, cb) {
 
     cb(null, _chat);
   });
-};
+}
 
 function update(id, chat, cb) {
   var filter = {_id: id};
@@ -36,7 +36,7 @@ function update(id, chat, cb) {
 
     cb(null, _chat);
   });
-};
+}
 
 function get(id, cb) {
   var filter = {_id: id};
@@ -52,7 +52,7 @@ function get(id, cb) {
 
     cb(null, chat);
   });
-};
+}
 
 function list(cb) {
   Chat.find({}, function(err, chats) {
@@ -63,7 +63,7 @@ function list(cb) {
     
     cb(null, chats);
   });
-};
+}
 
 function remove(id, cb) {
   var filter = {_id: id};
@@ -79,4 +79,4 @@ function remove(id, cb) {
 
     return cb(null, chat);
   });
-};
+}

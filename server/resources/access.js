@@ -16,7 +16,7 @@ function save(memberId, path, id, cb) {
     member: memberId, 
     thread: threadFromPath(path, id),
     last: Date.now()
-  }
+  };
 
   Access.findOneAndUpdate(filter, access, {upsert: true}, function (err, savedAccess) {
     if (err) {
@@ -24,7 +24,7 @@ function save(memberId, path, id, cb) {
       return cb(Boom.internal());
     }
 
-    return cb(savedAccess);
+    return cb(null, savedAccess);
   });
 
-};
+}

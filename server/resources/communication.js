@@ -29,7 +29,7 @@ function create(communication, memberId, cb) {
 
     cb(null, _communication);
   });
-};
+}
 
 function update(id, communication, cb) {
   communication.updated = Date.now();
@@ -46,7 +46,7 @@ function update(id, communication, cb) {
 
     cb(null, _communication);
   });
-};
+}
 
 function get(id, cb) {
   var filter = {_id: id};
@@ -62,10 +62,10 @@ function get(id, cb) {
 
     cb(null, communication);
   });
-};
+}
 
 function getByMember(memberId, cb) {
-  var filter = {member:memberId}
+  var filter = {member:memberId};
   Communication.find(filter, function(err, communications) {
     if (err) {
       log.error({ err: err, member: memberId}, 'error getting communications');
@@ -74,7 +74,7 @@ function getByMember(memberId, cb) {
 
     cb(null, communications);
   });
-};
+}
 
 function getByThread(path, id, cb) {
   var thread = threadFromPath(path, id);
@@ -87,7 +87,7 @@ function getByThread(path, id, cb) {
 
     cb(null, communications);
   });
-};
+}
 
 function getByEvent(eventId, cb) {
   var filter = {event: eventId};
@@ -99,7 +99,7 @@ function getByEvent(eventId, cb) {
 
     cb(null, communications);
   });
-};
+}
 
 function list(cb) {
   Communication.find({}, function(err, communications) {
@@ -110,10 +110,10 @@ function list(cb) {
     
     cb(null, communications);
   });
-};
+}
 
 function remove(id, cb) {
-  var filter = {id:id}
+  var filter = {id:id};
   Communication.findOneAndRemove(filter, function(err, communication){
     if (err) {
       log.error({ err: err, communication: id}, 'error deleting communication');
@@ -126,4 +126,4 @@ function remove(id, cb) {
 
     return cb(null, communication);
   });
-};
+}

@@ -23,9 +23,9 @@ function create(event, memberId, cb) {
       return cb(Boom.internal());
     }
 
-    cb(_event);
+    cb(null, _event);
   });
-};
+}
 
 function update(id, event, cb) {
   event.updated = Date.now();
@@ -40,9 +40,9 @@ function update(id, event, cb) {
       return cb(Boom.notFound());
     }
 
-    cb(_event);
+    cb(null, _event);
   });
-};
+}
 
 function get(id, query, cb) {
   cb = cb || query; // fields is optional
@@ -58,9 +58,9 @@ function get(id, query, cb) {
       return cb(Boom.notFound());
     }
 
-    cb(event);
+    cb(null, event);
   });
-};
+}
 
 function list(query, cb) {
   cb = cb || query; // fields is optional
@@ -71,7 +71,7 @@ function list(query, cb) {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
-  }
+  };
 
   Event.find(filter, fields,options, function(err, events) {
     if (err) {
@@ -79,9 +79,9 @@ function list(query, cb) {
       return cb(Boom.internal());
     }
     
-    cb(events);
+    cb(null, events);
   });
-};
+}
 
 function remove(id, cb) {
   Event.findOneAndRemove({id: id}, function(err, event){
@@ -94,6 +94,6 @@ function remove(id, cb) {
       return cb(Boom.notFound());
     }
 
-    return cb(event);
+    return cb(null, event);
   });
-};
+}

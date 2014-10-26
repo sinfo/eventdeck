@@ -13,7 +13,7 @@ webSocket
   .of('/chat')
   .on('connection', function (socket) {
 
-    socket.on('auth', function(data, cbClient){
+    socket.on('chat-auth', function(data, cbClient){
       var room = data.id;
       var user = data.user;
       socket.nickname = user;
@@ -29,7 +29,7 @@ webSocket
       });
     });
 
-    socket.on('send', function(data, cbClient){
+    socket.on('chat-send', function(data, cbClient){
       var room    = data.room;
       messageData = data.message;
       async.series([
@@ -44,18 +44,18 @@ webSocket
       });
     });
 
-    socket.on('logout', function(data, cb){
+    socket.on('chat-logout', function(data, cb){
       webSocket.of('/chat').in(data.room).emit('user-disconnected', {id: socket.nickname});
       log.debug("[sockets-chat] User " + socket.nickname + " disconnected");
       socket.disconnect();
       cb();
     });
 
-    socket.on('disconnect', function(){
+    socket.on('chat-disconnect', function(){
       delete socket;
     });
 
-    socket.on('history-get', function(data, cb){
+    socket.on('chat-page', function(data, cb){
       var dateRef = data.date;
       var room = data.room;
       getMessages(room, dateRef, function(){
@@ -82,17 +82,7 @@ function getChat(chatID, memberID, cb){
   });
 }
 
-function getMessages(chatID, dateRef, cb){
-  Message.getByChatId({params:{id: chatID, date: dateRef}}, function(response){
-    if(response.error) {
-      log.error('[sockets-chat] Chat id: ' + chatID + ' messages unavailable');
-    } 
-    else {
-      messages = response;
-    }
-    cb();
-  });
-}
+
 
 function done(err, room, socket, cb){
   var data = {};

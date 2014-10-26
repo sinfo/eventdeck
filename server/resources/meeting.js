@@ -21,7 +21,7 @@ function create(meeting, memberId, cb) {
 
     cb(null, _meeting);
   });
-};
+}
 
 function update(id, meeting, cb) {
   var filter = {_id: id};
@@ -37,7 +37,7 @@ function update(id, meeting, cb) {
 
     cb(null, _meeting);
   });
-};
+}
 
 function get(id, cb) {
   var filter = {_id:id};
@@ -53,7 +53,7 @@ function get(id, cb) {
 
     cb(null, meeting);
   });
-};
+}
 
 function list(cb) {
   Meeting.find({}, function(err, meetings) {
@@ -64,7 +64,7 @@ function list(cb) {
     
     cb(null, meetings);
   });
-};
+}
 
 function remove(id, cb) {
   var filter = {_id: id};
@@ -80,4 +80,4 @@ function remove(id, cb) {
 
     return cb(null, meeting);
   });
-};
+}

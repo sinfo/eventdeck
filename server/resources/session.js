@@ -23,7 +23,7 @@ function create(session, memberId, cb) {
 
     cb(null, _session);
   });
-};
+}
 
 function update(id, session, cb) {
   var filter = {id:id};
@@ -39,7 +39,7 @@ function update(id, session, cb) {
 
     cb(null, _session);
   });
-};
+}
 
 function get(id, cb) {
   var filter = {id:id};
@@ -55,7 +55,7 @@ function get(id, cb) {
 
     cb(null, session);
   });
-};
+}
 
 function list(cb) {
   Session.find({}, function(err, sessions) {
@@ -66,7 +66,7 @@ function list(cb) {
     
     cb(null, sessions);
   });
-};
+}
 
 function remove(id, cb) {
   var filter = {id:id};
@@ -82,4 +82,4 @@ function remove(id, cb) {
 
     return cb(null, session);
   });
-};
+}

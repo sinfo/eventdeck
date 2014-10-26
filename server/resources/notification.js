@@ -43,12 +43,12 @@ function notify(memberId, thread, description, objectId, cb) {
         unread: members,
         targets: subscribers,
         posted: new Date()
-      }
+      };
 
       create(notification, cb);
     });
   });
-};
+}
 
 function create(notification, cb) {
   Notification.create(notification, function(err, _notification) {
@@ -59,7 +59,7 @@ function create(notification, cb) {
 
     cb(null, _notification);
   });
-};
+}
 
 function get(id, cb) {
   var filter = {_id: id};
@@ -75,7 +75,7 @@ function get(id, cb) {
 
     cb(null, notification);
   });
-};
+}
 
 function getByThread(path, id, cb) {
   var thread = threadFromPath(path, id);
@@ -88,7 +88,7 @@ function getByThread(path, id, cb) {
 
     cb(null, notifications);
   });
-};
+}
 
 function readThread(path, id, memberId, cb) {
   var thread = threadFromPath(path, id);
@@ -99,9 +99,9 @@ function readThread(path, id, memberId, cb) {
       return cb(Boom.internal());
     }
 
-    cb(null);
+    cb();
   });
-};
+}
 
 function list(cb) {
   Notification.find({}, function(err, notifications) {
@@ -112,7 +112,7 @@ function list(cb) {
     
     cb(null, notifications);
   });
-};
+}
 
 function remove(id, cb) {
   var filter ={id:id};
@@ -128,7 +128,7 @@ function remove(id, cb) {
 
     return cb(null, notification);
   });
-};
+}
 
 function removeByThread(path, id, cb) {
   var thread = threadFromPath(path, id);
@@ -141,5 +141,5 @@ function removeByThread(path, id, cb) {
 
     cb(null, notifications);
   });
-};
+}
 

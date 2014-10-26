@@ -25,9 +25,9 @@ function create(comment, memberId, cb) {
       return cb(Boom.internal());
     }
 
-    cb(_comment);
+    cb(null, _comment);
   });
-};
+}
 
 function update(id, comment, cb) {
   comment.updated = Date.now();
@@ -43,9 +43,9 @@ function update(id, comment, cb) {
       return cb(Boom.notFound());
     }
 
-    cb(_comment);
+    cb(null, _comment);
   });
-};
+}
 
 function get(id, cb) {
   var filter ={_id: id};
@@ -60,9 +60,9 @@ function get(id, cb) {
       return cb(Boom.notFound());
     }
 
-    cb(comment);
+    cb(null, comment);
   });
-};
+}
 
 function getByMember(memberId, cb) {
   var filter ={member:memberId};
@@ -73,9 +73,9 @@ function getByMember(memberId, cb) {
       return cb(Boom.internal());
     }
 
-    cb(comments);
+    cb(null, comments);
   });
-};
+}
 
 function getByThread(path, id, cb) {
   var thread = threadFromPath(path, id);
@@ -86,9 +86,9 @@ function getByThread(path, id, cb) {
       return cb(Boom.internal());
     }
 
-    cb(comments);
+    cb(null, comments);
   });
-};
+}
 
 function list(cb) {
   Comment.find({}, function(err, comments) {
@@ -97,9 +97,9 @@ function list(cb) {
       return cb(Boom.internal());
     }
     
-    cb(comments);
+    cb(null, comments);
   });
-};
+}
 
 function remove(id, cb) {
   var filter = {_id:id};
@@ -114,6 +114,6 @@ function remove(id, cb) {
       return cb(Boom.notFound());
     }
 
-    return cb(comment);
+    return cb(null, comment);
   });
-};
+}

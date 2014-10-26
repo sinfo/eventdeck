@@ -27,7 +27,7 @@ function create(speaker, memberId, cb) {
 
     cb(null, _speaker);
   });
-};
+}
 
 function update(id, speaker, cb) {
   speaker.updated = Date.now();
@@ -44,7 +44,7 @@ function update(id, speaker, cb) {
 
     cb(null, _speaker);
   });
-};
+}
 
 function get(id, cb) {
   var filter = {id:id};
@@ -60,7 +60,7 @@ function get(id, cb) {
 
     cb(null, speaker);
   });
-};
+}
 
 function getByMember(memberId, cb) {
   Speaker.find({ participations: { $elemMatch: { member: memberId } } }, function(err, speaker) {
@@ -71,7 +71,7 @@ function getByMember(memberId, cb) {
 
     cb(null, speaker);
   });
-};
+}
 
 function getByEvent(eventId, cb) {
   var filter = { participations: { $elemMatch: { event: eventId } } };
@@ -83,7 +83,7 @@ function getByEvent(eventId, cb) {
 
     cb(null, speaker);
   });
-};
+}
 
 function list(cb) {
   Speaker.find({}, function(err, speaker) {
@@ -94,7 +94,7 @@ function list(cb) {
     
     cb(null, speaker);
   });
-};
+}
 
 function remove(id, cb) {
   var filter = {id:id};
@@ -110,4 +110,4 @@ function remove(id, cb) {
 
     return cb(null, speaker);
   });
-};
+}

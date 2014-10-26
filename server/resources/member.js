@@ -34,9 +34,9 @@ function create(member, cb) {
       return cb(Boom.internal());
     }
 
-    cb(_member);
+    cb(null, _member);
   });
-};
+}
 
 function update(id, member, cb) {
   Member.findOneAndUpdate({id: id}, member, function(err, _member) {
@@ -49,9 +49,9 @@ function update(id, member, cb) {
       return cb(Boom.notFound());
     }
 
-    cb(_member);
+    cb(null, _member);
   });
-};
+}
 
 function createLoginCode(id, cb) {
   var loginCode = randtoken.generate(4).toUpperCase();
@@ -69,9 +69,9 @@ function createLoginCode(id, cb) {
 
     log.info({member: id, loginCode: loginCode}, 'login code created');
 
-    cb({member: _member, loginCode: loginCode} );
+    cb(null, {member: _member, loginCode: loginCode} );
   });
-};
+}
 
 function get(id, query, cb) {
   cb = cb || query; // fields is optional
@@ -88,9 +88,9 @@ function get(id, query, cb) {
       return cb(Boom.notFound());
     }
 
-    cb(member);
+    cb(null, member);
   });
-};
+}
 
 function getByRole(roleId, query, cb) {
   cb = cb || query; // fields is optional
@@ -102,7 +102,7 @@ function getByRole(roleId, query, cb) {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
-  }
+  };
 
   Member.find(filter,fields,options, function(err, members) {
     if (err) {
@@ -110,9 +110,9 @@ function getByRole(roleId, query, cb) {
       return cb(Boom.internal());
     }
 
-    cb(members);
+    cb(null, members);
   });
-};
+}
 
 function getTeamLeaders(query, cb) {
   cb = cb || query; // fields is optional
@@ -123,7 +123,7 @@ function getTeamLeaders(query, cb) {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
-  }
+  };
 
   Member.find(filter,fields,options, function(err, members) {
     if (err) {
@@ -131,9 +131,9 @@ function getTeamLeaders(query, cb) {
       return cb(Boom.internal());
     }
 
-    cb(members);
+    cb(null, members);
   });
-};
+}
 
 function getSubscribers(thread, cb) {
   var filter = {$or:[{'subscriptions.threads': thread}, {'subscriptions.all': true}]};
@@ -143,9 +143,9 @@ function getSubscribers(thread, cb) {
       return cb(Boom.internal());
     }
 
-    cb(members);
+    cb(null, members);
   });
-};
+}
 
 function list(query, cb) {
   cb = cb || query; // fields is optional
@@ -164,9 +164,9 @@ function list(query, cb) {
       return cb(Boom.internal());
     }
     
-    cb(members);
+    cb(null, members);
   });
-};
+}
 
 function remove(id, cb) {
   var filter = {_id: id};
@@ -180,6 +180,6 @@ function remove(id, cb) {
       return cb(Boom.notFound());
     }
 
-    return cb(member);
+    return cb(null, member);
   });
-};
+}

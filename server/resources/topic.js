@@ -29,7 +29,7 @@ function create(topic, memberId, cb) {
 
     cb(null, _topic);
   });
-};
+}
 
 function update(id, topic, cb) {
   topic.updated = Date.now();
@@ -46,7 +46,7 @@ function update(id, topic, cb) {
 
     cb(null, _topic);
   });
-};
+}
 
 function get(id, cb) {
   var filter = {_id:id};
@@ -62,7 +62,7 @@ function get(id, cb) {
 
     cb(null, topic);
   });
-};
+}
 
 function getByMember(memberId, cb) {
   var filter ={targets: {$in: [memberId]}}; 
@@ -74,7 +74,7 @@ function getByMember(memberId, cb) {
 
     cb(null, topics);
   });
-};
+}
 
 function getByDueDate(start, end, cb) {
   var filter = {duedate: {$gte: start, $lt: end} };
@@ -86,7 +86,7 @@ function getByDueDate(start, end, cb) {
 
     cb(null, topics);
   });
-};
+}
 
 function getByTag(tagId, cb) {
   var filter = {tags: {$in: [tagId]}};
@@ -98,7 +98,7 @@ function getByTag(tagId, cb) {
 
     cb(null, topics);
   });
-};
+}
 
 function getByMeeting(meetingId, cb) {
   var filter = {meetings: {$in: [meetingId]}};
@@ -110,7 +110,7 @@ function getByMeeting(meetingId, cb) {
 
     cb(null, topics);
   });
-};
+}
 
 function list(cb) {
   Topic.find({}, function(err, topics) {
@@ -121,7 +121,7 @@ function list(cb) {
     
     cb(null, topics);
   });
-};
+}
 
 function remove(id, cb) {
   var filter = {_id:id};
@@ -137,4 +137,4 @@ function remove(id, cb) {
 
     return cb(null, topic);
   });
-};
+}

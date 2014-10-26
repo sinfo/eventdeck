@@ -17,4 +17,4 @@ function isAdmin(member, cb) {
   }
 
   return cb();
-};
+}

@@ -6,7 +6,7 @@ var Message = require('server/db/models/message');
 
 server.method('message.get', get, {});
 server.method('message.list', list, {});
-
+server.method('message.getByChat', getByChat, {});
 
 function get(id, cb) {
   Message.findOne({_id: id}, function(err, message) {
@@ -21,7 +21,27 @@ function get(id, cb) {
 
     cb(null, message);
   });
-};
+}
+
+function getByChat(chatId, query, cb){
+  cb = cb || query;
+
+  var filter = {chatId: chatId};
+  var fields = query.fields;
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+
+  Message.find(filter, fields, options, function(err, messages) {
+    if(response.error) {
+      log.error({ err: err, chat: chatId}, 'error getting messages');
+      return cb(Boom.internal());
+    } 
+    cb(null, messages);
+  });
+}
 
 function list(cb) {
   Message.find({}, function(err, messages) {
@@ -32,4 +52,4 @@ function list(cb) {
     
     cb(null, messages);
   });
-};
+}
