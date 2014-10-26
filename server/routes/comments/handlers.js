@@ -1,6 +1,6 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
-
+var render = require('server/views/comment')
 
 var handlers = module.exports;
 
@@ -11,11 +11,7 @@ exports.create = {
     payload: {
       thread: Joi.string().required().description('Thread of the comment'),
       subthread: Joi.string().description('Thread of the comment'),
-      member: Joi.string().description('Author of the comment'),
-      markdown: Joi.string().description('Markdown of the comment'),
-      html: Joi.string().description('Html of the comment'),
-      posted: Joi.date().description('Date the comment was posted'),
-      updated: Joi.date().description('Date the comment was last updated'),
+      text: Joi.string().description('Text of the comment'),
     }
   },
   pre: [
@@ -25,7 +21,7 @@ exports.create = {
     // TODO: PARSE FOR MEMBERS
   ],
   handler: function (request, reply) {
-    reply(request.pre.comment).created('/comments/'+request.pre.comment._id);
+    reply(render(request.pre.comment)).created('/comments/'+request.pre.comment._id);
   },
   description: 'Creates a new comment'
 };
@@ -39,13 +35,7 @@ exports.update = {
       id: Joi.string().required().description('Id of the comment we want to update'),
     },
     payload: {
-      thread: Joi.string().description('Thread of the comment'),
-      subthread: Joi.string().description('Thread of the comment'),
-      member: Joi.string().description('Author of the comment'),
-      markdown: Joi.string().description('Markdown of the comment'),
-      html: Joi.string().description('Html of the comment'),
-      posted: Joi.date().description('Date the comment was posted'),
-      updated: Joi.date().description('Date the comment was last updated'),
+      text: Joi.string().description('Text of the comment'),
     }
   },
   pre: [
@@ -53,7 +43,7 @@ exports.update = {
     { method: 'comment.update(params.id, payload)', assign: 'comment' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.comment);
+    reply(render(request.pre.comment));
   },
   description: 'Updates an comment'
 };
@@ -71,7 +61,7 @@ exports.get = {
     { method: 'comment.get(params.id)', assign: 'comment' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.comment);
+    reply(render(request.pre.comment));
   },
   description: 'Gets an comment'
 };
@@ -120,7 +110,7 @@ exports.list = {
     { method: 'comment.list()', assign: 'comments' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.comments);
+    reply(request.pre.comments.map(render));
   },
   description: 'Gets all the comments'
 };
@@ -140,7 +130,7 @@ exports.remove = {
     { method: 'comment.remove(params.id)', assign: 'comment' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.comment);
+    reply(render(request.pre.comment));
   },
   description: 'Removes an comment'
 };

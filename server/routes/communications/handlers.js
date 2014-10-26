@@ -1,5 +1,6 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
+var render = require('server/views/comment')
 
 
 var handlers = module.exports;
@@ -12,12 +13,7 @@ exports.create = {
       thread: Joi.string().required().description('Thread of the communication'),
       event: Joi.string().description('Event of the communication'),
       kind: Joi.string().description('Kind of the communication'),
-      member: Joi.string().description('Author of the communication'),
       text: Joi.string().description('Text of the communication'),
-      status: Joi.string().description('Status of the communication'),
-      approved: Joi.boolean().description('Approved of the communication'),
-      posted: Joi.date().description('Date the communication was posted'),
-      updated: Joi.date().description('Date the communication was last updated'),
     }
   },
   pre: [
@@ -27,7 +23,7 @@ exports.create = {
     // TODO: PARSE FOR MEMBERS
   ],
   handler: function (request, reply) {
-    reply(request.pre.communication).created('/communications/'+request.pre.communication._id);
+    reply(render(request.pre.communication)).created('/communications/'+request.pre.communication._id);
   },
   description: 'Creates a new communication'
 };
@@ -41,15 +37,9 @@ exports.update = {
       id: Joi.string().required().description('Id of the communication we want to update'),
     },
     payload: {
-      thread: Joi.string().description('Thread of the communication'),
-      event: Joi.string().description('Event of the communication'),
       kind: Joi.string().description('Kind of the communication'),
-      member: Joi.string().description('Author of the communication'),
       text: Joi.string().description('Text of the communication'),
       status: Joi.string().description('Status of the communication'),
-      approved: Joi.boolean().description('Approved of the communication'),
-      posted: Joi.date().description('Date the communication was posted'),
-      updated: Joi.date().description('Date the communication was last updated'),
     }
   },
   pre: [
@@ -57,7 +47,7 @@ exports.update = {
     { method: 'communication.update(params.id, payload)', assign: 'communication' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.communication);
+    reply(render(request.pre.communication));
   },
   description: 'Updates an communication'
 };
@@ -75,7 +65,7 @@ exports.get = {
     { method: 'communication.get(params.id)', assign: 'communication' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.communication);
+    reply(render(request.pre.communication));
   },
   description: 'Gets an communication'
 };
@@ -93,7 +83,7 @@ exports.getByMember = {
     { method: 'communication.getByMember(params.id)', assign: 'communications' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.communications);
+    reply(request.pre.communications.map(render));
   },
   description: 'Gets communications of a given member'
 };
@@ -111,7 +101,7 @@ exports.getByThread = {
     { method: 'communication.getByThread(path, params.id)', assign: 'communications' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.communications);
+    reply(request.pre.communications.map(render));
   },
   description: 'Gets communications of a given thread'
 };
@@ -128,7 +118,7 @@ exports.getByEvent = {
     { method: 'communication.getByEvent(params.id)', assign: 'communications' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.communications);
+    reply(request.pre.communications.map(render));
   },
   description: 'Gets communications of a given event'
 };
@@ -141,7 +131,7 @@ exports.list = {
     { method: 'communication.list()', assign: 'communications' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.communications);
+    reply(request.pre.communications.map(render));
   },
   description: 'Gets all the communications'
 };
@@ -161,7 +151,7 @@ exports.remove = {
      // TODO: REMOVE NOTIFICATIONS
   ],
   handler: function (request, reply) {
-    reply(request.pre.communication);
+    reply(render(request.pre.communication));
   },
   description: 'Removes an communication'
 };

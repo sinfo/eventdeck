@@ -4,8 +4,7 @@ var commentSchema = new mongoose.Schema({
   thread: String,
   subthread: String,
   member: String,
-  markdown: String,
-  html: String,
+  text: String,
   posted: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now }
 });
