@@ -48,9 +48,13 @@ function update(id, communication, cb) {
   });
 }
 
-function get(id, cb) {
+function get(id,query, cb) {
+  cb = cb || query; // fields is optional
+
   var filter = {_id: id};
-  Communication.findOne(filter, function(err, communication) {
+  var fields = parser(query.fields);
+
+  Communication.findOne(filter,fields, function(err, communication) {
     if (err) {
       log.error({ err: err, communication: id}, 'error getting communication');
       return cb(Boom.internal());
@@ -64,9 +68,17 @@ function get(id, cb) {
   });
 }
 
-function getByMember(memberId, cb) {
+function getByMember(memberId,query, cb) {
+  cb = cb || query; // fields is optional
+
   var filter = {member:memberId};
-  Communication.find(filter, function(err, communications) {
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+  Communication.find(filter,fields,options, function(err, communications) {
     if (err) {
       log.error({ err: err, member: memberId}, 'error getting communications');
       return cb(Boom.internal());
@@ -76,9 +88,17 @@ function getByMember(memberId, cb) {
   });
 }
 
-function getByThread(path, id, cb) {
+function getByThread(path, id,query, cb) {
+  cb = cb || query; // fields is optional
+
   var thread = threadFromPath(path, id);
   var filter = {thread: thread};
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
   Communication.find(filter, function(err, communications) {
     if (err) {
       log.error({ err: err, thread: thread}, 'error getting communications');
@@ -89,8 +109,16 @@ function getByThread(path, id, cb) {
   });
 }
 
-function getByEvent(eventId, cb) {
+function getByEvent(eventId,query, cb) {
+  cb = cb || query; // fields is optional
+  
   var filter = {event: eventId};
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
   Communication.find(filter, function(err, communications) {
     if (err) {
       log.error({ err: err, event: eventId}, 'error getting communications');
@@ -101,8 +129,17 @@ function getByEvent(eventId, cb) {
   });
 }
 
-function list(cb) {
-  Communication.find({}, function(err, communications) {
+function list(query, cb) {
+  cb = cb || query; // fields is optional
+
+  var filter = {};
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+  Communication.find(filter,fields,options, function(err, communications) {
     if (err) {
       log.error({ err: err}, 'error getting all communications');
       return cb(Boom.internal());

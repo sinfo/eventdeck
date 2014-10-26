@@ -38,9 +38,12 @@ function update(id, chat, cb) {
   });
 }
 
-function get(id, cb) {
+function get(id,query, cb) {
+  cb = cb||query;
   var filter = {_id: id};
-  Chat.findOne(filter, function(err, chat) {
+  var fields = parser(query.fields);
+
+  Chat.findOne(filter,fields, function(err, chat) {
     if (err) {
       log.error({ err: err, chat: id}, 'error getting chat');
       return cb(Boom.internal());
@@ -54,8 +57,17 @@ function get(id, cb) {
   });
 }
 
-function list(cb) {
-  Chat.find({}, function(err, chats) {
+function list(query, cb) {
+  cb = cb || query; // fields is optional
+
+  var filter = {};
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+  Chat.find(filter,fields,options, function(err, chats) {
     if (err) {
       log.error({ err: err}, 'error getting all chats');
       return cb(Boom.internal());

@@ -48,9 +48,11 @@ function update(id, topic, cb) {
   });
 }
 
-function get(id, cb) {
+function get(id,query, cb) {
+  cb = cb || query; // fields is optional
+  var fields = query.fields;
   var filter = {_id:id};
-  Topic.findOne(filter, function(err, topic) {
+  Topic.findOne(filter,fields, function(err, topic) {
     if (err) {
       log.error({ err: err, topic: id}, 'error getting topic');
       return cb(Boom.internal());
@@ -64,9 +66,17 @@ function get(id, cb) {
   });
 }
 
-function getByMember(memberId, cb) {
+function getByMember(memberId,query, cb) {
+  cb = cb || query;
+
   var filter ={targets: {$in: [memberId]}}; 
-  Topic.find(filter, function(err, topics) {
+  var fields = query.fields;
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+  Topic.find(filter,fields,options, function(err, topics) {
     if (err) {
       log.error({ err: err, member: memberId}, 'error getting topics');
       return cb(Boom.internal());
@@ -76,9 +86,16 @@ function getByMember(memberId, cb) {
   });
 }
 
-function getByDueDate(start, end, cb) {
+function getByDueDate(start, end,query, cb) {
+  cb = cb||query;
   var filter = {duedate: {$gte: start, $lt: end} };
-  Topic.find( filter, function(err, topics) {
+  var fields = query.fields;
+    var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+  Topic.find( filter,fields,options, function(err, topics) {
     if (err) {
       log.error({ err: err, member: memberId}, 'error getting topics');
       return cb(Boom.internal());
@@ -88,9 +105,16 @@ function getByDueDate(start, end, cb) {
   });
 }
 
-function getByTag(tagId, cb) {
+function getByTag(tagId,query, cb) {
+  cb = cb || query;
   var filter = {tags: {$in: [tagId]}};
-  Topic.find(filter, function(err, topics) {
+  var fields = query.fields;
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+  Topic.find(filter,fields,options, function(err, topics) {
     if (err) {
       log.error({ err: err, tag: tagId}, 'error getting topics');
       return cb(Boom.internal());
@@ -100,9 +124,16 @@ function getByTag(tagId, cb) {
   });
 }
 
-function getByMeeting(meetingId, cb) {
+function getByMeeting(meetingId,query, cb) {
+  cb = cb || query;
   var filter = {meetings: {$in: [meetingId]}};
-  Topic.find(filter, function(err, topics) {
+  var fields = query.fields;
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+  Topic.find(filter,fields,options, function(err, topics) {
     if (err) {
       log.error({ err: err, meeting: meetingId}, 'error getting topics');
       return cb(Boom.internal());
@@ -112,8 +143,18 @@ function getByMeeting(meetingId, cb) {
   });
 }
 
-function list(cb) {
-  Topic.find({}, function(err, topics) {
+function list(query, cb) {
+  cb = cb || query; // fields is optional
+
+  var filter = {};
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+
+  Topic.find(filter, fields, options, function(err, topics) {
     if (err) {
       log.error({ err: err}, 'error getting all topics');
       return cb(Boom.internal());
