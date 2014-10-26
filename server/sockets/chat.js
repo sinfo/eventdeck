@@ -13,10 +13,6 @@ webSocket
   .of('/chat')
   .on('connection', function (socket) {
 
-    socket.emit('connected');
-
-    log.debug("[sockets-chat] New user connected");
-
     socket.on('auth', function(data, cbClient){
       var room = data.id;
       var user = data.user;
