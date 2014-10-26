@@ -36,14 +36,14 @@ function chatServer(socket){
         updateChat(room, cb);
       }
     ], function(){
-        webSocket.of('/chat').in(room).emit('message', {message: messageData});
+        webSocket.in(room).emit('message', {message: messageData});
         log.debug("[socket-chat] New message from " + socket.nickname + " sent");
         cbClient();
     });
   });
 
   socket.on('chat-logout', function(data, cb){
-    webSocket.of('/chat').in(data.room).emit('user-disconnected', {id: socket.nickname});
+    webSocket.in(data.room).emit('user-disconnected', {id: socket.nickname});
     log.debug("[socket-chat] User " + socket.nickname + " disconnected");
     socket.disconnect();
     cb();
@@ -57,7 +57,7 @@ function chatServer(socket){
     var dateRef = data.date;
     var room = data.room;
     getMessages(room, dateRef, function(){
-      webSocket.of('/chat').in(room).emit('history-send', {messages: messages});
+      webSocket.in(room).emit('history-send', {messages: messages});
       cb();
     });
   });
