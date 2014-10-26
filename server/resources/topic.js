@@ -64,7 +64,8 @@ function get(id, cb) {
 };
 
 function getByMember(memberId, cb) {
-  Topic.find({targets: {$in: [memberId]}}, function(err, topics) {
+  var filter ={targets: {$in: [memberId]}}; 
+  Topic.find(filter, function(err, topics) {
     if (err) {
       log.error({ err: err, member: memberId}, 'error getting topics');
       return cb(Boom.internal());
@@ -75,7 +76,8 @@ function getByMember(memberId, cb) {
 };
 
 function getByDueDate(start, end, cb) {
-  Topic.find({ duedate: {$gte: start, $lt: end} }, function(err, topics) {
+  var filter = duedate: {$gte: start, $lt: end} };
+  Topic.find({ date, function(err, topics) {
     if (err) {
       log.error({ err: err, member: memberId}, 'error getting topics');
       return cb(Boom.internal());
@@ -86,7 +88,8 @@ function getByDueDate(start, end, cb) {
 };
 
 function getByTag(tagId, cb) {
-  Topic.find({tags: {$in: [tagId]}}, function(err, topics) {
+  var filter = tags: {$in: [tagId]}};
+  Topic.find(tag, function(err, topics) {
     if (err) {
       log.error({ err: err, tag: tagId}, 'error getting topics');
       return cb(Boom.internal());
@@ -97,7 +100,8 @@ function getByTag(tagId, cb) {
 };
 
 function getByMeeting(meetingId, cb) {
-  Topic.find({meetings: {$in: [meetingId]}}, function(err, topics) {
+  var filter = meetings: {$in: [meetingId]}};
+  Topic.find({filter, function(err, topics) {
     if (err) {
       log.error({ err: err, meeting: meetingId}, 'error getting topics');
       return cb(Boom.internal());

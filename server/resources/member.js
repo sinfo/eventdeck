@@ -55,8 +55,9 @@ function update(id, member, cb) {
 
 function createLoginCode(id, cb) {
   var loginCode = randtoken.generate(4).toUpperCase();
+  var code = {$push: {'loginCodes': {code: loginCode, created: new Date()}}};
 
-  Member.findOneAndUpdate({id: id}, {$push: {'loginCodes': {code: loginCode, created: new Date()}}}, function(err, _member) {
+  Member.findOneAndUpdate({id: id},code , function(err, _member) {
     if (err) {
       log.error({ err: err, member: id}, 'error creating login code for member');
       return cb(Boom.internal());
@@ -76,7 +77,8 @@ function get(id, query, cb) {
   cb = cb || query; // fields is optional
 
   var fields = parser(query.fields);
-  Member.findOne({$or:[{id: id}, {'facebook.id': id}]}, fields, function(err, member) {
+  var filter = {$or:[{id: id}, {'facebook.id': id}]};
+  Member.findOne(filter, fields, function(err, member) {
     if (err) {
       log.error({ err: err, member: id}, 'error getting member');
       return cb(Boom.internal());
@@ -134,7 +136,8 @@ function getTeamLeaders(query, cb) {
 };
 
 function getSubscribers(thread, cb) {
-  Member.find({$or:[{'subscriptions.threads': thread}, {'subscriptions.all': true}]}, function(err, members) {
+  var filter = {$or:[{'subscriptions.threads': thread}, {'subscriptions.all': true}]};
+  Member.find(filter, function(err, members) {
     if (err) {
       log.error({ err: err, thread: thread}, 'error getting members');
       return cb(Boom.internal());

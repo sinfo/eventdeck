@@ -73,7 +73,8 @@ function getByMember(memberId, cb) {
 };
 
 function getByEvent(eventId, cb) {
-  Speaer.find({ participations: { $elemMatch: { event: eventId } } }, function(err, speaker) {
+  var filter = { participations: { $elemMatch: { event: eventId } } };
+  Speaer.find(filter, function(err, speaker) {
     if (err) {
       log.error({ err: err, event: eventId}, 'error getting speaker');
       return cb(Boom.internal());
