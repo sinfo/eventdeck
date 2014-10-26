@@ -2,7 +2,7 @@ var Boom = require('boom');
 var slug = require('slug');
 var server = require('server').hapi;
 var log = require('server/helpers/logger');
-var fieldsParser = require('server/helpers/fieldsParser');
+var parser = require('server/helpers/fieldsParser');
 var Event = require('server/db/models/event');
 
 
@@ -44,10 +44,11 @@ function update(id, event, cb) {
   });
 };
 
-function get(id, fields, cb) {
-  cb = cb || fields; // fields is optional
+function get(id, query, cb) {
+  cb = cb || query; // fields is optional
 
-  Event.findOne({id: id}, fieldsParser(fields), function(err, event) {
+  var fields = parser(query.fields);
+  Event.findOne({id: id}, fields, function(err, event) {
     if (err) {
       log.error({ err: err, event: id}, 'error getting event');
       return cb(Boom.internal());
@@ -61,10 +62,18 @@ function get(id, fields, cb) {
   });
 };
 
-function list(fields, cb) {
-  cb = cb || fields; // fields is optional
+function list(query, cb) {
+  cb = cb || query; // fields is optional
 
-  Event.find({}, fieldsParser(fields), function(err, events) {
+  var filter = {};
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  }
+
+  Event.find(filter, fields,options, function(err, events) {
     if (err) {
       log.error({ err: err}, 'error getting all events');
       return cb(Boom.internal());

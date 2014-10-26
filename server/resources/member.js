@@ -3,7 +3,7 @@ var slug = require('slug');
 var server = require('server').hapi;
 var log = require('server/helpers/logger');
 var threadFromPath = require('server/helpers/threadFromPath');
-var fieldsParser = require('server/helpers/fieldsParser');
+var parser = require('server/helpers/fieldsParser');
 var dupKeyParser = require('server/helpers/dupKeyParser');
 var randtoken = require('rand-token');
 var Member = require('server/db/models/member');
@@ -72,10 +72,11 @@ function createLoginCode(id, cb) {
   });
 };
 
-function get(id, fields, cb) {
-  cb = cb || fields; // fields is optional
+function get(id, query, cb) {
+  cb = cb || query; // fields is optional
 
-  Member.findOne({$or:[{id: id}, {'facebook.id': id}]}, fieldsParser(fields), function(err, member) {
+  var fields = parser(query.fields);
+  Member.findOne({$or:[{id: id}, {'facebook.id': id}]}, fields, function(err, member) {
     if (err) {
       log.error({ err: err, member: id}, 'error getting member');
       return cb(Boom.internal());
@@ -89,10 +90,19 @@ function get(id, fields, cb) {
   });
 };
 
-function getByRole(roleId, fields, cb) {
-  cb = cb || fields; // fields is optional
+function getByRole(roleId, query, cb) {
+  cb = cb || query; // fields is optional
 
-  Member.find({'roles.id': roleId}, fieldsParser(fields), function(err, members) {
+
+  var filter = { participations: { $elemMatch: { event: roleId } } };
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  }
+
+  Member.find(filter,fields,options, function(err, members) {
     if (err) {
       log.error({ err: err, member: memberId}, 'error getting members');
       return cb(Boom.internal());
@@ -102,10 +112,18 @@ function getByRole(roleId, fields, cb) {
   });
 };
 
-function getTeamLeaders(fields, cb) {
-  cb = cb || fields; // fields is optional
+function getTeamLeaders(query, cb) {
+  cb = cb || query; // fields is optional
 
-  Member.find({'roles.isTeamLeader': true}, fieldsParser(fields), function(err, members) {
+    var filter ={'roles.isTeamLeader': true};
+    var fields = parser(query.fields);
+    var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  }
+
+  Member.find(filter,fields,options, function(err, members) {
     if (err) {
       log.error({ err: err, isTeamLeader: true}, 'error getting members');
       return cb(Boom.internal());
@@ -126,10 +144,18 @@ function getSubscribers(thread, cb) {
   });
 };
 
-function list(fields, cb) {
-  cb = cb || fields; // fields is optional
+function list(query, cb) {
+  cb = cb || query; // fields is optional
 
-  Member.find({}, fieldsParser(fields), function(err, members) {
+  var filter = {};
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+
+  Member.find(filter,fields,options, function(err, members) {
     if (err) {
       log.error({ err: err}, 'error getting all members');
       return cb(Boom.internal());

@@ -72,7 +72,7 @@ exports.get = {
     }
   },
   pre: [
-    { method: 'event.get(params.id, query.fields)', assign: 'event' }
+    { method: 'event.get(params.id, query)', assign: 'event' }
     // TODO: READ NOTIFICATIONS
   ],
   handler: function (request, reply) {
@@ -91,7 +91,7 @@ exports.list = {
     }
   },
   pre: [
-    { method: 'event.list(query.fields)', assign: 'events' }
+    { method: 'event.list(query)', assign: 'events' }
   ],
   handler: function (request, reply) {
     reply(request.pre.events);

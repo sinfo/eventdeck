@@ -93,7 +93,7 @@ exports.get = {
     }
   },
   pre: [
-    { method: 'member.get(params.id, query.fields)', assign: 'member' }
+    { method: 'member.get(params.id, query)', assign: 'member' }
   ],
   handler: function (request, reply) {
     reply(request.pre.member);

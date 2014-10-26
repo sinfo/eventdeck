@@ -47,10 +47,11 @@ function update(id, company, cb) {
   });
 };
 
-function get(id, fields, cb) {
-  cb = cb || fields; // fields is optional
+function get(id, query, cb) {
+  cb = cb || query; // fields is optional
 
-  Company.findOne({id: id}, parser(fields), function(err, company) {
+  var fields = parser(query.fields);
+  Company.findOne({id: id}, fields, function(err, company) {
     if (err) {
       log.error({ err: err, company: id}, 'error getting company');
       return cb(Boom.internal());
@@ -64,8 +65,8 @@ function get(id, fields, cb) {
   });
 };
 
-function getByMember(memberId, fields, cb) {
-  cb = cb || fields; // fields is optional
+function getByMember(memberId, query, cb) {
+  cb = cb || query; // fields is optional
 
   var filter = { participations: { $elemMatch: { event: eventId } } };
   var fields = parser(query.fields);
@@ -85,8 +86,8 @@ function getByMember(memberId, fields, cb) {
   });
 };
 
-function getByEvent(eventId, fields, cb) {
-  cb = cb || fields; // fields is optional
+function getByEvent(eventId, query, cb) {
+  cb = cb || query; // fields is optional
 
   var filter = { participations: { $elemMatch: { event: eventId } } };
   var fields = parser(query.fields);
