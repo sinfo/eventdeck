@@ -68,7 +68,7 @@ function get(id, query, cb) {
 function getByMember(memberId, query, cb) {
   cb = cb || query; // fields is optional
 
-  var filter = { participations: { $elemMatch: { event: eventId } } };
+  var filter = { participations: { $elemMatch: { member: memberId } } };
   var fields = parser(query.fields);
   var options = {
     skip: query.skip,

@@ -34,7 +34,7 @@ function create(member, cb) {
       return cb(Boom.internal());
     }
 
-    cb(null, _member);
+    cb(_member);
   });
 };
 
@@ -49,7 +49,7 @@ function update(id, member, cb) {
       return cb(Boom.notFound());
     }
 
-    cb(null, _member);
+    cb(_member);
   });
 };
 
@@ -69,7 +69,7 @@ function createLoginCode(id, cb) {
 
     log.info({member: id, loginCode: loginCode}, 'login code created');
 
-    cb(null, {member: _member, loginCode: loginCode} );
+    cb({member: _member, loginCode: loginCode} );
   });
 };
 
@@ -88,7 +88,7 @@ function get(id, query, cb) {
       return cb(Boom.notFound());
     }
 
-    cb(null, member);
+    cb(member);
   });
 };
 
@@ -110,7 +110,7 @@ function getByRole(roleId, query, cb) {
       return cb(Boom.internal());
     }
 
-    cb(null, members);
+    cb(members);
   });
 };
 
@@ -131,7 +131,7 @@ function getTeamLeaders(query, cb) {
       return cb(Boom.internal());
     }
 
-    cb(null, members);
+    cb(members);
   });
 };
 
@@ -143,7 +143,7 @@ function getSubscribers(thread, cb) {
       return cb(Boom.internal());
     }
 
-    cb(null, members);
+    cb(members);
   });
 };
 
@@ -164,7 +164,7 @@ function list(query, cb) {
       return cb(Boom.internal());
     }
     
-    cb(null, members);
+    cb(members);
   });
 };
 
@@ -180,6 +180,6 @@ function remove(id, cb) {
       return cb(Boom.notFound());
     }
 
-    return cb(null, member);
+    return cb(member);
   });
 };

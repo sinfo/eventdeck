@@ -12,5 +12,6 @@ require('./messages');
 require('./notifications');
 require('./speakers');
 require('./sessions');
+require('./subscriptions');
 require('./tags');
 require('./topics');
