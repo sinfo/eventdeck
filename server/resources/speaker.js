@@ -31,8 +31,8 @@ function create(speaker, memberId, cb) {
 
 function update(id, speaker, cb) {
   speaker.updated = Date.now();
-
-  Speaker.findOneAndUpdate({id: id}, speaker, function(err, _speaker) {
+  var filter = {id:id};
+  Speaker.findOneAndUpdate(filter, speaker, function(err, _speaker) {
     if (err) {
       log.error({ err: err, speaker: id}, 'error updating speaker');
       return cb(Boom.internal());
@@ -47,7 +47,8 @@ function update(id, speaker, cb) {
 };
 
 function get(id, cb) {
-  Speaker.findOne({id: id}, function(err, speaker) {
+  var filter = {id:id};
+  Speaker.findOne(filter, function(err, speaker) {
     if (err) {
       log.error({ err: err, speaker: id}, 'error getting speaker');
       return cb(Boom.internal());
@@ -96,7 +97,8 @@ function list(cb) {
 };
 
 function remove(id, cb) {
-  Speaker.findOneAndRemove({id: id}, function(err, speaker){
+  var filter = {id:id};
+  Speaker.findOneAndRemove(filter, function(err, speaker){
     if (err) {
       log.error({ err: err, speaker: id}, 'error deleting speaker');
       return cb(Boom.internal());
