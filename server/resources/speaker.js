@@ -111,7 +111,7 @@ function list(query,cb) {
     limit: query.limit,
     sort: parser(query.sort)
   };
-  Speaker.find(fileter,fields,options, function(err, speaker) {
+  Speaker.find(filter,fields,options, function(err, speaker) {
     if (err) {
       log.error({ err: err}, 'error getting all speaker');
       return cb(Boom.internal());

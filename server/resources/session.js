@@ -44,10 +44,9 @@ function update(id, session, cb) {
 function get(id,query, cb) {
   cb = cb||query;
   var filter = {id:id};
-  var filter ={thread:thread};
   var fields = query.fields;
 
-  Session.findOne(filter,fields, function(err, session) {
+  Session.findOne(filter, fields, function(err, session) {
     if (err) {
       log.error({ err: err, session: id}, 'error getting session');
       return cb(Boom.internal());
