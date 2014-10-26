@@ -61,9 +61,13 @@ function create(notification, cb) {
   });
 }
 
-function get(id, cb) {
+function get(id,query, cb) {
+  cb = cb||query;
   var filter = {_id: id};
-  Notification.findOne(filter, function(err, notification) {
+  var filter ={thread:thread};
+  var fields = query.fields;
+
+  Notification.findOne(filter,fields, function(err, notification) {
     if (err) {
       log.error({ err: err, notification: id}, 'error getting notification');
       return cb(Boom.internal());
@@ -77,10 +81,17 @@ function get(id, cb) {
   });
 }
 
-function getByThread(path, id, cb) {
+function getByThread(path, id,query, cb) {
+  cb = cb||query;
   var thread = threadFromPath(path, id);
   var filter ={thread:thread};
-  Notification.find(filter, function(err, notifications) {
+  var fields = query.fields;
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+  Notification.find(filter,fields,options, function(err, notifications) {
     if (err) {
       log.error({ err: err, thread: thread}, 'error getting notifications');
       return cb(Boom.internal());
@@ -103,8 +114,17 @@ function readThread(path, id, memberId, cb) {
   });
 }
 
-function list(cb) {
-  Notification.find({}, function(err, notifications) {
+function list(query, cb) {
+  cb = cb || query; // fields is optional
+
+  var filter = {};
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+  Notification.find(filter,fields,options, function(err, notifications) {
     if (err) {
       log.error({ err: err}, 'error getting all notifications');
       return cb(Boom.internal());

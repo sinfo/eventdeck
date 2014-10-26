@@ -39,9 +39,12 @@ function update(id, meeting, cb) {
   });
 }
 
-function get(id, cb) {
+function get(id,query, cb) {
+  cb = cb||query;
   var filter = {_id:id};
-  Meeting.findOne(filter, function(err, meeting) {
+  var fields = parser(query.fields);
+
+  Meeting.findOne(filter,fields, function(err, meeting) {
     if (err) {
       log.error({ err: err, meeting: id}, 'error getting meeting');
       return cb(Boom.internal());
@@ -55,8 +58,18 @@ function get(id, cb) {
   });
 }
 
-function list(cb) {
-  Meeting.find({}, function(err, meetings) {
+function list(query, cb) {
+  cb = cb || query; // fields is optional
+
+  var filter = {};
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+
+  Meeting.find(filter,fields,options, function(err, meetings) {
     if (err) {
       log.error({ err: err}, 'error getting all meetings');
       return cb(Boom.internal());

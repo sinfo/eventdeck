@@ -41,9 +41,12 @@ function update(id, item, cb) {
   });
 }
 
-function get(id, cb) {
+function get(id,query, cb) {
+  cb = cb||query;
   var filter = {_id: id};
-  Item.findOne(filter, function(err, item) {
+  var fields = parser(query.fields);
+
+  Item.findOne(filter,fields, function(err, item) {
     if (err) {
       log.error({ err: err, item: id}, 'error getting item');
       return cb(Boom.internal());
@@ -57,8 +60,18 @@ function get(id, cb) {
   });
 }
 
-function list(cb) {
-  Item.find({}, function(err, items) {
+function list(query, cb) {
+  cb = cb || query; // fields is optional
+
+  var filter = {};
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+
+  Item.find(filter,fields,options, function(err, items) {
     if (err) {
       log.error({ err: err}, 'error getting all items');
       return cb(Boom.internal());

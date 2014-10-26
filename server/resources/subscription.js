@@ -23,10 +23,13 @@ function create(thread, memberId, cb) {
   });
 }
 
-function get(thread, memberId, cb) {
+function get(thread, memberId,query, cb) {
+  cb = cb || query; // fields is optional
+
+  var fields = parser(query.fields);
   var filter = { member: memberId, thread: thread };
 
-  Subscription.findOne(filter, function(err, subscription) {
+  Subscription.findOne(filter,fields, function(err, subscription) {
     if (err) {
       log.error({ err: err, subscription: filter}, 'error getting subscription');
       return cb(Boom.internal());
@@ -57,10 +60,17 @@ function remove(thread, memberId, cb) {
   });
 }
 
-function getByMember(memberId, cb) {
-  var filter = { member: memberId };
+function getByMember(memberId,query, cb) {
+  cb = cb || query;
+  var filter = {members: {$in: [memberId]}};
+  var fields = query.fields;
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
 
-  Subscription.find(filter, function(err, subscriptions) {
+  Subscription.find(filter,fields,options, function(err, subscriptions) {
     if (err) {
       log.error({ err: err, subscriptions: filter}, 'error getting subscriptions');
       return cb(Boom.internal());
@@ -70,10 +80,17 @@ function getByMember(memberId, cb) {
   });
 }
 
-function getByThread(thread, cb) {
-  var filter = { thread: thread };
+function getByThread(thread,query, cb) {
+  cb = cb || query;
+  var filter = {thread: thread};
+  var fields = query.fields;
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
 
-  Subscription.find(filter, function(err, subscriptions) {
+  Subscription.find(filter,fields,options, function(err, subscriptions) {
     if (err) {
       log.error({ err: err, subscriptions: filter}, 'error getting subscriptions');
       return cb(Boom.internal());
