@@ -132,7 +132,7 @@ exports.getByRole = {
     }
   },
   pre: [
-    { method: 'member.getByRole(params.id, query.fields)', assign: 'members' }
+    { method: 'member.getByRole(params.id, query)', assign: 'members' }
   ],
   handler: function (request, reply) {
     reply(request.pre.members);
@@ -150,7 +150,7 @@ exports.getTeamLeaders = {
     },
   },  
   pre: [
-    { method: 'member.getTeamLeaders(query.fields)', assign: 'members' }
+    { method: 'member.getTeamLeaders(query)', assign: 'members' }
   ],
   handler: function (request, reply) {
     reply(request.pre.members);
@@ -189,7 +189,7 @@ exports.list = {
     }
   },
   pre: [
-    { method: 'member.list(query.fields)', assign: 'members' }
+    { method: 'member.list(query)', assign: 'members' }
   ],
   handler: function (request, reply) {
     reply(request.pre.members);
