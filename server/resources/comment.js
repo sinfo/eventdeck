@@ -25,7 +25,7 @@ function create(comment, memberId, cb) {
       return cb(Boom.internal());
     }
 
-    cb(null, _comment);
+    cb(_comment);
   });
 };
 
@@ -42,7 +42,7 @@ function update(id, comment, cb) {
       return cb(Boom.notFound());
     }
 
-    cb(null, _comment);
+    cb(_comment);
   });
 };
 
@@ -57,7 +57,7 @@ function get(id, cb) {
       return cb(Boom.notFound());
     }
 
-    cb(null, comment);
+    cb(comment);
   });
 };
 
@@ -68,7 +68,7 @@ function getByMember(memberId, cb) {
       return cb(Boom.internal());
     }
 
-    cb(null, comments);
+    cb(comments);
   });
 };
 
@@ -80,7 +80,7 @@ function getByThread(path, id, cb) {
       return cb(Boom.internal());
     }
 
-    cb(null, comments);
+    cb(comments);
   });
 };
 
@@ -91,7 +91,7 @@ function list(cb) {
       return cb(Boom.internal());
     }
     
-    cb(null, comments);
+    cb(comments);
   });
 };
 
@@ -106,6 +106,6 @@ function remove(id, cb) {
       return cb(Boom.notFound());
     }
 
-    return cb(null, comment);
+    return cb(comment);
   });
 };
