@@ -15,42 +15,22 @@ server.method('notification.getByThread', getByThread, {});
 server.method('notification.removeByThread', removeByThread, {});
 
 
-function notify(memberId, thread, description, objectId, cb) {
-  server.methods.member.list('id', function gotMembers(err, _members) {
-    if (err) {
-      log.error({ err: err, thread: thread}, 'error creating notification');
-      return cb(Boom.internal());
-    }
+function notify(memberId, thread, description, objectId, targets, cb) {
+  var notification = {
+    thread: thread,
+    source: objectId,
+    member: memberId,
+    description: description,
+    targets: targets,
+    posted: Date.now()
+  };
 
-    var members = [];
-    for(var m in result) {
-      if(_members[m].id != memberId){
-        members.push(_members[m].id);
-      }
-    }
-
-    server.methods.member.getSubscribers(thread, function gotSubscribers(err, subscribers) {
-      if (err) {
-        log.error({ err: err, thread: thread}, 'error creating notification');
-        return cb(Boom.internal());
-      }
-
-      var notification = {
-        thread: thread,
-        source: objectId,
-        member: memberId,
-        description: description,
-        unread: members,
-        targets: subscribers,
-        posted: new Date()
-      };
-
-      create(notification, cb);
-    });
-  });
+  create(notification, cb);
 }
 
 function create(notification, cb) {
+  notification.posted = Date.now();
+  
   Notification.create(notification, function(err, _notification) {
     if (err) {
       log.error({ err: err, notification: notification}, 'error creating notification');
