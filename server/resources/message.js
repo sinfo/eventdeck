@@ -27,7 +27,7 @@ function getByChat(chatId, query, cb){
   cb = cb || query;
 
   var filter = {chatId: chatId};
-  var fields = query.fields;
+  var fields = parser(query.fields);
   var options = {
     skip: query.skip,
     limit: query.limit,

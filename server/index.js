@@ -1,8 +1,8 @@
 var Hapi = require('hapi');
 var SocketIO = {server: require('socket.io'), client: require('socket.io-client')};
-var cookieConfig = require('config').cookie;
-var config = require('config');
 var log = require('server/helpers/logger');
+var config = require('config');
+var cookieConfig = config.cookie;
 
 log.error('### Starting EventDeck ###');
 
