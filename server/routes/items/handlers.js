@@ -62,10 +62,13 @@ exports.get = {
   validate: {
     params: {
       id: Joi.string().required().description('id of the item we want to retrieve'),
+    },
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
     }
   },
   pre: [
-    { method: 'item.get(params.id)', assign: 'item' }
+    { method: 'item.get(params.id,query)', assign: 'item' }
     // TODO: READ NOTIFICATIONS
   ],
   handler: function (request, reply) {
@@ -78,8 +81,16 @@ exports.get = {
 exports.list = {
   auth: 'session',
   tags: ['api','item'],
+  validate: {
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
+   }
+  },
   pre: [
-    { method: 'item.list()', assign: 'items' }
+    { method: 'item.list(query)', assign: 'items' }
   ],
   handler: function (request, reply) {
     reply(request.pre.items);

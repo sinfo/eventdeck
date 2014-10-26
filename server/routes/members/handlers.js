@@ -84,9 +84,9 @@ exports.update = {
 exports.get = {
   auth: 'session',
   tags: ['api','member'],
-  validate: {
+   validate: {
     query: {
-      fields: Joi.string().default('id,name,img,mails,facebook,phones').description('Fields we want to retrieve'),
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
     },
     params: {
       id: Joi.string().required().description('id of the member we want to retrieve'),
@@ -108,11 +108,13 @@ exports.getMe = {
   tags: ['api','member'],
   validate: {
     query: {
-      fields: Joi.string().default('id,name,img').description('Fields we want to retrieve'),
-    }
-  },
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
+  }},
   pre: [
-    { method: 'member.get(auth.credentials.id, query.fields)', assign: 'member' }
+    { method: 'member.get(auth.credentials.id, query)', assign: 'member' }
   ],
   handler: function (request, reply) {
     reply(request.pre.member);
@@ -126,7 +128,10 @@ exports.getByRole = {
   tags: ['api','member'],
   validate: {
     query: {
-      fields: Joi.string().default('id,name').description('Fields we want to retrieve'),
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
     },
     params: {
       id: Joi.string().required().description('id of the role'),
@@ -147,9 +152,12 @@ exports.getTeamLeaders = {
   tags: ['api','member'],
   validate: {
     query: {
-      fields: Joi.string().default('id,name').description('Fields we want to retrieve'),
-    },
-  },  
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
+    }
+  },
   pre: [
     { method: 'member.getTeamLeaders(query)', assign: 'members' }
   ],
@@ -165,14 +173,17 @@ exports.getSubscribers = {
   tags: ['api','member'],
   validate: {
     query: {
-      fields: Joi.string().default('id,name').description('Fields we want to retrieve'),
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
     },
     params: {
       id: Joi.string().required().description('id of the thread'),
     }
   },
   pre: [
-    { method: 'member.getSubscribers(path, params.id)', assign: 'members' }
+    { method: 'member.getSubscribers(path, params.id,query)', assign: 'members' }
   ],
   handler: function (request, reply) {
     reply(request.pre.members);
@@ -186,7 +197,10 @@ exports.list = {
   tags: ['api','member'],
   validate: {
     query: {
-      fields: Joi.string().default('id,name,img,facebook').description('Fields we want to retrieve'),
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
     }
   },
   pre: [

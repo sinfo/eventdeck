@@ -52,12 +52,15 @@ exports.get = {
   auth: 'session',
   tags: ['api','tag'],
   validate: {
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+    },
     params: {
       id: Joi.string().required().description('id of the tag we want to retrieve'),
     }
   },
   pre: [
-    { method: 'tag.get(params.id)', assign: 'tag' }
+    { method: 'tag.get(params.id,query)', assign: 'tag' }
     // TODO: READ NOTIFICATIONS
   ],
   handler: function (request, reply) {
@@ -70,8 +73,15 @@ exports.get = {
 exports.list = {
   auth: 'session',
   tags: ['api','tag'],
+  validate: {
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
+  }},
   pre: [
-    { method: 'tag.list()', assign: 'tags' }
+    { method: 'tag.list(query)', assign: 'tags' }
   ],
   handler: function (request, reply) {
     reply(request.pre.tags);
