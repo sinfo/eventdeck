@@ -3,12 +3,12 @@ var server = require('server');
 var log = require('server/helpers/logger');
 var webSocket = server.webSocket.server;
 
-var outChat;
-var messages;
-var message;
-var messageData;
-
 function chatServer(socket){
+
+  var outChat;
+  var messages;
+  var message;
+  var messageData;
 
   socket.on('chat-auth', function(data, cbClient){
     var room = data.id;
