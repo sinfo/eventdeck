@@ -43,7 +43,7 @@ function get(id,query, cb) {
   var filter = {_id: id};
   var fields = parser(query.fields);
 
-  Chat.findOne(filter,fields, function(err, chat) {
+  Chat.findOne(filter, fields, function(err, chat) {
     if (err) {
       log.error({ err: err, chat: id}, 'error getting chat');
       return cb(Boom.internal());
@@ -67,7 +67,7 @@ function list(query, cb) {
     limit: query.limit,
     sort: parser(query.sort)
   };
-  Chat.find(filter,fields,options, function(err, chats) {
+  Chat.find(filter, fields, options, function(err, chats) {
     if (err) {
       log.error({ err: err}, 'error getting all chats');
       return cb(Boom.internal());

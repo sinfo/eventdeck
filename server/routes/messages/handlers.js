@@ -25,8 +25,15 @@ exports.get = {
 exports.list = {
   auth: 'session',
   tags: ['api','message'],
+  validate: {
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
+  }},
   pre: [
-    { method: 'message.list()', assign: 'messages' }
+    { method: 'message.list(query)', assign: 'messages' }
   ],
   handler: function (request, reply) {
     reply(request.pre.messages);

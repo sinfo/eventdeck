@@ -44,7 +44,6 @@ function create(notification, cb) {
 function get(id,query, cb) {
   cb = cb||query;
   var filter = {_id: id};
-  var filter ={thread:thread};
   var fields = query.fields;
 
   Notification.findOne(filter,fields, function(err, notification) {

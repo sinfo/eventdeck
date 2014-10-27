@@ -12,7 +12,9 @@ function get(id,query, cb) {
   cb = cb || query; // fields is optional
 
   var fields = parser(query.fields);
-  Message.findOne({_id: id},fields, function(err, message) {
+  var filter = {_id: id};
+  
+  Message.findOne(filter, fields, function(err, message) {
     if (err) {
       log.error({ err: err, message: id}, 'error getting message');
       return cb(Boom.internal());
@@ -30,7 +32,7 @@ function getByChat(chatId, query, cb){
   cb = cb || query;
 
   var filter = {chatId: chatId};
-  var fields = query.fields;
+  var fields = parser(query.fields);
   var options = {
     skip: query.skip,
     limit: query.limit,

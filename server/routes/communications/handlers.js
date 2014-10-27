@@ -59,10 +59,13 @@ exports.get = {
   validate: {
     params: {
       id: Joi.string().required().description('Id of the communication we want to retrieve'),
+    },
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
     }
   },
   pre: [
-    { method: 'communication.get(params.id)', assign: 'communication' }
+    { method: 'communication.get(params.id,query)', assign: 'communication' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.communication));
@@ -77,10 +80,16 @@ exports.getByMember = {
   validate: {
     params: {
       id: Joi.string().required().description('Id of the member'),
+    },
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
     }
   },
   pre: [
-    { method: 'communication.getByMember(params.id)', assign: 'communications' }
+    { method: 'communication.getByMember(params.id,query)', assign: 'communications' }
   ],
   handler: function (request, reply) {
     reply(request.pre.communications.map(render));
@@ -95,10 +104,16 @@ exports.getByThread = {
   validate: {
     params: {
       id: Joi.string().required().description('Id of the thread'),
+    },
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
     }
   },
   pre: [
-    { method: 'communication.getByThread(path, params.id)', assign: 'communications' }
+    { method: 'communication.getByThread(path, params.id,query)', assign: 'communications' }
   ],
   handler: function (request, reply) {
     reply(request.pre.communications.map(render));
@@ -112,10 +127,16 @@ exports.getByEvent = {
   validate: {
     params: {
       id: Joi.string().required().description('Id of the event'),
+    },
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
     }
   },
   pre: [
-    { method: 'communication.getByEvent(params.id)', assign: 'communications' }
+    { method: 'communication.getByEvent(params.id,query)', assign: 'communications' }
   ],
   handler: function (request, reply) {
     reply(request.pre.communications.map(render));
@@ -127,8 +148,16 @@ exports.getByEvent = {
 exports.list = {
   auth: 'session',
   tags: ['api','communication'],
+  validate: {
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
+    }
+  },
   pre: [
-    { method: 'communication.list()', assign: 'communications' }
+    { method: 'communication.list(query)', assign: 'communications' }
   ],
   handler: function (request, reply) {
     reply(request.pre.communications.map(render));
