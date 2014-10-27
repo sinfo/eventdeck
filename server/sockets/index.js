@@ -2,7 +2,7 @@ var Boom = require('boom');
 var log = require('server/helpers/logger');
 var webSocket = require('server').webSocket.server;
 var chatServer = require('./chat');
-var notificationServer = require('./notifications');
+var notificationServer = require('./notification');
 
 webSocket.on('connection', function (socket) {
 

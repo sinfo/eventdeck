@@ -4,7 +4,7 @@ var log = require('server/helpers/logger');
 var config = require('config');
 var cookieConfig = config.cookie;
 
-log.error('### Starting EventDeck ###');
+log.info('### Starting EventDeck ###');
 
 var server = module.exports.hapi = new Hapi.Server(config.port);
 
@@ -28,16 +28,18 @@ server.pack.register([
     isSecure: false,
   });
 
+  var webSocket = module.exports.webSocket = {
+    server: SocketIO.server.listen(server.listener)
+  };
+  log.info('Websocket server started at: ' + server.info.uri);
+  require('./sockets');
+  webSocket.client = module.exports.webSocket.client = SocketIO.client.connect('http://localhost:' + server.info.port);
+
   require('./resources');
   require('./routes');
 
   server.start(function () {
     log.info('Server started at: ' + server.info.uri);
-    var webSocket = module.exports.webSocket = {
-      server: SocketIO.server.listen(server.listener)
-    };
-    require('./sockets');
-    webSocket.client = module.exports.webSocket.client = SocketIO.client.connect('http://localhost:' + server.info.port + '/chat');
     // var crono  = require('./scripts/crono');
     // var reminders = require('./resources/reminder');
     // reminders(null, function(stuff){});
