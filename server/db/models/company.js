@@ -36,20 +36,4 @@ var schema = new mongoose.Schema({
   updated: Date
 });
 
-schema.statics.findById = function (id, cb) {
-  this.find({ id: id }, cb);
-};
-
-schema.statics.findByName = function (id, cb) {
-  this.find({ name: id }, cb);
-};
-
-schema.statics.findByMember = function (id, cb) {
-  this.find({ member: id }, cb);
-};
-
-schema.statics.findAll = function (cb) {
-  this.find({},cb);
-};
-
 var Company = module.exports = mongoose.model('Company', schema);

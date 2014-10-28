@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var meetingSchema = new mongoose.Schema({
+var schema = new mongoose.Schema({
   author: String,
   title: String,
   description: String,
@@ -8,12 +8,4 @@ var meetingSchema = new mongoose.Schema({
   date: {type: Date}
 });
 
-meetingSchema.statics.findById = function (id, cb) {
-  this.find({_id: id}, cb);
-};
-
-meetingSchema.statics.findAll = function (cb) {
-  this.find({}, cb);
-};
-
-var Meeting = module.exports = mongoose.model('Meeting', meetingSchema);
+var Meeting = module.exports = mongoose.model('Meeting', schema);

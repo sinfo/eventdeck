@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var speakerSchema = new mongoose.Schema({
+var schema = new mongoose.Schema({
   id: {type: String, unique: true},
   name: String,
   title: { type: String, default: "" },
@@ -16,21 +16,4 @@ var speakerSchema = new mongoose.Schema({
   updated: { type: Date, default: Date.now }
 });
 
-speakerSchema.statics.findById = function (id, cb) {
-  this.find({ id: id }, cb);
-};
-
-speakerSchema.statics.findByName = function (id, cb) {
-  this.find({ name: id }, cb);
-};
-
-speakerSchema.statics.findByMember = function (id, cb) {
-  this.find({ member: id }, cb);
-};
-
-speakerSchema.statics.findAll = function (cb) {
-  this.find({},cb);
-};
-
-
-var Speaker = module.exports = mongoose.model('Speaker', speakerSchema);
+var Speaker = module.exports = mongoose.model('Speaker', schema);

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var itemSchema = new mongoose.Schema({
+var schema = new mongoose.Schema({
   id: {type: String, unique: true},
   name: String,
   description: String,
@@ -9,16 +9,4 @@ var itemSchema = new mongoose.Schema({
   minPrice: Number
 });
 
-itemSchema.statics.findById = function (id, cb) {
-  this.find({id: id }, cb);
-};
-
-itemSchema.statics.del = function (id, cb) {
-  this.remove({ id: id }, cb);
-};
-
-itemSchema.statics.findAll = function (cb) {
-  this.find({}, cb);
-};
-
-var Item = module.exports = mongoose.model('Item', itemSchema);
+var Item = module.exports = mongoose.model('Item', schema);

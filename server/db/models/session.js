@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var sessionSchema = new mongoose.Schema({
+var schema = new mongoose.Schema({
   id: String,
   name: String,
   kind: String,
@@ -18,21 +18,4 @@ var sessionSchema = new mongoose.Schema({
   updated: { type: Date }
 });
 
-sessionSchema.statics.findById = function (id, cb) {
-  this.find({ _id: id }, cb);
-};
-
-sessionSchema.statics.del = function (id, cb) {
-  this.remove({ _id: id }, cb);
-};
-
-sessionSchema.statics.findByThread = function (id, cb) {
-  this.find({ thread: id }, cb);
-};
-
-sessionSchema.statics.findAll = function (cb) {
-  this.find({},cb);
-};
-
-
-var Session = module.exports = mongoose.model('Session', sessionSchema);
+var Session = module.exports = mongoose.model('Session', schema);

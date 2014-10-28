@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var eventSchema = new mongoose.Schema({
+var schema = new mongoose.Schema({
   id: String,
   name: String,
   kind: String,
@@ -10,21 +10,4 @@ var eventSchema = new mongoose.Schema({
   updated: { type: Date }
 });
 
-eventSchema.statics.findById = function (id, cb) {
-  this.find({ id: id }, cb);
-};
-
-eventSchema.statics.del = function (id, cb) {
-  this.remove({ id: id }, cb);
-};
-
-eventSchema.statics.findAll = function (cb) {
-  this.find({},cb);
-};
-
-eventSchema.statics.findLast = function (cb) {
-  this.find().sort('-date').limit(1).exec(cb);
-};
-
-
-var Event = module.exports = mongoose.model('Event', eventSchema);
+var Event = module.exports = mongoose.model('Event', schema);
