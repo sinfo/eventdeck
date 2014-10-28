@@ -8,8 +8,6 @@ server.method('authorization.isAdmin', isAdmin, {});
 
 
 function isAdmin(member, cb) {
-  log.debug(member)
-
   var isAuthorized = member.roles.filter(function (role) {
     return role.id === 'development-team' || role.id === 'coordination';
   }).length > 0;

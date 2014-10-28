@@ -27,8 +27,8 @@ exports.create = {
     }
   },
   pre: [
-    { method: 'topic.create(payload, auth.credentials.id)', assign: 'topic' }
-    // TODO: CREATE NOTIFICATION
+    { method: 'topic.create(payload, auth.credentials.id)', assign: 'topic' },
+    { method: 'notification.notifyCreate(auth.credentials.id, path, pre.topic)', assign: 'notification' }
   ],
   handler: function (request, reply) {
     reply(request.pre.topic).created('/topics/'+request.pre.topic.id);
@@ -63,8 +63,8 @@ exports.update = {
   },
   pre: [
     // TODO: CHECK PERMISSIONS
-    { method: 'topic.update(params.id, payload)', assign: 'topic' }
-    // TODO: CREATE NOTIFICATION
+    { method: 'topic.update(params.id, payload)', assign: 'topic' },
+    { method: 'notification.notifyUpdate(auth.credentials.id, path, pre.topic)', assign: 'notification' }
   ],
   handler: function (request, reply) {
     reply(request.pre.topic);
