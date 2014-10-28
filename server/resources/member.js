@@ -177,7 +177,7 @@ function list(query, cb) {
 }
 
 function remove(id, cb) {
-  var filter = {_id: id};
+  var filter = {id: id};
   Member.findOneAndRemove(filter, function(err, member){
     if (err) {
       log.error({ err: err, member: id}, 'error deleting member');

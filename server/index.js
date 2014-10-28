@@ -37,13 +37,14 @@ server.pack.register([
 
   require('./resources');
   require('./routes');
-
-  server.start(function () {
-    log.info('Server started at: ' + server.info.uri);
-    // var crono  = require('./scripts/crono');
-    // var reminders = require('./resources/reminder');
-    // reminders(null, function(stuff){});
-    // crono.reminder.start();
-  });
-
+  
+  if (!module.parent) {
+    server.start(function () {
+      log.info('Server started at: ' + server.info.uri);
+      // var crono  = require('./scripts/crono');
+      // var reminders = require('./resources/reminder');
+      // reminders(null, function(stuff){});
+      // crono.reminder.start();
+    });
+  }
 });
