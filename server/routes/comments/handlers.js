@@ -87,7 +87,7 @@ exports.getByMember = {
     { method: 'comment.getByMember(params.id,query)', assign: 'comments' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.comments);
+    reply(render(request.pre.comments));
   },
   description: 'Gets comments of a given member'
 };
@@ -111,7 +111,7 @@ exports.getByThread = {
     { method: 'comment.getByThread(path, params.id,query)', assign: 'comments' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.comments);
+    reply(render(request.pre.comments));
   },
   description: 'Gets comments of a given thread'
 };
@@ -132,7 +132,7 @@ exports.list = {
     { method: 'comment.list(query)', assign: 'comments' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.comments);
+    reply(render(request.pre.comments));
   },
   description: 'Gets all the comments'
 };

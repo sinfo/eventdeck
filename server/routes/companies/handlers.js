@@ -1,5 +1,6 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
+var render = require('server/views/company')
 
 
 var handlers = module.exports;
@@ -31,7 +32,7 @@ exports.create = {
     { method: 'notification.notifyCreate(auth.credentials.id, path, pre.company)', assign: 'notification' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.company).created('/companies/'+request.pre.company.id);
+    reply(render(request.pre.company)).created('/companies/'+request.pre.company.id);
   },
   description: 'Creates a new company'
 };
@@ -65,7 +66,7 @@ exports.update = {
     // TODO: EMAIL IF MEMBER NECESSARY FOR NEW MEMBER
   ],
   handler: function (request, reply) {
-    reply(request.pre.company);
+    reply(render(request.pre.company));
   },
   description: 'Updates an company'
 };
@@ -87,7 +88,7 @@ exports.get = {
     { method: 'access.save(auth.credentials.id, path, params.id)' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.company);
+    reply(render(request.pre.company));
   },
   description: 'Gets an company'
 };
@@ -111,7 +112,7 @@ exports.getByMember = {
     { method: 'company.getByMember(params.id, query)', assign: 'companies' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.companies);
+    reply(render(request.pre.companies));
   },
   description: 'Gets companies of a given member'
 };
@@ -135,7 +136,7 @@ exports.getByEvent = {
     { method: 'company.getByEvent(params.id, query)', assign: 'companies' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.companies);
+    reply(render(request.pre.companies));
   },
   description: 'Gets companies associated to a given event'
 };
@@ -146,7 +147,7 @@ exports.list = {
   tags: ['api','company'],
   validate: {
     query: {
-      fields: Joi.string().default('id,name,img').description('Fields we want to retrieve'),
+      fields: Joi.string().description('Fields we want to retrieve'),
       skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
       limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
       sort: Joi.string().description('How to sort the array'),
@@ -156,7 +157,7 @@ exports.list = {
     { method: 'company.list(query)', assign: 'companies' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.companies);
+    reply(render(request.pre.companies));
   },
   description: 'Gets all the companies'
 };
@@ -178,7 +179,7 @@ exports.remove = {
     { method: 'communication.removeByThread(path, params.id)' },
   ],
   handler: function (request, reply) {
-    reply(request.pre.company);
+    reply(render(request.pre.company));
   },
   description: 'Removes an company'
 };
