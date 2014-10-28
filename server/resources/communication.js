@@ -2,6 +2,7 @@ var Boom = require('boom');
 var server = require('server').hapi;
 var log = require('server/helpers/logger');
 var threadFromPath = require('server/helpers/threadFromPath');
+var parser = require('server/helpers/fieldsParser');
 var Communication = require('server/db/models/communication');
 
 

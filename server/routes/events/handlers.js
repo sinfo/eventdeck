@@ -1,5 +1,6 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
+var render = require('server/views/event')
 
 
 var handlers = module.exports;
@@ -25,7 +26,7 @@ exports.create = {
     // TODO: CREATE NOTIFICATION
   ],
   handler: function (request, reply) {
-    reply(request.pre.event).created('/events/'+request.pre.event.id);
+    reply(render(request.pre.event)).created('/events/'+request.pre.event.id);
   },
   description: 'Creates a new event'
 };
@@ -54,7 +55,7 @@ exports.update = {
     // TODO: CREATE NOTIFICATION
   ],
   handler: function (request, reply) {
-    reply(request.pre.event);
+    reply(render(request.pre.event));
   },
   description: 'Updates an event'
 };
@@ -76,7 +77,7 @@ exports.get = {
     { method: 'access.save(auth.credentials.id, path, params.id)' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.event);
+    reply(render(request.pre.event));
   },
   description: 'Gets an event'
 };
@@ -94,7 +95,7 @@ exports.list = {
     { method: 'event.list(query)', assign: 'events' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.events);
+    reply(render(request.pre.events));
   },
   description: 'Gets all the events'
 };
@@ -114,7 +115,7 @@ exports.remove = {
     { method: 'event.remove(params.id)', assign: 'event' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.event);
+    reply(render(request.pre.event));
   },
   description: 'Removes an event'
 };

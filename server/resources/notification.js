@@ -3,6 +3,7 @@ var server = require('server').hapi;
 var webSocket = require('server').webSocket.client;
 var log = require('server/helpers/logger');
 var threadFromPath = require('server/helpers/threadFromPath');
+var parser = require('server/helpers/fieldsParser');
 var Notification = require('server/db/models/notification');
 
 

@@ -1,5 +1,6 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
+var render = require('server/views/member')
 
 
 var handlers = module.exports;
@@ -35,7 +36,7 @@ exports.create = {
     { method: 'member.create(payload)', assign: 'member' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.member).created('/members/'+request.pre.member.id);
+    reply(render(request.pre.member)).created('/members/'+request.pre.member.id);
   },
   description: 'Creates a new member'
 };
@@ -75,7 +76,7 @@ exports.update = {
     { method: 'member.update(params.id, payload)', assign: 'member' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.member);
+    reply(render(request.pre.member));
   },
   description: 'Updates an member'
 };
@@ -97,7 +98,7 @@ exports.get = {
     { method: 'access.save(auth.credentials.id, path, params.id)' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.member);
+    reply(render(request.pre.member));
   },
   description: 'Gets an member'
 };
@@ -117,7 +118,7 @@ exports.getMe = {
     { method: 'member.get(auth.credentials.id, query)', assign: 'member' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.member);
+    reply(render(request.pre.member));
   },
   description: 'Gets an member'
 };
@@ -141,7 +142,7 @@ exports.getByRole = {
     { method: 'member.getByRole(params.id, query)', assign: 'members' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.members);
+    reply(render(request.pre.members));
   },
   description: 'Gets members of a given role'
 };
@@ -162,7 +163,7 @@ exports.getTeamLeaders = {
     { method: 'member.getTeamLeaders(query)', assign: 'members' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.members);
+    reply(render(request.pre.members));
   },
   description: 'Gets members who are team leaders'
 };
@@ -186,7 +187,7 @@ exports.getSubscribers = {
     { method: 'member.getSubscribers(path, params.id,query)', assign: 'members' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.members);
+    reply(render(request.pre.members));
   },
   description: 'Gets subscribers of a given thread'
 };
@@ -207,7 +208,7 @@ exports.list = {
     { method: 'member.list(query)', assign: 'members' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.members);
+    reply(render(request.pre.members));
   },
   description: 'Gets all the members'
 };
@@ -229,7 +230,7 @@ exports.remove = {
     { method: 'member.remove(params.id)', assign: 'member' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.member);
+    reply(render(request.pre.member));
   },
   description: 'Removes an member'
 };

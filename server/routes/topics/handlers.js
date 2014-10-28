@@ -1,5 +1,6 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
+var render = require('server/views/topic')
 
 
 var handlers = module.exports;
@@ -31,7 +32,7 @@ exports.create = {
     { method: 'notification.notifyCreate(auth.credentials.id, path, pre.topic)', assign: 'notification' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.topic).created('/topics/'+request.pre.topic.id);
+    reply(render(request.pre.topic)).created('/topics/'+request.pre.topic.id);
   },
   description: 'Creates a new topic'
 };
@@ -67,7 +68,7 @@ exports.update = {
     { method: 'notification.notifyUpdate(auth.credentials.id, path, pre.topic)', assign: 'notification' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.topic);
+    reply(render(request.pre.topic));
   },
   description: 'Updates an topic'
 };
@@ -89,7 +90,7 @@ exports.get = {
     { method: 'access.save(auth.credentials.id, path, params.id)' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.topic);
+    reply(render(request.pre.topic));
   },
   description: 'Gets an topic'
 };
@@ -113,7 +114,7 @@ exports.getByMember = {
     { method: 'topic.getByMember(params.id,query)', assign: 'topics' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.topics);
+    reply(render(request.pre.topics));
   },
   description: 'Gets topics of a given member'
 };
@@ -131,7 +132,7 @@ exports.findByTag = {
     { method: 'topic.findByTag(params.id)', assign: 'topics' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.topics);
+    reply(render(request.pre.topics));
   },
   description: 'Gets topics of a given tag'
 };
@@ -155,7 +156,7 @@ exports.getByMeeting = {
     { method: 'topic.getByMeeting(params.id,query)', assign: 'topics' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.topics);
+    reply(render(request.pre.topics));
   },
   description: 'Gets topics of a given meeting'
 };
@@ -176,7 +177,7 @@ exports.list = {
     { method: 'topic.list(query)', assign: 'topics' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.topics);
+    reply(render(request.pre.topics));
   },
   description: 'Gets all the topics'
 };
@@ -198,7 +199,7 @@ exports.remove = {
     { method: 'communication.removeByThread(path, params.id)' },
   ],
   handler: function (request, reply) {
-    reply(request.pre.topic);
+    reply(render(request.pre.topic));
   },
   description: 'Removes an topic'
 };

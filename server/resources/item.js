@@ -2,6 +2,7 @@ var Boom = require('boom');
 var slug = require('slug');
 var server = require('server').hapi;
 var log = require('server/helpers/logger');
+var parser = require('server/helpers/fieldsParser');
 var Item = require('server/db/models/item');
 
 

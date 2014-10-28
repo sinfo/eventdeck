@@ -1,5 +1,6 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
+var render = require('server/views/notification');
 
 
 var handlers = module.exports;
@@ -16,7 +17,7 @@ exports.get = {
     { method: 'notification.get(params.id)', assign: 'notification' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.notification);
+    reply(render(request.pre.notification));
   },
   description: 'Gets an notification'
 };
@@ -40,7 +41,7 @@ exports.getByMember = {
     { method: 'notification.getByMember(params.id,query)', assign: 'notifications' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.notifications);
+    reply(render(request.pre.notifications));
   },
   description: 'Gets notifications of a given member'
 };
@@ -64,7 +65,7 @@ exports.getByThread = {
     { method: 'notification.getByThread(path, params.id,query)', assign: 'notifications' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.notifications);
+    reply(render(request.pre.notifications));
   },
   description: 'Gets notifications of a given thread'
 };
@@ -84,7 +85,8 @@ exports.list = {
     { method: 'notification.list(query)', assign: 'notifications' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.notifications);
+    console.log(request.pre.notifications)
+    reply(render(request.pre.notifications));
   },
   description: 'Gets all the notifications'
 };

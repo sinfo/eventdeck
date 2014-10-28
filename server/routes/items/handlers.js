@@ -1,5 +1,6 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
+var render = require('server/views/item')
 
 
 var handlers = module.exports;
@@ -22,7 +23,7 @@ exports.create = {
     // TODO: CREATE NOTIFICATION
   ],
   handler: function (request, reply) {
-    reply(request.pre.item).created('/items/'+request.pre.item.id);
+    reply(render(request.pre.item)).created('/items/'+request.pre.item.id);
   },
   description: 'Creates a new item'
 };
@@ -50,7 +51,7 @@ exports.update = {
     // TODO: CREATE NOTIFICATION ?
   ],
   handler: function (request, reply) {
-    reply(request.pre.item);
+    reply(render(request.pre.item));
   },
   description: 'Updates an item'
 };
@@ -72,7 +73,7 @@ exports.get = {
     // TODO: READ NOTIFICATIONS
   ],
   handler: function (request, reply) {
-    reply(request.pre.item);
+    reply(render(request.pre.item));
   },
   description: 'Gets an item'
 };
@@ -93,7 +94,7 @@ exports.list = {
     { method: 'item.list(query)', assign: 'items' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.items);
+    reply(render(request.pre.items));
   },
   description: 'Gets all the items'
 };
@@ -113,7 +114,7 @@ exports.remove = {
     { method: 'item.remove(params.id)', assign: 'item' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.item);
+    reply(render(request.pre.item));
   },
   description: 'Removes an item'
 };

@@ -1,5 +1,6 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
+var render = require('server/views/message')
 
 
 var handlers = module.exports;
@@ -16,7 +17,7 @@ exports.get = {
     { method: 'message.get(params.id)', assign: 'message' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.message);
+    reply(render(request.pre.message));
   },
   description: 'Gets an message'
 };
@@ -36,7 +37,7 @@ exports.list = {
     { method: 'message.list(query)', assign: 'messages' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.messages);
+    reply(render(request.pre.messages));
   },
   description: 'Gets all the messages'
 };

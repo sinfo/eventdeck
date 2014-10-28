@@ -3,6 +3,7 @@ var slug = require('slug');
 var server = require('server').hapi;
 var log = require('server/helpers/logger');
 var threadFromPath = require('server/helpers/threadFromPath');
+var parser = require('server/helpers/fieldsParser');
 var Speaker = require('server/db/models/speaker');
 
 

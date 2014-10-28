@@ -1,5 +1,6 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
+var render = require('server/views/session');
 
 
 var handlers = module.exports;
@@ -27,7 +28,7 @@ exports.create = {
     // TODO: CREATE NOTIFICATION
   ],
   handler: function (request, reply) {
-    reply(request.pre.session).created('/sessions/'+request.pre.session.id);
+    reply(render(request.pre.session)).created('/sessions/'+request.pre.session.id);
   },
   description: 'Creates a new session'
 };
@@ -60,7 +61,7 @@ exports.update = {
     // TODO: CREATE NOTIFICATION ?
   ],
   handler: function (request, reply) {
-    reply(request.pre.session);
+    reply(render(request.pre.session));
   },
   description: 'Updates an session'
 };
@@ -82,7 +83,7 @@ exports.get = {
     { method: 'access.save(auth.credentials.id, path, params.id)' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.session);
+    reply(render(request.pre.session));
   },
   description: 'Gets an session'
 };
@@ -103,7 +104,7 @@ exports.list = {
     { method: 'session.list(query)', assign: 'sessions' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.sessions);
+    reply(render(request.pre.sessions));
   },
   description: 'Gets all the sessions'
 };
@@ -123,7 +124,7 @@ exports.remove = {
     { method: 'session.remove(params.id)', assign: 'session' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.session);
+    reply(render(request.pre.session));
   },
   description: 'Removes an session'
 };

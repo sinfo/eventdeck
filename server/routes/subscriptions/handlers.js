@@ -1,5 +1,6 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
+var render = require('server/views/subscription')
 
 
 var handlers = module.exports;
@@ -16,7 +17,7 @@ exports.create = {
     { method: 'subscription.create(payload.thread, auth.credentials.id)', assign: 'subscription' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.subscription);
+    reply(render(request.pre.subscription));
   },
   description: 'Creates a new subscription'
 };
@@ -38,7 +39,7 @@ exports.get = {
     // TODO: READ NOTIFICATIONS
   ],
   handler: function (request, reply) {
-    reply(request.pre.subscription);
+    reply(render(request.pre.subscription));
   },
   description: 'Gets an subscription'
 };
@@ -56,7 +57,7 @@ exports.remove = {
     { method: 'subscription.remove(payload.thread, auth.credentials.id)', assign: 'subscription' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.subscription);
+    reply(render(request.pre.subscription));
   },
   description: 'Removes an subscription'
 };

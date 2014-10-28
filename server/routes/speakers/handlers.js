@@ -1,5 +1,6 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
+var render = require('server/views/speaker');
 
 
 var handlers = module.exports;
@@ -28,7 +29,7 @@ exports.create = {
     { method: 'notification.notifyCreate(auth.credentials.id, path, pre.speaker)', assign: 'notification' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.speaker).created('/speakers/'+request.pre.speaker.id);
+    reply(render(request.pre.speaker)).created('/speakers/'+request.pre.speaker.id);
   },
   description: 'Creates a new speaker'
 };
@@ -60,7 +61,7 @@ exports.update = {
     // TODO: EMAIL IF MEMBER NECESSARY FOR NEW MEMBER
   ],
   handler: function (request, reply) {
-    reply(request.pre.speaker);
+    reply(render(request.pre.speaker));
   },
   description: 'Updates an speaker'
 };
@@ -82,7 +83,7 @@ exports.get = {
     { method: 'access.save(auth.credentials.id, path, params.id)' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.speaker);
+    reply(render(request.pre.speaker));
   },
   description: 'Gets an speaker'
 };
@@ -106,7 +107,7 @@ exports.getByMember = {
     { method: 'speaker.getByMember(params.id,query)', assign: 'speakers' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.speakers);
+    reply(render(request.pre.speakers));
   },
   description: 'Gets speakers of a given member'
 };
@@ -127,7 +128,7 @@ exports.list = {
     { method: 'speaker.list(query)', assign: 'speakers' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.speakers);
+    reply(render(request.pre.speakers));
   },
   description: 'Gets all the speakers'
 };
@@ -149,7 +150,7 @@ exports.remove = {
     { method: 'communication.removeByThread(path, params.id)' },
   ],
   handler: function (request, reply) {
-    reply(request.pre.speaker);
+    reply(render(request.pre.speaker));
   },
   description: 'Removes an speaker'
 };

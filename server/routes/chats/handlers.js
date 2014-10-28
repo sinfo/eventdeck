@@ -1,5 +1,6 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
+var render = require('server/views/chat')
 
 
 var handlers = module.exports;
@@ -20,7 +21,7 @@ exports.create = {
     { method: 'chat.create(payload, auth.credentials.id)', assign: 'chat' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.chat).created('/chats/'+request.pre.chat._id);
+    reply(render(request.pre.chat)).created('/chats/'+request.pre.chat._id);
   },
   description: 'Creates a new chat'
 };
@@ -45,7 +46,7 @@ exports.update = {
     { method: 'chat.update(params.id, payload)', assign: 'chat' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.chat);
+    reply(render(request.pre.chat));
   },
   description: 'Updates a chat'
 };
@@ -67,7 +68,7 @@ exports.get = {
     { method: 'access.save(auth.credentials.id, path, params.id)' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.chat);
+    reply(render(request.pre.chat));
   },
   description: 'Gets a chat'
 };
@@ -80,7 +81,7 @@ exports.list = {
     { method: 'chat.list()', assign: 'chats' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.chats);
+    reply(render(request.pre.chats));
   },
   description: 'Gets all the chats'
 };
@@ -99,7 +100,7 @@ exports.remove = {
     { method: 'chat.remove(params.id)', assign: 'chat' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.chat);
+    reply(render(request.pre.chat));
   },
   description: 'Removes a chat'
 };

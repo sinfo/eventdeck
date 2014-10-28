@@ -1,6 +1,6 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
-var render = require('server/views/comment')
+var render = require('server/views/communication')
 
 
 var handlers = module.exports;
@@ -91,7 +91,7 @@ exports.getByMember = {
     { method: 'communication.getByMember(params.id,query)', assign: 'communications' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.communications.map(render));
+    reply(render(request.pre.communications));
   },
   description: 'Gets communications of a given member'
 };
@@ -115,7 +115,7 @@ exports.getByThread = {
     { method: 'communication.getByThread(path, params.id,query)', assign: 'communications' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.communications.map(render));
+    reply(render(request.pre.communications));
   },
   description: 'Gets communications of a given thread'
 };
@@ -138,7 +138,7 @@ exports.getByEvent = {
     { method: 'communication.getByEvent(params.id,query)', assign: 'communications' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.communications.map(render));
+    reply(render(request.pre.communications));
   },
   description: 'Gets communications of a given event'
 };
@@ -159,7 +159,7 @@ exports.list = {
     { method: 'communication.list(query)', assign: 'communications' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.communications.map(render));
+    reply(render(request.pre.communications));
   },
   description: 'Gets all the communications'
 };

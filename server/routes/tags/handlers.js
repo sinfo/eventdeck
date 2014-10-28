@@ -1,5 +1,6 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
+var render = require('server/views/tag')
 
 
 var handlers = module.exports;
@@ -18,7 +19,7 @@ exports.create = {
     { method: 'tag.create(payload, auth.credentials.id)', assign: 'tag' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.tag).created('/tags/'+request.pre.tag.id);
+    reply(render(request.pre.tag)).created('/tags/'+request.pre.tag.id);
   },
   description: 'Creates a new tag'
 };
@@ -42,7 +43,7 @@ exports.update = {
     { method: 'tag.update(params.id, payload)', assign: 'tag' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.tag);
+    reply(render(request.pre.tag));
   },
   description: 'Updates an tag'
 };
@@ -64,7 +65,7 @@ exports.get = {
     // TODO: READ NOTIFICATIONS
   ],
   handler: function (request, reply) {
-    reply(request.pre.tag);
+    reply(render(request.pre.tag));
   },
   description: 'Gets an tag'
 };
@@ -84,7 +85,7 @@ exports.list = {
     { method: 'tag.list(query)', assign: 'tags' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.tags);
+    reply(render(request.pre.tags));
   },
   description: 'Gets all the tags'
 };
@@ -102,7 +103,7 @@ exports.remove = {
     { method: 'tag.remove(params.id)', assign: 'tag' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.tag);
+    reply(render(request.pre.tag));
   },
   description: 'Removes an tag'
 };

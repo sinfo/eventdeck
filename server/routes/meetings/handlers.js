@@ -1,5 +1,6 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
+var render = require('server/views/meeting')
 
 
 var handlers = module.exports;
@@ -21,7 +22,7 @@ exports.create = {
     // TODO: CREATE NOTIFICATION
   ],
   handler: function (request, reply) {
-    reply(request.pre.meeting).created('/meetings/'+request.pre.meeting.id);
+    reply(render(request.pre.meeting)).created('/meetings/'+request.pre.meeting.id);
   },
   description: 'Creates a new meeting'
 };
@@ -48,7 +49,7 @@ exports.update = {
     // TODO: CREATE NOTIFICATION ?
   ],
   handler: function (request, reply) {
-    reply(request.pre.meeting);
+    reply(render(request.pre.meeting));
   },
   description: 'Updates a meeting'
 };
@@ -72,7 +73,7 @@ exports.get = {
   ],
   handler: function (request, reply) {
     // TODO ADD TOPICS TO MEETING
-    reply(request.pre.meeting);
+    reply(render(request.pre.meeting));
   },
   description: 'Gets a meeting'
 };
@@ -93,7 +94,7 @@ exports.list = {
     { method: 'meeting.list()', assign: 'meetings' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.meetings);
+    reply(render(request.pre.meetings));
   },
   description: 'Gets all the meetings'
 };
@@ -113,7 +114,7 @@ exports.remove = {
     { method: 'meeting.remove(params.id)', assign: 'meeting' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.meeting);
+    reply(render(request.pre.meeting));
   },
   description: 'Removes a meeting'
 };

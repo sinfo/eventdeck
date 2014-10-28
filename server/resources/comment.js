@@ -117,7 +117,7 @@ function list(query, cb) {
     limit: query.limit,
     sort: parser(query.sort)
   };
-  Comment.find(filters,fields,options, function(err, comments) {
+  Comment.find(filter,fields,options, function(err, comments) {
     if (err) {
       log.error({ err: err}, 'error getting all comments');
       return cb(Boom.internal());
