@@ -15,8 +15,6 @@ var schema = new mongoose.Schema({
     kind: String,
     payment: {
       price: Number,
-      iva: Number,
-      total: Number,
       date: String,
       invoice: String,
       status: String,

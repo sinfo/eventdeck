@@ -6,7 +6,7 @@ var schema = new mongoose.Schema({
   member: String,
   description: String,
   targets: [String],
-  posted: { type: Date, default: Date.now }
+  posted: { type: Date }
 });
 
 var Notification = module.exports = mongoose.model('Notification', schema);

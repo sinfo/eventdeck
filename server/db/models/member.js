@@ -6,7 +6,6 @@ var schema = new mongoose.Schema({
   img: String,
   roles: [{
     id: String,
-    name: String,
     isTeamLeader: Boolean
   }],
   facebook: {

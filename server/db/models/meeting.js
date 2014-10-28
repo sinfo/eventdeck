@@ -5,7 +5,8 @@ var schema = new mongoose.Schema({
   title: String,
   description: String,
   attendants: [String],
-  date: {type: Date}
+  date: {type: Date},
+  updated: {type: Date},
 });
 
 var Meeting = module.exports = mongoose.model('Meeting', schema);
