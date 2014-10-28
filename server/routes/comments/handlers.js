@@ -16,7 +16,6 @@ exports.create = {
   },
   pre: [
     { method: 'comment.create(payload, auth.credentials.id)', assign: 'comment' }
-    // TODO: GET TARGETS
     // TODO: CREATE NOTIFICATION
     // TODO: PARSE FOR MEMBERS
   ],
@@ -133,7 +132,7 @@ exports.list = {
     { method: 'comment.list(query)', assign: 'comments' }
   ],
   handler: function (request, reply) {
-    reply(request.pre.comments.map(render));
+    reply(request.pre.comments);
   },
   description: 'Gets all the comments'
 };

@@ -16,7 +16,7 @@ server.method('speaker.remove', remove, {});
 
 
 function create(speaker, memberId, cb) {
-  speaker.id = speaker.id || slug(speaker.name);
+  speaker.id = slug(speaker.id || speaker.name).toLowerCase();
   speaker.updated = Date.now();
 
   Speaker.create(speaker, function(err, _speaker) {

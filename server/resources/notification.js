@@ -6,6 +6,8 @@ var threadFromPath = require('server/helpers/threadFromPath');
 var Notification = require('server/db/models/notification');
 
 
+server.method('notification.notifyCreate', notifyCreate, {});
+server.method('notification.notifyUpdate', notifyUpdate, {});
 server.method('notification.notify', notify, {});
 server.method('notification.create', create, {});
 server.method('notification.get', get, {});
@@ -15,6 +17,28 @@ server.method('notification.readThread', readThread, {});
 server.method('notification.getByThread', getByThread, {});
 server.method('notification.removeByThread', removeByThread, {});
 
+
+function notifyCreate(memberId, path, thing, cb) {
+  var notification = {
+    thread: threadFromPath(path, thing.id),
+    member: memberId,
+    description: 'created '+thing.name || thing.kind,
+    posted: Date.now()
+  };
+
+  create(notification, cb);
+}
+
+function notifyUpdate(memberId, path, thing, cb) {
+  var notification = {
+    thread: threadFromPath(path, thing.id),
+    member: memberId,
+    description: 'updated '+thing.name || thing.kind,
+    posted: Date.now()
+  };
+
+  create(notification, cb);
+}
 
 function notify(memberId, thread, description, objectId, targets, cb) {
   var notification = {
@@ -65,7 +89,7 @@ function get(id,query, cb) {
   });
 }
 
-function getByThread(path, id,query, cb) {
+function getByThread(path, id, query, cb) {
   cb = cb||query;
   var thread = threadFromPath(path, id);
   var filter ={thread:thread};
@@ -135,8 +159,15 @@ function remove(id, cb) {
 }
 
 function removeByThread(path, id, cb) {
-  var thread = threadFromPath(path, id);
-  var fitler = {thread: thread};
+  var thread = '';
+  if(typeof(id) == 'function') {
+    thread = path;
+    cb = id;
+  } else {
+    thread = threadFromPath(path, id);
+  }
+
+  var filter = {thread: thread};
   Notification.remove(filter, function(err, notifications) {
     if (err) {
       log.error({ err: err, thread: thread}, 'error getting notifications');

@@ -27,9 +27,8 @@ exports.create = {
     }
   },
   pre: [
-    { method: 'company.create(payload, auth.credentials.id)', assign: 'company' }
-    // TODO: GET TARGETS
-    // TODO: CREATE NOTIFICATION
+    { method: 'company.create(payload, auth.credentials.id)', assign: 'company' },
+    { method: 'notification.notifyCreate(auth.credentials.id, path, pre.company)', assign: 'notification' }
   ],
   handler: function (request, reply) {
     reply(request.pre.company).created('/companies/'+request.pre.company.id);
@@ -61,9 +60,8 @@ exports.update = {
   },
   pre: [
     // TODO: CHECK PERMISSIONS
-    { method: 'company.update(params.id, payload)', assign: 'company' }
-    // TODO: GET TARGET
-    // TODO: CREATE NOTIFICATION
+    { method: 'company.update(params.id, payload)', assign: 'company' },
+    { method: 'notification.notifyUpdate(auth.credentials.id, path, pre.company)', assign: 'notification' }
     // TODO: EMAIL IF MEMBER NECESSARY FOR NEW MEMBER
   ],
   handler: function (request, reply) {
@@ -175,9 +173,9 @@ exports.remove = {
   pre: [
     { method: 'authorization.isAdmin(auth.credentials)' },
     { method: 'company.remove(params.id)', assign: 'company' },
-    // TODO: REMOVE NOTIFICATIONS
-    // TODO: REMOVE COMMENTS
-    // TODO: REMOVE COMMUNICATIONS
+    { method: 'notification.removeByThread(path, params.id)' },
+    { method: 'comment.removeByThread(path, params.id)' },
+    { method: 'communication.removeByThread(path, params.id)' },
   ],
   handler: function (request, reply) {
     reply(request.pre.company);

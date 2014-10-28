@@ -27,9 +27,8 @@ exports.create = {
     }
   },
   pre: [
-    { method: 'topic.create(payload, auth.credentials.id)', assign: 'topic' }
-    // TODO: GET TARGETS
-    // TODO: CREATE NOTIFICATION
+    { method: 'topic.create(payload, auth.credentials.id)', assign: 'topic' },
+    { method: 'notification.notifyCreate(auth.credentials.id, path, pre.topic)', assign: 'notification' }
   ],
   handler: function (request, reply) {
     reply(request.pre.topic).created('/topics/'+request.pre.topic.id);
@@ -64,9 +63,8 @@ exports.update = {
   },
   pre: [
     // TODO: CHECK PERMISSIONS
-    { method: 'topic.update(params.id, payload)', assign: 'topic' }
-    // TODO: GET TARGETS
-    // TODO: CREATE NOTIFICATION
+    { method: 'topic.update(params.id, payload)', assign: 'topic' },
+    { method: 'notification.notifyUpdate(auth.credentials.id, path, pre.topic)', assign: 'notification' }
   ],
   handler: function (request, reply) {
     reply(request.pre.topic);
@@ -189,15 +187,15 @@ exports.remove = {
   tags: ['api','topic'],
   validate: {
     params: {
-     // TODO: CHECK PERMISSIONS
-     id: Joi.string().required().description('id of the topic we want to remove'),
-     // TODO: REMOVE NOTIFICATIONS
-     // TODO: REMOVE COMMENTS
-     // TODO: REMOVE COMMUNICATIONS
+      id: Joi.string().required().description('id of the topic we want to remove'),
     }
   },
   pre: [
-    { method: 'topic.remove(params.id)', assign: 'topic' }
+    // { method: 'authorization.isAdmin(auth.credentials)' },
+    { method: 'topic.remove(params.id)', assign: 'topic' },
+    { method: 'notification.removeByThread(path, params.id)' },
+    { method: 'comment.removeByThread(path, params.id)' },
+    { method: 'communication.removeByThread(path, params.id)' },
   ],
   handler: function (request, reply) {
     reply(request.pre.topic);

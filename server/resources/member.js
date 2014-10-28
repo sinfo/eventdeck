@@ -21,7 +21,7 @@ server.method('member.remove', remove, {});
 
 
 function create(member, cb) {
-  member.id = member.id || slug(member.name).toLowerCase();
+  member.id = slug(member.id || member.name).toLowerCase();
 
   Member.create(member, function(err, _member) {
     if (err) {

@@ -24,9 +24,8 @@ exports.create = {
     }
   },
   pre: [
-    { method: 'speaker.create(payload, auth.credentials.id)', assign: 'speaker' }
-    // TODO: GET TARGETS
-    // TODO: CREATE NOTIFICATION
+    { method: 'speaker.create(payload, auth.credentials.id)', assign: 'speaker' },
+    { method: 'notification.notifyCreate(auth.credentials.id, path, pre.speaker)', assign: 'notification' }
   ],
   handler: function (request, reply) {
     reply(request.pre.speaker).created('/speakers/'+request.pre.speaker.id);
@@ -56,9 +55,8 @@ exports.update = {
   },
   pre: [
     // TODO: CHECK PERMISSIONS
-    { method: 'speaker.update(params.id, payload)', assign: 'speaker' }
-    // TODO: GET TARGET
-    // TODO: CREATE NOTIFICATION
+    { method: 'speaker.update(params.id, payload)', assign: 'speaker' },
+    { method: 'notification.notifyUpdate(auth.credentials.id, path, pre.speaker)', assign: 'notification' }
     // TODO: EMAIL IF MEMBER NECESSARY FOR NEW MEMBER
   ],
   handler: function (request, reply) {
@@ -140,15 +138,15 @@ exports.remove = {
   tags: ['api','speaker'],
   validate: {
     params: {
-     // TODO: CHECK PERMISSIONS
      id: Joi.string().required().description('id of the speaker we want to remove'),
-     // TODO: REMOVE NOTIFICATIONS
-     // TODO: REMOVE COMMENTS
-     // TODO: REMOVE COMMUNICATIONS
     }
   },
   pre: [
-    { method: 'speaker.remove(params.id)', assign: 'speaker' }
+    { method: 'authorization.isAdmin(auth.credentials)' },
+    { method: 'speaker.remove(params.id)', assign: 'speaker' },
+    { method: 'notification.removeByThread(path, params.id)' },
+    { method: 'comment.removeByThread(path, params.id)' },
+    { method: 'communication.removeByThread(path, params.id)' },
   ],
   handler: function (request, reply) {
     reply(request.pre.speaker);

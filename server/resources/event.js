@@ -14,7 +14,7 @@ server.method('event.remove', remove, {});
 
 
 function create(event, memberId, cb) {
-  event.id = event.id || slug(event.name);
+  event.id = slug(event.id || event.name).toLowerCase();
   event.updated = Date.now();
 
   Event.create(event, function(err, _event) {

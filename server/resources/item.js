@@ -13,7 +13,7 @@ server.method('item.remove', remove, {});
 
 
 function create(item, memberId, cb) {
-  item.id = item.id || slug(item.name);
+  item.id = slug(item.id || item.name).toLowerCase();
 
   Item.create(item, function(err, _item) {
     if (err) {
