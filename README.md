@@ -1,5 +1,9 @@
 # EventDeck
 
+[![Build Status](https://magnum.travis-ci.com/sinfo/eventdeck.svg?token=bYLgwH8zFdHVE6syVqz5)](https://magnum.travis-ci.com/sinfo/eventdeck)
+[![Dependency Status](https://david-dm.org/sinfo/eventdeck.svg?style=flat)](https://david-dm.org/sinfo/eventdeck)
+[![devDependency Status](https://david-dm.org/sinfo/eventdeck/dev-status.svg?style=flat)](https://david-dm.org/sinfo/eventdeck#info=devDependencies)
+
 EventDeck is a tool being built internally at [SINFO](http://sinfo.org) to help us manage everything related to our events.
 
 
