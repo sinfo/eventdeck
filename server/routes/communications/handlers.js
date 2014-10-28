@@ -18,7 +18,6 @@ exports.create = {
   },
   pre: [
     { method: 'communication.create(payload, auth.credentials.id)', assign: 'communication' }
-    // TODO: GET TARGETS
     // TODO: CREATE NOTIFICATION
     // TODO: PARSE FOR MEMBERS
   ],

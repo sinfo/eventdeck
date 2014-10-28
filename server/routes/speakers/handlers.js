@@ -25,7 +25,6 @@ exports.create = {
   },
   pre: [
     { method: 'speaker.create(payload, auth.credentials.id)', assign: 'speaker' }
-    // TODO: GET TARGETS
     // TODO: CREATE NOTIFICATION
   ],
   handler: function (request, reply) {
@@ -140,15 +139,15 @@ exports.remove = {
   tags: ['api','speaker'],
   validate: {
     params: {
-     // TODO: CHECK PERMISSIONS
      id: Joi.string().required().description('id of the speaker we want to remove'),
-     // TODO: REMOVE NOTIFICATIONS
-     // TODO: REMOVE COMMENTS
-     // TODO: REMOVE COMMUNICATIONS
     }
   },
   pre: [
-    { method: 'speaker.remove(params.id)', assign: 'speaker' }
+    { method: 'authorization.isAdmin(auth.credentials)' },
+    { method: 'speaker.remove(params.id)', assign: 'speaker' },
+    { method: 'notification.removeByThread(path, params.id)' },
+    { method: 'comment.removeByThread(path, params.id)' },
+    { method: 'communication.removeByThread(path, params.id)' },
   ],
   handler: function (request, reply) {
     reply(request.pre.speaker);

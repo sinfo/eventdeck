@@ -65,7 +65,7 @@ function get(id,query, cb) {
   });
 }
 
-function getByThread(path, id,query, cb) {
+function getByThread(path, id, query, cb) {
   cb = cb||query;
   var thread = threadFromPath(path, id);
   var filter ={thread:thread};
@@ -135,8 +135,15 @@ function remove(id, cb) {
 }
 
 function removeByThread(path, id, cb) {
-  var thread = threadFromPath(path, id);
-  var fitler = {thread: thread};
+  var thread = '';
+  if(typeof(id) == 'function') {
+    thread = path;
+    cb = id;
+  } else {
+    thread = threadFromPath(path, id);
+  }
+
+  var filter = {thread: thread};
   Notification.remove(filter, function(err, notifications) {
     if (err) {
       log.error({ err: err, thread: thread}, 'error getting notifications');

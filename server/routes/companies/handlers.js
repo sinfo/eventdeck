@@ -28,7 +28,6 @@ exports.create = {
   },
   pre: [
     { method: 'company.create(payload, auth.credentials.id)', assign: 'company' }
-    // TODO: GET TARGETS
     // TODO: CREATE NOTIFICATION
   ],
   handler: function (request, reply) {
@@ -175,9 +174,9 @@ exports.remove = {
   pre: [
     { method: 'authorization.isAdmin(auth.credentials)' },
     { method: 'company.remove(params.id)', assign: 'company' },
-    // TODO: REMOVE NOTIFICATIONS
-    // TODO: REMOVE COMMENTS
-    // TODO: REMOVE COMMUNICATIONS
+    { method: 'notification.removeByThread(path, params.id)' },
+    { method: 'comment.removeByThread(path, params.id)' },
+    { method: 'communication.removeByThread(path, params.id)' },
   ],
   handler: function (request, reply) {
     reply(request.pre.company);

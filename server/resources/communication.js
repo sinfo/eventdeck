@@ -13,6 +13,7 @@ server.method('communication.getByThread', getByThread, {});
 server.method('communication.getByEvent', getByEvent, {});
 server.method('communication.list', list, {});
 server.method('communication.remove', remove, {});
+server.method('communication.removeByThread', removeByThread, {});
 
 
 function create(communication, memberId, cb) {
@@ -164,3 +165,24 @@ function remove(id, cb) {
     return cb(null, communication);
   });
 }
+
+function removeByThread(path, id, cb) {
+  var thread = '';
+  if(typeof(id) == 'function') {
+    thread = path;
+    cb = id;
+  } else {
+    thread = threadFromPath(path, id);
+  }
+
+  var filter = {thread: thread};
+  Communication.remove(filter, function(err, communications) {
+    if (err) {
+      log.error({ err: err, thread: thread}, 'error getting communications');
+      return cb(Boom.internal());
+    }
+
+    cb(null, communications);
+  });
+}
+

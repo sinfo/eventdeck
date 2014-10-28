@@ -38,7 +38,7 @@ function createCode(memberId, cb) {
 }
 
 function verifyCode(memberId, loginCode, cb) {
-  server.methods.member.get(memberId, 'id,loginCodes', function(err, member) {
+  server.methods.member.get(memberId, '', function(err, member) {
     if (err) {
       log.error({ err: err, member: memberId}, 'error finding member');
       return cb(err);

@@ -13,7 +13,7 @@ server.method('session.remove', remove, {});
 
 
 function create(session, memberId, cb) {
-  session.id = session.id || slug(session.name);
+  session.id = slug(session.id || session.name).toLowerCase();
 
   Session.create(session, function(err, _session) {
     if (err) {

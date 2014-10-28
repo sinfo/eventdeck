@@ -13,7 +13,7 @@ server.method('tag.remove', remove, {});
 
 
 function create(tag, memberId, cb) {
-  tag.id = tag.id || slug(tag.name);
+  tag.id = slug(tag.id || tag.name).toLowerCase();
 
   Tag.create(tag, function(err, _tag) {
     if (err) {

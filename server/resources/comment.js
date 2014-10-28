@@ -1,6 +1,7 @@
 var Boom = require('boom');
 var server = require('server').hapi;
 var log = require('server/helpers/logger');
+var parser = require('server/helpers/fieldsParser');
 var threadFromPath = require('server/helpers/threadFromPath');
 var Comment = require('server/db/models/comment');
 
@@ -12,6 +13,7 @@ server.method('comment.getByMember', getByMember, {});
 server.method('comment.getByThread', getByThread, {});
 server.method('comment.list', list, {});
 server.method('comment.remove', remove, {});
+server.method('comment.removeByThread', removeByThread, {});
 
 
 function create(comment, memberId, cb) {
@@ -141,3 +143,24 @@ function remove(id, cb) {
     return cb(null, comment);
   });
 }
+
+function removeByThread(path, id, cb) {
+  var thread = '';
+  if(typeof(id) == 'function') {
+    thread = path;
+    cb = id;
+  } else {
+    thread = threadFromPath(path, id);
+  }
+
+  var filter = {thread: thread};
+  Comment.remove(filter, function(err, comments) {
+    if (err) {
+      log.error({ err: err, thread: thread}, 'error getting comments');
+      return cb(Boom.internal());
+    }
+
+    cb(null, comments);
+  });
+}
+

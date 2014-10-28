@@ -17,7 +17,7 @@ server.method('company.remove', remove, {});
 
 
 function create(company, memberId, cb) {
-  company.id = company.id || slug(company.name);
+  company.id = slug(company.id || company.name).toLowerCase();
   company.updated = Date.now();
 
   Company.create(company, function(err, _company) {
