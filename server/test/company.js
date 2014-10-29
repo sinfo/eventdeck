@@ -15,23 +15,24 @@ var credentials = {
   }],
 };
 
-var itemA = {  
-  id: 'painting1',
-  name: 'Mona Lisa',
+var companyA = {  
+  id: "chiquitos",
+  name: 'Chicos Emporium of Cool Stuff',
 };
+
 
 var changesToA = {
-  name: 'Guernica'
+  name: 'Duartes Emporium of Awesome Stuff'
 };
 
-lab.experiment('Item', function() {
+lab.experiment('Company', function() {
 
   lab.test('Create', function(done) {
     var options = {
       method: 'POST',
-      url: '/items',
+      url: '/companies',
       credentials: credentials,
-      payload: itemA
+      payload: companyA
     };
  
     server.inject(options, function(response) {
@@ -39,7 +40,8 @@ lab.experiment('Item', function() {
 
       Code.expect(response.statusCode).to.equal(201);
       Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.name).to.equal(itemA.name);
+      Code.expect(result.id).to.equal(companyA.id);
+      Code.expect(result.name).to.equal(companyA.name);
 
       done();
     });
@@ -48,7 +50,7 @@ lab.experiment('Item', function() {
   lab.test('List all', function(done) {
     var options = {
       method: 'GET',
-      url: '/items',
+      url: '/companies',
       credentials: credentials,
     };
  
@@ -65,7 +67,7 @@ lab.experiment('Item', function() {
   lab.test('Get one', function(done) {
     var options = {
       method: 'GET',
-      url: '/items/'+itemA.id,
+      url: '/companies/'+companyA.id,
       credentials: credentials,
     };
  
@@ -74,7 +76,8 @@ lab.experiment('Item', function() {
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.name).to.equal(itemA.name);
+      Code.expect(result.id).to.equal(companyA.id);
+      Code.expect(result.name).to.equal(companyA.name);
       
       done();
     });
@@ -83,7 +86,7 @@ lab.experiment('Item', function() {
   lab.test('Update', function(done) {
     var options = {
       method: 'PUT',
-      url: '/items/'+itemA.id,
+      url: '/companies/'+companyA.id,
       credentials: credentials,
       payload: changesToA
     };
@@ -93,6 +96,7 @@ lab.experiment('Item', function() {
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
+      Code.expect(result.id).to.equal(companyA.id);
       Code.expect(result.name).to.equal(changesToA.name);
       
       done();
@@ -102,7 +106,7 @@ lab.experiment('Item', function() {
   lab.test('Delete', function(done) {
     var options = {
       method: 'DELETE',
-      url: '/items/'+itemA.id,
+      url: '/companies/'+companyA.id,
       credentials: credentials,
     };
  
@@ -111,6 +115,7 @@ lab.experiment('Item', function() {
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
+      Code.expect(result.id).to.equal(companyA.id);
       Code.expect(result.name).to.equal(changesToA.name); 
       done();
     });

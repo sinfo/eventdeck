@@ -15,31 +15,32 @@ var credentials = {
   }],
 };
 
-var itemA = {  
-  id: 'painting1',
-  name: 'Mona Lisa',
+var eventA = {  
+  name: 'Super Festinha de anos do Chico',
 };
+
+var eventAId;
 
 var changesToA = {
-  name: 'Guernica'
+  name: 'Super Grande Festarrona de Anos do Chico'
 };
 
-lab.experiment('Item', function() {
+lab.experiment('Event', function() {
 
   lab.test('Create', function(done) {
     var options = {
       method: 'POST',
-      url: '/items',
+      url: '/events',
       credentials: credentials,
-      payload: itemA
+      payload: eventA
     };
  
     server.inject(options, function(response) {
       var result = response.result;
-
+      eventAid = result.id.toString();
       Code.expect(response.statusCode).to.equal(201);
       Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.name).to.equal(itemA.name);
+      Code.expect(result.name).to.equal(eventA.name);
 
       done();
     });
@@ -48,7 +49,7 @@ lab.experiment('Item', function() {
   lab.test('List all', function(done) {
     var options = {
       method: 'GET',
-      url: '/items',
+      url: '/events',
       credentials: credentials,
     };
  
@@ -65,7 +66,7 @@ lab.experiment('Item', function() {
   lab.test('Get one', function(done) {
     var options = {
       method: 'GET',
-      url: '/items/'+itemA.id,
+      url: '/events/'+eventAid,
       credentials: credentials,
     };
  
@@ -74,7 +75,7 @@ lab.experiment('Item', function() {
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.name).to.equal(itemA.name);
+      Code.expect(result.name).to.equal(eventA.name);
       
       done();
     });
@@ -83,7 +84,7 @@ lab.experiment('Item', function() {
   lab.test('Update', function(done) {
     var options = {
       method: 'PUT',
-      url: '/items/'+itemA.id,
+      url: '/events/'+eventAid,
       credentials: credentials,
       payload: changesToA
     };
@@ -102,7 +103,7 @@ lab.experiment('Item', function() {
   lab.test('Delete', function(done) {
     var options = {
       method: 'DELETE',
-      url: '/items/'+itemA.id,
+      url: '/events/'+eventAid,
       credentials: credentials,
     };
  
