@@ -15,26 +15,23 @@ var credentials = {
   }],
 };
 
-var topicA = {
-  text: 'hey',
-  kind: 'Idea',
-  author: 'john.doe'
+var itemA = {  
+  id: 'painting',
+  name: 'Mona Lisa',
 };
 
-var topicAid;
+var changesToA = {
+  name: 'Guernica'
+};
 
-var changesTopicA = {
-  text: 'Howdy'
-}
-
-lab.experiment('Topic', function() {
+lab.experiment('Item', function() {
 
   lab.test('Create', function(done) {
     var options = {
       method: 'POST',
-      url: '/topics',
+      url: '/items',
       credentials: credentials,
-      payload: topicA
+      payload: itemA
     };
  
     server.inject(options, function(response) {
@@ -42,10 +39,7 @@ lab.experiment('Topic', function() {
 
       Code.expect(response.statusCode).to.equal(201);
       Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.text).to.equal(topicA.text);
-      Code.expect(result.author).to.equal(topicA.author);
-
-      topicAid = result.id.toString();
+      Code.expect(result.name).to.equal(itemA.name);
 
       done();
     });
@@ -54,7 +48,7 @@ lab.experiment('Topic', function() {
   lab.test('List all', function(done) {
     var options = {
       method: 'GET',
-      url: '/topics',
+      url: '/items',
       credentials: credentials,
     };
  
@@ -63,17 +57,15 @@ lab.experiment('Topic', function() {
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Array);
-      Code.expect(result[0].id).to.be.string
-      Code.expect(result[0].author).to.be.string;
-      Code.expect(result[0].text).to.be.string;      
-      done();;
+      Code.expect(result[0].name).to.be.name;
+      done();
     });
   });
 
   lab.test('Get one', function(done) {
     var options = {
       method: 'GET',
-      url: '/topics/'+topicAid,
+      url: '/items/'+itemA.id,
       credentials: credentials,
     };
  
@@ -82,9 +74,7 @@ lab.experiment('Topic', function() {
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.author).to.equal(topicA.author);   
-      Code.expect(result.text).to.equal(topicA.text);
-      Code.expect(result.id.toString()).to.equal(topicAid);
+      Code.expect(result.name).to.equal(itemA.name);
       
       done();
     });
@@ -93,9 +83,9 @@ lab.experiment('Topic', function() {
   lab.test('Update', function(done) {
     var options = {
       method: 'PUT',
-      url: '/topics/'+topicAid,
+      url: '/items/'+itemA.id,
       credentials: credentials,
-      payload: changesTopicA
+      payload: changesToA
     };
  
     server.inject(options, function(response) {
@@ -103,9 +93,8 @@ lab.experiment('Topic', function() {
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.text).to.equal(changesTopicA.text);   
-      Code.expect(result.author).to.equal(topicA.author); 
-      Code.expect(result.id.toString()).to.equal(topicAid);  
+      Code.expect(result.name).to.equal(changesToA.name);
+      
       done();
     });
   });
@@ -113,7 +102,7 @@ lab.experiment('Topic', function() {
   lab.test('Delete', function(done) {
     var options = {
       method: 'DELETE',
-      url: '/topics/'+topicAid,
+      url: '/items/'+itemA.id,
       credentials: credentials,
     };
  
@@ -122,12 +111,10 @@ lab.experiment('Topic', function() {
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.id.toString()).to.equal(topicAid);
-      Code.expect(result.author).to.equal(topicA.author);
-      Code.expect(result.text).to.equal(changesTopicA.text);
-      
+      Code.expect(result.name).to.equal(changesToA.name); 
       done();
     });
   });
+
 
 });
