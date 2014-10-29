@@ -27,8 +27,9 @@ function create(item, memberId, cb) {
 }
 
 function update(id, item, cb) {
-    var filter = {_id: id};
-    Item.findOneAndUpdate(filter, item, function(err, _item) {
+  var filter = { id: id };
+
+  Item.findOneAndUpdate(filter, item, function(err, _item) {
     if (err) {
       log.error({ err: err, item: id}, 'error updating item');
       return cb(Boom.internal());
@@ -43,8 +44,9 @@ function update(id, item, cb) {
 }
 
 function get(id,query, cb) {
-  cb = cb||query;
-  var filter = {_id: id};
+  cb = cb || query;
+
+  var filter = { id: id };
   var fields = parser(query.fields);
 
   Item.findOne(filter,fields, function(err, item) {
@@ -83,7 +85,8 @@ function list(query, cb) {
 }
 
 function remove(id, cb) {
-  var filter = {_id: id};
+  var filter = { id: id };
+  
   Item.findOneAndRemove(filter, function(err, item){
     if (err) {
       log.error({ err: err, item: id}, 'error deleting item');
