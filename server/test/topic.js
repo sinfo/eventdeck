@@ -17,6 +17,7 @@ var credentials = {
 
 var topicA = {
   text: 'hey',
+  kind: 'Idea',
   author: 'john.doe'
 };
 
@@ -39,12 +40,12 @@ lab.experiment('Topic', function() {
     server.inject(options, function(response) {
       var result = response.result;
 
-      topicAid = result.id.toString();
-
       Code.expect(response.statusCode).to.equal(201);
       Code.expect(result).to.be.instanceof(Object);
       Code.expect(result.text).to.equal(topicA.text);
       Code.expect(result.author).to.equal(topicA.author);
+
+      topicAid = result.id.toString();
 
       done();
     });

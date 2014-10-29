@@ -14,7 +14,7 @@ exports.create = {
       author: Joi.string().description('author of the topic'),
       text: Joi.string().description('text of the topic'),
       targets: Joi.array().description('targets of the topic'),
-      kind: Joi.string().description('kind of the topic'),
+      kind: Joi.string().required().description('kind of the topic'),
       closed: Joi.boolean().description('closed of the topic'),
       result: Joi.string().description('result of the topic'),
       poll: {

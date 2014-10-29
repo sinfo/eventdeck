@@ -11,6 +11,7 @@ function renderObject(model) {
     id: model._id,
     kind: model.kind,
     text: model.text,
+    author: model.author,
     targets: model.targets,
     closed: model.closed,
     result: model.result,
