@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
 var facebookConfig = require('./../../../../../config').facebook;
 
-eventdeckController.controller("LoginController", function ($rootScope, $scope, $routeParams, $location, $http, $window) {
+eventdeckController.controller('LoginController', function ($rootScope, $scope, $routeParams, $location, $http, $window) {
 
   //================================INITIALIZATION================================
   $.ajaxSetup({cache: true});
-  $.getScript("//connect.facebook.net/pt_PT/all.js", function () {
+  $.getScript('//connect.facebook.net/pt_PT/all.js', function () {
     FB.init({appId: facebookConfig.appId});
   });
 
@@ -33,13 +33,13 @@ eventdeckController.controller("LoginController", function ($rootScope, $scope, 
     lock = true;
 
     FB.getLoginStatus(function (response) {
-      if (response.status === "connected") {
+      if (response.status === 'connected') {
         connected(response);
       }
       else {
-        FB.login(function () {}, {display: "popup"});
-        FB.Event.subscribe("auth.statusChange", function (response) {
-          if (response.status === "connected") {
+        FB.login(function () {}, {display: 'popup'});
+        FB.Event.subscribe('auth.statusChange', function (response) {
+          if (response.status === 'connected') {
             connected(response);
           }
         });
@@ -51,9 +51,9 @@ eventdeckController.controller("LoginController", function ($rootScope, $scope, 
     function connected(response) {
       $scope.connected = true;
       $scope.loading = true;
-      $scope.loginInfo = "Logging in...";
+      $scope.loginInfo = 'Logging in...';
 
-      $http.get(url_prefix + '/api/login/facebook?id='+response.authResponse.userID+'&token='+response.authResponse.accessToken).
+      $http.get(url_prefix + '/auth/login/facebook?id='+response.authResponse.userID+'&token='+response.authResponse.accessToken).
         success(function(data, status, headers, config) {
           //$location.path('/');
           if(typeof $rootScope.nextPath == undefined){
@@ -66,66 +66,66 @@ eventdeckController.controller("LoginController", function ($rootScope, $scope, 
         }).
         error(function(data, status, headers, config) {
           $scope.loading = false;
-          //console.log("ERROR", data);
+          //console.log('ERROR', data);
         });
     }
   };
 
   $scope.sendEmail = function (memberId) {
     $scope.loading = true;
-    $scope.loginInfo = "Sending email...";
+    $scope.loginInfo = 'Sending email...';
     $scope.showIdInput = false;
-    //console.log("Sending email...");
+    //console.log('Sending email...');
 
-    $http.get(url_prefix + '/api/login/' + memberId).
+    $http.get(url_prefix + '/auth/login/' + memberId).
       success(function(data, status, headers, config) {
         if(data.error) {
           $scope.loading = false;
-          setInfo("There was an error...");
+          setInfo('There was an error...');
           $scope.showIdInput = true;
           return;
         }
         $scope.loading = false;
-        setInfo("Email sent!");
+        setInfo('Email sent!');
         $scope.showCodeInput = true;
-        //console.log("Email sent!")
+        //console.log('Email sent!')
       }).
       error(function(data, status, headers, config) {
         $scope.loading = false;
-        setInfo("There was an error...");
+        setInfo('There was an error...');
         $scope.showIdInput = true;
-        //console.log("ERROR", data);
+        //console.log('ERROR', data);
       });
   }
 
   $scope.submitCode = function (memberId, memberCode) {
     $scope.loading = true;
-    $scope.loginInfo = "Verifying code...";
+    $scope.loginInfo = 'Verifying code...';
     $scope.showCodeInput = false;
 
-    $http.get(url_prefix + '/api/login/' + memberId + '/' + memberCode).
+    $http.get(url_prefix + '/auth/login/' + memberId + '/' + memberCode).
       success(function(data, status, headers, config) {
         if(data.error) {
           $scope.loading = false;
-          setInfo("There was an error...");
+          setInfo('There was an error...');
           $scope.showIdInput = true;
           return;
         }
         $scope.loading = false;
-        $scope.loginInfo = "Success!";
+        $scope.loginInfo = 'Success!';
         $window.location.assign('/');
         //$location.path('/');
       }).
       error(function(data, status, headers, config) {
         $scope.loading = false;
-        setInfo("There was an error...");
+        setInfo('There was an error...');
         $scope.showIdInput = true;
       });
   }
 
   function setInfo(message) {
     $scope.loginInfo = message;
-    setTimeout(function(){$scope.loginInfo=""}, 2000);
+    setTimeout(function(){$scope.loginInfo=''}, 2000);
   }
 
   if ($routeParams.id && $routeParams.code) {

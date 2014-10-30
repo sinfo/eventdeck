@@ -3,10 +3,10 @@
 eventdeckServices
   .factory('EmailFactory', function ($resource) {
     return {
-      Company: $resource(url_prefix+'/api/company/:id/sendInitialEmail', null, {
+      Company: $resource(url_prefix+'/companies/:id/sendInitialEmail', null, {
         'send': {method: 'POST'}
       }),
-      Speaker: $resource(url_prefix+'/api/speaker/:id/sendInitialEmail', null, {
+      Speaker: $resource(url_prefix+'/speakers/:id/sendInitialEmail', null, {
         'send': {method: 'POST'}
       })
     }

@@ -3,7 +3,7 @@
 eventdeckServices
   .factory('ItemFactory', function ($resource) {
     return {
-      Item: $resource(url_prefix+'/api/item/:id', null, {
+      Item: $resource(url_prefix+'/items/:id', null, {
         'getAll': {method: 'GET', isArray: true},
         'update': {method: 'PUT'},
         'create': {method: 'POST'},

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_PATH=. node server/index.js | node_modules/.bin/bunyan",
     "mon": "NODE_PATH=. node_modules/.bin/nodemon server/index.js | node_modules/.bin/bunyan",
-    "dist": "node_modules/.bin/browserify -t brfs --debug -e client/js/eventdeck.js -o public/js/eventdeck.js",
+    "dist": "NODE_PATH=. node_modules/.bin/browserify -t brfs --debug -e client/js/eventdeck.js -o public/js/eventdeck.js",
     "test": "NODE_PATH=. ./node_modules/lab/bin/lab server/test",
     "test-cov": "NODE_PATH=. ./node_modules/lab/bin/lab server/test -c"
   },
