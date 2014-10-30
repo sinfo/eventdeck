@@ -1,5 +1,7 @@
 "use strict";
 
+var kinds = require('options').topics.kinds;
+
 eventdeckController.controller("MeetingController", function ($rootScope, $scope, $routeParams, $location, $timeout, MeetingFactory, TopicFactory, TagFactory) {
 
   $rootScope.update.timeout(runController);
@@ -10,7 +12,7 @@ eventdeckController.controller("MeetingController", function ($rootScope, $scope
 
     $scope.loading = true;
 
-    $scope.kinds = ["Info", "To do", "Decision", "Idea"];
+    $scope.kinds = kinds;
 
     MeetingFactory.get({id: $routeParams.id}, function (meeting) {
       $scope.meeting = meeting;

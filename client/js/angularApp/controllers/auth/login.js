@@ -1,6 +1,6 @@
 'use strict';
 
-var facebookConfig = require('./../../../../../config').facebook;
+var facebookConfig = require('config').facebook;
 
 eventdeckController.controller('LoginController', function ($rootScope, $scope, $routeParams, $location, $http, $window) {
 
