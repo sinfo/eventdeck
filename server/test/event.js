@@ -37,7 +37,7 @@ lab.experiment('Event', function() {
  
     server.inject(options, function(response) {
       var result = response.result;
-      eventAid = result.id.toString();
+      eventAId = result.id.toString();
       Code.expect(response.statusCode).to.equal(201);
       Code.expect(result).to.be.instanceof(Object);
       Code.expect(result.name).to.equal(eventA.name);
@@ -66,7 +66,7 @@ lab.experiment('Event', function() {
   lab.test('Get one', function(done) {
     var options = {
       method: 'GET',
-      url: '/events/'+eventAid,
+      url: '/events/'+eventAId,
       credentials: credentials,
     };
  
@@ -84,7 +84,7 @@ lab.experiment('Event', function() {
   lab.test('Update', function(done) {
     var options = {
       method: 'PUT',
-      url: '/events/'+eventAid,
+      url: '/events/'+eventAId,
       credentials: credentials,
       payload: changesToA
     };
@@ -103,7 +103,7 @@ lab.experiment('Event', function() {
   lab.test('Delete', function(done) {
     var options = {
       method: 'DELETE',
-      url: '/events/'+eventAid,
+      url: '/events/'+eventAId,
       credentials: credentials,
     };
  
