@@ -10,6 +10,7 @@ require('./meetings');
 require('./members');
 require('./messages');
 require('./notifications');
+require('./roles');
 require('./speakers');
 require('./sessions');
 require('./subscriptions');
