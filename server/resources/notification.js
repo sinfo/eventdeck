@@ -175,7 +175,7 @@ function removeByThread(path, id, cb) {
       return cb(Boom.internal());
     }
 
-    cb(null, notifications);
+    cb(null);
   });
 }
 

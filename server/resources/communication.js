@@ -152,7 +152,7 @@ function list(query, cb) {
 }
 
 function remove(id, cb) {
-  var filter = {id:id};
+  var filter = {_id:id};
   Communication.findOneAndRemove(filter, function(err, communication){
     if (err) {
       log.error({ err: err, communication: id}, 'error deleting communication');

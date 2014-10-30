@@ -13,7 +13,7 @@ function get(id,query, cb) {
   cb = cb || query; // fields is optional
 
   var fields = parser(query.fields);
-  var filter = {_id: id};
+  var filter = {id: id};
   
   Message.findOne(filter, fields, function(err, message) {
     if (err) {

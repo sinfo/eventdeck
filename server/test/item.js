@@ -57,7 +57,7 @@ lab.experiment('Item', function() {
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Array);
-      Code.expect(result[0].name).to.be.name;
+      Code.expect(result[0].name).to.be.string;
       done();
     });
   });

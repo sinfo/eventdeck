@@ -16,13 +16,13 @@ var credentials = {
 };
 
 var companyA = {  
-  id: "chiquitos",
-  name: 'Chicos Emporium of Cool Stuff',
+  id: 'sinfo',
+  name: 'SINFO XXII',
 };
 
 
 var changesToA = {
-  name: 'Duartes Emporium of Awesome Stuff'
+  name: 'SINFO XXIII'
 };
 
 lab.experiment('Company', function() {
@@ -59,7 +59,7 @@ lab.experiment('Company', function() {
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Array);
-      Code.expect(result[0].name).to.be.name;
+      Code.expect(result[0].name).to.be.string;
       done();
     });
   });
