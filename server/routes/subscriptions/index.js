@@ -16,6 +16,6 @@ server.route({
 
 server.route({
   method: 'DELETE',
-  path: '/subscriptions/{id}',
+  path: '/subscriptions',
   config: handlers.remove
 });

@@ -15,32 +15,39 @@ var credentials = {
   }],
 };
 
-var eventA = {  
-  name: 'Super Festinha de anos do Chico',
+var communicationA = {  
+  thread : 'company-example',
+  event : 'John Does promotion',
+  kind : 'geral',
+  text : 'From this day on Mr.Doe rules the world.'
 };
-
-var eventAId;
 
 var changesToA = {
-  name: 'Super Grande Festarrona de Anos do Chico'
+  text: 'He has been demoted after all.'
 };
+var commId;
 
-lab.experiment('Event', function() {
+lab.experiment('Communication', function() {
 
   lab.test('Create', function(done) {
     var options = {
       method: 'POST',
-      url: '/events',
+      url: '/communications',
       credentials: credentials,
-      payload: eventA
+      payload: communicationA
     };
  
     server.inject(options, function(response) {
       var result = response.result;
-      eventAId = result.id.toString();
+
       Code.expect(response.statusCode).to.equal(201);
       Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.name).to.equal(eventA.name);
+      Code.expect(result.thread, 'thread').to.equal(communicationA.thread);
+      Code.expect(result.event, 'event').to.equal(communicationA.event);
+      Code.expect(result.kind, 'kind').to.equal(communicationA.kind);
+      Code.expect(result.text, 'text').to.equal(communicationA.text);
+
+      commId = result.id.toString();
 
       done();
     });
@@ -49,7 +56,7 @@ lab.experiment('Event', function() {
   lab.test('List all', function(done) {
     var options = {
       method: 'GET',
-      url: '/events',
+      url: '/communications',
       credentials: credentials,
     };
  
@@ -58,7 +65,10 @@ lab.experiment('Event', function() {
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Array);
-      Code.expect(result[0].name).to.be.string;
+      Code.expect(result[0].thread, 'thread').to.be.string;
+      Code.expect(result[0].event, 'event').to.be.string;
+      Code.expect(result[0].kind, 'kind').to.be.string;
+      Code.expect(result[0].text, 'text').to.be.string;
       done();
     });
   });
@@ -66,7 +76,7 @@ lab.experiment('Event', function() {
   lab.test('Get one', function(done) {
     var options = {
       method: 'GET',
-      url: '/events/'+eventAId,
+      url: '/communications/'+commId,
       credentials: credentials,
     };
  
@@ -75,7 +85,11 @@ lab.experiment('Event', function() {
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.name).to.equal(eventA.name);
+      Code.expect(result.thread, 'thread').to.equal(communicationA.thread);
+      Code.expect(result.event, 'event').to.equal(communicationA.event);
+      Code.expect(result.kind, 'kind').to.equal(communicationA.kind);
+      Code.expect(result.text, 'text').to.equal(communicationA.text);
+
       
       done();
     });
@@ -84,7 +98,7 @@ lab.experiment('Event', function() {
   lab.test('Update', function(done) {
     var options = {
       method: 'PUT',
-      url: '/events/'+eventAId,
+      url: '/communications/'+commId,
       credentials: credentials,
       payload: changesToA
     };
@@ -94,7 +108,11 @@ lab.experiment('Event', function() {
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.name).to.equal(changesToA.name);
+      Code.expect(result.thread, 'thread').to.equal(communicationA.thread);
+      Code.expect(result.event, 'event').to.equal(communicationA.event);
+      Code.expect(result.kind, 'kind').to.equal(communicationA.kind);
+      Code.expect(result.text, 'text').to.equal(changesToA.text);
+
       
       done();
     });
@@ -103,7 +121,7 @@ lab.experiment('Event', function() {
   lab.test('Delete', function(done) {
     var options = {
       method: 'DELETE',
-      url: '/events/'+eventAId,
+      url: '/communications/'+commId,
       credentials: credentials,
     };
  
@@ -112,7 +130,11 @@ lab.experiment('Event', function() {
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.name).to.equal(changesToA.name); 
+      Code.expect(result.thread, 'thread').to.equal(communicationA.thread);
+      Code.expect(result.event, 'event').to.equal(communicationA.event);
+      Code.expect(result.kind, 'kind').to.equal(communicationA.kind);
+      Code.expect(result.text, 'text').to.equal(changesToA.text);
+
       done();
     });
   });

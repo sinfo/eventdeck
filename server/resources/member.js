@@ -56,7 +56,7 @@ function update(id, member, cb) {
 function createLoginCode(id, cb) {
   var loginCode = randtoken.generate(4).toUpperCase();
   var code = {$push: {'loginCodes': {code: loginCode, created: new Date()}}};
-  var filter = {_id: id};
+  var filter = {id: id};
   Member.findOneAndUpdate(filter,code , function(err, _member) {
     if (err) {
       log.error({ err: err, member: id}, 'error creating login code for member');

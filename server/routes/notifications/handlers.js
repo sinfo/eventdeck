@@ -85,7 +85,6 @@ exports.list = {
     { method: 'notification.list(query)', assign: 'notifications' }
   ],
   handler: function (request, reply) {
-    console.log(request.pre.notifications)
     reply(render(request.pre.notifications));
   },
   description: 'Gets all the notifications'
