@@ -3,7 +3,7 @@ var slug = require('slug');
 var server = require('server').hapi;
 var log = require('server/helpers/logger');
 var parser = require('server/helpers/fieldsParser');
-var Event = require('server/db/models/event');
+var Event = require('server/db/event');
 
 
 server.method('event.create', create, {});

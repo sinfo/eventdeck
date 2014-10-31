@@ -4,7 +4,7 @@ var server = require('server').hapi;
 var log = require('server/helpers/logger');
 var threadFromPath = require('server/helpers/threadFromPath');
 var parser = require('server/helpers/fieldsParser');
-var Topic = require('server/db/models/topic');
+var Topic = require('server/db/topic');
 
 
 server.method('topic.create', create, {});

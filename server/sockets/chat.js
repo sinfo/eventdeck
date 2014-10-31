@@ -13,13 +13,12 @@ function chatServer(socket){
   socket.on('chat-init', function(data, cbClient){
     var room = data.id;
     var user = socket.nickname;
-    var query = data.query;
     async.parallel([
       function(cb){
         server.methhods.chat.get(room, cb);
       },
       function(cb){
-        server.methods.message.getByChat(room, query, cb);
+        server.methods.message.getByChat(room, {skip: 0, limit: 10, sort: 'date'}, cb);
       }
     ], function(err, results){
         done(err, user, room, results, cbClient);

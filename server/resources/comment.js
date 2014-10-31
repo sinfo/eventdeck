@@ -3,7 +3,7 @@ var server = require('server').hapi;
 var log = require('server/helpers/logger');
 var parser = require('server/helpers/fieldsParser');
 var threadFromPath = require('server/helpers/threadFromPath');
-var Comment = require('server/db/models/comment');
+var Comment = require('server/db/comment');
 
 
 server.method('comment.create', create, {});

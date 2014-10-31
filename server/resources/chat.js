@@ -2,7 +2,7 @@ var Boom = require('boom');
 var server = require('server').hapi;
 var log = require('server/helpers/logger');
 var parser = require('server/helpers/fieldsParser');
-var Chat = require('server/db/models/chat');
+var Chat = require('server/db/chat');
 
 
 server.method('chat.create', create, {});

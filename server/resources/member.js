@@ -6,7 +6,7 @@ var threadFromPath = require('server/helpers/threadFromPath');
 var parser = require('server/helpers/fieldsParser');
 var dupKeyParser = require('server/helpers/dupKeyParser');
 var randtoken = require('rand-token');
-var Member = require('server/db/models/member');
+var Member = require('server/db/member');
 
 // TODO: GET TARGETS
 server.method('member.create', create, {});

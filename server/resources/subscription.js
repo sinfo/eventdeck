@@ -3,11 +3,13 @@ var slug = require('slug');
 var server = require('server').hapi;
 var log = require('server/helpers/logger');
 var parser = require('server/helpers/fieldsParser');
-var Subscription = require('server/db/models/subscription');
+var Subscription = require('server/db/subscription');
 
 
 server.method('subscription.create', create, {});
 server.method('subscription.get', get, {});
+server.method('subscription.getByMember', getByMember, {});
+server.method('subscription.getByThread', getByThread, {});
 server.method('subscription.remove', remove, {});
 
 
