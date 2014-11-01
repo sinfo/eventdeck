@@ -30,7 +30,7 @@ lab.experiment('Company', function() {
   lab.test('Create', function(done) {
     var options = {
       method: 'POST',
-      url: '/companies',
+      url: '/api/companies',
       credentials: credentials,
       payload: companyA
     };
@@ -50,7 +50,7 @@ lab.experiment('Company', function() {
   lab.test('List all', function(done) {
     var options = {
       method: 'GET',
-      url: '/companies',
+      url: '/api/companies',
       credentials: credentials,
     };
  
@@ -67,7 +67,7 @@ lab.experiment('Company', function() {
   lab.test('Get one', function(done) {
     var options = {
       method: 'GET',
-      url: '/companies/'+companyA.id,
+      url: '/api/companies/'+companyA.id,
       credentials: credentials,
     };
  
@@ -86,7 +86,7 @@ lab.experiment('Company', function() {
   lab.test('Update', function(done) {
     var options = {
       method: 'PUT',
-      url: '/companies/'+companyA.id,
+      url: '/api/companies/'+companyA.id,
       credentials: credentials,
       payload: changesToA
     };
@@ -106,7 +106,7 @@ lab.experiment('Company', function() {
   lab.test('Delete', function(done) {
     var options = {
       method: 'DELETE',
-      url: '/companies/'+companyA.id,
+      url: '/api/companies/'+companyA.id,
       credentials: credentials,
     };
  

@@ -32,7 +32,7 @@ lab.experiment('Communication', function() {
   lab.test('Create', function(done) {
     var options = {
       method: 'POST',
-      url: '/communications',
+      url: '/api/communications',
       credentials: credentials,
       payload: communicationA
     };
@@ -56,7 +56,7 @@ lab.experiment('Communication', function() {
   lab.test('List all', function(done) {
     var options = {
       method: 'GET',
-      url: '/communications',
+      url: '/api/communications',
       credentials: credentials,
     };
  
@@ -76,7 +76,7 @@ lab.experiment('Communication', function() {
   lab.test('Get one', function(done) {
     var options = {
       method: 'GET',
-      url: '/communications/'+commId,
+      url: '/api/communications/'+commId,
       credentials: credentials,
     };
  
@@ -98,7 +98,7 @@ lab.experiment('Communication', function() {
   lab.test('Update', function(done) {
     var options = {
       method: 'PUT',
-      url: '/communications/'+commId,
+      url: '/api/communications/'+commId,
       credentials: credentials,
       payload: changesToA
     };
@@ -121,7 +121,7 @@ lab.experiment('Communication', function() {
   lab.test('Delete', function(done) {
     var options = {
       method: 'DELETE',
-      url: '/communications/'+commId,
+      url: '/api/communications/'+commId,
       credentials: credentials,
     };
  

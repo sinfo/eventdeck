@@ -36,7 +36,7 @@ exports.create = {
     { method: 'member.create(payload)', assign: 'member' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.member)).created('/members/'+request.pre.member.id);
+    reply(render(request.pre.member)).created('/api/members/'+request.pre.member.id);
   },
   description: 'Creates a new member'
 };

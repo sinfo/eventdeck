@@ -33,7 +33,7 @@ config.bunyan = {
 };
 
 config.swagger = {
-  pathPrefixSize: 1,
+  pathPrefixSize: 2,
   apiVersion: pack.version
 };
 

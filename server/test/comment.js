@@ -31,7 +31,7 @@ lab.experiment('Comment', function() {
   lab.test('Create', function(done) {
     var options = {
       method: 'POST',
-      url: '/comments',
+      url: '/api/comments',
       credentials: credentials,
       payload: commentA
     };
@@ -54,7 +54,7 @@ lab.experiment('Comment', function() {
   lab.test('List all', function(done) {
     var options = {
       method: 'GET',
-      url: '/comments',
+      url: '/api/comments',
       credentials: credentials,
     };
  
@@ -73,7 +73,7 @@ lab.experiment('Comment', function() {
   lab.test('Get one', function(done) {
     var options = {
       method: 'GET',
-      url: '/comments/'+commId,
+      url: '/api/comments/'+commId,
       credentials: credentials,
     };
  
@@ -94,7 +94,7 @@ lab.experiment('Comment', function() {
   lab.test('Update', function(done) {
     var options = {
       method: 'PUT',
-      url: '/comments/'+commId,
+      url: '/api/comments/'+commId,
       credentials: credentials,
       payload: changesToA
     };
@@ -115,7 +115,7 @@ lab.experiment('Comment', function() {
   lab.test('Delete', function(done) {
     var options = {
       method: 'DELETE',
-      url: '/comments/'+commId,
+      url: '/api/comments/'+commId,
       credentials: credentials,
     };
  

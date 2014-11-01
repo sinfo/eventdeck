@@ -4,30 +4,30 @@ var handlers = require('./handlers');
 
 server.route({
   method: 'GET',
-  path: '/tags',
+  path: '/api/tags',
   config: handlers.list
 });
 
 server.route({
   method: 'GET',
-  path: '/tags/{id}',
+  path: '/api/tags/{id}',
   config: handlers.get
 });
 
 server.route({
   method: 'POST',
-  path: '/tags',
+  path: '/api/tags',
   config: handlers.create
 });
 
 server.route({
   method: 'PUT',
-  path: '/tags/{id}',
+  path: '/api/tags/{id}',
   config: handlers.update
 });
 
 server.route({
   method: 'DELETE',
-  path: '/tags/{id}',
+  path: '/api/tags/{id}',
   config: handlers.remove
 });

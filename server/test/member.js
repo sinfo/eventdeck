@@ -26,7 +26,7 @@ lab.experiment('Members', function() {
   lab.test('Create', function(done) {
     var options = {
       method: 'POST',
-      url: '/members',
+      url: '/api/members',
       credentials: credentials,
       payload: memberA
     };
@@ -46,7 +46,7 @@ lab.experiment('Members', function() {
   lab.test('List all', function(done) {
     var options = {
       method: 'GET',
-      url: '/members',
+      url: '/api/members',
       credentials: credentials,
     };
  
@@ -66,7 +66,7 @@ lab.experiment('Members', function() {
   lab.test('Get me', function(done) {
     var options = {
       method: 'GET',
-      url: '/members/me',
+      url: '/api/members/me',
       credentials: credentials,
     };
  
@@ -85,7 +85,7 @@ lab.experiment('Members', function() {
   lab.test('Get one', function(done) {
     var options = {
       method: 'GET',
-      url: '/members/'+memberA.id,
+      url: '/api/members/'+memberA.id,
       credentials: credentials,
     };
  
@@ -104,7 +104,7 @@ lab.experiment('Members', function() {
   lab.test('Update', function(done) {
     var options = {
       method: 'PUT',
-      url: '/members/'+memberA.id,
+      url: '/api/members/'+memberA.id,
       credentials: credentials,
       payload: changesMemberA
     };
@@ -124,7 +124,7 @@ lab.experiment('Members', function() {
   lab.test('Delete', function(done) {
     var options = {
       method: 'DELETE',
-      url: '/members/'+memberA.id,
+      url: '/api/members/'+memberA.id,
       credentials: credentials,
     };
  

@@ -19,7 +19,7 @@ exports.create = {
     { method: 'tag.create(payload, auth.credentials.id)', assign: 'tag' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.tag)).created('/tags/'+request.pre.tag.id);
+    reply(render(request.pre.tag)).created('/api/tags/'+request.pre.tag.id);
   },
   description: 'Creates a new tag'
 };

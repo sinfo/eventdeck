@@ -32,7 +32,7 @@ exports.create = {
     { method: 'notification.notifyCreate(auth.credentials.id, path, pre.topic)', assign: 'notification' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.topic)).created('/topics/'+request.pre.topic.id);
+    reply(render(request.pre.topic)).created('/api/topics/'+request.pre.topic.id);
   },
   description: 'Creates a new topic'
 };

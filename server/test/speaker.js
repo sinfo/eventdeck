@@ -31,7 +31,7 @@ lab.experiment('Speaker', function() {
   lab.test('Create', function(done) {
     var options = {
       method: 'POST',
-      url: '/speakers',
+      url: '/api/speakers',
       credentials: credentials,
       payload: speakerA
     };
@@ -51,7 +51,7 @@ lab.experiment('Speaker', function() {
   lab.test('List all', function(done) {
     var options = {
       method: 'GET',
-      url: '/speakers',
+      url: '/api/speakers',
       credentials: credentials,
     };
  
@@ -69,7 +69,7 @@ lab.experiment('Speaker', function() {
   lab.test('Get one', function(done) {
     var options = {
       method: 'GET',
-      url: '/speakers/'+speakerA.id,
+      url: '/api/speakers/'+speakerA.id,
       credentials: credentials,
     };
  
@@ -88,7 +88,7 @@ lab.experiment('Speaker', function() {
   lab.test('Update', function(done) {
     var options = {
       method: 'PUT',
-      url: '/speakers/'+speakerA.id,
+      url: '/api/speakers/'+speakerA.id,
       credentials: credentials,
       payload: changesToA
     };
@@ -108,7 +108,7 @@ lab.experiment('Speaker', function() {
   lab.test('Delete', function(done) {
     var options = {
       method: 'DELETE',
-      url: '/speakers/'+speakerA.id,
+      url: '/api/speakers/'+speakerA.id,
       credentials: credentials,
     };
  
