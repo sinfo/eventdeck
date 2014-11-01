@@ -3,7 +3,8 @@ var pack = require('package');
 var config = {
   url: process.env.EVENTDECK_URL || 'http://localhost:8080',
   port: process.env.EVENTDECK_PORT || 8080,
-  isDev: true
+  isDev: true,
+  isSecure: false
 };
 
 config.mongo = {
@@ -34,6 +35,11 @@ config.bunyan = {
 config.swagger = {
   pathPrefixSize: 1,
   apiVersion: pack.version
+};
+
+config.client = {
+  apiUrl: config.url,
+  debugMode: true
 };
 
 if(process.env.NODE_ENV == 'test') {

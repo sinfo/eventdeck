@@ -3,6 +3,7 @@ var SocketIO = {server: require('socket.io'), client: require('socket.io-client'
 var log = require('server/helpers/logger');
 var config = require('config');
 var cookieConfig = config.cookie;
+var moonbootsConfig = require('moonbootsConfig');
 
 log.info('### Starting EventDeck ###');
 
@@ -10,8 +11,28 @@ var server = module.exports.hapi = new Hapi.Server(config.port);
 
 require('./db');
 
+var internals = {};
+// set clientconfig cookie
+internals.configStateConfig = {
+    encoding: 'none',
+    ttl: 1000 * 60 * 15,
+    isSecure: config.isSecure
+};
+server.state('config', internals.configStateConfig);
+internals.clientConfig = JSON.stringify(config.client);
+server.ext('onPreResponse', function(request, reply) {
+    if (!request.state.config) {
+        var response = request.response;
+        return reply(response.state('config', encodeURIComponent(internals.clientConfig)));
+    }
+    else {
+        return reply();
+    }
+});
+
 server.pack.register([
     { plugin: require('hapi-swagger'), options: config.swagger }, 
+    { plugin: require('moonboots_hapi'), options: moonbootsConfig },
     require('hapi-auth-cookie'),
   ], 
   function (err) {

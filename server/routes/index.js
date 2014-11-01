@@ -1,4 +1,4 @@
-require('./publicAssets');
+// require('./publicAssets');
 require('./auth');
 require('./chats');
 require('./comments');
