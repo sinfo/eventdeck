@@ -3,6 +3,7 @@ var pack = require('package');
 var config = {
   url: process.env.EVENTDECK_URL || 'http://localhost:8080',
   port: process.env.EVENTDECK_PORT || 8080,
+  isDev: true
 };
 
 config.mongo = {
