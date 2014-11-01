@@ -1,2 +1,0 @@
-require("./topic");
-require("./card");

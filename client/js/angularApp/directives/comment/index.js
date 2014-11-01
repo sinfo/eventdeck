@@ -1,2 +1,0 @@
-require('./area');
-require('./first');
