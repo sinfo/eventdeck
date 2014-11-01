@@ -4,12 +4,12 @@ var handlers = require('./handlers');
 
 server.route({
   method: 'GET',
-  path: '/messages',
+  path: '/api/messages',
   config: handlers.list
 });
 
 server.route({
   method: 'GET',
-  path: '/messages/{id}',
+  path: '/api/messages/{id}',
   config: handlers.get
 });

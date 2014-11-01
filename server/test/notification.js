@@ -33,7 +33,7 @@ lab.experiment('Notification', function() {
   lab.test('Create', function(done) {
     var options = {
       method: 'POST',
-      url: '/notifications',
+      url: '/api/notifications',
       credentials: credentials,
       payload: notificationA
     };
@@ -55,7 +55,7 @@ lab.experiment('Notification', function() {
   lab.test('List all', function(done) {
     var options = {
       method: 'GET',
-      url: '/notifications',
+      url: '/api/notifications',
       credentials: credentials,
     };
  
@@ -75,7 +75,7 @@ lab.experiment('Notification', function() {
   lab.test('Get one', function(done) {
     var options = {
       method: 'GET',
-      url: '/notifications/'+notificationAid,
+      url: '/api/notifications/'+notificationAid,
       credentials: credentials,
     };
  
@@ -95,7 +95,7 @@ lab.experiment('Notification', function() {
   lab.test('Delete', function(done) {
     var options = {
       method: 'DELETE',
-      url: '/notifications/'+notificationAid,
+      url: '/api/notifications/'+notificationAid,
       credentials: credentials,
     };
  

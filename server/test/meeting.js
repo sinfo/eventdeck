@@ -31,7 +31,7 @@ lab.experiment('Meeting', function() {
   lab.test('Create', function(done) {
     var options = {
       method: 'POST',
-      url: '/meetings',
+      url: '/api/meetings',
       credentials: credentials,
       payload: meetingA
     };
@@ -52,7 +52,7 @@ lab.experiment('Meeting', function() {
   lab.test('List all', function(done) {
     var options = {
       method: 'GET',
-      url: '/meetings',
+      url: '/api/meetings',
       credentials: credentials,
     };
  
@@ -69,7 +69,7 @@ lab.experiment('Meeting', function() {
   lab.test('Get one', function(done) {
     var options = {
       method: 'GET',
-      url: '/meetings/'+meetingAid,
+      url: '/api/meetings/'+meetingAid,
       credentials: credentials,
     };
  
@@ -87,7 +87,7 @@ lab.experiment('Meeting', function() {
   lab.test('Update', function(done) {
     var options = {
       method: 'PUT',
-      url: '/meetings/'+meetingAid,
+      url: '/api/meetings/'+meetingAid,
       credentials: credentials,
       payload: changesToA
     };
@@ -106,7 +106,7 @@ lab.experiment('Meeting', function() {
   lab.test('Delete', function(done) {
     var options = {
       method: 'DELETE',
-      url: '/meetings/'+meetingAid,
+      url: '/api/meetings/'+meetingAid,
       credentials: credentials,
     };
  

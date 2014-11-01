@@ -23,7 +23,7 @@ exports.create = {
     // TODO: CREATE NOTIFICATION
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.item)).created('/items/'+request.pre.item.id);
+    reply(render(request.pre.item)).created('/api/items/'+request.pre.item.id);
   },
   description: 'Creates a new item'
 };

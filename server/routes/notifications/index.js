@@ -4,30 +4,30 @@ var handlers = require('./handlers');
 
 server.route({
   method: 'GET',
-  path: '/notifications',
+  path: '/api/notifications',
   config: handlers.list
 });
 
 server.route({
   method: 'GET',
-  path: '/notifications/{id}',
+  path: '/api/notifications/{id}',
   config: handlers.get
 });
 
 server.route({
   method: 'GET',
-  path: '/companies/{id}/notifications',
+  path: '/api/companies/{id}/notifications',
   config: handlers.getByThread
 });
 
 server.route({
   method: 'GET',
-  path: '/speakers/{id}/notifications',
+  path: '/api/speakers/{id}/notifications',
   config: handlers.getByThread
 });
 
 server.route({
   method: 'GET',
-  path: '/topics/{id}/notifications',
+  path: '/api/topics/{id}/notifications',
   config: handlers.getByThread
 });

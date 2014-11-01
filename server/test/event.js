@@ -30,7 +30,7 @@ lab.experiment('Event', function() {
   lab.test('Create', function(done) {
     var options = {
       method: 'POST',
-      url: '/events',
+      url: '/api/events',
       credentials: credentials,
       payload: eventA
     };
@@ -49,7 +49,7 @@ lab.experiment('Event', function() {
   lab.test('List all', function(done) {
     var options = {
       method: 'GET',
-      url: '/events',
+      url: '/api/events',
       credentials: credentials,
     };
  
@@ -66,7 +66,7 @@ lab.experiment('Event', function() {
   lab.test('Get one', function(done) {
     var options = {
       method: 'GET',
-      url: '/events/'+eventAId,
+      url: '/api/events/'+eventAId,
       credentials: credentials,
     };
  
@@ -84,7 +84,7 @@ lab.experiment('Event', function() {
   lab.test('Update', function(done) {
     var options = {
       method: 'PUT',
-      url: '/events/'+eventAId,
+      url: '/api/events/'+eventAId,
       credentials: credentials,
       payload: changesToA
     };
@@ -103,7 +103,7 @@ lab.experiment('Event', function() {
   lab.test('Delete', function(done) {
     var options = {
       method: 'DELETE',
-      url: '/events/'+eventAId,
+      url: '/api/events/'+eventAId,
       credentials: credentials,
     };
  

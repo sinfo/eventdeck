@@ -28,7 +28,7 @@ exports.create = {
     // TODO: CREATE NOTIFICATION
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.session)).created('/sessions/'+request.pre.session.id);
+    reply(render(request.pre.session)).created('/api/sessions/'+request.pre.session.id);
   },
   description: 'Creates a new session'
 };

@@ -32,7 +32,7 @@ exports.create = {
     { method: 'notification.notifyCreate(auth.credentials.id, path, pre.company)', assign: 'notification' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.company)).created('/companies/'+request.pre.company.id);
+    reply(render(request.pre.company)).created('/api/companies/'+request.pre.company.id);
   },
   description: 'Creates a new company'
 };

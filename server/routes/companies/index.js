@@ -4,42 +4,42 @@ var handlers = require('./handlers');
 
 server.route({
   method: 'GET',
-  path: '/companies',
+  path: '/api/companies',
   config: handlers.list
 });
 
 server.route({
   method: 'GET',
-  path: '/companies/{id}',
+  path: '/api/companies/{id}',
   config: handlers.get
 });
 
 server.route({
   method: 'POST',
-  path: '/companies',
+  path: '/api/companies',
   config: handlers.create
 });
 
 server.route({
   method: 'PUT',
-  path: '/companies/{id}',
+  path: '/api/companies/{id}',
   config: handlers.update
 });
 
 server.route({
   method: 'DELETE',
-  path: '/companies/{id}',
+  path: '/api/companies/{id}',
   config: handlers.remove
 });
 
 server.route({
   method: 'GET',
-  path: '/members/{id}/companies',
+  path: '/api/members/{id}/companies',
   config: handlers.getByMember
 });
 
 server.route({
   method: 'GET',
-  path: '/events/{id}/companies',
+  path: '/api/events/{id}/companies',
   config: handlers.getByEvent
 });

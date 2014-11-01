@@ -4,36 +4,36 @@ var handlers = require('./handlers');
 
 server.route({
   method: 'GET',
-  path: '/speakers',
+  path: '/api/speakers',
   config: handlers.list
 });
 
 server.route({
   method: 'GET',
-  path: '/speakers/{id}',
+  path: '/api/speakers/{id}',
   config: handlers.get
 });
 
 server.route({
   method: 'POST',
-  path: '/speakers',
+  path: '/api/speakers',
   config: handlers.create
 });
 
 server.route({
   method: 'PUT',
-  path: '/speakers/{id}',
+  path: '/api/speakers/{id}',
   config: handlers.update
 });
 
 server.route({
   method: 'DELETE',
-  path: '/speakers/{id}',
+  path: '/api/speakers/{id}',
   config: handlers.remove
 });
 
 server.route({
   method: 'GET',
-  path: '/members/{id}/speakers',
+  path: '/api/members/{id}/speakers',
   config: handlers.getByMember
 });

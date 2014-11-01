@@ -29,7 +29,7 @@ exports.create = {
     { method: 'notification.notifyCreate(auth.credentials.id, path, pre.speaker)', assign: 'notification' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.speaker)).created('/speakers/'+request.pre.speaker.id);
+    reply(render(request.pre.speaker)).created('/api/speakers/'+request.pre.speaker.id);
   },
   description: 'Creates a new speaker'
 };

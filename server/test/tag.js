@@ -31,7 +31,7 @@ lab.experiment('Tag', function() {
   lab.test('Create', function(done) {
     var options = {
       method: 'POST',
-      url: '/tags',
+      url: '/api/tags',
       credentials: credentials,
       payload: tagA
     };
@@ -51,7 +51,7 @@ lab.experiment('Tag', function() {
   lab.test('List all', function(done) {
     var options = {
       method: 'GET',
-      url: '/tags',
+      url: '/api/tags',
       credentials: credentials,
     };
  
@@ -70,7 +70,7 @@ lab.experiment('Tag', function() {
   lab.test('Get one', function(done) {
     var options = {
       method: 'GET',
-      url: '/tags/'+tagA.id,
+      url: '/api/tags/'+tagA.id,
       credentials: credentials,
     };
  
@@ -89,7 +89,7 @@ lab.experiment('Tag', function() {
   lab.test('Update', function(done) {
     var options = {
       method: 'PUT',
-      url: '/tags/'+tagA.id,
+      url: '/api/tags/'+tagA.id,
       credentials: credentials,
       payload: changesTagA
     };
@@ -110,7 +110,7 @@ lab.experiment('Tag', function() {
   lab.test('Delete', function(done) {
     var options = {
       method: 'DELETE',
-      url: '/tags/'+tagA.id,
+      url: '/api/tags/'+tagA.id,
       credentials: credentials,
     };
  

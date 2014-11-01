@@ -24,7 +24,7 @@ lab.experiment('Subscription', function() {
   lab.test('Create', function(done) {
     var options = {
       method: 'POST',
-      url: '/subscriptions',
+      url: '/api/subscriptions',
       credentials: credentials,
       payload: subscriptionA
     };
@@ -44,7 +44,7 @@ lab.experiment('Subscription', function() {
   lab.test('Get one', function(done) {
     var options = {
       method: 'GET',
-      url: '/subscriptions?thread='+subscriptionA.thread,
+      url: '/api/subscriptions?thread='+subscriptionA.thread,
 
       credentials: credentials,
     };
@@ -63,7 +63,7 @@ lab.experiment('Subscription', function() {
   lab.test('Delete', function(done) {
     var options = {
       method: 'DELETE',
-      url: '/subscriptions',
+      url: '/api/subscriptions',
       payload: subscriptionA,
       credentials: credentials,
     };

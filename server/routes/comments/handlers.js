@@ -20,7 +20,7 @@ exports.create = {
     // TODO: PARSE FOR MEMBERS
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.comment)).created('/comments/'+request.pre.comment._id);
+    reply(render(request.pre.comment)).created('/api/comments/'+request.pre.comment._id);
   },
   description: 'Creates a new comment'
 };

@@ -29,7 +29,7 @@ lab.experiment('Item', function() {
   lab.test('Create', function(done) {
     var options = {
       method: 'POST',
-      url: '/items',
+      url: '/api/items',
       credentials: credentials,
       payload: itemA
     };
@@ -48,7 +48,7 @@ lab.experiment('Item', function() {
   lab.test('List all', function(done) {
     var options = {
       method: 'GET',
-      url: '/items',
+      url: '/api/items',
       credentials: credentials,
     };
  
@@ -65,7 +65,7 @@ lab.experiment('Item', function() {
   lab.test('Get one', function(done) {
     var options = {
       method: 'GET',
-      url: '/items/'+itemA.id,
+      url: '/api/items/'+itemA.id,
       credentials: credentials,
     };
  
@@ -83,7 +83,7 @@ lab.experiment('Item', function() {
   lab.test('Update', function(done) {
     var options = {
       method: 'PUT',
-      url: '/items/'+itemA.id,
+      url: '/api/items/'+itemA.id,
       credentials: credentials,
       payload: changesToA
     };
@@ -102,7 +102,7 @@ lab.experiment('Item', function() {
   lab.test('Delete', function(done) {
     var options = {
       method: 'DELETE',
-      url: '/items/'+itemA.id,
+      url: '/api/items/'+itemA.id,
       credentials: credentials,
     };
  

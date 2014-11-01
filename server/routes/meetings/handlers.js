@@ -22,7 +22,7 @@ exports.create = {
     // TODO: CREATE NOTIFICATION
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.meeting)).created('/meetings/'+request.pre.meeting.id);
+    reply(render(request.pre.meeting)).created('/api/meetings/'+request.pre.meeting.id);
   },
   description: 'Creates a new meeting'
 };

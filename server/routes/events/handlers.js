@@ -26,7 +26,7 @@ exports.create = {
     // TODO: CREATE NOTIFICATION
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.event)).created('/events/'+request.pre.event.id);
+    reply(render(request.pre.event)).created('/api/events/'+request.pre.event.id);
   },
   description: 'Creates a new event'
 };

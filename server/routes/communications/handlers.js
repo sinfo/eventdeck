@@ -22,7 +22,7 @@ exports.create = {
     // TODO: PARSE FOR MEMBERS
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.communication)).created('/communications/'+request.pre.communication._id);
+    reply(render(request.pre.communication)).created('/api/communications/'+request.pre.communication._id);
   },
   description: 'Creates a new communication'
 };

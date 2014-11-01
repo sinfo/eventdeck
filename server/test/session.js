@@ -29,7 +29,7 @@ lab.experiment('Session', function() {
   lab.test('Create', function(done) {
     var options = {
       method: 'POST',
-      url: '/sessions',
+      url: '/api/sessions',
       credentials: credentials,
       payload: sessionA
     };
@@ -49,7 +49,7 @@ lab.experiment('Session', function() {
   lab.test('List all', function(done) {
     var options = {
       method: 'GET',
-      url: '/sessions',
+      url: '/api/sessions',
       credentials: credentials,
     };
  
@@ -68,7 +68,7 @@ lab.experiment('Session', function() {
   lab.test('Get one', function(done) {
     var options = {
       method: 'GET',
-      url: '/sessions/'+sessionA.id,
+      url: '/api/sessions/'+sessionA.id,
       credentials: credentials,
     };
  
@@ -87,7 +87,7 @@ lab.experiment('Session', function() {
   lab.test('Update', function(done) {
     var options = {
       method: 'PUT',
-      url: '/sessions/'+sessionA.id,
+      url: '/api/sessions/'+sessionA.id,
       credentials: credentials,
       payload: changesSessionA
     };
@@ -107,7 +107,7 @@ lab.experiment('Session', function() {
   lab.test('Delete', function(done) {
     var options = {
       method: 'DELETE',
-      url: '/sessions/'+sessionA.id,
+      url: '/api/sessions/'+sessionA.id,
       credentials: credentials,
     };
  

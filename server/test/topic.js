@@ -32,7 +32,7 @@ lab.experiment('Topic', function() {
   lab.test('Create', function(done) {
     var options = {
       method: 'POST',
-      url: '/topics',
+      url: '/api/topics',
       credentials: credentials,
       payload: topicA
     };
@@ -54,7 +54,7 @@ lab.experiment('Topic', function() {
   lab.test('List all', function(done) {
     var options = {
       method: 'GET',
-      url: '/topics',
+      url: '/api/topics',
       credentials: credentials,
     };
  
@@ -73,7 +73,7 @@ lab.experiment('Topic', function() {
   lab.test('Get one', function(done) {
     var options = {
       method: 'GET',
-      url: '/topics/'+topicAid,
+      url: '/api/topics/'+topicAid,
       credentials: credentials,
     };
  
@@ -93,7 +93,7 @@ lab.experiment('Topic', function() {
   lab.test('Update', function(done) {
     var options = {
       method: 'PUT',
-      url: '/topics/'+topicAid,
+      url: '/api/topics/'+topicAid,
       credentials: credentials,
       payload: changesTopicA
     };
@@ -113,7 +113,7 @@ lab.experiment('Topic', function() {
   lab.test('Delete', function(done) {
     var options = {
       method: 'DELETE',
-      url: '/topics/'+topicAid,
+      url: '/api/topics/'+topicAid,
       credentials: credentials,
     };
  
