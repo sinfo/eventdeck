@@ -24,15 +24,6 @@ build/Release
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 node_modules
 
-config.js
-config.json
-server/cookieConfig.js
-server/emailConfig.json
-server/resources/auth/facebookConfig.js
 sftp-config.json
 
 public/js/eventdeck.js
-
-chromeExtension.*
-
-phonegap/platforms

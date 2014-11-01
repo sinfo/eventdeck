@@ -1,5 +1,7 @@
+var pack = require('package');
+
 var config = {
-  url: process.env.EVENTDECK_URL || 'https://deck.eventdeck.co',
+  url: process.env.EVENTDECK_URL || 'http://localhost:8080',
   port: process.env.EVENTDECK_PORT || 8080,
 };
 
@@ -13,7 +15,7 @@ config.cookie = {
 };
 
 config.mailgun = {
-  email: process.env.EVENTDECK_MAILGUN_EMAIL || 'deck@sinfo.org',
+  email: process.env.EVENTDECK_MAILGUN_EMAIL || 'email@example.com',
   api: process.env.EVENTDECK_MAILGUN_API || 'YOUR MAILGUN KEY',
   publicApi: process.env.EVENTDECK_MAILGUN_PUBLIC_API || 'YOUR MAILGUN PUBLIC KEY'
 };
@@ -24,7 +26,7 @@ config.facebook = {
 };
 
 config.bunyan = {
-  name: require('./package.json').name,
+  name: pack.name,
   level: process.env.EVENTDECK_LOG_LEVEL || 'trace'
 };
 
@@ -33,5 +35,9 @@ config.swagger = {
   apiVersion: pack.version
 };
 
+if(process.env.NODE_ENV == 'test') {
+  config.mongo.url = process.env.EVENTDECK_MONGO_TEST_URL || 'mongodb://localhost/deck_test'
+  config.bunyan.level = process.env.EVENTDECK_LOG_LEVEL_TEST || 'error'
+}
 
 module.exports = config;
