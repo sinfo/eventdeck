@@ -24,7 +24,7 @@
 
     // cards/member.jade compiled template
     templatizer["cards"]["member"] = function tmpl_cards_member() {
-        return '<li class="member list-group-item"><img data-hook="img" width="40" height="40"/><a data-hook="name"></a><span class="btn-group pull-right"> <a data-hook="action-edit" class="ink-button orange">edit </a><a href="#" data-hook="action-delete" class="ink-button red">delete</a></span></li>';
+        return '<div class="card"><div data-hook="background" class="header"></div><div class="content"><a data-hook="name" class="name"></a><div class="button-group"> <a data-hook="action-edit" class="ink-button orange">edit </a><a href="#" data-hook="action-delete" class="ink-button red">delete</a></div></div></div>';
     };
 
     // head.jade compiled template

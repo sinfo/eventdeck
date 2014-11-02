@@ -11,6 +11,11 @@ module.exports = View.extend({
             hook: 'img',
             name: 'src'
         },
+        'model.background': {
+            type: 'attribute',
+            hook: 'background',
+            name: 'style'
+        },
         'model.editUrl': {
             type: 'attribute',
             hook: 'action-edit',

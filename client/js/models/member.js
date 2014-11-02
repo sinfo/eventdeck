@@ -28,6 +28,12 @@ module.exports = AmpModel.extend({
       fn: function () {
         return '/members/' + this.id;
       }
+    },
+    background: {
+      deps: ['img'],
+      fn: function () {
+        return 'background-image:url('+this.img+'?width=200);';
+      }
     }
   }
 });

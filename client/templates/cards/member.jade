@@ -1,6 +1,8 @@
-li.member.list-group-item
-  img(data-hook="img", width="40", height="40")
-  a(data-hook="name")
-  span.btn-group.pull-right 
-    a.ink-button.orange(data-hook="action-edit") edit 
-    a.ink-button.red(href="#", data-hook="action-delete") delete
+.card
+  .header(data-hook="background")
+
+  .content
+    a.name(data-hook="name")
+    div.button-group 
+      a.ink-button.orange(data-hook="action-edit") edit 
+      a.ink-button.red(href="#", data-hook="action-delete") delete
