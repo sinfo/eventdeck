@@ -12,5 +12,22 @@ module.exports = AmpModel.extend({
     skype: ['string'],
     phones: ['array'],
     mails: ['object']
+  },
+  session: {
+    selected: ['boolean', true, false]
+  },
+  derived: {
+    editUrl: {
+      deps: ['id'],
+      fn: function () {
+        return '/members/' + this.id + '/edit';
+      }
+    },
+    viewUrl: {
+      deps: ['id'],
+      fn: function () {
+        return '/members/' + this.id;
+      }
+    }
   }
 });

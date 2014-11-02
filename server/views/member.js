@@ -13,8 +13,8 @@ function renderObject(model) {
     img: model.img || (model.facebook && model.facebook.username && 'https://graph.facebook.com/'+model.facebook.username+'/picture'),
     roles: model.roles && model.roles.map(function(role) {
       return {
-        id: role.id,
-        isTeamLeader: role.isTeamLeader,
+        id: role && role.id,
+        isTeamLeader: role && role.isTeamLeader,
       };
     }),
     facebook: model.facebook && {

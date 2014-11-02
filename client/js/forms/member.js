@@ -9,7 +9,7 @@ module.exports = FormView.extend({
       new InputView({
         label: 'Id',
         name: 'id',
-        value: this.model.id || '',
+        value: this.model && this.model.id || '',
         required: false,
         placeholder: 'Id',
         parent: this
@@ -17,7 +17,7 @@ module.exports = FormView.extend({
       new InputView({
         label: 'Name',
         name: 'name',
-        value: this.model.name || '',
+        value: this.model && this.model.name || '',
         required: false,
         placeholder: 'Name',
         parent: this
@@ -25,14 +25,14 @@ module.exports = FormView.extend({
       new ArrayInputView({
         label: 'Roles',
         name: 'roles',
-        value: this.model.roles || [],
-        numberRequired: 0,
+        value: this.model && this.model.roles || [],
+        minLength: 0,
         parent: this
       }),
       new InputView({
         label: 'Skype',
         name: 'skype',
-        value: this.model.skype || '',
+        value: this.model && this.model.skype || '',
         required: false,
         placeholder: 'Skype',
         parent: this
@@ -40,8 +40,8 @@ module.exports = FormView.extend({
       new ArrayInputView({
         label: 'Phones',
         name: 'phones',
-        value: this.model.phones || [],
-        numberRequired: 0,
+        value: this.model && this.model.phones || [],
+        minLength: 0,
         parent: this
       })
     ];

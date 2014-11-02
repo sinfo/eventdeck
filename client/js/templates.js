@@ -24,7 +24,7 @@
 
     // cards/member.jade compiled template
     templatizer["cards"]["member"] = function tmpl_cards_member() {
-        return '<li class="member list-group-item"><img data-hook="img" width="40" height="40"/><a data-hook="name"></a><span class="btn-group pull-right"> <a data-hook="action-edit" class="btn btn-default">edit </a><a href="#" data-hook="action-delete" class="btn btn-danger">delete</a></span></li>';
+        return '<li class="member list-group-item"><img data-hook="img" width="40" height="40"/><a data-hook="name"></a><span class="btn-group pull-right"> <a data-hook="action-edit" class="ink-button orange">edit </a><a href="#" data-hook="action-delete" class="ink-button red">delete</a></span></li>';
     };
 
     // head.jade compiled template
@@ -42,14 +42,24 @@
         return '<section class="page home"><h2>Welcome to a skeleton for EventDeck</h2><p>If you "view source" you\'ll see it\'s 100% client rendered.</p><p>Click around the site using the nav bar at the top. </p><p>Things to note:<ul><li>The url changes, no requests are made to the server.</li><li>Refreshing the page will always get you back to the same page</li><li>Page changes are nearly instantaneous</li><li>In development mode, you don\'t need to restart the server to see changes, just edit and refresh.</li><li>In production mode, it will serve minfied, uniquely named files with super agressive cache headers. To test:<ul> <li>in dev_config.json set <code>isDev</code> to <code>false</code>.</li><li>restart the server.</li><li>view source and you\'ll see minified css and js files with unique names.</li><li>open the "network" tab in chrome dev tools (or something similar). You\'ll also want to make sure you haven\'t disabled your cache.</li><li>without hitting "refresh" load the app again (selecting current URL in url bar and hitting "enter" works great).</li><li>you should now see that the JS and CSS files were both served from cache without making any request to the server at all.</li></ul></li></ul></p></section>';
     };
 
+    // pages/members/add.jade compiled template
+    templatizer["pages"]["members"]["add"] = function tmpl_pages_members_add() {
+        return '<section class="page add-member"><h2>Add Person</h2><p>This form and all behavior is defined by the form view in <code>client/forms/member.js</code>.</p><p>The same form-view is used for both editing and creating new users.</p><form data-hook="member-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
+    };
+
+    // pages/members/edit.jade compiled template
+    templatizer["pages"]["members"]["edit"] = function tmpl_pages_members_edit() {
+        return '<section class="page edit-member"><h2>Edit Person</h2><p>This form and all behavior is defined by the form view in <code>client/forms/member.js</code>.</p><p>The same form-view is used for both editing and creating new users.</p><form data-hook="member-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
+    };
+
     // pages/members/list.jade compiled template
     templatizer["pages"]["members"]["list"] = function tmpl_pages_members_list() {
-        return '<section class="page pageOne"><h2>Members</h2><ul data-hook="members-list" class="list-group"></ul><p>Try it by clicking the buttons</p><div class="buttons btn-group"><button data-hook="reset" class="btn btn-default">.reset() </button><button data-hook="fetch" class="btn btn-default">.fetch() </button><button data-hook="shuffle" class="btn btn-default">.shuffle() </button><a href="/person/add" class="btn btn-default">Add Person</a></div><p>Events are always managed so you don\'t get any leaks.</p></section>';
+        return '<section class="page pageOne"><h2>Members</h2><ul data-hook="members-list" class="list-group"></ul><p>Try it by clicking the buttons</p><div class="buttons btn-group"><button data-hook="reset" class="ink-button">.reset() </button><button data-hook="fetch" class="ink-button">.fetch() </button><button data-hook="shuffle" class="ink-button">.shuffle() </button><a href="/person/add" class="ink-button">Add Person</a></div><p>Events are always managed so you don\'t get any leaks.</p></section>';
     };
 
     // pages/members/view.jade compiled template
     templatizer["pages"]["members"]["view"] = function tmpl_pages_members_view() {
-        return '<section class="page view-member"><h2 data-hook="name"></h2><img data-hook="img" width="80" height="80"/><div class="buttons"><a data-hook="edit" class="btn">Edit</a><button data-hook="delete" class="btn">Delete</button></div></section>';
+        return '<section class="page view-member"><h2 data-hook="name"></h2><img data-hook="img" width="80" height="80"/><div class="buttons"><a data-hook="edit" class="ink-button">Edit</a><button data-hook="delete" class="ink-button red">Delete</button></div></section>';
     };
 
     return templatizer;
