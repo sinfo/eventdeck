@@ -6,6 +6,7 @@ module.exports = AmpModel.extend({
   props: {
     id: ['string'],
     name: ['string'],
+    img: ['string'],
     roles: ['array'],
     facebook: ['object'],
     skype: ['string'],

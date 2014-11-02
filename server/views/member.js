@@ -10,7 +10,7 @@ function renderObject(model) {
   return {
     id: model.id,
     name: model.name,
-    img: model.img,
+    img: model.img || (model.facebook && model.facebook.username && 'https://graph.facebook.com/'+model.facebook.username+'/picture'),
     roles: model.roles && model.roles.map(function(role) {
       return {
         id: role.id,

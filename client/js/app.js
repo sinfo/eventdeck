@@ -7,11 +7,15 @@ var Router = require('./router');
 var MainView = require('./views/main');
 var domReady = require('domready');
 
+var Members = require('./models/members');
+
 
 module.exports = {
     // this is the the whole app initter
     blastoff: function () {
         var self = window.app = this;
+
+        this.members = new Members();
 
         // init our URL handlers and the history tracker
         this.router = new Router();
