@@ -35,7 +35,7 @@ messageSchema.statics.findByChatId = function (id, now, cb) {
   }
   
   function getMessages(callback){
-    schema.find({ chatId: id, date: {$lt: date} }).sort('-date').limit(20).exec(function(err, result) {
+    schema.find({ chatId: id, date: {$lt: date} }).sort('-date').limit(50).exec(function(err, result) {
       if (err) callback(err);
       messages = messages.concat(result);
       callback();
