@@ -183,7 +183,7 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
   //================================SCOPE FUNCTIONS================================
 
   $scope.update = function() {
-    NotificationFactory.Notification.getAll(function (response) {
+/*    NotificationFactory.Notification.getAll(function (response) {
       $scope.targetNotifications = [];
       $scope.unreadNotifications = [];
       $scope.targetInfo.number = 0;
@@ -206,7 +206,7 @@ theToolController.controller('MainController', function ($scope, $http, $routePa
       else {
         $scope.targetInfo.text = " " + $scope.targetInfo.number + " Notification" + ($scope.targetInfo.number > 1 ? "s" : "");
       }
-    });
+    });*/
   }
 
   $scope.timeSince =function (date) {
