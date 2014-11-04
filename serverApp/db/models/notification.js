@@ -35,7 +35,7 @@ notificationSchema.statics.findByUnread = function (id, cb) {
 };
 
 notificationSchema.statics.findAll = function (cb) {
-  this.find({}, {}, {limit: 20, sort: 'date'}, cb);
+  this.find({}, {}, {limit: 20, sort: '-date'}, cb);
 };
 
 notificationSchema.statics.findByThread = function (id, cb) {
