@@ -27,14 +27,14 @@ theToolController.controller('CompanyEmbedController', function ($rootScope, $sc
       }
     };
 
-    $scope.getUnreadNotifications = function (thread) {
+    /*$scope.getUnreadNotifications = function (thread) {
       var notifications = $scope.notifications.filter(function(o) {
         return o.thread == thread;
       });
       return notifications;
     };
 
-    $scope.company.unread = $scope.getUnreadNotifications('company-' + $scope.company.id).length > 0;
+    $scope.company.unread = $scope.getUnreadNotifications('company-' + $scope.company.id).length > 0;*/
 
     $scope.timeSince =function (date) {
       date = new Date(date);

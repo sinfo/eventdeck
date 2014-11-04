@@ -12,14 +12,14 @@ theToolController.controller('SpeakerEmbedController', function ($rootScope, $sc
       })[0];
     }
 
-    $scope.getUnreadNotifications = function (thread) {
+    /*$scope.getUnreadNotifications = function (thread) {
       var notifications = $scope.notifications.filter(function(o) {
         return o.thread == thread;
       });
       return notifications;
     };
 
-    $scope.speaker.unread = $scope.getUnreadNotifications('speaker-' + $scope.speaker.id).length > 0;
+    $scope.speaker.unread = $scope.getUnreadNotifications('speaker-' + $scope.speaker.id).length > 0;*/
 
     $scope.getMember = function (memberId) {
       var member = $scope.members.filter(function(o) {

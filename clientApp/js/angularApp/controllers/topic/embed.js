@@ -217,7 +217,7 @@ theToolController.controller("TopicEmbedController", function ($rootScope, $scop
       }
     };
 
-    $scope.getUnreadNotifications = function (thread) {
+   /* $scope.getUnreadNotifications = function (thread) {
       //console.log(notifications);
       var notifications = $scope.notifications.filter(function(o) {
         return o.thread == thread;
@@ -226,7 +226,7 @@ theToolController.controller("TopicEmbedController", function ($rootScope, $scop
       return notifications;
     };
 
-     $scope.topic.unread = $scope.getUnreadNotifications('topic-'+ $scope.topic._id).length > 0;
+     $scope.topic.unread = $scope.getUnreadNotifications('topic-'+ $scope.topic._id).length > 0;*/
 
     $scope.timeSince =function (date) {
       date = new Date(date);
