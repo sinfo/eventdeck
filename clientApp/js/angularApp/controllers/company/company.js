@@ -9,6 +9,12 @@ theToolController
 
     function runController(){
 
+      $scope.communicationEvent = $scope.currentEvent;
+
+      $scope.setCommunicationEvent = function(event) {
+        $scope.communicationEvent = event;
+      }
+
       $scope.trustSrc = function(src) {
         return $sce.trustAsResourceUrl(src+'#page-body');
       }
