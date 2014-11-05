@@ -34,7 +34,7 @@
 
     // includes/formInput.jade compiled template
     templatizer["includes"]["formInput"] = function tmpl_includes_formInput() {
-        return '<div class="form-group"><label data-hook="label"></label><div data-hook="message-container"><div data-hook="message-text" class="alert alert-danger"></div></div><input class="form-control"/></div>';
+        return '<div class="control-group column-group gutters"><label data-hook="label" class="all-20 align-right"></label><div data-hook="message-container" class="control all-80"><div data-hook="message-text" class="ink-alert warning"></div></div><input/></div>';
     };
 
     // pages/home.jade compiled template
@@ -44,17 +44,17 @@
 
     // pages/members/add.jade compiled template
     templatizer["pages"]["members"]["add"] = function tmpl_pages_members_add() {
-        return '<section class="page add-member"><h2>Add Person</h2><p>This form and all behavior is defined by the form view in <code>client/forms/member.js</code>.</p><p>The same form-view is used for both editing and creating new users.</p><form data-hook="member-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
+        return '<section class="page add-member"><h2>Add Person</h2><form data-hook="member-form" class="ink-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
     };
 
     // pages/members/edit.jade compiled template
     templatizer["pages"]["members"]["edit"] = function tmpl_pages_members_edit() {
-        return '<section class="page edit-member"><h2>Edit Person</h2><p>This form and all behavior is defined by the form view in <code>client/forms/member.js</code>.</p><p>The same form-view is used for both editing and creating new users.</p><form data-hook="member-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
+        return '<section class="page edit-member"><h2>Edit Person</h2><form data-hook="member-form" class="ink-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
     };
 
     // pages/members/list.jade compiled template
     templatizer["pages"]["members"]["list"] = function tmpl_pages_members_list() {
-        return '<section class="page pageOne"><h2>Members</h2><ul data-hook="members-list" class="list-group"></ul><p>Try it by clicking the buttons</p><div class="buttons btn-group"><button data-hook="reset" class="ink-button">.reset() </button><button data-hook="fetch" class="ink-button">.fetch() </button><button data-hook="shuffle" class="ink-button">.shuffle() </button><a href="/person/add" class="ink-button">Add Person</a></div><p>Events are always managed so you don\'t get any leaks.</p></section>';
+        return '<section class="page pageOne"><h2>Members</h2><ul data-hook="members-list" class="list-group"></ul><p>Try it by clicking the buttons</p><div class="buttons btn-group"><button data-hook="fetch" class="ink-button">Fetch</button><a href="/members/add" class="ink-button">Add Member</a></div></section>';
     };
 
     // pages/members/view.jade compiled template
