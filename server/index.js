@@ -5,7 +5,7 @@ var config = require('config');
 var cookieConfig = config.cookie;
 var moonbootsConfig = require('moonbootsConfig');
 
-log.info('### Starting EventDeck ###');
+log.error('### Starting EventDeck ###');
 
 var server = module.exports.hapi = new Hapi.Server(config.port);
 

@@ -15,7 +15,7 @@ module.exports = {
     blastoff: function () {
         var self = window.app = this;
 
-        this.members = new Members();
+        this.members = new Members({parse: true});
 
         // init our URL handlers and the history tracker
         this.router = new Router();

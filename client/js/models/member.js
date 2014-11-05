@@ -1,5 +1,36 @@
 // Member Model - member.js
+var AmpState = require('ampersand-state');
 var AmpModel = require('ampersand-model');
+var AmpCollection = require('ampersand-collection');
+
+
+var Facebook = AmpState.extend({
+  props: {
+    id: 'string',
+    username: 'string'
+  }
+});
+
+var Mails = AmpState.extend({
+  props: {
+    main: 'string',
+    institutional: 'string',
+    dropbox: 'string',
+    google: 'string',
+    microsoft: 'string',
+  }
+});
+
+var Role = AmpState.extend({
+  props: {
+    id: 'string',
+    isTeamLeader: 'boolean'
+  }
+});
+
+var RoleCollection = AmpCollection.extend({
+    model: Role
+});
 
 
 module.exports = AmpModel.extend({
@@ -7,11 +38,15 @@ module.exports = AmpModel.extend({
     id: ['string'],
     name: ['string'],
     img: ['string'],
-    roles: ['array'],
-    facebook: ['object'],
     skype: ['string'],
-    phones: ['array'],
-    mails: ['object']
+    phones: ['array']
+  },
+  children: {
+    facebook: Facebook,
+    mails: Mails
+  },
+  collections: {
+    roles: RoleCollection
   },
   session: {
     selected: ['boolean', true, false]
@@ -35,5 +70,8 @@ module.exports = AmpModel.extend({
         return 'background-image:url('+this.img+'?width=200);';
       }
     }
-  }
+  },
+  parse: function (attrs) {
+    return attrs;
+  },
 });
