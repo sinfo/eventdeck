@@ -14,7 +14,7 @@ module.exports = AmpModel.extend({
     items:['array'],
     area:['string'],
     accesses:['array'],
-    updated:['object']
+    updated:['string']
   },
  
   session: {

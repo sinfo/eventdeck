@@ -3,6 +3,6 @@ var templates = require('client/js/templates');
 
 
 module.exports = PageView.extend({
-    pageTitle: 'EventDeck',
-    template: templates.pages.home
+  pageTitle: 'EventDeck',
+  template: templates.pages.home
 });

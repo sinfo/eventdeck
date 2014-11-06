@@ -1,7 +1,7 @@
 /*global app*/
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
-var MemberForm = require('client/js/forms/company');
+var CompanyForm = require('client/js/forms/company');
 
 
 module.exports = PageView.extend({
@@ -11,7 +11,7 @@ module.exports = PageView.extend({
     form: {
       container: 'form',
       prepareView: function (el) {
-        return new MemberForm({
+        return new CompanyForm({
           el: el,
           submitCallback: function (data) {
             app.companies.create(data, {

@@ -5,5 +5,5 @@ var company = require('./company');
 
 module.exports = AmpCollection.extend({
   model: company,
-  url: '/api/company'
+  url: '/api/companies'
 });

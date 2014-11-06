@@ -27,7 +27,7 @@ module.exports = PageView.extend({
   },
   shuffle: function () {
     this.collection.comparator = function () {
-        return !Math.round(Math.random());
+      return !Math.round(Math.random());
     };
     this.collection.sort();
     delete this.collection.comparator;

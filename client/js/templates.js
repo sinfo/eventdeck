@@ -20,7 +20,7 @@
 
     // body.jade compiled template
     templatizer["body"] = function tmpl_body() {
-        return '<body><nav class="ink-navigation"><div><ul class="menu horizontal black"><li class="heading"><a href="/">EventDeck</a></li><li><a href="/members">Members</a></li><li><a href="/companies">Companies</a></li><li class="ink-grid"></li></ul></div><main data-hook="page-container"></main></nav></body>';
+        return '<body><nav class="ink-navigation"><div><ul class="menu horizontal black"><li class="heading"><a href="/">EventDeck</a></li><li><a href="/members">Members</a></li><li><a href="/companies">Companies</a></li></ul></div><main data-hook="page-container"></main></nav></body>';
     };
 
     // cards/company.jade compiled template
@@ -55,7 +55,7 @@
 
     // pages/companies/list.jade compiled template
     templatizer["pages"]["companies"]["list"] = function tmpl_pages_companies_list() {
-        return '<section class="page pageOne"><h2>Companies</h2><ul data-hook="companies-list" class="list-group"></ul><p>Try it by clicking the buttons</p><div class="buttons btn-group"><button data-hook="fetch" class="ink-button">Fetch</button><a href="/companies/add" class="ink-button">Add Member</a></div></section>';
+        return '<section class="page pageOne"><h2>Companies</h2><ul data-hook="companies-list" class="list-group"></ul><p>Try it by clicking the buttons</p><div class="buttons btn-group"><button data-hook="fetch" class="ink-button">Fetch</button><a href="/companies/add" class="ink-button">Add Company</a></div></section>';
     };
 
     // pages/companies/view.jade compiled template

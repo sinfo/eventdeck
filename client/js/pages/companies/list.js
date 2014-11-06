@@ -1,11 +1,11 @@
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
-var MemberView = require('client/js/views/company');
+var CompanyView = require('client/js/views/company');
 
 
 module.exports = PageView.extend({
   pageTitle: 'Companies',
-  template: templates.pages.members.list,
+  template: templates.pages.companies.list,
   events: {
     'click [data-hook~=shuffle]': 'shuffle',
     'click [data-hook~=fetch]': 'fetchCollection',
@@ -13,7 +13,7 @@ module.exports = PageView.extend({
   },
   render: function () {
     this.renderWithTemplate();
-    this.renderCollection(this.collection, MemberView, this.queryByHook('companies-list'));
+    this.renderCollection(this.collection, CompanyView, this.queryByHook('companies-list'));
     if (!this.collection.length) {
       this.fetchCollection();
     }
@@ -27,7 +27,7 @@ module.exports = PageView.extend({
   },
   shuffle: function () {
     this.collection.comparator = function () {
-        return !Math.round(Math.random());
+      return !Math.round(Math.random());
     };
     this.collection.sort();
     delete this.collection.comparator;

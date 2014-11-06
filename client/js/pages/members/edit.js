@@ -5,13 +5,13 @@ var MemberForm = require('client/js/forms/member');
 
 
 module.exports = PageView.extend({
-  pageTitle: 'edit person',
+  pageTitle: 'Edit person',
   template: templates.pages.members.edit,
   initialize: function (spec) {
     var self = this;
     app.members.getOrFetch(spec.id, {all: true}, function (err, model) {
-    if (err) alert('couldnt find a model with id: ' + spec.id);
-    self.model = model;
+      if (err) alert('couldnt find a model with id: ' + spec.id);
+      self.model = model;
     });
   },
   subviews: {

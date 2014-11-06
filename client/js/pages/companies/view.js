@@ -1,12 +1,12 @@
 /*global app, alert*/
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
-var MemberView = require('client/js/views/company');
+var CompanyView = require('client/js/views/company');
 
 
 module.exports = PageView.extend({
   pageTitle: 'View company',
-  template: templates.pages.members.view,
+  template: templates.pages.companies.view,
   bindings: {
     'model.name': {
       hook: 'name'

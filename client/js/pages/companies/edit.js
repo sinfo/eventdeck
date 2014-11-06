@@ -1,17 +1,17 @@
 /*global app, alert*/
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
-var MemberForm = require('client/js/forms/company');
+var CompanyForm = require('client/js/forms/company');
 
 
 module.exports = PageView.extend({
-  pageTitle: 'edit company',
-  template: templates.pages.members.edit,
+  pageTitle: 'Edit company',
+  template: templates.pages.companies.edit,
   initialize: function (spec) {
     var self = this;
-    app.members.getOrFetch(spec.id, {all: true}, function (err, model) {
-    if (err) alert('couldnt find a model with id: ' + spec.id);
-    self.model = model;
+    app.companies.getOrFetch(spec.id, {all: true}, function (err, model) {
+      if (err) alert('couldnt find a model with id: ' + spec.id);
+      self.model = model;
     });
   },
   subviews: {
@@ -23,7 +23,7 @@ module.exports = PageView.extend({
       waitFor: 'model',
       prepareView: function (el) {
         var model = this.model;
-        return new MemberForm({
+        return new CompanyForm({
           el: el,
           model: this.model,
           submitCallback: function (data) {
