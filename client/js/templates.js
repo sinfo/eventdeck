@@ -15,11 +15,17 @@
     templatizer["cards"] = {};
     templatizer["includes"] = {};
     templatizer["pages"] = {};
+    templatizer["pages"]["companies"] = {};
     templatizer["pages"]["members"] = {};
 
     // body.jade compiled template
     templatizer["body"] = function tmpl_body() {
-        return '<body><nav class="ink-navigation"><div><ul class="menu horizontal black"><li class="heading"><a href="/">EventDeck</a></li><li><a href="/members">Members</a></li><li></li></ul></div></nav><div class="ink-grid"><main data-hook="page-container"></main></div></body>';
+        return '<body><nav class="ink-navigation"><div><ul class="menu horizontal black"><li class="heading"><a href="/">EventDeck</a></li><li><a href="/members">Members</a></li><li><a href="/companies">Companies</a></li><li class="ink-grid"></li></ul></div><main data-hook="page-container"></main></nav></body>';
+    };
+
+    // cards/company.jade compiled template
+    templatizer["cards"]["company"] = function tmpl_cards_company() {
+        return '<div class="card"><div data-hook="background" class="header"></div><div class="content"><a data-hook="name" class="name"></a><div class="button-group"> <a data-hook="action-edit" class="ink-button orange">edit </a><a href="#" data-hook="action-delete" class="ink-button red">delete</a></div></div></div>';
     };
 
     // cards/member.jade compiled template
@@ -35,6 +41,26 @@
     // includes/formInput.jade compiled template
     templatizer["includes"]["formInput"] = function tmpl_includes_formInput() {
         return '<div class="control-group column-group gutters"><label data-hook="label" class="all-20 align-right"></label><div data-hook="message-container" class="control all-80"><div data-hook="message-text" class="ink-alert warning"></div></div><input/></div>';
+    };
+
+    // pages/companies/add.jade compiled template
+    templatizer["pages"]["companies"]["add"] = function tmpl_pages_companies_add() {
+        return '<section class="page add-company"><h2>Add Company</h2><form data-hook="company-form" class="ink-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
+    };
+
+    // pages/companies/edit.jade compiled template
+    templatizer["pages"]["companies"]["edit"] = function tmpl_pages_companies_edit() {
+        return '<section class="page edit-company"><h2>Edit company</h2><form data-hook="company-form" class="ink-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
+    };
+
+    // pages/companies/list.jade compiled template
+    templatizer["pages"]["companies"]["list"] = function tmpl_pages_companies_list() {
+        return '<section class="page pageOne"><h2>Companies</h2><ul data-hook="companies-list" class="list-group"></ul><p>Try it by clicking the buttons</p><div class="buttons btn-group"><button data-hook="fetch" class="ink-button">Fetch</button><a href="/companies/add" class="ink-button">Add Member</a></div></section>';
+    };
+
+    // pages/companies/view.jade compiled template
+    templatizer["pages"]["companies"]["view"] = function tmpl_pages_companies_view() {
+        return '<section class="page view-company"><h2 data-hook="name"></h2><img data-hook="img" width="80" height="80"/><div class="buttons"><a data-hook="edit" class="ink-button">Edit</a><button data-hook="delete" class="ink-button red">Delete</button></div></section>';
     };
 
     // pages/home.jade compiled template

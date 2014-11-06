@@ -7,6 +7,11 @@ var MemberAddPage = require('./pages/members/add');
 var MemberEditPage = require('./pages/members/edit');
 var MemberViewPage = require('./pages/members/view');
 
+
+var CompanyAddPage = require('./pages/companies/add');
+var CompanyEditPage = require('./pages/companies/edit');
+var CompanyViewPage = require('./pages/companies/view');
+
 module.exports = Router.extend({
     routes: {
         '': 'home',
@@ -14,7 +19,12 @@ module.exports = Router.extend({
         'members/add': 'memberAdd',
         'members/:id': 'memberView',
         'members/:id/edit': 'memberEdit',
-        '(*path)': 'catchAll'
+        '(*path)': 'catchAll',
+        'companies': 'companies',
+        'companies/add': 'companyAdd',
+        'companies/:id': 'companyView',
+        'companies/:id/edit': 'coompanyEdit',
+        
     },
 
     // ------- ROUTE HANDLERS ---------
@@ -40,6 +50,27 @@ module.exports = Router.extend({
 
     memberView: function (id) {
         this.trigger('page', new MemberViewPage({
+            id: id
+        }));
+    },
+    companies: function () {
+        this.trigger('page', new Companies({
+            collection: app.companies
+        }));
+    },
+
+    companyAdd: function () {
+        this.trigger('page', new CompanyAddPage());
+    },
+
+    companyEdit: function (id) {
+        this.trigger('page', new CompanyEditPage({
+            id: id
+        }));
+    },
+
+    companyView: function (id) {
+        this.trigger('page', new CompanyViewPage({
             id: id
         }));
     },
