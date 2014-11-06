@@ -8,6 +8,7 @@ var MainView = require('./views/main');
 var domReady = require('domready');
 
 var Members = require('./models/members');
+var Companies = require('./models/companies');
 
 
 module.exports = {
@@ -16,7 +17,8 @@ module.exports = {
         var self = window.app = this;
 
         this.members = new Members({parse: true});
-
+        this.companies = new Companies({parse: true});
+        
         // init our URL handlers and the history tracker
         this.router = new Router();
 
