@@ -82,7 +82,7 @@ function chatServer(socket){
       online   : online
     };
     webSocket.in(room).emit('user-connected', {id: socket.nickname});
-    socket.emit("validation", data);
+    socket.emit('validation', data);
     cb();
   }
 }

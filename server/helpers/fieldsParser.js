@@ -9,7 +9,7 @@
 module.exports = function(fieldsStr) {
   var options = {};
 
-  if(fieldsStr && typeof(fieldsStr) == 'string' && fieldsStr != '') {
+  if(fieldsStr && typeof(fieldsStr) == 'string' && fieldsStr !== '') {
     var fields = fieldsStr.replace(/\s+/g, '').split(',');
     for (var i in fields) {
       if(fields[i][0] == '-') {
@@ -17,8 +17,8 @@ module.exports = function(fieldsStr) {
       } else {
         options[fields[i]] = 1;
       }
-    };
+    }
   }
 
   return options;
-}
+};

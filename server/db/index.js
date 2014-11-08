@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
-var mongo_url = require('config').mongo.url;
+var mongoUrl = require('config').mongo.url;
 var log = require('server/helpers/logger');
 
-mongoose.connect(mongo_url);
+mongoose.connect(mongoUrl);
 var db = mongoose.connection;
 
 db.on('error', function(err) {

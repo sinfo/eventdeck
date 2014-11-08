@@ -1,10 +1,10 @@
 module.exports = function render(content) {
-  if(typeof(content) == 'array' || content.length) {
+  if(content instanceof Array) {
     return content.map(renderObject);
   }
 
   return renderObject(content);  
-}
+};
 
 function renderObject(model) {
   return {
@@ -15,5 +15,5 @@ function renderObject(model) {
     description: model.description,
     targets: model.targets,
     posted: model.posted,
-  }
+  };
 }

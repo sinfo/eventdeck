@@ -41,7 +41,7 @@ function getByChat(chatId, query, cb){
   };
 
   Message.find(filter, fields, options, function(err, messages) {
-    if(response.error) {
+    if(err) {
       log.error({ err: err, chat: chatId}, 'error getting messages');
       return cb(Boom.internal());
     } 

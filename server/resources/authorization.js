@@ -1,7 +1,6 @@
 var Boom = require('boom');
 var server = require('server').hapi;
 var log = require('server/helpers/logger');
-var url_prefix = require('config').url;
 
 
 server.method('authorization.isAdmin', isAdmin, {});

@@ -12,6 +12,6 @@ var publicAssets = {
       }
     }
   } 
-}
+};
 
 server.route(publicAssets);

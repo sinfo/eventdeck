@@ -25,7 +25,7 @@ var topicAid;
 
 var changesTopicA = {
   text: 'Howdy'
-}
+};
 
 lab.experiment('Topic', function() {
 
@@ -63,10 +63,10 @@ lab.experiment('Topic', function() {
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Array);
-      Code.expect(result[0].id).to.be.string
+      Code.expect(result[0].id).to.be.string;
       Code.expect(result[0].author).to.be.string;
       Code.expect(result[0].text).to.be.string;      
-      done();;
+      done();
     });
   });
 

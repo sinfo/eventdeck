@@ -38,7 +38,7 @@ function update(id, communication, cb) {
   var filter = {_id: id};
   Communication.findOneAndUpdate(filter, communication, function(err, _communication) {
     if (err) {
-       g.error({ err: err, communication: id}, 'error updating communication');
+      log.error({ err: err, communication: id}, 'error updating communication');
       return cb(Boom.internal());
     }
     if (!_communication) {

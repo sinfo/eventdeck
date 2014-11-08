@@ -12,7 +12,7 @@ var sessionA = {
 
 var changesSessionA = {
   name: 'Jane Doe'
-}
+};
 
 
 var credentials = {

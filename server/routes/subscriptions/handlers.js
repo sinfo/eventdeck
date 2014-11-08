@@ -1,6 +1,6 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
-var render = require('server/views/subscription')
+var render = require('server/views/subscription');
 
 
 var handlers = module.exports;
@@ -29,8 +29,6 @@ exports.get = {
   validate: {
     query: {
       fields: Joi.string().default('').description('Fields we want to retrieve'),
-    },
-    query: {
       thread: Joi.string().description('thread of the subscription'),
     }
   },

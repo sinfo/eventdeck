@@ -24,7 +24,7 @@ var tagA = {
 var changesTagA = {
   name:'updated yer tag',
   color: 'green'
-}
+};
 
 lab.experiment('Tag', function() {
 

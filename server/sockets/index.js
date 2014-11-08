@@ -6,7 +6,7 @@ var notificationServer = require('./notification');
 
 webSocket.on('connection', function (socket) {
 
-	log.debug("[sockets] New user connected");
+	log.debug('[sockets] New user connected');
 
   socket.emit('connected');
 

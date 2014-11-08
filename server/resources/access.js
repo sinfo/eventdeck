@@ -1,7 +1,6 @@
 var Boom = require('boom');
 var server = require('server').hapi;
 var log = require('server/helpers/logger');
-var url_prefix = require('config').url;
 var threadFromPath = require('server/helpers/threadFromPath');
 var parser = require('server/helpers/fieldsParser');
 var Access = require('server/db/access');
@@ -51,7 +50,7 @@ function get(memberId, path, id, cb) {
   
   Access.findOne(filter, function (err, savedAccess) {
     if (err) {
-      log.error({ err: err, access: access});
+      log.error({ err: err, access: filter});
       return cb(Boom.internal());
     }
 

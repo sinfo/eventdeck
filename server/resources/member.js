@@ -106,7 +106,7 @@ function getByRole(roleId, query, cb) {
 
   Member.find(filter,fields,options, function(err, members) {
     if (err) {
-      log.error({ err: err, member: memberId}, 'error getting members');
+      log.error({ err: err, role: roleId}, 'error getting members');
       return cb(Boom.internal());
     }
 
