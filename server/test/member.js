@@ -16,7 +16,7 @@ var memberA = {
 
 var changesMemberA = {
   name: 'Jane Doe'
-}
+};
 
 
 var credentials = memberA;

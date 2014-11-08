@@ -1,6 +1,6 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
-var render = require('server/views/message')
+var render = require('server/views/message');
 
 
 var handlers = module.exports;

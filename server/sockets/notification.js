@@ -12,9 +12,9 @@ function notificationServer(socket){
 
   socket.on('notify', function(notification, cbClient){
     
-    if(notificaiton.targets){
-      async.each(notificaiton.targets, function(target, cb){
-        webSocket.to(taget).emit('notify-target', {notification: notification});
+    if(notification.targets){
+      async.each(notification.targets, function(target, cb){
+        webSocket.to(target).emit('notify-target', {notification: notification});
         cb();
       });
       return cbClient();
@@ -25,7 +25,7 @@ function notificationServer(socket){
         log.error({err: err, subscription: notification.thread}, '[socket-notification] error getting subscriptions');
       }
       async.each(subscriptions, function(subscription, cb){
-        webSocket.to(taget).emit('notify-subscription', {notification: notification});
+        webSocket.to(subscription.member).emit('notify-subscription', {notification: notification});
         cb();
       });
       return cbClient();

@@ -34,7 +34,7 @@ function create(topic, memberId, cb) {
 
 function update(id, topic, cb) {
   topic.updated = Date.now();
-  var filter = {_id:id};
+  var filter = { _id: id };
   Topic.findOneAndUpdate(filter, topic, function(err, _topic) {
     if (err) {
       log.error({ err: err, topic: id}, 'error updating topic');
@@ -52,7 +52,7 @@ function update(id, topic, cb) {
 function get(id,query, cb) {
   cb = cb || query; // fields is optional
   var fields = query.fields;
-  var filter = {_id:id};
+  var filter = { _id: id };
   Topic.findOne(filter,fields, function(err, topic) {
     if (err) {
       log.error({ err: err, topic: id}, 'error getting topic');
@@ -87,8 +87,8 @@ function getByMember(memberId,query, cb) {
   });
 }
 
-function getByDueDate(start, end,query, cb) {
-  cb = cb||query;
+function getByDueDate(start, end, query, cb) {
+  cb = cb || query;
   var filter = {duedate: {$gte: start, $lt: end} };
   var fields = query.fields;
     var options = {
@@ -98,7 +98,7 @@ function getByDueDate(start, end,query, cb) {
   };
   Topic.find( filter,fields,options, function(err, topics) {
     if (err) {
-      log.error({ err: err, member: memberId}, 'error getting topics');
+      log.error({ err: err, dates: filter}, 'error getting topics');
       return cb(Boom.internal());
     }
 
@@ -166,7 +166,7 @@ function list(query, cb) {
 }
 
 function remove(id, cb) {
-  var filter = {_id:id};
+  var filter = { _id: id };
   Topic.findOneAndRemove(filter, function(err, topic){
     if (err) {
       log.error({ err: err, topic: id}, 'error deleting topic');

@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var schema = new mongoose.Schema({
   id: {type: String, unique: true},
   name: String,
-  title: { type: String, default: "" },
+  title: { type: String, default: '' },
   description: String,
   img: String,
   contacts: String,

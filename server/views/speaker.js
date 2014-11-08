@@ -1,10 +1,10 @@
 module.exports = function render(content) {
-  if(typeof(content) == 'array' || content.length) {
+  if(content instanceof Array) {
     return content.map(renderObject);
   }
 
   return renderObject(content);  
-}
+};
 
 function renderObject(model) {
   return {
@@ -23,5 +23,5 @@ function renderObject(model) {
       };
     }),
     updated: model.updated,
-  }
+  };
 }

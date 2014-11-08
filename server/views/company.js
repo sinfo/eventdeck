@@ -1,12 +1,12 @@
-var IVA = 1.23
+var IVA = 1.23;
 
 module.exports = function render(content) {
-  if(typeof(content) == 'array' || content.length) {
+  if(content instanceof Array) {
     return content.map(renderObject);
   }
 
   return renderObject(content);  
-}
+};
 
 function renderObject(model) {
   return {
@@ -30,7 +30,6 @@ function renderObject(model) {
           total: participation.payment.price * IVA,
           date: participation.payment.date,
           invoice: participation.payment.invoice,
-          price: participation.payment.price,
           status: participation.payment.status,
           via: participation.payment.via,
         },
@@ -50,5 +49,5 @@ function renderObject(model) {
       };
     }),
     updated: model.updated,
-  }
+  };
 }
