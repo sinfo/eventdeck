@@ -636,7 +636,7 @@ th {
   display: table;
   clear: both;
 }
-
+/*
 @font-face {
   font-family: "Roboto";
   src: url('../fonts/Roboto/roboto-thin-webfont.eot?1408628222');
@@ -791,6 +791,7 @@ th {
   font-weight: 700;
   font-style: normal;
 }
+*/
 .ink-form fieldset {
   border: none;
   margin-bottom: 1.5em;
