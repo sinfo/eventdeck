@@ -1,6 +1,6 @@
 /*global app, me, $*/
 var _ = require('underscore');
-var logger = require('andlog');
+var log = require('bows')('eventdeck');
 var config = require('clientconfig');
 
 var Router = require('./router');
@@ -15,6 +15,8 @@ module.exports = {
   // this is the the whole app initter
   blastoff: function () {
     var self = window.app = this;
+
+    log('Blasting off!');
 
     this.members = new Members();
     this.companies = new Companies();
