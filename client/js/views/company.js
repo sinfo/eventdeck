@@ -7,9 +7,7 @@ module.exports = View.extend({
     bindings: {
         'model.name': '[data-hook~=name]',
         'model.status': {
-            type: 'attribute',
-            hook: 'status',
-            name: 'src'
+            hook: 'status'
         },
         'model.img': {
             type: 'attribute',
