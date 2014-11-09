@@ -7,6 +7,7 @@ var Router = require('./router');
 var MainView = require('./views/main');
 var domReady = require('domready');
 
+var Me = require('./models/me');
 var Members = require('./models/members');
 var Companies = require('./models/companies');
 
@@ -18,9 +19,20 @@ module.exports = {
 
     log('Blasting off!');
 
+    this.me = new Me();
+
+    this.me.fetch({
+      success: function(model, response, options) {
+        log('Hello ' + model.name + '!');
+      },
+      error: function(model, response, options) {
+        log('Please log in first!');
+      }
+    });
+
     this.members = new Members();
     this.companies = new Companies();
-    
+
     // init our URL handlers and the history tracker
     this.router = new Router();
 
