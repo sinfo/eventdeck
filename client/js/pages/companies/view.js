@@ -13,6 +13,11 @@ module.exports = PageView.extend({
   bindings: {
     'model.name': {
       hook: 'name'
+    },    
+    'model.status': {
+      type:'attribute',
+      hook: 'status',
+      name: 'src'
     },
     'model.img': {
       type: 'attribute',

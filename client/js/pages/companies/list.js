@@ -12,6 +12,7 @@ module.exports = PageView.extend({
     'click [data-hook~=reset]': 'resetCollection',
   },
   render: function () {
+    console.log("Rendering the company list.");
     this.renderWithTemplate();
     this.renderCollection(this.collection, CompanyView, this.queryByHook('companies-list'));
     if (!this.collection.length) {
