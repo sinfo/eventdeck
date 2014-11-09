@@ -8,7 +8,7 @@ var config = {
 };
 
 config.mongo = {
-  url: process.env.EVENTDECK_MONGO_URL || 'mongodb://localhost/sinfo'
+  url: process.env.EVENTDECK_MONGO_URL || 'mongodb://localhost/deck'
 };
 
 config.cookie = {
