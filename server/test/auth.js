@@ -26,8 +26,6 @@ lab.experiment('Auth', function() {
       Code.expect(err, 'err').to.be.null;
       auth = result;
 
-      console.log(result);
-
       done();
     });
   });
