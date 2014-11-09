@@ -1,4 +1,5 @@
 # EventDeck
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/sinfo/eventdeck?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![Build Status](https://magnum.travis-ci.com/sinfo/eventdeck.svg?token=bYLgwH8zFdHVE6syVqz5)](https://magnum.travis-ci.com/sinfo/eventdeck)
 [![Dependency Status](https://david-dm.org/sinfo/eventdeck.svg)](https://david-dm.org/sinfo/eventdeck)
