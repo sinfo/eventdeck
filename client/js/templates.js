@@ -15,6 +15,7 @@
     templatizer["cards"] = {};
     templatizer["includes"] = {};
     templatizer["pages"] = {};
+    templatizer["pages"]["communications"] = {};
     templatizer["pages"]["companies"] = {};
     templatizer["pages"]["members"] = {};
 
@@ -48,6 +49,11 @@
         return '<div class="control-group column-group gutters"><label data-hook="label" class="all-20 align-right"></label><div data-hook="message-container" class="control all-80"><div data-hook="message-text" class="ink-alert warning"></div></div><input/></div>';
     };
 
+    // pages/communications/area.jade compiled template
+    templatizer["pages"]["communications"]["area"] = function tmpl_pages_communications_area() {
+        return '<div><h2>Communications</h2><ul data-hook="communications-list" class="list-group"></ul></div>';
+    };
+
     // pages/companies/add.jade compiled template
     templatizer["pages"]["companies"]["add"] = function tmpl_pages_companies_add() {
         return '<section class="page add-company"><h2>Add Company</h2><form data-hook="company-form" class="ink-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
@@ -65,7 +71,7 @@
 
     // pages/companies/view.jade compiled template
     templatizer["pages"]["companies"]["view"] = function tmpl_pages_companies_view() {
-        return '<section class="page view-company"><h2 data-hook="name"></h2><img data-hook="img" width="80" height="80"/><div class="buttons"><a data-hook="edit" class="ink-button">Edit</a><button data-hook="delete" class="ink-button red">Delete</button></div><div data-hook="communications"></div></section>';
+        return '<section class="page view-company"><h2 data-hook="name"></h2><img data-hook="img" width="80" height="80"/><div class="buttons"><a data-hook="edit" class="ink-button">Edit</a><button data-hook="delete" class="ink-button red">Delete</button></div><div data-hook="communications" class="container"></div></section>';
     };
 
     // pages/home.jade compiled template

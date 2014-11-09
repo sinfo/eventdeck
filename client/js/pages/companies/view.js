@@ -3,8 +3,7 @@ var log = require('bows')('companies');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var CompanyView = require('client/js/views/company');
-var CommunicationView = require('client/js/views/communication');
-
+var CommunicationsView = require('client/js/views/communications');
 var Communications = require('client/js/models/communications');
 
 
@@ -41,15 +40,9 @@ module.exports = PageView.extend({
       log('Got company', model.name)
 
       var Comms = Communications(model.communicationsApi);
-      self.communications = new Comms();
-
-      self.communications.fetch({ 
-        success: function(collection, response, options) {
-          self.communications = collection;
-          log('got communications', self.model.communications);
-        }
-      });
-
+      self.renderSubview(new CommunicationsView({
+        collection: new Comms()
+      }), '.container');
     });
   },
   handleDeleteClick: function () {
