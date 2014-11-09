@@ -23,6 +23,11 @@
         return '<body><nav class="ink-navigation"><div><ul class="menu horizontal black"><li class="heading"><a href="/">EventDeck</a></li><li><a href="/members">Members</a></li><li><a href="/companies">Companies</a></li></ul></div><main data-hook="page-container"></main></nav></body>';
     };
 
+    // cards/communication.jade compiled template
+    templatizer["cards"]["communication"] = function tmpl_cards_communication() {
+        return '<div class="card"><div class="content"><a data-hook="kind" class="kind"></a><div data-hook="text"></div></div></div>';
+    };
+
     // cards/company.jade compiled template
     templatizer["cards"]["company"] = function tmpl_cards_company() {
         return '<div class="card"><div data-hook="background" class="header"></div><div class="content"><a data-hook="name" class="name"></a><div class="button-group"> <a data-hook="action-edit" class="ink-button orange">edit </a><a href="#" data-hook="action-delete" class="ink-button red">delete</a></div></div></div>';
@@ -60,7 +65,7 @@
 
     // pages/companies/view.jade compiled template
     templatizer["pages"]["companies"]["view"] = function tmpl_pages_companies_view() {
-        return '<section class="page view-company"><h2 data-hook="name"></h2><img data-hook="img" width="80" height="80"/><div class="buttons"><a data-hook="edit" class="ink-button">Edit</a><button data-hook="delete" class="ink-button red">Delete</button></div></section>';
+        return '<section class="page view-company"><h2 data-hook="name"></h2><img data-hook="img" width="80" height="80"/><div class="buttons"><a data-hook="edit" class="ink-button">Edit</a><button data-hook="delete" class="ink-button red">Delete</button></div><div data-hook="communications"></div></section>';
     };
 
     // pages/home.jade compiled template

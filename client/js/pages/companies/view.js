@@ -1,7 +1,11 @@
 /*global app, alert*/
+var log = require('bows')('companies');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var CompanyView = require('client/js/views/company');
+var CommunicationView = require('client/js/views/communication');
+
+var Communications = require('client/js/models/communications');
 
 
 module.exports = PageView.extend({
@@ -28,8 +32,24 @@ module.exports = PageView.extend({
   initialize: function (spec) {
     var self = this;
     app.companies.getOrFetch(spec.id, {all: true}, function (err, model) {
-      if (err) alert('couldnt find a model with id: ' + spec.id);
+      if (err) {
+        log.error('couldnt find a company with id: ' + spec.id);
+      }
+
       self.model = model;
+
+      log('Got company', model.name)
+
+      var Comms = Communications(model.communicationsApi);
+      self.communications = new Comms();
+
+      self.communications.fetch({ 
+        success: function(collection, response, options) {
+          self.communications = collection;
+          log('got communications', self.model.communications);
+        }
+      });
+
     });
   },
   handleDeleteClick: function () {
