@@ -21,12 +21,12 @@
 
     // body.jade compiled template
     templatizer["body"] = function tmpl_body() {
-        return '<body><nav class="ink-navigation"><div><ul class="menu horizontal black"><li class="heading"><a href="/">EventDeck</a></li><li><a href="/members">Members</a></li><li><a href="/companies">Companies</a></li></ul></div><main data-hook="page-container"></main></nav></body>';
+        return '<body><nav class="ink-navigation"><div><ul class="menu horizontal black"><li class="heading"><a href="/">EventDeck</a></li><li><a href="/members">Members</a></li><li><a href="/companies">Companies</a></li></ul></div><main data-hook="page-container" class="ink-grid"></main></nav></body>';
     };
 
     // cards/communication.jade compiled template
     templatizer["cards"]["communication"] = function tmpl_cards_communication() {
-        return '<div class="card"><div class="content"><a data-hook="kind" class="kind"></a><div data-hook="text"></div></div></div>';
+        return '<div class="card"><div class="content"><b data-hook="kind" class="kind"></b><div data-hook="text"></div></div></div>';
     };
 
     // cards/company.jade compiled template
@@ -51,7 +51,7 @@
 
     // pages/communications/area.jade compiled template
     templatizer["pages"]["communications"]["area"] = function tmpl_pages_communications_area() {
-        return '<div><h2>Communications</h2><ul data-hook="communications-list" class="list-group"></ul></div>';
+        return '<div><h4>Communications</h4><div data-hook="communications-list"></div></div>';
     };
 
     // pages/companies/add.jade compiled template
@@ -66,12 +66,12 @@
 
     // pages/companies/list.jade compiled template
     templatizer["pages"]["companies"]["list"] = function tmpl_pages_companies_list() {
-        return '<section class="page pageOne"><h2>Companies</h2><ul data-hook="companies-list" class="list-group"></ul><p>Try it by clicking the buttons</p><div class="buttons btn-group"><button data-hook="fetch" class="ink-button">Fetch</button><a href="/companies/add" class="ink-button">Add Company</a></div></section>';
+        return '<section class="page pageOne"><h2>Companies</h2><div data-hook="companies-list"></div><p>Try it by clicking the buttons</p><div><button data-hook="fetch" class="ink-button">Fetch</button><a href="/companies/add" class="ink-button">Add Company</a></div></section>';
     };
 
     // pages/companies/view.jade compiled template
     templatizer["pages"]["companies"]["view"] = function tmpl_pages_companies_view() {
-        return '<section class="page view-company"><h2 data-hook="name"></h2><img data-hook="img" width="80" height="80"/><div class="buttons"><a data-hook="edit" class="ink-button">Edit</a><button data-hook="delete" class="ink-button red">Delete</button></div><div data-hook="communications" class="container"></div></section>';
+        return '<section class="page view-company"><h2 data-hook="name"></h2><div class="button-group"><a data-hook="edit" class="ink-button orange">Edit</a><button data-hook="delete" class="ink-button red">Delete</button></div><img data-hook="img" width="80" height="80"/><div data-hook="communications"></div></section>';
     };
 
     // pages/home.jade compiled template
@@ -91,7 +91,7 @@
 
     // pages/members/list.jade compiled template
     templatizer["pages"]["members"]["list"] = function tmpl_pages_members_list() {
-        return '<section class="page pageOne"><h2>Members</h2><ul data-hook="members-list" class="list-group"></ul><p>Try it by clicking the buttons</p><div class="buttons btn-group"><button data-hook="fetch" class="ink-button">Fetch</button><a href="/members/add" class="ink-button">Add Member</a></div></section>';
+        return '<section class="page pageOne"><h2>Members</h2><div data-hook="members-list"></div><p>Try it by clicking the buttons</p><div><button data-hook="fetch" class="ink-button">Fetch</button><a href="/members/add" class="ink-button">Add Member</a></div></section>';
     };
 
     // pages/members/view.jade compiled template

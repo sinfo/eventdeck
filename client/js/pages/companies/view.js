@@ -42,7 +42,7 @@ module.exports = PageView.extend({
       var Comms = Communications(model.communicationsApi);
       self.renderSubview(new CommunicationsView({
         collection: new Comms()
-      }), '.container');
+      }), self.queryByHook('communications'));
     });
   },
   handleDeleteClick: function () {
