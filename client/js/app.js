@@ -8,6 +8,7 @@ var MainView = require('./views/main');
 var domReady = require('domready');
 
 var Me = require('./models/me');
+var Events = require('./models/events');
 var Members = require('./models/members');
 var Companies = require('./models/companies');
 
@@ -30,6 +31,14 @@ module.exports = {
       }
     });
 
+    this.events = new Events();
+    this.events.fetch({
+      success: function(collection, response, options) {
+        app.me.selectedEvent = collection.toJSON()[0].id;
+        log('Got '+collection.length+' events, '+app.me.selectedEvent+' is the default one. ', collection.toJSON());
+      }
+    });
+
     this.members = new Members();
     this.companies = new Companies();
 
@@ -41,7 +50,8 @@ module.exports = {
     domReady(function () {
       // init our main view
       var mainView = self.view = new MainView({
-        el: document.body
+        el: document.body,
+        collection: this.events
       });
 
       // ...and render it

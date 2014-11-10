@@ -5,8 +5,15 @@ module.exports = Member.extend({
   url: '/api/members/me',
 
   session: {
-    signedIn: ['boolean', true, false],
     selectedEvent: ['string'],
-    selectedEventIndex: ['number'],
+  },
+
+  derived: {
+    selectedEventIndex: {
+      deps: ['selectedEvent'],
+      fn: function () {
+        return app.events.map(function (e) { return e.id }).indexOf(this.selectedEvent);
+      }
+    }
   }
 });

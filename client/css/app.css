@@ -1,6 +1,9 @@
 body {
   background: #fff;
 }
+.base-form {
+  padding: 8px;
+}
 .card {
   background: #fff;
   float: left;

@@ -21,7 +21,7 @@
 
     // body.jade compiled template
     templatizer["body"] = function tmpl_body() {
-        return '<body><nav class="ink-navigation"><div><ul class="menu horizontal black"><li class="heading"><a href="/">EventDeck</a></li><li><a href="/members">Members</a></li><li><a href="/companies">Companies</a></li></ul></div><main data-hook="page-container" class="ink-grid"></main></nav></body>';
+        return '<body><nav class="ink-navigation"><div><ul class="menu horizontal black"><li class="heading"><a href="/">EventDeck</a></li><li><form data-hook="base-form" class="base-form ink-form"><fieldset data-hook="field-container"></fieldset></form></li><li><a href="/members">Members</a></li><li><a href="/companies">Companies</a></li></ul></div><main data-hook="page-container" class="ink-grid"></main></nav></body>';
     };
 
     // cards/communication.jade compiled template
