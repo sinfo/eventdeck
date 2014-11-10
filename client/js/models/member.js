@@ -67,7 +67,7 @@ module.exports = AmpModel.extend({
     background: {
       deps: ['img'],
       fn: function () {
-        return 'background-image:url('+this.img+'?width=200);';
+        return 'background-image:url('+this.img+');';
       }
     }
   },

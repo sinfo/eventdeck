@@ -13,7 +13,7 @@ module.exports = PageView.extend({
   bindings: {
     'model.name': {
       hook: 'name'
-    },    
+    },
     'model.status': {
       type:'attribute',
       hook: 'status',
@@ -42,12 +42,13 @@ module.exports = PageView.extend({
 
       self.model = model;
 
-      log('Got company', model.name)
+      log('Got company', model.name);
+      self.renderWithTemplate(self);
+      var Comms = Communications(self.model.communicationsApi);
 
-      var Comms = Communications(model.communicationsApi);
       self.renderSubview(new CommunicationsView({
         collection: new Comms()
-      }), self.queryByHook('communications'));
+      }), self.queryByHook('company-communications'));
     });
   },
   handleDeleteClick: function () {

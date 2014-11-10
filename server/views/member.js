@@ -3,14 +3,14 @@ module.exports = function render(content) {
     return content.map(renderObject);
   }
 
-  return renderObject(content);  
+  return renderObject(content);
 };
 
 function renderObject(model) {
   return {
     id: model.id,
     name: model.name,
-    img: model.img || (model.facebook && model.facebook.username && 'https://graph.facebook.com/'+model.facebook.username+'/picture'),
+    img: model.img || (model.facebook && model.facebook.username && 'https://graph.facebook.com/'+model.facebook.username+'/picture?width=400'),
     roles: model.roles && model.roles.map(function(role) {
       return {
         id: role && role.id,

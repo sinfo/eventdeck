@@ -25,14 +25,12 @@ radial($inner, $outer)
   background-image: -ms-radial-gradient(center center, circle cover, $inner, $outer)
   background-image: -o-radial-gradient(center center, circle cover, $inner, $outer)
   background-image: radial-gradient(center center, circle cover, $inner, $outer)
-  
-background-cover()
-  background-repeat: no-repeat
-  background-position: center
-  -webkit-background-size: cover
-  -moz-background-size: cover
-  -o-background-size: cover
-  background-size: cover
+
+background-size($size)
+  -webkit-background-size: $size
+  -moz-background-size: $size
+  -o-background-size: $size
+  background-size: $size
 
 roundall($round)
   -moz-border-radius: $round

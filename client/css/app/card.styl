@@ -7,20 +7,25 @@
   margin: 10px
   box-shadow: 1px 1px 2px #999
   border-radius: 2px
-  
+
   .header
     position: relative
     float: left
     width: 100px
     height: 160px
-    background-cover()
+    background-repeat: no-repeat
+    background-position: center
+    background-size(cover)
+
+  .header.wide
+    background-size(100px)
 
   .content
     overflow: hidden
     float: left
     width: 200px
     padding: 10px
-  
+
     .name
       color: #333
       font-size: 18px

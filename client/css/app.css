@@ -26,6 +26,12 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
+.card .header.wide {
+  -webkit-background-size: 100px;
+  -moz-background-size: 100px;
+  -o-background-size: 100px;
+  background-size: 100px;
+}
 .card .content {
   overflow: hidden;
   float: left;

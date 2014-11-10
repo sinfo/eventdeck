@@ -31,7 +31,7 @@
 
     // cards/company.jade compiled template
     templatizer["cards"]["company"] = function tmpl_cards_company() {
-        return '<div class="card"><div data-hook="background" class="header"></div><div class="content"><a data-hook="name" class="name"></a><a data-hook="status" class="status"></a><div class="button-group"> <a data-hook="action-edit" class="ink-button orange">edit </a><a href="#" data-hook="action-delete" class="ink-button red">delete</a></div></div></div>';
+        return '<div class="card"><div data-hook="background" class="header wide"></div><div class="content"><a data-hook="name" class="name"></a><a data-hook="status" class="status"></a><div class="button-group"><a data-hook="action-edit" class="ink-button orange">edit</a><a href="#" data-hook="action-delete" class="ink-button red">delete</a></div></div></div>';
     };
 
     // cards/member.jade compiled template
@@ -56,22 +56,22 @@
 
     // pages/companies/add.jade compiled template
     templatizer["pages"]["companies"]["add"] = function tmpl_pages_companies_add() {
-        return '<section class="page add-company"><h2>Add Company</h2><form data-hook="company-form" class="ink-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
+        return '<section class="page companies add"><h2>Add Company</h2><form data-hook="company-form" class="ink-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
     };
 
     // pages/companies/edit.jade compiled template
     templatizer["pages"]["companies"]["edit"] = function tmpl_pages_companies_edit() {
-        return '<section class="page edit-company"><h2>Edit company</h2><form data-hook="company-form" class="ink-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
+        return '<section class="page companies edit"><h2>Edit company</h2><form data-hook="company-form" class="ink-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
     };
 
     // pages/companies/list.jade compiled template
     templatizer["pages"]["companies"]["list"] = function tmpl_pages_companies_list() {
-        return '<section class="page companies"><h2>Companies</h2><div data-hook="companies-list"></div><p>Try it by clicking the buttons</p><div><button data-hook="fetch" class="ink-button">Fetch</button><a href="/companies/add" class="ink-button">Add Company</a></div></section>';
+        return '<section class="page companies list"><h2>Companies</h2><div data-hook="companies-list"></div><p>Try it by clicking the buttons</p><div><button data-hook="fetch" class="ink-button">Fetch</button><a href="/companies/add" class="ink-button">Add Company</a></div></section>';
     };
 
     // pages/companies/view.jade compiled template
     templatizer["pages"]["companies"]["view"] = function tmpl_pages_companies_view() {
-        return '<section class="page view-company"><h2 data-hook="name"></h2><div class="button-group"><a data-hook="edit" class="ink-button orange">Edit</a><button data-hook="delete" class="ink-button red">Delete</button></div><img data-hook="img" width="80" height="80"/><div data-hook="communications"></div></section>';
+        return '<section class="page companies view"><h2 data-hook="name"></h2><div class="button-group"><a data-hook="edit" class="ink-button orange">Edit</a><button data-hook="delete" class="ink-button red">Delete</button></div><img data-hook="img" width="80" height="80"/><div data-hook="company-communications"></div></section>';
     };
 
     // pages/home.jade compiled template
@@ -81,22 +81,22 @@
 
     // pages/members/add.jade compiled template
     templatizer["pages"]["members"]["add"] = function tmpl_pages_members_add() {
-        return '<section class="page add-member"><h2>Add Person</h2><form data-hook="member-form" class="ink-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
+        return '<section class="page members add"><h2>Add Person</h2><form data-hook="member-form" class="ink-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
     };
 
     // pages/members/edit.jade compiled template
     templatizer["pages"]["members"]["edit"] = function tmpl_pages_members_edit() {
-        return '<section class="page edit-member"><h2>Edit Person</h2><form data-hook="member-form" class="ink-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
+        return '<section class="page members edit"><h2>Edit Person</h2><form data-hook="member-form" class="ink-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
     };
 
     // pages/members/list.jade compiled template
     templatizer["pages"]["members"]["list"] = function tmpl_pages_members_list() {
-        return '<section class="page members"><h2>Members</h2><div data-hook="members-list"></div><p>Try it by clicking the buttons</p><div><button data-hook="fetch" class="ink-button">Fetch</button><a href="/members/add" class="ink-button">Add Member</a></div></section>';
+        return '<section class="page members list"><h2>Members</h2><div data-hook="members-list"></div><p>Try it by clicking the buttons</p><div><button data-hook="fetch" class="ink-button">Fetch</button><a href="/members/add" class="ink-button">Add Member</a></div></section>';
     };
 
     // pages/members/view.jade compiled template
     templatizer["pages"]["members"]["view"] = function tmpl_pages_members_view() {
-        return '<section class="page view-member"><h2 data-hook="name"></h2><img data-hook="img" width="80" height="80"/><div class="buttons"><a data-hook="edit" class="ink-button">Edit</a><button data-hook="delete" class="ink-button red">Delete</button></div></section>';
+        return '<section class="page member view"><h2 data-hook="name"></h2><img data-hook="img" width="300" height="300"/><div class="buttons"><a data-hook="edit" class="ink-button">Edit</a><button data-hook="delete" class="ink-button red">Delete</button></div></section>';
     };
 
     return templatizer;
