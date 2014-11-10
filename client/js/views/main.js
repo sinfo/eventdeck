@@ -86,13 +86,17 @@ module.exports = View.extend({
 
   handleEventChange: function (e){
     app.me.selectedEvent = e.target.value;
+
     log('New event selected', app.me.selectedEvent, '(index: '+app.me.selectedEventIndex+')');
+
+    app.companies.reset();
+    app.companies.fetch();
   },
 
   updateActiveNav: function () {
     var path = window.location.pathname.slice(1);
 
-    this.queryAll('.nav a[href]').forEach(function (aTag) {
+    this.queryAll('nav a[href]').forEach(function (aTag) {
       var aPath = aTag.pathname.slice(1);
 
       if ((!aPath && !path) || (aPath && path.indexOf(aPath) === 0)) {

@@ -56,10 +56,10 @@ module.exports = AmpModel.extend({
         return '/api/companies/' + this.id + '/communications';
       }
     },
-    status: {
+    participation: {
       deps:['participations'],
       fn: function () {
-        return this.participations[0].status;
+        return this.participations.filter(function(p){ return p.event == app.me.selectedEvent })[0];
       }
     }
   }

@@ -6,7 +6,7 @@ module.exports = View.extend({
     template: templates.cards.company,
     bindings: {
         'model.name': '[data-hook~=name]',
-        'model.status': {
+        'model.participation.status': {
             hook: 'status'
         },
         'model.img': {
