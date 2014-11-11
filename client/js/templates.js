@@ -86,7 +86,7 @@
 
     // pages/members/edit.jade compiled template
     templatizer["pages"]["members"]["edit"] = function tmpl_pages_members_edit() {
-        return '<section class="page members edit"><h2>Edit Person</h2><form data-hook="member-form" class="ink-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
+        return '<section class="page members edit"><h2>Edit Person</h2><img data-hook="img" width="300" height="300"/><form data-hook="member-form" class="ink-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
     };
 
     // pages/members/list.jade compiled template
