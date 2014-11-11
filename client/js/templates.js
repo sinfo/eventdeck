@@ -46,7 +46,7 @@
 
     // includes/formInput.jade compiled template
     templatizer["includes"]["formInput"] = function tmpl_includes_formInput() {
-        return '<div class="control-group column-group gutters"><label data-hook="label" class="all-20 align-right"></label><div data-hook="message-container" class="control all-80"><div data-hook="message-text" class="ink-alert warning"></div></div><input/></div>';
+        return '<div class="control-group"><label data-hook="label"></label><div data-hook="message-container" class="control"><div data-hook="message-text" class="ink-alert warning"></div></div><input/></div>';
     };
 
     // pages/communications/area.jade compiled template
