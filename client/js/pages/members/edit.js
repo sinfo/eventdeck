@@ -15,6 +15,13 @@ module.exports = PageView.extend({
       self.model = model;
     });
   },
+  bindings:{
+    'model.img': {
+      type: 'attribute',
+      hook: 'img',
+      name: 'src'
+    }
+  },
   subviews: {
     form: {
       // this is the css selector that will be the `el` in the
@@ -46,12 +53,22 @@ module.exports = PageView.extend({
               data.mails.dropbox = data['mails.dropbox'] || data.mails.dropbox;
               data.mails.google = data['mails.google'] || data.mails.google;
               data.mails.microsoft = data['mails.microsoft'] || data.mails.microsoft;
+
               delete data['mails.main'];
               delete data['mails.institutional'];
               delete data['mails.dropbox'];
               delete data['mails.google'];
               delete data['mails.microsoft'];
             }
+            if(data.roles){
+              data.roles = data.roles.map(function(role){
+                return {
+                  id: role,
+                  isTeamLeader: false
+                };
+              })
+            }
+            console.log(data.roles);
 
             model.save(data, {
               wait: true,
