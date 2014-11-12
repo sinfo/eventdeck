@@ -53,3 +53,9 @@ body {
   word-break: break-word;
   hyphens: auto;
 }
+.page.login {
+  text-align: center;
+  width: 600px;
+  margin: 0 auto;
+  margin-top: 150px;
+}

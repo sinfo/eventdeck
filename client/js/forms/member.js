@@ -90,6 +90,7 @@ module.exports = FormView.extend({
         value: this.model && this.model.roles.map(function(r) {
           return r.id;
         }) || [],
+        minLength: 0,
         numberRequired: 0,
         parent: this
       }),
@@ -97,6 +98,7 @@ module.exports = FormView.extend({
         label: 'Phones',
         name: 'phones',
         value: this.model && this.model.phones || [],
+        minLength: 0,
         numberRequired: 0,
         parent: this
       })
