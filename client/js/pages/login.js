@@ -14,9 +14,7 @@ module.exports = PageView.extend({
   template: templates.pages.login,
 
   bindings: {
-    'loginModel.id': {
-      hook: 'id'
-    }
+    'model.id': '[data-hook=id]'
   },
 
   events: {
@@ -24,12 +22,12 @@ module.exports = PageView.extend({
   },
 
   initialize: function () {
-  	this.loginModel = new LoginModel({
+  	this.model = new LoginModel({
   		id: ''
   	});
   },
 
   login: function () {
-  	console.log(this.cenas.id);
+  	console.log(this.model.id);
   }
 });
