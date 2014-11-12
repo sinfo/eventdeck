@@ -32,7 +32,7 @@
           </div>
           <br>
           <div ng-if="company.contacts">
-            <h3>Contacts</h3>
+            <h3>Contacts <a class="ink-button blue small" href="/api/company/{{company.id}}/sendInitialEmail">Email Template</a></h3>
             <div ng-bind-html="convertEmails(convertURLs(company.contacts))"></div>
           </div>
           <br>
@@ -62,7 +62,7 @@
           <div class="card" ng-repeat="participation in company.participations">
             <div class="content full">
               <h5>
-                {{getEvent(participation.event).name}} 
+                {{getEvent(participation.event).name}}
                 <span class="status" ng-class="participation.status.replace(' ','-').toLowerCase()">{{participation.status}}</span>
               </h5>
               <h6 ng-if="participation.member">
@@ -85,27 +85,27 @@
                 <b>Items</b><br>
                 <div ng-repeat="item in participation.items">
                   <span ng-if="item.amount"><b>{{item.amount}}</b></span>
-                  {{getItem(item.id).name}} 
-                  <span ng-if="item.kind"> - <b>{{item.kind}}</b></span> 
+                  {{getItem(item.id).name}}
+                  <span ng-if="item.kind"> - <b>{{item.kind}}</b></span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
+
       <div ng-if="company.participations.length">
         <nav class="ink-navigation">
           <ul class="menu horizontal">
             <li>
-              <h2> 
+              <h2>
                 Communications
               </h2>
             </li>
             <li>
               <a>
-                <i class="fa fa-circle-o-notch fa-spin" ng-if="!communicationEvent.name"></i> 
-                {{communicationEvent.name || 'Loading...'}} 
+                <i class="fa fa-circle-o-notch fa-spin" ng-if="!communicationEvent.name"></i>
+                {{communicationEvent.name || 'Loading...'}}
                 <i class="fa fa-caret-down" ng-if="communicationEvent.name"></i>
               </a>
               <ul class="submenu">
@@ -115,7 +115,7 @@
               </ul>
             </li>
             <li>
-              <span ng-click="hideCommunications=!hideCommunications" title="Click to show/hide communications"> 
+              <span ng-click="hideCommunications=!hideCommunications" title="Click to show/hide communications">
                 <i ng-show="hideCommunications" class="fa fa-chevron-circle-down" style="font-size:30px"></i>
                 <i ng-hide="hideCommunications" class="fa fa-chevron-circle-up" style="font-size:30px"></i>
               </span>
@@ -125,9 +125,9 @@
         <communication-area ng-hide="hideCommunications" thread="{{'company-' + company.id}}" event="communicationEvent" members="{{members}}" me="{{me}}" roles="{{roles}}"></communication-area>
       </div>
 
-      <h2 ng-click="hideComments=!hideComments" title="Click to show/hide comments"> 
-        Comments 
-        <i ng-show="hideComments" class="fa fa-chevron-circle-down" style="font-size:30px"></i> 
+      <h2 ng-click="hideComments=!hideComments" title="Click to show/hide comments">
+        Comments
+        <i ng-show="hideComments" class="fa fa-chevron-circle-down" style="font-size:30px"></i>
         <i ng-hide="hideComments" class="fa fa-chevron-circle-up" style="font-size:30px"></i>
       </h2>
       <comment-area ng-hide="hideComments" thread="{{'company-' + company.id}}" me="me" members="members"></comment-area>

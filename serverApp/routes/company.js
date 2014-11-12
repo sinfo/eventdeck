@@ -61,7 +61,7 @@ server.route({
 });
 
 server.route({
-  method: "POST",
+  method: "GET",
   path: "/api/company/{id}/sendInitialEmail",
   config: {
     handler: company.sendInitialEmail,
