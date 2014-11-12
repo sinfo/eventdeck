@@ -44,3 +44,6 @@ body {
   font-weight: 500;
   margin-bottom: 1px;
 }
+.companies .contacts {
+  white-space: pre-wrap;
+}

@@ -1,11 +1,32 @@
 section.page.companies.view
 
-  h2(data-hook='name')
+  div.ink-grid
+    div.column-group.horizontal-gutters
+      div.all-100
+        h1(data-hook='name')
+      div.all-33
+        .button-group
+          a.ink-button.orange(data-hook='edit') Edit
+          button.ink-button.red(data-hook='delete') Delete
+        img(data-hook='img', width='60',  height='60')
+        div
+          h4 Area
+          p(data-hook="area")
+        div 
+          h4 Description
+          p(data-hook="description")
+      div.all-33
+        div
+          h3 History
+          p(data-hook="history")
+        div 
+          h3 Contacts
+          p(data-hook="contacts").contacts
+      div.all-33
+        div(data-hook="company-participations")
+      div.all-100  
+        div(data-hook="company-communications")
 
-  .button-group
-    a.ink-button.orange(data-hook='edit') Edit
-    button.ink-button.red(data-hook='delete') Delete
+    
 
-  img(data-hook='img', width='80',  height='80')
 
-  div(data-hook="company-communications")
