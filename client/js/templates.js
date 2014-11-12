@@ -26,7 +26,7 @@
 
     // cards/communication.jade compiled template
     templatizer["cards"]["communication"] = function tmpl_cards_communication() {
-        return '<div class="card"><div class="content"><b data-hook="kind" class="kind"></b><div data-hook="text"></div></div></div>';
+        return '<div class="card full"><div class="content"><b data-hook="kind" class="kind"></b><div data-hook="text"></div></div></div>';
     };
 
     // cards/company.jade compiled template
