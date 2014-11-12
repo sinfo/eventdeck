@@ -1,6 +1,7 @@
 /*global app, alert*/
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
+var populate = require('client/js/helpers/populate');
 var MemberForm = require('client/js/forms/member');
 
 
@@ -27,6 +28,9 @@ module.exports = PageView.extend({
           el: el,
           model: this.model,
           submitCallback: function (data) {
+
+            //populate(data, this.model, ['facebook.id', 'facebook.username', 'mails.main', 'mails.institutional', 'mails.dropbox', 'mails.google', 'mails.microsoft']);
+
             if(data['facebook.id'] || data['facebook.username']) {
               data.facebook = this.model.facebook || {};
               data.facebook.id = data['facebook.id'] || data.facebook.id;
