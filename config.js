@@ -8,7 +8,7 @@ var config = {
 };
 
 config.mongo = {
-  url: process.env.EVENTDECK_MONGO_URL || 'mongodb://localhost/sinfo'
+  url: process.env.EVENTDECK_MONGO_URL || 'mongodb://localhost/deck'
 };
 
 config.cookie = {
@@ -17,9 +17,9 @@ config.cookie = {
 };
 
 config.mailgun = {
-  email: process.env.EVENTDECK_MAILGUN_EMAIL || 'tool@bananamarket.eu',
-  api: process.env.EVENTDECK_MAILGUN_API || 'key-7jm1c009ezjv85pkm1rqfxevufeovb43',
-  publicApi: process.env.EVENTDECK_MAILGUN_PUBLIC_API || 'pubkey-0blv6drs63745oxru3itvfg1urp662y8'
+  email: process.env.EVENTDECK_MAILGUN_EMAIL || 'email@example.com',
+  api: process.env.EVENTDECK_MAILGUN_API || 'YOUR MAILGUN KEY',
+  publicApi: process.env.EVENTDECK_MAILGUN_PUBLIC_API || 'YOUR MAILGUN PUBLIC KEY'
 };
 
 config.facebook = {
