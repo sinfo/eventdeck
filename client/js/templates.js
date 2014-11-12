@@ -31,7 +31,7 @@
 
     // cards/company.jade compiled template
     templatizer["cards"]["company"] = function tmpl_cards_company() {
-        return '<div class="card"><div data-hook="background" class="header wide"></div><div class="content"><div data-hook="name" class="a name"></div><div data-hook="status" class="a status"></div><div class="button-group"><a data-hook="action-edit" class="ink-button orange">edit</a><a href="#" data-hook="action-delete" class="ink-button red">delete</a></div></div></div>';
+        return '<div class="card"><div data-hook="background" class="header wide"></div><div class="content"><a data-hook="name" class="name"></a><div data-hook="status" class="status"></div><div class="button-group"><a data-hook="action-edit" class="ink-button orange">edit</a><a href="#" data-hook="action-delete" class="ink-button red">delete</a></div></div></div>';
     };
 
     // cards/member.jade compiled template
@@ -41,7 +41,7 @@
 
     // cards/participation.jade compiled template
     templatizer["cards"]["participation"] = function tmpl_cards_participation() {
-        return '<div class="card"><div class="content"><span data-hook="event" style="margin-right: 4pt;"></span><span data-hook="status" class="kind"></span><div><p data-hook="member"></p><p data-hook="kind"></p></div></div></div>';
+        return '<div class="card"><div class="content"><span data-hook="event" style="margin-right: 4pt;"></span><span data-hook="status"></span><div><p data-hook="member"></p><p data-hook="kind"></p></div></div></div>';
     };
 
     // head.jade compiled template
