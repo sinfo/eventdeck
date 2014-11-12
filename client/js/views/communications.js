@@ -5,8 +5,7 @@ var CommunicationView = require('client/js/views/communication');
 
 
 module.exports = PageView.extend({
-  pageTitle: 'Companies',
-  template: templates.pages.communications.area,
+  template: templates.partials.communications,
   events: {
     'click [data-hook~=fetch]': 'fetchCollection',
   },
