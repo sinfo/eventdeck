@@ -25,9 +25,11 @@ module.exports = {
     this.me.fetch({
       success: function(model, response, options) {
         log('Hello ' + model.name + '!');
+        model.authenticated = true;
       },
       error: function(model, response, options) {
         log('Please log in first!');
+        model.authenticated = false;
       }
     });
 
@@ -59,6 +61,10 @@ module.exports = {
 
       // we have what we need, we can now start our router and show the appropriate page
       self.router.history.start({pushState: true, root: '/'});
+
+      if (!self.me.authenticated) {
+        self.router.history.navigate('/login', {trigger: true});
+      }
     });
   },
 
@@ -68,8 +74,13 @@ module.exports = {
   // it expects a url without a leading slash.
   // for example: "costello/settings".
   navigate: function (page) {
-    var url = (page.charAt(0) === '/') ? page.slice(1) : page;
-    this.router.history.navigate(url, {trigger: true});
+    if (app.me.authenticated) {
+      var url = (page.charAt(0) === '/') ? page.slice(1) : page;
+      this.router.history.navigate(url, {trigger: true});
+    }
+    else {
+      self.router.history.navigate('/login', {trigger: true});
+    }
   }
 };
 

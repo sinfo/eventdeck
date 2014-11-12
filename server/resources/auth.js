@@ -23,7 +23,7 @@ function createCode(memberId, cb) {
     var message = {
       to: member.name + '<' +member.mails.main + '>',
       subject: '[SINFO] Login code for Deck!',
-      text: 'Hey '+member.name+'!\n\n Here is your code for logging in on EventDeck: '+loginCode+'\n\n'+urlPrefix+'#/login/'+member.id+'/'+loginCode,
+      text: 'Hey '+member.name+'!\n\n Here is your code for logging in on EventDeck: '+loginCode+'\n\n'+urlPrefix+'/login/'+member.id+'/'+loginCode,
     };
 
     server.methods.email.send(message, function(err) {

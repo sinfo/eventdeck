@@ -4,30 +4,35 @@ var AmpModel = require('ampersand-model');
 var AmpCollection = require('ampersand-collection');
 
 var Communication = require('./communication');
+var Participation = require('./participation');
+
 
 var CommunicationCollection = AmpCollection.extend({
     model: Communication
 });
 
+var ParticipationCollection = AmpCollection.extend({
+  model: Participation
+});
 
 module.exports = AmpModel.extend({
   props: {
     id: ['string'],
     name: ['string'],
+    description: ['string'],
     img: ['string'],
+    site:['string'],
     url:['string'],
+    status:['status'],
     contacts:['string'],
     history:['string'],
-    participations:['array'],
-    items:['array'],
     area:['string'],
-    accesses:['array'],
     updated:['string']
   },
   collections: {
-    communications: CommunicationCollection
+    communications: CommunicationCollection,
+    participations: ParticipationCollection
   },
-
   session: {
     selected: ['boolean', true, false]
   },
@@ -59,9 +64,8 @@ module.exports = AmpModel.extend({
     participation: {
       deps:['participations'],
       fn: function () {
-        return this.participations.filter(function(p){ return p.event == app.me.selectedEvent })[0];
+        return this.participations.filter(function(p){ return p.event == app.me.selectedEvent; })[0];
       }
     }
   }
-
  });
