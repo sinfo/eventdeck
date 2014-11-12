@@ -6,6 +6,18 @@ var Company = require('client/js/models/company');
 var AmpersandCollection = require('ampersand-collection');
 
 
+
+function filtering(collection,filter){
+    return collection.filter(function(company){
+      return company.participation && company.participation.status == filter;
+    });
+  }
+function rerender(page,collection){
+    page.renderWithTemplate();
+    page.renderCollection(collection, CompanyView, page.queryByHook('companies-list'));
+    return false;
+  }
+
 module.exports = PageView.extend({
   pageTitle: 'Companies',
   template: templates.pages.companies.list,
@@ -50,84 +62,62 @@ module.exports = PageView.extend({
   },
   contacted: function () {
     log('Fetching  contacted Companies')
-    var aux = this.collection.filter(function(company){
-      return company.participation && company.participation.status == 'Contacted';
-    });
+    var aux =  filtering(this.collection,'Contacted');
 
     aux = new AmpersandCollection(aux, {model: Company});
-    this.renderWithTemplate();
-    this.renderCollection(aux, CompanyView, this.queryByHook('companies-list'));
+    rerender(this,aux);
     return false;
   },  
   selected: function () {
     log('Fetching  Selected Companies')
-    var aux = this.collection.filter(function(company){
-      return company.participation && company.participation.status == 'Selected';
-    });
+    var aux = filtering(this.collection,'Selected');
 
     aux = new AmpersandCollection(aux, {model: Company});
-    this.renderWithTemplate();
-    this.renderCollection(aux, CompanyView, this.queryByHook('companies-list'));
+    rerender(this,aux);
     return false;
   },
   closeddeal: function () {
     log('Fetching  Closed Deal Companies')
-    var aux = this.collection.filter(function(company){
-      return company.participation && company.participation.status == 'Closed Deal';
-    });
+    var aux = filtering(this.collection,'Closed Deal');
 
     aux = new AmpersandCollection(aux, {model: Company});
-    this.renderWithTemplate();
-    this.renderCollection(aux, CompanyView, this.queryByHook('companies-list'));
+    rerender(this,aux);
     return false;
   },
   rejected: function () {
     log('Fetching  Rejected Companies')
-    var aux = this.collection.filter(function(company){
-      return company.participation && company.participation.status == 'Rejected';
-    });
+    var aux = filtering(this.collection,'Rejected');
 
     aux = new AmpersandCollection(aux, {model: Company});
-    this.renderWithTemplate();
-    this.renderCollection(aux, CompanyView, this.queryByHook('companies-list'));
+    rerender(this,aux);
     return false;
   },
   giveup: function () {
     log('Fetching  Gave up Companies')
-    var aux = this.collection.filter(function(company){
-      return company.participation && company.participation.status == 'Give Up';
-    });
+    var aux = filtering(this.collection,'Give Up');
 
     aux = new AmpersandCollection(aux, {model: Company});
-    this.renderWithTemplate();
-    this.renderCollection(aux, CompanyView, this.queryByHook('companies-list'));
+    rerender(this,aux);
     return false;
   },    
   inconversations: function () {
     log('Fetching  Selected Companies')
-    var aux = this.collection.filter(function(company){
-      return company.participation && company.participation.status == 'In Conversations';
-    });
+    var aux = filtering(this.collection,'In Conversations');
 
     aux = new AmpersandCollection(aux, {model: Company});
-    this.renderWithTemplate();
-    this.renderCollection(aux, CompanyView, this.queryByHook('companies-list'));
+    rerender(this,aux);
     return false;
   },
   innegotiations: function () {
     log('Fetching  Selected Companies')
-    var aux = this.collection.filter(function(company){
-      return company.participation && company.participation.status == 'In Negotiations';
-    });
+    var aux = filtering(this.collection,'In Negotiations');
 
     aux = new AmpersandCollection(aux, {model: Company});
-    this.renderWithTemplate();
-    this.renderCollection(aux, CompanyView, this.queryByHook('companies-list'));
+    rerender(this,aux);
     return false;
   },
   showall: function () {
-    this.renderWithTemplate();
-    this.renderCollection(this.collection, CompanyView, this.queryByHook('companies-list'));
+    rerender(this,this.collection);
     return false;
   },
 });
