@@ -1,6 +1,15 @@
 section.page.companies.list
   h2 Companies
 
+  div.button-group
+    div.button.ink-button(data-hook='selected') Selected
+    div.button.ink-button(data-hook='contacted') Contacted
+    div.button.ink-button(data-hook='inconversations') In Conversations
+    div.button.ink-button(data-hook='innegotiations') In Negotiations
+    div.button.ink-button(data-hook='closeddeal') Closed Deal
+    div.button.ink-button(data-hook='rejected') Rejected
+    div.button.ink-button(data-hook='giveup') Give Up
+
   div(data-hook="companies-list")
 
   p Try it by clicking the buttons

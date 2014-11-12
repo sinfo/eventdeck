@@ -31,7 +31,7 @@
 
     // cards/company.jade compiled template
     templatizer["cards"]["company"] = function tmpl_cards_company() {
-        return '<div class="card"><div data-hook="background" class="header wide"></div><div class="content"><a data-hook="name" class="name"></a><a data-hook="status" class="status"></a><div class="button-group"><a data-hook="action-edit" class="ink-button orange">edit</a><a href="#" data-hook="action-delete" class="ink-button red">delete</a></div></div></div>';
+        return '<div class="card"><div data-hook="background" class="header wide"></div><div class="content"><div data-hook="name" class="a name"></div><div data-hook="status" class="a status"></div><div class="button-group"><a data-hook="action-edit" class="ink-button orange">edit</a><a href="#" data-hook="action-delete" class="ink-button red">delete</a></div></div></div>';
     };
 
     // cards/member.jade compiled template
@@ -66,7 +66,7 @@
 
     // pages/companies/list.jade compiled template
     templatizer["pages"]["companies"]["list"] = function tmpl_pages_companies_list() {
-        return '<section class="page companies list"><h2>Companies</h2><div data-hook="companies-list"></div><p>Try it by clicking the buttons</p><div><button data-hook="fetch" class="ink-button">Fetch</button><a href="/companies/add" class="ink-button">Add Company</a></div></section>';
+        return '<section class="page companies list"><h2>Companies</h2><div class="button-group"><div data-hook="selected" class="button ink-button">Selected</div><div data-hook="contacted" class="button ink-button">Contacted</div><div data-hook="inconversations" class="button ink-button">In Conversations</div><div data-hook="innegotiations" class="button ink-button">In Negotiations</div><div data-hook="closeddeal" class="button ink-button">Closed Deal</div><div data-hook="rejected" class="button ink-button">Rejected</div><div data-hook="giveup" class="button ink-button">Give Up</div></div><div data-hook="companies-list"></div><p>Try it by clicking the buttons</p><div><button data-hook="fetch" class="ink-button">Fetch</button><a href="/companies/add" class="ink-button">Add Company</a></div></section>';
     };
 
     // pages/companies/view.jade compiled template
