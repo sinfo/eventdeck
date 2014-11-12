@@ -8,10 +8,10 @@ module.exports = AmpModel.extend({
     thread: ['string'],
     event: ['string'],
     kind: ['string'],
-    member:['string'],
-    text:['string'],
-    status:['string'],
-    posted:['string'],
-    updated:['string'],
+    member: ['string'],
+    text: ['string'],
+    status: ['string'],
+    posted: ['string'],
+    updated: ['string']
   }
 });

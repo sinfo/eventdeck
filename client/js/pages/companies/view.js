@@ -5,6 +5,7 @@ var templates = require('client/js/templates');
 var CompanyView = require('client/js/views/company');
 var CommunicationsView = require('client/js/views/communications');
 var Communications = require('client/js/models/communications');
+var ParticipationsView = require('client/js/views/participations');
 
 
 module.exports = PageView.extend({
@@ -14,15 +15,28 @@ module.exports = PageView.extend({
     'model.name': {
       hook: 'name'
     },
-    'model.status': {
-      type:'attribute',
-      hook: 'status',
-      name: 'src'
-    },
     'model.img': {
       type: 'attribute',
       hook: 'img',
       name: 'src'
+    },
+    'model.status': {
+      hook: 'status'
+    },
+    'model.history': {
+      hook: 'history'
+    },
+    'model.contacts': {
+      hook: 'contacts'
+    },
+    'model.area': {
+      hook: 'area'
+    },
+    'model.description': {
+      hook: 'description'
+    },
+    'model.access': {
+      hook: 'access'
     },
     'model.editUrl': {
       type: 'attribute',
@@ -46,9 +60,14 @@ module.exports = PageView.extend({
       self.renderWithTemplate(self);
       var Comms = Communications(self.model.communicationsApi);
 
-      self.renderSubview(new CommunicationsView({
+      /*self.renderSubview(new CommunicationsView({
         collection: new Comms()
       }), self.queryByHook('company-communications'));
+      */
+      self.renderSubview(new ParticipationsView({
+        collection: self.model.participations
+      }), self.queryByHook('company-participations'));
+      
     });
   },
   handleDeleteClick: function () {

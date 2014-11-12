@@ -15,7 +15,7 @@
     templatizer["cards"] = {};
     templatizer["includes"] = {};
     templatizer["pages"] = {};
-    templatizer["pages"]["communications"] = {};
+    templatizer["partials"] = {};
     templatizer["pages"]["companies"] = {};
     templatizer["pages"]["members"] = {};
 
@@ -39,6 +39,11 @@
         return '<div class="card"><div data-hook="background" class="header"></div><div class="content"><a data-hook="name" class="name"></a><div class="button-group"> <a data-hook="action-edit" class="ink-button orange">edit </a><a href="#" data-hook="action-delete" class="ink-button red">delete</a></div></div></div>';
     };
 
+    // cards/participation.jade compiled template
+    templatizer["cards"]["participation"] = function tmpl_cards_participation() {
+        return '<div class="card"><div class="content"><span data-hook="event" style="margin-right: 4pt;"></span><span data-hook="status" class="kind"></span><div><p data-hook="member"></p><p data-hook="kind"></p></div></div></div>';
+    };
+
     // head.jade compiled template
     templatizer["head"] = function tmpl_head() {
         return '<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><meta name="apple-mobile-web-app-capable" content="yes"/>';
@@ -47,11 +52,6 @@
     // includes/formInput.jade compiled template
     templatizer["includes"]["formInput"] = function tmpl_includes_formInput() {
         return '<div class="control-group"><label data-hook="label"></label><div data-hook="message-container" class="control"><div data-hook="message-text" class="ink-alert warning"></div></div><input/></div>';
-    };
-
-    // pages/communications/area.jade compiled template
-    templatizer["pages"]["communications"]["area"] = function tmpl_pages_communications_area() {
-        return '<div><h4>Communications</h4><div data-hook="communications-list"></div></div>';
     };
 
     // pages/companies/add.jade compiled template
@@ -71,7 +71,7 @@
 
     // pages/companies/view.jade compiled template
     templatizer["pages"]["companies"]["view"] = function tmpl_pages_companies_view() {
-        return '<section class="page companies view"><h2 data-hook="name"></h2><div class="button-group"><a data-hook="edit" class="ink-button orange">Edit</a><button data-hook="delete" class="ink-button red">Delete</button></div><img data-hook="img" width="80" height="80"/><div data-hook="company-communications"></div></section>';
+        return '<section class="page companies view"><div class="ink-grid"><div class="column-group horizontal-gutters"><div class="all-100"><h1 data-hook="name"></h1></div><div class="all-33"><div class="button-group"><a data-hook="edit" class="ink-button orange">Edit</a><button data-hook="delete" class="ink-button red">Delete</button></div><img data-hook="img" width="60" height="60"/><div><h4>Area</h4><p data-hook="area"></p></div><div> <h4>Description</h4><p data-hook="description"></p></div></div><div class="all-33"><div><h3>History</h3><p data-hook="history"></p></div><div> <h3>Contacts</h3><p data-hook="contacts" class="contacts"></p></div></div><div class="all-33"><div data-hook="company-participations"></div></div><div class="all-100"> <div data-hook="company-communications"></div></div></div></div></section>';
     };
 
     // pages/home.jade compiled template
@@ -107,6 +107,16 @@
     // pages/members/view.jade compiled template
     templatizer["pages"]["members"]["view"] = function tmpl_pages_members_view() {
         return '<section class="page member view"><h2 data-hook="name"></h2><img data-hook="img" width="300" height="300"/><div class="buttons"><a data-hook="edit" class="ink-button">Edit</a><button data-hook="delete" class="ink-button red">Delete</button></div></section>';
+    };
+
+    // partials/comunications.jade compiled template
+    templatizer["partials"]["comunications"] = function tmpl_partials_comunications() {
+        return '<div><h4>Communications</h4><div data-hook="communications-list"></div></div>';
+    };
+
+    // partials/participations.jade compiled template
+    templatizer["partials"]["participations"] = function tmpl_partials_participations() {
+        return '<div><h4>Participations</h4><div data-hook="participations-list"></div></div>';
     };
 
     return templatizer;
