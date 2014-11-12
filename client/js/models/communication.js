@@ -13,5 +13,5 @@ module.exports = AmpModel.extend({
     status:['string'],
     posted:['string'],
     updated:['string'],
-  },
-  });
+  }
+});

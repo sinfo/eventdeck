@@ -80,7 +80,13 @@ module.exports = View.extend({
     // and it's a local url, navigate internally
     if (local && !e.ctrlKey && !e.shiftKey && !e.altKey && !e.metaKey) {
       e.preventDefault();
-      app.navigate(aTag.pathname);
+
+      if (app.me.authenticated) {
+        app.navigate(aTag.pathname);
+      }
+      else {
+        app.navigate('/login');
+      }
     }
   },
 

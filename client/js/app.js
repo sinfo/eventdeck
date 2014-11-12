@@ -25,9 +25,11 @@ module.exports = {
     this.me.fetch({
       success: function(model, response, options) {
         log('Hello ' + model.name + '!');
+        model.authenticated = true;
       },
       error: function(model, response, options) {
         log('Please log in first!');
+        model.authenticated = false;
       }
     });
 
@@ -59,6 +61,10 @@ module.exports = {
 
       // we have what we need, we can now start our router and show the appropriate page
       self.router.history.start({pushState: true, root: '/'});
+
+      if (!self.me.authenticated) {
+        self.router.history.navigate('/login', {trigger: true});
+      }
     });
   },
 

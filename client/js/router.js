@@ -3,6 +3,9 @@ var Router = require('ampersand-router');
 
 var HomePage = require('./pages/home');
 
+var LoginPage = require('./pages/login');
+var LoginCodePage = require('./pages/loginCode');
+
 var Members = require('./pages/members/list');
 var MemberAddPage = require('./pages/members/add');
 var MemberEditPage = require('./pages/members/edit');
@@ -16,6 +19,8 @@ var CompanyViewPage = require('./pages/companies/view');
 module.exports = Router.extend({
   routes: {
     '': 'home',
+    'login': 'login',
+    'login/:id/:code': 'loginCode',
     'members': 'members',
     'members/add': 'memberAdd',
     'members/:id': 'memberView',
@@ -30,6 +35,17 @@ module.exports = Router.extend({
   // ------- ROUTE HANDLERS ---------
   home: function () {
     this.trigger('page', new HomePage());
+  },
+
+  login: function () {
+    this.trigger('page', new LoginPage());
+  },
+
+  loginCode: function () {
+    this.trigger('page', new LoginCodePage({
+      id: id,
+      code: code
+    }));
   },
 
   members: function () {

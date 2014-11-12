@@ -6,6 +6,7 @@ module.exports = Member.extend({
 
   session: {
     selectedEvent: ['string'],
+    authenticated: ['boolean']
   },
 
   derived: {
