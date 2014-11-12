@@ -5,7 +5,7 @@ var schema = new mongoose.Schema({
   name: String,
   description: String,
   img: String,
-  url: String,
+  site: String,
   contacts: String,
   history: String,
   participations: [{

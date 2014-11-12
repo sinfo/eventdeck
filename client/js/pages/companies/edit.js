@@ -27,14 +27,16 @@ module.exports = PageView.extend({
           el: el,
           model: this.model,
           submitCallback: function (data) {
-
+            delete(data.communications);
+            delete(data.items);
+            console.log(data);
             model.save(data, {
               wait: true,
               success: function (model, response, options) {
                 app.navigate('/companies/'+model.id);
               },
               error: function (model, response, options) {
-                console.log('error', response.statusCode, response.response)
+                console.log('error', response.statusCode, response.response);
               }
             });
           }

@@ -22,11 +22,11 @@ module.exports = FormView.extend({
         parent: this
       }),
       new InputView({
-        label: 'Url',
-        name: 'url',
-        value: this.model && this.model.url || '',
+        label: 'Site',
+        name: 'site',
+        value: this.model && this.model.site || '',
         required: false,
-        placeholder: 'Url',
+        placeholder: 'Site',
         parent: this
       }),
       new InputView({
@@ -35,13 +35,6 @@ module.exports = FormView.extend({
         value: this.model && this.model.contacts || '',
         required: false,
         placeholder: 'Contacts',
-        parent: this
-      }),
-      new ArrayInputView({
-        label: 'Participations',
-        name: 'participations',
-        value: this.model && this.model.participations || [],
-        minLength: 0,
         parent: this
       }),
       new ArrayInputView({
@@ -59,6 +52,13 @@ module.exports = FormView.extend({
         placeholder: 'Area',
         parent: this
       }),
+      new ArrayInputView({
+        label: 'Participations',
+        name: 'participations',
+        value: this.model && this.model.participations || [],
+        minLength: 0,
+        parent: this
+      })
     ];
   }
 });
