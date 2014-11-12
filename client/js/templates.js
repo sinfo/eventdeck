@@ -26,7 +26,7 @@
 
     // cards/communication.jade compiled template
     templatizer["cards"]["communication"] = function tmpl_cards_communication() {
-        return '<div class="card"><div class="content"><b data-hook="kind" class="kind"></b><div data-hook="text"></div></div></div>';
+        return '<div class="card full"><div class="content"><b data-hook="kind" class="kind"></b><div data-hook="text"></div></div></div>';
     };
 
     // cards/company.jade compiled template
@@ -51,7 +51,7 @@
 
     // includes/formInput.jade compiled template
     templatizer["includes"]["formInput"] = function tmpl_includes_formInput() {
-        return '<div class="control-group column-group gutters"><label data-hook="label" class="all-20 align-right"></label><div data-hook="message-container" class="control all-80"><div data-hook="message-text" class="ink-alert warning"></div></div><input/></div>';
+        return '<div class="control-group"><label data-hook="label"></label><div data-hook="message-container" class="control"><div data-hook="message-text" class="ink-alert warning"></div></div><input/></div>';
     };
 
     // pages/companies/add.jade compiled template
@@ -79,6 +79,16 @@
         return '<section class="page home"><h2>Welcome to a skeleton for EventDeck</h2><p>If you "view source" you\'ll see it\'s 100% client rendered.</p><p>Click around the site using the nav bar at the top. </p><p>Things to note:<ul><li>The url changes, no requests are made to the server.</li><li>Refreshing the page will always get you back to the same page</li><li>Page changes are nearly instantaneous</li><li>In development mode, you don\'t need to restart the server to see changes, just edit and refresh.</li><li>In production mode, it will serve minfied, uniquely named files with super agressive cache headers. To test:<ul> <li>in dev_config.json set <code>isDev</code> to <code>false</code>.</li><li>restart the server.</li><li>view source and you\'ll see minified css and js files with unique names.</li><li>open the "network" tab in chrome dev tools (or something similar). You\'ll also want to make sure you haven\'t disabled your cache.</li><li>without hitting "refresh" load the app again (selecting current URL in url bar and hitting "enter" works great).</li><li>you should now see that the JS and CSS files were both served from cache without making any request to the server at all.</li></ul></li></ul></p></section>';
     };
 
+    // pages/login.jade compiled template
+    templatizer["pages"]["login"] = function tmpl_pages_login() {
+        return '<section class="page login"><h2>Welcome to EventDeck!</h2><form class="ink-form"><div class="control-group"><div class="control append-button"><span><input type="text" placeholder="joaquim.couves" data-hook="id"/></span><div id="login" class="ink-button">Log in</div></div></div></form></section>';
+    };
+
+    // pages/loginCode.jade compiled template
+    templatizer["pages"]["loginCode"] = function tmpl_pages_loginCode() {
+        return '<section class="page login"><h2>Welcome to EventDeck!</h2><form class="ink-form"><div class="control-group"><div class="control append-button"><span><input type="text" placeholder="AAAA" id="code"/></span><div id="login" class="ink-button">Log in</div></div></div></form></section>';
+    };
+
     // pages/members/add.jade compiled template
     templatizer["pages"]["members"]["add"] = function tmpl_pages_members_add() {
         return '<section class="page members add"><h2>Add Person</h2><form data-hook="member-form" class="ink-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
@@ -86,7 +96,7 @@
 
     // pages/members/edit.jade compiled template
     templatizer["pages"]["members"]["edit"] = function tmpl_pages_members_edit() {
-        return '<section class="page members edit"><h2>Edit Person</h2><form data-hook="member-form" class="ink-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
+        return '<section class="page members edit"><h2>Edit Person</h2><img data-hook="img" width="300" height="300"/><form data-hook="member-form" class="ink-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
     };
 
     // pages/members/list.jade compiled template

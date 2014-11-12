@@ -78,16 +78,27 @@ module.exports = FormView.extend({
         parent: this
       }),
       new ExtendedInput({
-        label: 'Miscrosoft Mail',
+        label: 'Microsoft Mail',
         name: 'mails.microsoft',
         value: this.model && this.model.mails && this.model.mails.microsoft || '',
         required: false,
         parent: this
       }),
       new ArrayInputView({
+        label: 'Roles',
+        name: 'roles',
+        value: this.model && this.model.roles.map(function(r) {
+          return r.id;
+        }) || [],
+        minLength: 0,
+        numberRequired: 0,
+        parent: this
+      }),
+      new ArrayInputView({
         label: 'Phones',
         name: 'phones',
         value: this.model && this.model.phones || [],
+        minLength: 0,
         numberRequired: 0,
         parent: this
       })
