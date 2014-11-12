@@ -74,8 +74,13 @@ module.exports = {
   // it expects a url without a leading slash.
   // for example: "costello/settings".
   navigate: function (page) {
-    var url = (page.charAt(0) === '/') ? page.slice(1) : page;
-    this.router.history.navigate(url, {trigger: true});
+    if (app.me.authenticated) {
+      var url = (page.charAt(0) === '/') ? page.slice(1) : page;
+      this.router.history.navigate(url, {trigger: true});
+    }
+    else {
+      self.router.history.navigate('/login', {trigger: true});
+    }
   }
 };
 

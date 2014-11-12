@@ -44,6 +44,12 @@ body {
   font-weight: 500;
   margin-bottom: 1px;
 }
+.card .contacts {
+  white-space: pre-wrap;
+}
+.companies .contacts {
+  white-space: pre-wrap;
+}
 .card.full {
   width: 100%;
 }
@@ -58,4 +64,10 @@ body {
   width: 600px;
   margin: 0 auto;
   margin-top: 150px;
+}
+.page.login #code {
+  display: none;
+}
+.page.login #code p {
+  text-align: left;
 }
