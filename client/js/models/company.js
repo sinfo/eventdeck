@@ -22,7 +22,6 @@ module.exports = AmpModel.extend({
     description: ['string'],
     img: ['string'],
     site:['string'],
-    url:['string'],
     status:['status'],
     contacts:['string'],
     history:['string'],
