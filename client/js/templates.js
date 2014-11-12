@@ -46,7 +46,7 @@
 
     // includes\formInput.jade compiled template
     templatizer["includes"]["formInput"] = function tmpl_includes_formInput() {
-        return '<div class="control-group column-group gutters"><label data-hook="label" class="all-20 align-right"></label><div data-hook="message-container" class="control all-80"><div data-hook="message-text" class="ink-alert warning"></div></div><input/></div>';
+        return '<div class="control-group"><label data-hook="label"></label><div data-hook="message-container" class="control"><div data-hook="message-text" class="ink-alert warning"></div></div><input/></div>';
     };
 
     // pages\communications\area.jade compiled template
@@ -96,7 +96,7 @@
 
     // pages\members\edit.jade compiled template
     templatizer["pages"]["members"]["edit"] = function tmpl_pages_members_edit() {
-        return '<section class="page members edit"><h2>Edit Person</h2><form data-hook="member-form" class="ink-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
+        return '<section class="page members edit"><h2>Edit Person</h2><img data-hook="img" width="300" height="300"/><form data-hook="member-form" class="ink-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="ink-button">Submit</button></div></form></section>';
     };
 
     // pages\members\list.jade compiled template

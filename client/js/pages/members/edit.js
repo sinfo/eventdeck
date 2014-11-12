@@ -1,6 +1,7 @@
 /*global app, alert*/
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
+var populate = require('client/js/helpers/populate');
 var MemberForm = require('client/js/forms/member');
 
 
@@ -13,6 +14,13 @@ module.exports = PageView.extend({
       if (err) alert('couldnt find a model with id: ' + spec.id);
       self.model = model;
     });
+  },
+  bindings:{
+    'model.img': {
+      type: 'attribute',
+      hook: 'img',
+      name: 'src'
+    }
   },
   subviews: {
     form: {
@@ -27,27 +35,8 @@ module.exports = PageView.extend({
           el: el,
           model: this.model,
           submitCallback: function (data) {
-            if(data['facebook.id'] || data['facebook.username']) {
-              data.facebook = this.model.facebook || {};
-              data.facebook.id = data['facebook.id'] || data.facebook.id;
-              data.facebook.username = data['facebook.username'] || data.facebook.username;
-              delete data['facebook.id'];
-              delete data['facebook.username'];
-            }
-            if(data['mails.main'] || data['mails.institutional'] || data['mails.dropbox'] 
-              || data['mails.google'] || data['mails.microsoft']) {
-              data.mails = this.model.mails || {};
-              data.mails.main = data['mails.main'] || data.mails.main;
-              data.mails.institutional = data['mails.institutional'] || data.mails.institutional;
-              data.mails.dropbox = data['mails.dropbox'] || data.mails.dropbox;
-              data.mails.google = data['mails.google'] || data.mails.google;
-              data.mails.microsoft = data['mails.microsoft'] || data.mails.microsoft;
-              delete data['mails.main'];
-              delete data['mails.institutional'];
-              delete data['mails.dropbox'];
-              delete data['mails.google'];
-              delete data['mails.microsoft'];
-            }
+
+            populate(data, this.model, ['facebook.id', 'facebook.username', 'mails.main', 'mails.institutional', 'mails.dropbox', 'mails.google', 'mails.microsoft']);
 
             model.save(data, {
               wait: true,
@@ -55,7 +44,7 @@ module.exports = PageView.extend({
                 app.navigate('/members/'+model.id);
               },
               error: function (model, response, options) {
-                console.log('error', response.statusCode, response.response)
+                console.log('error', response.statusCode, response.response);
               }
             });
           }

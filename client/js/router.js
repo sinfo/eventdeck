@@ -28,7 +28,7 @@ module.exports = Router.extend({
     'companies': 'companies',
     'companies/add': 'companyAdd',
     'companies/:id': 'companyView',
-    'companies/:id/edit': 'coompanyEdit',
+    'companies/:id/edit': 'companyEdit',
     '(*path)': 'catchAll',
   },
 
