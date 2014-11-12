@@ -41,7 +41,7 @@
 
     // cards/participation.jade compiled template
     templatizer["cards"]["participation"] = function tmpl_cards_participation() {
-        return '<div class="card"><div class="content"><span data-hook="event" style="margin-right: 4pt;"></span><span data-hook="status" class="kind"></span><div><p data-hook="member"></p><p data-hook="kind"></p></div></div></div>';
+        return '<div class="card"><div class="content"><span data-hook="event" style="margin-right: 4pt;"></span><span data-hook="status"></span><div><p data-hook="member"></p><p data-hook="kind"></p></div></div></div>';
     };
 
     // head.jade compiled template
