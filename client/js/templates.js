@@ -81,7 +81,7 @@
 
     // pages\login.jade compiled template
     templatizer["pages"]["login"] = function tmpl_pages_login() {
-        return '<section class="page login"><h2>Welcome to EventDeck!</h2><form class="ink-form"><div class="control-group"><div class="control append-button"><span><input type="text" placeholder="joaquim.couves" data-hook="id"/></span><div id="login" class="ink-button">Log in</div></div></div></form></section>';
+        return '<section class="page login"><h2>Welcome to EventDeck!</h2><form class="ink-form"><div id="id" class="control-group"><div class="control append-button"><span><input type="text" placeholder="joaquim.couves"/></span><div id="loginId" class="ink-button">Log in</div></div></div><div id="code" class="control-group"><div class="control append-button"><span><input type="text" placeholder="AAAA"/></span><div id="loginCode" class="ink-button">Log in</div></div><p>Type in the field above the code you received on your email.<br>It may take a few minutes so be patient.</p></div></form></section>';
     };
 
     // pages\loginCode.jade compiled template

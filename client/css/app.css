@@ -50,3 +50,9 @@ body {
   margin: 0 auto;
   margin-top: 150px;
 }
+.page.login #code {
+  display: none;
+}
+.page.login #code p {
+  text-align: left;
+}
