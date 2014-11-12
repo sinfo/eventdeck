@@ -15,7 +15,7 @@ module.exports = AmpModel.extend({
     id: ['string'],
     name: ['string'],
     img: ['string'],
-    url:['string'],
+    site:['string'],
     contacts:['string'],
     history:['string'],
     participations:['array'],
@@ -59,7 +59,7 @@ module.exports = AmpModel.extend({
     participation: {
       deps:['participations'],
       fn: function () {
-        return this.participations.filter(function(p){ return p.event == app.me.selectedEvent })[0];
+        return this.participations.filter(function(p){ return p.event == app.me.selectedEvent; })[0];
       }
     }
   }
