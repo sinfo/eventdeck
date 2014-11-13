@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.org/sinfo/eventdeck.svg)](https://travis-ci.org/sinfo/eventdeck)
 [![Dependency Status](https://david-dm.org/sinfo/eventdeck.svg)](https://david-dm.org/sinfo/eventdeck)
 [![devDependency Status](https://david-dm.org/sinfo/eventdeck/dev-status.svg)](https://david-dm.org/sinfo/eventdeck#info=devDependencies)
+[![Codacy Badge](https://www.codacy.com/project/badge/dc7a334d6a32416c88b51580999a1131)](https://www.codacy.com/public/dpais11_2338/eventdeck)
 
 EventDeck is a tool being built at [SINFO](http://sinfo.org) to help us manage everything related to our events.
 
