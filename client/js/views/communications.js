@@ -3,7 +3,6 @@ var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var CommunicationView = require('client/js/views/communication');
 
-
 module.exports = PageView.extend({
   template: templates.partials.communications,
   events: {

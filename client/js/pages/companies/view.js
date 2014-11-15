@@ -53,22 +53,32 @@ module.exports = PageView.extend({
       if (err) {
         log.error('couldnt find a company with id: ' + spec.id);
       }
-
       self.model = model;
-
       log('Got company', model.name);
-      self.renderWithTemplate(self);
-      var Comms = Communications(self.model.communicationsApi);
-
-      /*self.renderSubview(new CommunicationsView({
-        collection: new Comms()
-      }), self.queryByHook('company-communications'));
-      */
-      self.renderSubview(new ParticipationsView({
-        collection: self.model.participations
-      }), self.queryByHook('company-participations'));
-      
     });
+  },
+  subviews: {
+    participations: {
+      container: '[data-hook=company-participations]',
+      waitFor: 'model.participations',
+      prepareView: function (el) {
+        return new ParticipationsView({
+          el: el,
+          collection: this.model.participations
+        });
+      }
+    },
+    communications: {
+      container: '[data-hook=company-communications]',
+      waitFor: 'model.communicationsApi',
+      prepareView: function (el) {
+        var Comms = Communications(this.model.communicationsApi);
+        return new CommunicationsView({
+          el: el,
+          collection: new Comms()
+        });
+      }
+    },
   },
   handleDeleteClick: function () {
     this.model.destroy({success: function () {
