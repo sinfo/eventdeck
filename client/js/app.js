@@ -2,6 +2,7 @@
 var _ = require('underscore');
 var log = require('bows')('eventdeck');
 var config = require('clientconfig');
+var $ = require('jquery');
 
 var Router = require('./router');
 var MainView = require('./views/main');
@@ -63,10 +64,6 @@ module.exports = {
 
       // we have what we need, we can now start our router and show the appropriate page
       self.router.history.start({pushState: true, root: '/'});
-
-      // if (!self.me.authenticated) {
-      //   self.router.history.navigate('/login', {trigger: true});
-      // }
     });
   },
 
@@ -83,6 +80,20 @@ module.exports = {
     else {
       self.router.history.navigate('/login', {trigger: true});
     }
+  },
+
+  login: function (id, code) {
+    $.get('/api/auth/login/' + id + '/' + code, function () {
+      app.me.authenticated = true;
+      app.navigate('/');
+    });
+  },
+
+  logout: function () {
+    $.get('/api/auth/logout', function () {
+      app.me.authenticated = false;
+      app.navigate('/login');
+    });
   }
 };
 

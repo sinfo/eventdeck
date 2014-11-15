@@ -21,6 +21,7 @@ module.exports = View.extend({
     this.listenTo(app.router, 'page', this.handleNewPage);
   },
   events: {
+    'click #logout': 'logout',
     'click a[href]': 'handleLinkClick',
     'change .base-form select': 'handleEventChange'
   },
@@ -105,5 +106,9 @@ module.exports = View.extend({
         dom.removeClass(aTag.parentNode, 'active');
       }
     });
+  },
+
+  logout: function () {
+    app.logout();
   }
 });

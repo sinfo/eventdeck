@@ -6,11 +6,7 @@ module.exports = PageView.extend({
   pageTitle: 'EventDeck',
   template: templates.pages.loginCode,
 
-  events: {
-  	'click #login': 'login'
-  },
-
-  login: function() {
-
+  initialize: function (spec) {
+  	app.login(spec.id, spec.code);
   }
 });
