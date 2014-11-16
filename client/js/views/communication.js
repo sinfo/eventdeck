@@ -7,7 +7,12 @@ module.exports = View.extend({
   bindings: {
     'model.kind': '[data-hook~=kind]',
     'model.status': '[data-hook~=status]',
-    'model.posted': '[data-hook~=posted]',
+    'model.postedTimeSpan': '[data-hook~=posted]',
+    'model.posted': {
+      type: 'attribute',
+      hook: 'posted',
+      name: 'title'
+    },
     'model.text': {
       type: 'text',
       hook: 'text'

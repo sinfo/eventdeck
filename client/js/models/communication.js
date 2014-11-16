@@ -1,6 +1,6 @@
 // communication Model - communication.js
 var AmpModel = require('ampersand-model');
-
+var timeSince = require('client/js/helpers/timeSince');
 
 module.exports = AmpModel.extend({
   props: {
@@ -13,5 +13,14 @@ module.exports = AmpModel.extend({
     status: ['string'],
     posted: ['string'],
     updated: ['string']
+  },
+  derived: {
+    postedTimeSpan: {
+      deps: ['posted'],
+      fn: function () {
+        return timeSince(this.posted);
+      },
+      cache: false
+    }
   }
 });
