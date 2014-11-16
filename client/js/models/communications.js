@@ -7,5 +7,5 @@ module.exports = function(url) {
     model: communication,
     url: url
   });
-}
+};
 

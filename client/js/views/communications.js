@@ -25,10 +25,24 @@ module.exports = PageView.extend({
     form: {
       container: '[data-hook~=new-commmunication]',
       prepareView: function (el) {
+        var self = this;
         return new CommunicationForm({
           el: el,
           submitCallback: function (data) {
-            log('new communication', data);
+            var communication = {
+              thread: self.parent.model.thread,
+              event: data.event,
+              kind: data.kind,
+              text: data.text
+            };
+
+            app.communications.create(communication, {
+              wait: true,
+              success: function () {
+                self.fetchCollection();
+                log('new communication created', communication);
+              }
+            });
           }
         });
       }

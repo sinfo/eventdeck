@@ -36,6 +36,12 @@ module.exports = AmpModel.extend({
     selected: ['boolean', true, false]
   },
   derived: {
+    thread: {
+      deps: ['id'],
+      fn: function () {
+        return 'company-' + this.id;
+      }
+    },
     editUrl: {
       deps: ['id'],
       fn: function () {
