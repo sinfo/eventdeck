@@ -17,7 +17,16 @@ options.statuses = {
     { name: 'In Negotiations', color: '#006b75'},
     { name: 'Closed Deal', color: '#009800'},
     { name: 'Rejected', color: '#e11d21'},
-    { name: 'Give Up', color: '#333'} 
+    { name: 'Give Up', color: '#333'}
+  ]
+};
+
+options.kinds = {
+  communications: [
+    { name: 'Email To', id: 'Email To'},
+    { name: 'Email From', id: 'Email From'},
+    { name: 'Meeting', id: 'Meeting'},
+    { name: 'Phone Call', id: 'Phone Call'}
   ]
 };
 
