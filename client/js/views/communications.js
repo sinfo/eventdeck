@@ -5,7 +5,7 @@ var CommunicationView = require('client/js/views/communication');
 var CommunicationForm = require('client/js/forms/communication');
 
 module.exports = PageView.extend({
-  template: templates.partials.communications,
+  template: templates.partials.communications.area,
   events: {
     'click [data-hook~=fetch]': 'fetchCollection',
   },
@@ -36,7 +36,7 @@ module.exports = PageView.extend({
               text: data.text
             };
 
-            app.communications.create(communication, {
+            self.collection.create(communication, {
               wait: true,
               success: function () {
                 self.fetchCollection();

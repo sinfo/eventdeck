@@ -34,6 +34,8 @@ exports.update = {
   validate: {
     params: {
       id: Joi.string().required().description('Id of the communication we want to update'),
+      threadKind: Joi.string().description('Kind of the thread of the communication we want to update'),
+      threadId: Joi.string().description('Id of the thread of the communication we want to update'),
     },
     payload: {
       kind: Joi.string().description('Kind of the communication'),
@@ -58,6 +60,8 @@ exports.get = {
   validate: {
     params: {
       id: Joi.string().required().description('Id of the communication we want to retrieve'),
+      threadKind: Joi.string().description('Kind of the thread of the communication we want to update'),
+      threadId: Joi.string().description('Id of the thread of the communication we want to update'),
     },
     query: {
       fields: Joi.string().default('').description('Fields we want to retrieve'),
@@ -170,7 +174,9 @@ exports.remove = {
   tags: ['api','communication'],
   validate: {
     params: {
-     id: Joi.string().required().description('Id of the communication we want to remove'),
+      id: Joi.string().required().description('Id of the communication we want to remove'),
+      threadKind: Joi.string().description('Kind of the thread of the communication we want to update'),
+      threadId: Joi.string().description('Id of the thread of the communication we want to update'),
     }
   },
   pre: [

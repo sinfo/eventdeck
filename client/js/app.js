@@ -48,9 +48,6 @@ module.exports = {
     this.members = new Members();
     this.companies = new Companies();
 
-    var Comms = Communications('/api/communications');
-    this.communications = new Comms();
-
     // init our URL handlers and the history tracker
     this.router = new Router();
 

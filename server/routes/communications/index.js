@@ -56,3 +56,29 @@ server.route({
   config: handlers.getByEvent
 });
 
+server.route({
+  method: 'GET',
+  path: '/api/{threadKind}/{threadId}/communications/{id}',
+  config: handlers.get
+});
+
+server.route({
+  method: 'POST',
+  path: '/api/{threadKind}/{threadId}/communications',
+  config: handlers.create
+});
+
+server.route({
+  method: ['PUT','PATCH'],
+  path: '/api/{threadKind}/{threadId}/communications/{id}',
+  config: handlers.update
+});
+
+server.route({
+  method: 'DELETE',
+  path: '/api/{threadKind}/{threadId}/communications/{id}',
+  config: handlers.remove
+});
+
+
+

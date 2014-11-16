@@ -21,6 +21,14 @@ module.exports = AmpModel.extend({
         return timeSince(this.posted);
       },
       cache: false
+    },
+    memberName: {
+      deps: ['member'],
+      fn: function () {
+        app.members.getOrFetch(this.member, {all: true}, function (err, model) {
+          return model.name;
+        });
+      }
     }
   }
 });
