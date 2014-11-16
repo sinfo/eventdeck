@@ -18,23 +18,23 @@ internals.configStateConfig = {
     ttl: 1000 * 60 * 15,
     isSecure: config.isSecure
 };
+
 server.state('config', internals.configStateConfig);
 internals.clientConfig = JSON.stringify(config.client);
 server.ext('onPreResponse', function(request, reply) {
-    if (!request.state.config) {
-        var response = request.response;
-        return reply(response.state('config', encodeURIComponent(internals.clientConfig)));
-    }
-    else {
-        return reply();
-    }
+  if (!request.state.config && !request.response.isBoom) {
+    var response = request.response;
+    return reply(response.state('config', encodeURIComponent(internals.clientConfig)));
+  }
+
+  return reply();
 });
 
 server.pack.register([
-    { plugin: require('hapi-swagger'), options: config.swagger }, 
+    { plugin: require('hapi-swagger'), options: config.swagger },
     { plugin: require('moonboots_hapi'), options: moonbootsConfig },
     require('hapi-auth-cookie'),
-  ], 
+  ],
   function (err) {
 
   server.auth.strategy('session', 'cookie', {
@@ -58,7 +58,7 @@ server.pack.register([
 
   require('./resources');
   require('./routes');
-  
+
   if (!module.parent) {
     server.start(function () {
       log.info('Server started at: ' + server.info.uri);
