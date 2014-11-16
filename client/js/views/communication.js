@@ -6,6 +6,8 @@ module.exports = View.extend({
   template: templates.cards.communication,
   bindings: {
     'model.kind': '[data-hook~=kind]',
+    'model.status': '[data-hook~=status]',
+    'model.posted': '[data-hook~=posted]',
     'model.text': {
       type: 'text',
       hook: 'text'

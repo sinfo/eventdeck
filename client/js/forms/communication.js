@@ -1,6 +1,8 @@
 var FormView = require('ampersand-form-view');
-var InputView = require('ampersand-select-view');
+var InputView = require('ampersand-input-view');
 var SelectView = require('ampersand-select-view');
+var templates = require('client/js/templates');
+var options = require('options');
 
 module.exports = FormView.extend({
   fields: function () {
@@ -10,37 +12,25 @@ module.exports = FormView.extend({
         label: 'Event',
         parent: this,
         options: app.events,
-        value: this.model.events,
+        value: this.model && this.model.event || app.me.selectedEvent,
         idAttribute: 'id',
         textAttribute: 'name',
-        // yieldModel: false
-      }),
-      new SelectView({
-        name: 'event',
-        label: 'Event',
-        parent: this,
-        options: app.events,
-        value: this.model.event || '',
-        idAttribute: 'id',
-        textAttribute: 'name',
-        // yieldModel: false
+        yieldModel: false
       }),
       new SelectView({
         label: 'Kind',
         name: 'kind',
-        value: this.model && this.model.kind || '',
-        required: true,
-        options: app.events,
-        idAttribute: 'id',
-        textAttribute: 'name',
+        value: this.model && this.model.kind || options.kinds.communications[0],
+        options: options.kinds.communications,
         parent: this
       }),
       new InputView({
-        label: 'Text',
+        label: '',
         name: 'text',
+        template: templates.includes.formTextarea,
         value: this.model && this.model.text || '',
-        required: false,
-        placeholder: 'text',
+        placeholder: 'Communication content',
+        required: true,
         parent: this
       })
     ];

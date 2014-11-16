@@ -23,10 +23,10 @@ options.statuses = {
 
 options.kinds = {
   communications: [
-    { name: 'Email To', id: 'Email To'},
-    { name: 'Email From', id: 'Email From'},
-    { name: 'Meeting', id: 'Meeting'},
-    { name: 'Phone Call', id: 'Phone Call'}
+    'Email To',
+    'Email From',
+    'Meeting',
+    'Phone Call'
   ]
 };
 

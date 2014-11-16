@@ -23,7 +23,7 @@ module.exports = View.extend({
   events: {
     'click #logout': 'logout',
     'click a[href]': 'handleLinkClick',
-    'change .base-form select': 'handleEventChange'
+    'change [data-hook~=base-form] select': 'handleEventChange'
   },
   subviews: {
     form: {
