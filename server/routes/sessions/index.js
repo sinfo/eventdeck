@@ -21,7 +21,7 @@ server.route({
 });
 
 server.route({
-  method: 'PUT',
+  method: ['PUT','PATCH'],
   path: '/api/sessions/{id}',
   config: handlers.update
 });

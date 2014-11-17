@@ -37,13 +37,13 @@ module.exports = FormView.extend({
         placeholder: 'Contacts',
         parent: this
       }),
-/*      new ArrayInputView({
+      new ArrayInputView({
         label: 'Items',
         name: 'items',
         value: this.model && this.model.items || [],
         minLength: 0,
         parent: this
-      }),  */    
+      }),  
       new InputView({
         label: 'Area',
         name: 'area',

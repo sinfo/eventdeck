@@ -27,11 +27,13 @@ module.exports = PageView.extend({
           el: el,
           model: this.model,
           submitCallback: function (data) {
-            delete(data.communications);
-            delete(data.items);
             console.log(data);
+            if(!data) {
+              return this.parent.handleViewClick();
+            }
             model.save(data, {
-              wait: true,
+              patch: true,
+              wait: false,
               success: function (model, response, options) {
                 app.navigate('/companies/'+model.id);
               },

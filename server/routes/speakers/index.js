@@ -21,7 +21,7 @@ server.route({
 });
 
 server.route({
-  method: 'PUT',
+  method: ['PUT','PATCH'],
   path: '/api/speakers/{id}',
   config: handlers.update
 });

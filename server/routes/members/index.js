@@ -27,7 +27,7 @@ server.route({
 });
 
 server.route({
-  method: 'PUT',
+  method: ['PUT','PATCH'],
   path: '/api/members/{id}',
   config: handlers.update
 });

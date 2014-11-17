@@ -21,7 +21,7 @@ server.route({
 });
 
 server.route({
-  method: 'PUT',
+  method: ['PUT','PATCH'],
   path: '/api/tags/{id}',
   config: handlers.update
 });

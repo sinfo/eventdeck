@@ -21,7 +21,7 @@ server.route({
 });
 
 server.route({
-  method: 'PUT',
+  method: ['PUT','PATCH'],
   path: '/api/communications/{id}',
   config: handlers.update
 });
