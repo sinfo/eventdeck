@@ -20,9 +20,9 @@ options.statuses = {
     { name: 'Give Up', color: '#333'}
   ],
   communication: [
-    { name: 'Pending Review', id: 'pending-review', color: '#fbca04' },
-    { name: 'Reviewed', id: 'reviewed', color: '#e11d21' },
-    { name: 'Approved', id: 'approved', color: '#009800' },
+    { name: 'Pending Review...', id: 'pending-review', color: '#fbca04' },
+    { name: 'Reviewed.', id: 'reviewed', color: '#e11d21' },
+    { name: 'Approved!', id: 'approved', color: '#009800' },
   ]
 };
 

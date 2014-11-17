@@ -61,7 +61,12 @@ var ViewCommunication = View.extend({
   template: templates.partials.communications.view,
   bindings: {
     'model.kind': '[data-hook~=kind]',
-    'model.status': '[data-hook~=status]',
+    'model.statusDetails.name': '[data-hook~=status]',
+    'model.statusDetails.style': {
+      type: 'attribute',
+      hook: 'status',
+      name: 'style'
+    },
     'model.postedTimeSpan': '[data-hook~=posted]',
     'model.posted': {
       type: 'attribute',
