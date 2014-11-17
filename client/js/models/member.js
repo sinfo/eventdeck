@@ -52,6 +52,14 @@ module.exports = AmpModel.extend({
     selected: ['boolean', true, false]
   },
   derived: {
+    isAdmin: {
+      deps: ['roles'],
+      fn: function () {
+        return this.roles.filter(function (role) {
+          return role.id === 'development-team' || role.id === 'coordination';
+        }).length > 0;
+      }
+    },
     editUrl: {
       deps: ['id'],
       fn: function () {

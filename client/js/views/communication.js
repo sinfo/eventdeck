@@ -16,7 +16,9 @@ module.exports = View.extend({
   events: {
     'click [data-hook~=action-delete]': 'handleRemoveClick',
     'click [data-hook~=action-edit]': 'handleEditClick',
-    'click [data-hook~=action-view]': 'handleViewClick'
+    'click [data-hook~=action-view]': 'handleViewClick',
+    'click [data-hook~=action-approve]': 'handleApproveClick',
+    'click [data-hook~=action-review]': 'handleReviewClick',
   },
   handleRemoveClick: function () {
     this.model.destroy({wait: true});
@@ -31,7 +33,27 @@ module.exports = View.extend({
     var view = new ViewCommunication({ model: this.model, parent: this });
     this.switcher.set(view);
     return false;
-  }
+  },
+  handleApproveClick: function () {
+    this.model.save({ status: 'approved' }, {
+      patch: true,
+      wait: false,
+      success: function () {
+        log('communication approved');
+      }
+    });
+    return false;
+  },
+  handleReviewClick: function () {
+    this.model.save({ status: 'reviewed' }, {
+      patch: true,
+      wait: false,
+      success: function () {
+        log('communication reviewed');
+      }
+    });
+    return false;
+  },
 });
 
 
@@ -55,6 +77,12 @@ var ViewCommunication = View.extend({
   handleRemoveClick: function () {
     this.model.destroy();
     return false;
+  },
+  render: function () {
+    this.renderWithTemplate();
+    if(app.me.isAdmin) {
+      this.renderSubview(new AdminCommunication(), '[data-hook=admin-container]');
+    }
   }
 });
 
@@ -89,3 +117,10 @@ var EditCommunication = View.extend({
     }
   }
 });
+
+
+var AdminCommunication = View.extend({
+  template: templates.partials.communications.admin,
+});
+
+
