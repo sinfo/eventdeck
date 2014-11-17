@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/sinfo/eventdeck",
   "dependencies": {
-    "ampersand-array-input-view": "~3.0.2",
+    "ampersand-array-input-view": "https://github.com/jgantunes/ampersand-array-input-view/tarball/master",
     "ampersand-collection": "~1.3.17",
     "ampersand-dom": "^1.2.1",
     "ampersand-form-view": "^2.0.0",
