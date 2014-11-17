@@ -39,6 +39,10 @@ module.exports = AmpModel.extend({
           return status.id == self.status;
         })[0];
 
+        if(!details) {
+          return;
+        }
+
         details.style = details.color && 'background-color:' +details.color;
 
         return details;
