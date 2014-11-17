@@ -2,7 +2,17 @@ section.page.companies.edit
 
   h2 Edit company
 
+  img.logo(data-hook='img')
+
   form.ink-form(data-hook="company-form")
     fieldset(data-hook="field-container")
+      .column-group
+        #name.all-30
+        #area.all-30
+        #site.all-30
+      .column-group
+        #contacts.all-70
+        #description.all-70
+        #history.all-70
     .buttons
       button.ink-button(data-hook="reset", type="submit") Submit

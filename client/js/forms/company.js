@@ -6,19 +6,19 @@ module.exports = FormView.extend({
   fields: function () {
     return [
       new InputView({
-        label: 'Id',
-        name: 'id',
-        value: this.model && this.model.id || '',
-        required: false,
-        placeholder: 'Id',
-        parent: this
-      }),
-      new InputView({
         label: 'Name',
         name: 'name',
         value: this.model && this.model.name || '',
         required: false,
         placeholder: 'Name',
+        parent: this
+      }),
+      new InputView({
+        label: 'Area',
+        name: 'area',
+        value: this.model && this.model.area || '',
+        required: false,
+        placeholder: 'Area',
         parent: this
       }),
       new InputView({
@@ -37,28 +37,22 @@ module.exports = FormView.extend({
         placeholder: 'Contacts',
         parent: this
       }),
-      new ArrayInputView({
-        label: 'Items',
-        name: 'items',
-        value: this.model && this.model.items || [],
-        minLength: 0,
-        parent: this
-      }),  
       new InputView({
-        label: 'Area',
-        name: 'area',
-        value: this.model && this.model.area || '',
+        label: 'Description',
+        name: 'description',
+        value: this.model && this.model.description || '',
         required: false,
-        placeholder: 'Area',
+        placeholder: 'Description',
         parent: this
       }),
-/*      new ArrayInputView({
-        label: 'Participations',
-        name: 'participations',
-        value: this.model && this.model.participations || [],
-        minLength: 0,
+      new InputView({
+        label: 'History',
+        name: 'history',
+        value: this.model && this.model.history || '',
+        required: false,
+        placeholder: 'History',
         parent: this
-      })*/
+      }),
     ];
   }
 });
