@@ -1,10 +1,12 @@
 section.page.companies.list
   div(data-hook="companies-list")
 
-  .awesome-sidebar
+  div.button.awesome-sidebar-button(data-hook='hide') Show
+
+  .awesome-sidebar(data-hook="awesome-sidebar")
     .header
       b Companies
-      .push-right.hide-button HIDE
+      .push-right.hide-button(data-hook='hide') HIDE
 
     .button-group.small
       .ink-button(data-hook='showall') Show all

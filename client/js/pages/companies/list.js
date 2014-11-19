@@ -39,7 +39,9 @@ module.exports = PageView.extend({
     'click [data-hook~=noMember]': 'noMember',
     'click [data-hook~=noParticipation]': 'noParticipation',
 
+    'click [data-hook~=hide]': 'hide',
   },
+  hidden: false,
   render: function () {
     this.renderWithTemplate();
     this.renderCollection(this.collection, CompanyView, this.queryByHook('companies-list'));
@@ -154,4 +156,15 @@ module.exports = PageView.extend({
     rerender(this,this.collection);
     return false;
   },
+  hide: function(){
+    console.log(this.hidden);
+    if(!this.hidden){
+      this.queryByHook('awesome-sidebar').style.display = 'none';
+      this.hidden = true;
+    }
+    else{
+      this.queryByHook('awesome-sidebar').style.display = 'block';
+      this.hidden = false;
+    }
+  }
 });
