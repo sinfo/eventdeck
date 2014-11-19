@@ -35,6 +35,10 @@ module.exports = PageView.extend({
     'click [data-hook~=rejected]': 'rejected',
     'click [data-hook~=giveup]': 'giveup',
 
+    'click [data-hook~=me]': 'me',
+    'click [data-hook~=noMember]': 'noMember',
+    'click [data-hook~=noParticipation]': 'noParticipation',
+
   },
   render: function () {
     this.renderWithTemplate();
@@ -111,6 +115,36 @@ module.exports = PageView.extend({
   innegotiations: function () {
     log('Fetching  Selected Companies')
     var aux = filtering(this.collection,'In Negotiations');
+
+    aux = new AmpersandCollection(aux, {model: Company});
+    rerender(this,aux);
+    return false;
+  },
+  me: function () {
+    log('Fetching  Selected Companies')
+    var aux = this.collection.filter(function(company){
+      return company.participation && company.participation.member == app.me.id;
+    });
+
+    aux = new AmpersandCollection(aux, {model: Company});
+    rerender(this,aux);
+    return false;
+  },
+  noMember: function () {
+    log('Fetching  Selected Companies')
+    var aux = this.collection.filter(function(company){
+      return company.participation && !company.participation.member;
+    });
+
+    aux = new AmpersandCollection(aux, {model: Company});
+    rerender(this,aux);
+    return false;
+  },
+  noParticipation: function () {
+    log('Fetching  Selected Companies')
+    var aux = this.collection.filter(function(company){
+      return !company.participation;
+    });
 
     aux = new AmpersandCollection(aux, {model: Company});
     rerender(this,aux);

@@ -8,9 +8,18 @@ module.exports = FormView.extend({
       new InputView({
         label: 'Name',
         name: 'name',
+        el: this.el.querySelector('#company-name'),
         value: this.model && this.model.name || '',
         required: false,
         placeholder: 'Name',
+        parent: this
+      }),
+      new InputView({
+        label: 'Image',
+        name: 'image',
+        value: this.model && this.model.img || '',
+        required: false,
+        placeholder: 'Image',
         parent: this
       }),
       new InputView({
