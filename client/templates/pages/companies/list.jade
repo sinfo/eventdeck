@@ -5,23 +5,33 @@ section.page.companies.list
     .header
       b Companies
       .push-right.hide-button HIDE
-    .button-group
-      .button.ink-button(data-hook='selected') Selected
-      .button.ink-button(data-hook='contacted') Contacted
-      .button.ink-button(data-hook='inconversations') In Conversations
-      .button.ink-button(data-hook='innegotiations') In Negotiations
-      .button.ink-button(data-hook='closeddeal') Closed Deal
-      .button.ink-button(data-hook='rejected') Rejected
-      .button.ink-button(data-hook='giveup') Give Up
 
-    .button-group
-      .button.ink-button(data-hook='me') Me
-      .button.ink-button(data-hook='noMember') No Member
-      .button.ink-button(data-hook='noParticipation') No Participation
-      .button.ink-button(data-hook='showall') All Members
+    .button-group.small
+      .ink-button(data-hook='showall') Show all
+      a.ink-button(href="/companies/add") Add Company
 
+    br
+    h5 Filter Status
+    ul.small.unstyled
+      li
+        .ink-button(data-hook='selected') Selected
+      li
+        .ink-button(data-hook='contacted') Contacted
+      li
+        .ink-button(data-hook='inconversations') In Conversations
+      li
+        .ink-button(data-hook='innegotiations') In Negotiations
+      li
+        .ink-button(data-hook='closeddeal') Closed Deal
+      li
+        .ink-button(data-hook='rejected') Rejected
+      li
+        .ink-button(data-hook='giveup') Give Up
 
-    .button.ink-button(data-hook='showall') Show all
-
-    button.ink-button(data-hook="fetch") Fetch
-    a.ink-button(href="/companies/add") Add Company
+    br
+    h5 Filter Member
+    .button-group.small
+      .ink-button(data-hook='me') Me
+      .ink-button(data-hook='noMember') No Member
+      .ink-button(data-hook='noParticipation') No Participation
+      .ink-button(data-hook='showall') All Members
