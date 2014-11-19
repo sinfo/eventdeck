@@ -1,28 +1,27 @@
 section.page.companies.list
-  h2 Companies
-
-  div.button-group
-    div.button.ink-button(data-hook='selected') Selected
-    div.button.ink-button(data-hook='contacted') Contacted
-    div.button.ink-button(data-hook='inconversations') In Conversations
-    div.button.ink-button(data-hook='innegotiations') In Negotiations
-    div.button.ink-button(data-hook='closeddeal') Closed Deal
-    div.button.ink-button(data-hook='rejected') Rejected
-    div.button.ink-button(data-hook='giveup') Give Up
-
-  div.button-group
-    div.button.ink-button(data-hook='me') Me
-    div.button.ink-button(data-hook='noMember') No Member
-    div.button.ink-button(data-hook='noParticipation') No Participation
-    div.button.ink-button(data-hook='showall') All Members
-
-
-  div.button.ink-button(data-hook='showall') Show all
-  
   div(data-hook="companies-list")
 
-  p Try it by clicking the buttons
+  .awesome-sidebar
+    .header
+      b Companies
+      .push-right.hide-button HIDE
+    .button-group
+      .button.ink-button(data-hook='selected') Selected
+      .button.ink-button(data-hook='contacted') Contacted
+      .button.ink-button(data-hook='inconversations') In Conversations
+      .button.ink-button(data-hook='innegotiations') In Negotiations
+      .button.ink-button(data-hook='closeddeal') Closed Deal
+      .button.ink-button(data-hook='rejected') Rejected
+      .button.ink-button(data-hook='giveup') Give Up
 
-  div
+    .button-group
+      .button.ink-button(data-hook='me') Me
+      .button.ink-button(data-hook='noMember') No Member
+      .button.ink-button(data-hook='noParticipation') No Participation
+      .button.ink-button(data-hook='showall') All Members
+
+
+    .button.ink-button(data-hook='showall') Show all
+
     button.ink-button(data-hook="fetch") Fetch
     a.ink-button(href="/companies/add") Add Company
