@@ -1,11 +1,15 @@
 var FormView = require('ampersand-form-view');
 var InputView = require('ampersand-input-view');
 var ArrayInputView = require('ampersand-array-input-view');
+var templates = require('client/js/templates');
+var ExtendedInput = InputView.extend({
+    template: templates.includes.formInput()
+});
 
 module.exports = FormView.extend({
   fields: function () {
     return [
-      new InputView({
+      new ExtendedInput({
         label: 'Name',
         name: 'name',
         el: this.el.querySelector('#company-name'),
@@ -14,7 +18,7 @@ module.exports = FormView.extend({
         placeholder: 'Name',
         parent: this
       }),
-      new InputView({
+      new ExtendedInput({
         label: 'Image',
         name: 'image',
         value: this.model && this.model.img || '',
@@ -22,7 +26,7 @@ module.exports = FormView.extend({
         placeholder: 'Image',
         parent: this
       }),
-      new InputView({
+      new ExtendedInput({
         label: 'Area',
         name: 'area',
         value: this.model && this.model.area || '',
@@ -30,7 +34,7 @@ module.exports = FormView.extend({
         placeholder: 'Area',
         parent: this
       }),
-      new InputView({
+      new ExtendedInput({
         label: 'Site',
         name: 'site',
         value: this.model && this.model.site || '',
@@ -38,7 +42,7 @@ module.exports = FormView.extend({
         placeholder: 'Site',
         parent: this
       }),
-      new InputView({
+      new ExtendedInput({
         label: 'Contacts',
         name: 'contacts',
         value: this.model && this.model.contacts || '',
@@ -46,7 +50,7 @@ module.exports = FormView.extend({
         placeholder: 'Contacts',
         parent: this
       }),
-      new InputView({
+      new ExtendedInput({
         label: 'Description',
         name: 'description',
         value: this.model && this.model.description || '',
@@ -54,7 +58,7 @@ module.exports = FormView.extend({
         placeholder: 'Description',
         parent: this
       }),
-      new InputView({
+      new ExtendedInput({
         label: 'History',
         name: 'history',
         value: this.model && this.model.history || '',

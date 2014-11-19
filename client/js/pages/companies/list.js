@@ -67,15 +67,15 @@ module.exports = PageView.extend({
     return false;
   },
   contacted: function () {
-    log('Fetching  contacted Companies')
+    log('Fetching contacted Companies');
     var aux =  filtering(this.collection,'Contacted');
 
     aux = new AmpersandCollection(aux, {model: Company});
     rerender(this,aux);
     return false;
-  },  
+  },
   selected: function () {
-    log('Fetching  Selected Companies')
+    log('Fetching Selected Companies');
     var aux = filtering(this.collection,'Selected');
 
     aux = new AmpersandCollection(aux, {model: Company});
@@ -83,7 +83,7 @@ module.exports = PageView.extend({
     return false;
   },
   closeddeal: function () {
-    log('Fetching  Closed Deal Companies')
+    log('Fetching Closed Deal Companies');
     var aux = filtering(this.collection,'Closed Deal');
 
     aux = new AmpersandCollection(aux, {model: Company});
@@ -91,7 +91,7 @@ module.exports = PageView.extend({
     return false;
   },
   rejected: function () {
-    log('Fetching  Rejected Companies')
+    log('Fetching Rejected Companies');
     var aux = filtering(this.collection,'Rejected');
 
     aux = new AmpersandCollection(aux, {model: Company});
@@ -99,15 +99,15 @@ module.exports = PageView.extend({
     return false;
   },
   giveup: function () {
-    log('Fetching  Gave up Companies')
+    log('Fetching Gave up Companies');
     var aux = filtering(this.collection,'Give Up');
 
     aux = new AmpersandCollection(aux, {model: Company});
     rerender(this,aux);
     return false;
-  },    
+  },
   inconversations: function () {
-    log('Fetching  Selected Companies')
+    log('Fetching Selected Companies');
     var aux = filtering(this.collection,'In Conversations');
 
     aux = new AmpersandCollection(aux, {model: Company});
@@ -115,7 +115,7 @@ module.exports = PageView.extend({
     return false;
   },
   innegotiations: function () {
-    log('Fetching  Selected Companies')
+    log('Fetching Selected Companies');
     var aux = filtering(this.collection,'In Negotiations');
 
     aux = new AmpersandCollection(aux, {model: Company});
@@ -123,7 +123,7 @@ module.exports = PageView.extend({
     return false;
   },
   me: function () {
-    log('Fetching  Selected Companies')
+    log('Fetching Selected Companies');
     var aux = this.collection.filter(function(company){
       return company.participation && company.participation.member == app.me.id;
     });
@@ -133,7 +133,7 @@ module.exports = PageView.extend({
     return false;
   },
   noMember: function () {
-    log('Fetching  Selected Companies')
+    log('Fetching Selected Companies');
     var aux = this.collection.filter(function(company){
       return company.participation && !company.participation.member;
     });
@@ -143,7 +143,7 @@ module.exports = PageView.extend({
     return false;
   },
   noParticipation: function () {
-    log('Fetching  Selected Companies')
+    log('Fetching Selected Companies');
     var aux = this.collection.filter(function(company){
       return !company.participation;
     });
