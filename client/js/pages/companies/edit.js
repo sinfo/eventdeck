@@ -18,14 +18,14 @@ module.exports = PageView.extend({
     'model.img': {
       type: 'attribute',
       hook: 'img',
-      name: 'src'
+      name: 'background'
     }
   },
   subviews: {
     form: {
       // this is the css selector that will be the `el` in the
       // prepareView function.
-      container: 'form',
+      container: '[data-hook=company-form]',
       // this says we'll wait for `this.model` to be truthy
       waitFor: 'model',
       prepareView: function (el) {
@@ -51,6 +51,9 @@ module.exports = PageView.extend({
           }
         });
       }
+    },
+    participations: {
+
     }
   }
 });
