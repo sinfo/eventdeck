@@ -17,6 +17,7 @@ function rerender(page,collection){
     page.renderCollection(collection, CompanyView, page.queryByHook('companies-list'));
     return false;
   }
+var selectedFilter = '';
 
 module.exports = PageView.extend({
   pageTitle: 'Companies',
@@ -79,6 +80,10 @@ module.exports = PageView.extend({
     var aux = filtering(this.collection,'Selected');
 
     aux = new AmpersandCollection(aux, {model: Company});
+
+    this.queryByHook('selected').classList.add('selected');
+
+    
     rerender(this,aux);
     return false;
   },
