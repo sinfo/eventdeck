@@ -6,18 +6,25 @@ var Company = require('client/js/models/company');
 var AmpersandCollection = require('ampersand-collection');
 
 
+var selectedFilter = 'showall';
 
 function filtering(collection,filter){
     return collection.filter(function(company){
       return company.participation && company.participation.status == filter;
     });
   }
-function rerender(page,collection){
+function rerender(page, collection, filter){
+
+    console.log(page.queryByHook(selectedFilter));
     page.renderWithTemplate();
     page.renderCollection(collection, CompanyView, page.queryByHook('companies-list'));
+
+    page.queryByHook(selectedFilter).classList.remove('selected');
+    page.queryByHook(filter).classList.add('selected');
+    selectedFilter = filter;
+    
     return false;
   }
-var selectedFilter = '';
 
 module.exports = PageView.extend({
   pageTitle: 'Companies',
@@ -49,6 +56,8 @@ module.exports = PageView.extend({
     if (!this.collection.length) {
       this.fetchCollection();
     }
+
+    this.queryByHook(selectedFilter).classList.add('selected');
   },
   fetchCollection: function () {
     log('Fetching companies');
@@ -72,7 +81,9 @@ module.exports = PageView.extend({
     var aux =  filtering(this.collection,'Contacted');
 
     aux = new AmpersandCollection(aux, {model: Company});
-    rerender(this,aux);
+
+    rerender(this,aux,'contacted');
+
     return false;
   },
   selected: function () {
@@ -81,10 +92,8 @@ module.exports = PageView.extend({
 
     aux = new AmpersandCollection(aux, {model: Company});
 
-    this.queryByHook('selected').classList.add('selected');
+    rerender(this,aux,'selected');
 
-    
-    rerender(this,aux);
     return false;
   },
   closeddeal: function () {
@@ -92,7 +101,9 @@ module.exports = PageView.extend({
     var aux = filtering(this.collection,'Closed Deal');
 
     aux = new AmpersandCollection(aux, {model: Company});
-    rerender(this,aux);
+
+    rerender(this,aux,'closeddeal');
+
     return false;
   },
   rejected: function () {
@@ -100,7 +111,9 @@ module.exports = PageView.extend({
     var aux = filtering(this.collection,'Rejected');
 
     aux = new AmpersandCollection(aux, {model: Company});
-    rerender(this,aux);
+
+    rerender(this,aux,'rejected');
+
     return false;
   },
   giveup: function () {
@@ -108,7 +121,9 @@ module.exports = PageView.extend({
     var aux = filtering(this.collection,'Give Up');
 
     aux = new AmpersandCollection(aux, {model: Company});
-    rerender(this,aux);
+
+    rerender(this,aux,'giveup');
+
     return false;
   },
   inconversations: function () {
@@ -116,15 +131,17 @@ module.exports = PageView.extend({
     var aux = filtering(this.collection,'In Conversations');
 
     aux = new AmpersandCollection(aux, {model: Company});
-    rerender(this,aux);
+
+    rerender(this,aux,'inconversations');
+
     return false;
   },
   innegotiations: function () {
     log('Fetching Selected Companies');
     var aux = filtering(this.collection,'In Negotiations');
 
-    aux = new AmpersandCollection(aux, {model: Company});
-    rerender(this,aux);
+    rerender(this,aux,'innegotiations');
+
     return false;
   },
   me: function () {
@@ -133,8 +150,8 @@ module.exports = PageView.extend({
       return company.participation && company.participation.member == app.me.id;
     });
 
-    aux = new AmpersandCollection(aux, {model: Company});
-    rerender(this,aux);
+    rerender(this,aux,'me');
+    
     return false;
   },
   noMember: function () {
@@ -143,8 +160,8 @@ module.exports = PageView.extend({
       return company.participation && !company.participation.member;
     });
 
-    aux = new AmpersandCollection(aux, {model: Company});
-    rerender(this,aux);
+    rerender(this,aux,'noMember');
+    
     return false;
   },
   noParticipation: function () {
@@ -153,16 +170,18 @@ module.exports = PageView.extend({
       return !company.participation;
     });
 
-    aux = new AmpersandCollection(aux, {model: Company});
-    rerender(this,aux);
+    rerender(this,aux,'noParticipation');
     return false;
   },
   showall: function () {
-    rerender(this,this.collection);
+    this.queryByHook(selectedFilter).classList.remove('selected');
+    this.queryByHook('showall').classList.add('selected');
+    selectedFilter = 'showall';
+
+    rerender(this,aux,'showall');
     return false;
   },
   hide: function(){
-    console.log(this.hidden);
     if(!this.hidden){
       this.queryByHook('awesome-sidebar').style.display = 'none';
       this.hidden = true;
