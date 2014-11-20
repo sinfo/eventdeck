@@ -12,7 +12,6 @@ module.exports = FormView.extend({
       new ExtendedInput({
         label: 'Name',
         name: 'name',
-        el: this.el.querySelector('#company-name'),
         value: this.model && this.model.name || '',
         required: false,
         placeholder: 'Name',

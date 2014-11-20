@@ -1,9 +1,15 @@
 section.page.companies.edit
 
-  h2 Edit company
+  div(data-hook="view-container")
 
-  form.ink-form(data-hook="company-form")
-    fieldset(data-hook="field-container")
-      #company-name(data-hook='company-name')
-    .buttons
-      button.ink-button(data-hook="reset", type="submit") Submit
+  .awesome-sidebar
+    .header
+      b Edit Company
+      .push-right.hide-button HIDE
+
+    .button-group.small
+      a.ink-button Edit Company Information
+
+    b Edit Participations
+    .button-group.small(data-hook="company-participations")
+
