@@ -1,10 +1,6 @@
 .content
-  b.kind(data-hook="kind")
-  .note.push-right(data-hook="posted")
-  span.status(data-hook="status")
-  div(data-hook="text")
-  div(data-hook="member-name")
-
-  .button-group
-    a.ink-button.orange.small(data-hook="action-edit") Edit
-    div(data-hook="admin-container")
+  span(data-hook="event", style="margin-right: 4pt;")
+  span(data-hook="status")
+  div
+    p(data-hook="member")
+    p(data-hook="kind")
