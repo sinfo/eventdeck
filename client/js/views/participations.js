@@ -4,7 +4,7 @@ var templates = require('client/js/templates');
 var ParticipationView = require('client/js/views/participation');
 
 module.exports = PageView.extend({
-  template: templates.partials.participations,
+  template: templates.partials.participations.area,
   render: function () {
     this.renderWithTemplate();
     this.renderCollection(this.collection, ParticipationView, this.queryByHook('participations-list'));
