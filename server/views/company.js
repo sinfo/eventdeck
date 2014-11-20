@@ -5,7 +5,7 @@ module.exports = function render(content) {
     return content.map(renderObject);
   }
 
-  return renderObject(content);  
+  return renderObject(content);
 };
 
 function renderObject(model) {
@@ -15,6 +15,7 @@ function renderObject(model) {
     area: model.area,
     description: model.description,
     img: model.img,
+    storedImg: model.img && '/api/images/'+ new Buffer(model.img || '').toString('base64'),
     url: model.url,
     contacts: model.contacts,
     history: model.history,
@@ -34,7 +35,7 @@ function renderObject(model) {
           via: participation.payment.via,
         },
         items: participation.items && participation.items.map(function(item) {
-          return { 
+          return {
             id: item.id,
             amount: item.amount,
             kind: item.kind

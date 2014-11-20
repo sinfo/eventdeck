@@ -22,6 +22,7 @@ module.exports = AmpModel.extend({
     name: ['string'],
     description: ['string'],
     img: ['string'],
+    storedImg: ['string'],
     site:['string'],
     status:['status'],
     contacts:['string'],
@@ -58,7 +59,7 @@ module.exports = AmpModel.extend({
     background: {
       deps: ['img'],
       fn: function () {
-        return 'background-image:url('+this.img+'?width=150);';
+        return 'background-image:url('+this.storedImg+');';
       }
     },
     communicationsApi: {

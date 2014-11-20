@@ -23,30 +23,11 @@ module.exports = {
     log('Blasting off!');
 
     this.me = new Me();
-
-    this.me.fetch({
-      success: function(model, response, options) {
-        log('Hello ' + model.name + '!');
-        model.authenticated = true;
-      },
-      error: function(model, response, options) {
-        log('Please log in first!');
-        model.authenticated = false;
-
-        self.router.history.navigate('/login', {trigger: true});
-      }
-    });
-
     this.events = new Events();
-    this.events.fetch({
-      success: function(collection, response, options) {
-        app.me.selectedEvent = collection.toJSON()[0].id;
-        log('Got '+collection.length+' events, '+app.me.selectedEvent+' is the default one. ', collection.toJSON());
-      }
-    });
-
     this.members = new Members();
     this.companies = new Companies();
+
+    this.fetchInitialData();
 
     // init our URL handlers and the history tracker
     this.router = new Router();
@@ -68,6 +49,28 @@ module.exports = {
     });
   },
 
+  fetchInitialData: function () {
+    this.me.fetch({
+      success: function(model, response, options) {
+        log('Hello ' + model.name + '!');
+        model.authenticated = true;
+      },
+      error: function(model, response, options) {
+        log('Please log in first!');
+        model.authenticated = false;
+
+        self.router.history.navigate('/login', {trigger: true});
+      }
+    });
+
+    this.events.fetch({
+      success: function(collection, response, options) {
+        app.me.selectedEvent = collection.toJSON()[0].id;
+        log('Got '+collection.length+' events, '+app.me.selectedEvent+' is the default one. ', collection.toJSON());
+      }
+    });
+  },
+
   // This is how you navigate around the app.
   // this gets called by a global click handler that handles
   // all the <a> tags in the app.
@@ -85,6 +88,7 @@ module.exports = {
 
   login: function (id, code) {
     $.get('/api/auth/login/' + id + '/' + code, function () {
+      app.fetchInitialData();
       app.me.authenticated = true;
       app.navigate('/');
     });

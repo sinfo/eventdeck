@@ -15,7 +15,7 @@ module.exports = PageView.extend({
     'model.name': {
       hook: 'name'
     },
-    'model.img': {
+    'model.storedImg': {
       type: 'attribute',
       hook: 'img',
       name: 'src'

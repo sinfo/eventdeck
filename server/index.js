@@ -34,6 +34,7 @@ server.pack.register([
     { plugin: require('hapi-swagger'), options: config.swagger },
     { plugin: require('moonboots_hapi'), options: moonbootsConfig },
     require('hapi-auth-cookie'),
+    { plugin: require('./plugins/images'), options: config.images },
   ],
   function (err) {
 
