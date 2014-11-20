@@ -68,7 +68,8 @@
     "socket.io-client": "^1.2.0",
     "stylizer": "^1.0.0",
     "templatizer": "^1.0.0",
-    "underscore": "^1.6.0"
+    "underscore": "^1.6.0",
+    "hoek": "^2.9.0"
   },
   "devDependencies": {
     "bunyan": "~1.2.1",
