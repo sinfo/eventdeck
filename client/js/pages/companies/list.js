@@ -174,10 +174,6 @@ module.exports = PageView.extend({
     return false;
   },
   showall: function () {
-    this.queryByHook(selectedFilter).classList.remove('selected');
-    this.queryByHook('showall').classList.add('selected');
-    selectedFilter = 'showall';
-
     rerender(this,aux,'showall');
     return false;
   },
