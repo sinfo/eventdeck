@@ -26,8 +26,8 @@ module.exports = PageView.extend({
     'click [data-hook~=action-edit-company]': 'handleEditCompanyClick',
     'click [data-hook~=action-edit-participations]': 'handleEditParticipationsClick',
   },
-  handleViewParticipationsClick: function () {
-    var view = new ViewParticipations({ model: this.model, parent: this });
+  handleEditParticipationsClick: function () {
+    var view = new ParticipationsView({ collection: this.model.participations });
     this.switcher.set(view);
     return false;
   },
@@ -75,22 +75,6 @@ var EditCompany = PageView.extend({
               }
             });
           }
-        });
-      }
-    }
-  }
-});
-
-var ViewParticipations = PageView.extend({
-  template: templates.partials.companies.participations,
-  subviews: {
-    participations: {
-      container: '[data-hook=company-participations]',
-      waitFor: 'model.participations',
-      prepareView: function (el) {
-        return new ParticipationsView({
-          el: el,
-          collection: this.model.participations
         });
       }
     }
