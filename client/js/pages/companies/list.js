@@ -12,7 +12,7 @@ function filtering(collection,filter){
     return collection.filter(function(company){
       return company.participation && company.participation.status == filter;
     });
-  }
+}
 function rerender(page, collection, filter){
 
     console.log(page.queryByHook(selectedFilter));
@@ -24,7 +24,7 @@ function rerender(page, collection, filter){
     selectedFilter = filter;
 
     return false;
-  }
+}
 
 module.exports = PageView.extend({
   pageTitle: 'Companies',
@@ -140,6 +140,8 @@ module.exports = PageView.extend({
     log('Fetching Selected Companies');
     var aux = filtering(this.collection,'In Negotiations');
 
+    aux = new AmpersandCollection(aux, {model: Company});
+
     rerender(this,aux,'innegotiations');
 
     return false;
@@ -149,6 +151,8 @@ module.exports = PageView.extend({
     var aux = this.collection.filter(function(company){
       return company.participation && company.participation.member == app.me.id;
     });
+
+    aux = new AmpersandCollection(aux, {model: Company});
 
     rerender(this,aux,'me');
 
@@ -160,6 +164,8 @@ module.exports = PageView.extend({
       return company.participation && !company.participation.member;
     });
 
+    aux = new AmpersandCollection(aux, {model: Company});
+
     rerender(this,aux,'noMember');
 
     return false;
@@ -170,11 +176,13 @@ module.exports = PageView.extend({
       return !company.participation;
     });
 
+    aux = new AmpersandCollection(aux, {model: Company});
+    
     rerender(this,aux,'noParticipation');
     return false;
   },
   showall: function () {
-    rerender(this,aux,'showall');
+    rerender(this,this.collection,'showall');
     return false;
   },
   hide: function(){
