@@ -3,6 +3,7 @@ var View = require('ampersand-view');
 var templates = require('client/js/templates');
 var ViewSwitcher = require('ampersand-view-switcher');
 var CommunicationForm = require('client/js/forms/communication');
+var _ = require('client/js/helpers/underscore');
 
 module.exports = View.extend({
   template: templates.cards.communication,
@@ -104,7 +105,7 @@ var EditCommunication = View.extend({
           el: el,
           model: this.model,
           submitCallback: function (data) {
-            data = self.model.changedAttributes(data);
+            data = self.model.changedAttributes(_.compactObject(data));
             if(!data) {
               return self.parent.handleViewClick();
             }
