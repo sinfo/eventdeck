@@ -86,7 +86,7 @@ module.exports = {
       this.router.history.navigate(url, {trigger: true});
     }
     else {
-      self.router.history.navigate('/login', {trigger: true});
+      this.router.history.navigate('/login', {trigger: true});
     }
   },
 
