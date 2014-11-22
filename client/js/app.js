@@ -3,6 +3,7 @@ var _ = require('underscore');
 var log = require('bows')('eventdeck');
 var config = require('clientconfig');
 var $ = require('jquery');
+var io = require('socket.io-client');
 
 var Router = require('./router');
 var MainView = require('./views/main');
@@ -23,6 +24,7 @@ module.exports = {
     log('Blasting off!');
 
     this.me = new Me();
+    this.socket = io.connect();
     this.events = new Events();
     this.members = new Members();
     this.companies = new Companies();

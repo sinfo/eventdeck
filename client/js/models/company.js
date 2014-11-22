@@ -5,11 +5,16 @@ var AmpCollection = require('ampersand-collection');
 var options = require('options');
 
 var Communication = require('./communication');
+var Comment = require('./comment');
 var Participation = require('./participation');
 
 
 var CommunicationCollection = AmpCollection.extend({
     model: Communication
+});
+
+var CommentCollection = AmpCollection.extend({
+    model: Comment
 });
 
 var ParticipationCollection = AmpCollection.extend({
@@ -32,6 +37,7 @@ module.exports = AmpModel.extend({
   },
   collections: {
     communications: CommunicationCollection,
+    comments: CommentCollection,
     participations: ParticipationCollection
   },
   session: {
@@ -60,6 +66,12 @@ module.exports = AmpModel.extend({
       deps: ['img'],
       fn: function () {
         return 'background-image:url('+this.storedImg+');';
+      }
+    },
+    commentsApi: {
+      deps: ['id'],
+      fn: function () {
+        return '/api/companies/' + this.id + '/comments';
       }
     },
     communicationsApi: {

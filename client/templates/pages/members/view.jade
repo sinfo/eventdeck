@@ -2,7 +2,27 @@ section.page.member.view
 
   h2(data-hook='name')
 
-  .image-logo(data-hook='img')
+  img.image-logo(data-hook='img')
+
+  h4(data-hook='roleIds')
+
+  h4 Mails
+  ul
+    li
+      div(data-hook='mails.main')
+    li
+      div(data-hook='mails.google')
+    li
+      div(data-hook='mails.microsoft')
+    li
+      div(data-hook='mails.dropbox')
+
+  h4.div Phone
+  ul
+    li
+      div(data-hook='phones')
+
+  a(data-hook='fbURL') Facebook
 
   .buttons
     a.ink-button(data-hook='edit') Edit
