@@ -36,9 +36,15 @@ module.exports = PageView.extend({
           el: el,
           model: this.model,
           submitCallback: function (data) {
+            data.roles = data.roles.map(function(r) {
+              return {
+                id: r
+              };
+            }) || [],
 
             populate(data, this.model, ['facebook.id', 'facebook.username', 'mails.main', 'mails.institutional', 'mails.dropbox', 'mails.google', 'mails.microsoft']);
             data = self.model.changedAttributes(data);
+            console.log(data);
             model.save(data, {
               patch: true,
               wait: false,
