@@ -6,6 +6,9 @@ module.exports = Member.extend({
 
   session: {
     selectedEvent: ['string'],
+    online: ['boolean'],
+    reconnecting: ['boolean'],
+    error: ['boolean'],
     authenticated: ['boolean']
   },
 
@@ -13,7 +16,7 @@ module.exports = Member.extend({
     selectedEventIndex: {
       deps: ['selectedEvent'],
       fn: function () {
-        return app.events.map(function (e) { return e.id }).indexOf(this.selectedEvent);
+        return app.events.map(function (e) { return e.id; }).indexOf(this.selectedEvent);
       }
     }
   }
