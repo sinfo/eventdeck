@@ -3,9 +3,37 @@ var View = require('ampersand-view');
 var templates = require('client/js/templates');
 var ViewSwitcher = require('ampersand-view-switcher');
 var ParticipationForm = require('client/js/forms/participation');
+var async = require('async');
 
 module.exports =  View.extend({
   template: templates.cards.participation,
+  initialize: function (spec) {
+    var self = this;
+    async.parallel([
+      function getMember (cb){
+        if(self.model.member){
+          app.members.getOrFetch(self.model.member, {all: true}, function (err, model) {
+            if (err) {
+              log.error('couldnt find a member with id: ' + self.model.member);
+              return cb();
+            }
+            self.model.memberDetails = model;
+            log('Got member', model.name);
+            cb();
+          });
+        }
+      },
+      function getEvent (cb){
+        app.events.getOrFetch(self.model.event, {all: true}, function (err, model) {
+          if (err) {
+            log.error('couldnt find a event with id: ' + self.model.event);
+          }
+          self.model.eventDetails = model;
+          log('Got event', model.name);
+        });
+      }
+    ], self.render);
+  },
   render: function () {
     this.renderWithTemplate();
     this.viewContainer = this.queryByHook('view-container');
@@ -37,8 +65,8 @@ module.exports =  View.extend({
 var ViewParticipation = View.extend({
   template: templates.partials.participations.view,
   bindings: {
-    'model.event': '[data-hook~=event]',
-    'model.member': '[data-hook~=member]',
+    'model.eventDetails.name': '[data-hook~=event]',
+    'model.memberDetails.name': '[data-hook~=member]',
     'model.status': '[data-hook~=status]',
     'model.kind': '[data-hook~=kind]'
   },

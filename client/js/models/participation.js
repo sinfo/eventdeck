@@ -2,6 +2,7 @@
 var AmpState = require('ampersand-state');
 var AmpModel = require('ampersand-model');
 var AmpCollection = require('ampersand-collection');
+var Member = require('./member');
 
 var Payment = AmpState.extend({
   props: {
@@ -34,6 +35,10 @@ module.exports = AmpState.extend({
   },
   children: {
     payment: Payment
+  },
+  session: {
+    memberDetails: Member,
+    eventDetails: Event
   },
   collections: {
     items: ItemCollection
