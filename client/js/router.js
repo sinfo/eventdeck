@@ -15,6 +15,7 @@ var Companies = require('./pages/companies/list');
 var CompanyAddPage = require('./pages/companies/add');
 var CompanyEditPage = require('./pages/companies/edit');
 var CompanyViewPage = require('./pages/companies/view');
+var CompanyMemberTable = require('./pages/companies/table');
 
 module.exports = Router.extend({
   routes: {
@@ -26,6 +27,7 @@ module.exports = Router.extend({
     'members/:id': 'memberView',
     'members/:id/edit': 'memberEdit',
     'companies': 'companies',
+    'companies/table': 'companiesTable',
     'companies/add': 'companyAdd',
     'companies/:id': 'companyView',
     'companies/:id/edit': 'companyEdit',
@@ -93,6 +95,11 @@ module.exports = Router.extend({
     }));
   },
 
+  companiesTable: function () {
+    this.trigger('page', new CompanyMemberTable({
+      collection: app.members
+    }));
+  },
 
   catchAll: function () {
     this.redirectTo('');
