@@ -23,13 +23,14 @@ module.exports = View.extend({
     var self = this;
     this.collection = null;
     var companies = app.companies.filter(function(company){
+      console.log("FILTER", company.participation.member, self.model.id);
       return company.participation && company.participation.member == self.model.id;
     });
     this.collection = new AmpersandCollection(companies, {model: Company});
-    console.log("COMPANIES", companies)
-    console.log("MODEL", self.model)
-    console.log("MODEL ID", self.model.id)
-    console.log("INITIALIZE", this.collection.serialize())
+    console.log("COMPANIES", companies);
+    console.log("MODEL", self.model);
+    console.log("MODEL ID", self.model.id);
+    console.log("INITIALIZE", this.collection.serialize());
     this.render();
   },
   render: function () {
