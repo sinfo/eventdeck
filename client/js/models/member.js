@@ -28,6 +28,7 @@ var Role = AmpState.extend({
   }
 });
 
+
 var RoleCollection = AmpCollection.extend({
     model: Role
 });
@@ -47,9 +48,7 @@ module.exports = AmpModel.extend({
   collections: {
     roles: RoleCollection
   },
-  session: {
-    selected: ['boolean', true, false]
-  },
+
   derived: {
     isAdmin: {
       deps: ['roles'],

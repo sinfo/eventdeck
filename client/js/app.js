@@ -25,10 +25,10 @@ module.exports = {
 
     this.me = new Me();
     this.socket = io.connect();
+    this.socketInit();
     this.events = new Events();
     this.members = new Members();
     this.companies = new Companies();
-
     this.fetchInitialData();
 
     // init our URL handlers and the history tracker
@@ -100,6 +100,39 @@ module.exports = {
     $.get('/api/auth/logout', function () {
       app.me.authenticated = false;
       app.navigate('/login');
+    });
+  },
+
+  socketInit: function () {
+    var self = this;
+    this.socket.on('connect', function(){
+      log('Connected!');
+      self.me.online = true;
+      self.me.error = false;
+    });
+    this.socket.on('disconnect', function(){
+      log('Disconnected!');
+      self.me.online = false;
+    });
+    this.socket.on('reconnecting', function(attempts){
+      log('Reconnecting!');
+      self.me.reconnecting = true;
+    });
+    this.socket.on('reconnect', function(attempts){
+      log('Reconnected!');
+      self.me.reconnecting = false;
+    });
+    this.socket.on('reconnect_failed', function(){
+      log('Reconnect failed!');
+      self.me.reconnecting = false;
+    });
+    this.socket.on('reconnect_error', function(error){
+      log('Reconnection error!', error);
+      self.me.error = true;
+    });
+    this.socket.on('error', function(error){
+      log('Connection error!', error);
+      self.me.error = true;
     });
   }
 };
