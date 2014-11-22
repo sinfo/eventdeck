@@ -2,6 +2,7 @@
 var _ = require('underscore');
 var log = require('bows')('eventdeck');
 var config = require('clientconfig');
+var $ = require('jquery');
 
 var Router = require('./router');
 var MainView = require('./views/main');
@@ -11,6 +12,7 @@ var Me = require('./models/me');
 var Events = require('./models/events');
 var Members = require('./models/members');
 var Companies = require('./models/companies');
+var Communications = require('./models/communications');
 
 
 module.exports = {
@@ -21,28 +23,11 @@ module.exports = {
     log('Blasting off!');
 
     this.me = new Me();
-
-    this.me.fetch({
-      success: function(model, response, options) {
-        log('Hello ' + model.name + '!');
-        model.authenticated = true;
-      },
-      error: function(model, response, options) {
-        log('Please log in first!');
-        model.authenticated = false;
-      }
-    });
-
     this.events = new Events();
-    this.events.fetch({
-      success: function(collection, response, options) {
-        app.me.selectedEvent = collection.toJSON()[0].id;
-        log('Got '+collection.length+' events, '+app.me.selectedEvent+' is the default one. ', collection.toJSON());
-      }
-    });
-
     this.members = new Members();
     this.companies = new Companies();
+
+    this.fetchInitialData();
 
     // init our URL handlers and the history tracker
     this.router = new Router();
@@ -61,9 +46,27 @@ module.exports = {
 
       // we have what we need, we can now start our router and show the appropriate page
       self.router.history.start({pushState: true, root: '/'});
+    });
+  },
 
-      if (!self.me.authenticated) {
+  fetchInitialData: function () {
+    this.me.fetch({
+      success: function(model, response, options) {
+        log('Hello ' + model.name + '!');
+        model.authenticated = true;
+      },
+      error: function(model, response, options) {
+        log('Please log in first!');
+        model.authenticated = false;
+
         self.router.history.navigate('/login', {trigger: true});
+      }
+    });
+
+    this.events.fetch({
+      success: function(collection, response, options) {
+        app.me.selectedEvent = collection.toJSON()[0].id;
+        log('Got '+collection.length+' events, '+app.me.selectedEvent+' is the default one. ', collection.toJSON());
       }
     });
   },
@@ -81,6 +84,21 @@ module.exports = {
     else {
       self.router.history.navigate('/login', {trigger: true});
     }
+  },
+
+  login: function (id, code) {
+    $.get('/api/auth/login/' + id + '/' + code, function () {
+      app.fetchInitialData();
+      app.me.authenticated = true;
+      app.navigate('/');
+    });
+  },
+
+  logout: function () {
+    $.get('/api/auth/logout', function () {
+      app.me.authenticated = false;
+      app.navigate('/login');
+    });
   }
 };
 

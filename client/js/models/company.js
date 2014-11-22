@@ -2,6 +2,7 @@
 var AmpState = require('ampersand-state');
 var AmpModel = require('ampersand-model');
 var AmpCollection = require('ampersand-collection');
+var options = require('options');
 
 var Communication = require('./communication');
 var Participation = require('./participation');
@@ -21,8 +22,8 @@ module.exports = AmpModel.extend({
     name: ['string'],
     description: ['string'],
     img: ['string'],
+    storedImg: ['string'],
     site:['string'],
-    url:['string'],
     status:['status'],
     contacts:['string'],
     history:['string'],
@@ -37,6 +38,12 @@ module.exports = AmpModel.extend({
     selected: ['boolean', true, false]
   },
   derived: {
+    thread: {
+      deps: ['id'],
+      fn: function () {
+        return 'company-' + this.id;
+      }
+    },
     editUrl: {
       deps: ['id'],
       fn: function () {
@@ -52,7 +59,7 @@ module.exports = AmpModel.extend({
     background: {
       deps: ['img'],
       fn: function () {
-        return 'background-image:url('+this.img+'?width=150);';
+        return 'background-image:url('+this.storedImg+');';
       }
     },
     communicationsApi: {
@@ -66,6 +73,32 @@ module.exports = AmpModel.extend({
       fn: function () {
         return this.participations.filter(function(p){ return p.event == app.me.selectedEvent; })[0];
       }
+    },
+    statusDetails: {
+      deps: ['participations'],
+      fn: function () {
+        var self = this;
+        var participations = self.participations.toJSON();
+        var participation = participations.filter(function(p){
+          return p.event == app.me.selectedEvent;
+        })[0];
+
+        var details = options.statuses.company.filter(function (status) {
+          return participation && participation.status == status.name;
+        })[0] || {};
+
+        details.style = details && details.color && 'background-color:' + details.color;
+        return details;
+      }
+    },
+    toJSON: function () {
+      return function () {
+        var json = this.serialize();
+        delete json.communications;
+        delete json.storedImg;
+        return json;
+      }
     }
+
   }
  });

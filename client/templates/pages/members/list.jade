@@ -1,10 +1,48 @@
 section.page.members.list
-  h2 Members
-
   div(data-hook="members-list")
 
-  p Try it by clicking the buttons
+  div.button.awesome-sidebar-button(data-hook='hide') Show
 
-  div
-    button.ink-button(data-hook="fetch") Fetch
-    a.ink-button(href="/members/add") Add Member
+  .awesome-sidebar(data-hook="awesome-sidebar")
+    .header
+      b Members
+      .push-right.hide-button(data-hook='hide') HIDE
+
+    .button-group.small
+      .ink-button(data-hook='showall') Show all
+      a.ink-button(href="/members/add") Add Member
+
+    b Filter Role
+    ul.filters.small.unstyled
+      li
+        .ink-button(data-hook='coordination') Coordination
+      li
+        .ink-button(data-hook='design') Design
+      li
+        .ink-button(data-hook='devteam') Dev Team
+      li
+        .ink-button(data-hook='events') Events
+      li
+        .ink-button(data-hook='extrelations') External Relations
+      li
+        .ink-button(data-hook='ia') Innovation Awards
+      li
+        .ink-button(data-hook='internalrelations') Internal Relations
+      li
+        .ink-button(data-hook='marketing') Marketing
+
+      li
+        .ink-button(data-hook='marketingManager') Marketing Manager
+      li
+        .ink-button(data-hook='pr') Public Relations
+      li
+        .ink-button(data-hook='partnerships') Strategic Partnerships
+      li
+        .ink-button(data-hook='sysadmin') SysAdmin
+      li
+        .ink-button(data-hook='treasury') Treasury
+
+    b Filter Member
+    .button-group.small
+      .ink-button(data-hook='me') Me
+      .ink-button(data-hook='showall') Show All

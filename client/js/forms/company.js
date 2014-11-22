@@ -1,19 +1,15 @@
 var FormView = require('ampersand-form-view');
 var InputView = require('ampersand-input-view');
 var ArrayInputView = require('ampersand-array-input-view');
+var templates = require('client/js/templates');
+var ExtendedInput = InputView.extend({
+    template: templates.includes.formInput()
+});
 
 module.exports = FormView.extend({
   fields: function () {
     return [
-      new InputView({
-        label: 'Id',
-        name: 'id',
-        value: this.model && this.model.id || '',
-        required: false,
-        placeholder: 'Id',
-        parent: this
-      }),
-      new InputView({
+      new ExtendedInput({
         label: 'Name',
         name: 'name',
         value: this.model && this.model.name || '',
@@ -21,30 +17,15 @@ module.exports = FormView.extend({
         placeholder: 'Name',
         parent: this
       }),
-      new InputView({
-        label: 'Site',
-        name: 'site',
-        value: this.model && this.model.site || '',
+      new ExtendedInput({
+        label: 'Image',
+        name: 'image',
+        value: this.model && this.model.img || '',
         required: false,
-        placeholder: 'Site',
+        placeholder: 'Image',
         parent: this
       }),
-      new InputView({
-        label: 'Contacts',
-        name: 'contacts',
-        value: this.model && this.model.contacts || '',
-        required: false,
-        placeholder: 'Contacts',
-        parent: this
-      }),
-      new ArrayInputView({
-        label: 'Items',
-        name: 'items',
-        value: this.model && this.model.items || [],
-        minLength: 0,
-        parent: this
-      }),      
-      new InputView({
+      new ExtendedInput({
         label: 'Area',
         name: 'area',
         value: this.model && this.model.area || '',
@@ -52,13 +33,38 @@ module.exports = FormView.extend({
         placeholder: 'Area',
         parent: this
       }),
-      new ArrayInputView({
-        label: 'Participations',
-        name: 'participations',
-        value: this.model && this.model.participations || [],
-        minLength: 0,
+      new ExtendedInput({
+        label: 'Site',
+        name: 'site',
+        value: this.model && this.model.site || '',
+        required: false,
+        placeholder: 'Site',
         parent: this
-      })
+      }),
+      new ExtendedInput({
+        label: 'Contacts',
+        name: 'contacts',
+        value: this.model && this.model.contacts || '',
+        required: false,
+        placeholder: 'Contacts',
+        parent: this
+      }),
+      new ExtendedInput({
+        label: 'Description',
+        name: 'description',
+        value: this.model && this.model.description || '',
+        required: false,
+        placeholder: 'Description',
+        parent: this
+      }),
+      new ExtendedInput({
+        label: 'History',
+        name: 'history',
+        value: this.model && this.model.history || '',
+        required: false,
+        placeholder: 'History',
+        parent: this
+      }),
     ];
   }
 });

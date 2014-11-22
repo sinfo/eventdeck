@@ -40,9 +40,9 @@ function create(member, cb) {
 
 function update(id, member, cb) {
   Member.findOneAndUpdate({id: id}, member, function(err, _member) {
-    if (err) {
+    if (err && err != {}) {
       log.error({ err: err, member: id}, 'error updating member');
-      return cb(Boom.internal());
+      return cb(Boom.badRequest('error updating member'));
     }
     if (!_member) {
       log.warn({ err: 'not found', member: id}, 'error updating member');

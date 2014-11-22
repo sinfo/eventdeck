@@ -17,7 +17,21 @@ options.statuses = {
     { name: 'In Negotiations', color: '#006b75'},
     { name: 'Closed Deal', color: '#009800'},
     { name: 'Rejected', color: '#e11d21'},
-    { name: 'Give Up', color: '#333'} 
+    { name: 'Give Up', color: '#333'}
+  ],
+  communication: [
+    { name: 'Pending Review...', id: 'pending-review', color: '#fbca04' },
+    { name: 'Reviewed.', id: 'reviewed', color: '#e11d21' },
+    { name: 'Approved!', id: 'approved', color: '#009800' },
+  ]
+};
+
+options.kinds = {
+  communications: [
+    'Email To',
+    'Email From',
+    'Meeting',
+    'Phone Call'
   ]
 };
 

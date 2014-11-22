@@ -26,4 +26,8 @@ node_modules
 
 sftp-config.json
 
-public/js/eventdeck.js
+# Compiled results
+client/js/templates.js
+*.css
+
+public/images

@@ -21,8 +21,9 @@ module.exports = View.extend({
     this.listenTo(app.router, 'page', this.handleNewPage);
   },
   events: {
+    'click #logout': 'logout',
     'click a[href]': 'handleLinkClick',
-    'change .base-form select': 'handleEventChange'
+    'change [data-hook~=base-form] select': 'handleEventChange'
   },
   subviews: {
     form: {
@@ -48,7 +49,7 @@ module.exports = View.extend({
     this.pageSwitcher = new ViewSwitcher(this.queryByHook('page-container'), {
       show: function (newView, oldView) {
         // it's inserted and rendered for me
-        document.title = _.result(newView, 'pageTitle') || "EventDeck";
+        document.title = _.result(newView, 'pageTitle') || 'EventDeck';
         document.scrollTop = 0;
 
         // add a class specifying it's active
@@ -105,5 +106,9 @@ module.exports = View.extend({
         dom.removeClass(aTag.parentNode, 'active');
       }
     });
+  },
+
+  logout: function () {
+    app.logout();
   }
 });

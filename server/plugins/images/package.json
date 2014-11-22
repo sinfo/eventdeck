@@ -1,0 +1,12 @@
+{
+  "name": "images",
+  "version": "0.0.0",
+  "description": "Image caching service",
+  "main": "index.js",
+  "dependencies": {
+    "hoek": "~2.9.0",
+    "boom": "~2.6.0",
+    "joi": "~4.9.0",
+    "path": "~0.4.9"
+  }
+}

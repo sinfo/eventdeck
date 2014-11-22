@@ -30,16 +30,24 @@ module.exports = PageView.extend({
       // this says we'll wait for `this.model` to be truthy
       waitFor: 'model',
       prepareView: function (el) {
+        var self = this;
         var model = this.model;
         return new MemberForm({
           el: el,
           model: this.model,
           submitCallback: function (data) {
+            data.roles = data.roles.map(function(r) {
+              return {
+                id: r
+              };
+            }) || [],
 
             populate(data, this.model, ['facebook.id', 'facebook.username', 'mails.main', 'mails.institutional', 'mails.dropbox', 'mails.google', 'mails.microsoft']);
-
+            data = self.model.changedAttributes(data);
+            console.log(data);
             model.save(data, {
-              wait: true,
+              patch: true,
+              wait: false,
               success: function (model, response, options) {
                 app.navigate('/members/'+model.id);
               },

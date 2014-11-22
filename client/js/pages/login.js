@@ -12,11 +12,6 @@ module.exports = PageView.extend({
     'click #loginCode': 'loginCode'
   },
 
-  initialzie: function () {
-    this.id = "";
-    this.code = "";
-  },
-
   loginId: function () {
     var id = this.id = $('#id input').val();
 
@@ -29,13 +24,10 @@ module.exports = PageView.extend({
   },
 
   loginCode: function () {
-    var code = this.code = $('#code input').val();
+    var code = $('#code input').val();
 
     if (code) {
-      $.get('/api/auth/login/' + this.id + '/' + code, function () {
-        app.me.authenticated = true;
-        app.navigate('/');
-      });
+      app.login(this.id, code);
     }
   }
 });

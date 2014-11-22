@@ -41,7 +41,7 @@ module.exports = Router.extend({
     this.trigger('page', new LoginPage());
   },
 
-  loginCode: function () {
+  loginCode: function (id, code) {
     this.trigger('page', new LoginCodePage({
       id: id,
       code: code
