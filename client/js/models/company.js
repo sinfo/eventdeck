@@ -90,6 +90,14 @@ module.exports = AmpModel.extend({
         details.style = details && details.color && 'background-color:' + details.color;
         return details;
       }
+    },
+    toJSON: function () {
+      return function () {
+        var json = this.serialize();
+        delete json.communications;
+        delete json.storedImg;
+        return json;
+      }
     }
 
   }

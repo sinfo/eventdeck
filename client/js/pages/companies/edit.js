@@ -4,6 +4,7 @@ var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var CompanyForm = require('client/js/forms/company');
 var ParticipationsView = require('client/js/views/participations');
+var _ = require('client/js/helpers/underscore');
 
 
 module.exports = PageView.extend({
@@ -14,6 +15,7 @@ module.exports = PageView.extend({
     app.companies.getOrFetch(spec.id, {all: true}, function (err, model) {
       if (err) alert('couldnt find a model with id: ' + spec.id);
       self.model = model;
+      self.render();
     });
   },
   render: function () {
@@ -55,16 +57,17 @@ var EditCompany = PageView.extend({
         }
       },
       prepareView: function (el) {
+        var self = this;
         var model = this.model;
         return new CompanyForm({
           el: el,
           model: this.model,
           submitCallback: function (data) {
-            console.log(data);
+            data = self.model.changedAttributes(_.compactObject(data));
             if(!data) {
-              return this.parent.handleViewClick();
+              return app.navigate('/companies/'+model.id);
             }
-            model.save(data, {
+            self.model.save(data, {
               patch: true,
               wait: false,
               success: function (model, response, options) {
