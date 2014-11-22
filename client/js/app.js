@@ -52,7 +52,9 @@ module.exports = {
   },
 
   fetchInitialData: function () {
-    this.me.fetch({
+    var self = this;
+
+    self.me.fetch({
       success: function(model, response, options) {
         log('Hello ' + model.name + '!');
         model.authenticated = true;
@@ -61,11 +63,11 @@ module.exports = {
         log('Please log in first!');
         model.authenticated = false;
 
-        self.router.history.navigate('/login', {trigger: true});
+        self.router.navigate('/login', {trigger: true});
       }
     });
 
-    this.events.fetch({
+    self.events.fetch({
       success: function(collection, response, options) {
         app.me.selectedEvent = collection.toJSON()[0].id;
         log('Got '+collection.length+' events, '+app.me.selectedEvent+' is the default one. ', collection.toJSON());
