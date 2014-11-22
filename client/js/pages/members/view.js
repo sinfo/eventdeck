@@ -20,6 +20,29 @@ module.exports = PageView.extend({
       type: 'attribute',
       hook: 'edit',
       name: 'href'
+    },
+    'model.mails.dropbox': {
+      hook: 'mails.dropbox'
+    },
+    'model.mails.main': {
+      hook: 'mails.main'
+    },
+    'model.mails.google': {
+      hook: 'mails.google'
+    },
+    'model.mails.microsoft': {
+      hook: 'mails.microsoft'
+    },
+    'model.phones': {
+      hook: 'phones'
+    },
+    'model.roleIds': {
+      hook: 'roleIds'
+    },
+    'model.fbURL':{
+      type: 'attribute',
+      hook: 'fbURL',
+      name: 'href'
     }
   },
   events: {
@@ -32,6 +55,7 @@ module.exports = PageView.extend({
       self.model = model;
     });
   },
+
   handleDeleteClick: function () {
     this.model.destroy({success: function () {
       app.navigate('members');

@@ -32,7 +32,6 @@ var RoleCollection = AmpCollection.extend({
     model: Role
 });
 
-
 module.exports = AmpModel.extend({
   props: {
     id: ['string'],
@@ -77,7 +76,22 @@ module.exports = AmpModel.extend({
       fn: function () {
         return 'background-image:url('+this.img+');';
       }
-    }
+    },
+    roleIds: {
+      deps: ['roles'],
+      fn: function () {
+        return this.roles.map(function (role){
+          return role.id;
+        });
+      }
+    },
+    fbURL: {
+      deps: ['facebook'],
+      fn: function () {
+        return 'http://www.facebook.com/'+this.facebook.username;
+      }
+    },
+
   },
   parse: function (attrs) {
     return attrs;
