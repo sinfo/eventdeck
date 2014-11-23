@@ -63,7 +63,7 @@ module.exports = {
         log('Please log in first!');
         model.authenticated = false;
 
-        self.router.navigate('/login', {trigger: true});
+        self.router.history.navigate('/login', {trigger: true});
       }
     });
 
