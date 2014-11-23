@@ -5,7 +5,7 @@ var AmpCollection = require('ampersand-collection');
 var options = require('options');
 
 var Communication = require('./communication');
-// var Comment = require('./comment');
+var Comment = require('./comment');
 var Participation = require('./participation');
 
 
@@ -13,9 +13,9 @@ var CommunicationCollection = AmpCollection.extend({
     model: Communication
 });
 
-// var CommentCollection = AmpCollection.extend({
-//     model: Comment
-// });
+var CommentCollection = AmpCollection.extend({
+    model: Comment
+});
 
 var ParticipationCollection = AmpCollection.extend({
   model: Participation
@@ -37,7 +37,7 @@ module.exports = AmpModel.extend({
   },
   collections: {
     communications: CommunicationCollection,
-    // comments: CommentCollection,
+    comments: CommentCollection,
     participations: ParticipationCollection
   },
   session: {

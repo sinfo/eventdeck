@@ -5,8 +5,8 @@ var templates = require('client/js/templates');
 var CompanyView = require('client/js/views/company');
 var CommunicationsView = require('client/js/views/communications');
 var Communications = require('client/js/models/communications');
-// var CommentsView = require('client/js/views/comments');
-// var Comments = require('client/js/models/comments');
+var CommentsView = require('client/js/views/comments');
+var Comments = require('client/js/models/comments');
 var ParticipationsView = require('client/js/views/participations');
 
 
@@ -70,17 +70,17 @@ module.exports = PageView.extend({
         });
       }
     },
-    // comments:{
-    //   container: '[data-hook=company-comments]',
-    //   waitFor: 'model.commentsApi',
-    //   prepareView: function (el) {
-    //     var Comms = Comments(this.model.commentsApi);
-    //     return new CommentsView({
-    //       el: el,
-    //       collection: new Comms()
-    //     });
-    //   }
-    // },
+    comments:{
+      container: '[data-hook=company-comments]',
+      waitFor: 'model.commentsApi',
+      prepareView: function (el) {
+        var Comms = Comments(this.model.commentsApi);
+        return new CommentsView({
+          el: el,
+          collection: new Comms()
+        });
+      }
+    },
     communications: {
       container: '[data-hook=company-communications]',
       waitFor: 'model.communicationsApi',
