@@ -79,6 +79,3 @@ server.route({
   path: '/api/{threadKind}/{threadId}/communications/{id}',
   config: handlers.remove
 });
-
-
-

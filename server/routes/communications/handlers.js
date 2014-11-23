@@ -9,6 +9,10 @@ exports.create = {
   auth: 'session',
   tags: ['api','communication'],
   validate: {
+    params: {
+      threadKind: Joi.string().description('Kind of the thread of the communication we want to update'),
+      threadId: Joi.string().description('Id of the thread of the communication we want to update'),
+    },
     payload: {
       thread: Joi.string().required().description('Thread of the communication'),
       event: Joi.string().description('Event of the communication'),
@@ -180,9 +184,9 @@ exports.remove = {
     }
   },
   pre: [
-     // TODO: CHECK PERMISSIONS
+    // TODO: CHECK PERMISSIONS
     { method: 'communication.remove(params.id)', assign: 'communication' }
-     // TODO: REMOVE NOTIFICATIONS
+    // TODO: REMOVE NOTIFICATIONS
   ],
   handler: function (request, reply) {
     reply(render(request.pre.communication));

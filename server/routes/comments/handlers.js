@@ -8,6 +8,10 @@ exports.create = {
   auth: 'session',
   tags: ['api','comment'],
   validate: {
+    params: {
+      threadKind: Joi.string().description('Kind of the thread of the communication we want to update'),
+      threadId: Joi.string().description('Id of the thread of the communication we want to update'),
+    },
     payload: {
       thread: Joi.string().required().description('Thread of the comment'),
       subthread: Joi.string().description('Thread of the comment'),
@@ -32,6 +36,8 @@ exports.update = {
   validate: {
     params: {
       id: Joi.string().required().description('Id of the comment we want to update'),
+      threadKind: Joi.string().description('Kind of the thread of the communication we want to update'),
+      threadId: Joi.string().description('Id of the thread of the communication we want to update'),
     },
     payload: {
       text: Joi.string().description('Text of the comment'),
@@ -54,10 +60,12 @@ exports.get = {
   validate: {
     params: {
       id: Joi.string().required().description('Id of the comment we want to retrieve'),
+      threadKind: Joi.string().description('Kind of the thread of the communication we want to update'),
+      threadId: Joi.string().description('Id of the thread of the communication we want to update'),
     },
     query: {
       fields: Joi.string().default('').description('Fields we want to retrieve'),
-    }   
+    }
   },
   pre: [
     { method: 'comment.get(params.id,query)', assign: 'comment' }
@@ -143,13 +151,15 @@ exports.remove = {
   tags: ['api','comment'],
   validate: {
     params: {
-     // TODO: CHECK PERMISSIONS
-     id: Joi.string().required().description('Id of the comment we want to remove'),
-     // TODO: REMOVE NOTIFICATIONS
+      id: Joi.string().required().description('Id of the comment we want to remove'),
+      threadKind: Joi.string().description('Kind of the thread of the communication we want to update'),
+      threadId: Joi.string().description('Id of the thread of the communication we want to update'),
     }
   },
   pre: [
+    // TODO: CHECK PERMISSIONS
     { method: 'comment.remove(params.id)', assign: 'comment' }
+    // TODO: REMOVE NOTIFICATIONS
   ],
   handler: function (request, reply) {
     reply(render(request.pre.comment));

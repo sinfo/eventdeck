@@ -24,12 +24,12 @@ module.exports = View.extend({
     return false;
   },
   handleEditClick: function () {
-    var view = new EditCommunication({ model: this.model, parent: this });
+    var view = new EditComment({ model: this.model, parent: this });
     this.switcher.set(view);
     return false;
   },
   handleViewClick: function () {
-    var view = new ViewCommunication({ model: this.model, parent: this });
+    var view = new ViewComment({ model: this.model, parent: this });
     this.switcher.set(view);
     return false;
   },
@@ -58,13 +58,13 @@ var ViewComment = View.extend({
   render: function () {
     this.renderWithTemplate();
     if(app.me.isAdmin) {
-      this.renderSubview(new AdminCommunication(), '[data-hook=admin-container]');
+      this.renderSubview(new AdminComment(), '[data-hook=admin-container]');
     }
   }
 });
 
 
-var EditCommunication = View.extend({
+var EditComment = View.extend({
   template: templates.partials.comments.edit,
   subviews: {
     form: {
@@ -96,7 +96,7 @@ var EditCommunication = View.extend({
 });
 
 
-var AdminCommunication = View.extend({
+var AdminComment = View.extend({
   template: templates.partials.comments.admin,
 });
 

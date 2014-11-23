@@ -61,3 +61,28 @@ server.route({
   path: '/api/members/{id}/comments',
   config: handlers.getByMember
 });
+
+server.route({
+  method: 'GET',
+  path: '/api/{threadKind}/{threadId}/comments/{id}',
+  config: handlers.get
+});
+
+server.route({
+  method: 'POST',
+  path: '/api/{threadKind}/{threadId}/comments',
+  config: handlers.create
+});
+
+server.route({
+  method: ['PUT','PATCH'],
+  path: '/api/{threadKind}/{threadId}/comments/{id}',
+  config: handlers.update
+});
+
+server.route({
+  method: 'DELETE',
+  path: '/api/{threadKind}/{threadId}/comments/{id}',
+  config: handlers.remove
+});
+

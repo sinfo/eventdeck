@@ -4,8 +4,6 @@ var SelectView = require('ampersand-select-view');
 
 module.exports = FormView.extend({
   fields: function () {
-    // var parsedEvents = app.events.map(function(e) { return [e.id, e.name]; };
-
     return [
       new SelectView({
         name: 'event',
