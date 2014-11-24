@@ -38,7 +38,8 @@ module.exports = AmpState.extend({
   },
   session: {
     memberDetails: Member,
-    eventDetails: Event
+    eventDetails: Event,
+    editing: ['boolean']
   },
   collections: {
     items: ItemCollection

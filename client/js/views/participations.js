@@ -17,5 +17,11 @@ module.exports = PageView.extend({
     log('Fetching participations');
     this.collection.fetch();
     return false;
-  }
+  },
+  events: {
+    'click [data-hook~=add]': 'addNew',
+  },
+  addNew: function () {
+    this.collection.add({editing: true});
+  },
 });

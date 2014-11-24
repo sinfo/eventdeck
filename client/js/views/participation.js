@@ -25,13 +25,15 @@ module.exports =  View.extend({
         }
       },
       function getEvent (cb){
-        app.events.getOrFetch(self.model.event, {all: true}, function (err, model) {
-          if (err) {
-            log.error('couldnt find a event with id: ' + self.model.event);
-          }
-          self.model.eventDetails = model;
-          log('Got event', model.name);
-        });
+        if(self.model.event){
+          app.events.getOrFetch(self.model.event, {all: true}, function (err, model) {
+            if (err) {
+              log.error('couldnt find a event with id: ' + self.model.event);
+            }
+            self.model.eventDetails = model;
+            log('Got event', model.name);
+          });
+        }
       }
     ], self.render);
   },
@@ -39,8 +41,11 @@ module.exports =  View.extend({
     this.renderWithTemplate();
     this.viewContainer = this.queryByHook('view-container');
     this.switcher = new ViewSwitcher(this.viewContainer);
-
-    this.handleViewClick();
+    if(!this.model.editing) {
+      this.handleViewClick();
+    } else {
+      this.handleEditClick();
+    }
   },
   events: {
     'click [data-hook~=action-delete]': 'handleRemoveClick',
@@ -63,11 +68,13 @@ module.exports =  View.extend({
   handleEditClick: function () {
     var view = new EditParticipation({ model: this.model, parent: this });
     this.switcher.set(view);
+    this.model.editing = true;
     return false;
   },
   handleViewClick: function () {
     var view = new ViewParticipation({ model: this.model, parent: this });
     this.switcher.set(view);
+    this.model.editing = false;
     return false;
   }
 });
