@@ -48,7 +48,16 @@ module.exports =  View.extend({
     'click [data-hook~=action-view]': 'handleViewClick',
   },
   handleRemoveClick: function () {
-    this.model.destroy({wait: true});
+    var self = this;
+    self.parent.parent.parent.model.participations.remove(self.model);
+
+    self.parent.parent.parent.model.save({
+      wait: false,
+      success: function () {
+        log('participation saved', data);
+        self.parent.handleViewClick();
+      }
+    });
     return false;
   },
   handleEditClick: function () {
@@ -67,15 +76,33 @@ var ViewParticipation = View.extend({
   template: templates.partials.participations.view,
   bindings: {
     'model.eventDetails.name': '[data-hook~=event]',
-    'model.memberDetails.name': '[data-hook~=member]',
-    'model.status': '[data-hook~=status]',
-    'model.kind': '[data-hook~=kind]'
+    'model.memberDetails.name': '[data-hook~=member-name]',
+    'model.statusDetails.name': '[data-hook~=status]',
+    'model.statusDetails.style': {
+      type: 'attribute',
+      hook: 'status',
+      name: 'style'
+    },
+    'model.kind': '[data-hook~=kind]',
+    'model.memberDetails.img': {
+      type: 'attribute',
+      hook: 'member-img',
+      name: 'src'
+    },
   },
   events: {
     'click [data-hook~=action-delete]': 'handleRemoveClick'
   },
   handleRemoveClick: function () {
-    this.model.destroy();
+    self.model.set(data);
+
+    self.parent.parent.parent.parent.model.save({
+      wait: false,
+      success: function () {
+        log('participation saved', data);
+        self.parent.handleViewClick();
+      }
+    });
     return false;
   },
   render: function () {
@@ -99,8 +126,10 @@ var EditParticipation = View.extend({
             if(!data) {
               return self.parent.handleViewClick();
             }
-            self.model.save(data, {
-              patch: true,
+
+            self.model.set(data);
+
+            self.parent.parent.parent.parent.model.save({
               wait: false,
               success: function () {
                 log('participation saved', data);

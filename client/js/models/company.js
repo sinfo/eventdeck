@@ -106,6 +106,7 @@ module.exports = AmpModel.extend({
     toJSON: function () {
       return function () {
         var json = this.serialize();
+        delete json.comments;
         delete json.communications;
         delete json.storedImg;
         return json;

@@ -1,12 +1,8 @@
 section.page.companies.edit
 
-  div(data-hook='view-container')
+  h2 Edit company
 
-  .awesome-sidebar
-    .header
-      b Edit Company
-      .push-right.hide-button HIDE
-
-    .button-group.small
-      a.ink-button(data-hook='action-edit-company') Edit Company Information
-      a.ink-button(data-hook='action-edit-participations') Edit Participations
+  form.ink-form(data-hook='company-form')
+    fieldset(data-hook='field-container')
+    .buttons
+      button.ink-button(data-hook='reset', type='submit') Submit

@@ -1,8 +1,8 @@
-//Participation Model - participation.js
 var AmpState = require('ampersand-state');
 var AmpModel = require('ampersand-model');
 var AmpCollection = require('ampersand-collection');
 var Member = require('./member');
+var options = require('options');
 
 var Payment = AmpState.extend({
   props: {
@@ -42,5 +42,19 @@ module.exports = AmpState.extend({
   },
   collections: {
     items: ItemCollection
+  },
+  derived: {
+    statusDetails: {
+      deps: ['participations'],
+      fn: function () {
+        var self = this;
+        var details = options.statuses.company.filter(function (status) {
+          return self.status == status.name;
+        })[0] || {};
+
+        details.style = details && details.color && 'background-color:' + details.color;
+        return details;
+      }
+    },
   }
 });

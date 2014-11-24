@@ -1,6 +1,10 @@
-.content
-  span(data-hook='event', style='margin-right: 4pt;')
-  span(data-hook='status')
+div
   div
-    p(data-hook='member')
-    p(data-hook='kind')
+    span.event(data-hook='event', style='margin-right: 4pt;')
+    span.status(data-hook='status')
+    a.push-right.edit(data-hook='action-edit') EDIT
+  .member
+    img(data-hook='member-img')
+    span(data-hook='member-name')
+
+  .details(data-hook='kind')

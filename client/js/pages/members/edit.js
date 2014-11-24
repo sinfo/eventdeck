@@ -17,13 +17,6 @@ module.exports = PageView.extend({
       self.model = model;
     });
   },
-  bindings:{
-    'model.img': {
-      type: 'attribute',
-      hook: 'img',
-      name: 'src'
-    }
-  },
   subviews: {
     form: {
       // this is the css selector that will be the `el` in the
