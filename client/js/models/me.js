@@ -1,4 +1,4 @@
-// Me Model - me.js
+/*global app*/
 var Member = require('./member');
 
 module.exports = Member.extend({

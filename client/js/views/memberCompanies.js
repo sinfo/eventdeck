@@ -1,3 +1,4 @@
+/*global app*/
 var View = require('ampersand-view');
 var templates = require('client/js/templates');
 var Company = require('client/js/models/company');
@@ -34,9 +35,6 @@ module.exports = View.extend({
   render: function () {
     this.renderWithTemplate();
     this.renderCollection(this.collection, MemberCompaniesRow, this.queryByHook('companiesContainer'));
-    if (!this.collection.length) {
-      //this.fetchCollection();
-    }
   },
 });
 

@@ -1,3 +1,4 @@
+/*global app, alert*/
 var log = require('bows')('companies');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
@@ -177,7 +178,7 @@ module.exports = PageView.extend({
     });
 
     aux = new AmpersandCollection(aux, {model: Company});
-    
+
     rerender(this,aux,'noParticipation');
     return false;
   },

@@ -1,3 +1,4 @@
+/*global app*/
 var log = require('bows')('members');
 var Member= require('client/js/models/member');
 var PageView = require('client/js/pages/base');
@@ -9,7 +10,7 @@ var selectedFilter = 'showall';
 
 function filtering(page,filter){
     log('Fetching Selected Members');
-    
+
     var aux = page.collection.filter(function(member){
     var ids = member.roles.map(function (role){
         return role.id;
@@ -59,9 +60,9 @@ module.exports = PageView.extend({
 
     'click [data-hook~=me]': 'me',
     'click [data-hook~=showall]': 'showall',
-    
+
     'click [data-hook~=hide]': 'hide',
-  
+
   },
   render: function () {
     this.renderWithTemplate();

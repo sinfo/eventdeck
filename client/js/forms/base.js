@@ -1,3 +1,4 @@
+/*global app*/
 var FormView = require('ampersand-form-view');
 var SelectView = require('ampersand-select-view');
 

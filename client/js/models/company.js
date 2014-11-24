@@ -1,4 +1,4 @@
-// company Model - company.js
+/*global app*/
 var AmpState = require('ampersand-state');
 var AmpModel = require('ampersand-model');
 var AmpCollection = require('ampersand-collection');
@@ -109,7 +109,7 @@ module.exports = AmpModel.extend({
         delete json.communications;
         delete json.storedImg;
         return json;
-      }
+      };
     }
 
   }

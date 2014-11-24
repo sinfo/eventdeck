@@ -11,7 +11,9 @@ module.exports = PageView.extend({
   initialize: function (spec) {
     var self = this;
     app.members.getOrFetch(spec.id, {all: true}, function (err, model) {
-      if (err) alert('couldnt find a model with id: ' + spec.id);
+      if (err) {
+        return alert('couldnt find a model with id: ' + spec.id);
+      }
       self.model = model;
     });
   },
@@ -44,7 +46,6 @@ module.exports = PageView.extend({
 
             populate(data, this.model, ['facebook.id', 'facebook.username', 'mails.main', 'mails.institutional', 'mails.dropbox', 'mails.google', 'mails.microsoft']);
             data = self.model.changedAttributes(data);
-            console.log(data);
             model.save(data, {
               patch: true,
               wait: false,

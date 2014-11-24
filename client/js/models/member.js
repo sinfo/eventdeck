@@ -1,4 +1,3 @@
-// Member Model - member.js
 var AmpState = require('ampersand-state');
 var AmpModel = require('ampersand-model');
 var AmpCollection = require('ampersand-collection');

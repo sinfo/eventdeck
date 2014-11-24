@@ -1,4 +1,4 @@
-/*global app, me, $*/
+/*global app*/
 var _ = require('underscore');
 var log = require('bows')('eventdeck');
 var config = require('clientconfig');

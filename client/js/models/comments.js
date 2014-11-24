@@ -1,4 +1,3 @@
-// communication Collection - communication-collection.js
 var AmpCollection = require('ampersand-rest-collection');
 var comment = require('./comment');
 

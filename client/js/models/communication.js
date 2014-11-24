@@ -1,4 +1,4 @@
-// communication Model - communication.js
+/*global app*/
 var AmpModel = require('ampersand-model');
 var timeSince = require('client/js/helpers/timeSince');
 var options = require('options');

@@ -1,3 +1,4 @@
+/*global app*/
 var log = require('bows')('communications');
 var View = require('ampersand-view');
 var templates = require('client/js/templates');

@@ -1,3 +1,4 @@
+/*global app, alert*/
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var MemberCompaniesView = require('client/js/views/memberCompanies');
