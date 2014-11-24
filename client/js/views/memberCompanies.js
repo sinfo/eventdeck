@@ -51,6 +51,11 @@ var MemberCompaniesRow = View.extend({
       type: 'attribute',
       hook: 'company-url',
       name: 'href'
+    },
+    'model.statusDetails.style': {
+      type: 'attribute',
+      hook: 'status',
+      name: 'style'
     }
   },
 });
