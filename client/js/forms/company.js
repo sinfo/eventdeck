@@ -6,6 +6,10 @@ var ExtendedInput = InputView.extend({
     template: templates.includes.formInput()
 });
 
+var TextareaInput = InputView.extend({
+    template: templates.includes.formTextarea()
+});
+
 module.exports = FormView.extend({
   fields: function () {
     return [
@@ -41,7 +45,7 @@ module.exports = FormView.extend({
         placeholder: 'Site',
         parent: this
       }),
-      new ExtendedInput({
+      new TextareaInput({
         label: 'Contacts',
         name: 'contacts',
         value: this.model && this.model.contacts || '',
@@ -49,7 +53,7 @@ module.exports = FormView.extend({
         placeholder: 'Contacts',
         parent: this
       }),
-      new ExtendedInput({
+      new TextareaInput({
         label: 'Description',
         name: 'description',
         value: this.model && this.model.description || '',
@@ -57,7 +61,7 @@ module.exports = FormView.extend({
         placeholder: 'Description',
         parent: this
       }),
-      new ExtendedInput({
+      new TextareaInput({
         label: 'History',
         name: 'history',
         value: this.model && this.model.history || '',
