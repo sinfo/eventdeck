@@ -10,9 +10,11 @@ server.method('chat.update', update, {});
 server.method('chat.get', get, {});
 server.method('chat.list', list, {});
 server.method('chat.remove', remove, {});
+server.method('chat.message.add', addMessage, {});
+server.method('chat.message.remove', removeMessage, {});
 
 
-function create(chat, memberId, cb) {
+function create(chat, cb) {
   Chat.create(chat, function(err, _chat) {
     if (err) {
       log.error({ err: err, chat: chat}, 'error creating chat');
@@ -24,7 +26,7 @@ function create(chat, memberId, cb) {
 }
 
 function update(id, chat, cb) {
-  var filter = {_id: id};
+  var filter = {id: id};
   Chat.findOneAndUpdate(filter, chat, function(err, _chat) {
     if (err) {
       log.error({ err: err, chat: id}, 'error updating chat');
@@ -41,7 +43,7 @@ function update(id, chat, cb) {
 
 function get(id,query, cb) {
   cb = cb||query;
-  var filter = {_id: id};
+  var filter = {id: id};
   var fields = parser(query.fields);
 
   Chat.findOne(filter, fields, function(err, chat) {
@@ -79,7 +81,7 @@ function list(query, cb) {
 }
 
 function remove(id, cb) {
-  var filter = {_id: id};
+  var filter = {id: id};
   Chat.findOneAndRemove(filter, function(err, chat){
     if (err) {
       log.error({ err: err, chat: id}, 'error deleting chat');
@@ -87,6 +89,40 @@ function remove(id, cb) {
     }
     if (!chat) {
       log.error({ err: err, chat: id}, 'error deleting chat');
+      return cb(Boom.notFound());
+    }
+
+    return cb(null, chat);
+  });
+}
+
+function addMessage(id, message, cb) {
+  var filter = {id: id};
+  var update = {$push: {messages: message}};
+  Chat.findOneAndUpdate(filter, update, function(err, chat){
+    if (err) {
+      log.error({ err: err, chat: id}, 'error adding chat message');
+      return cb(Boom.internal());
+    }
+    if (!chat) {
+      log.error({ err: err, chat: id}, 'error adding chat message');
+      return cb(Boom.notFound());
+    }
+
+    return cb(null, chat);
+  });
+}
+
+function removeMessage(id, message, cb) {
+  var filter = {id: id};
+  var update = {$pull: {messages: message}};
+  Chat.findOneAndUpdate(filter, update, function(err, chat){
+    if (err) {
+      log.error({ err: err, chat: id}, 'error removing chat message');
+      return cb(Boom.internal());
+    }
+    if (!chat) {
+      log.error({ err: err, chat: id}, 'error removing chat message');
       return cb(Boom.notFound());
     }
 
