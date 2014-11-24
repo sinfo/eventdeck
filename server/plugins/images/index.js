@@ -4,6 +4,7 @@ var Boom = require('boom');
 var Joi = require('joi');
 var fs = require('fs');
 var Request = require('request');
+var log = require('server/helpers/logger')
 
 var properties = require('./package.json');
 
@@ -11,17 +12,17 @@ exports = module.exports = {};
 exports.name = properties.name;
 exports.version = properties.version;
 
-// Declare internals
 var internals = {
   defaults: {
     prefix: '/api/images',
     directory: Path.join(__dirname, 'downloads')
-  }
+  },
 };
 
-exports.register = function (plugin, options, next) {
+var settings = {};
 
-  var settings = Hoek.applyToDefaults(internals.defaults, options || {});
+exports.register = function (plugin, options, next) {
+  settings = Hoek.applyToDefaults(internals.defaults, options || {});
 
   plugin.route({
     method: 'GET',
@@ -33,57 +34,12 @@ exports.register = function (plugin, options, next) {
         },
       },
       handler: function (request, reply) {
-        var filePath = Path.join(settings.directory, request.params.encodedUrl);
-
-        // console.log('filePath', filePath);
-        var url = new Buffer(request.params.encodedUrl, 'base64').toString('ascii');
-
-        if(url.indexOf('data:image/jpeg;base64') != -1) {
-          // var image = new Buffer(request.params.encodedUrl, 'base64');
-          // request.raw.res.writeHead(200, {
-          //   'Access-Control-Allow-Origin': '*',
-          //   'Content-Type': 'image/jpeg',
-          //   'Cache-Control': 'no-cache, no-store, must-revalidate',
-          //   'Pragma': 'no-cache',
-          //   'Content-Length': image.length
-          // });
-          // request.raw.res.write(image, 'binary');
-
-          // return request.raw.res.end();
-
-          return reply(Boom.badRequest('Malformed image url'));
-        }
-
-        fs.exists(filePath, function (exists) {
-          if(exists) {
-            return reply.file(filePath).type('image');
+        getResource(request.params.encodedUrl, function (err, filePath) {
+          if(err && err.isBoom) {
+            return reply(err);
           }
 
-          console.log('download file', url, '\n\n\n');
-
-          try {
-            Request
-              .get(url)
-              .on('error', function(err) {
-                console.log('ERROR!');
-                reply(Boom.notFound(err.message));
-              })
-              .on('end', function(response) {
-                return reply.file(filePath).type('image');
-              })
-              .on('error', function(err) {
-                console.log('ERROR!');
-                return reply(Boom.notFound(err.message));
-              })
-              .pipe(fs.createWriteStream(filePath))
-              .on('error', function(err) {
-                console.log('ERROR!');
-                return reply(Boom.badRequest('Make sure the directory `'+settings.directory+'` exists'));
-              });
-
-            } catch (err) {
-              return reply(Boom.notFound(err));
-            }
+          return reply.file(filePath).type('image');
         });
       }
     }
@@ -91,6 +47,60 @@ exports.register = function (plugin, options, next) {
 
   next();
 };
+
+function getResource(id, cb) {
+  getLocal(id, function (err, filePath) {
+    if(err) {
+      return getRemote(id, cb);
+    }
+    return cb(null, filePath);
+  });
+}
+
+function getLocal(id, cb) {
+  var filePath = Path.join(settings.directory, id);
+
+  fs.exists(filePath, function (exists) {
+    if(!exists) {
+      return cb(Boom.notFound('file is not on disk'));
+    }
+
+    return cb(null, filePath);
+  });
+}
+
+function getRemote(id, cb) {
+  var filePath = Path.join(settings.directory, id);
+  var url = new Buffer(id, 'base64').toString('ascii');
+
+  log.debug({ url: url }, 'Image not found on disk, remote requesting...');
+
+  if(url.indexOf('data:image/jpeg;base64') != -1) {
+    return cb(Boom.badRequest('Malformed image url'));
+  }
+
+  try {
+    Request
+      .get(url)
+      .on('error', function(err) {
+        return cb(Boom.notFound(err.message));
+      })
+      .on('end', function(response) {
+        return cb(null, filePath);
+      })
+      .on('error', function(err) {
+        return cb(Boom.notFound(err.message));
+      })
+      .pipe(fs.createWriteStream(filePath))
+      .on('error', function(err) {
+        log.error({ url: url, err: err }, 'Error saving file, make sure the directory `'+settings.directory+'` exists');
+        return cb(Boom.badRequest('Make sure the directory `'+settings.directory+'` exists'));
+      });
+
+    } catch (err) {
+      return cb(Boom.notFound(err));
+    }
+}
 
 exports.register.attributes = {
   pkg: properties
