@@ -4,10 +4,21 @@ var log = require('server/helpers/logger');
 var parser = require('server/helpers/fieldsParser');
 var Message = require('server/db/message');
 
-
+server.method('message.create', create, {});
 server.method('message.get', get, {});
 server.method('message.list', list, {});
 server.method('message.getByChat', getByChat, {});
+
+function create(message, cb) {
+  Message.create(message, function(err, _message) {
+    if (err) {
+      log.error({ err: err, message: message}, 'error creating message');
+      return cb(Boom.internal());
+    }
+
+    cb(null, _message);
+  });
+}
 
 function get(id,query, cb) {
   cb = cb || query; // fields is optional

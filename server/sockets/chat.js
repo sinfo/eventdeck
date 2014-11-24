@@ -5,11 +5,6 @@ var webSocket = server.webSocket.server;
 
 function chatServer(socket){
 
-  var outChat;
-  var messages;
-  var message;
-  var messageData;
-
   socket.on('chat-init', function(data, cbClient){
     var room = data.id;
     var user = socket.nickname;
@@ -27,14 +22,20 @@ function chatServer(socket){
 
   socket.on('chat-send', function(data, cbClient){
     var room    = data.room;
-    messageData = data.message;
-    async.series([
-      createMessage,
+    var messageData = data.message;
+    async.waterfall([
       function(cb){
-        updateChat(room, cb);
+        server.methods.message.create(messageData, cb);
+      },
+      function(cb, message){
+        server.methods.chat.message.add(room, message.id, cb);
       }
-    ], function(){
-        webSocket.in(room).emit('message', {message: messageData});
+    ], function(err, results){
+        if(err){
+          log.error({err: err, chat: room},'[socket-chat] error on chat send');
+          return cbClient(err);
+        }
+        webSocket.in(room).emit('message', {message: results[0]});
         cbClient();
     });
   });
@@ -47,10 +48,14 @@ function chatServer(socket){
   });
 
   socket.on('chat-page', function(data, cb){
-    var dateRef = data.date;
+    var page = data.page;
     var room = data.room;
-    getMessages(room, dateRef, function(){
-      webSocket.in(room).emit('history-send', {messages: messages});
+    server.methods.message.getByChat(room, {skip: 10 * page, limit: 10, sort: 'date'}, function(err, messages){
+      if(err){
+        log.error({err: err, chat: room}, '[socket-chat] error on page send');
+        return cb(err);
+      }
+      webSocket.in(room).emit('page-send', {messages: messages});
       cb();
     });
   });
