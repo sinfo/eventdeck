@@ -74,7 +74,7 @@ module.exports = PageView.extend({
       container: '[data-hook=company-comments]',
       waitFor: 'model.commentsApi',
       prepareView: function (el) {
-        var Comms = Comments(this.model.commentsApi);
+        var Comms = new Comments(this.model.commentsApi);
         return new CommentsView({
           el: el,
           collection: new Comms()
@@ -85,7 +85,7 @@ module.exports = PageView.extend({
       container: '[data-hook=company-communications]',
       waitFor: 'model.communicationsApi',
       prepareView: function (el) {
-        var Comms = Communications(this.model.communicationsApi);
+        var Comms = new Communications(this.model.communicationsApi);
         return new CommunicationsView({
           el: el,
           collection: new Comms()

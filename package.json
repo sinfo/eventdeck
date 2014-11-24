@@ -11,6 +11,10 @@
     "lint-client": "node_modules/.bin/jshint -c .jshintrc-client --exclude server .",
     "lint-server": "node_modules/.bin/jshint -c .jshintrc-server  --exclude client ."
   },
+  "pre-commit": [
+    "lint-client",
+    "lint-server"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/sinfo/eventdeck.git"
@@ -28,7 +32,7 @@
   },
   "homepage": "https://github.com/sinfo/eventdeck",
   "dependencies": {
-    "ampersand-array-input-view": "https://github.com/jgantunes/ampersand-array-input-view/tarball/master",
+    "ampersand-array-input-view": "^3.0.3",
     "ampersand-collection": "~1.3.17",
     "ampersand-dom": "^1.2.1",
     "ampersand-form-view": "^2.0.0",
@@ -76,6 +80,7 @@
     "nodemon": "~1.2.1",
     "lab": "~5.0.1",
     "code": "~1.2.0",
-    "jshint": "~2.5.10"
+    "jshint": "~2.5.10",
+    "pre-commit": "https://github.com/jgantunes/pre-commit/tarball/master"
   }
 }
