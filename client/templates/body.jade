@@ -1,22 +1,23 @@
 body
-  .topbar.ink-grid
-    nav.ink-navigation
-      ul.menu.horizontal.push-left
-        li.title
-          a(href='/') EventDeck
-        li.event
-          form.base-form.ink-form(data-hook='base-form')
-            fieldset(data-hook='field-container')
-      ul.menu.horizontal.push-right
-        li
-          a(href='/companies') Companies
-          ul.submenu
-            li
-              a(href='/companies/table') Table
-        li
-          a(href='/members') Members
-        li
-          a#logout(href='/login') Logout
+  .topbar
+    .ink-grid
+      nav.ink-navigation
+        ul.menu.horizontal.push-left
+          li.title
+            a(href='/') EventDeck
+          li.event
+            form.base-form.ink-form(data-hook='base-form')
+              fieldset(data-hook='field-container')
+        ul.menu.horizontal.push-right
+          li
+            a(href='/companies') Companies
+            ul.submenu
+              li
+                a(href='/companies/table') Table
+          li
+            a(href='/members') Members
+          li
+            a#logout(href='/login') Logout
 
 
   main.ink-grid(data-hook='page-container')
