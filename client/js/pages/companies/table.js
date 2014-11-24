@@ -12,6 +12,8 @@ module.exports = PageView.extend({
     this.renderCollection(this.collection, MemberCompaniesView, this.queryByHook('members-list'));
     if (!this.collection.length) {
       this.fetchCollection();
+      this.collection.comparator = 'name';
+      this.collection.sort();
     }
   },
   fetchCollection: function () {

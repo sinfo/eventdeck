@@ -26,7 +26,7 @@ module.exports = View.extend({
       var companies = app.companies.filter(function(company){
         return company.participation && company.participation.member == self.model.id;
       });
-
+      
       self.collection = new AmpersandCollection(companies, {model: Company});
       self.render();
     });
