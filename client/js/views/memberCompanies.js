@@ -7,15 +7,15 @@ var AmpersandCollection = require('ampersand-collection');
 module.exports = View.extend({
   template: templates.cards.memberCompanies,
   bindings: {
-    'model.name': '[data-hook~=name]',
+    'model.name': '[data-hook~=user-name]',
     'model.img': {
       type: 'attribute',
-      hook: 'img',
+      hook: 'user-img',
       name: 'src'
     },
     'model.viewUrl': {
       type: 'attribute',
-      hook: 'name',
+      hook: 'user-url',
       name: 'href'
     }
   },
