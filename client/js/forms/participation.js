@@ -38,7 +38,7 @@ module.exports = FormView.extend({
         name: 'status',
         label: 'Status',
         parent: this,
-        options: options.statuses.company.map(function (s) { return s.name }),
+        options: options.statuses.company.map(function (s) { return s.name; }),
         value: this.model && this.model.status || '',
         yieldModel: false
       }),

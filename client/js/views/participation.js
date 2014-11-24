@@ -59,7 +59,7 @@ module.exports =  View.extend({
     self.parent.parent.parent.model.save({
       wait: false,
       success: function () {
-        log('participation saved', data);
+        log('participation removed');
         self.parent.handleViewClick();
       }
     });
@@ -99,18 +99,6 @@ var ViewParticipation = View.extend({
   },
   events: {
     'click [data-hook~=action-delete]': 'handleRemoveClick'
-  },
-  handleRemoveClick: function () {
-    self.model.set(data);
-
-    self.parent.parent.parent.parent.model.save({
-      wait: false,
-      success: function () {
-        log('participation saved', data);
-        self.parent.handleViewClick();
-      }
-    });
-    return false;
   },
   render: function () {
     this.renderWithTemplate();
