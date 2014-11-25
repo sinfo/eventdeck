@@ -36,7 +36,7 @@ config.bunyan = {
 config.swagger = {
   pathPrefixSize: 2,
   apiVersion: pack.version,
-  protocol: url.parse(config.url).protocol.replace(':', '')
+  basePath: config.url,
 };
 
 config.client = {
