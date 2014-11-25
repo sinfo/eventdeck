@@ -5,6 +5,7 @@
 [![Dependency Status](https://david-dm.org/sinfo/eventdeck.svg?style=flat)](https://david-dm.org/sinfo/eventdeck)
 [![devDependency Status](https://david-dm.org/sinfo/eventdeck/dev-status.svg?style=flat)](https://david-dm.org/sinfo/eventdeck#info=devDependencies)
 [![Codacy Badge](https://www.codacy.com/project/badge/dc7a334d6a32416c88b51580999a1131)](https://www.codacy.com/public/dpais11_2338/eventdeck)
+[![Issues In Progress](https://badge.waffle.io/sinfo/eventdeck.png?label=In%20Progress&title=Waffle%20-%20In%20Progress&style=flat)](http://waffle.io/sinfo/eventdeck)
 
 EventDeck is a tool being built at [SINFO](http://sinfo.org) to help us manage everything related to our events.
 
