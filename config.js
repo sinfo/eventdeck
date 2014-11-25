@@ -1,4 +1,5 @@
 var pack = require('package');
+var url = require('url');
 
 var config = {
   url: process.env.EVENTDECK_URL || 'http://localhost:8080',
@@ -34,7 +35,8 @@ config.bunyan = {
 
 config.swagger = {
   pathPrefixSize: 2,
-  apiVersion: pack.version
+  apiVersion: pack.version,
+  protocol: url.parse(config.url).protocol.replace(':', '')
 };
 
 config.client = {
