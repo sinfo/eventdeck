@@ -18,6 +18,7 @@ server.method('member.getTeamLeaders', getTeamLeaders, {});
 server.method('member.getSubscribers', getSubscribers, {});
 server.method('member.list', list, {});
 server.method('member.remove', remove, {});
+server.method('member.search', search, {});
 
 
 function create(member, cb) {
@@ -171,7 +172,7 @@ function list(query, cb) {
       log.error({ err: err}, 'error getting all members');
       return cb(Boom.internal());
     }
-    
+
     cb(null, members);
   });
 }
@@ -189,5 +190,48 @@ function remove(id, cb) {
     }
 
     return cb(null, member);
+  });
+}
+
+
+function search(str, query, cb) {
+  cb = cb || query; // fields is optional
+
+  var filter = { name: new RegExp(str, 'i') };
+  var fields = parser(query.fields || 'id,name,img,facebook');
+  var options = {
+    skip: query.skip,
+    limit: query.limit || 10,
+    sort: parser(query.sort)
+  };
+
+  Member.find(filter, fields, options, function(err, exactMembers) {
+    if (err) {
+      log.error({ err: err, filter: filter}, 'error getting members');
+      return cb(Boom.internal());
+    }
+
+    if (exactMembers.length > 0) {
+      return cb(null, { exact: exactMembers });
+    }
+
+    filter = {
+      $or: [
+        { contacts: new RegExp(str, 'i') },
+        { area: new RegExp(str, 'i') },
+        { history: new RegExp(str, 'i') },
+        { 'participations.status': new RegExp(str, 'i') },
+      ]
+    };
+
+    Member.find(filter, fields, options, function(err, extendedMembers) {
+      if (err) {
+        log.error({ err: err, filter: filter}, 'error getting members');
+        return cb(Boom.internal());
+      }
+
+      return cb(null, { exact: exactMembers, extended: extendedMembers });
+    });
+
   });
 }

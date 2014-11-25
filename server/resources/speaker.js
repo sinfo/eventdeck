@@ -14,6 +14,7 @@ server.method('speaker.getByMember', getByMember, {});
 server.method('speaker.getByEvent', getByEvent, {});
 server.method('speaker.list', list, {});
 server.method('speaker.remove', remove, {});
+server.method('speaker.search', search, {});
 
 
 function create(speaker, memberId, cb) {
@@ -117,7 +118,7 @@ function list(query,cb) {
       log.error({ err: err}, 'error getting all speaker');
       return cb(Boom.internal());
     }
-    
+
     cb(null, speaker);
   });
 }
@@ -135,5 +136,47 @@ function remove(id, cb) {
     }
 
     return cb(null, speaker);
+  });
+}
+
+function search(str, query, cb) {
+  cb = cb || query; // fields is optional
+
+  var filter = { name: new RegExp(str, 'i') };
+  var fields = parser(query.fields || 'id,name,img');
+  var options = {
+    skip: query.skip,
+    limit: query.limit || 10,
+    sort: parser(query.sort)
+  };
+
+  Speaker.find(filter, fields, options, function(err, exactSpeakers) {
+    if (err) {
+      log.error({ err: err, filter: filter}, 'error getting speakers');
+      return cb(Boom.internal());
+    }
+
+    if (exactSpeakers.length > 0) {
+      return cb(null, { exact: exactSpeakers });
+    }
+
+    filter = {
+      $or: [
+        { contacts: new RegExp(str, 'i') },
+        { area: new RegExp(str, 'i') },
+        { history: new RegExp(str, 'i') },
+        { 'participations.status': new RegExp(str, 'i') },
+      ]
+    };
+
+    Speaker.find(filter, fields, options, function(err, extendedSpeakers) {
+      if (err) {
+        log.error({ err: err, filter: filter}, 'error getting speakers');
+        return cb(Boom.internal());
+      }
+
+      return cb(null, { exact: exactSpeakers, extended: extendedSpeakers });
+    });
+
   });
 }

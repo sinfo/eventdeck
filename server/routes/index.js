@@ -1,4 +1,4 @@
-// require('./publicAssets');
+require('./publicAssets');
 require('./auth');
 require('./chats');
 require('./comments');
@@ -11,6 +11,7 @@ require('./members');
 require('./messages');
 require('./notifications');
 require('./roles');
+require('./search');
 require('./speakers');
 require('./sessions');
 require('./subscriptions');

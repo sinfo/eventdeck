@@ -14,6 +14,7 @@ server.method('company.getByMember', getByMember, {});
 server.method('company.getByEvent', getByEvent, {});
 server.method('company.list', list, {});
 server.method('company.remove', remove, {});
+server.method('company.search', search, {});
 
 
 function create(company, memberId, cb) {
@@ -123,7 +124,7 @@ function list(query, cb) {
       log.error({ err: err}, 'error getting all companies');
       return cb(Boom.internal());
     }
-    
+
     cb(null, companies);
   });
 }
@@ -142,3 +143,46 @@ function remove(id, cb) {
     return cb(null, company);
   });
 }
+
+function search(str, query, cb) {
+  cb = cb || query; // fields is optional
+
+  var filter = { name: new RegExp(str, 'i') };
+  var fields = parser(query.fields || 'id,name,img');
+  var options = {
+    skip: query.skip,
+    limit: query.limit || 10,
+    sort: parser(query.sort)
+  };
+
+  Company.find(filter, fields, options, function(err, exactCompanies) {
+    if (err) {
+      log.error({ err: err, filter: filter}, 'error getting companies');
+      return cb(Boom.internal());
+    }
+
+    if (exactCompanies.length > 0) {
+      return cb(null, { exact: exactCompanies });
+    }
+
+    filter = {
+      $or: [
+        { contacts: new RegExp(str, 'i') },
+        { area: new RegExp(str, 'i') },
+        { history: new RegExp(str, 'i') },
+        { 'participations.status': new RegExp(str, 'i') },
+      ]
+    };
+
+    Company.find(filter, fields, options, function(err, extendedCompanies) {
+      if (err) {
+        log.error({ err: err, filter: filter}, 'error getting companies');
+        return cb(Boom.internal());
+      }
+
+      return cb(null, { exact: exactCompanies, extended: extendedCompanies });
+    });
+
+  });
+}
+
