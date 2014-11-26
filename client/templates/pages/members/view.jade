@@ -1,29 +1,31 @@
 section.page.member.view
+  div.ink-grid
+    div.column-group.horizontal-gutters
+      div.all-100
+        h1(data-hook='name').push-left
+        .button-group.small.push-right
+          a.ink-button.orange(data-hook='edit') Edit
+          button.ink-button.red(data-hook='delete') Delete
+        div.all-100
+      div.all-33.medium-50.small-100.tiny-100
+        img.image-logo(data-hook='img')
 
-  h2(data-hook='name')
+        h4(data-hook='roleIds')
 
-  img.image-logo(data-hook='img')
+        h4 Mails
+        ul
+          li
+            div(data-hook='mails.main')
+          li
+            div(data-hook='mails.google')
+          li
+            div(data-hook='mails.microsoft')
+          li
+            div(data-hook='mails.dropbox')
 
-  h4(data-hook='roleIds')
+        h4.div Phone
+        ul
+          li
+            div(data-hook='phones')
 
-  h4 Mails
-  ul
-    li
-      div(data-hook='mails.main')
-    li
-      div(data-hook='mails.google')
-    li
-      div(data-hook='mails.microsoft')
-    li
-      div(data-hook='mails.dropbox')
-
-  h4.div Phone
-  ul
-    li
-      div(data-hook='phones')
-
-  a(data-hook='fbURL') Facebook
-
-  .buttons
-    a.ink-button(data-hook='edit') Edit
-    button.ink-button.red(data-hook='delete') Delete
+        a(data-hook='fbURL') Facebook
