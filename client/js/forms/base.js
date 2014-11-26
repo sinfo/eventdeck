@@ -1,6 +1,7 @@
 /*global app*/
 var FormView = require('ampersand-form-view');
 var SelectView = require('ampersand-select-view');
+var InputView = require('ampersand-input-view');
 
 
 module.exports = FormView.extend({
@@ -23,7 +24,15 @@ module.exports = FormView.extend({
         // here you can specify if it should return the selected model from the
         // collection, or just the id attribute
         yieldModel: true
-      })
+      }),
+      new InputView({
+        label: ' ',
+        name: 'search',
+        value: '',
+        required: false,
+        placeholder: 'Super search!!!',
+        parent: this
+      }),
     ];
   }
 });

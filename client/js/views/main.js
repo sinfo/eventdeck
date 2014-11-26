@@ -1,4 +1,4 @@
-/*global app, me, $*/
+/*global app*/
 // This app view is responsible for rendering all content that goes into
 // <html>. It's initted right away and renders itself on DOM ready.
 
@@ -12,7 +12,9 @@ var dom = require('ampersand-dom');
 var templates = require('../templates');
 var setFavicon = require('favicon-setter');
 var BaseForm = require('client/js/forms/base');
+var $ = require('jquery');
 
+var searchTypeTimeout = null;
 
 module.exports = View.extend({
   template: templates.body,
@@ -23,7 +25,8 @@ module.exports = View.extend({
   events: {
     'click #logout': 'logout',
     'click a[href]': 'handleLinkClick',
-    'change [data-hook~=base-form] select': 'handleEventChange'
+    'change [data-hook~=base-form] select': 'handleEventChange',
+    'input [data-hook~=base-form] input': 'handleSearchInput'
   },
   subviews: {
     form: {
@@ -92,6 +95,78 @@ module.exports = View.extend({
 
     app.companies.reset();
     app.companies.fetch();
+  },
+
+  handleSearchInput: function (e){
+    var self = this;
+    var str = e.target.value;
+
+    // only search when the user stops typing for 200 ms
+    if(searchTypeTimeout !== null) {
+      clearTimeout(searchTypeTimeout);
+    }
+    searchTypeTimeout = setTimeout(search, 200);
+
+    function searchResultTemplate (name, url, img) {
+      return '<li><a href="'+url+'" class="link"><img src="'+img+'" class="img"/><span class="name">'+name+'</span></a></li>';
+    }
+
+    function search () {
+      var searchResults = $(self.queryByHook('search-results'));
+
+      if(str.length < 2) {
+        searchResults.html('');
+        return;
+      }
+
+      log('Searching for', str);
+
+      $.get('/api/search/'+str, function (data) {
+        searchResults.html('');
+        log('Got', data);
+
+        var resultsType = 'exact';
+        if(!data.companies.exact.length && !data.speakers.exact.length && !data.members.exact.length) {
+          resultsType = 'extended';
+          searchResults.append('<li class="header">Showing Extended Results</li>');
+        }
+
+        var i, result;
+
+        searchResults.append('<li class="header">'+data.companies[resultsType].length+' Companies</li>');
+        for(i=0; i<data.companies[resultsType].length; i++) {
+          result = {
+            name: data.companies[resultsType][i].name,
+            img: data.companies[resultsType][i].img,
+            url: '/companies/'+data.companies[resultsType][i].id
+          };
+
+          searchResults.append(searchResultTemplate(result.name, result.url, result.img));
+        }
+
+        searchResults.append('<li class="header">'+data.speakers[resultsType].length+' Speakers</li>');
+        for(i=0; i<data.speakers[resultsType].length; i++) {
+          result = {
+            name: data.speakers[resultsType][i].name,
+            img: data.speakers[resultsType][i].img,
+            url: '/speakers/'+data.speakers[resultsType][i].id
+          };
+
+          searchResults.append(searchResultTemplate(result.name, result.url, result.img));
+        }
+
+        searchResults.append('<li class="header">'+data.members[resultsType].length+' Members</li>');
+        for(i=0; i<data.members[resultsType].length; i++) {
+          result = {
+            name: data.members[resultsType][i].name,
+            img: data.members[resultsType][i].img,
+            url: '/members/'+data.members[resultsType][i].id
+          };
+
+          searchResults.append(searchResultTemplate(result.name, result.url, result.img));
+        }
+      });
+    }
   },
 
   updateActiveNav: function () {
