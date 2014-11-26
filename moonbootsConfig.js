@@ -59,7 +59,7 @@ module.exports = {
             stylizer({
                 infile: cssDir + '/app.styl',
                 outfile:  cssDir + '/app.css',
-                development: true,
+                development: config.isDev,
                 // Beware there's an issue with watch on OSX that causes issues with
                 // watch if you're not running node 0.10.25 or later.
                 watch: cssDir + '/**/*.styl'
