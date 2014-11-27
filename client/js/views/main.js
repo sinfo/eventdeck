@@ -83,8 +83,8 @@ module.exports = View.extend({
 
     // if it's a plain click (no modifier keys)
     // and it's a local url, navigate internally
-    if (local && !e.ctrlKey && !e.shiftKey && !e.altKey && !e.metaKey) {
-      // e.preventDefault();
+    if (local && !e.ctrlKey && !e.shiftKey && !e.altKey && !e.metaKey && aTag.target != '_blank') {
+      e.preventDefault();
       app.navigate(aTag.pathname);
     }
   },
