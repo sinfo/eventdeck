@@ -48,6 +48,8 @@ config.images = {
   directory: __dirname+'/public/images'
 };
 
+config.templates = {};
+
 if(process.env.NODE_ENV == 'test') {
   config.mongo.url = process.env.EVENTDECK_MONGO_TEST_URL || 'mongodb://localhost/deck_test';
   config.bunyan.level = process.env.EVENTDECK_LOG_LEVEL_TEST || 'error';

@@ -54,9 +54,11 @@
     "domready": "^1.0.5",
     "emailjs": "~0.3.8",
     "favicon-setter": "^0.1.1",
+    "handlebars": "^2.0.0",
     "hapi": "~7.5.0",
     "hapi-auth-cookie": "~1.3.2",
     "hapi-swagger": "~0.4.2",
+    "hoek": "^2.9.0",
     "joi": "~4.7.0",
     "jquery": "^2.1.1",
     "lout": "~5.1.1",
@@ -72,8 +74,7 @@
     "socket.io-client": "^1.2.0",
     "stylizer": "^1.0.0",
     "templatizer": "^1.0.0",
-    "underscore": "^1.6.0",
-    "hoek": "^2.9.0"
+    "underscore": "^1.6.0"
   },
   "devDependencies": {
     "bunyan": "~1.2.1",

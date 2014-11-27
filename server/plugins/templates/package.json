@@ -1,0 +1,13 @@
+{
+  "name": "templates",
+  "version": "0.0.0",
+  "description": "Template service",
+  "main": "index.js",
+  "dependencies": {
+    "boom": "~2.6.0",
+    "handlebars": "^2.0.0",
+    "hoek": "~2.9.0",
+    "joi": "~4.9.0",
+    "path": "~0.4.9"
+  }
+}
