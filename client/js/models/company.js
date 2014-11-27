@@ -62,6 +62,18 @@ module.exports = AmpModel.extend({
         return '/companies/' + this.id;
       }
     },
+    templateUrl: {
+      deps: ['id'],
+      fn: function () {
+        return '/templates/companies/' + this.id;
+      }
+    },
+    startupTemplateUrl: {
+      deps: ['id'],
+      fn: function () {
+        return '/templates/startups/' + this.id;
+      }
+    },
     background: {
       deps: ['img'],
       fn: function () {

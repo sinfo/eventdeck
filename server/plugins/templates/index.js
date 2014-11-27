@@ -31,19 +31,19 @@ exports.register = function (plugin, options, next) {
 
   plugin.route({
     method: 'GET',
-    path: settings.endpoint+'/company/{id}',
+    path: settings.endpoint+'/companies/{id}',
     config: handlers.company
   });
 
   plugin.route({
     method: 'GET',
-    path: settings.endpoint+'/startup/{id}',
+    path: settings.endpoint+'/startups/{id}',
     config: handlers.startup
   });
 
   plugin.route({
     method: 'GET',
-    path: settings.endpoint+'/speaker/{id}',
+    path: settings.endpoint+'/speakers/{id}',
     config: handlers.speaker
   });
 

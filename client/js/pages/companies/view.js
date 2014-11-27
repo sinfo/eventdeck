@@ -44,6 +44,16 @@ module.exports = PageView.extend({
       type: 'attribute',
       hook: 'edit',
       name: 'href'
+    },
+    'model.templateUrl': {
+      type: 'attribute',
+      hook: 'view-template',
+      name: 'href'
+    },
+    'model.startupTemplateUrl': {
+      type: 'attribute',
+      hook: 'view-startup-template',
+      name: 'href'
     }
   },
   events: {
