@@ -26,7 +26,8 @@ module.exports = View.extend({
     'click #logout': 'logout',
     'click a[href]': 'handleLinkClick',
     'change [data-hook~=base-form] select': 'handleEventChange',
-    'input [data-hook~=base-form] input': 'handleSearchInput'
+    'input [data-hook~=base-form] input': 'handleSearchInput',
+    'keydown [data-hook~=base-form] input': 'handleSearchKeydown',
   },
   subviews: {
     form: {
@@ -64,7 +65,7 @@ module.exports = View.extend({
     });
 
     // setting a favicon for fun (note, it's dynamic)
-    setFavicon('/images/ampersand.png');
+    setFavicon('/static/favicon.ico');
     return this;
   },
 
@@ -83,7 +84,7 @@ module.exports = View.extend({
     // if it's a plain click (no modifier keys)
     // and it's a local url, navigate internally
     if (local && !e.ctrlKey && !e.shiftKey && !e.altKey && !e.metaKey) {
-      e.preventDefault();
+      // e.preventDefault();
       app.navigate(aTag.pathname);
     }
   },
@@ -97,7 +98,73 @@ module.exports = View.extend({
     app.companies.fetch();
   },
 
+  handleSearchKeydown: function (e){
+    var searchResults = $(this.queryByHook('search-results'));
+    // down arrow or enter
+    if (e.keyCode == 40 || e.keyCode == 13) {
+      searchResults.find('a').first().focus();
+      return false;
+    }
+    // up arrow
+    else if (e.keyCode == 38) {
+      searchResults.find('a').last().focus();
+      return false;
+    }
+  },
+
+  initializeSearch: function() {
+    var self = this;
+    var searchResults = $(this.queryByHook('search-results'));
+    searchResults.mouseleave(function () {
+      searchResults.hide();
+    });
+
+    searchResults.on('focus', 'a', function() {
+      var $this = $(this);
+      $this.parent().addClass('active').siblings().removeClass('active');
+    }).on('keydown', 'a', function(e) {
+      var $this = $(this);
+      // backspace or escape
+      if (e.keyCode == 8 || e.keyCode == 27) {
+        e.preventDefault();
+        $('.event input').focus();
+      }
+      // enter
+      else if (e.keyCode == 13) {
+        e.preventDefault();
+        self.handleLinkClick(e);
+        searchResults.hide();
+      }
+      // down arrow
+      else if (e.keyCode == 40) {
+        var next = $this.parent().next();
+        if(next.hasClass('header')) {
+          next = next.next();
+        }
+
+        next.find('a').focus();
+        return false;
+      }
+      // up arrow
+      else if (e.keyCode == 38) {
+        var prev = $this.parent().prev();
+        if(prev.hasClass('header')) {
+          prev = prev.prev();
+        }
+
+        prev.find('a').focus();
+        return false;
+      }
+    });
+
+    this.searchReady = true;
+  },
+
   handleSearchInput: function (e){
+    if(!this.searchReady) {
+      this.initializeSearch();
+    }
+
     var self = this;
     var str = e.target.value;
 
@@ -113,6 +180,8 @@ module.exports = View.extend({
 
     function search () {
       var searchResults = $(self.queryByHook('search-results'));
+
+      searchResults.show();
 
       if(str.length < 2) {
         searchResults.html('');
