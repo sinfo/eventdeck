@@ -1,23 +1,28 @@
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
+  kind: String, // IDEA, INFO, TODO, DECISION or MEETING
+  name: String, // title of the topic
+  text: String, // can be markdown
   author: String,
-  text: String,
-  targets: [String],
-  kind: String,
+
+  targets: [String], // people assigned to this topic or attendants if type==MEETING
+
   closed: {type:Boolean, default: false},
-  result: String,
+
+  // only used on if type==DECISION
   poll: {
-    kind: {type: String, default: 'text'},
+    kind: {type: String, default: 'text'}, // TEXT or IMAGE
     options: [{
       content: String,
       votes: [String]
     }]
   },
   duedate: {type: Date},
-  meetings: [String],
+
   tags: [String],
-  root: String,
+
+  posted: {type: Date},
   updated: {type: Date},
 });
 

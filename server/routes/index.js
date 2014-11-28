@@ -6,7 +6,6 @@ require('./communications');
 require('./companies');
 require('./events');
 require('./items');
-require('./meetings');
 require('./members');
 require('./messages');
 require('./notifications');

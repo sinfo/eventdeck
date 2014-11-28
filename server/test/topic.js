@@ -17,8 +17,7 @@ var credentials = {
 
 var topicA = {
   text: 'hey',
-  kind: 'Idea',
-  author: 'john.doe'
+  kind: 'idea'
 };
 
 var topicAid;
@@ -36,14 +35,14 @@ lab.experiment('Topic', function() {
       credentials: credentials,
       payload: topicA
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
       Code.expect(response.statusCode).to.equal(201);
       Code.expect(result).to.be.instanceof(Object);
       Code.expect(result.text).to.equal(topicA.text);
-      Code.expect(result.author).to.equal(topicA.author);
+      Code.expect(result.author).to.equal(credentials.id);
 
       topicAid = result.id.toString();
 
@@ -57,7 +56,7 @@ lab.experiment('Topic', function() {
       url: '/api/topics',
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -65,7 +64,7 @@ lab.experiment('Topic', function() {
       Code.expect(result).to.be.instanceof(Array);
       Code.expect(result[0].id).to.be.string;
       Code.expect(result[0].author).to.be.string;
-      Code.expect(result[0].text).to.be.string;      
+      Code.expect(result[0].text).to.be.string;
       done();
     });
   });
@@ -76,16 +75,16 @@ lab.experiment('Topic', function() {
       url: '/api/topics/'+topicAid,
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.author).to.equal(topicA.author);   
+      Code.expect(result.author).to.equal(credentials.id);
       Code.expect(result.text).to.equal(topicA.text);
       Code.expect(result.id.toString()).to.equal(topicAid);
-      
+
       done();
     });
   });
@@ -97,15 +96,15 @@ lab.experiment('Topic', function() {
       credentials: credentials,
       payload: changesTopicA
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.text).to.equal(changesTopicA.text);   
-      Code.expect(result.author).to.equal(topicA.author); 
-      Code.expect(result.id.toString()).to.equal(topicAid);  
+      Code.expect(result.text).to.equal(changesTopicA.text);
+      Code.expect(result.author).to.equal(credentials.id);
+      Code.expect(result.id.toString()).to.equal(topicAid);
       done();
     });
   });
@@ -116,16 +115,16 @@ lab.experiment('Topic', function() {
       url: '/api/topics/'+topicAid,
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
       Code.expect(result.id.toString()).to.equal(topicAid);
-      Code.expect(result.author).to.equal(topicA.author);
+      Code.expect(result.author).to.equal(credentials.id);
       Code.expect(result.text).to.equal(changesTopicA.text);
-      
+
       done();
     });
   });

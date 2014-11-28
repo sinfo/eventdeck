@@ -8,7 +8,6 @@ require('./company');
 require('./email');
 require('./event');
 require('./item');
-require('./meeting');
 require('./member');
 require('./message');
 require('./notification');

@@ -11,20 +11,20 @@ exports.create = {
   tags: ['api','topic'],
   validate: {
     payload: {
-      author: Joi.string().description('author of the topic'),
-      text: Joi.string().description('text of the topic'),
-      targets: Joi.array().description('targets of the topic'),
-      kind: Joi.string().required().description('kind of the topic'),
+      kind: Joi.string().required().valid('info','idea','decision','todo','meeting').description('kind of the topic'),
+      name: Joi.string().description('name of the topic'),
+      text: Joi.string().description('text of the topic (can be markdown)'),
+      targets: Joi.array().includes(Joi.string()).description('targets of the topic'),
       closed: Joi.boolean().description('closed of the topic'),
-      result: Joi.string().description('result of the topic'),
       poll: {
-        kind: Joi.string().description('kind of the poll'),
-        options: Joi.array().description('options of the poll'),
+        kind: Joi.string().valid('text','image').description('kind of the poll'),
+        options: Joi.array().includes(Joi.object().keys({
+          content: Joi.string().description('content of the option - can be image url or text'),
+          votes: Joi.array().includes(Joi.string()).description('members who voted for this option')
+        })).description('options of the poll'),
       },
       duedate: Joi.date().description('duedate of the poll'),
-      meetings: Joi.array().description('meetings the topic is associated to'),
-      tags: Joi.array().description('tags of the topic'),
-      root: Joi.string().description('root topic of this topic'),
+      tags: Joi.array().includes(Joi.string()).description('tags of the topic'),
     }
   },
   pre: [
@@ -46,20 +46,21 @@ exports.update = {
       id: Joi.string().required().description('id of the topic we want to update'),
     },
     payload: {
-      author: Joi.string().description('author of the topic'),
+      kind: Joi.string().valid('info','idea','decision','todo','meeting').description('kind of the topic'),
+      name: Joi.string().description('name of the topic'),
       text: Joi.string().description('text of the topic'),
-      targets: Joi.array().description('targets of the topic'),
-      kind: Joi.string().description('kind of the topic'),
+      author: Joi.string().description('author of the topic'),
+      targets: Joi.array().includes(Joi.string()).description('targets of the topic'),
       closed: Joi.boolean().description('closed of the topic'),
-      result: Joi.string().description('result of the topic'),
       poll: {
-        kind: Joi.string().description('kind of the poll'),
-        options: Joi.array().description('options of the poll'),
+        kind: Joi.string().valid('text','image').description('kind of the poll'),
+        options: Joi.array().includes(Joi.object().keys({
+          content: Joi.string().description('content of the option - can be image url or text'),
+          votes: Joi.array().includes(Joi.string()).description('members who voted for this option')
+        })).description('options of the poll'),
       },
       duedate: Joi.date().description('duedate of the poll'),
-      meetings: Joi.array().description('meetings the topic is associated to'),
-      tags: Joi.array().description('tags of the topic'),
-      root: Joi.string().description('root topic of this topic'),
+      tags: Joi.array().includes(Joi.string()).description('tags of the topic'),
     }
   },
   pre: [
@@ -135,30 +136,6 @@ exports.findByTag = {
     reply(render(request.pre.topics));
   },
   description: 'Gets topics of a given tag'
-};
-
-
-exports.getByMeeting = {
-  auth: 'session',
-  tags: ['api','topic'],
-  validate: {
-    query: {
-      fields: Joi.string().default('').description('Fields we want to retrieve'),
-      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
-      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
-      sort: Joi.string().description('How to sort the array'),
-    },
-    params: {
-      id: Joi.string().required().description('id of the meeting'),
-    }
-  },
-  pre: [
-    { method: 'topic.getByMeeting(params.id,query)', assign: 'topics' }
-  ],
-  handler: function (request, reply) {
-    reply(render(request.pre.topics));
-  },
-  description: 'Gets topics of a given meeting'
 };
 
 
