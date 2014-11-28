@@ -17,6 +17,12 @@ var CompanyEditPage = require('./pages/companies/edit');
 var CompanyViewPage = require('./pages/companies/view');
 var CompanyMemberTable = require('./pages/companies/table');
 
+var Topics = require('./pages/topics/list');
+var TopicAddPage = require('./pages/topics/add');
+var TopicEditPage = require('./pages/topics/edit');
+var TopicViewPage = require('./pages/topics/view');
+
+
 module.exports = Router.extend({
   routes: {
     '': 'home',
@@ -31,6 +37,10 @@ module.exports = Router.extend({
     'companies/add': 'companyAdd',
     'companies/:id': 'companyView',
     'companies/:id/edit': 'companyEdit',
+    'topics': 'topics',
+    'topics/add': 'topicAdd',
+    'topics/:id': 'topicView',
+    'topics/:id/edit': 'topicEdit',
     '(*path)': 'catchAll',
   },
 
@@ -49,6 +59,7 @@ module.exports = Router.extend({
       code: code
     }));
   },
+
 
   members: function () {
     this.trigger('page', new Members({
@@ -100,6 +111,30 @@ module.exports = Router.extend({
       collection: app.members
     }));
   },
+
+
+  topics: function () {
+    this.trigger('page', new Topics({
+      collection: app.topics
+    }));
+  },
+
+  topicAdd: function () {
+    this.trigger('page', new TopicAddPage());
+  },
+
+  topicEdit: function (id) {
+    this.trigger('page', new TopicEditPage({
+      id: id
+    }));
+  },
+
+  topicView: function (id) {
+    this.trigger('page', new TopicViewPage({
+      id: id
+    }));
+  },
+
 
   catchAll: function () {
     this.redirectTo('');

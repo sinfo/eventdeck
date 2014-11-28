@@ -11,14 +11,42 @@ module.exports = AmpModel.extend({
     author: 'string',
     targets: 'array',
     closed: 'boolean',
-    duedate: 'date',
+    duedate: 'string',
     tags: 'array',
-    posted: 'date',
-    updated: 'date',
+    posted: 'string',
+    upstringd: 'string',
   },
-  children: {
-    poll: Poll
+  // children: {
+  //   poll: Poll
+  // }
+
+  derived: {
+    thread: {
+      deps: ['id'],
+      fn: function () {
+        return 'topic-' + this.id;
+      }
+    },
+    editUrl: {
+      deps: ['id'],
+      fn: function () {
+        return '/topics/' + this.id + '/edit';
+      }
+    },
+    viewUrl: {
+      deps: ['id'],
+      fn: function () {
+        return '/topics/' + this.id;
+      }
+    },
+    commentsApi: {
+      deps: ['id'],
+      fn: function () {
+        return '/api/topics/' + this.id + '/comments';
+      }
+    },
   }
+
 });
 
 var PollOption = AmpState.extend({

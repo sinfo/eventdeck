@@ -1,0 +1,30 @@
+section.page.topics.list
+  div(data-hook='topics-list')
+
+  div.button.awesome-sidebar-button(data-hook='hide') Show
+
+  .awesome-sidebar(data-hook='awesome-sidebar')
+    .header
+      b Topics
+      .push-right.hide-button(data-hook='hide') HIDE
+
+    .button-group.small
+      .ink-button(data-hook='showall') Show all
+      a.ink-button(href='/topics/add') Add topic
+
+    b Filter Kind
+    ul.filters.small.unstyled
+      li
+        .ink-button(data-hook='idea') Idea
+      li
+        .ink-button(data-hook='info') Info
+      li
+        .ink-button(data-hook='todo') To do
+      li
+        .ink-button(data-hook='decision') Decision
+      li
+        .ink-button(data-hook='meeting') Meeting
+
+    b Filter Member
+    .button-group.small
+      .ink-button(data-hook='me') Me

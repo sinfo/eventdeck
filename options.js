@@ -32,6 +32,13 @@ options.kinds = {
     'Email From',
     'Meeting',
     'Phone Call'
+  ],
+  topics: [
+    'idea',
+    'info',
+    'todo',
+    'decision',
+    'meeting',
   ]
 };
 

@@ -1,0 +1,16 @@
+section.page.topics.view
+  div.ink-grid
+    div.column-group.horizontal-gutters
+      div.all-100
+        h1(data-hook='name').push-left
+          span(data-hook='kind')
+        .button-group.small.push-right
+          a.ink-button.orange(data-hook='edit') Edit
+          button.ink-button.red(data-hook='delete') Delete
+        div.all-100
+          p.paragraphs(data-hook='text')
+
+      div.all-100
+        div(data-hook='topic-comments')
+
+
