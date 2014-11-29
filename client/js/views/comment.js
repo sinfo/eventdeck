@@ -5,10 +5,25 @@ var templates = require('client/js/templates');
 var ViewSwitcher = require('ampersand-view-switcher');
 var CommentForm = require('client/js/forms/comment');
 var _ = require('client/js/helpers/underscore');
+var async = require('async');
+
+function getMember(page){
+    if(page.model.member){
+          app.members.getOrFetch(page.model.member, {all: true}, function (err, model) {
+            if (err) {
+              log.error('couldnt find a member with id: ' + page.model.member);
+              return cb();
+            }
+            page.model.memberDetails = model;
+            log('Got member', model.name);
+          });
+        }
+}
 
 module.exports = View.extend({
   template: templates.cards.comment,
   render: function () {
+    getMember(this);
     this.renderWithTemplate();
     this.viewContainer = this.queryByHook('view-container');
     this.switcher = new ViewSwitcher(this.viewContainer);
