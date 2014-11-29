@@ -7,23 +7,21 @@ var CommentForm = require('client/js/forms/comment');
 var _ = require('client/js/helpers/underscore');
 var async = require('async');
 
-function getMember(page){
-    if(page.model.member){
-          app.members.getOrFetch(page.model.member, {all: true}, function (err, model) {
+module.exports = View.extend({
+  template: templates.cards.comment,
+  initialize: function(){
+    var self = this;
+    if(self.model.member){
+          app.members.getOrFetch(self.model.member, {all: true}, function (err, model) {
             if (err) {
-              log.error('couldnt find a member with id: ' + page.model.member);
-              return cb();
+              log.error('couldnt find a member with id: ' + self.model.member);
             }
-            page.model.memberDetails = model;
+            self.model.memberDetails = model;
             log('Got member', model.name);
           });
         }
-}
-
-module.exports = View.extend({
-  template: templates.cards.comment,
+  },
   render: function () {
-    getMember(this);
     this.renderWithTemplate();
     this.viewContainer = this.queryByHook('view-container');
     this.switcher = new ViewSwitcher(this.viewContainer);
