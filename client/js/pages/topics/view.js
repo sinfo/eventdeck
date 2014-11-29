@@ -41,7 +41,7 @@ module.exports = PageView.extend({
   },
   subviews: {
     comments:{
-      container: '[data-hook=company-comments]',
+      container: '[data-hook=topic-comments]',
       waitFor: 'model.commentsApi',
       prepareView: function (el) {
         var Comms = new Comments(this.model.commentsApi);

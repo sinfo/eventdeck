@@ -43,14 +43,16 @@ module.exports = FormView.extend({
         label: 'Targets',
         name: 'targets',
         value: this.model && this.model.targets || [],
-        numberRequired: 0,
+        minLength: 0,
+        maxLength: 50,
         parent: this
       }),
       new ArrayInputView({
         label: 'Tags',
         name: 'tags',
         value: this.model && this.model.tags || [],
-        numberRequired: 0,
+        minLength: 0,
+        maxLength: 50,
         parent: this
       }),
       new CheckboxView({

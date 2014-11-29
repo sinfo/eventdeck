@@ -5,7 +5,7 @@ var templates = require('client/js/templates');
 module.exports = View.extend({
   template: templates.cards.topic,
   bindings: {
-    'model.text': '[data-hook~=name]',
+    'model.name': '[data-hook~=name]',
     'model.kind': '[data-hook~=kind]',
     'model.viewUrl': {
       type: 'attribute',

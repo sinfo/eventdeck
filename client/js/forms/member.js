@@ -91,7 +91,6 @@ module.exports = FormView.extend({
           return r.id;
         }) || [],
         minLength: 0,
-        numberRequired: 0,
         parent: this
       }),
       new ArrayInputView({
@@ -99,7 +98,6 @@ module.exports = FormView.extend({
         name: 'phones',
         value: this.model && this.model.phones || [],
         minLength: 0,
-        numberRequired: 0,
         parent: this
       })
     ];
