@@ -13,6 +13,7 @@ var Me = require('./models/me');
 var Events = require('./models/events');
 var Members = require('./models/members');
 var Companies = require('./models/companies');
+var Speakers = require('./models/speakers');
 var Topics = require('./models/topics');
 var Communications = require('./models/communications');
 
@@ -30,6 +31,7 @@ module.exports = {
     this.events = new Events();
     this.members = new Members();
     this.companies = new Companies();
+    this.speakers = new Speakers();
     this.topics = new Topics();
     this.fetchInitialData();
 

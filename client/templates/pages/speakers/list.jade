@@ -1,0 +1,36 @@
+section.page.speakers.list
+  div(data-hook='speakers-list')
+
+  div.button.awesome-sidebar-button(data-hook='hide') Show
+
+  .awesome-sidebar(data-hook='awesome-sidebar')
+    .header
+      b Companies
+      .push-right.hide-button(data-hook='hide') HIDE
+
+    .button-group.small
+      .ink-button(data-hook='showall') Show all
+      a.ink-button(href='/speakers/add') Add Company
+
+    b Filter Status
+    ul.filters.small.unstyled
+      li
+        .ink-button(data-hook='selected') Selected
+      li
+        .ink-button(data-hook='contacted') Contacted
+      li
+        .ink-button(data-hook='inconversations') In Conversations
+      li
+        .ink-button(data-hook='innegotiations') In Negotiations
+      li
+        .ink-button(data-hook='closeddeal') Closed Deal
+      li
+        .ink-button(data-hook='rejected') Rejected
+      li
+        .ink-button(data-hook='giveup') Give Up
+
+    b Filter Member
+    .button-group.small
+      .ink-button(data-hook='me') Me
+      .ink-button(data-hook='noMember') No Member
+      .ink-button(data-hook='noParticipation') No Participation

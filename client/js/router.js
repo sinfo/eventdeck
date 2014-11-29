@@ -17,6 +17,12 @@ var CompanyEditPage = require('./pages/companies/edit');
 var CompanyViewPage = require('./pages/companies/view');
 var CompanyMemberTable = require('./pages/companies/table');
 
+var Speakers = require('./pages/speakers/list');
+var SpeakerAddPage = require('./pages/speakers/add');
+var SpeakerEditPage = require('./pages/speakers/edit');
+var SpeakerViewPage = require('./pages/speakers/view');
+var SpeakerMemberPage = require('./pages/speakers/table');
+
 var Topics = require('./pages/topics/list');
 var TopicAddPage = require('./pages/topics/add');
 var TopicEditPage = require('./pages/topics/edit');
@@ -41,6 +47,11 @@ module.exports = Router.extend({
     'topics/add': 'topicAdd',
     'topics/:id': 'topicView',
     'topics/:id/edit': 'topicEdit',
+    'speakers': 'speakers',
+    'speakers/add': 'speakerAdd',
+    'speakers/:id': 'speakerView',
+    'speakers/:id/edit': 'speakerEdit',
+    'speakers/table': 'speakersTable',
     '(*path)': 'catchAll',
   },
 
@@ -112,6 +123,32 @@ module.exports = Router.extend({
     }));
   },
 
+  speakers: function () {
+    this.trigger('page', new Speakers({
+      collection: app.speakers
+    }));
+  },
+
+  speakerAdd: function () {
+    this.trigger('page', new SpeakerAddPage());
+  },
+
+  speakerEdit: function (id) {
+    this.trigger('page', new SpeakerEditPage({
+      id: id
+    }));
+  },
+
+  speakerView: function (id) {
+    this.trigger('page', new SpeakerViewPage({
+      id: id
+    }));
+  },
+  SpeakerMemberTable: function (id) {
+    this.trigger('page', new SpeakerMemberPage({
+      id: id
+    }));
+  },
 
   topics: function () {
     this.trigger('page', new Topics({
