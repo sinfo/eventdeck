@@ -4,8 +4,8 @@ var url = require('url');
 var config = {
   url: process.env.EVENTDECK_URL || 'http://localhost:8080',
   port: process.env.EVENTDECK_PORT || 8080,
-  isDev: process.env.EVENTDECK_IS_DEV == 'true',
-  isSecure: process.env.EVENTDECK_IS_SECURE == 'true'
+  isDev: process.env.EVENTDECK_IS_DEV === true || process.env.EVENTDECK_IS_DEV === 'true',
+  isSecure: process.env.EVENTDECK_IS_SECURE === true || process.env.EVENTDECK_IS_SECURE === 'true'
 };
 
 config.mongo = {
