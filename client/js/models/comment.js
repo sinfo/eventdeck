@@ -2,6 +2,7 @@
 var AmpModel = require('ampersand-model');
 var timeSince = require('client/js/helpers/timeSince');
 var options = require('options');
+var Member = require('./member');
 
 module.exports = AmpModel.extend({
   props: {
@@ -13,6 +14,10 @@ module.exports = AmpModel.extend({
     posted: ['string'],
     updated: ['string']
   },
+  session: {
+    memberDetails: Member,
+    editing: ['boolean']
+  },
   derived: {
     postedTimeSpan: {
       deps: ['posted'],
@@ -20,14 +25,6 @@ module.exports = AmpModel.extend({
         return timeSince(this.posted);
       },
       cache: false
-    },
-    memberName: {
-      deps: ['member'],
-      fn: function () {
-        app.members.getOrFetch(this.member, {all: true}, function (err, model) {
-          return model.name;
-        });
-      }
     }
   }
 });

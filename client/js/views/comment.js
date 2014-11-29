@@ -46,8 +46,13 @@ var ViewComment = View.extend({
       hook: 'posted',
       name: 'title'
     },
+    'model.memberDetails.img': {
+      type: 'attribute',
+      hook: 'member-img',
+      name: 'src'
+    },
     'model.text': '[data-hook~=text]',
-    'model.memberName': '[data-hook~=member-name]'
+    'model.memberDetails.name': '[data-hook~=member-name]',
   },
   events: {
     'click [data-hook~=action-delete]': 'handleRemoveClick'
@@ -95,7 +100,6 @@ var EditComment = View.extend({
     }
   }
 });
-
 
 var AdminComment = View.extend({
   template: templates.partials.comments.admin,

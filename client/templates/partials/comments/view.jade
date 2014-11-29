@@ -1,9 +1,10 @@
 .content
-  b.kind(data-hook='kind')
+
+  .member
+    img(data-hook='member-img')
+    span(data-hook='member-name')
   .note.push-right(data-hook='posted')
-  span.status(data-hook='status')
   .paragraphs(data-hook='text')
-  div(data-hook='member-name')
 
   .button-group
     a.ink-button.orange.small(data-hook='action-edit') Edit
