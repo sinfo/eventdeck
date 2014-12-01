@@ -21,7 +21,7 @@ var Speakers = require('./pages/speakers/list');
 var SpeakerAddPage = require('./pages/speakers/add');
 var SpeakerEditPage = require('./pages/speakers/edit');
 var SpeakerViewPage = require('./pages/speakers/view');
-var SpeakerMemberPage = require('./pages/speakers/table');
+var SpeakerMemberTable = require('./pages/speakers/table');
 
 var Topics = require('./pages/topics/list');
 var TopicAddPage = require('./pages/topics/add');
@@ -144,9 +144,8 @@ module.exports = Router.extend({
       id: id
     }));
   },
-  SpeakerMemberTable: function (id) {
-    this.trigger('page', new SpeakerMemberPage({
-      id: id
+  SpeakerTable: function () {
+    this.trigger('page', new SpeakerMemberTable({
     }));
   },
 

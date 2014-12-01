@@ -38,7 +38,7 @@ module.exports = View.extend({
 });
 
 var MemberCompaniesRow = View.extend({
-  template: templates.cards.memberCompaniesRow,
+  template: templates.cards.memberSpeakersRow,
   bindings: {
     'model.name': '[data-hook~=speaker-name]',
     'model.img': {
