@@ -4,7 +4,6 @@ var templates = require('client/js/templates');
 
 module.exports = View.extend({
   template: templates.cards.company,
-
   bindings: {
     'model.name': '[data-hook~=name]',
     'model.statusDetails.name': '[data-hook~=status]',
@@ -13,7 +12,7 @@ module.exports = View.extend({
       hook: 'status',
       name: 'style'
     },
-    'model.storedImg': {
+    'model.img': {
       type: 'attribute',
       hook: 'img',
       name: 'src'

@@ -3,7 +3,7 @@ var log = require('bows')('speakers');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var SpeakerView = require('client/js/views/speaker');
-var Company = require('client/js/models/speaker');
+var Speaker = require('client/js/models/speaker');
 var AmpersandCollection = require('ampersand-collection');
 
 
@@ -36,14 +36,14 @@ module.exports = PageView.extend({
     'click [data-hook~=reset]': 'resetCollection',
 
     'click [data-hook~=selected]': 'selected',
+    'click [data-hook~=approved]': 'approved',
     'click [data-hook~=contacted]': 'contacted',
     'click [data-hook~=inconversations]': 'inconversations',
-    'click [data-hook~=innegotiations]': 'innegotiations',
-    'click [data-hook~=showall]': 'showall',
-    'click [data-hook~=closeddeal]': 'closeddeal',
+    'click [data-hook~=accepted]': 'accepted',
     'click [data-hook~=rejected]': 'rejected',
     'click [data-hook~=giveup]': 'giveup',
 
+    'click [data-hook~=showall]': 'showall',
     'click [data-hook~=me]': 'me',
     'click [data-hook~=noMember]': 'noMember',
     'click [data-hook~=noParticipation]': 'noParticipation',
@@ -66,8 +66,8 @@ module.exports = PageView.extend({
 
     return false;
   },
-  resetCollection: function () {
-    this.collection.reset();
+  resetCollection: function (){
+     this.collection.reset();
   },
   shuffle: function () {
     this.collection.comparator = function () {
@@ -81,7 +81,7 @@ module.exports = PageView.extend({
     log('Fetching contacted Speakers');
     var aux =  filtering(this.collection,'Contacted');
 
-    aux = new AmpersandCollection(aux, {model: Company});
+    aux = new AmpersandCollection(aux, {model: Speaker});
 
     rerender(this,aux,'contacted');
 
@@ -91,19 +91,19 @@ module.exports = PageView.extend({
     log('Fetching Selected Speakers');
     var aux = filtering(this.collection,'Selected');
 
-    aux = new AmpersandCollection(aux, {model: Company});
+    aux = new AmpersandCollection(aux, {model: Speaker});
 
     rerender(this,aux,'selected');
 
     return false;
   },
-  closeddeal: function () {
-    log('Fetching Closed Deal Speakers');
-    var aux = filtering(this.collection,'Closed Deal');
+  approved: function () {
+    log('Fetching Approved Speakers');
+    var aux = filtering(this.collection,'Approved');
 
-    aux = new AmpersandCollection(aux, {model: Company});
+    aux = new AmpersandCollection(aux, {model: Speaker});
 
-    rerender(this,aux,'closeddeal');
+    rerender(this,aux,'approved');
 
     return false;
   },
@@ -111,7 +111,7 @@ module.exports = PageView.extend({
     log('Fetching Rejected Speakers');
     var aux = filtering(this.collection,'Rejected');
 
-    aux = new AmpersandCollection(aux, {model: Company});
+    aux = new AmpersandCollection(aux, {model: Speaker});
 
     rerender(this,aux,'rejected');
 
@@ -121,7 +121,7 @@ module.exports = PageView.extend({
     log('Fetching Gave up Speakers');
     var aux = filtering(this.collection,'Give Up');
 
-    aux = new AmpersandCollection(aux, {model: Company});
+    aux = new AmpersandCollection(aux, {model: Speaker});
 
     rerender(this,aux,'giveup');
 
@@ -131,19 +131,19 @@ module.exports = PageView.extend({
     log('Fetching Selected Speakers');
     var aux = filtering(this.collection,'In Conversations');
 
-    aux = new AmpersandCollection(aux, {model: Company});
+    aux = new AmpersandCollection(aux, {model: Speaker});
 
     rerender(this,aux,'inconversations');
 
     return false;
   },
-  innegotiations: function () {
-    log('Fetching Selected Speakers');
-    var aux = filtering(this.collection,'In Negotiations');
+  accepted: function () {
+    log('Fetching Accepted Speakers');
+    var aux = filtering(this.collection,'Accepted');
 
-    aux = new AmpersandCollection(aux, {model: Company});
+    aux = new AmpersandCollection(aux, {model: Speaker});
 
-    rerender(this,aux,'innegotiations');
+    rerender(this,aux,'accepted');
 
     return false;
   },
@@ -153,7 +153,7 @@ module.exports = PageView.extend({
       return speaker.participation && speaker.participation.member == app.me.id;
     });
 
-    aux = new AmpersandCollection(aux, {model: Company});
+    aux = new AmpersandCollection(aux, {model: Speaker});
 
     rerender(this,aux,'me');
 
@@ -165,7 +165,7 @@ module.exports = PageView.extend({
       return speaker.participation && !speaker.participation.member;
     });
 
-    aux = new AmpersandCollection(aux, {model: Company});
+    aux = new AmpersandCollection(aux, {model: Speaker});
 
     rerender(this,aux,'noMember');
 
@@ -177,7 +177,7 @@ module.exports = PageView.extend({
       return !speaker.participation;
     });
 
-    aux = new AmpersandCollection(aux, {model: Company});
+    aux = new AmpersandCollection(aux, {model: Speaker});
 
     rerender(this,aux,'noParticipation');
     return false;
