@@ -16,43 +16,45 @@ var Companies = require('./models/companies');
 var Speakers = require('./models/speakers');
 var Topics = require('./models/topics');
 var Communications = require('./models/communications');
+var Notifications = require('./models/notifications');
 
 
 module.exports = {
   // this is the the whole app initter
-  blastoff: function () {
-    var self = window.app = this;
+blastoff: function () {
+var self = window.app = this;
 
-    log('Blasting off!');
+log('Blasting off!');
 
-    this.me = new Me();
-    this.socket = io.connect();
-    this.socketInit();
-    this.events = new Events();
-    this.members = new Members();
-    this.companies = new Companies();
-    this.speakers = new Speakers();
-    this.topics = new Topics();
-    this.fetchInitialData();
+this.me = new Me();
+this.socket = io.connect();
+this.socketInit();
+this.events = new Events();
+this.members = new Members();
+this.companies = new Companies();
+this.speakers = new Speakers();
+this.topics = new Topics();
+// this.notifications = new Notifications();
+this.fetchInitialData();
 
-    // init our URL handlers and the history tracker
-    this.router = new Router();
+// init our URL handlers and the history tracker
+this.router = new Router();
 
-    // wait for document ready to render our main view
-    // this ensures the document has a body, etc.
-    domReady(function () {
-      // init our main view
-      var mainView = self.view = new MainView({
-        el: document.body,
-        collection: this.events
-      });
+// wait for document ready to render our main view
+// this ensures the document has a body, etc.
+domReady(function () {
+  // init our main view
+  var mainView = self.view = new MainView({
+    el: document.body,
+    collection: this.events
+  });
 
-      // ...and render it
-      mainView.render();
+  // ...and render it
+  mainView.render();
 
-      // we have what we need, we can now start our router and show the appropriate page
-      self.router.history.start({pushState: true, root: '/'});
-    });
+  // we have what we need, we can now start our router and show the appropriate page
+  self.router.history.start({pushState: true, root: '/'});
+});
   },
 
   fetchInitialData: function () {
@@ -121,23 +123,23 @@ module.exports = {
       self.me.online = false;
     });
     this.socket.on('reconnecting', function(attempts){
-      log('Reconnecting!');
+      log('Reconnecting');
       self.me.reconnecting = true;
     });
     this.socket.on('reconnect', function(attempts){
-      log('Reconnected!');
+      log('Reconnected');
       self.me.reconnecting = false;
     });
     this.socket.on('reconnect_failed', function(){
-      log('Reconnect failed!');
+      log('Reconnect failed');
       self.me.reconnecting = false;
     });
     this.socket.on('reconnect_error', function(error){
-      log('Reconnection error!', error);
+      log('Reconnection error', error);
       self.me.error = true;
     });
     this.socket.on('error', function(error){
-      log('Connection error!', error);
+      log('Connection error', error);
       self.me.error = true;
     });
   }
