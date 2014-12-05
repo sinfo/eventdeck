@@ -48,10 +48,10 @@ module.exports = Router.extend({
     'topics/:id': 'topicView',
     'topics/:id/edit': 'topicEdit',
     'speakers': 'speakers',
+    'speakers/table': 'speakersTable',
     'speakers/add': 'speakerAdd',
     'speakers/:id': 'speakerView',
     'speakers/:id/edit': 'speakerEdit',
-    'speakers/table': 'speakersTable',
     '(*path)': 'catchAll',
   },
 
@@ -144,8 +144,10 @@ module.exports = Router.extend({
       id: id
     }));
   },
-  SpeakerTable: function () {
+
+  speakersTable: function () {
     this.trigger('page', new SpeakerMemberTable({
+      collection: app.members
     }));
   },
 
