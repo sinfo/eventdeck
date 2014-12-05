@@ -28,7 +28,8 @@ var schema = new mongoose.Schema({
   subscriptions: {
     all: Boolean,
     threads: [String]
-  }
+  },
+  unreadAccess: { type: Date, default: Date.now }
 });
 
 var Member = module.exports = mongoose.model('Member', schema);

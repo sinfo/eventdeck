@@ -1,10 +1,13 @@
 var Boom = require('boom');
+var async = require('async');
 var server = require('server').hapi;
 var webSocket = require('server').webSocket.client;
 var log = require('server/helpers/logger');
 var threadFromPath = require('server/helpers/threadFromPath');
 var parser = require('server/helpers/fieldsParser');
 var Notification = require('server/db/notification');
+var Access = require('server/db/access');
+var Subscription = require('server/db/subscription');
 
 
 server.method('notification.notifyCreate', notifyCreate, {});
@@ -107,6 +110,60 @@ function getByThread(path, id, query, cb) {
     }
 
     cb(null, notifications);
+  });
+}
+
+function getUnreadCount(memberId, query, cb) {
+  cb = cb||query;
+
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+
+  async.waterfall([
+    function getSubscriptions(cbAsync){
+      var filter = {member: memberId};
+      Subscription.find(filter, function(err, subscriptions) {
+        if (err) {
+          log.error({ err: err, subscriptions: subscriptions}, 'error getting subscriptions');
+          return cbAsync(Boom.internal());
+        }
+
+        cbAsync(null, subscriptions);
+      });
+    },
+    function getLastAccess(subscriptions, cbAsync){
+      var filter = {member: memberId};
+      var memberFields = {unreadAccess: true};
+      Member.find(filter, memberFields, function(err, member){
+        if (err) {
+          log.error({ err: err, member: member}, 'error getting member notification accesses');
+          return cbAsync(Boom.internal());
+        }
+
+        cbAsync(null, subscriptions, member.unreadAccess);
+      });
+    },
+    function getUnreadNotifications(subscriptions, access, cbAsync){
+      var filter = {member: memberId, posted: {$gt: access}};
+      Notification.count(filter, fields, options, function(err, count){
+        if (err) {
+          log.error({ err: err, count: count}, 'error counting notifications');
+          return cbAsync(Boom.internal());
+        }
+
+        cbAsync(null, count);
+      });
+    }
+  ], function done (err, result){
+    if(err){
+      log.error({ err: err}, 'error counting notifications');
+      return cb(err);
+    }
+    cb(result);
   });
 }
 
