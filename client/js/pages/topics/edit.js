@@ -10,6 +10,10 @@ module.exports = PageView.extend({
   template: templates.pages.topics.edit,
   initialize: function (spec) {
     var self = this;
+    if (!app.members.length) {
+      app.members.fetch();
+    }
+
     app.topics.getOrFetch(spec.id, {all: true}, function (err, model) {
       if (err) {
         return alert('couldnt find a model with id: ' + spec.id);

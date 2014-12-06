@@ -1,6 +1,8 @@
+/*global app*/
 var FormView = require('ampersand-form-view');
 var InputView = require('ampersand-input-view');
 var ArrayInputView = require('ampersand-array-input-view');
+var ArrayCheckboxView = require('ampersand-array-checkbox-view');
 var CheckboxView = require('ampersand-checkbox-view');
 var SelectView = require('ampersand-select-view');
 var templates = require('client/js/templates');
@@ -39,10 +41,11 @@ module.exports = FormView.extend({
         placeholder: 'Text',
         parent: this
       }),
-      new ArrayInputView({
+      new ArrayCheckboxView({
         label: 'Targets',
         name: 'targets',
         value: this.model && this.model.targets || [],
+        options: app.members && app.members.map(function (m) { return [m.id, m.name]; }),
         minLength: 0,
         maxLength: 50,
         parent: this
