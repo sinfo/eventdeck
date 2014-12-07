@@ -20,7 +20,7 @@ module.exports = FormView.extend({
         name: 'status',
         label: 'Status',
         parent: this,
-        options: options.kinds.topics,
+        options: options.kinds.topics.map(function(t) { return [t, t.toUpperCase()]; }),
         value: this.model && this.model.status || '',
         yieldModel: false
       }),
@@ -44,6 +44,8 @@ module.exports = FormView.extend({
       new ArrayCheckboxView({
         label: 'Targets',
         name: 'targets',
+        template: templates.includes.formCheckboxGroup(),
+        fieldTemplate: templates.includes.formCheckboxGroupElement(),
         value: this.model && this.model.targets || [],
         options: app.members && app.members.map(function (m) { return [m.id, m.name]; }),
         minLength: 0,
@@ -53,6 +55,8 @@ module.exports = FormView.extend({
       new ArrayCheckboxView({
         label: 'Tags',
         name: 'tags',
+        template: templates.includes.formCheckboxGroup(),
+        fieldTemplate: templates.includes.formCheckboxGroupElement(),
         value: this.model && this.model.tags || [],
         options: app.tags && app.tags.map(function (m) { return [m.id, m.name]; }),
         minLength: 0,
