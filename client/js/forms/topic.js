@@ -50,10 +50,11 @@ module.exports = FormView.extend({
         maxLength: 50,
         parent: this
       }),
-      new ArrayInputView({
+      new ArrayCheckboxView({
         label: 'Tags',
         name: 'tags',
         value: this.model && this.model.tags || [],
+        options: app.tags && app.tags.map(function (m) { return [m.id, m.name]; }),
         minLength: 0,
         maxLength: 50,
         parent: this
