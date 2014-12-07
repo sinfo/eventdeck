@@ -60,7 +60,7 @@ function notify(memberId, thread, description, objectId, targets, cb) {
 
 function create(notification, cb) {
   notification.posted = Date.now();
-  
+
   Notification.create(notification, function(err, _notification) {
     if (err) {
       log.error({ err: err, notification: notification}, 'error creating notification');
@@ -170,7 +170,7 @@ function getUnreadCount(memberId, query, cb) {
 
 function readThread(path, id, memberId, cb) {
   var thread = threadFromPath(path, id);
-  var filter = {thread:thread}; 
+  var filter = {thread:thread};
   Notification.update(filter, { $pull: { unread: memberId } }, function(err) {
     if (err) {
       log.error({ err: err, thread: thread}, 'error reading notifications');
@@ -196,7 +196,7 @@ function list(query, cb) {
       log.error({ err: err}, 'error getting all notifications');
       return cb(Boom.internal());
     }
-    
+
     cb(null, notifications);
   });
 }
