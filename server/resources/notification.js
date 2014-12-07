@@ -6,6 +6,7 @@ var log = require('server/helpers/logger');
 var threadFromPath = require('server/helpers/threadFromPath');
 var parser = require('server/helpers/fieldsParser');
 var Notification = require('server/db/notification');
+var Member = require('server/db/member');
 var Access = require('server/db/access');
 var Subscription = require('server/db/subscription');
 
