@@ -16,6 +16,7 @@ server.method('notification.notifyUpdate', notifyUpdate, {});
 server.method('notification.notify', notify, {});
 server.method('notification.create', create, {});
 server.method('notification.get', get, {});
+server.method('notification.getUnreadCount', getUnreadCount, {});
 server.method('notification.list', list, {});
 server.method('notification.remove', remove, {});
 server.method('notification.readThread', readThread, {});
