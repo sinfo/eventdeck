@@ -2,6 +2,7 @@
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var TopicForm = require('client/js/forms/topic');
+var _ = require('client/js/helpers/underscore');
 
 
 module.exports = PageView.extend({
@@ -23,6 +24,8 @@ module.exports = PageView.extend({
         return new TopicForm({
           el: el,
           submitCallback: function (data) {
+            data = _.compactObject(data);
+
             app.topics.create(data, {
               wait: true,
               success: function () {

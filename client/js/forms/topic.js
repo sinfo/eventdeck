@@ -17,11 +17,12 @@ module.exports = FormView.extend({
     return [
       new SelectView({
         template: templates.includes.formSelect(),
-        name: 'status',
-        label: 'Status',
+        name: 'kind',
+        label: 'Kind',
         parent: this,
         options: options.kinds.topics.map(function(t) { return [t, t.toUpperCase()]; }),
-        value: this.model && this.model.status || '',
+        value: this.model && this.model.kind || '',
+        unselectedText: 'please choose one',
         yieldModel: false
       }),
       new ExtendedInput({

@@ -2,6 +2,7 @@
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var CompanyForm = require('client/js/forms/speaker');
+var _ = require('client/js/helpers/underscore');
 
 
 module.exports = PageView.extend({
@@ -14,6 +15,8 @@ module.exports = PageView.extend({
         return new CompanyForm({
           el: el,
           submitCallback: function (data) {
+            data = _.compactObject(data);
+
             app.companies.create(data, {
               wait: true,
               success: function () {
