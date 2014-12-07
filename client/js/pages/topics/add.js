@@ -7,6 +7,15 @@ var TopicForm = require('client/js/forms/topic');
 module.exports = PageView.extend({
   pageTitle: 'Add topic',
   template: templates.pages.topics.add,
+  initialize: function (spec) {
+    var self = this;
+    if (!app.members.length) {
+      app.members.fetch();
+    }
+    if (!app.tags.length) {
+      app.tags.fetch();
+    }
+  },
   subviews: {
     form: {
       container: 'form',

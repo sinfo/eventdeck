@@ -14,6 +14,7 @@ var Events = require('./models/events');
 var Members = require('./models/members');
 var Companies = require('./models/companies');
 var Speakers = require('./models/speakers');
+var Tags = require('./models/tags');
 var Topics = require('./models/topics');
 var Communications = require('./models/communications');
 var Notifications = require('./models/notifications');
@@ -21,40 +22,41 @@ var Notifications = require('./models/notifications');
 
 module.exports = {
   // this is the the whole app initter
-blastoff: function () {
-var self = window.app = this;
+  blastoff: function () {
+    var self = window.app = this;
 
-log('Blasting off!');
+    log('Blasting off!');
 
-this.me = new Me();
-this.socket = io.connect();
-this.socketInit();
-this.events = new Events();
-this.members = new Members();
-this.companies = new Companies();
-this.speakers = new Speakers();
-this.topics = new Topics();
-// this.notifications = new Notifications();
-this.fetchInitialData();
+    this.me = new Me();
+    this.socket = io.connect();
+    this.socketInit();
+    this.events = new Events();
+    this.members = new Members();
+    this.companies = new Companies();
+    this.speakers = new Speakers();
+    this.tags = new Tags();
+    this.topics = new Topics();
+    // this.notifications = new Notifications();
+    this.fetchInitialData();
 
-// init our URL handlers and the history tracker
-this.router = new Router();
+    // init our URL handlers and the history tracker
+    this.router = new Router();
 
-// wait for document ready to render our main view
-// this ensures the document has a body, etc.
-domReady(function () {
-  // init our main view
-  var mainView = self.view = new MainView({
-    el: document.body,
-    collection: this.events
-  });
+    // wait for document ready to render our main view
+    // this ensures the document has a body, etc.
+    domReady(function () {
+      // init our main view
+      var mainView = self.view = new MainView({
+        el: document.body,
+        collection: this.events
+      });
 
-  // ...and render it
-  mainView.render();
+      // ...and render it
+      mainView.render();
 
-  // we have what we need, we can now start our router and show the appropriate page
-  self.router.history.start({pushState: true, root: '/'});
-});
+      // we have what we need, we can now start our router and show the appropriate page
+      self.router.history.start({pushState: true, root: '/'});
+    });
   },
 
   fetchInitialData: function () {

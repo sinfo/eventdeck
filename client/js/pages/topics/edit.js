@@ -13,6 +13,9 @@ module.exports = PageView.extend({
     if (!app.members.length) {
       app.members.fetch();
     }
+    if (!app.tags.length) {
+      app.tags.fetch();
+    }
 
     app.topics.getOrFetch(spec.id, {all: true}, function (err, model) {
       if (err) {
