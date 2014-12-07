@@ -7,7 +7,6 @@ var appDir = __dirname + '/client/js';
 var cssDir = __dirname + '/client/css';
 var templatesDir = __dirname + '/client/templates';
 
-
 module.exports = {
     // Tell the Hapi server what URLs the application should be served from.
     // Since we're doing clientside routing we want to serve this from some type
