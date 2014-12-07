@@ -6,17 +6,29 @@ var webSocket = server.webSocket.server;
 function chatServer(socket){
 
   socket.on('chat-init', function(data, cbClient){
-    var room = data.id;
+    var room = data.chatId;
     var user = socket.nickname;
-    async.parallel([
-      function(cb){
-        server.methhods.chat.get(room, cb);
-      },
-      function(cb){
-        server.methods.message.getByChat(room, {skip: 0, limit: 10, sort: 'date'}, cb);
+    server.methhods.chat.get(room, function(err, chat){
+      if(err){
+        log.error({err: err, chat: chat.id, user: user}, '[socket-chat] error on initialization');
+        return cbClient(err);
       }
-    ], function(err, results){
-        done(err, user, room, results, cbClient);
+      var online  = [];
+      socket.join(room);
+      var clients = webSocket.sockets;
+      for(var i = 0; i < clients.length; i++){
+        if(clients[i].connected  && clients[i].nickname){
+          online[i] = clients[i].nickname;
+        }
+      }
+      var data = {
+        room     : room,
+        chatData : chat,
+        online   : online
+      };
+      webSocket.in(room).emit('user-connected', {id: socket.nickname});
+      socket.emit('chat-init-response', data);
+      cbClient();
     });
   });
 
@@ -47,7 +59,7 @@ function chatServer(socket){
     cb();
   });
 
-  socket.on('chat-page', function(data, cb){
+  socket.on('chat-get', function(data, cb){
     var page = data.page;
     var room = data.room;
     server.methods.message.getByChat(room, {skip: 10 * page, limit: 10, sort: 'date'}, function(err, messages){
@@ -55,7 +67,7 @@ function chatServer(socket){
         log.error({err: err, chat: room}, '[socket-chat] error on page send');
         return cb(err);
       }
-      webSocket.in(room).emit('page-send', {messages: messages});
+      webSocket.in(room).emit('chat-get-response', {messages: messages});
       cb();
     });
   });
@@ -68,27 +80,7 @@ function chatServer(socket){
 
     //MISSING USER AUTH CHECK
 
-    if(err){
-      log.error({err: err, chat: chat.id, user: user}, '[socket-chat] error on auth');
-      return cb(err);
-    }
-    var online  = [];
-    socket.join(room);
-    var clients = webSocket.sockets;
-    for(var i = 0; i < clients.length; i++){
-      if(clients[i].connected  && clients[i].nickname){
-        online[i] = clients[i].nickname;
-      }
-    }
-    var data = {
-      room     : room,
-      chatData : chat,
-      messages : messages,
-      online   : online
-    };
-    webSocket.in(room).emit('user-connected', {id: socket.nickname});
-    socket.emit('validation', data);
-    cb();
+
   }
 }
 
