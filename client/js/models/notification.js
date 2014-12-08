@@ -29,5 +29,11 @@ module.exports = AmpModel.extend({
         });
       }
     },
+    unread: {
+      deps: ['member'],
+      fn: function() {
+        
+      }
+    }
   }
 });

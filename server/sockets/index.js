@@ -20,7 +20,7 @@ webSocket.on('connection', function (socket) {
     }
     socket.nickname = user;
     socket.join(user);
-/*    chatServer(socket);
-    notificationServer(socket);*/
+    chatServer(socket);
+    notificationServer(socket);
   });
 });

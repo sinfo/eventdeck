@@ -71,17 +71,6 @@ function chatServer(socket){
       cb();
     });
   });
-
-
-
-  function done(err, user, room, results, cb){
-    var chat = results[0];
-    var messages = results[1];
-
-    //MISSING USER AUTH CHECK
-
-
-  }
 }
 
 module.exports = chatServer;
