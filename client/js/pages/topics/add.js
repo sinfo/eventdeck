@@ -28,10 +28,9 @@ module.exports = PageView.extend({
 
             app.topics.create(data, {
               wait: true,
-              success: function () {
-                app.navigate('/topics');
-                app.topics.fetch();
-              }
+              success: function (model, response, options) {
+                app.navigate('/topics/'+model.id);
+              },
             });
           }
         });

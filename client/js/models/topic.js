@@ -1,6 +1,29 @@
 var AmpState = require('ampersand-state');
 var AmpModel = require('ampersand-model');
 var AmpCollection = require('ampersand-collection');
+var options = require('options');
+
+
+var PollOption = AmpState.extend({
+  props: {
+    content: 'string',
+    votes: 'array',
+  }
+});
+
+var PollOptions = AmpCollection.extend({
+    model: PollOption
+});
+
+var Poll = AmpState.extend({
+  props: {
+    kind: 'string',
+  },
+  collections: {
+    options: PollOptions
+  }
+});
+
 
 module.exports = AmpModel.extend({
   props: {
@@ -16,9 +39,10 @@ module.exports = AmpModel.extend({
     posted: 'string',
     upstringd: 'string',
   },
-  // children: {
-  //   poll: Poll
-  // }
+
+  children: {
+    poll: Poll
+  },
 
   derived: {
     thread: {
@@ -45,27 +69,29 @@ module.exports = AmpModel.extend({
         return '/api/topics/' + this.id + '/comments';
       }
     },
+    kindDetails: {
+      deps: ['kind'],
+      fn: function() {
+        var self = this;
+        var details = options.statuses.communication.filter(function (status) {
+          return status.id == self.kind;
+        })[0];
+
+        if(!details) {
+          return;
+        }
+
+        details.style = details.color && 'background-color:' +details.color;
+
+        return details;
+      }
+    },
+    hasPoll: {
+      deps: ['kind', 'poll'],
+      fn: function () {
+        return this.kind == 'decision' && this.poll;
+      }
+    }
   }
 
 });
-
-var PollOption = AmpState.extend({
-  props: {
-    content: 'string',
-    votes: 'array',
-  }
-});
-
-var PollOptions = AmpCollection.extend({
-    model: PollOption
-});
-
-var Poll = AmpState.extend({
-  props: {
-    kind: 'string',
-  },
-  collections: {
-    options: PollOptions
-  }
-});
-

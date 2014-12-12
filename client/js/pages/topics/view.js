@@ -5,6 +5,7 @@ var templates = require('client/js/templates');
 var TopicView = require('client/js/views/topic');
 var CommentsView = require('client/js/views/comments');
 var Comments = require('client/js/models/comments');
+var PollForm = require('client/js/forms/poll');
 
 
 module.exports = PageView.extend({
@@ -40,6 +41,24 @@ module.exports = PageView.extend({
     });
   },
   subviews: {
+    form: {
+      container: '[data-hook=topic-poll]',
+      waitFor: 'model.hasPoll',
+      parent: this,
+      prepareView: function (el) {
+        var self = this;
+        var model = this.model;
+
+        return new PollForm({
+          el: el,
+          model: this.model,
+          submitCallback: function (data) {
+            log('POLL', data);
+          }
+        });
+      }
+    },
+
     comments:{
       container: '[data-hook=topic-comments]',
       waitFor: 'model.commentsApi',

@@ -20,7 +20,7 @@ module.exports = FormView.extend({
         name: 'kind',
         label: 'Kind',
         parent: this,
-        options: options.kinds.topics.map(function(t) { return [t, t.toUpperCase()]; }),
+        options: options.kinds.topics.map(function(t) { return [t.id, t.name]; }),
         value: this.model && this.model.kind || '',
         unselectedText: 'please choose one',
         yieldModel: false

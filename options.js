@@ -34,11 +34,11 @@ options.kinds = {
     'Phone Call'
   ],
   topics: [
-    'idea',
-    'info',
-    'todo',
-    'decision',
-    'meeting',
+    { name: 'IDEA', id:'idea', color: '#5319e7' },
+    { name: 'INFO', id:'info', color: '#207de5' },
+    { name: 'TODO', id:'todo', color: '#fbca04' },
+    { name: 'DECISION', id:'decision', color: '#e11d21' },
+    { name: 'MEETING', id:'meeting', color: '#333' },
   ]
 };
 

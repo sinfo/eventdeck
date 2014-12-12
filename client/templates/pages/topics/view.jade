@@ -10,6 +10,13 @@ section.page.topics.view
           h2(data-hook='kind')
           p.paragraphs(data-hook='text')
 
+          form.ink-form(data-hook='topic-poll')
+            fieldset(data-hook='field-container')
+            .buttons
+              button.ink-button.small.blue(data-hook='reset', type='submit') Vote!
+
+      br
+
       div.all-100
         div(data-hook='topic-comments')
 
