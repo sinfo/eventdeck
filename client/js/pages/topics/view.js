@@ -49,13 +49,37 @@ module.exports = PageView.extend({
         var self = this;
         var model = this.model;
 
-        return new PollForm({
+        var poll = new PollForm({
           el: el,
           model: this.model,
-          submitCallback: function (data) {
-            log('POLL', data);
-          }
+          parent: self,
         });
+
+        poll.on('change:poll', function (data) {
+          self.model.poll.options.each(function(o) {
+            var optionIndexInPollValue = data.value.indexOf(o.content);
+            var memberIndexInVotes = o.votes.indexOf(app.me.id);
+
+            // Nothing changed
+            if((optionIndexInPollValue != -1) == (memberIndexInVotes != -1)) {
+              return;
+            }
+
+            if(optionIndexInPollValue != -1) {
+              // Option is selected - Add member to votes
+              o.votes.push(app.me.id);
+            } else {
+              // Option is not selected - Remove member from votes
+              o.votes.splice(memberIndexInVotes, 1);
+            }
+          });
+
+          self.model.save({ poll: self.model.poll.serialize() }, { patch: true });
+
+          log('Vote submitted');
+        });
+
+        return poll;
       }
     },
 

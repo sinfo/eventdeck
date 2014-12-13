@@ -17,7 +17,7 @@ exports.create = {
       targets: Joi.array().includes(Joi.string()).description('targets of the topic'),
       closed: Joi.boolean().description('closed of the topic'),
       poll: {
-        kind: Joi.string().valid('text','image').description('kind of the poll'),
+        kind: Joi.string().valid('text','images').description('kind of the poll'),
         options: Joi.array().includes(Joi.object().keys({
           content: Joi.string().description('content of the option - can be image url or text'),
           votes: Joi.array().includes(Joi.string()).description('members who voted for this option')
@@ -53,7 +53,7 @@ exports.update = {
       targets: Joi.array().includes(Joi.string()).description('targets of the topic'),
       closed: Joi.boolean().description('closed of the topic'),
       poll: {
-        kind: Joi.string().valid('text','image').description('kind of the poll'),
+        kind: Joi.string().valid('text','images').description('kind of the poll'),
         options: Joi.array().includes(Joi.object().keys({
           content: Joi.string().description('content of the option - can be image url or text'),
           votes: Joi.array().includes(Joi.string()).description('members who voted for this option')

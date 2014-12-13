@@ -37,7 +37,7 @@ module.exports = AmpModel.extend({
     duedate: 'string',
     tags: 'array',
     posted: 'string',
-    upstringd: 'string',
+    updated: 'string',
   },
 
   children: {
