@@ -38,11 +38,11 @@ module.exports = FormView.extend({
       }));
     }
 
-    if(this.model.kind == 'decision') {
+    if(self.model && self.model.kind == 'decision') {
       addPollFields();
     }
 
-    this.on('change:kind', function (data) {
+    self.on('change:kind', function (data) {
       if(data.value == 'decision') {
         addPollFields();
       } else {

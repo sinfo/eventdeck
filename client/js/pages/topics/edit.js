@@ -51,22 +51,32 @@ module.exports = PageView.extend({
           el: el,
           model: this.model,
           submitCallback: function (data) {
-            data.poll = {
-              kind: data['poll-kind'],
-              options: data['poll-options'].map(function(o) { return { content: o }; })
-            };
+            var changedAttrs = self.model.changedAttributes(_.compactObject(data)) || {};
 
-            delete data['poll-kind'];
-            delete data['poll-options'];
+            if(data['poll-kind'] || data['poll-options']) {
+              data.poll = {
+                kind: data['poll-kind'],
+                options: data['poll-options'].map(function(o) { return { content: o }; })
+              };
+              delete data['poll-kind'];
+              delete data['poll-options'];
 
-            console.log('data', data);
+              // If there's a poll, let's populate each option with the saved votes
+              var savedOptions = self.model.poll.options.serialize();
+              _.each(data.poll.options, function(option) {
+                var savedOption = _.find(savedOptions, function(o) { return o.content == option.content; });
+                if(savedOption) {
+                  option.votes = savedOption.votes;
+                }
+              });
+              changedAttrs.poll = data.poll;
+            }
 
-            data = self.model.changedAttributes(_.compactObject(data));
-
-            if(!data) {
+            if(!changedAttrs) {
               return app.navigate('/topics/'+model.id);
             }
-            self.model.save(data, {
+
+            self.model.save(changedAttrs, {
               patch: true,
               wait: false,
               success: function (model, response, options) {

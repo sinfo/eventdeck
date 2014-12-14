@@ -3,6 +3,7 @@ var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var TopicForm = require('client/js/forms/topic');
 var _ = require('client/js/helpers/underscore');
+var async = require('async');
 
 
 module.exports = PageView.extend({
@@ -10,12 +11,28 @@ module.exports = PageView.extend({
   template: templates.pages.topics.add,
   initialize: function (spec) {
     var self = this;
-    if (!app.members.length) {
-      app.members.fetch();
-    }
-    if (!app.tags.length) {
-      app.tags.fetch();
-    }
+
+    async.parallel([
+      function(cb) {
+        if(app.members.length) {
+          return cb();
+        }
+        app.members.fetch({ success: function () {
+          cb();
+        }});
+      },
+      function(cb) {
+        if(app.tags.length) {
+          return cb();
+        }
+        app.tags.fetch({ success: function () {
+          cb();
+        }});
+      }
+    ],
+    function(err) {
+      self.moder = {};
+    });
   },
   subviews: {
     form: {
@@ -25,6 +42,15 @@ module.exports = PageView.extend({
           el: el,
           submitCallback: function (data) {
             data = _.compactObject(data);
+
+            if(data['poll-kind'] || data['poll-options']) {
+              data.poll = {
+                kind: data['poll-kind'],
+                options: data['poll-options'] && data['poll-options'].map(function(o) { return { content: o }; })
+              };
+              delete data['poll-kind'];
+              delete data['poll-options'];
+            }
 
             app.topics.create(data, {
               wait: true,
