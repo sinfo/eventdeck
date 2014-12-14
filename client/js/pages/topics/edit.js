@@ -3,6 +3,7 @@ var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var TopicForm = require('client/js/forms/topic');
 var _ = require('client/js/helpers/underscore');
+var async = require('async');
 
 
 module.exports = PageView.extend({
@@ -10,20 +11,33 @@ module.exports = PageView.extend({
   template: templates.pages.topics.edit,
   initialize: function (spec) {
     var self = this;
-    if (!app.members.length) {
-      app.members.fetch();
-      app.members.on('sync', self.render);
-    }
-    if (!app.tags.length) {
-      app.tags.fetch();
-      app.tags.on('sync', self.render);
-    }
 
-    app.topics.getOrFetch(spec.id, {all: true}, function (err, model) {
-      if (err) {
-        return alert('couldnt find a model with id: ' + spec.id);
+    async.parallel([
+      function(cb) {
+        if(app.members.length) {
+          return cb();
+        }
+        app.members.fetch({ success: function () {
+          cb();
+        }});
+      },
+      function(cb) {
+        if(app.tags.length) {
+          return cb();
+        }
+        app.tags.fetch({ success: function () {
+          cb();
+        }});
       }
-      self.model = model;
+    ],
+    function(err) {
+      app.topics.getOrFetch(spec.id, {all: true}, function (err, model) {
+        if (err) {
+          return alert('couldnt find a model with id: ' + spec.id);
+        }
+
+        self.model = model;
+      });
     });
   },
   subviews: {
@@ -37,7 +51,18 @@ module.exports = PageView.extend({
           el: el,
           model: this.model,
           submitCallback: function (data) {
+            data.poll = {
+              kind: data['poll-kind'],
+              options: data['poll-options'].map(function(o) { return { content: o }; })
+            };
+
+            delete data['poll-kind'];
+            delete data['poll-options'];
+
+            console.log('data', data);
+
             data = self.model.changedAttributes(_.compactObject(data));
+
             if(!data) {
               return app.navigate('/topics/'+model.id);
             }

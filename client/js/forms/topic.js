@@ -13,6 +13,44 @@ var ExtendedInput = InputView.extend({
 
 
 module.exports = FormView.extend({
+  initialize: function() {
+    var self = this;
+
+    function addPollFields() {
+      self.addField(new SelectView({
+        template: templates.includes.formSelect(),
+        name: 'poll-kind',
+        label: 'Poll kind',
+        parent: self,
+        options: options.kinds.polls.map(function(t) { return [t.id, t.name]; }),
+        value: self.model && self.model.poll.kind || '',
+        unselectedText: 'please choose one',
+        yieldModel: false
+      }));
+      self.addField(new ArrayInputView({
+        template: templates.includes.formInputGroup(),
+        fieldTemplate: templates.includes.formInputGroupElement(),
+        label: 'Poll options',
+        name: 'poll-options',
+        value: self.model && self.model.poll.options.map(function(o) { return o.content; }) || [],
+        maxLength: 50,
+        parent: self
+      }));
+    }
+
+    if(this.model.kind == 'decision') {
+      addPollFields();
+    }
+
+    this.on('change:kind', function (data) {
+      if(data.value == 'decision') {
+        addPollFields();
+      } else {
+        self.removeField('poll-options');
+        self.removeField('poll-kind');
+      }
+    });
+  },
   fields: function () {
     return [
       new SelectView({
