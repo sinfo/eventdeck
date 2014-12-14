@@ -18,7 +18,8 @@ module.exports = PageView.extend({
     'model.kind': {
       hook: 'kind'
     },
-    'model.text': {
+    'model.textHtml': {
+      type: 'innerHTML',
       hook: 'text'
     },
     'model.editUrl': {

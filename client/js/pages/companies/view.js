@@ -25,16 +25,19 @@ module.exports = PageView.extend({
     'model.status': {
       hook: 'status'
     },
-    'model.history': {
+    'model.historyHtml': {
+      type: 'innerHTML',
       hook: 'history'
     },
-    'model.contacts': {
+    'model.contactsHtml': {
+      type: 'innerHTML',
       hook: 'contacts'
     },
     'model.area': {
       hook: 'area'
     },
-    'model.description': {
+    'model.descriptionHtml': {
+      type: 'innerHTML',
       hook: 'description'
     },
     'model.access': {

@@ -30,10 +30,12 @@ module.exports = PageView.extend({
     'model.title': {
       hook: 'title'
     },
-    'model.contacts': {
+    'model.contactsHtml': {
+      type: 'innerHTML',
       hook: 'contacts'
     },
-    'model.description': {
+    'model.descriptionHtml': {
+      type: 'innerHTML',
       hook: 'description'
     },
     'model.access': {

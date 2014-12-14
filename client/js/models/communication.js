@@ -2,6 +2,7 @@
 var AmpModel = require('ampersand-model');
 var timeSince = require('client/js/helpers/timeSince');
 var options = require('options');
+var marked = require('client/js/helpers/marked');
 
 module.exports = AmpModel.extend({
   props: {
@@ -47,6 +48,12 @@ module.exports = AmpModel.extend({
 
         return details;
       }
+    },
+    textHtml: {
+      deps: ['text'],
+      fn: function () {
+        return this.text && marked(this.text) || '';
+      },
     }
   }
 });

@@ -3,6 +3,7 @@ var AmpState = require('ampersand-state');
 var AmpModel = require('ampersand-model');
 var AmpCollection = require('ampersand-collection');
 var options = require('options');
+var marked = require('client/js/helpers/marked');
 
 var Communication = require('./communication');
 var Comment = require('./comment');
@@ -99,17 +100,28 @@ module.exports = AmpModel.extend({
 
         details.style = details && details.color && 'background-color:' + details.color;
         return details;
-      }
+      },
     },
-    toJSON: function () {
-      return function () {
-        var json = this.serialize();
-        delete json.comments;
-        delete json.communications;
-        delete json.storedImg;
-        return json;
-      };
-    }
-
+    descriptionHtml: {
+      deps: ['description'],
+      fn: function () {
+        return this.description && marked(this.description) || '';
+      },
+    },
+    contactsHtml: {
+      deps: ['contacts'],
+      fn: function () {
+        return this.contacts && marked(this.contacts) || '';
+      },
+    },
+  },
+  toJSON: function () {
+    return function () {
+      var json = this.serialize();
+      delete json.comments;
+      delete json.communications;
+      delete json.storedImg;
+      return json;
+    };
   }
- });
+});

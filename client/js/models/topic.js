@@ -2,6 +2,7 @@ var AmpState = require('ampersand-state');
 var AmpModel = require('ampersand-model');
 var AmpCollection = require('ampersand-collection');
 var options = require('options');
+var marked = require('client/js/helpers/marked');
 
 
 var PollOption = AmpState.extend({
@@ -91,6 +92,12 @@ module.exports = AmpModel.extend({
       fn: function () {
         return this.kind == 'decision' && this.poll;
       }
+    },
+    textHtml: {
+      deps: ['text'],
+      fn: function () {
+        return this.text && marked(this.text) || '';
+      },
     }
   }
 

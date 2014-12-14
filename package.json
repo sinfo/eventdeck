@@ -67,6 +67,7 @@
     "mailcomposer": "~0.2.12",
     "mailgun": "~0.4.2",
     "markdown": "~0.5.0",
+    "marked": "^0.3.2",
     "mongoose": "~3.8.4",
     "moonboots_hapi": "^3.0.2",
     "rand-token": "~0.2.1",

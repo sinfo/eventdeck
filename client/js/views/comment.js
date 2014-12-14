@@ -64,7 +64,10 @@ var ViewComment = View.extend({
       hook: 'member-img',
       name: 'src'
     },
-    'model.text': '[data-hook~=text]',
+    'model.textHtml': {
+      type: 'innerHTML',
+      hook: 'text',
+    },
     'model.memberDetails.name': '[data-hook~=member-name]',
   },
   events: {
