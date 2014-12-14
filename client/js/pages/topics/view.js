@@ -15,8 +15,13 @@ module.exports = PageView.extend({
     'model.name': {
       hook: 'name'
     },
-    'model.kind': {
+    'model.kindDetails.name': {
       hook: 'kind'
+    },
+    'model.kindDetails.style': {
+      type: 'attribute',
+      hook: 'kind',
+      name: 'style'
     },
     'model.textHtml': {
       type: 'innerHTML',

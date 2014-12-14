@@ -74,16 +74,15 @@ module.exports = AmpModel.extend({
       deps: ['kind'],
       fn: function() {
         var self = this;
-        var details = options.statuses.communication.filter(function (status) {
-          return status.id == self.kind;
+        var details = options.kinds.topics.filter(function (kind) {
+          return kind.id == self.kind;
         })[0];
 
         if(!details) {
           return;
         }
 
-        details.style = details.color && 'background-color:' +details.color;
-
+        details.style = details.color && 'color:' +details.color;
         return details;
       }
     },

@@ -30,7 +30,7 @@ module.exports = FormView.extend({
         placeholder: 'Title',
         parent: this
       }),
-      new ExtendedInput({
+      new TextareaInput({
         label: 'Description',
         name: 'description',
         value: this.model && this.model.description || '',

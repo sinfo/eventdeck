@@ -44,7 +44,7 @@ exports.update = {
     },
     payload: {
       id: Joi.string().description('id of the speaker'),
-      name: Joi.string().required().description('name of the speaker'),
+      name: Joi.string().description('name of the speaker'),
       title: Joi.string().description('title of the speaker'),
       description: Joi.string().description('description of the speaker'),
       img: Joi.string().description('image of the speaker'),

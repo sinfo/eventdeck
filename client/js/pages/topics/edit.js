@@ -12,9 +12,11 @@ module.exports = PageView.extend({
     var self = this;
     if (!app.members.length) {
       app.members.fetch();
+      app.members.on('sync', self.render);
     }
     if (!app.tags.length) {
       app.tags.fetch();
+      app.tags.on('sync', self.render);
     }
 
     app.topics.getOrFetch(spec.id, {all: true}, function (err, model) {
