@@ -6,6 +6,7 @@
   "scripts": {
     "start": "NODE_PATH=. node server/index.js | bunyan",
     "mon": "NODE_PATH=. node_modules/.bin/nodemon server/index.js --ignore client/ | node_modules/.bin/bunyan",
+    "pretest": "touch client/css/app.css",
     "test": "NODE_PATH=. node_modules/lab/bin/lab server/test -l",
     "test-cov": "NODE_PATH=. node_modules/lab/bin/lab server/test -c",
     "lint-client": "node_modules/.bin/jshint -c .jshintrc-client --exclude server .",
