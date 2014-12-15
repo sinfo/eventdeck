@@ -11,6 +11,7 @@ require('./item');
 require('./member');
 require('./message');
 require('./notification');
+require('./parser');
 require('./session');
 require('./speaker');
 require('./subscription');

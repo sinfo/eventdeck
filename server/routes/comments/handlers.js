@@ -21,10 +21,24 @@ exports.create = {
   pre: [
     { method: 'comment.create(payload, auth.credentials.id)', assign: 'comment' }
     // TODO: CREATE NOTIFICATION
-    // TODO: PARSE FOR MEMBERS
   ],
   handler: function (request, reply) {
     reply(render(request.pre.comment)).created('/api/comments/'+request.pre.comment._id);
+
+    var parser = request.server.methods.parser;
+    var payload = request.payload;
+
+    parser.members(
+      request.payload.text,
+      request.payload.thread,
+      request.pre.comment._id,
+      request.pre.comment.member,
+      function (err) {
+        if(err) {
+          log.error({err: err, text: request.payload.text }, 'error creating mention notifications');
+        }
+      }
+    );
   },
   description: 'Creates a new comment'
 };

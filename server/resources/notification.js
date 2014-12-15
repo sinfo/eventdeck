@@ -13,6 +13,7 @@ var Subscription = require('server/db/subscription');
 
 server.method('notification.notifyCreate', notifyCreate, {});
 server.method('notification.notifyUpdate', notifyUpdate, {});
+server.method('notification.notifyMention', notifyMention, {});
 server.method('notification.notify', notify, {});
 server.method('notification.create', create, {});
 server.method('notification.get', get, {});
@@ -40,6 +41,19 @@ function notifyUpdate(memberId, path, thing, cb) {
     thread: threadFromPath(path, thing.id),
     member: memberId,
     description: 'updated '+thing.name || thing.kind,
+    posted: Date.now()
+  };
+
+  create(notification, cb);
+}
+
+function notifyMention(memberId, thread, targets, source, cb) {
+  var notification = {
+    thread: thread,
+    member: memberId,
+    description: 'mentioned you',
+    targets: targets,
+    source: source,
     posted: Date.now()
   };
 
