@@ -177,6 +177,9 @@ module.exports = View.extend({
     function searchResultTemplate (name, url, img) {
       return '<li><a href="'+url+'" class="link"><img src="'+img+'" class="img"/><span class="name">'+name+'</span></a></li>';
     }
+    function searchResultTopicTemplate (name, url, kind) {
+      return '<li><a href="'+url+'" class="link"><b>'+kind+'</b><span class="name">'+name+'</span></a></li>';
+    }
 
     function search () {
       var searchResults = $(self.queryByHook('search-results'));
@@ -195,7 +198,7 @@ module.exports = View.extend({
         log('Got', data);
 
         var resultsType = 'exact';
-        if(!data.companies.exact.length && !data.speakers.exact.length && !data.members.exact.length) {
+        if(!data.companies.exact.length && !data.speakers.exact.length && !data.topics.exact.length && !data.members.exact.length) {
           resultsType = 'extended';
           searchResults.append('<li class="header">Showing Extended Results</li>');
         }
@@ -222,6 +225,17 @@ module.exports = View.extend({
           };
 
           searchResults.append(searchResultTemplate(result.name, result.url, result.img));
+        }
+
+        searchResults.append('<li class="header">'+data.topics[resultsType].length+' Topics</li>');
+        for(i=0; i<data.topics[resultsType].length; i++) {
+          result = {
+            name: data.topics[resultsType][i].name,
+            kind: data.topics[resultsType][i].kind.toUpperCase(),
+            url: '/topics/'+data.topics[resultsType][i].id
+          };
+
+          searchResults.append(searchResultTopicTemplate(result.name, result.url, result.kind));
         }
 
         searchResults.append('<li class="header">'+data.members[resultsType].length+' Members</li>');

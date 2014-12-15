@@ -15,6 +15,7 @@ server.method('topic.getByDueDate', getByDueDate, {});
 server.method('topic.getByTag', getByTag, {});
 server.method('topic.list', list, {});
 server.method('topic.remove', remove, {});
+server.method('topic.search', search, {});
 
 
 function create(topic, memberId, cb) {
@@ -159,5 +160,45 @@ function remove(id, cb) {
     }
 
     return cb(null, topic);
+  });
+}
+
+function search(str, query, cb) {
+  cb = cb || query; // fields is optional
+
+  var filter = { name: new RegExp(str, 'i') };
+  var fields = parser(query.fields || 'id,name,kind');
+  var options = {
+    skip: query.skip,
+    limit: query.limit || 10,
+    sort: parser(query.sort)
+  };
+
+  Topic.find(filter, fields, options, function(err, exactTopics) {
+    if (err) {
+      log.error({ err: err, filter: filter}, 'error getting topics');
+      return cb(Boom.internal());
+    }
+
+    if (exactTopics.length > 0) {
+      return cb(null, { exact: exactTopics });
+    }
+
+    filter = {
+      $or: [
+        { text: new RegExp(str, 'i') },
+        { kind: new RegExp(str, 'i') },
+      ]
+    };
+
+    Topic.find(filter, fields, options, function(err, extendedTopics) {
+      if (err) {
+        log.error({ err: err, filter: filter}, 'error getting topics');
+        return cb(Boom.internal());
+      }
+
+      return cb(null, { exact: exactTopics, extended: extendedTopics });
+    });
+
   });
 }
