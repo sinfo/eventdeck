@@ -33,6 +33,7 @@ module.exports = {
         // Specify the stylesheets we want to bundle
         stylesheets: [
             cssDir + '/ink.css',
+            cssDir + '/font-awesome.css',
             cssDir + '/app.css'
         ],
         beforeBuildJS: function () {

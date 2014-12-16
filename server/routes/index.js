@@ -1,4 +1,5 @@
 require('./publicAssets');
+require('./fonts');
 require('./auth');
 require('./chats');
 require('./comments');
