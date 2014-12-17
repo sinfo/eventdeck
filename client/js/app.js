@@ -3,6 +3,7 @@ var _ = require('underscore');
 var log = require('bows')('eventdeck');
 var config = require('clientconfig');
 var $ = require('jquery');
+var Ink = require('./ink-all');
 var io = require('socket.io-client');
 
 var Router = require('./router');

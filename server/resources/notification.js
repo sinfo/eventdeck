@@ -13,6 +13,9 @@ var Subscription = require('server/db/subscription');
 
 server.method('notification.notifyCreate', notifyCreate, {});
 server.method('notification.notifyUpdate', notifyUpdate, {});
+server.method('notification.notifyMention', notifyMention, {});
+server.method('notification.notifyComment', notifyComment, {});
+server.method('notification.notifyCommunication', notifyCommunication, {});
 server.method('notification.notify', notify, {});
 server.method('notification.create', create, {});
 server.method('notification.get', get, {});
@@ -22,6 +25,7 @@ server.method('notification.remove', remove, {});
 server.method('notification.readThread', readThread, {});
 server.method('notification.getByThread', getByThread, {});
 server.method('notification.removeByThread', removeByThread, {});
+server.method('notification.removeBySource', removeBySource, {});
 
 
 function notifyCreate(memberId, path, thing, cb) {
@@ -40,6 +44,43 @@ function notifyUpdate(memberId, path, thing, cb) {
     thread: threadFromPath(path, thing.id),
     member: memberId,
     description: 'updated '+thing.name || thing.kind,
+    posted: Date.now()
+  };
+
+  create(notification, cb);
+}
+
+function notifyMention(memberId, thread, targets, source, cb) {
+  var notification = {
+    thread: thread,
+    member: memberId,
+    description: 'mentioned you',
+    targets: targets,
+    source: source,
+    posted: Date.now()
+  };
+
+  create(notification, cb);
+}
+
+function notifyComment(memberId, thread, source, cb) {
+  var notification = {
+    thread: thread,
+    member: memberId,
+    description: 'posted a new comment',
+    source: source,
+    posted: Date.now()
+  };
+
+  create(notification, cb);
+}
+
+function notifyCommunication(memberId, thread, source, cb) {
+  var notification = {
+    thread: thread,
+    member: memberId,
+    description: 'posted a new communication',
+    source: source,
     posted: Date.now()
   };
 
@@ -230,7 +271,19 @@ function removeByThread(path, id, cb) {
   var filter = {thread: thread};
   Notification.remove(filter, function(err, notifications) {
     if (err) {
-      log.error({ err: err, thread: thread}, 'error getting notifications');
+      log.error({ err: err, thread: thread}, 'error removing notifications');
+      return cb(Boom.internal());
+    }
+
+    cb(null);
+  });
+}
+
+function removeBySource(source, cb) {
+  var filter = { source: source };
+  Notification.remove(filter, function(err, notifications) {
+    if (err) {
+      log.error({ err: err, source: source}, 'error removing notifications');
       return cb(Boom.internal());
     }
 

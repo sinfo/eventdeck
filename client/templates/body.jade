@@ -1,15 +1,17 @@
-body
+body.ink-drawer
   .topbar
     .ink-grid
       nav.ink-navigation
         ul.menu.horizontal.push-left
-          li.title.hide-medium.hide-small.hide-tiny
+          li.title.hide-small.hide-tiny
             a(href='/') EventDeck
+          li.title.hide-all.show-small.show-tiny
+            a(href='/') ED
           li.event
             form.base-form.ink-form(data-hook='base-form')
               fieldset(data-hook='field-container')
             ul.submenu(data-hook='search-results')
-        ul.menu.horizontal.push-right.hide-small.hide-tiny
+        ul.menu.horizontal.push-right.hide-medium.hide-small.hide-tiny
           li
             a(href='/topics') Topics
             ul.submenu
@@ -37,8 +39,39 @@ body
             a(href='/members') Members
           li
             a#logout(href='/login') Logout
+        ul.menu.horizontal.push-right.hide-all.show-medium.show-small.show-tiny
+          li
+            .ink-button.small.left-drawer-trigger
+              i.fa.fa-bars
 
+  main.content-drawer.ink-grid(data-hook='page-container')
 
-  main.ink-grid(data-hook='page-container')
+  .left-drawer
+    nav.ink-navigation
+        ul.menu.vertical
+          li
+            a(href='/topics') Topics
+            ul.submenu
+              li
+                a(href='/topics/add') Add new
+          li
+            a(href='/companies') Companies
+            ul.submenu
+              li
+                a(href='/companies/table') Table
+                a(href='/companies/add') Add new
+          li
+            a(href='/speakers') Speakers
+            ul.submenu
+              li
+                a(href='/speakers/table') Table
+                a(href='/speakers/add') Add new
+          li
+            a(href='/members') Members
+          li
+            a#logout(href='/login') Logout
 
-
+script(type='text/javascript').
+  Ink.requireModules(['Ink.UI.Drawer_1'], function (Drawer) {
+    new Drawer();
+  });

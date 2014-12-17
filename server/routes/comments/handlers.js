@@ -19,12 +19,35 @@ exports.create = {
     }
   },
   pre: [
-    { method: 'comment.create(payload, auth.credentials.id)', assign: 'comment' }
-    // TODO: CREATE NOTIFICATION
-    // TODO: PARSE FOR MEMBERS
+    { method: 'comment.create(payload, auth.credentials.id)', assign: 'comment' },
   ],
   handler: function (request, reply) {
     reply(render(request.pre.comment)).created('/api/comments/'+request.pre.comment._id);
+
+    var API = request.server.methods;
+
+    API.notification.notifyComment(
+      request.auth.credentials.id,
+      request.payload.thread,
+      request.pre.comment._id,
+      function (err) {
+        if(err) {
+          log.error({err: err, comment: request.pre.comment._id }, 'error creating post comment notification');
+        }
+      }
+    );
+
+    API.parser.members(
+      request.payload.text,
+      request.payload.thread,
+      request.pre.comment._id,
+      request.pre.comment.member,
+      function (err) {
+        if(err) {
+          log.error({err: err, text: request.payload.text }, 'error creating mention notifications');
+        }
+      }
+    );
   },
   description: 'Creates a new comment'
 };
@@ -158,8 +181,8 @@ exports.remove = {
   },
   pre: [
     // TODO: CHECK PERMISSIONS
-    { method: 'comment.remove(params.id)', assign: 'comment' }
-    // TODO: REMOVE NOTIFICATIONS
+    { method: 'comment.remove(params.id)', assign: 'comment' },
+    { method: 'notification.removeBySource(params.id)' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.comment));

@@ -21,12 +21,23 @@ exports.create = {
     }
   },
   pre: [
-    { method: 'communication.create(payload, auth.credentials.id)', assign: 'communication' }
-    // TODO: CREATE NOTIFICATION
-    // TODO: PARSE FOR MEMBERS
+    { method: 'communication.create(payload, auth.credentials.id)', assign: 'communication' },
   ],
   handler: function (request, reply) {
     reply(render(request.pre.communication)).created('/api/communications/'+request.pre.communication._id);
+
+    var API = request.server.methods;
+
+    API.notification.notifyCommunication(
+      request.auth.credentials.id,
+      request.payload.thread,
+      request.pre.communication._id,
+      function (err) {
+        if(err) {
+          log.error({err: err, communication: request.pre.communication._id }, 'error creating post communication notification');
+        }
+      }
+    );
   },
   description: 'Creates a new communication'
 };
@@ -185,8 +196,8 @@ exports.remove = {
   },
   pre: [
     // TODO: CHECK PERMISSIONS
-    { method: 'communication.remove(params.id)', assign: 'communication' }
-    // TODO: REMOVE NOTIFICATIONS
+    { method: 'communication.remove(params.id)', assign: 'communication' },
+    { method: 'notification.removeBySource(params.id)' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.communication));
