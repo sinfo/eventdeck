@@ -23,6 +23,8 @@ var SpeakerEditPage = require('./pages/speakers/edit');
 var SpeakerViewPage = require('./pages/speakers/view');
 var SpeakerMemberTable = require('./pages/speakers/table');
 
+//var Sessions = require('./pages/sessions/list');
+
 var Topics = require('./pages/topics/list');
 var TopicAddPage = require('./pages/topics/add');
 var TopicEditPage = require('./pages/topics/edit');
@@ -47,6 +49,7 @@ module.exports = Router.extend({
     'topics/add': 'topicAdd',
     'topics/:id': 'topicView',
     'topics/:id/edit': 'topicEdit',
+    'sessions/': 'sessions',
     'speakers': 'speakers',
     'speakers/table': 'speakersTable',
     'speakers/add': 'speakerAdd',
@@ -172,7 +175,13 @@ module.exports = Router.extend({
       id: id
     }));
   },
-
+  
+  sessions: function () {
+    this.trigger('page', new Sessions({
+      collection: app.sessions
+    }));
+  },
+  
 
   catchAll: function () {
     this.redirectTo('');
