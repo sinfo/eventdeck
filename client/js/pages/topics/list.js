@@ -92,7 +92,7 @@ module.exports = PageView.extend({
   },
   renderTagFilters: function () {
     var self = this;
-
+    app.tags.fetch();
     var tags = app.tags.map(function (m) {
                               return [m.id, m.name];
                               });
