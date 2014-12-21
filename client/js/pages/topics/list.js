@@ -88,7 +88,7 @@ module.exports = PageView.extend({
 
       for (var j = 0; j < columns.length; j++) {
         var o = new AmpersandCollection();
-        for (key in collection) {
+        for (var key in collection) {
           o[key] = collection[key];
         }
         o.models = [];
@@ -96,12 +96,12 @@ module.exports = PageView.extend({
         collections.push(o);
       }
 
-      for (var j = 0, k = 0; j < collection.models.length; j++, k = (k+1) % collections.length) {
-        collections[k].models.push(collection.models[j]);
+      for (var k = 0, l = 0; k < collection.models.length; k++, l = (l+1) % collections.length) {
+        collections[l].models.push(collection.models[k]);
       }
 
-      for (var j = 0; j < columns.length; j++) {
-        this.renderCollection(collections[j], TopicView, columns[j]);
+      for (var m = 0; m < columns.length; m++) {
+        this.renderCollection(collections[m], TopicView, columns[m]);
       }
     }
   },
