@@ -64,12 +64,10 @@ module.exports = PageView.extend({
       return self.model.tags.indexOf(tag.id) != -1;
     });
 
-    console.log(details);
-
     var filterContainer = $(self.queryByHook('tags'));
 
     _.each(details, function (tag) {
-      filterContainer.append('<li><div class=\'ink-button\' data-hook=\''+tag.id+'\' style = \"color:#F0F8FF; background:'+tag.color+'">'+tag.name+'</div></li>');
+      filterContainer.append('<div class=\'ink-button\' data-hook=\''+tag.id+'\' style = \"color:#F0F8FF; background:'+tag.color+'">'+tag.name+'</div>');
     });
   },
   subviews: {
