@@ -32,7 +32,9 @@ function rerender(page, collection, filter){
 
 module.exports = PageView.extend({
   pageTitle: 'Topics',
+
   template: templates.pages.topics.list,
+
   events: {
     'click [data-hook~=showall]': 'showall',
 
@@ -42,24 +44,68 @@ module.exports = PageView.extend({
 
     'click [data-hook~=hide]': 'hide',
   },
+
   hidden: false,
+
   render: function () {
     this.renderWithTemplate();
-    this.renderCollection(this.collection, TopicView, this.queryByHook('topics-list'));
+
     if (!this.collection.length) {
       this.fetchCollection();
+    }
+    else {
+      this.stuff(this.collection);
     }
 
     this.renderKindFilters();
 
     this.queryByHook(selectedFilter).classList.add('selected');
   },
+
   fetchCollection: function () {
     log('Fetching topics');
-    this.collection.fetch();
+    var that = this;
+    this.collection.fetch({
+      success: function () {
+        that.stuff(that.collection);
+      }
+    });
 
     return false;
   },
+
+  stuff: function (collection) {
+    //this.renderCollection(this.collection, TopicView, this.queryByHook('topics-list'));
+
+    var groups = $(this.queryByHook('topics-list')).children('div');
+
+    for (var i = 0; i < groups.length; i++) {
+      var columns = $(groups[i]).children('div');
+
+      columns.children('*').remove();
+
+      var collections = [];
+
+      for (var j = 0; j < columns.length; j++) {
+        var o = new AmpersandCollection();
+        for (key in collection) {
+          o[key] = collection[key];
+        }
+        o.models = [];
+
+        collections.push(o);
+      }
+
+      for (var j = 0, k = 0; j < collection.models.length; j++, k = (k+1) % collections.length) {
+        collections[k].models.push(collection.models[j]);
+      }
+
+      for (var j = 0; j < columns.length; j++) {
+        this.renderCollection(collections[j], TopicView, columns[j]);
+      }
+    }
+  },
+
   renderKindFilters: function () {
     var self = this;
     var filterContainer = $(self.queryByHook('kind-filters'));// $.hook('kind-filters');
@@ -67,6 +113,7 @@ module.exports = PageView.extend({
       filterContainer.append('<li><div class=\'ink-button\' data-hook=\''+kind.id+'\'>'+kind.name+'</div></li>');
     });
   },
+
   handleKindFilter: function (ev) {
     var kind = ev.target.getAttribute('data-hook');
 
@@ -79,6 +126,7 @@ module.exports = PageView.extend({
 
     return false;
   },
+
   me: function () {
     log('Fetching my topics');
     var aux = this.collection.filter(function(topic){
@@ -91,10 +139,12 @@ module.exports = PageView.extend({
 
     return false;
   },
+
   showall: function () {
     rerender(this,this.collection,'showall');
     return false;
   },
+
   hide: function(){
     if(!this.hidden){
       this.queryByHook('awesome-sidebar').style.display = 'none';
