@@ -6,13 +6,13 @@
 var log = require('bows')('base');
 var View = require('ampersand-view');
 var ViewSwitcher = require('ampersand-view-switcher');
-var _ = require('underscore');
+var _ = require('client/js/helpers/underscore');
 var domify = require('domify');
 var dom = require('ampersand-dom');
 var templates = require('../templates');
 var setFavicon = require('favicon-setter');
 var BaseForm = require('client/js/forms/base');
-var $ = require('jquery');
+var $ = require('client/js/helpers/jquery');
 
 var searchTypeTimeout = null;
 

@@ -5,6 +5,9 @@ var templates = require('client/js/templates');
 var TopicView = require('client/js/views/topic');
 var Topic = require('client/js/models/topic');
 var AmpersandCollection = require('ampersand-collection');
+var topicKinds = require('options').kinds.topics;
+var _ = require('client/js/helpers/underscore');
+var $ = require('client/js/helpers/jquery');
 
 
 var selectedFilter = 'showall';
@@ -17,6 +20,8 @@ function filtering(collection,filter){
 function rerender(page, collection, filter){
   page.renderWithTemplate();
   page.renderCollection(collection, TopicView, page.queryByHook('topics-list'));
+
+  page.renderKindFilters();
 
   page.queryByHook(selectedFilter).classList.remove('selected');
   page.queryByHook(filter).classList.add('selected');
@@ -31,11 +36,7 @@ module.exports = PageView.extend({
   events: {
     'click [data-hook~=showall]': 'showall',
 
-    'click [data-hook~=idea]': 'idea',
-    'click [data-hook~=info]': 'info',
-    'click [data-hook~=todo]': 'todo',
-    'click [data-hook~=decision]': 'decision',
-    'click [data-hook~=meeting]': 'meeting',
+    'click [data-hook~=kind-filters]': 'handleKindFilter',
 
     'click [data-hook~=me]': 'me',
 
@@ -49,6 +50,8 @@ module.exports = PageView.extend({
       this.fetchCollection();
     }
 
+    this.renderKindFilters();
+
     this.queryByHook(selectedFilter).classList.add('selected');
   },
   fetchCollection: function () {
@@ -57,53 +60,22 @@ module.exports = PageView.extend({
 
     return false;
   },
-  idea: function () {
-    log('Fetching ideas');
-    var aux =  filtering(this.collection, 'idea');
-
-    aux = new AmpersandCollection(aux, {model: Topic});
-
-    rerender(this,aux,'idea');
-
-    return false;
+  renderKindFilters: function () {
+    var self = this;
+    var filterContainer = $(self.queryByHook('kind-filters'));// $.hook('kind-filters');
+    _.each(topicKinds, function (kind) {
+      filterContainer.append('<li><div class=\'ink-button\' data-hook=\''+kind.id+'\'>'+kind.name+'</div></li>');
+    });
   },
-  info: function () {
-    log('Fetching infos');
-    var aux = filtering(this.collection,'info');
+  handleKindFilter: function (ev) {
+    var kind = ev.target.getAttribute('data-hook');
 
+    log('Fetching', kind);
+
+    var aux = filtering(this.collection, kind);
     aux = new AmpersandCollection(aux, {model: Topic});
 
-    rerender(this,aux,'info');
-
-    return false;
-  },
-  todo: function () {
-    log('Fetching todos');
-    var aux = filtering(this.collection,'todo');
-
-    aux = new AmpersandCollection(aux, {model: Topic});
-
-    rerender(this,aux,'todo');
-
-    return false;
-  },
-  decision: function () {
-    log('Fetching decisions');
-    var aux = filtering(this.collection,'decision');
-
-    aux = new AmpersandCollection(aux, {model: Topic});
-
-    rerender(this,aux,'decision');
-
-    return false;
-  },
-  meeting: function () {
-    log('Fetching meetings');
-    var aux = filtering(this.collection,'meeting');
-
-    aux = new AmpersandCollection(aux, {model: Topic});
-
-    rerender(this,aux,'meeting');
+    rerender(this,aux,kind);
 
     return false;
   },

@@ -13,17 +13,10 @@ section.page.topics.list
       a.ink-button(href='/topics/add') Add topic
 
     b Filter Kind
-    ul.filters.small.unstyled
-      li
-        .ink-button(data-hook='idea') Idea
-      li
-        .ink-button(data-hook='info') Info
-      li
-        .ink-button(data-hook='todo') To do
-      li
-        .ink-button(data-hook='decision') Decision
-      li
-        .ink-button(data-hook='meeting') Meeting
+    ul.filters.small.unstyled(data-hook='kind-filters')
+
+    ul.filters.small.unstyled(data-hook='tag-filters')
+
 
     b Filter Member
     .button-group.small
