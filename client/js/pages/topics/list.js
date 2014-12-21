@@ -14,12 +14,20 @@ var async = require('async');
 
 var selectedKind = 'showall';
 var selectedTag = 'showall';
+var tempCollection;
 
-function filtering(collection,filter){
+function filterKind(collection,filter){
   return collection.filter(function(topic){
     return topic.kind == filter;
   });
 }
+
+function filterTag(collection,filter){
+  return collection.filter(function(topic){
+    return topic.tags.indexOf(filter) != -1;
+  });
+}
+
 function rerender(page, collection, kind, tag){
   page.renderWithTemplate();
   page.renderCollection(collection, TopicView, page.queryByHook('topics-list'));
@@ -69,7 +77,6 @@ module.exports = PageView.extend({
     }
 
     this.renderKindFilters();
-    this.renderTagFilters();
 
     this.queryByHook(selectedKind).classList.add('selected');
     this.queryByHook(selectedTag).classList.add('selected');
@@ -92,7 +99,7 @@ module.exports = PageView.extend({
 
     log('filtering by kind', kind);
 
-    var aux = filtering(this.collection, kind);
+    var aux = filterKind(this.collection, kind);
     aux = new AmpersandCollection(aux, {model: Topic});
 
     rerender(this, aux, kind, selectedTag);
@@ -112,7 +119,7 @@ module.exports = PageView.extend({
 
     log('filtering by tag', tag);
 
-    var aux = filtering(this.collection, tag);
+    var aux = filterTag(this.collection, tag);
     aux = new AmpersandCollection(aux, {model: Topic});
 
     rerender(this, aux, selectedKind, tag);
