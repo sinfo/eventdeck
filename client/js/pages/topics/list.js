@@ -25,6 +25,7 @@ function rerender(page, collection, kind, tag){
   page.renderCollection(collection, TopicView, page.queryByHook('topics-list'));
 
   page.renderKindFilters();
+  page.renderTagFilters();
 
   page.queryByHook(selectedKind).classList.remove('selected');
   page.queryByHook(kind).classList.add('selected');
@@ -53,10 +54,18 @@ module.exports = PageView.extend({
   },
   hidden: false,
   render: function () {
+    var self = this;
     this.renderWithTemplate();
     this.renderCollection(this.collection, TopicView, this.queryByHook('topics-list'));
     if (!this.collection.length) {
       this.fetchCollection();
+    }
+
+    if (!app.tags.length) {
+      app.tags.fetch({success: function () {
+        log('got tags', app.tags.serialize());
+        self.renderTagFilters();
+      }});
     }
 
     this.renderKindFilters();
@@ -81,37 +90,32 @@ module.exports = PageView.extend({
   handleKindFilter: function (ev) {
     var kind = ev.target.getAttribute('data-hook');
 
-    log('Fetching', kind);
+    log('filtering by kind', kind);
 
     var aux = filtering(this.collection, kind);
     aux = new AmpersandCollection(aux, {model: Topic});
 
-    rerender(this,aux,kind);
+    rerender(this, aux, kind, selectedTag);
 
     return false;
   },
   renderTagFilters: function () {
     var self = this;
-    app.tags.fetch();
-    var tags = app.tags.map(function (m) {
-                              return [m.id, m.name];
-                              });
 
     var filterContainer = $(self.queryByHook('tag-filters'));
-    _.each(app.tags, function (tag) {
-      console.log(tag.id);
+    _.each(app.tags.serialize(), function (tag) {
       filterContainer.append('<li><div class=\'ink-button\' data-hook=\''+tag.id+'\'>'+tag.name+'</div></li>');
     });
   },
   handleTagFilter: function (ev) {
     var tag = ev.target.getAttribute('data-hook');
 
-    log('Fetching', tag);
+    log('filtering by tag', tag);
 
     var aux = filtering(this.collection, tag);
     aux = new AmpersandCollection(aux, {model: Topic});
 
-    rerender(this,aux,tag);
+    rerender(this, aux, selectedKind, tag);
 
     return false;
   },
@@ -123,12 +127,12 @@ module.exports = PageView.extend({
 
     aux = new AmpersandCollection(aux, {model: Topic});
 
-    rerender(this,aux,'me','showall');
+    rerender(this, aux, 'me', 'showall');
 
     return false;
   },
   showall: function () {
-    rerender(this,this.collection,'showall');
+    rerender(this,this.collection, 'showall');
     return false;
   },
   hide: function(){
