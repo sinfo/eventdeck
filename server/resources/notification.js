@@ -20,6 +20,7 @@ server.method('notification.notify', notify, {});
 server.method('notification.create', create, {});
 server.method('notification.get', get, {});
 server.method('notification.getUnreadCount', getUnreadCount, {});
+server.method('notification.getByMember', getByMember, {});
 server.method('notification.list', list, {});
 server.method('notification.remove', remove, {});
 server.method('notification.readThread', readThread, {});
@@ -139,7 +140,7 @@ function get(id,query, cb) {
 function getByThread(path, id, query, cb) {
   cb = cb||query;
   var thread = threadFromPath(path, id);
-  var filter ={thread:thread};
+  var filter = {thread: thread, targets: []};
   var fields = query.fields;
   var options = {
     skip: query.skip,
@@ -191,7 +192,7 @@ function getUnreadCount(memberId, query, cb) {
       });
     },
     function getUnreadNotifications(subscriptions, access, cbAsync){
-      var filter = {member: memberId, posted: {$gt: access}};
+      var filter = {$or: [{thread: {$in: subscriptions}}, {targets: {$in: [memberId]}}], posted: {$gt: access}};
       Notification.count(filter, fields, options, function(err, count){
         if (err) {
           log.error({ err: err, count: count}, 'error counting notifications');
@@ -199,6 +200,48 @@ function getUnreadCount(memberId, query, cb) {
         }
 
         cbAsync(null, count);
+      });
+    }
+  ], function done (err, result){
+    if(err){
+      log.error({ err: err}, 'error counting notifications');
+      return cb(err);
+    }
+    cb(result);
+  });
+}
+
+function getByMember(memberId, query, cb) {
+  cb = cb||query;
+
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+
+  async.waterfall([
+    function getSubscriptions(cbAsync){
+      var filter = {member: memberId};
+      Subscription.find(filter, function(err, subscriptions) {
+        if (err) {
+          log.error({ err: err, subscriptions: subscriptions}, 'error getting subscriptions');
+          return cbAsync(Boom.internal());
+        }
+
+        cbAsync(null, subscriptions);
+      });
+    },
+    function getNotificationsFromSubscriptions(subscriptions, cbAsync){
+      var filter = {$or: [{thread: {$in: subscriptions}}, {targets: {$in: [memberId]}}]};
+      Notification.find(filter, fields, options, function(err, notifications){
+        if (err) {
+          log.error({ err: err, filter: filter}, 'error getting notifications');
+          return cbAsync(Boom.internal());
+        }
+
+        cbAsync(null, notifications);
       });
     }
   ], function done (err, result){
@@ -226,7 +269,7 @@ function readThread(path, id, memberId, cb) {
 function list(query, cb) {
   cb = cb || query; // fields is optional
 
-  var filter = {};
+  var filter = {targets: []};
   var fields = parser(query.fields);
   var options = {
     skip: query.skip,

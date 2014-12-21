@@ -16,6 +16,12 @@ server.route({
 
 server.route({
   method: 'GET',
+  path: '/api/members/{id}/notifications',
+  config: handlers.getByMember
+});
+
+server.route({
+  method: 'GET',
   path: '/api/companies/{id}/notifications',
   config: handlers.getByThread
 });

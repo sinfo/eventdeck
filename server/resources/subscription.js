@@ -63,7 +63,7 @@ function remove(thread, memberId, cb) {
   });
 }
 
-function getByMember(memberId,query, cb) {
+function getByMember(memberId, query, cb) {
   cb = cb || query;
   var filter = {members: {$in: [memberId]}};
   var fields = query.fields;
@@ -73,7 +73,7 @@ function getByMember(memberId,query, cb) {
     sort: parser(query.sort)
   };
 
-  Subscription.find(filter,fields,options, function(err, subscriptions) {
+  Subscription.find(filter, fields, options, function(err, subscriptions) {
     if (err) {
       log.error({ err: err, subscriptions: filter}, 'error getting subscriptions');
       return cb(Boom.internal());
@@ -93,7 +93,7 @@ function getByThread(thread,query, cb) {
     sort: parser(query.sort)
   };
 
-  Subscription.find(filter,fields,options, function(err, subscriptions) {
+  Subscription.find(filter, fields, options, function(err, subscriptions) {
     if (err) {
       log.error({ err: err, subscriptions: filter}, 'error getting subscriptions');
       return cb(Boom.internal());

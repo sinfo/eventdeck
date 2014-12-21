@@ -26,7 +26,7 @@ exports.get = {
 exports.getByMember = {
   auth: 'session',
   tags: ['api','notification'],
-    validate: {
+  validate: {
     query: {
       fields: Joi.string().default('').description('Fields we want to retrieve'),
       skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),

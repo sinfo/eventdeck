@@ -33,8 +33,25 @@ exports.get = {
     }
   },
   pre: [
-    { method: 'subscription.get(query.thread, auth.credentials.id,query)', assign: 'subscription' }
-    // TODO: READ NOTIFICATIONS
+    { method: 'subscription.get(query.thread, auth.credentials.id, query)', assign: 'subscription' }
+  ],
+  handler: function (request, reply) {
+    reply(render(request.pre.subscription));
+  },
+  description: 'Gets an subscription'
+};
+
+
+exports.getByMember = {
+  auth: 'session',
+  tags: ['api','subscription'],
+  validate: {
+    params: {
+      id: Joi.string().required().description('Id of the member'),
+    }
+  },
+  pre: [
+    { method: 'subscription.getByMember(auth.credentials.id, query)', assign: 'subscription' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.subscription));

@@ -19,3 +19,9 @@ server.route({
   path: '/api/subscriptions',
   config: handlers.remove
 });
+
+server.route({
+  method: 'GET',
+  path: '/api/members/{id}/subscriptions',
+  config: handlers.getByMember
+});
