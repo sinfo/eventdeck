@@ -25,7 +25,9 @@
             a
               color: #777
         div.left-drawer-trigger
-          margin-top: 3px
+          margin-top: 4px
+          margin-right: 5px
+          padding: 3px 6px
       li.active
         a
           font-weight: 700
@@ -72,3 +74,22 @@
 .ink-navigation ul.menu.horizontal > li:last-child,
 .ink-navigation ul.menu.horizontal > li:last-child a
   border-radius: 0
+
+body.ink-drawer
+  .left-drawer
+    top: 37px
+    left: 0
+
+    nav
+      background: white
+      border-right: 1px solid black
+      border-bottom: 1px solid black
+      border-bottom-right-radius: 3px
+
+    .ink-navigation ul.menu.vertical > li > a
+      border-top: 1px solid rgba(0, 0, 0, 0.15)
+      border-bottom: none
+
+    .ink-navigation ul.menu li ul.submenu
+      display: block
+      padding-left: 15px

@@ -28,6 +28,7 @@ module.exports = View.extend({
     'change [data-hook~=base-form] select': 'handleEventChange',
     'input [data-hook~=base-form] input': 'handleSearchInput',
     'keydown [data-hook~=base-form] input': 'handleSearchKeydown',
+    'click .left-drawer-trigger': 'toggleLeftDrawer'
   },
   subviews: {
     form: {
@@ -268,5 +269,9 @@ module.exports = View.extend({
 
   logout: function () {
     app.logout();
+  },
+
+  toggleLeftDrawer: function () {
+    $('.left-drawer').toggle();
   }
 });
