@@ -36,7 +36,11 @@ exports.get = {
     { method: 'subscription.get(query.thread, auth.credentials.id, query)', assign: 'subscription' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.subscription));
+    if(!request.pre.subscription) {
+      reply({ subscribed: false });
+    } else {
+      reply({ subscribed: true });
+    }
   },
   description: 'Gets an subscription'
 };

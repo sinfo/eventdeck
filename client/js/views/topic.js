@@ -12,6 +12,12 @@ module.exports = View.extend({
       hook: 'kind',
       name: 'style'
     },
+    'model.tagDetails.name': '[data-hook~=tag]',
+    'model.tagDetails.style': {
+      type: 'attribute',
+      hook: 'tag',
+      name: 'style'
+    },
     'model.viewUrl': {
       type: 'attribute',
       hook: 'name',

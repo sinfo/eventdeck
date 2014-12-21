@@ -6,27 +6,35 @@ var TopicView = require('client/js/views/topic');
 var Topic = require('client/js/models/topic');
 var AmpersandCollection = require('ampersand-collection');
 var topicKinds = require('options').kinds.topics;
+var Tag = require('client/js/models/tag');
 var _ = require('client/js/helpers/underscore');
 var $ = require('client/js/helpers/jquery');
+var async = require('async');
 
 
-var selectedFilter = 'showall';
+var selectedKind = 'showall';
+var selectedTag = 'showall';
 
 function filtering(collection,filter){
   return collection.filter(function(topic){
     return topic.kind == filter;
   });
 }
-function rerender(page, collection, filter){
+function rerender(page, collection, kind, tag){
   page.renderWithTemplate();
   page.renderCollection(collection, TopicView, page.queryByHook('topics-list'));
 
   page.renderKindFilters();
+  page.renderTagFilters();
 
-  page.queryByHook(selectedFilter).classList.remove('selected');
-  page.queryByHook(filter).classList.add('selected');
-  selectedFilter = filter;
+  page.queryByHook(selectedKind).classList.remove('selected');
+  page.queryByHook(kind).classList.add('selected');
 
+  page.queryByHook(selectedTag).classList.remove('selected');
+  page.queryByHook(tag).classList.add('selected');
+
+  selectedKind = kind;
+  selectedTag = tag;
   return false;
 }
 
@@ -40,6 +48,8 @@ module.exports = PageView.extend({
 
     'click [data-hook~=kind-filters]': 'handleKindFilter',
 
+    'click [data-hook~=tag-filters]': 'handleTagFilter',
+
     'click [data-hook~=me]': 'me',
 
     'click [data-hook~=hide]': 'hide',
@@ -48,6 +58,7 @@ module.exports = PageView.extend({
   hidden: false,
 
   render: function () {
+    var self = this;
     this.renderWithTemplate();
 
     if (!this.collection.length) {
@@ -57,9 +68,18 @@ module.exports = PageView.extend({
       this.stuff(this.collection);
     }
 
-    this.renderKindFilters();
+    if (!app.tags.length) {
+      app.tags.fetch({success: function () {
+        log('got tags', app.tags.serialize());
+        self.renderTagFilters();
+      }});
+    }
 
-    this.queryByHook(selectedFilter).classList.add('selected');
+    this.renderKindFilters();
+    this.renderTagFilters();
+
+    this.queryByHook(selectedKind).classList.add('selected');
+    this.queryByHook(selectedTag).classList.add('selected');
   },
 
   fetchCollection: function () {
@@ -117,12 +137,32 @@ module.exports = PageView.extend({
   handleKindFilter: function (ev) {
     var kind = ev.target.getAttribute('data-hook');
 
-    log('Fetching', kind);
+    log('filtering by kind', kind);
 
     var aux = filtering(this.collection, kind);
     aux = new AmpersandCollection(aux, {model: Topic});
 
-    rerender(this,aux,kind);
+    rerender(this, aux, kind, selectedTag);
+
+    return false;
+  },
+  renderTagFilters: function () {
+    var self = this;
+
+    var filterContainer = $(self.queryByHook('tag-filters'));
+    _.each(app.tags.serialize(), function (tag) {
+      filterContainer.append('<li><div class=\'ink-button\' data-hook=\''+tag.id+'\'>'+tag.name+'</div></li>');
+    });
+  },
+  handleTagFilter: function (ev) {
+    var tag = ev.target.getAttribute('data-hook');
+
+    log('filtering by tag', tag);
+
+    var aux = filtering(this.collection, tag);
+    aux = new AmpersandCollection(aux, {model: Topic});
+
+    rerender(this, aux, selectedKind, tag);
 
     return false;
   },
@@ -130,18 +170,18 @@ module.exports = PageView.extend({
   me: function () {
     log('Fetching my topics');
     var aux = this.collection.filter(function(topic){
-      return topic.targets && topic.targetsindexOf(app.me.id) != -1;
+      return topic.targets && topic.targets.indexOf(app.me.id) != -1;
     });
 
     aux = new AmpersandCollection(aux, {model: Topic});
 
-    rerender(this,aux,'me');
+    rerender(this, aux, 'me', 'showall');
 
     return false;
   },
 
   showall: function () {
-    rerender(this,this.collection,'showall');
+    rerender(this,this.collection, 'showall');
     return false;
   },
 
