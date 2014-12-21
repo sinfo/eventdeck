@@ -8,6 +8,8 @@ var SubscriptionView = require('client/js/views/subscription');
 var Comments = require('client/js/models/comments');
 var PollForm = require('client/js/forms/poll');
 
+var $ = require('client/js/helpers/jquery');
+var _ = require('client/js/helpers/underscore');
 
 module.exports = PageView.extend({
   pageTitle: 'View topic',
@@ -45,6 +47,29 @@ module.exports = PageView.extend({
       }
       self.model = model;
       log('Got topic', model.name);
+
+
+    if (!app.tags.length) {
+      app.tags.fetch({success: function () {
+        self.renderTagFilters();
+          }
+        });
+    }
+    });
+  },
+  renderTagFilters: function () {
+    var self = this;
+
+    var details = app.tags.serialize().filter(function (tag) {
+      return self.model.tags.indexOf(tag.id) != -1;
+    });
+
+    console.log(details);
+
+    var filterContainer = $(self.queryByHook('tags'));
+
+    _.each(details, function (tag) {
+      filterContainer.append('<li><div class=\'ink-button\' data-hook=\''+tag.id+'\' style = \"color:#F0F8FF; background:'+tag.color+'">'+tag.name+'</div></li>');
     });
   },
   subviews: {
