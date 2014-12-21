@@ -8,6 +8,7 @@ var Communications = require('client/js/models/communications');
 var CommentsView = require('client/js/views/comments');
 var Comments = require('client/js/models/comments');
 var ParticipationsView = require('client/js/views/participations');
+var SubscriptionView = require('client/js/views/subscription');
 
 
 module.exports = PageView.extend({
@@ -93,6 +94,19 @@ module.exports = PageView.extend({
         });
       }
     },
+    subscription:{
+      container: '[data-hook=speaker-subscription]',
+      parent: this,
+      waitFor: 'model.thread',
+      prepareView: function (el) {
+        var self = this;
+        return new SubscriptionView({
+          el: el,
+          model: self.model,
+          parent: self,
+        });
+      }
+    }
   },
   handleDeleteClick: function () {
     this.model.destroy({success: function () {

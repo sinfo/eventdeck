@@ -37,10 +37,6 @@ function get(thread, memberId,query, cb) {
       log.error({ err: err, subscription: filter}, 'error getting subscription');
       return cb(Boom.internal());
     }
-    if (!subscription) {
-      log.warn({ err: 'not found', subscription: filter}, 'error getting subscription');
-      return cb(Boom.notFound('member is not subscribed to this thread'));
-    }
 
     cb(null, subscription);
   });

@@ -4,6 +4,7 @@ var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var TopicView = require('client/js/views/topic');
 var CommentsView = require('client/js/views/comments');
+var SubscriptionView = require('client/js/views/subscription');
 var Comments = require('client/js/models/comments');
 var PollForm = require('client/js/forms/poll');
 
@@ -88,7 +89,6 @@ module.exports = PageView.extend({
         return poll;
       }
     },
-
     comments:{
       container: '[data-hook=topic-comments]',
       waitFor: 'model.commentsApi',
@@ -100,6 +100,19 @@ module.exports = PageView.extend({
         });
       }
     },
+    subscription:{
+      container: '[data-hook=topic-subscription]',
+      parent: this,
+      waitFor: 'model.thread',
+      prepareView: function (el) {
+        var self = this;
+        return new SubscriptionView({
+          el: el,
+          model: self.model,
+          parent: self,
+        });
+      }
+    }
   },
   handleDeleteClick: function () {
     this.model.destroy({success: function () {
