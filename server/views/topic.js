@@ -7,7 +7,7 @@ module.exports = function render(content) {
 };
 
 function renderObject(model) {
-  return {
+  var topic = {
     id: model._id,
     kind: model.kind,
     name: model.name,
@@ -27,11 +27,14 @@ function renderObject(model) {
         };
       }),
     },
-    duedate: model.duedate,
 
     tags: model.tags,
 
     posted: model.posted,
     updated: model.updated,
   };
+
+  if(model.duedate) { topic.duedate = model.duedate; }
+
+  return topic;
 }

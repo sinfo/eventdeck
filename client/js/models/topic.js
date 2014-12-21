@@ -35,10 +35,17 @@ module.exports = AmpModel.extend({
     author: 'string',
     targets: 'array',
     closed: 'boolean',
-    duedate: 'string',
+    duedate: 'date',
     tags: 'array',
     posted: 'string',
     updated: 'string',
+  },
+
+  parse: function (attrs) {
+    if(attrs.duedate) {
+      attrs.duedate = new Date(attrs.duedate);
+    }
+    return attrs;
   },
 
   children: {

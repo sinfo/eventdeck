@@ -5,6 +5,7 @@ var ArrayInputView = require('ampersand-array-input-view');
 var ArrayCheckboxView = require('ampersand-array-checkbox-view');
 var CheckboxView = require('ampersand-checkbox-view');
 var SelectView = require('ampersand-select-view');
+var DateView = require('ampersand-date-view');
 var templates = require('client/js/templates');
 var options = require('options');
 var ExtendedInput = InputView.extend({
@@ -101,6 +102,11 @@ module.exports = FormView.extend({
         minLength: 0,
         maxLength: 50,
         parent: this
+      }),
+      new DateView({
+        label: 'Due Date',
+        value: this.model && this.model.duedate || '',
+        name: 'duedate'
       }),
       new CheckboxView({
         label: 'Closed',

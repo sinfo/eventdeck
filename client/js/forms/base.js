@@ -10,7 +10,6 @@ module.exports = FormView.extend({
       new SelectView({
         name: 'event',
         label: ' ',
-        id: 'banana',
         parent: this,
         // first is the value, second is used for the label
         options: app.events,
