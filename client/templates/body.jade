@@ -3,6 +3,9 @@ body.ink-drawer
     .ink-grid
       nav.ink-navigation
         ul.menu.horizontal.push-left
+          li.hide-all.show-medium.show-small.show-tiny
+            .ink-button.small.white.left-drawer-trigger
+              i.fa.fa-bars.fa-2x
           li.title.hide-small.hide-tiny
             a(href='/') EventDeck
           li.title.hide-all.show-small.show-tiny
@@ -29,7 +32,7 @@ body.ink-drawer
               li
                 a(href='/speakers/table') Table
                 a(href='/speakers/add') Add new
-                
+
           li
             a(href='/sessions') Sessions
             ul.submenu
@@ -39,39 +42,30 @@ body.ink-drawer
             a(href='/members') Members
           li
             a#logout(href='/login') Logout
-        ul.menu.horizontal.push-right.hide-all.show-medium.show-small.show-tiny
-          li
-            .ink-button.small.left-drawer-trigger
-              i.fa.fa-bars
 
   main.content-drawer.ink-grid(data-hook='page-container')
 
   .left-drawer
-    nav.ink-navigation
-        ul.menu.vertical
-          li
-            a(href='/topics') Topics
-            ul.submenu
-              li
-                a(href='/topics/add') Add new
-          li
-            a(href='/companies') Companies
-            ul.submenu
-              li
-                a(href='/companies/table') Table
-                a(href='/companies/add') Add new
-          li
-            a(href='/speakers') Speakers
-            ul.submenu
-              li
-                a(href='/speakers/table') Table
-                a(href='/speakers/add') Add new
-          li
-            a(href='/members') Members
-          li
-            a#logout(href='/login') Logout
-
-script(type='text/javascript').
-  Ink.requireModules(['Ink.UI.Drawer_1'], function (Drawer) {
-    new Drawer();
-  });
+    nav.ink-navigation.hide-all.show-medium.show-small.show-tiny
+      ul.menu.vertical
+        li
+          a(href='/topics') Topics
+          ul.submenu
+            li
+              a(href='/topics/add') Add new
+        li
+          a(href='/companies') Companies
+          ul.submenu
+            li
+              a(href='/companies/table') Table
+              a(href='/companies/add') Add new
+        li
+          a(href='/speakers') Speakers
+          ul.submenu
+            li
+              a(href='/speakers/table') Table
+              a(href='/speakers/add') Add new
+        li
+          a(href='/members') Members
+        li
+          a#logout(href='/login') Logout
