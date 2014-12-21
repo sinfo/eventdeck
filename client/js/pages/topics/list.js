@@ -65,7 +65,7 @@ module.exports = PageView.extend({
       this.fetchCollection();
     }
     else {
-      this.stuff(this.collection);
+      this.renderCards(this.collection);
     }
 
     if (!app.tags.length) {
@@ -87,16 +87,14 @@ module.exports = PageView.extend({
     var that = this;
     this.collection.fetch({
       success: function () {
-        that.stuff(that.collection);
+        that.renderCards(that.collection);
       }
     });
 
     return false;
   },
 
-  stuff: function (collection) {
-    //this.renderCollection(this.collection, TopicView, this.queryByHook('topics-list'));
-
+  renderCards: function (collection) {
     var groups = $(this.queryByHook('topics-list')).children('div');
 
     for (var i = 0; i < groups.length; i++) {
