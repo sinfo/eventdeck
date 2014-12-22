@@ -16,6 +16,12 @@ var selectedKind = 'showall';
 var selectedTag = 'showall';
 var tempCollection;
 
+function filterClosed(collection,filter){
+  return collection.filter(function(topic){
+    return topic.closed == filter;
+  });
+}
+
 function filterKind(collection,filter){
   return collection.filter(function(topic){
     return topic.kind == filter;
@@ -37,24 +43,56 @@ module.exports = PageView.extend({
     'click [data-hook~=showall]': 'showall',
     'click [data-hook~=kind-filters]': 'handleKindFilter',
     'click [data-hook~=tag-filters]': 'handleTagFilter',
+    'click [data-hook~≃closed]' : 'closed',
     'click [data-hook~=me]': 'me',
     'click [data-hook~=hide]': 'hide',
   },
 
   hidden: false,
+  closed: function(ev){
+    var closed = ev.target.getAttribute('data-hook');
 
+    log('filtering by kind', closed);
+
+    var filter = ( closed == 'closed' );
+
+    var aux = filterKind(tempCollection, filter);
+    tempCollection = new AmpersandCollection(aux, {model: Topic});
+
+    this.renderCards(tempCollection);
+
+    if(closed == 'closed'){
+      this.queryByHook(selectedKind).classList.remove('open');
+      this.queryByHook(closed).classList.add('closed');
+    }
+    else{
+      this.queryByHook(selectedKind).classList.remove('closed');
+      this.queryByHook(closed).classList.add('open');
+    }
+
+    return false;
+
+  },
+  initialize: function () {
+    var self = this;
+    if (!this.collection.length) {
+      this.fetchCollection({success: function() {
+        self.render();
+      }});
+    }
+  },
   render: function () {
     var self = this;
     this.renderWithTemplate();
 
-    if (!this.collection.length) {
-      this.fetchCollection();
-    }
+    var aux = filterClosed(self.collection, 'false');
+    tempCollection = new AmpersandCollection(aux, {model: Topic});
 
+    console.log(tempCollection);
     app.tags.fetch({success: function () {
         log('got tags', app.tags.serialize());
         self.renderTagFilters();
-        self.renderCards(self.collection);
+        self.renderCards(tempCollection);
     }});
 
     this.renderKindFilters();
@@ -70,6 +108,7 @@ module.exports = PageView.extend({
     var that = this;
     this.collection.fetch({
       success: function () {
+        tempCollection = this.collection;
       }
     });
 
@@ -77,7 +116,6 @@ module.exports = PageView.extend({
   },
 
   renderCards: function (collection) {
-    this.fetchCollection();
     var groups = $(this.queryByHook('topics-list')).children('div');
 
     for (var i = 0; i < groups.length; i++) {
@@ -166,7 +204,7 @@ module.exports = PageView.extend({
 
     aux = new AmpersandCollection(aux, {model: Topic});
 
-    this.renderCards(tempCollection);
+    this.renderCards(aux);
 
     return false;
   },
