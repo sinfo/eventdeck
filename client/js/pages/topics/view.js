@@ -68,9 +68,10 @@ module.exports = PageView.extend({
 
       var filterContainer = $(self.queryByHook('closed'));
       var closed = 'Open';
-      if(self.model.closed)
-        closed = 'Closed'
-          filterContainer.append('<div>'+closed+'</div>');
+      if(self.model.closed){
+        closed = 'Closed';
+        filterContainer.append('<div>'+closed+'</div>');
+      }
     });
   },
   renderTagFilters: function () {
