@@ -29,6 +29,7 @@ var Poll = AmpState.extend({
 module.exports = AmpModel.extend({
   props: {
     id: 'string',
+    unread: 'boolean',
     kind: 'string',
     name: 'string',
     text: 'string',

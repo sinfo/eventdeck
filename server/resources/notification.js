@@ -24,6 +24,7 @@ server.method('notification.getByMember', getByMember, {});
 server.method('notification.list', list, {});
 server.method('notification.remove', remove, {});
 server.method('notification.readThread', readThread, {});
+server.method('notification.decorateWithUnreadStatus', decorateWithUnreadStatus, {});
 server.method('notification.getByThread', getByThread, {});
 server.method('notification.removeByThread', removeByThread, {});
 server.method('notification.removeBySource', removeBySource, {});
@@ -283,6 +284,53 @@ function list(query, cb) {
     }
 
     cb(null, notifications);
+  });
+}
+
+function decorateWithUnreadStatus(memberId, collection, cb) {
+  var threads = collection.map(function(o) {
+    return o.thread;
+  });
+
+  var filter = { member: memberId, thread: { $in: threads }};
+  Access.find(filter, function (err, accesses) {
+    if (err) {
+      log.error({ err: err, access: filter});
+      return cb(Boom.internal());
+    }
+
+    var accessLookup = {};
+    for (var i = 0, len = accesses.length; i < len; i++) {
+      accessLookup[accesses[i].thread] = accesses[i];
+    }
+
+    var accessedThreads = accesses.map(function(o) {
+      return o.thread;
+    });
+
+
+    async.map(collection, function (o, asyncCb) {
+      if(accessedThreads.indexOf(o.thread) == -1) {
+        o.set('unread', true, { strict: false });
+
+        return asyncCb(null, o);
+      }
+
+      var notificationFilter = {thread: o.thread, posted: {$gt: accessLookup[o.thread].last}};
+      Notification.count(notificationFilter, function(err, count){
+        if (err) {
+          log.error({ err: err, count: count}, 'error counting notifications');
+          return asyncCb();
+        }
+
+        o.set('unread', count > 0, { strict: false });
+
+        asyncCb(null, o);
+      });
+    }, function (err, result) {
+
+      cb(err, result);
+    });
   });
 }
 

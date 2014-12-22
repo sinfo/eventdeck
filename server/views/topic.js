@@ -7,8 +7,11 @@ module.exports = function render(content) {
 };
 
 function renderObject(model) {
+  model = model.toJSON();
+
   var topic = {
     id: model._id,
+    unread: model.unread,
     thread: model.thread,
     kind: model.kind,
     name: model.name,

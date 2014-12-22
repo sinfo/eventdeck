@@ -9,8 +9,11 @@ module.exports = function render(content) {
 };
 
 function renderObject(model) {
+  model = model.toJSON();
+
   return {
     id: model.id,
+    unread: model.unread,
     thread: model.thread,
     name: model.name,
     area: model.area,

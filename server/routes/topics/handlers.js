@@ -151,7 +151,8 @@ exports.list = {
     }
   },
   pre: [
-    { method: 'topic.list(query)', assign: 'topics' }
+    { method: 'topic.list(query)', assign: 'topics' },
+    { method: 'notification.decorateWithUnreadStatus(auth.credentials.id, pre.topics)', assign: 'topics' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.topics));

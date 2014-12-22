@@ -5,7 +5,6 @@ var render = require('server/views/company');
 
 var handlers = module.exports;
 
-// TODO: SEND INITIAL EMAIL
 // TODO: SPONSOR PAGE TRACKER
 // TODO: EMAIL TRACKER
 
@@ -81,7 +80,7 @@ exports.get = {
     },
     query: {
       fields: Joi.string().default('id,name,img').description('Fields we want to retrieve'),
-    }    
+    }
   },
   pre: [
     { method: 'company.get(params.id, query)', assign: 'company' },
@@ -130,7 +129,7 @@ exports.getByEvent = {
       skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
       limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
       sort: Joi.string().description('How to sort the array'),
-    }    
+    }
   },
   pre: [
     { method: 'company.getByEvent(params.id, query)', assign: 'companies' }
@@ -151,10 +150,11 @@ exports.list = {
       skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
       limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
       sort: Joi.string().description('How to sort the array'),
-    }    
+    }
   },
   pre: [
-    { method: 'company.list(query)', assign: 'companies' }
+    { method: 'company.list(query)', assign: 'companies' },
+    { method: 'notification.decorateWithUnreadStatus(auth.credentials.id, pre.companies)', assign: 'companies' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.companies));

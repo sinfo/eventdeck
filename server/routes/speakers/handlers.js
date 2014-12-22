@@ -5,7 +5,6 @@ var render = require('server/views/speaker');
 
 var handlers = module.exports;
 
-// TODO: SEND INITIAL EMAIL
 // TODO: EMAIL TRACKER
 
 exports.create = {
@@ -125,7 +124,8 @@ exports.list = {
     }
   },
   pre: [
-    { method: 'speaker.list(query)', assign: 'speakers' }
+    { method: 'speaker.list(query)', assign: 'speakers' },
+    { method: 'notification.decorateWithUnreadStatus(auth.credentials.id, pre.speakers)', assign: 'speakers' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.speakers));
