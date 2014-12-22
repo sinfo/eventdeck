@@ -49,12 +49,12 @@ module.exports = PageView.extend({
       log('Got topic', model.name);
 
 
-    if (!app.tags.length) {
       app.tags.fetch({success: function () {
+        log('Rendering tags!!!');
         self.renderTagFilters();
           }
         });
-    }
+
     });
   },
   renderTagFilters: function () {

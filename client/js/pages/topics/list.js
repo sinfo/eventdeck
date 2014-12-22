@@ -14,6 +14,7 @@ var async = require('async');
 
 var selectedKind = 'showall';
 var selectedTag = 'showall';
+var selectedClosed = 'open';
 var tempCollection;
 
 function filterClosed(collection,filter){
@@ -23,15 +24,21 @@ function filterClosed(collection,filter){
 }
 
 function filterKind(collection,filter){
-  return collection.filter(function(topic){
-    return topic.kind == filter;
-  });
+  if(filter != 'showall')
+    return collection.filter(function(topic){
+      return topic.kind == filter;
+    });
+  else
+    return collection;
 }
 
 function filterTag(collection,filter){
-  return collection.filter(function(topic){
-    return topic.tags.indexOf(filter) != -1;
-  });
+  if(filter != 'showall')
+    return collection.filter(function(topic){
+      return topic.tags.indexOf(filter) != -1;
+    });
+  else
+    return collection;
 }
 
 module.exports = PageView.extend({
@@ -43,36 +50,13 @@ module.exports = PageView.extend({
     'click [data-hook~=showall]': 'showall',
     'click [data-hook~=kind-filters]': 'handleKindFilter',
     'click [data-hook~=tag-filters]': 'handleTagFilter',
-    'click [data-hook~≃closed]' : 'closed',
+    'click [data-hook~=closed-filters]' : 'handleClosed',
     'click [data-hook~=me]': 'me',
     'click [data-hook~=hide]': 'hide',
   },
 
   hidden: false,
-  closed: function(ev){
-    var closed = ev.target.getAttribute('data-hook');
 
-    log('filtering by kind', closed);
-
-    var filter = ( closed == 'closed' );
-
-    var aux = filterKind(tempCollection, filter);
-    tempCollection = new AmpersandCollection(aux, {model: Topic});
-
-    this.renderCards(tempCollection);
-
-    if(closed == 'closed'){
-      this.queryByHook(selectedKind).classList.remove('open');
-      this.queryByHook(closed).classList.add('closed');
-    }
-    else{
-      this.queryByHook(selectedKind).classList.remove('closed');
-      this.queryByHook(closed).classList.add('open');
-    }
-
-    return false;
-
-  },
   initialize: function () {
     var self = this;
     if (!this.collection.length) {
@@ -85,10 +69,6 @@ module.exports = PageView.extend({
     var self = this;
     this.renderWithTemplate();
 
-    var aux = filterClosed(self.collection, 'false');
-    tempCollection = new AmpersandCollection(aux, {model: Topic});
-
-    console.log(tempCollection);
     app.tags.fetch({success: function () {
         log('got tags', app.tags.serialize());
         self.renderTagFilters();
@@ -96,6 +76,7 @@ module.exports = PageView.extend({
     }});
 
     this.renderKindFilters();
+    this.renderClosedFilters();
 
     this.queryByHook(selectedKind).classList.add('selected');
     this.queryByHook(selectedTag).classList.add('selected');
@@ -108,7 +89,10 @@ module.exports = PageView.extend({
     var that = this;
     this.collection.fetch({
       success: function () {
-        tempCollection = this.collection;
+        var aux = that.collection.filter(function(topic){
+          return topic.closed == false;
+        });
+        tempCollection = new AmpersandCollection(aux, {model: Topic});
       }
     });
 
@@ -153,12 +137,17 @@ module.exports = PageView.extend({
     });
   },
 
+
   handleKindFilter: function (ev) {
     var kind = ev.target.getAttribute('data-hook');
+
+    tempCollection = this.collection;
 
     log('filtering by kind', kind);
 
     var aux = filterKind(tempCollection, kind);
+    aux = filterClosed(aux,selectedClosed=='closed');
+    aux = filterTag(aux,selectedTag);
     tempCollection = new AmpersandCollection(aux, {model: Topic});
 
     this.renderCards(tempCollection);
@@ -181,9 +170,13 @@ module.exports = PageView.extend({
   handleTagFilter: function (ev) {
     var tag = ev.target.getAttribute('data-hook');
 
+    tempCollection = this.collection;
+
     log('filtering by tag', tag);
 
-    var aux = filterTag(tempCollection, tag);
+    var aux = filterKind(tempCollection, selectedKind);
+    aux = filterClosed(aux,selectedClosed=='closed');
+    aux = filterTag(aux,tag);
     tempCollection = new AmpersandCollection(aux, {model: Topic});
 
     this.renderCards(tempCollection);
@@ -192,6 +185,34 @@ module.exports = PageView.extend({
     this.queryByHook(tag).classList.add('selected');
 
     selectedTag = tag;
+
+    return false;
+  },
+  renderClosedFilters: function () {
+    var self = this;
+
+    var filterContainer = $(self.queryByHook('closed-filters'));
+      filterContainer.append('<li><div class=\'ink-button\' data-hook=\'open\'>Open</div></li>');
+      filterContainer.append('<li><div class=\'ink-button\' data-hook=\'closed\'>Closed</div></li>');
+  },
+  handleClosed: function (ev) {
+    var closed = ev.target.getAttribute('data-hook');
+
+    tempCollection = this.collection;
+
+    log('filtering by closed', closed);
+
+    var aux = filterKind(tempCollection, selectedKind);
+    aux = filterClosed(aux,closed=='closed');
+    aux = filterTag(aux,selectedTag);
+    tempCollection = new AmpersandCollection(aux, {model: Topic});
+
+    this.renderCards(tempCollection);
+
+    this.queryByHook(selectedClosed).classList.remove('selected');
+    this.queryByHook(closed).classList.add('selected');
+
+    selectedClosed = closed;
 
     return false;
   },
@@ -215,6 +236,12 @@ module.exports = PageView.extend({
 
     this.queryByHook(selectedTag).classList.remove('selected');
     this.queryByHook(selectedKind).classList.remove('selected');
+    this.queryByHook(selectedClosed).classList.remove('selected');
+
+    this.queryByHook('showall').classList.add('selected');
+
+    selectedTag = 'showall';
+    selectedKind = 'showall';
 
     return false;
   },
