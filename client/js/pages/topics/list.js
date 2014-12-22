@@ -53,13 +53,9 @@ module.exports = PageView.extend({
 
   events: {
     'click [data-hook~=showall]': 'showall',
-
     'click [data-hook~=kind-filters]': 'handleKindFilter',
-
     'click [data-hook~=tag-filters]': 'handleTagFilter',
-
     'click [data-hook~=me]': 'me',
-
     'click [data-hook~=hide]': 'hide',
   },
 
@@ -80,6 +76,7 @@ module.exports = PageView.extend({
       app.tags.fetch({success: function () {
         log('got tags', app.tags.serialize());
         self.renderTagFilters();
+        self.renderCards(self.collection);
       }});
     }
 
