@@ -1,9 +1,16 @@
 /*global app*/
-var AmpModel = require('ampersand-model');
+var AmpModel = require('ampersand-state');
+var AmpIOModel = require('ampersand-io-model');
 var timeSince = require('client/js/helpers/timeSince');
 var options = require('options');
 
-module.exports = AmpModel.extend({
+var events = {};
+
+var listeners = {};
+
+var IOModel = new AmpIOModel(app.socket, events, listeners);
+
+module.exports = AmpModel.extend(IOModel, {
   props: {
     id: ['string'],
     thread: ['string'],
