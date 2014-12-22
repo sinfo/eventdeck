@@ -3,14 +3,24 @@ section.page.topics.view
     div.column-group.horizontal-gutters
       div.all-100
         h1.push-left
-          span.kind(data-hook='kind')
-          span(data-hook='name')
-        .button-group.small(data-hook='tags')
-        .button-group.small.push-right
-          a.ink-button.orange(data-hook='edit') Edit
-          button.ink-button.red(data-hook='delete') Delete
-          div(data-hook='topic-subscription')
+          div
+            span.kind(data-hook='kind')
+            span(data-hook='name')
+        div.push-left
+          p.button-group.small(data-hook='tags')
+        ul
+          h1
+            .push-right.a(data-hook='posted')
+            .push-right.a(data-hook='duedate')
+
+          .button-group.small.push-right
+            a.ink-button.orange(data-hook='edit') Edit
+            button.ink-button.red(data-hook='delete') Delete
+            div(data-hook='topic-subscription')
+
         div.all-100
+          div
+            a(data-hook = 'author')
           p(data-hook='text')
 
           form.ink-form(data-hook='topic-poll')

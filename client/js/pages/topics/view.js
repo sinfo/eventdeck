@@ -18,6 +18,13 @@ module.exports = PageView.extend({
     'model.name': {
       hook: 'name'
     },
+    'model.author': {
+      hook: 'author'
+    },
+    'model.targets': {
+      hook: 'targets'
+    },
+
     'model.kindDetails.name': {
       hook: 'kind'
     },
@@ -26,6 +33,10 @@ module.exports = PageView.extend({
       hook: 'kind',
       name: 'style'
     },
+    'model.duedate': {
+      hook: 'duedate'
+    },
+    'model.postedTimeSpan': '[data-hook~=posted]',
     'model.textHtml': {
       type: 'innerHTML',
       hook: 'text'
@@ -55,6 +66,11 @@ module.exports = PageView.extend({
           }
         });
 
+      var filterContainer = $(self.queryByHook('closed'));
+      var closed = 'Open';
+      if(self.model.closed)
+        closed = 'Closed'
+          filterContainer.append('<div>'+closed+'</div>');
     });
   },
   renderTagFilters: function () {

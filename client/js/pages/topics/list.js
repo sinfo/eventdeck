@@ -24,21 +24,25 @@ function filterClosed(collection,filter){
 }
 
 function filterKind(collection,filter){
-  if(filter != 'showall')
+  if(filter != 'showall'){
     return collection.filter(function(topic){
       return topic.kind == filter;
     });
-  else
+  }
+  else{
     return collection;
+  }
 }
 
 function filterTag(collection,filter){
-  if(filter != 'showall')
+  if(filter != 'showall'){
     return collection.filter(function(topic){
       return topic.tags.indexOf(filter) != -1;
     });
-  else
+  }
+  else{
     return collection;
+  }
 }
 
 module.exports = PageView.extend({
@@ -90,7 +94,7 @@ module.exports = PageView.extend({
     this.collection.fetch({
       success: function () {
         var aux = that.collection.filter(function(topic){
-          return topic.closed == false;
+          return topic.closed === false;
         });
         tempCollection = new AmpersandCollection(aux, {model: Topic});
       }

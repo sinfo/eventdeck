@@ -4,6 +4,7 @@ var AmpCollection = require('ampersand-collection');
 var options = require('options');
 var marked = require('client/js/helpers/marked');
 var log = require('bows')('topics');
+var timeSince = require('client/js/helpers/timeSince');
 
 var PollOption = AmpState.extend({
   props: {
@@ -105,7 +106,14 @@ module.exports = AmpModel.extend({
       fn: function () {
         return this.text && marked(this.text) || '';
       },
-    }
+    },
+    postedTimeSpan: {
+      deps: ['posted'],
+      fn: function () {
+        return timeSince(this.posted);
+      },
+      cache: false
+    },
   }
 
 });
