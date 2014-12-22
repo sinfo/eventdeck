@@ -8,9 +8,9 @@ var events = {};
 
 var listeners = {};
 
-var IOModel = new AmpIOModel(app.socket, events, listeners);
+//var IOModel = new AmpIOModel(app.socket, events, listeners);
 
-module.exports = AmpModel.extend(IOModel, {
+module.exports = AmpModel.extend({
   props: {
     id: ['string'],
     thread: ['string'],
