@@ -25,7 +25,7 @@ module.exports = View.extend({
       name: 'id'
     }
   },
-  render: function () {
+  initialize: function(){
     var self = this;
 
     self.renderWithTemplate();
@@ -35,9 +35,9 @@ module.exports = View.extend({
     });
 
     var tagsContainer = $('#'+this.model.thread+' [data-hook=tags]');
+    tagsContainer.empty();
     _.each(topicTags, function (tag) {
       tagsContainer.append('<div style=\'color:'+tag.color+'\'>'+tag.name+'</div>');
     });
-
   }
 });

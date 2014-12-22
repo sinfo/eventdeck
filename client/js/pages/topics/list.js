@@ -28,24 +28,6 @@ function filterTag(collection,filter){
   });
 }
 
-function rerender(page, collection, kind, tag){
-  page.renderWithTemplate();
-  page.renderCollection(collection, TopicView, page.queryByHook('topics-list'));
-
-  page.renderKindFilters();
-  page.renderTagFilters();
-
-  page.queryByHook(selectedKind).classList.remove('selected');
-  page.queryByHook(kind).classList.add('selected');
-
-  page.queryByHook(selectedTag).classList.remove('selected');
-  page.queryByHook(tag).classList.add('selected');
-
-  selectedKind = kind;
-  selectedTag = tag;
-  return false;
-}
-
 module.exports = PageView.extend({
   pageTitle: 'Topics',
 
@@ -68,17 +50,12 @@ module.exports = PageView.extend({
     if (!this.collection.length) {
       this.fetchCollection();
     }
-    else {
-      this.renderCards(this.collection);
-    }
 
-    if (!app.tags.length) {
-      app.tags.fetch({success: function () {
+    app.tags.fetch({success: function () {
         log('got tags', app.tags.serialize());
         self.renderTagFilters();
         self.renderCards(self.collection);
-      }});
-    }
+    }});
 
     this.renderKindFilters();
 
@@ -93,7 +70,6 @@ module.exports = PageView.extend({
     var that = this;
     this.collection.fetch({
       success: function () {
-        that.renderCards(that.collection);
       }
     });
 
@@ -101,6 +77,7 @@ module.exports = PageView.extend({
   },
 
   renderCards: function (collection) {
+    this.fetchCollection();
     var groups = $(this.queryByHook('topics-list')).children('div');
 
     for (var i = 0; i < groups.length; i++) {
@@ -146,7 +123,12 @@ module.exports = PageView.extend({
     var aux = filterKind(tempCollection, kind);
     tempCollection = new AmpersandCollection(aux, {model: Topic});
 
-    rerender(this, tempCollection, kind, selectedTag);
+    this.renderCards(tempCollection);
+
+    this.queryByHook(selectedKind).classList.remove('selected');
+    this.queryByHook(kind).classList.add('selected');
+
+    selectedKind = kind;
 
     return false;
   },
@@ -166,7 +148,12 @@ module.exports = PageView.extend({
     var aux = filterTag(tempCollection, tag);
     tempCollection = new AmpersandCollection(aux, {model: Topic});
 
-    rerender(this, tempCollection, selectedKind, tag);
+    this.renderCards(tempCollection);
+
+    this.queryByHook(selectedTag).classList.remove('selected');
+    this.queryByHook(tag).classList.add('selected');
+
+    selectedTag = tag;
 
     return false;
   },
@@ -186,7 +173,11 @@ module.exports = PageView.extend({
 
   showall: function () {
     tempCollection = this.collection;
-    rerender(this,this.collection, 'showall');
+    this.renderCards(this.collection);
+
+    this.queryByHook(selectedTag).classList.remove('selected');
+    this.queryByHook(selectedKind).classList.remove('selected');
+
     return false;
   },
 

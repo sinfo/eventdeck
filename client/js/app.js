@@ -84,6 +84,10 @@ module.exports = {
         log('Got '+collection.length+' events, '+app.me.selectedEvent+' is the default one. ', collection.toJSON());
       }
     });
+
+
+    app.tags.fetch();
+
   },
 
   // This is how you navigate around the app.
