@@ -26,6 +26,7 @@ module.exports = AmpModel.extend({
 
   props: {
     id: ['string'],
+    unread: ['boolean'],
     name: ['string'],
     title: ['string'],
     description: ['string'],

@@ -25,6 +25,7 @@ var ParticipationCollection = AmpCollection.extend({
 module.exports = AmpModel.extend({
   props: {
     id: ['string'],
+    unread: ['boolean'],
     name: ['string'],
     description: ['string'],
     img: ['string'],

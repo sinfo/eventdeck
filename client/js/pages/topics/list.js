@@ -166,7 +166,7 @@ module.exports = PageView.extend({
 
     aux = new AmpersandCollection(aux, {model: Topic});
 
-    rerender(this, aux, 'me', 'showall');
+    this.renderCards(tempCollection);
 
     return false;
   },
