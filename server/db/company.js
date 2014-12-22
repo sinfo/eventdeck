@@ -34,4 +34,8 @@ var schema = new mongoose.Schema({
   updated: Date
 });
 
+schema.virtual('thread').get(function () {
+  return 'company-'+this.id;
+});
+
 var Company = module.exports = mongoose.model('Company', schema);

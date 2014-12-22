@@ -9,6 +9,7 @@ module.exports = function render(content) {
 function renderObject(model) {
   var topic = {
     id: model._id,
+    thread: model.thread,
     kind: model.kind,
     name: model.name,
     text: model.text,

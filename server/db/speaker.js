@@ -16,4 +16,8 @@ var schema = new mongoose.Schema({
   updated: { type: Date, default: Date.now }
 });
 
+schema.virtual('thread').get(function () {
+  return 'speaker-'+this.id;
+});
+
 var Speaker = module.exports = mongoose.model('Speaker', schema);

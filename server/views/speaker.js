@@ -3,12 +3,13 @@ module.exports = function render(content) {
     return content.map(renderObject);
   }
 
-  return renderObject(content);  
+  return renderObject(content);
 };
 
 function renderObject(model) {
   return {
     id: model.id,
+    thread: model.thread,
     name: model.name,
     title: model.title,
     description: model.description,

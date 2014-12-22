@@ -26,4 +26,8 @@ var schema = new mongoose.Schema({
   updated: {type: Date},
 });
 
+schema.virtual('thread').get(function () {
+  return 'topic-'+this.id;
+});
+
 var Topic = module.exports = mongoose.model('Topic', schema);

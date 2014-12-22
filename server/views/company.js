@@ -11,6 +11,7 @@ module.exports = function render(content) {
 function renderObject(model) {
   return {
     id: model.id,
+    thread: model.thread,
     name: model.name,
     area: model.area,
     description: model.description,
