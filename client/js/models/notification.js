@@ -8,7 +8,7 @@ var events = {};
 
 var listeners = {};
 
-var IOModel = new AmpIOModel(app.socket, events, listeners);
+var IOModel = new AmpIOModel(null, events, listeners);
 
 module.exports = AmpModel.extend(IOModel, {
   props: {
@@ -39,7 +39,7 @@ module.exports = AmpModel.extend(IOModel, {
     unread: {
       deps: ['member'],
       fn: function() {
-        
+
       }
     }
   }

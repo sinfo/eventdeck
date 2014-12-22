@@ -52,7 +52,7 @@ module.exports = Router.extend({
     'topics/add': 'topicAdd',
     'topics/:id': 'topicView',
     'topics/:id/edit': 'topicEdit',
-    'sessions/': 'sessions',
+    'sessions': 'sessions',
     'sessions/add': 'sessionAdd',
     'sessions/:id': 'sessionView',
     'sessions/:id/edit': 'sessionEdit',
