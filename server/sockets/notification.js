@@ -2,13 +2,16 @@ var async = require('async');
 var server = require('server');
 var log = require('server/helpers/logger');
 var webSocket = server.webSocket.server;
+var hapiServer = server.hapi;
 
 function notificationServer(socket){
 
   socket.on('notification-count', function(data, cbClient){
-    server.methods.notification.getUnreadCount(data.id, data.query, function(err, result){
+    var query = data.query || {};
+    log.debug(cbClient);
+    hapiServer.methods.notification.getUnreadCount(data.id, query, function(err, result){
       if(err){
-        log.error({user: data.id, notifications: result}, '[socket-notification] error getting notification count');
+        log.error({err: err, user: data.id, notifications: result}, '[socket-notification] error getting notification count');
         return cbClient(err);
       }
       socket.emit('notification-count-response', {count: result});
@@ -17,13 +20,16 @@ function notificationServer(socket){
   });
 
   socket.on('notifications-get', function(data, cbClient){
-    server.methods.notification.list(data.id, data.query, function(err, result){
-      if(err){
-        log.error({user: data.id, notifications: result}, '[socket-notification] error getting notifications');
-        return cbClient(err);
-      }
-      socket.emit('notifications-get-response', {notifications: result});
-      cbClient();
+   var query = data.query || {};
+    hapiServer.methods.notification.list(data.id, query, function(err, notifications){
+      hapiServer.mehtods.notification.decorateWithUnreadStatus(data.id, notifications, function(err, result){
+        if(err){
+          log.error({err: err, user: data.id, notifications: result}, '[socket-notification] error getting notifications');
+          return cbClient(err);
+        }
+        socket.emit('notifications-get-response', result);
+        cbClient();
+      });
     });
   });
 
@@ -41,7 +47,7 @@ function notificationServer(socket){
       return cbClient();
     }
 
-    server.methods.subscription.getByThread(notification.thread, function(subscriptions, err){
+    hapiServer.methods.subscription.getByThread(notification.thread, function(subscriptions, err){
       if(err){
         log.error({err: err, subscription: notification.thread}, '[socket-notification] error getting subscriptions');
       }

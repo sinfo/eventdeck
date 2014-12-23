@@ -18,6 +18,9 @@ webSocket.on('connection', function (socket) {
     if(!user){
       return cbClient(Boom.unauthorized('Need valid user to connect'));
     }
+    else{
+      cbClient();
+    }
     socket.nickname = user;
     socket.join(user);
     chatServer(socket);

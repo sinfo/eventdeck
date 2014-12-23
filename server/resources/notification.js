@@ -194,7 +194,7 @@ function getUnreadCount(memberId, query, cb) {
     },
     function getUnreadNotifications(subscriptions, access, cbAsync){
       var filter = {$or: [{thread: {$in: subscriptions}}, {targets: {$in: [memberId]}}], posted: {$gt: access}};
-      Notification.count(filter, fields, options, function(err, count){
+      Notification.count(filter, function(err, count){
         if (err) {
           log.error({ err: err, count: count}, 'error counting notifications');
           return cbAsync(Boom.internal());

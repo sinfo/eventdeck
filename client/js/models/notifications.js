@@ -10,7 +10,9 @@ module.exports = function(socket){
 	var events = {
 	  fetch: 'notifications-get',
 	  onFetch: 'notification-get-response',
-	  onNew: ['notify-target', 'notify-subscription']
+	  onNew: ['notify-target', 'notify-subscription'],
+	  count: 'notification-count',
+	  onCount: 'notification-count-response'
 	};
 
 	var listeners = {
@@ -19,6 +21,16 @@ module.exports = function(socket){
 				log('Received notification.', data);
 				app.me.notifications++;
 				app.notifications.add(data);
+				if(cb){
+					cb();
+				}
+			},
+			active: true
+		},
+		onCount: {
+			fn: function(data, cb){
+				log('Received notification count.', data);
+				app.me.notifications = data.count;
 				if(cb){
 					cb();
 				}

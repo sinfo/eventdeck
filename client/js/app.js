@@ -69,6 +69,21 @@ module.exports = {
       success: function(model, response, options) {
         log('Hello ' + model.name + '!');
         model.authenticated = true;
+
+        // var callback = function(err){
+        //   if(err){
+        //     log(err);
+        //   }
+        // };
+
+        // var sendOptions = {
+        //   callback: function(err){
+        //     callback(err);
+        //     self.notifications.emit('count', {id: self.me.id}, {callback: callback});
+        //   }
+        // };
+
+        // self.notifications.emit('init', {user: self.me}, sendOptions);
       },
       error: function(model, response, options) {
         log('Please log in first!');
