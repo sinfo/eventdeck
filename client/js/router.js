@@ -17,13 +17,16 @@ var CompanyEditPage = require('./pages/companies/edit');
 var CompanyViewPage = require('./pages/companies/view');
 var CompanyMemberTable = require('./pages/companies/table');
 
+var Sessions = require('./pages/sessions/list');
+var SessionAddPage = require('./pages/sessions/add');
+var SessionEditPage = require('./pages/sessions/edit');
+var SessionViewPage = require('./pages/sessions/view');
+
 var Speakers = require('./pages/speakers/list');
 var SpeakerAddPage = require('./pages/speakers/add');
 var SpeakerEditPage = require('./pages/speakers/edit');
 var SpeakerViewPage = require('./pages/speakers/view');
 var SpeakerMemberTable = require('./pages/speakers/table');
-
-var SessionsAddPage = require('./pages/sessions/add');
 
 var Topics = require('./pages/topics/list');
 var TopicAddPage = require('./pages/topics/add');
@@ -49,8 +52,10 @@ module.exports = Router.extend({
     'topics/add': 'topicAdd',
     'topics/:id': 'topicView',
     'topics/:id/edit': 'topicEdit',
-    'sessions/': 'sessions',
+    'sessions': 'sessions',
     'sessions/add': 'sessionAdd',
+    'sessions/:id': 'sessionView',
+    'sessions/:id/edit': 'sessionEdit',
     'speakers': 'speakers',
     'speakers/table': 'speakersTable',
     'speakers/add': 'speakerAdd',
@@ -127,6 +132,30 @@ module.exports = Router.extend({
     }));
   },
 
+
+  sessions: function () {
+    this.trigger('page', new Sessions({
+      collection: app.sessions
+    }));
+  },
+
+  sessionAdd: function () {
+    this.trigger('page', new SessionAddPage());
+  },
+
+  sessionEdit: function (id) {
+    this.trigger('page', new SessionEditPage({
+      id: id
+    }));
+  },
+
+  sessionView: function (id) {
+    this.trigger('page', new SessionViewPage({
+      id: id
+    }));
+  },
+
+
   speakers: function () {
     this.trigger('page', new Speakers({
       collection: app.speakers
@@ -176,11 +205,6 @@ module.exports = Router.extend({
       id: id
     }));
   },
-  
-  sessionAdd: function () {
-    this.trigger('page', new SessionsAddPage());
-  },
-  
 
   catchAll: function () {
     this.redirectTo('');

@@ -12,6 +12,7 @@ var events = {
 
 var listeners = {};
 
+
 module.exports= function(socket){
 
   var IOModel = AmpIOModel.extend(socket, {events: events, listeners: listeners});

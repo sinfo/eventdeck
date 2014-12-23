@@ -3,7 +3,7 @@ var templates = require('client/js/templates');
 
 
 module.exports = View.extend({
-  template: templates.cards.company,
+  template: templates.cards.speaker,
   bindings: {
     'model.name': '[data-hook~=name]',
     'model.unread': {
