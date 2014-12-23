@@ -17,3 +17,4 @@ require('./sessions');
 require('./subscriptions');
 require('./tags');
 require('./topics');
+require('./test');

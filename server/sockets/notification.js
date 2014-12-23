@@ -16,15 +16,19 @@ function notificationServer(socket){
     });
   });
 
-  socket.on('notification-get', function(data, cbClient){
+  socket.on('notifications-get', function(data, cbClient){
     server.methods.notification.list(data.id, data.query, function(err, result){
       if(err){
         log.error({user: data.id, notifications: result}, '[socket-notification] error getting notifications');
         return cbClient(err);
       }
-      socket.emit('notification-get-response', {notifications: result});
+      socket.emit('notifications-get-response', {notifications: result});
       cbClient();
     });
+  });
+
+  socket.on('notification-get', function(data, cbClient){
+    //TODO notification fetch by id
   });
 
   socket.on('notify', function(notification, cbClient){

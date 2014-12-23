@@ -5,6 +5,7 @@ module.exports = Member.extend({
   url: '/api/members/me',
 
   session: {
+    notifications: ['number'],
     selectedEvent: ['string'],
     online: ['boolean'],
     reconnecting: ['boolean'],

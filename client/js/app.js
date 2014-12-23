@@ -4,11 +4,11 @@ var log = require('bows')('eventdeck');
 var config = require('clientconfig');
 var $ = require('jquery');
 var Ink = require('./ink-all');
-var io = require('socket.io-client');
 
 var Router = require('./router');
 var MainView = require('./views/main');
 var domReady = require('domready');
+var IO = require('./sockets');
 
 var Me = require('./models/me');
 var Events = require('./models/events');
@@ -21,7 +21,6 @@ var Topics = require('./models/topics');
 var Communications = require('./models/communications');
 var Notifications = require('./models/notifications');
 
-
 module.exports = {
   // this is the the whole app initter
   blastoff: function () {
@@ -29,9 +28,8 @@ module.exports = {
 
     log('Blasting off!');
 
+    this.socket = new IO(null, {setListeners: true});
     this.me = new Me();
-    this.socket = io.connect();
-    this.socketInit();
     this.events = new Events();
     this.members = new Members();
     this.companies = new Companies();
@@ -39,8 +37,10 @@ module.exports = {
     this.speakers = new Speakers();
     this.tags = new Tags();
     this.topics = new Topics();
-    // this.notifications = new Notifications();
     this.fetchInitialData();
+
+    Notifications = new Notifications(this.socket);
+    this.notifications = new Notifications();
 
     // init our URL handlers and the history tracker
     this.router = new Router();
@@ -119,39 +119,6 @@ module.exports = {
       app.navigate('/login');
     });
   },
-
-  socketInit: function () {
-    var self = this;
-    this.socket.on('connect', function(){
-      log('Connected!');
-      self.me.online = true;
-      self.me.error = false;
-    });
-    this.socket.on('disconnect', function(){
-      log('Disconnected!');
-      self.me.online = false;
-    });
-    this.socket.on('reconnecting', function(attempts){
-      log('Reconnecting');
-      self.me.reconnecting = true;
-    });
-    this.socket.on('reconnect', function(attempts){
-      log('Reconnected');
-      self.me.reconnecting = false;
-    });
-    this.socket.on('reconnect_failed', function(){
-      log('Reconnect failed');
-      self.me.reconnecting = false;
-    });
-    this.socket.on('reconnect_error', function(error){
-      log('Reconnection error', error);
-      self.me.error = true;
-    });
-    this.socket.on('error', function(error){
-      log('Connection error', error);
-      self.me.error = true;
-    });
-  }
 };
 
 // run it

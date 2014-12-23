@@ -50,6 +50,7 @@
     "ampersand-view-switcher": "^1.0.2",
     "ampersand-collection-io-mixin": "https://github.com/jgantunes/ampersand-collection-io-mixin/tarball/master",
     "ampersand-io-model": "https://github.com/jgantunes/ampersand-io-model/tarball/master",
+    "ampersand-io": "https://github.com/jgantunes/ampersand-io/tarball/master",
     "andlog": "^1.0.0",
     "async": "~0.2.9",
     "boom": "~2.5.1",
