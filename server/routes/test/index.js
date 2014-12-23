@@ -6,7 +6,9 @@ server.route({
   method: 'GET',
   path: '/api/test/notify',
   handler: function(request, reply){
-    socketServer.emit('notify-target', {test: 'test'});
-    reply('testing-socket-notify');
+    server.methods.notification.notifyCreate('francisco.dias', '/company', 'ericsson', function(err, result){
+      socketServer.emit('notify-target', result);
+      reply('testing-socket-notify');
+    });
   }
 });

@@ -4,20 +4,19 @@ var AmpIOModel = require('ampersand-io-model');
 var timeSince = require('client/js/helpers/timeSince');
 var options = require('options');
 
-var events = {
-  create: 'notify',
-  fetch: 'notification-get',
-  onFetch: 'notification-get-response'
-};
-
-var listeners = {};
-
-
 module.exports= function(socket){
 
-  var IOModel = AmpIOModel.extend(socket, {events: events, listeners: listeners});
+  var events = {
+    create: 'notify',
+    fetch: 'notification-get',
+    onFetch: 'notification-get-response'
+  };
 
-  return AmpState.extend(new IOModel(), {
+  var listeners = {};
+
+  var IOModel = AmpIOModel.extend(socket);
+
+  return AmpState.extend(new IOModel(null, {events: events, listeners: listeners}), {
     props: {
       id: ['string'],
       thread: ['string'],
