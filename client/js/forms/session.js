@@ -25,6 +25,46 @@ module.exports = FormView.extend({
         placeholder: 'Img',
         parent: this
       }),
+      new ExtendedInput({
+        label: 'Kind',
+        name: 'kind',
+        value: this.model && this.model.img || '',
+        required: false,
+        placeholder: 'Kind',
+        parent: this
+      }),
+      new ExtendedInput({
+        label: 'Place',
+        name: 'place',
+        value: this.model && this.model.img || '',
+        required: false,
+        placeholder: 'Place',
+        parent: this
+      }),
+      new ExtendedInput({
+        label: 'Description',
+        name: 'description',
+        value: this.model && this.model.img || '',
+        required: false,
+        placeholder: 'Description',
+        parent: this
+      }),
+      new ExtendedInput({
+        label: 'Date',
+        name: 'date',
+        value: this.model && this.model.img || '',
+        required: false,
+        placeholder: 'Date',
+        parent: this
+      }),
+      new ExtendedInput({
+        label: 'Duration',
+        name: 'duration',
+        value: this.model && this.model.img || '',
+        required: false,
+        placeholder: 'Duration',
+        parent: this
+      }),
 //      new ArrayInputView({
 //        label: 'Roles',
 //        name: 'roles',
