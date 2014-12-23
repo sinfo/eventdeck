@@ -19,6 +19,11 @@ module.exports = View.extend({
       type: 'attribute',
       hook: 'name',
       name: 'href'
-    }
+    },
+    'model.editUrl': {
+      type: 'attribute',
+      hook: 'action-edit',
+      name: 'href'
+    },
   },
 });

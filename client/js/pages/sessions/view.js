@@ -22,9 +22,14 @@ module.exports = PageView.extend({
       type: 'innerHTML',
       hook: 'description'
     },
+    'model.editUrl': {
+      type: 'attribute',
+      hook: 'edit',
+      name: 'href'
+    },
   },
   events: {
-    'click [data-hook~=delete]': 'handleDeleteClick'
+    'click [data-hook~=delete]': 'handleDeleteClick',
   },
   initialize: function (spec) {
     var self = this;
