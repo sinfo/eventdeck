@@ -193,6 +193,8 @@ function getUnreadCount(memberId, query, cb) {
       });
     },
     function getUnreadNotifications(subscriptions, access, cbAsync){
+      log.debug(access, 'access');
+      log.debug(subscriptions, 'subscriptions');
       var filter = {$or: [{thread: {$in: subscriptions}}, {targets: {$in: [memberId]}}], posted: {$gt: access}};
       Notification.count(filter, function(err, count){
         if (err) {

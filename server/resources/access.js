@@ -7,7 +7,7 @@ var Access = require('server/db/access');
 
 
 server.method('access.save', save, {});
-server.method('access.get', save, {});
+server.method('access.get', get, {});
 
 
 function save(memberId, path, id, cb) {
