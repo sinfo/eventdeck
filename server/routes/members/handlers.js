@@ -69,6 +69,7 @@ exports.update = {
       },
       loginCodes: Joi.array().description('login codes of the member'),
       subscriptions: Joi.array().description('subscriptions of the member'),
+      unreadAccess: Joi.date().description('last notificaiton count access')
     }
   },
   pre: [
@@ -79,6 +80,40 @@ exports.update = {
     reply(render(request.pre.member));
   },
   description: 'Updates an member'
+};
+
+exports.updateMe = {
+  auth: 'session',
+  tags: ['api','member'],
+  validate: {
+    payload: {
+      id: Joi.string().description('id of the member'),
+      name: Joi.string().description('name of the member'),
+      img: Joi.string().description('image of the member'),
+      facebook: {
+        id: Joi.string().description('facebook id of the member'),
+        username: Joi.string().description('facebook username of the member'),
+      },
+      skype: Joi.string().description('skype username of the member'),
+      phones: Joi.array().description('phones of the member'),
+      mails: {
+        main: Joi.string().description('main email of the member (which is used for login and contacts)'),
+        institutional: Joi.string().description('institutional email of the member'),
+        dropbox: Joi.string().description('dropbox email of the member'),
+        google: Joi.string().description('google email of the member'),
+        microsoft: Joi.string().description('microsoft email of the member'),
+      },
+      subscriptions: Joi.array().description('subscriptions of the member'),
+      unreadAccess: Joi.date().description('last notificaiton count access')
+    }
+  },
+  pre: [
+    { method: 'member.update(auth.credentials.id, payload)', assign: 'member' }
+  ],
+  handler: function (request, reply) {
+    reply(render(request.pre.member));
+  },
+  description: 'Updates the connected user'
 };
 
 
@@ -94,8 +129,7 @@ exports.get = {
     }
   },
   pre: [
-    { method: 'member.get(params.id, query)', assign: 'member' },
-    { method: 'access.save(auth.credentials.id, path, params.id)' }
+    { method: 'member.get(params.id, query)', assign: 'member' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.member));
@@ -120,7 +154,7 @@ exports.getMe = {
   handler: function (request, reply) {
     reply(render(request.pre.member));
   },
-  description: 'Gets an member'
+  description: 'Gets the connected user'
 };
 
 

@@ -1,33 +1,35 @@
 var async = require('async');
-var server = require('server');
+var servers = require('server');
 var log = require('server/helpers/logger');
-var webSocket = server.webSocket.server;
-var hapiServer = server.hapi;
+var webSocket = servers.webSocket.server;
+var server = servers.hapi;
 
 function notificationServer(socket){
 
   socket.on('notification-count', function(data, cbClient){
     var query = data.query || {};
-    log.debug(cbClient);
-    hapiServer.methods.notification.getUnreadCount(data.id, query, function(err, result){
+    log.debug(data);
+    server.methods.notification.getUnreadCount(data.id, query, function(err, result){
       if(err){
         log.error({err: err, user: data.id, notifications: result}, '[socket-notification] error getting notification count');
+        socket.emit('notification-count-response', {err: err});
         return cbClient(err);
       }
-      socket.emit('notification-count-response', {count: result});
+      socket.emit('notification-count-response', {response: result});
       cbClient();
     });
   });
 
   socket.on('notifications-get', function(data, cbClient){
    var query = data.query || {};
-    hapiServer.methods.notification.list(data.id, query, function(err, notifications){
-      hapiServer.mehtods.notification.decorateWithUnreadStatus(data.id, notifications, function(err, result){
+    server.methods.notification.list(data.id, query, function(err, notifications){
+      server.mehtods.notification.decorateWithUnreadStatus(data.id, notifications, function(err, result){
         if(err){
           log.error({err: err, user: data.id, notifications: result}, '[socket-notification] error getting notifications');
+          socket.emit('notifications-get-response', {err: err});
           return cbClient(err);
         }
-        socket.emit('notifications-get-response', result);
+        socket.emit('notifications-get-response', {response: result});
         cbClient();
       });
     });
@@ -41,23 +43,34 @@ function notificationServer(socket){
     
     if(notification.targets){
       async.each(notification.targets, function(target, cb){
-        webSocket.to(target).emit('notify-target', {notification: notification});
+        webSocket.to(target).emit('notify-target', notification);
         cb();
       });
       return cbClient();
     }
 
-    hapiServer.methods.subscription.getByThread(notification.thread, function(subscriptions, err){
+    server.methods.subscription.getByThread(notification.thread, function(subscriptions, err){
       if(err){
         log.error({err: err, subscription: notification.thread}, '[socket-notification] error getting subscriptions');
+        return cbClient(err);
       }
       async.each(subscriptions, function(subscription, cb){
-        webSocket.to(subscription.member).emit('notify-subscription', {notification: notification});
+        webSocket.to(subscription.member).emit('notify-subscription', notification);
         cb();
       });
       return cbClient();
     });
   });
+
+  socket.on('access', function(data, cbClient){
+    server.methods.access.save(data.memberId, data.thread, function(err, result){
+      if(err){
+        log.error({err: err, access: result}, '[socket-notification] error saving access');
+      }
+      cbClient(err);
+    });
+  });
+
 }
 
 module.exports = notificationServer;

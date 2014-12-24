@@ -64,8 +64,7 @@ exports.get = {
     }  
   },
   pre: [
-    { method: 'chat.get(params.id,query)', assign: 'chat' },
-    { method: 'access.save(auth.credentials.id, path, params.id)' }
+    { method: 'chat.get(params.id,query)', assign: 'chat' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.chat));

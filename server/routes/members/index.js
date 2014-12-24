@@ -21,6 +21,12 @@ server.route({
 });
 
 server.route({
+  method: ['PUT','PATCH'],
+  path: '/api/members/me',
+  config: handlers.updateMe
+});
+
+server.route({
   method: 'POST',
   path: '/api/members',
   config: handlers.create

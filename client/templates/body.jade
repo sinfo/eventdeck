@@ -16,6 +16,8 @@ body.ink-drawer
             ul.submenu(data-hook='search-results')
         ul.menu.horizontal.push-right.hide-medium.hide-small.hide-tiny
           li
+            a(data-hook='notifications') Notifications
+          li
             a(href='/topics') Topics
             ul.submenu
               li
@@ -41,7 +43,7 @@ body.ink-drawer
           li
             a(href='/members') Members
           li
-            a.fa.fa-circle
+            a(data-hook='status').fa.fa-circle
           li
             a#logout(href='/login') Logout
 

@@ -83,8 +83,7 @@ exports.get = {
     }
   },
   pre: [
-    { method: 'company.get(params.id, query)', assign: 'company' },
-    { method: 'access.save(auth.credentials.id, path, params.id)' }
+    { method: 'company.get(params.id, query)', assign: 'company' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.company));

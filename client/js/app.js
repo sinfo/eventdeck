@@ -70,20 +70,20 @@ module.exports = {
         log('Hello ' + model.name + '!');
         model.authenticated = true;
 
-        // var callback = function(err){
-        //   if(err){
-        //     log(err);
-        //   }
-        // };
+        var callback = function(err){
+          if(err){
+            log(err);
+          }
+        };
 
-        // var sendOptions = {
-        //   callback: function(err){
-        //     callback(err);
-        //     self.notifications.emit('count', {id: self.me.id}, {callback: callback});
-        //   }
-        // };
+        var sendOptions = {
+          callback: function(err){
+            callback(err);
+            self.notifications.emit('count', {id: self.me.id}, {callback: callback});
+          }
+        };
 
-        // self.notifications.emit('init', {user: self.me}, sendOptions);
+        self.notifications.emit('init', {user: self.me}, sendOptions);
       },
       error: function(model, response, options) {
         log('Please log in first!');
@@ -134,6 +134,18 @@ module.exports = {
       app.navigate('/login');
     });
   },
+
+  access: function (model) {
+    var data ={
+      memberId: app.me.id,
+      thread: model.thread
+    };
+    app.notifications.emit('access', data,{callback: function(err, result){
+      if(err){
+        log(err);
+      }
+    }});
+  }
 };
 
 // run it

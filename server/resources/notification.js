@@ -176,14 +176,13 @@ function getUnreadCount(memberId, query, cb) {
           log.error({ err: err, subscriptions: subscriptions}, 'error getting subscriptions');
           return cbAsync(Boom.internal());
         }
-
         cbAsync(null, subscriptions);
       });
     },
     function getLastAccess(subscriptions, cbAsync){
-      var filter = {member: memberId};
+      var filter = {id: memberId};
       var memberFields = {unreadAccess: true};
-      Member.find(filter, memberFields, function(err, member){
+      Member.findOne(filter, memberFields, function(err, member){
         if (err) {
           log.error({ err: err, member: member}, 'error getting member notification accesses');
           return cbAsync(Boom.internal());
@@ -193,15 +192,15 @@ function getUnreadCount(memberId, query, cb) {
       });
     },
     function getUnreadNotifications(subscriptions, access, cbAsync){
-      log.debug(access, 'access');
-      log.debug(subscriptions, 'subscriptions');
-      var filter = {$or: [{thread: {$in: subscriptions}}, {targets: {$in: [memberId]}}], posted: {$gt: access}};
+      var filter = {$or: [{targets: {$in: [memberId]}}], posted: {$gt: access}};
+      if(subscriptions.length){
+        filter.$or.push({thread: {$in: subscriptions}});
+      }
       Notification.count(filter, function(err, count){
         if (err) {
           log.error({ err: err, count: count}, 'error counting notifications');
           return cbAsync(Boom.internal());
         }
-
         cbAsync(null, count);
       });
     }

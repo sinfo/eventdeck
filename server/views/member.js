@@ -31,5 +31,6 @@ function renderObject(model) {
       microsoft: model.mails.microsoft,
     },
     updated: model.updated,
+    unreadAccess: model.unreadAccess
   };
 }

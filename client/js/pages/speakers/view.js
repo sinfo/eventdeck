@@ -58,6 +58,7 @@ module.exports = PageView.extend({
         log.error('couldnt find a speaker with id: ' + spec.id);
       }
       self.model = model;
+      app.access(model);
       log('Got speaker', model.name);
     });
   },

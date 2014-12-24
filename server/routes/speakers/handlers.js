@@ -78,8 +78,7 @@ exports.get = {
     }
   },
   pre: [
-    { method: 'speaker.get(params.id,query)', assign: 'speaker' },
-    { method: 'access.save(auth.credentials.id, path, params.id)' }
+    { method: 'speaker.get(params.id,query)', assign: 'speaker' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.speaker));

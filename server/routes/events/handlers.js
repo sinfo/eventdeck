@@ -73,8 +73,7 @@ exports.get = {
     }
   },
   pre: [
-    { method: 'event.get(params.id, query)', assign: 'event' },
-    { method: 'access.save(auth.credentials.id, path, params.id)' }
+    { method: 'event.get(params.id, query)', assign: 'event' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.event));

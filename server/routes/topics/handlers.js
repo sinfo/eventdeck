@@ -87,8 +87,7 @@ exports.get = {
     }
   },
   pre: [
-    { method: 'topic.get(params.id,query)', assign: 'topic' },
-    { method: 'access.save(auth.credentials.id, path, params.id)' }
+    { method: 'topic.get(params.id,query)', assign: 'topic' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.topic));

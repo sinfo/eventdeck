@@ -12,28 +12,35 @@ module.exports = function(socket){
 	  onFetch: 'notification-get-response',
 	  onNew: ['notify-target', 'notify-subscription'],
 	  count: 'notification-count',
-	  onCount: 'notification-count-response'
+	  onCount: 'notification-count-response',
+	  access: 'access'
 	};
 
 	var listeners = {
 		onNew: {
 			fn: function(data, cb){
-				log('Received notification.', data);
+				var callback = function(){if(cb){ cb();}};
+				log('Received notification.');
+				if(data.err){
+					log(data.err);
+					return callback();
+				}
 				app.me.notifications++;
 				app.notifications.add(data);
-				if(cb){
-					cb();
-				}
+				callback();
 			},
 			active: true
 		},
 		onCount: {
 			fn: function(data, cb){
-				log('Received notification count.', data);
-				app.me.notifications = data.count;
-				if(cb){
-					cb();
+				var callback = function(){if(cb){ cb();}};
+				log('Received notification count.');
+				if(data.err){
+					log(data.err);
+					return callback();
 				}
+				app.me.unreadCount = data.response;
+				callback();
 			},
 			active: true
 		}

@@ -25,6 +25,7 @@ module.exports = View.extend({
   events: {
     'click #logout': 'logout',
     'click a[href]': 'handleLinkClick',
+    'click [data-hook~=notifications]': 'handleNotificationsClick',
     'change [data-hook~=base-form] select': 'handleEventChange',
     'input [data-hook~=base-form] input': 'handleSearchInput',
     'keydown [data-hook~=base-form] input': 'handleSearchKeydown',
@@ -76,6 +77,11 @@ module.exports = View.extend({
 
     // mark the correct nav item selected
     this.updateActiveNav();
+  },
+
+  handleNotificationsClick: function (e) {
+    app.me.save({unreadAccess: Date.now()}, {patch: true});
+    app.me.unreadCount = 0;
   },
 
   handleLinkClick: function (e) {

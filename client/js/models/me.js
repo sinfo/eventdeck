@@ -4,8 +4,12 @@ var Member = require('./member');
 module.exports = Member.extend({
   url: '/api/members/me',
 
+  props: {
+    unreadAccess: ['date']
+  },
+
   session: {
-    notifications: ['number'],
+    unreadCount: ['number'],
     selectedEvent: ['string'],
     online: ['boolean'],
     reconnecting: ['boolean'],

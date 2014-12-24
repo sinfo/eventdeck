@@ -79,8 +79,7 @@ exports.get = {
     }
   },
   pre: [
-    { method: 'session.get(params.id,query)', assign: 'session' },
-    { method: 'access.save(auth.credentials.id, path, params.id)' }
+    { method: 'session.get(params.id,query)', assign: 'session' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.session));

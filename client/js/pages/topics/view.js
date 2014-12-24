@@ -57,6 +57,7 @@ module.exports = PageView.extend({
         log.error('couldnt find a topic with id: ' + spec.id);
       }
       self.model = model;
+      app.access(model);
       log('Got topic', model.name);
 
 

@@ -61,15 +61,17 @@ module.exports = PageView.extend({
     }
   },
   events: {
-    'click [data-hook~=delete]': 'handleDeleteClick'
+    'click [data-hook~=delete]': 'handleDeleteClick',
   },
   initialize: function (spec) {
     var self = this;
+    
     app.companies.getOrFetch(spec.id, {all: true}, function (err, model) {
       if (err) {
         log.error('couldnt find a company with id: ' + spec.id);
       }
       self.model = model;
+      app.access(model);
       log('Got company', model.name);
     });
   },
@@ -124,5 +126,8 @@ module.exports = PageView.extend({
     this.model.destroy({success: function () {
       app.navigate('companies');
     }});
+  },
+  test: function(){
+    log('page just loaded!');
   }
 });
