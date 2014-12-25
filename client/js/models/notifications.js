@@ -25,7 +25,7 @@ module.exports = function(socket){
 					log(data.err);
 					return callback();
 				}
-				app.me.notifications++;
+				app.me.unreadCount++;
 				app.notifications.add(data);
 				callback();
 			},

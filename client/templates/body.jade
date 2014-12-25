@@ -15,8 +15,10 @@ body.ink-drawer
               fieldset(data-hook='field-container')
             ul.submenu(data-hook='search-results')
         ul.menu.horizontal.push-right.hide-medium.hide-small.hide-tiny
-          li
-            a(data-hook='notifications') Notifications
+          li.notifications
+            a(data-hook='notifications')
+              span(data-hook='notification-count')
+              span(data-hook='plural') Notifications
           li
             a(href='/topics') Topics
             ul.submenu
@@ -42,7 +44,7 @@ body.ink-drawer
                 a(href='/sessions/add') Add new
           li
             a(href='/members') Members
-          li
+          li.status
             a(data-hook='status').fa.fa-circle
           li
             a#logout(href='/login') Logout

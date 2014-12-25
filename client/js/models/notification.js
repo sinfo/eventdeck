@@ -26,6 +26,9 @@ module.exports= function(socket){
       targets: ['array'],
       posted: ['string']
     },
+    session: {
+      unread: ['boolean']
+    },
     derived: {
       postedTimeSpan: {
         deps: ['posted'],
@@ -40,12 +43,6 @@ module.exports= function(socket){
           app.members.getOrFetch(this.member, {all: true}, function (err, model) {
             return model.name;
           });
-        }
-      },
-      unread: {
-        deps: ['member'],
-        fn: function() {
-          
         }
       }
     }

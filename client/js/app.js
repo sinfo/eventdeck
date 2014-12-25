@@ -51,11 +51,12 @@ module.exports = {
       // init our main view
       var mainView = self.view = new MainView({
         el: document.body,
-        collection: this.events
+        model: self.me
       });
 
       // ...and render it
       mainView.render();
+      console.log(mainView);
 
       // we have what we need, we can now start our router and show the appropriate page
       self.router.history.start({pushState: true, root: '/'});
@@ -80,7 +81,7 @@ module.exports = {
           callback: function(err){
             callback(err);
             self.notifications.emit('count', {id: self.me.id}, {callback: callback});
-            self.notifications.fetch();
+            self.notifications.fetch({callback: callback});
           }
         };
 

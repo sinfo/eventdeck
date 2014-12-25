@@ -13,12 +13,14 @@ var templates = require('../templates');
 var setFavicon = require('favicon-setter');
 var BaseForm = require('client/js/forms/base');
 var $ = require('client/js/helpers/jquery');
+var singular = require('client/js/helpers/singular');
+var plural = require('client/js/helpers/plural');
 
 var searchTypeTimeout = null;
 
 module.exports = View.extend({
   template: templates.body,
-  initialize: function () {
+  initialize: function (options) {
     // this marks the correct nav item selected
     this.listenTo(app.router, 'page', this.handleNewPage);
   },
@@ -30,6 +32,41 @@ module.exports = View.extend({
     'input [data-hook~=base-form] input': 'handleSearchInput',
     'keydown [data-hook~=base-form] input': 'handleSearchKeydown',
     'click .left-drawer-trigger': 'toggleLeftDrawer'
+  },
+  bindings: {
+    'model.unreadCount':[
+      {
+        hook: 'notification-count'
+      },
+      {
+        hook: 'notifications',
+        type: 'booleanClass',
+        yes: 'unread',
+        no: 'empty'
+      },
+      {
+        hook: 'plural',
+        type: function (el, value, previousValue) {
+          if(value === 1){
+            singular(el);
+          }
+          if(previousValue === 1){
+            plural(el);
+          }
+        }
+      }
+    ],
+    'model.online': {
+      type: 'booleanClass',
+      hook: 'status',
+      yes: 'online',
+      no: 'offline'
+    },
+    'model.reconnecting': {
+      type: 'booleanClass',
+      hook: 'status',
+      name: 'reconnect'
+    }
   },
   subviews: {
     form: {
