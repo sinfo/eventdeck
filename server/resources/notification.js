@@ -209,7 +209,7 @@ function getUnreadCount(memberId, query, cb) {
       log.error({ err: err}, 'error counting notifications');
       return cb(err);
     }
-    cb(result);
+    cb(null, result);
   });
 }
 
@@ -236,7 +236,10 @@ function getByMember(memberId, query, cb) {
       });
     },
     function getNotificationsFromSubscriptions(subscriptions, cbAsync){
-      var filter = {$or: [{thread: {$in: subscriptions}}, {targets: {$in: [memberId]}}]};
+      var filter = {$or: [{targets: {$in: [memberId]}}]};
+      if(subscriptions.length){
+        filter.$or.push({thread: {$in: subscriptions}});
+      }
       Notification.find(filter, fields, options, function(err, notifications){
         if (err) {
           log.error({ err: err, filter: filter}, 'error getting notifications');
@@ -251,7 +254,7 @@ function getByMember(memberId, query, cb) {
       log.error({ err: err}, 'error counting notifications');
       return cb(err);
     }
-    cb(result);
+    cb(null, result);
   });
 }
 

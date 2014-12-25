@@ -80,6 +80,7 @@ module.exports = {
           callback: function(err){
             callback(err);
             self.notifications.emit('count', {id: self.me.id}, {callback: callback});
+            self.notifications.fetch();
           }
         };
 

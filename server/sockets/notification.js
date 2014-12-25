@@ -8,7 +8,6 @@ function notificationServer(socket){
 
   socket.on('notification-count', function(data, cbClient){
     var query = data.query || {};
-    log.debug(data);
     server.methods.notification.getUnreadCount(data.id, query, function(err, result){
       if(err){
         log.error({err: err, user: data.id, notifications: result}, '[socket-notification] error getting notification count');
@@ -22,10 +21,14 @@ function notificationServer(socket){
 
   socket.on('notifications-get', function(data, cbClient){
    var query = data.query || {};
-    server.methods.notification.list(data.id, query, function(err, notifications){
-      server.mehtods.notification.decorateWithUnreadStatus(data.id, notifications, function(err, result){
+    server.methods.notification.getByMember(socket.nickname, query, function(err, notifications){
+      if(!notifications){
+        socket.emit('notifications-get-response', {response: []});
+        return cbClient();
+      } 
+      server.methods.notification.decorateWithUnreadStatus(socket.nickname, notifications, function(err, result){
         if(err){
-          log.error({err: err, user: data.id, notifications: result}, '[socket-notification] error getting notifications');
+          log.error({err: err, user: socket.nickname, notifications: result}, '[socket-notification] error getting notifications');
           socket.emit('notifications-get-response', {err: err});
           return cbClient(err);
         }
