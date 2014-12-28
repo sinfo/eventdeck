@@ -95,16 +95,25 @@ body.ink-drawer
     top: 37px
     left: 0
 
-    nav
+    .ink-navigation
       background: white
       border-right: 1px solid black
       border-bottom: 1px solid black
       border-bottom-right-radius: 3px
 
-    .ink-navigation ul.menu.vertical > li > a
-      border-top: 1px solid rgba(0, 0, 0, 0.15)
-      border-bottom: none
+      a
+        color: rgb(85, 85, 85)
+        text-decoration: none
 
-    .ink-navigation ul.menu li ul.submenu
-      display: block
-      padding-left: 15px
+      ul.menu.vertical > li > a
+        border-top: 1px solid rgba(0, 0, 0, 0.15)
+        border-bottom: none
+
+      ul.menu li ul.submenu
+        display: block
+
+        li
+          padding-left: 15px
+
+      a:hover
+        background: none repeat scroll 0% 0% rgb(238, 238, 238)
