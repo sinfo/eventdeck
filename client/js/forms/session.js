@@ -80,11 +80,9 @@ module.exports = FormView.extend({
         parent: this
       }),
       new ArrayInputView({
-        label: 'Companies',       
+        label: 'Companies',
         name: 'companies',
-        value: this.model && this.model.companies.map(function(r) {
-          return r.id;
-        }) || [],
+        value: this.model && this.model.companies || [],
         minLength: 0,
         parent: this
       })

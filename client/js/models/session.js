@@ -5,8 +5,6 @@ var AmpCollection = require('ampersand-collection');
 var options = require('options');
 var marked = require('client/js/helpers/marked');
 
-var Company = require('./company');
-
 var Speaker = AmpState.extend({
   props: {
     id: ['string'],
@@ -19,10 +17,6 @@ var SpeakerCollection = AmpCollection.extend({
   model: Speaker
 });
 
-var CompanyCollection = AmpCollection.extend({
-  model: Company
-});
-
 module.exports = AmpModel.extend({
   props: {
     id: ['string'],
@@ -33,11 +27,11 @@ module.exports = AmpModel.extend({
     description: ['string'],
     date: ['date'],
     duration: ['date'],
-    updated: ['date']
+    updated: ['date'],
+    companies: ['array'],
   },
   collections: {
-    speakers: SpeakerCollection,
-    companies: CompanyCollection
+    speakers: SpeakerCollection
   },
   derived: {
     thread: {
