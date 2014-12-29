@@ -21,6 +21,7 @@ module.exports = function(socket){
 			fn: function(data, cb){
 				var callback = function(){if(cb){ cb();}};
 				log('Received notification.');
+				log(data);
 				if(data.err){
 					log(data.err);
 					return callback();
@@ -47,6 +48,19 @@ module.exports = function(socket){
 	};
 
 	return AmpCollection.extend(new IOMixin(null, {events: events, listeners: listeners}), {
+		limit: 10,
+		page: 10,
+		skip: 0,
+		fetchPage: function(){
+			this.fetch({
+				data: {
+					limit: this.limit,
+					skip: this.skip
+				}
+			});
+			this.limit += this.page;
+			this.skip += this.page;
+		},
 	  model: notification(socket),
 	});
 };

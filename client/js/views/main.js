@@ -116,7 +116,7 @@ module.exports = View.extend({
     this.updateActiveNav();
   },
 
-  handleNotificationsClick: function (e) {
+  handleNotificationsClick: function () {
     app.me.save({unreadAccess: Date.now()}, {patch: true});
     app.me.unreadCount = 0;
   },

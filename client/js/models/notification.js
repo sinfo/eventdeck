@@ -2,6 +2,7 @@
 var AmpState = require('ampersand-state');
 var AmpIOModel = require('ampersand-io-model');
 var timeSince = require('client/js/helpers/timeSince');
+var threadUrl = require('client/js/helpers/threadUrl');
 var options = require('options');
 
 module.exports= function(socket){
@@ -43,6 +44,12 @@ module.exports= function(socket){
           app.members.getOrFetch(this.member, {all: true}, function (err, model) {
             return model.name;
           });
+        }
+      },
+      threadUrl: {
+        deps: ['thread'],
+        fn: function () {
+          return threadUrl(this.thread);
         }
       }
     }
