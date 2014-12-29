@@ -20,34 +20,13 @@ exports.create = {
   },
   pre: [
     { method: 'comment.create(payload, auth.credentials.id)', assign: 'comment' },
+    { method: 'notification.notifyComment(auth.credentials.id, payload.thread, pre.comment._id)', assign: 'notification' },
+    { method: 'notification.emit(pre.notification)', assign: 'emitNotification' },
+    { method: 'parser.members(payload.text, payload.thread, pre.comment._id, pre.comment.member)', assign: 'mention' },
+    { method: 'notification.emit(pre.mention)', assign: 'emitMention' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.comment)).created('/api/comments/'+request.pre.comment._id);
-
-    var API = request.server.methods;
-
-    API.notification.notifyComment(
-      request.auth.credentials.id,
-      request.payload.thread,
-      request.pre.comment._id,
-      function (err) {
-        if(err) {
-          log.error({err: err, comment: request.pre.comment._id }, 'error creating post comment notification');
-        }
-      }
-    );
-
-    API.parser.members(
-      request.payload.text,
-      request.payload.thread,
-      request.pre.comment._id,
-      request.pre.comment.member,
-      function (err) {
-        if(err) {
-          log.error({err: err, text: request.payload.text }, 'error creating mention notifications');
-        }
-      }
-    );
   },
   description: 'Creates a new comment'
 };

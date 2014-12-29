@@ -55,9 +55,8 @@ server.pack.register([
     server: SocketIO.server.listen(server.listener)
   };
   log.info('Websocket server started at: ' + server.info.uri);
-  require('./sockets');
   webSocket.client = module.exports.webSocket.client = SocketIO.client.connect('http://localhost:' + server.info.port);
-
+  require('./sockets');
   require('./resources');
   require('./routes');
 

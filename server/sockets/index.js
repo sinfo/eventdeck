@@ -2,7 +2,7 @@ var Boom = require('boom');
 var log = require('server/helpers/logger');
 var webSocket = require('server').webSocket.server;
 var chatServer = require('./chat');
-var notificationServer = require('./notification');
+var notifications = require('./notification');
 
 webSocket.on('connection', function (socket) {
 
@@ -24,6 +24,6 @@ webSocket.on('connection', function (socket) {
     socket.nickname = user;
     socket.join(user);
     chatServer(socket);
-    notificationServer(socket);
+    notifications.setListeners(socket);
   });
 });

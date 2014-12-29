@@ -1,7 +1,6 @@
 var Boom = require('boom');
 var async = require('async');
 var server = require('server').hapi;
-var webSocket = require('server').webSocket.client;
 var log = require('server/helpers/logger');
 var threadFromPath = require('server/helpers/threadFromPath');
 var parser = require('server/helpers/fieldsParser');
@@ -110,11 +109,6 @@ function create(notification, cb) {
       log.error({ err: err, notification: notification}, 'error creating notification');
       return cb(Boom.internal());
     }
-    webSocket.emit(notification, function(err){
-      if(err){
-        log.error({ err: err, notification: notification}, 'error notifying sockets');
-      }
-    });
     cb(null, _notification);
   });
 }

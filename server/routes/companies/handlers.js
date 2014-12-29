@@ -28,7 +28,8 @@ exports.create = {
   },
   pre: [
     { method: 'company.create(payload, auth.credentials.id)', assign: 'company' },
-    { method: 'notification.notifyCreate(auth.credentials.id, path, pre.company)', assign: 'notification' }
+    { method: 'notification.notifyCreate(auth.credentials.id, path, pre.company)', assign: 'notification' },
+    { method: 'notification.emit(pre.notification)', assign: 'emit'}
   ],
   handler: function (request, reply) {
     reply(render(request.pre.company)).created('/api/companies/'+request.pre.company.id);
@@ -61,7 +62,8 @@ exports.update = {
   pre: [
     // TODO: CHECK PERMISSIONS
     { method: 'company.update(params.id, payload)', assign: 'company' },
-    { method: 'notification.notifyUpdate(auth.credentials.id, path, pre.company)', assign: 'notification' }
+    { method: 'notification.notifyUpdate(auth.credentials.id, path, pre.company)', assign: 'notification' },
+    { method: 'notification.emit(pre.notification)', assign: 'emit'}
     // TODO: EMAIL IF MEMBER NECESSARY FOR NEW MEMBER
   ],
   handler: function (request, reply) {

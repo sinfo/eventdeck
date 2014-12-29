@@ -1,38 +1,65 @@
 var async = require('async');
 var servers = require('server');
 var log = require('server/helpers/logger');
-var webSocket = servers.webSocket.server;
+var socketServer = servers.webSocket.server;
+var socketClient = servers.webSocket.client;
 var server = servers.hapi;
 
-function notificationServer(socket){
+var events = {
+  count: 'notification-count',
+  countResp: 'notification-count-response',
+  get: 'notifications-get',
+  getResp: 'notifications-get',
+  notify: 'notify',
+  notifyTarget: 'notify-target',
+  notifySubscripton: 'notify-subscription',
+  access: 'access'
+};
 
-  socket.on('notification-count', function(data, cbClient){
+server.method('notification.emit', notify, {});
+
+function notify(notification, cb){
+  log.debug(notification);
+  if(!notification){
+    return cb();
+  }
+  socketClient.emit(events.notify, notification, function(err){
+    if(err){
+      log.error({ err: err, notification: notification}, 'error notifying sockets');
+    }
+    cb(err);
+  });
+}
+
+function notificationListeners(socket){
+
+  socket.on(events.count, function(data, cbClient){
     var query = data.data || {};
     server.methods.notification.getUnreadCount(data.id, query, function(err, result){
       if(err){
         log.error({err: err, user: data.id, notifications: result}, '[socket-notification] error getting notification count');
-        socket.emit('notification-count-response', {err: err});
+        socket.emit(events.countResp, {err: err});
         return cbClient(err);
       }
-      socket.emit('notification-count-response', {response: result});
+      socket.emit(events.countResp, {response: result});
       cbClient();
     });
   });
 
-  socket.on('notifications-get', function(data, cbClient){
+  socket.on(events.get, function(data, cbClient){
    var query = data.data || {};
     server.methods.notification.getByMember(socket.nickname, query, function(err, notifications){
       if(!notifications){
-        socket.emit('notifications-get-response', {response: []});
+        socket.emit(events.getResp, {response: []});
         return cbClient();
       } 
       server.methods.notification.decorateWithUnreadStatus(socket.nickname, notifications, function(err, result){
         if(err){
           log.error({err: err, user: socket.nickname, notifications: result}, '[socket-notification] error getting notifications');
-          socket.emit('notifications-get-response', {err: err});
+          socket.emit(events.getResp, {err: err});
           return cbClient(err);
         }
-        socket.emit('notifications-get-response', {response: result});
+        socket.emit(events.getResp, {response: result});
         cbClient();
       });
     });
@@ -42,11 +69,11 @@ function notificationServer(socket){
     //TODO notification fetch by id
   });
 
-  socket.on('notify', function(notification, cbClient){
+  socket.on(events.notify, function(notification, cbClient){
     
     if(notification.targets){
       async.each(notification.targets, function(target, cb){
-        webSocket.to(target).emit('notify-target', notification);
+        socketServer.to(target).emit(events.notifyTarget, notification);
         cb();
       });
       return cbClient();
@@ -58,14 +85,14 @@ function notificationServer(socket){
         return cbClient(err);
       }
       async.each(subscriptions, function(subscription, cb){
-        webSocket.to(subscription.member).emit('notify-subscription', notification);
+        socketServer.to(subscription.member).emit(events.notifySubscripton, notification);
         cb();
       });
       return cbClient();
     });
   });
 
-  socket.on('access', function(data, cbClient){
+  socket.on(events.access, function(data, cbClient){
     server.methods.access.save(data.memberId, data.thread, function(err, result){
       if(err){
         log.error({err: err, access: result}, '[socket-notification] error saving access');
@@ -76,4 +103,4 @@ function notificationServer(socket){
 
 }
 
-module.exports = notificationServer;
+module.exports = {setListeners: notificationListeners, events: events};

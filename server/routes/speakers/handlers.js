@@ -25,7 +25,8 @@ exports.create = {
   },
   pre: [
     { method: 'speaker.create(payload, auth.credentials.id)', assign: 'speaker' },
-    { method: 'notification.notifyCreate(auth.credentials.id, path, pre.speaker)', assign: 'notification' }
+    { method: 'notification.notifyCreate(auth.credentials.id, path, pre.speaker)', assign: 'notification' },
+    { method: 'notification.emit(pre.notification)', assign: 'emit'}
   ],
   handler: function (request, reply) {
     reply(render(request.pre.speaker)).created('/api/speakers/'+request.pre.speaker.id);
@@ -56,7 +57,8 @@ exports.update = {
   pre: [
     // TODO: CHECK PERMISSIONS
     { method: 'speaker.update(params.id, payload)', assign: 'speaker' },
-    { method: 'notification.notifyUpdate(auth.credentials.id, path, pre.speaker)', assign: 'notification' }
+    { method: 'notification.notifyUpdate(auth.credentials.id, path, pre.speaker)', assign: 'notification' },
+    { method: 'notification.emit(pre.notification)', assign: 'emit'}
     // TODO: EMAIL IF MEMBER NECESSARY FOR NEW MEMBER
   ],
   handler: function (request, reply) {

@@ -22,22 +22,11 @@ exports.create = {
   },
   pre: [
     { method: 'communication.create(payload, auth.credentials.id)', assign: 'communication' },
+    { method: 'notification.notifyCommunication(auth.credentials.id, payload.thread, pre.communication._id)', assign: 'notification' },
+    { method: 'notification.emit(pre.notification)', assign: 'emit'}
   ],
   handler: function (request, reply) {
     reply(render(request.pre.communication)).created('/api/communications/'+request.pre.communication._id);
-
-    var API = request.server.methods;
-
-    API.notification.notifyCommunication(
-      request.auth.credentials.id,
-      request.payload.thread,
-      request.pre.communication._id,
-      function (err) {
-        if(err) {
-          log.error({err: err, communication: request.pre.communication._id }, 'error creating post communication notification');
-        }
-      }
-    );
   },
   description: 'Creates a new communication'
 };
