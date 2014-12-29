@@ -1,10 +1,12 @@
 var FormView = require('ampersand-form-view');
 var InputView = require('ampersand-input-view');
 var ArrayInputView = require('ampersand-array-input-view');
+var SelectView = require('ampersand-select-view');
 var templates = require('client/js/templates');
 var ExtendedInput = InputView.extend({
   template: templates.includes.formInput()
 });
+var options = require('options');
 
 module.exports = FormView.extend({
   fields: function () {
@@ -13,7 +15,7 @@ module.exports = FormView.extend({
         label: 'Name',
         name: 'name',
         value: this.model && this.model.name || '',
-        required: false,
+        required: true,
         placeholder: 'Name',
         parent: this
       }),
@@ -25,13 +27,16 @@ module.exports = FormView.extend({
         placeholder: 'Img',
         parent: this
       }),
-      new ExtendedInput({
-        label: 'Kind',
+      new SelectView({
+        template: templates.includes.formSelect(),
         name: 'kind',
+        label: 'Kind',
+        parent: this,
+        options: options.kinds.sessions.map(function (s) { return s.name; }),
+        unselectedText: 'Please choose one',
+        required: true,
         value: this.model && this.model.kind || '',
-        required: false,
-        placeholder: 'Kind',
-        parent: this
+        yieldModel: false,
       }),
       new ExtendedInput({
         label: 'Place',
@@ -39,7 +44,7 @@ module.exports = FormView.extend({
         value: this.model && this.model.place || '',
         required: false,
         placeholder: 'Place',
-        parent: this
+        parent: this,
       }),
       new ExtendedInput({
         label: 'Description',
@@ -51,34 +56,33 @@ module.exports = FormView.extend({
       }),
       new ExtendedInput({
         label: 'Date',
-        name: 'date',
+        name: 'session-date',
         value: this.model && this.model.date || '',
-        required: false,
-        placeholder: 'Date',
+        required: true,
+        placeholder: 'Date DD-MM-YYYY',
         parent: this
       }),
       new ExtendedInput({
         label: 'Duration',
-        name: 'duration',
+        name: 'session-duration',
         value: this.model && this.model.duration || '',
-        required: false,
-        placeholder: 'Duration',
+        required: true,
+        placeholder: 'Duration DD-MM-YYYY',
         parent: this
       }),
       new ArrayInputView({
         label: 'Speakers',
-        name: 'speakers',
-        fieldTemplate: '<label><div><span>Name</span><input name=\"id\" type=\"text\"></div><div><span>Name</span><input name=\"name\" type=\"text\"></div><div><span>Position</span><input name=\"position\" type=\"text\"></div><div style=\"display: none;\" data-anddom-hidden=\"true\" data-anddom-display=\"\" data-hook=\"message-container\" class=\"message message-below message-error\"><p data-hook=\"message-text\"></p></div><a style=\"display: none;\" data-anddom-hidden=\"true\" data-anddom-display=\"\" data-hook=\"remove-field\">remove</a></label>',
-        value: this.model && this.model.speakers || [],
+        name: 'session-speakers',
+        value: this.model && this.model.speakers.map(function(r) {
+          return r.id;
+        }) || [],
         minLength: 0,
         parent: this
       }),
       new ArrayInputView({
-        label: 'Companies',       
+        label: 'Companies',
         name: 'companies',
-        value: this.model && this.model.companies.map(function(r) {
-          return r.id;
-        }) || [],
+        value: this.model && this.model.companies || [],
         minLength: 0,
         parent: this
       })

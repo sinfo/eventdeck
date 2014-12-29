@@ -19,8 +19,7 @@ exports.create = {
       speakers: Joi.array().description('speakers associated to the session'),
       companies: Joi.array().description('companies associated to the session'),
       date: Joi.date().description('start date of the session'),
-      duration: Joi.date().description('duration of the session'),
-      updated: Joi.date().description('date the session was last updated'),
+      duration: Joi.date().description('duration of the session')
     }
   },
   pre: [
@@ -43,7 +42,7 @@ exports.update = {
     },
     payload: {
       id: Joi.string().description('id of the session'),
-      name: Joi.string().required().description('name of the session'),
+      name: Joi.string().description('name of the session'),
       kind: Joi.string().description('kind of the session'),
       img: Joi.string().description('image of the session'),
       place: Joi.string().description('place of the session'),
@@ -51,8 +50,7 @@ exports.update = {
       speakers: Joi.array().description('speakers associated to the session'),
       companies: Joi.array().description('companies associated to the session'),
       date: Joi.date().description('start date of the session'),
-      duration: Joi.date().description('duration of the session'),
-      updated: Joi.date().description('date the session was last updated'),
+      duration: Joi.date().description('duration of the session')
     }
   },
   pre: [

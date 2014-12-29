@@ -142,6 +142,7 @@ module.exports = {
       memberId: app.me.id,
       thread: model.thread
     };
+    model.unread = false;
     app.notifications.emit('access', data,{callback: function(err, result){
       if(err){
         log(err);

@@ -3,6 +3,7 @@ var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var SessionForm = require('client/js/forms/session');
 var _ = require('client/js/helpers/underscore');
+var moment = require('moment');
 
 
 module.exports = PageView.extend({
@@ -35,11 +36,30 @@ module.exports = PageView.extend({
           el: el,
           model: this.model,
           submitCallback: function (data) {
-            data = self.model.changedAttributes(_.compactObject(data));
-            if(!data) {
+            data = _.compactObject(data);
+
+            var changedAttributes = self.model.changedAttributes(data) || {};
+
+            if(data['session-date']) {
+              changedAttributes.date = moment(data['session-date'], 'DD-MM-YYYY').toDate();
+              delete data['session-date'];
+            }
+
+            if(data['session-duration']) {
+              changedAttributes.duration = moment(data['session-duration'], 'DD-MM-YYYY').toDate();
+              delete data['session-duration'];
+            }
+
+            if(data['session-speakers']) {
+              changedAttributes.speakers = data['session-speakers'] && data['session-speakers'].map(function(s) {return {id: s};});
+              delete data['session-speakers'];
+            }
+
+            if(!changedAttributes) {
               return app.navigate('/sessions/'+model.id);
             }
-            self.model.save(data, {
+
+            self.model.save(changedAttributes, {
               patch: true,
               wait: false,
               success: function (model, response, options) {
