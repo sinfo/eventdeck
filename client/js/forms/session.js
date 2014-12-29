@@ -2,11 +2,28 @@ var FormView = require('ampersand-form-view');
 var InputView = require('ampersand-input-view');
 var ArrayInputView = require('ampersand-array-input-view');
 var SelectView = require('ampersand-select-view');
+var DateView = require('ampersand-date-view');
 var templates = require('client/js/templates');
 var ExtendedInput = InputView.extend({
   template: templates.includes.formInput()
 });
 var options = require('options');
+
+var hours = function () {
+  var hours = [];
+  for (var i = 0; i<24; i++){
+    hours.push('' + i);
+  }
+  return hours;
+};
+
+var minutes = function () {
+  var minutes = [];
+  for (var i = 0; i<60; i+=5){
+    minutes.push('' + i);
+  }
+  return minutes;
+};
 
 module.exports = FormView.extend({
   fields: function () {
@@ -54,21 +71,59 @@ module.exports = FormView.extend({
         placeholder: 'Description',
         parent: this
       }),
-      new ExtendedInput({
+      new DateView({
         label: 'Date',
-        name: 'session-date',
         value: this.model && this.model.date || '',
-        required: true,
-        placeholder: 'Date DD-MM-YYYY',
-        parent: this
+        name: 'session-date'
       }),
-      new ExtendedInput({
-        label: 'Duration',
-        name: 'session-duration',
-        value: this.model && this.model.duration || '',
+      new SelectView({
+        template: templates.includes.formSelect(),
+        name: 'session-date-hours',
+        label: 'Hours',
+        parent: this,
+        options: hours(),
+        value: this.model && this.model.date.getHours() || '',
+        unselectedText: 'Please choose one',
         required: true,
-        placeholder: 'Duration DD-MM-YYYY',
-        parent: this
+        yieldModel: false,
+      }),
+      new SelectView({
+        template: templates.includes.formSelect(),
+        name: 'session-date-minutes',
+        label: 'Minutes',
+        parent: this,
+        options: minutes(),
+        value: this.model && this.model.date.getMinutes() || '',
+        unselectedText: 'Please choose one',
+        required: true,
+        yieldModel: false,
+      }),
+      new DateView({
+        label: 'Duration',
+        value: this.model && this.model.duration || '',
+        name: 'session-duration'
+      }),
+      new SelectView({
+        template: templates.includes.formSelect(),
+        name: 'session-duration-hours',
+        label: 'Hours',
+        parent: this,
+        options: hours(),
+        value: this.model && this.model.duration.getHours() || '',
+        unselectedText: 'Please choose one',
+        required: true,
+        yieldModel: false,
+      }),
+      new SelectView({
+        template: templates.includes.formSelect(),
+        name: 'session-duration-minutes',
+        label: 'Minutes',
+        parent: this,
+        options: minutes(),
+        value: this.model && this.model.duration.getMinutes() || '',
+        unselectedText: 'Please choose one',
+        required: true,
+        yieldModel: false,
       }),
       new ArrayInputView({
         label: 'Speakers',

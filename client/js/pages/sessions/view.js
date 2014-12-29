@@ -18,6 +18,9 @@ module.exports = PageView.extend({
     'model.name': {
       hook: 'name'
     },
+    'model.date': {
+      hook: 'date'
+    },
     'model.descriptionHtml': {
       type: 'innerHTML',
       hook: 'description'
