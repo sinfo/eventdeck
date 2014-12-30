@@ -40,14 +40,32 @@ module.exports = PageView.extend({
 
             var changedAttributes = self.model.changedAttributes(data) || {};
 
-            if(data['session-date']) {
-              changedAttributes.date = moment(data['session-date'], 'DD-MM-YYYY').toDate();
+            if (data['session-date']) {
+              data.date = data['session-date'];
               delete data['session-date'];
+              
+              if (data['session-date-hours']) {
+                data.date.setHours(data['session-date-hours']);
+                delete data['session-date-hours'];
+              }
+              if (data['session-date-minutes']) {
+                data.date.setMinutes(data['session-date-minutes']);
+                delete data['session-date-minutes'];
+              }
             }
-
-            if(data['session-duration']) {
-              changedAttributes.duration = moment(data['session-duration'], 'DD-MM-YYYY').toDate();
+            
+            if (data['session-duration']) {
+              data.duration = data['session-duration'];
               delete data['session-duration'];
+              
+              if (data['session-duration-hours']) {
+                data.duration.setHours(data['session-duration-hours']);
+                delete data['session-duration-hours'];
+              }
+              if (data['session-duration-minutes']) {
+                data.duration.setMinutes(data['session-duration-minutes']);
+                delete data['session-duration-minutes'];
+              }
             }
 
             if(data['session-speakers']) {
