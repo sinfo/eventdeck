@@ -71,21 +71,7 @@ module.exports = {
         log('Hello ' + model.name + '!');
         model.authenticated = true;
 
-        var callback = function(err){
-          if(err){
-            log(err);
-          }
-        };
-
-        var sendOptions = {
-          callback: function(err){
-            callback(err);
-            self.notifications.emit('count', {id: self.me.id}, {callback: callback});
-            self.notifications.fetch({callback: callback});
-          }
-        };
-
-        self.notifications.emit('init', {user: self.me}, sendOptions);
+        self.notifications.init();
       },
       error: function(model, response, options) {
         log('Please log in first!');

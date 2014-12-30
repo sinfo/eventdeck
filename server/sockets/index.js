@@ -1,10 +1,10 @@
 var Boom = require('boom');
 var log = require('server/helpers/logger');
-var webSocket = require('server').webSocket.server;
+var IO = require('server').socket.server;
 var chatServer = require('./chat');
 var notifications = require('./notification');
 
-webSocket.on('connection', function (socket) {
+IO.on('connection', function (socket) {
 
 	log.debug('[sockets] New user connected');
 
@@ -18,12 +18,11 @@ webSocket.on('connection', function (socket) {
     if(!user){
       return cbClient(Boom.unauthorized('Need valid user to connect'));
     }
-    else{
-      cbClient();
-    }
-    socket.nickname = user;
-    socket.join(user);
-    chatServer(socket);
+    socket.nickname = user.id;
+    socket.join(user.id);
     notifications.setListeners(socket);
+    cbClient();
   });
 });
+
+module.exports = {notification: {events: notifications.events}};

@@ -61,6 +61,23 @@ module.exports = function(socket){
 			this.limit += this.page;
 			this.skip += this.page;
 		},
+		init: function(){
+			var callback = function(err){
+        if(err){
+          log(err);
+        }
+      };
+
+      var sendOptions = {
+        callback: function(err){
+          callback(err);
+          app.notifications.emit('count', {id: app.me.id}, {callback: callback});
+          app.notifications.fetch({callback: callback});
+        }
+      };
+
+      app.notifications.emit('init', {user: app.me}, sendOptions);
+		},
 	  model: notification(socket),
 	});
 };

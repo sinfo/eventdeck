@@ -1,5 +1,5 @@
 var Hapi = require('hapi');
-var SocketIO = {server: require('socket.io'), client: require('socket.io-client')};
+var IO = {server: require('socket.io'), client: require('socket.io-client')};
 var log = require('server/helpers/logger');
 var config = require('config');
 var cookieConfig = config.cookie;
@@ -51,12 +51,16 @@ server.pack.register([
     isSecure: false,
   });
 
-  var webSocket = module.exports.webSocket = {
-    server: SocketIO.server.listen(server.listener)
-  };
+  var webSocket = {};
+  webSocket.server = IO.server.listen(server.listener);
   log.info('Websocket server started at: ' + server.info.uri);
-  webSocket.client = module.exports.webSocket.client = SocketIO.client.connect('http://localhost:' + server.info.port);
+  webSocket.client = IO.client('http://localhost:' + server.info.port);
+  module.exports.socket = webSocket;
   require('./sockets');
+  webSocket.client.emit('init', {user: {id: 'toolbot'}}, function(){
+    log.info('Websocket client listeners set');
+  });
+
   require('./resources');
   require('./routes');
 

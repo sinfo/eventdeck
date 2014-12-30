@@ -1,5 +1,5 @@
 var server = require('server').hapi;
-var socketServer = require('server').webSocket.server;
+var socketServer = require('server').socket.server;
 
 
 server.route({

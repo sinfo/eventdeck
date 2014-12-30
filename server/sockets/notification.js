@@ -1,8 +1,7 @@
 var async = require('async');
 var servers = require('server');
 var log = require('server/helpers/logger');
-var socketServer = servers.webSocket.server;
-var socketClient = servers.webSocket.client;
+var IO = servers.socket.server;
 var server = servers.hapi;
 
 var events = {
@@ -15,21 +14,6 @@ var events = {
   notifySubscripton: 'notify-subscription',
   access: 'access'
 };
-
-server.method('notification.emit', notify, {});
-
-function notify(notification, cb){
-  log.debug(notification);
-  if(!notification){
-    return cb();
-  }
-  socketClient.emit(events.notify, notification, function(err){
-    if(err){
-      log.error({ err: err, notification: notification}, 'error notifying sockets');
-    }
-    cb(err);
-  });
-}
 
 function notificationListeners(socket){
 
@@ -70,22 +54,24 @@ function notificationListeners(socket){
   });
 
   socket.on(events.notify, function(notification, cbClient){
-    
-    if(notification.targets){
+    log.debug(notification);
+    if(notification.targets.length){
       async.each(notification.targets, function(target, cb){
-        socketServer.to(target).emit(events.notifyTarget, notification);
+        log.debug(target, events.notifyTarget);
+        IO.to(target).emit(events.notifyTarget, notification);
         cb();
       });
       return cbClient();
     }
 
-    server.methods.subscription.getByThread(notification.thread, function(subscriptions, err){
+    server.methods.subscription.getByThread(notification.thread, function(err, subscriptions){
       if(err){
         log.error({err: err, subscription: notification.thread}, '[socket-notification] error getting subscriptions');
         return cbClient(err);
       }
       async.each(subscriptions, function(subscription, cb){
-        socketServer.to(subscription.member).emit(events.notifySubscripton, notification);
+        log.debug(subscription.member, events.notifySubscripton);
+        IO.to(subscription.member).emit(events.notifySubscripton, notification);
         cb();
       });
       return cbClient();

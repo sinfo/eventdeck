@@ -40,6 +40,7 @@ module.exports = io.extend({
 	    fn: function(attempts){
 	      log('Reconnected');
 	      app.me.reconnecting = false;
+	      app.notifications.init();
 	    }
 		},
 		

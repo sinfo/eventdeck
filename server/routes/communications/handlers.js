@@ -23,7 +23,7 @@ exports.create = {
   pre: [
     { method: 'communication.create(payload, auth.credentials.id)', assign: 'communication' },
     { method: 'notification.notifyCommunication(auth.credentials.id, payload.thread, pre.communication._id)', assign: 'notification' },
-    { method: 'notification.emit(pre.notification)', assign: 'emit'}
+    { method: 'notification.broadcast(pre.notification)', assign: 'broadcast'}
   ],
   handler: function (request, reply) {
     reply(render(request.pre.communication)).created('/api/communications/'+request.pre.communication._id);

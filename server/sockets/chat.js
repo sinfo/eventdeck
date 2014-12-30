@@ -1,7 +1,7 @@
 var async = require('async');
 var server = require('server');
 var log = require('server/helpers/logger');
-var webSocket = server.webSocket.server;
+var IO = server.socket.server;
 
 function chatServer(socket){
 
@@ -15,7 +15,7 @@ function chatServer(socket){
       }
       var online  = [];
       socket.join(room);
-      var clients = webSocket.sockets;
+      var clients = IO.sockets;
       for(var i = 0; i < clients.length; i++){
         if(clients[i].connected  && clients[i].nickname){
           online[i] = clients[i].nickname;
@@ -26,7 +26,7 @@ function chatServer(socket){
         chatData : chat,
         online   : online
       };
-      webSocket.in(room).emit('user-connected', {id: socket.nickname});
+      IO.in(room).emit('user-connected', {id: socket.nickname});
       socket.emit('chat-init-response', data);
       cbClient();
     });
@@ -47,13 +47,13 @@ function chatServer(socket){
           log.error({err: err, chat: room},'[socket-chat] error on chat send');
           return cbClient(err);
         }
-        webSocket.in(room).emit('message', {message: results[0]});
+        IO.in(room).emit('message', {message: results[0]});
         cbClient();
     });
   });
 
   socket.on('chat-logout', function(data, cb){
-    webSocket.in(data.room).emit('user-disconnected', {id: socket.nickname});
+    IO.in(data.room).emit('user-disconnected', {id: socket.nickname});
     log.debug({user: socket.nickname}, '[socket-chat] User disconnected');
     socket.disconnect();
     cb();
@@ -67,7 +67,7 @@ function chatServer(socket){
         log.error({err: err, chat: room}, '[socket-chat] error on page send');
         return cb(err);
       }
-      webSocket.in(room).emit('chat-get-response', {messages: messages});
+      IO.in(room).emit('chat-get-response', {messages: messages});
       cb();
     });
   });

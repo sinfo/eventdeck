@@ -1,6 +1,8 @@
 var Boom = require('boom');
 var async = require('async');
 var server = require('server').hapi;
+var IO = require('server').socket.client;
+var events = require('server/sockets').notification.events;
 var log = require('server/helpers/logger');
 var threadFromPath = require('server/helpers/threadFromPath');
 var parser = require('server/helpers/fieldsParser');
@@ -16,6 +18,7 @@ server.method('notification.notifyMention', notifyMention, {});
 server.method('notification.notifyComment', notifyComment, {});
 server.method('notification.notifyCommunication', notifyCommunication, {});
 server.method('notification.notify', notify, {});
+server.method('notification.broadcast', broadcast, {});
 server.method('notification.create', create, {});
 server.method('notification.get', get, {});
 server.method('notification.getUnreadCount', getUnreadCount, {});
@@ -28,6 +31,12 @@ server.method('notification.getByThread', getByThread, {});
 server.method('notification.removeByThread', removeByThread, {});
 server.method('notification.removeBySource', removeBySource, {});
 
+function broadcast(notification, cb){
+  if(!notification){
+    return cb();
+  }
+  IO.emit(events.notify, notification, cb);
+}
 
 function notifyCreate(memberId, path, thing, cb) {
   var notification = {
@@ -104,12 +113,12 @@ function notify(memberId, thread, description, objectId, targets, cb) {
 function create(notification, cb) {
   notification.posted = Date.now();
 
-  Notification.create(notification, function(err, _notification) {
+ Notification.create(notification, function(err, _notification) {
     if (err) {
       log.error({ err: err, notification: notification}, 'error creating notification');
       return cb(Boom.internal());
     }
-    cb(null, _notification);
+    cb(null, _notification.toObject());
   });
 }
 

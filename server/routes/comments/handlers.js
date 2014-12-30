@@ -21,9 +21,9 @@ exports.create = {
   pre: [
     { method: 'comment.create(payload, auth.credentials.id)', assign: 'comment' },
     { method: 'notification.notifyComment(auth.credentials.id, payload.thread, pre.comment._id)', assign: 'notification' },
-    { method: 'notification.emit(pre.notification)', assign: 'emitNotification' },
+    { method: 'notification.broadcast(pre.notification)', assign: 'broadcastNotification' },
     { method: 'parser.members(payload.text, payload.thread, pre.comment._id, pre.comment.member)', assign: 'mention' },
-    { method: 'notification.emit(pre.mention)', assign: 'emitMention' }
+    { method: 'notification.broadcast(pre.mention)', assign: 'broadcastMention' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.comment)).created('/api/comments/'+request.pre.comment._id);
