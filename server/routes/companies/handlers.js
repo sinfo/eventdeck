@@ -143,7 +143,10 @@ exports.getByEvent = {
 
 
 exports.list = {
-  auth: 'session',
+  auth: {
+    strategies: ['session'],
+    mode: 'try'
+  },
   tags: ['api','company'],
   validate: {
     query: {
@@ -158,7 +161,7 @@ exports.list = {
     { method: 'notification.decorateWithUnreadStatus(auth.credentials.id, pre.companies)', assign: 'companies' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.companies));
+    reply(render(request.pre.companies, request.auth.isAuthenticated));
   },
   description: 'Gets all the companies'
 };

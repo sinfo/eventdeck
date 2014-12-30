@@ -8,7 +8,8 @@ options.statuses = {
     { name: 'In Conversations', color: '#207de5'},
     { name: 'Accepted', color: '#009800'},
     { name: 'Rejected', color: '#e11d21'},
-    { name: 'Give Up', color: '#333'}
+    { name: 'Give Up', color: '#333'},
+    { name: 'Annouced', color: '#009800'},
   ],
   company: [
     { name: 'Selected', color: '#5319e7', default: true},
@@ -17,7 +18,8 @@ options.statuses = {
     { name: 'In Negotiations', color: '#006b75'},
     { name: 'Closed Deal', color: '#009800'},
     { name: 'Rejected', color: '#e11d21'},
-    { name: 'Give Up', color: '#333'}
+    { name: 'Give Up', color: '#333'},
+    { name: 'Annouced', color: '#009800'},
   ],
   communication: [
     { name: 'Pending Review...', id: 'pending-review', color: '#fbca04' },

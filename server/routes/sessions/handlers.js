@@ -87,7 +87,10 @@ exports.get = {
 
 
 exports.list = {
-  auth: 'session',
+  auth: {
+    strategies: ['session'],
+    mode: 'try'
+  },
   tags: ['api','session'],
   validate: {
     query: {
@@ -101,7 +104,7 @@ exports.list = {
     { method: 'session.list(query)', assign: 'sessions' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.sessions));
+    reply(render(request.pre.sessions, request.auth.isAuthenticated));
   },
   description: 'Gets all the sessions'
 };

@@ -1,15 +1,36 @@
+var CURRENT_EVENT = 'xxii-sinfo';
+var PUBLIC_STATUS = 'closed deal';
+
 var IVA = 1.23;
 
-module.exports = function render(content) {
+module.exports = function render(content, isAuthenticated) {
   if(content instanceof Array) {
-    return content.map(renderObject);
+    if(isAuthenticated === false) {
+      content = content && content.filter(function(model) {
+        return model.participations && model.participations.filter(function(p) { return p.event == CURRENT_EVENT && p.status.toLowerCase() == PUBLIC_STATUS; }).length > 0;
+      });
+    }
+
+    return content.map(function(model) { return renderObject(model, isAuthenticated); });
   }
 
   return renderObject(content);
 };
 
-function renderObject(model) {
+function renderObject(model, isAuthenticated) {
   model = model.toJSON();
+
+  if(isAuthenticated === false) {
+    return {
+      id: model.id,
+      thread: model.thread,
+      name: model.name,
+      area: model.area,
+      description: model.description,
+      img: model.img,
+      updated: model.updated,
+    };
+  }
 
   return {
     id: model.id,
