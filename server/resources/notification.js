@@ -61,6 +61,14 @@ function notifyUpdate(memberId, path, thing, cb) {
 }
 
 function notifyMention(memberId, thread, targets, source, cb) {
+  var index = targets.indexOf[memberId];
+  if(index !== -1){
+    targets.splice(index, 1);
+    if(!targets.length){
+      return cb();
+    }
+  }
+  
   var notification = {
     thread: thread,
     member: memberId,
