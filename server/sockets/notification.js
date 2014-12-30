@@ -12,6 +12,7 @@ var events = {
   notify: 'notify',
   notifyTarget: 'notify-target',
   notifySubscripton: 'notify-subscription',
+  notifyPublic: 'notify-public',
   access: 'access'
 };
 
@@ -74,8 +75,10 @@ function notificationListeners(socket){
         IO.to(subscription.member).emit(events.notifySubscripton, notification);
         cb();
       });
-      return cbClient();
     });
+
+    IO.emit(events.notifyPublic, notification);
+    cbClient();
   });
 
   socket.on(events.access, function(data, cbClient){
