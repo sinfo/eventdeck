@@ -1,51 +1,53 @@
 /*global app*/
-var AmpCollection = require('./notifications');
-var AmpIOMixin = require('ampersand-collection-io-mixin');
+var AmpIOCollection = require('ampersand-io-collection');
+var PageFetchMixin = require('./notifications');
 var notification = require('./notification');
 var log = require('bows')('io-notifications');
 
 module.exports = function(socket){
-	var IOMixin = AmpIOMixin.extend(socket);
 
-	var events = {
-	  fetch: 'notifications-get',
-	  onFetch: 'notification-get-response',
-	  onNew: ['notify-target', 'notify-subscription'],
-	  count: 'notification-count',
-	  onCount: 'notification-count-response',
-	  access: 'access'
-	};
+	var model = notification(socket);
 
-	var listeners = {
-		onNew: {
-			fn: function(data, cb){
-				var callback = function(){if(cb){ cb();}};
-				log('Received private notification.');
-				log(data);
-				if(data.err){
-					log(data.err);
-					return callback();
-				}
-				app.me.unreadCount++;
-				app.notifications.private.add(data.response);
-				callback();
-			},
-			active: true
+	return AmpIOCollection.extend(socket, PageFetchMixin, {
+		events: {
+		  fetch: 'notifications-get',
+		  onFetch: 'notification-get-response',
+		  onNew: ['notify-target', 'notify-subscription'],
+		  count: 'notification-count',
+		  onCount: 'notification-count-response',
+		  access: 'access'
 		},
-		onCount: {
-			fn: function(data, cb){
-				var callback = function(){if(cb){ cb();}};
-				log('Received notification count.');
-				if(data.err){
-					log(data.err);
-					return callback();
-				}
-				app.me.unreadCount = data.response;
-				callback();
-			},
-			active: true
-		}
-	};
 
-	return (new AmpCollection(socket)).extend(new IOMixin(null, {events: events, listeners: listeners}));
+		listeners: {
+			onNew: {
+				fn: function(data, cb){
+					var callback = function(){if(cb){ cb();}};
+					log('Received private notification.');
+					log(data);
+					if(data.err){
+						log(data.err);
+						return callback();
+					}
+					app.me.unreadCount++;
+					app.notifications.private.add(data.response);
+					callback();
+				},
+				active: false
+			},
+			onCount: {
+				fn: function(data, cb){
+					var callback = function(){if(cb){ cb();}};
+					log('Received notification count.');
+					if(data.err){
+						log(data.err);
+						return callback();
+					}
+					app.me.unreadCount = data.response;
+					callback();
+				},
+				active: false
+			},
+		},
+		model: model
+	});
 };

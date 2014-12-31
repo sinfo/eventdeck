@@ -43,8 +43,8 @@ module.exports = {
     this.notifications = {};
     PublicNotifications = new PublicNotifications(this.socket);
     PrivateNotifications = new PrivateNotifications(this.socket);
-    this.notifications.public = new PublicNotifications();
-    this.notifications.private = new PrivateNotifications();
+    this.notifications.public = new PublicNotifications(null, {setListeners: true});
+    this.notifications.private = new PrivateNotifications(null, {setListeners: true});
 
     // init our URL handlers and the history tracker
     this.router = new Router();
