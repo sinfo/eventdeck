@@ -6,19 +6,18 @@ var threadUrl = require('client/js/helpers/threadUrl');
 var options = require('options');
 var log = require('bows')('io-notification');
 
-module.exports= function(socket){
+module.exports = function(socket){
 
-  var events = {
-    create: 'notify',
-    fetch: 'notification-get',
-    onFetch: 'notification-get-response'
-  };
+  return AmpIOModel.extend(socket, {
 
-  var listeners = {};
+    events: {
+      create: 'notify',
+      fetch: 'notification-get',
+      onFetch: 'notification-get-response'
+    },
 
-  var IOModel = AmpIOModel.extend(socket);
+    listeners: {},
 
-  return AmpState.extend(new IOModel(null, {events: events, listeners: listeners}), {
     props: {
       id: ['string'],
       thread: ['string'],
@@ -35,7 +34,6 @@ module.exports= function(socket){
       postedTimeSpan: {
         deps: ['posted'],
         fn: function () {
-          log(this);
           return timeSince(this.posted);
         },
         cache: false
@@ -43,7 +41,6 @@ module.exports= function(socket){
       memberName: {
         deps: ['member'],
         fn: function () {
-          log(this.member);
           app.members.getOrFetch(this.member, {all: true}, function (err, model) {
             return model.name;
           });
@@ -52,7 +49,6 @@ module.exports= function(socket){
       threadUrl: {
         deps: ['thread'],
         fn: function () {
-          log(this.thread);
           return threadUrl(this.thread);
         }
       }

@@ -23,7 +23,7 @@ module.exports = function(socket){
 					log(data.err);
 					return callback();
 				}
-				app.notifications.public.add(data);
+				app.notifications.public.add(data.response);
 				callback();
 			},
 			active: true
@@ -37,7 +37,7 @@ module.exports = function(socket){
 					log(data.err);
 					return callback();
 				}
-				app.notifications.public.set(data);
+				app.notifications.public.set(data.response);
 				callback();
 			},
 			active: true

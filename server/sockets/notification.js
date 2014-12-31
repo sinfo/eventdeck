@@ -76,7 +76,7 @@ function notificationListeners(socket){
     if(notification.targets.length){
       async.each(notification.targets, function(target, cb){
         log.debug(target, events.notifyTarget);
-        IO.to(target).emit(events.notifyTarget, render(notification));
+        IO.to(target).emit(events.notifyTarget, {response: render(notification)});
         cb();
       });
       return cbClient();
@@ -89,12 +89,12 @@ function notificationListeners(socket){
       }
       async.each(subscriptions, function(subscription, cb){
         log.debug(subscription.member, events.notifySubscripton);
-        IO.to(subscription.member).emit(events.notifySubscripton, render(notification));
+        IO.to(subscription.member).emit(events.notifySubscripton, {response: render(notification)});
         cb();
       });
     });
 
-    IO.emit(events.notifyPublic, render(notification));
+    IO.emit(events.notifyPublic, {response: render(notification)});
     cbClient();
   });
 

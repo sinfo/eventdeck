@@ -11,6 +11,8 @@ var pageOptions = {
 };
 
 module.exports = function(socket){
+  var model = notification(socket);
+
 	return AmpCollection.extend({
 		limit: 10,
 		page: 10,
@@ -29,6 +31,6 @@ module.exports = function(socket){
 			this.limit += this.page;
 			this.skip += this.page;
 		},
-   model: notification(socket),
+    model: model,
  });
 };

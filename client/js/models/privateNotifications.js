@@ -27,7 +27,7 @@ module.exports = function(socket){
 					return callback();
 				}
 				app.me.unreadCount++;
-				app.notifications.private.add(data);
+				app.notifications.private.add(data.response);
 				callback();
 			},
 			active: true
