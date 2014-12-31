@@ -1,12 +1,12 @@
-module.exports = function render(content) {
+module.exports = function render(content, isAuthenticated) {
   if(content instanceof Array) {
-    return content.map(renderObject);
+    return content.map(function(model) { return renderObject(model, isAuthenticated); });
   }
 
-  return renderObject(content);  
+  return renderObject(content);
 };
 
-function renderObject(model) {
+function renderObject(model, isAuthenticated) {
   return {
     id: model.id,
     name: model.name,

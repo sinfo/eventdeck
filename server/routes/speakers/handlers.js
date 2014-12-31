@@ -114,7 +114,10 @@ exports.getByMember = {
 
 
 exports.list = {
-  auth: 'session',
+  auth: {
+    strategies: ['session'],
+    mode: 'try'
+  },
   tags: ['api','speaker'],
   validate: {
     query: {
@@ -129,7 +132,7 @@ exports.list = {
     { method: 'notification.decorateWithUnreadStatus(auth.credentials.id, pre.speakers)', assign: 'speakers' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.speakers));
+    reply(render(request.pre.speakers, request.auth.isAuthenticated));
   },
   description: 'Gets all the speakers'
 };
