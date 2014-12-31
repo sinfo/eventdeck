@@ -25,13 +25,13 @@ server.method('notification.getUnreadCount', getUnreadCount, {});
 server.method('notification.getByMember', getByMember, {});
 server.method('notification.list', list, {});
 server.method('notification.remove', remove, {});
-server.method('notification.readThread', readThread, {});
 server.method('notification.decorateWithUnreadStatus', decorateWithUnreadStatus, {});
 server.method('notification.getByThread', getByThread, {});
 server.method('notification.removeByThread', removeByThread, {});
 server.method('notification.removeBySource', removeBySource, {});
 
 function broadcast(notification, cb){
+  log.debug('broadcast', notification);
   if(!notification){
     return cb();
   }
@@ -269,23 +269,11 @@ function getByMember(memberId, query, cb) {
   });
 }
 
-function readThread(path, id, memberId, cb) {
-  var thread = threadFromPath(path, id);
-  var filter = {thread:thread};
-  Notification.update(filter, { $pull: { unread: memberId } }, function(err) {
-    if (err) {
-      log.error({ err: err, thread: thread}, 'error reading notifications');
-      return cb(Boom.internal());
-    }
-
-    cb();
-  });
-}
 
 function list(query, cb) {
   cb = cb || query; // fields is optional
 
-  var filter = {targets: []};
+  var filter = {targets: {$size: 0}};
   var fields = parser(query.fields);
   var options = {
     skip: query.skip,

@@ -1,5 +1,5 @@
 module.exports = function (thread) {
-  var split = thread.split('-');
+  var split = thread.split(/-(.+)?/);
   var result = '/';
   if (thread.indexOf('company') != -1) {
     result += 'companies';

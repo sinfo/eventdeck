@@ -20,7 +20,7 @@ module.exports = function(socket){
 		onNew: {
 			fn: function(data, cb){
 				var callback = function(){if(cb){ cb();}};
-				log('Received notification.');
+				log('Received private notification.');
 				log(data);
 				if(data.err){
 					log(data.err);
@@ -47,5 +47,5 @@ module.exports = function(socket){
 		}
 	};
 
-	return AmpCollection(socket).extend(new IOMixin(null, {events: events, listeners: listeners}));
+	return (new AmpCollection(socket)).extend(new IOMixin(null, {events: events, listeners: listeners}));
 };

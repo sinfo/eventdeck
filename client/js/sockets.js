@@ -41,7 +41,7 @@ module.exports = io.extend({
 	    fn: function(attempts){
 	      log('Reconnected');
 	      app.me.reconnecting = false;
-	      this.init();
+	      app.socket.init();
 	    }
 		},
 		
@@ -73,15 +73,11 @@ module.exports = io.extend({
       }
     };
 
-    var sendOptions = {
-      callback: function(err){
-        callback(err);
-        app.notifications.private.emit( app.notifications.private.events.count, {id: app.me.id}, {callback: callback});
-        app.notifications.private.fetch({callback: callback});
-        app.notifications.public.fetch({callback: callback});
-      }
-    };
-
-    this.emit(this.events.init, {user: app.me}, sendOptions);
+    this.emit(this.events.init, app.me, function(err){
+      callback(err);
+      app.notifications.private.emit( app.notifications.private.events.count, {id: app.me.id}, {callback: callback});
+      app.notifications.private.fetchPage({start: true, callback: callback});
+      app.notifications.public.fetchPage({start: true, callback: callback});
+    });
 	}
 });

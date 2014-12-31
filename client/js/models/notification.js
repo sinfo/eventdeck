@@ -4,6 +4,7 @@ var AmpIOModel = require('ampersand-io-model');
 var timeSince = require('client/js/helpers/timeSince');
 var threadUrl = require('client/js/helpers/threadUrl');
 var options = require('options');
+var log = require('bows')('io-notification');
 
 module.exports= function(socket){
 
@@ -34,6 +35,7 @@ module.exports= function(socket){
       postedTimeSpan: {
         deps: ['posted'],
         fn: function () {
+          log(this);
           return timeSince(this.posted);
         },
         cache: false
@@ -41,6 +43,7 @@ module.exports= function(socket){
       memberName: {
         deps: ['member'],
         fn: function () {
+          log(this.member);
           app.members.getOrFetch(this.member, {all: true}, function (err, model) {
             return model.name;
           });
@@ -49,6 +52,7 @@ module.exports= function(socket){
       threadUrl: {
         deps: ['thread'],
         fn: function () {
+          log(this.thread);
           return threadUrl(this.thread);
         }
       }

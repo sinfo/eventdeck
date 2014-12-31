@@ -29,7 +29,6 @@ module.exports = {
 
     log('Blasting off!');
 
-    this.socket = new IO(null, {setListeners: true});
     this.me = new Me();
     this.events = new Events();
     this.members = new Members();
@@ -40,6 +39,7 @@ module.exports = {
     this.topics = new Topics();
     this.fetchInitialData();
 
+    this.socket = new IO(null, {setListeners: true});
     this.notifications = {};
     PublicNotifications = new PublicNotifications(this.socket);
     PrivateNotifications = new PrivateNotifications(this.socket);

@@ -10,14 +10,15 @@ IO.on('connection', function (socket) {
 
   socket.emit('connected');
 
-  socket.on('init', function(data, cbClient){
+  socket.on('init', function(request, cbClient){
 
     //MISSING USER AUTH CHECK
 
-    var user = data.user;
-    if(!user){
+    var user = request.data;
+    if(!user || typeof user.id === 'undefined' || user.id === null){
       return cbClient(Boom.unauthorized('Need valid user to connect'));
     }
+    log.debug(user);
     socket.nickname = user.id;
     socket.join(user.id);
     notifications.setListeners(socket);

@@ -57,7 +57,7 @@ server.pack.register([
   webSocket.client = IO.client('http://localhost:' + server.info.port);
   module.exports.socket = webSocket;
   require('./sockets');
-  webSocket.client.emit('init', {user: {id: 'toolbot'}}, function(){
+  webSocket.client.emit('init', {data: {id: 'toolbot'}}, function(){
     log.info('Websocket client listeners set');
   });
 

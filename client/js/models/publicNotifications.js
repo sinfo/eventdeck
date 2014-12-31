@@ -9,7 +9,7 @@ module.exports = function(socket){
 
 	var events = {
 	  fetch: 'notifications-public-get',
-	  onFetch: 'notification-public-get-response',
+	  onFetch: 'notifications-public-get-response',
 	  onNew: 'notify-public',
 	};
 
@@ -17,7 +17,7 @@ module.exports = function(socket){
 		onNew: {
 			fn: function(data, cb){
 				var callback = function(){if(cb){ cb();}};
-				log('Received notification.');
+				log('Received public notification.');
 				log(data);
 				if(data.err){
 					log(data.err);
@@ -27,8 +27,22 @@ module.exports = function(socket){
 				callback();
 			},
 			active: true
+		},
+		onFetch: {
+			fn: function(data, cb){
+				var callback = function(){if(cb){ cb();}};
+				log('Fetched public notifications.');
+				log(data);
+				if(data.err){
+					log(data.err);
+					return callback();
+				}
+				app.notifications.public.set(data);
+				callback();
+			},
+			active: true
 		}
 	};
 
-	return AmpCollection(socket).extend(new IOMixin(null, {events: events, listeners: listeners}));
+	return (new AmpCollection(socket)).extend(new IOMixin(null, {events: events, listeners: listeners}));
 };

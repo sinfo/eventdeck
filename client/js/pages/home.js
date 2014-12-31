@@ -10,7 +10,7 @@ module.exports = PageView.extend({
     this.renderWithTemplate();
     this.renderCollection(this.collection, NotificationView, this.queryByHook('notifications-list'));
     if (!this.collection.length) {
-      this.fetchCollection();
+      this.fetchCollection({start: true});
     }
   },
   fetchCollection: function () {
