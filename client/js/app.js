@@ -19,7 +19,8 @@ var Speakers = require('./models/speakers');
 var Tags = require('./models/tags');
 var Topics = require('./models/topics');
 var Communications = require('./models/communications');
-var Notifications = require('./models/notifications');
+var PublicNotifications = require('./models/publicNotifications');
+var PrivateNotifications = require('./models/privateNotifications');
 
 module.exports = {
   // this is the the whole app initter
@@ -39,8 +40,11 @@ module.exports = {
     this.topics = new Topics();
     this.fetchInitialData();
 
-    Notifications = new Notifications(this.socket);
-    this.notifications = new Notifications();
+    this.notifications = {};
+    PublicNotifications = new PublicNotifications(this.socket);
+    PrivateNotifications = new PrivateNotifications(this.socket);
+    this.notifications.public = new PublicNotifications();
+    this.notifications.private = new PrivateNotifications();
 
     // init our URL handlers and the history tracker
     this.router = new Router();
@@ -71,7 +75,7 @@ module.exports = {
         log('Hello ' + model.name + '!');
         model.authenticated = true;
 
-        self.notifications.init();
+        self.socket.init();
       },
       error: function(model, response, options) {
         log('Please log in first!');
@@ -129,7 +133,7 @@ module.exports = {
       thread: model.thread
     };
     model.unread = false;
-    app.notifications.emit('access', data,{callback: function(err, result){
+    app.notifications.private.emit('access', data,{callback: function(err, result){
       if(err){
         log(err);
       }

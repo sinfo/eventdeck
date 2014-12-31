@@ -67,7 +67,7 @@ module.exports = Router.extend({
   // ------- ROUTE HANDLERS ---------
   home: function () {
     this.trigger('page', new HomePage({
-      collection: app.notifications
+      collection: app.notifications.public
     }));
   },
 

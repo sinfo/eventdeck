@@ -4,6 +4,7 @@ var log = require('bows')('io-app');
 
 module.exports = io.extend({
 	events:{
+		init: 'init',
 		onConnected:'connect',
 		onDisconnected:'disconnect',
 		onReconnecting:'reconnecting',
@@ -40,7 +41,7 @@ module.exports = io.extend({
 	    fn: function(attempts){
 	      log('Reconnected');
 	      app.me.reconnecting = false;
-	      app.notifications.init();
+	      this.init();
 	    }
 		},
 		
@@ -64,5 +65,23 @@ module.exports = io.extend({
 	      app.me.error = true;
 	    }
 		}
+	},
+	init: function(){
+		var callback = function(err){
+      if(err){
+        log(err);
+      }
+    };
+
+    var sendOptions = {
+      callback: function(err){
+        callback(err);
+        app.notifications.private.emit( app.notifications.private.events.count, {id: app.me.id}, {callback: callback});
+        app.notifications.private.fetch({callback: callback});
+        app.notifications.public.fetch({callback: callback});
+      }
+    };
+
+    this.emit(this.events.init, {user: app.me}, sendOptions);
 	}
 });
