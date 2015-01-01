@@ -186,6 +186,7 @@ module.exports = Router.extend({
     }));
   },
 
+
   topics: function () {
     this.trigger('page', new Topics({
       collection: app.topics

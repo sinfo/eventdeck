@@ -5,6 +5,7 @@ var timeSince = require('client/js/helpers/timeSince');
 var threadUrl = require('client/js/helpers/threadUrl');
 var options = require('options');
 var log = require('bows')('io-notification');
+var Member = require('./member');
 
 module.exports = function(socket){
 
@@ -28,7 +29,8 @@ module.exports = function(socket){
       posted: ['string']
     },
     session: {
-      unread: ['boolean']
+      unread: ['boolean'],
+      memberDetails: Member,
     },
     derived: {
       postedTimeSpan: {
@@ -37,14 +39,6 @@ module.exports = function(socket){
           return timeSince(this.posted);
         },
         cache: false
-      },
-      memberName: {
-        deps: ['member'],
-        fn: function () {
-          app.members.getOrFetch(this.member, {all: true}, function (err, model) {
-            return model.name;
-          });
-        }
       },
       threadUrl: {
         deps: ['thread'],
