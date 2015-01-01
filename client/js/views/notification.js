@@ -23,12 +23,52 @@ module.exports = View.extend({
           });
         }
       },
+      function getThing (cb){
+        switch (self.model.threadKind) {
+          case 'company':
+            app.companies.getOrFetch(self.model.threadId, {all: true}, function (err, model) {
+              if (err) {
+                log.error('couldnt find a company with id: ' + self.model.threadId);
+                return cb();
+              }
+              self.model.threadDetails = { name: model.name, img: model.img };
+              cb();
+            });
+          break;
+          case 'speaker':
+            app.speakers.getOrFetch(self.model.threadId, {all: true}, function (err, model) {
+              if (err) {
+                log.error('couldnt find a speaker with id: ' + self.model.threadId);
+                return cb();
+              }
+              self.model.threadDetails = { name: model.name, img: model.img };
+              cb();
+            });
+          break;
+          case 'topic':
+            app.topics.getOrFetch(self.model.threadId, {all: true}, function (err, model) {
+              if (err) {
+                log.error('couldnt find a topic with id: ' + self.model.threadId);
+                return cb();
+              }
+              self.model.threadDetails = { name: model.name, img: model.img };
+              cb();
+            });
+          break;
+        }
+      }
     ], function () {
-
+      self.render();
     });
+  },
+  render: function () {
+    if(this.renderWithTemplate) {
+      this.renderWithTemplate();
+    }
   },
   bindings: {
     'model.memberDetails.name': '[data-hook~=memberName]',
+    'model.threadDetails.name': '[data-hook~=threadName]',
     'model.description': {
       hook: 'description'
     },
