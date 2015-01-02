@@ -67,11 +67,25 @@ module.exports = View.extend({
     }
   },
   bindings: {
+    'model.memberDetails.id': {
+      type: checkMember,
+      hook: 'memberName',
+    },
+    'model.memberDetails.roles': {
+      type: checkRole,
+      hook: 'memberName',
+    },
     'model.memberDetails.name': '[data-hook~=memberName]',
     'model.threadDetails.name': '[data-hook~=threadName]',
-    'model.description': {
-      hook: 'description'
-    },
+    'model.description': [
+      {
+        hook: 'description'
+      },
+      {
+        hook: 'type',
+        type: checkType
+      }
+    ],
     'model.postedTimeSpan': {
       hook: 'posted',
     },
@@ -82,3 +96,30 @@ module.exports = View.extend({
     }
   }
 });
+
+function checkMember (el, value, previousValue) {
+  if(value === app.me.id){
+    el.classList.add('me');
+  }
+  else{
+    el.classList.add('others');
+  }
+}
+
+function checkRole (el, value, previousValue) {
+  if(value && value.get('coordination')){
+    el.classList.add('coordination');
+  }
+}
+
+function checkType (el, value, previousValue) {
+  if(value.search(/^\bposted\b/) === 0){
+    el.classList.add('fa-envelope');
+  }
+  else if(value.search(/^\bcreated\b/) === 0){
+    el.classList.add('fa-plus-square');
+  }
+  else if(value.search(/^\bupdated\b/) === 0){
+    el.classList.add('fa-pencil');
+  }
+}

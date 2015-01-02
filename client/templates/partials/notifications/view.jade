@@ -1,6 +1,10 @@
-.notification
-  a.header(data-hook='threadUrl')
-    span(data-hook='memberName')
-    span(data-hook='postedTimeSpan')
-  p(data-hook='description')
-  p.description(data-hook='threadName')
+li.notification
+  .header
+    i.fa(data-hook='type')
+    span.ink-label(data-hook='memberName')
+    i.note(data-hook='posted')
+  .description
+    span(data-hook='description')
+    span on
+    a.ink-label.grey(data-hook='threadUrl')
+      span(data-hook='threadName')
