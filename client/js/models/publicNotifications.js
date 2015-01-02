@@ -29,20 +29,6 @@ module.exports = function(socket){
 					callback();
 				},
 				active: false
-			},
-			onFetch: {
-				fn: function(data, cb){
-					var callback = function(){if(cb){ cb();}};
-					log('Fetched public notifications.');
-					log(data);
-					if(data.err){
-						log(data.err);
-						return callback();
-					}
-					app.notifications.public.set(data.response);
-					callback();
-				},
-				active: false
 			}
 		},
 		model: model

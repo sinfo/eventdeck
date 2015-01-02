@@ -48,7 +48,7 @@
     "ampersand-state": "~4.3.14",
     "ampersand-view": "^7.0.1",
     "ampersand-view-switcher": "^1.0.2",
-    "ampersand-io-collection": "^0.1.2",
+    "ampersand-io-collection": "^0.1.4",
     "ampersand-io-model": "^0.1.1",
     "ampersand-io": "^0.1.0",
     "ampersand-infinite-scroll": "https://github.com/jgantunes/ampersand-infinite-scroll/tarball/master",

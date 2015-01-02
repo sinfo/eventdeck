@@ -18,7 +18,6 @@ IO.on('connection', function (socket) {
     if(!user || typeof user.id === 'undefined' || user.id === null){
       return cbClient(Boom.unauthorized('Need valid user to connect'));
     }
-    log.debug(user);
     socket.nickname = user.id;
     socket.join(user.id);
     notifications.setListeners(socket);

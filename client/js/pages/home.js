@@ -10,12 +10,12 @@ module.exports = PageView.extend({
     this.renderWithTemplate();
     this.renderCollection(this.collection, NotificationView, this.queryByHook('notifications-list'));
     if (!this.collection.length) {
-      this.fetchCollection({start: true});
+      this.fetchCollection({reset: true});
     }
   },
   fetchCollection: function () {
     log('Fetching notifications');
-    this.collection.fetchPage();
+    this.collection.fetchPage({reset: true});
 
     return false;
   },
