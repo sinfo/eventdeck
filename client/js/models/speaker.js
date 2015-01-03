@@ -4,6 +4,7 @@ var AmpModel = require('ampersand-model');
 var AmpCollection = require('ampersand-collection');
 var options = require('options');
 var marked = require('client/js/helpers/marked');
+var _ = require('client/js/helpers/underscore');
 
 var Communication = require('./communication');
 var Comment = require('./comment');
@@ -116,13 +117,19 @@ module.exports = AmpModel.extend({
       },
     },
   },
-  toJSON: function () {
-    return function () {
-      var json = this.serialize();
-      delete json.comments;
-      delete json.communications;
-      delete json.storedImg;
-      return json;
-    };
+  serialize: function () {
+    var res = this.getAttributes({props: true}, true);
+    _.each(this._children, function (value, key) {
+        res[key] = this[key].serialize();
+    }, this);
+    _.each(this._collections, function (value, key) {
+        res[key] = this[key].serialize();
+    }, this);
+
+    delete res.comments;
+    delete res.communications;
+    delete res.storedImg;
+
+    return res;
   }
 });
