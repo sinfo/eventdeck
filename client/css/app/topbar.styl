@@ -14,7 +14,7 @@
     color: #555
 
   .ink-navigation
-    ul
+    >ul
       li.notifications
         padding: 5px 2px
         a
@@ -25,11 +25,23 @@
         .empty
           background: $empty
         .empty:hover
-            background: #2A9E2A
+          background: #649048
         .unread
           background: $unread
         .unread:hover
-            background: #b10f0f
+          background: #b10f0f
+        ul.submenu
+          padding: 8px
+          max-height: 400px
+          overflow: auto
+          margin-top: 5px
+          width: 240px
+          border: 1px solid #eee
+          border-radius: 5px
+          box-shadow: 0px 0px 5px #ddd
+        ul.submenu.hide-menu
+          max-height: 0px
+          padding: 0px
       li.status
         .online
           color: $on
@@ -37,14 +49,14 @@
           color: $off
         .reconnect
           color: $reconnect
-      li
+      >li
         a
           font-weight: normal
         a:hover
           background: #eee
-        ul.submenu
-          li
-            a
+        >ul.submenu
+          >li
+            >a
               color: #777
         div.left-drawer-trigger
           margin-top: 4px

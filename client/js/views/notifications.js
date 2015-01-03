@@ -1,0 +1,21 @@
+var log = require('bows')('home');
+var PageView = require('ampersand-infinite-scroll');
+var templates = require('client/js/templates');
+var NotificationView = require('client/js/views/notification');
+
+module.exports = PageView.extend({
+  template: templates.partials.notifications.list,
+  render: function () {
+    this.renderWithTemplate();
+    this.renderCollection(this.collection, NotificationView, this.queryByHook('notifications-list'));
+    if (!this.collection.length) {
+      this.fetchCollection({reset: true});
+    }
+  },
+  fetchCollection: function () {
+    log('Fetching notifications');
+    this.collection.fetchPage({reset: true});
+
+    return false;
+  },
+});

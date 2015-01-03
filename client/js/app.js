@@ -55,7 +55,8 @@ module.exports = {
       // init our main view
       var mainView = self.view = new MainView({
         el: document.body,
-        model: self.me
+        model: self.me,
+        collection: self.notifications.private
       });
 
       // ...and render it

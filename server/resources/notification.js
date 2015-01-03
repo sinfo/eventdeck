@@ -31,7 +31,6 @@ server.method('notification.removeByThread', removeByThread, {});
 server.method('notification.removeBySource', removeBySource, {});
 
 function broadcast(notification, cb){
-  log.debug('broadcast', notification);
   if(!notification){
     return cb();
   }
