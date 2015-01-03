@@ -250,7 +250,7 @@ function getByMember(memberId, query, cb) {
       });
     },
     function getNotificationsFromSubscriptions(subscriptions, cbAsync){
-      var filter = {$or: [{targets: {$in: [memberId]}}]};
+      var filter = {$or: [{targets: {$in: [memberId]}}], member: {$ne: memberId}};
       if(subscriptions.length){
         filter.$or.push({thread: {$in: subscriptions}});
       }
