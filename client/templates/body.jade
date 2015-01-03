@@ -47,8 +47,9 @@ body.ink-drawer
             a(href='/members') Members
           li.status
             a(data-hook='status').fa.fa-circle
-          li
-            a#logout(href='/login') Logout
+            ul.submenu
+              li
+                a#logout(href='/login') Logout
 
   main.content-drawer.ink-grid(data-hook='page-container')
 

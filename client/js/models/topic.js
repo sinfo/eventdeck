@@ -5,6 +5,7 @@ var options = require('options');
 var marked = require('client/js/helpers/marked');
 var log = require('bows')('topics');
 var timeSince = require('client/js/helpers/timeSince');
+var _ = require('client/js/helpers/underscore');
 
 var PollOption = AmpState.extend({
   props: {
@@ -61,6 +62,11 @@ module.exports = AmpModel.extend({
         return 'topic-' + this.id;
       }
     },
+    threadKind: {
+      fn: function () {
+        return 'topic';
+      }
+    },
     editUrl: {
       deps: ['id'],
       fn: function () {
@@ -114,6 +120,20 @@ module.exports = AmpModel.extend({
       },
       cache: false
     },
+  },
+  serialize: function () {
+    var res = this.getAttributes({props: true}, true);
+    _.each(this._children, function (value, key) {
+        res[key] = this[key].serialize();
+    }, this);
+    _.each(this._collections, function (value, key) {
+        res[key] = this[key].serialize();
+    }, this);
+
+    delete res.comments;
+    delete res.unread;
+
+    return res;
   }
 
 });

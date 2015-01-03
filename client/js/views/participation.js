@@ -110,12 +110,15 @@ var EditParticipation = View.extend({
   subviews: {
     form: {
       container: '[data-hook~=new-participation]',
+      parent: this,
       prepareView: function (el) {
         var self = this;
         var model = this.model;
+        model.threadKind = self.parent.parent.parent.parent.model.threadKind;
         return new ParticipationForm({
           el: el,
           model: this.model,
+          parent: self,
           submitCallback: function (data) {
             data = self.model.changedAttributes(data);
             if(!data) {
