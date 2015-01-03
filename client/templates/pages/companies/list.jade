@@ -13,21 +13,7 @@ section.page.companies.list
       a.ink-button(href='/companies/add') Add Company
 
     b Filter Status
-    ul.filters.small.unstyled
-      li
-        .ink-button(data-hook='selected') Selected
-      li
-        .ink-button(data-hook='contacted') Contacted
-      li
-        .ink-button(data-hook='inconversations') In Conversations
-      li
-        .ink-button(data-hook='innegotiations') In Negotiations
-      li
-        .ink-button(data-hook='closeddeal') Closed Deal
-      li
-        .ink-button(data-hook='rejected') Rejected
-      li
-        .ink-button(data-hook='giveup') Give Up
+    ul.filters.small.unstyled(data-hook='status-filters')
 
     b Filter Member
     .button-group.small

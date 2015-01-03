@@ -5,43 +5,38 @@ var templates = require('client/js/templates');
 var SpeakerView = require('client/js/views/speaker');
 var Speaker = require('client/js/models/speaker');
 var AmpersandCollection = require('ampersand-collection');
+var speakerStatuses = require('options').statuses.speaker;
+var _ = require('client/js/helpers/underscore');
+var $ = require('client/js/helpers/jquery');
 
 
 var selectedFilter = 'showall';
 
 function filtering(collection,filter){
-    return collection.filter(function(speaker){
-      return speaker.participation && speaker.participation.status == filter;
-    });
+  return collection.filter(function(speaker){
+    return speaker.participation && speaker.participation.status == filter;
+  });
 }
+
 function rerender(page, collection, filter){
+  page.renderWithTemplate();
+  page.renderCollection(collection, SpeakerView, page.queryByHook('speakers-list'));
 
-    console.log(page.queryByHook(selectedFilter));
-    page.renderWithTemplate();
-    page.renderCollection(collection, SpeakerView, page.queryByHook('speakers-list'));
+  page.renderStatusFilters();
 
-    page.queryByHook(selectedFilter).classList.remove('selected');
-    page.queryByHook(filter).classList.add('selected');
-    selectedFilter = filter;
+  page.queryByHook(selectedFilter).classList.remove('selected');
+  page.queryByHook(filter).classList.add('selected');
+  selectedFilter = filter;
 
-    return false;
+  return false;
 }
 
 module.exports = PageView.extend({
   pageTitle: 'Speakers',
   template: templates.pages.speakers.list,
   events: {
-    'click [data-hook~=shuffle]': 'shuffle',
     'click [data-hook~=fetch]': 'fetchCollection',
-    'click [data-hook~=reset]': 'resetCollection',
-
-    'click [data-hook~=selected]': 'selected',
-    'click [data-hook~=approved]': 'approved',
-    'click [data-hook~=contacted]': 'contacted',
-    'click [data-hook~=inconversations]': 'inconversations',
-    'click [data-hook~=accepted]': 'accepted',
-    'click [data-hook~=rejected]': 'rejected',
-    'click [data-hook~=giveup]': 'giveup',
+    'click [data-hook~=status-filters]': 'handleStatusFilter',
 
     'click [data-hook~=showall]': 'showall',
     'click [data-hook~=me]': 'me',
@@ -58,6 +53,7 @@ module.exports = PageView.extend({
       this.fetchCollection();
     }
 
+    this.renderStatusFilters();
     this.queryByHook(selectedFilter).classList.add('selected');
   },
   fetchCollection: function () {
@@ -66,85 +62,21 @@ module.exports = PageView.extend({
 
     return false;
   },
-  resetCollection: function (){
-     this.collection.reset();
+  renderStatusFilters: function () {
+    var self = this;
+    var filterContainer = $(self.queryByHook('status-filters'));// $.hook('status-filters');
+    _.each(speakerStatuses, function (status) {
+      filterContainer.append('<li><div class=\'ink-button\' data-hook=\''+status.id+'\'>'+status.name+'</div></li>');
+    });
   },
-  shuffle: function () {
-    this.collection.comparator = function () {
-      return !Math.round(Math.random());
-    };
-    this.collection.sort();
-    delete this.collection.comparator;
-    return false;
-  },
-  contacted: function () {
-    log('Fetching contacted Speakers');
-    var aux =  filtering(this.collection,'Contacted');
+  handleStatusFilter: function (ev) {
+    var status = ev.target.getAttribute('data-hook');
+    log('filtering by status', status);
 
+    var aux = filtering(this.collection, status);
     aux = new AmpersandCollection(aux, {model: Speaker});
 
-    rerender(this,aux,'contacted');
-
-    return false;
-  },
-  selected: function () {
-    log('Fetching Selected Speakers');
-    var aux = filtering(this.collection,'Selected');
-
-    aux = new AmpersandCollection(aux, {model: Speaker});
-
-    rerender(this,aux,'selected');
-
-    return false;
-  },
-  approved: function () {
-    log('Fetching Approved Speakers');
-    var aux = filtering(this.collection,'Approved');
-
-    aux = new AmpersandCollection(aux, {model: Speaker});
-
-    rerender(this,aux,'approved');
-
-    return false;
-  },
-  rejected: function () {
-    log('Fetching Rejected Speakers');
-    var aux = filtering(this.collection,'Rejected');
-
-    aux = new AmpersandCollection(aux, {model: Speaker});
-
-    rerender(this,aux,'rejected');
-
-    return false;
-  },
-  giveup: function () {
-    log('Fetching Gave up Speakers');
-    var aux = filtering(this.collection,'Give Up');
-
-    aux = new AmpersandCollection(aux, {model: Speaker});
-
-    rerender(this,aux,'giveup');
-
-    return false;
-  },
-  inconversations: function () {
-    log('Fetching Selected Speakers');
-    var aux = filtering(this.collection,'In Conversations');
-
-    aux = new AmpersandCollection(aux, {model: Speaker});
-
-    rerender(this,aux,'inconversations');
-
-    return false;
-  },
-  accepted: function () {
-    log('Fetching Accepted Speakers');
-    var aux = filtering(this.collection,'Accepted');
-
-    aux = new AmpersandCollection(aux, {model: Speaker});
-
-    rerender(this,aux,'accepted');
-
+    rerender(this, aux, status);
     return false;
   },
   me: function () {

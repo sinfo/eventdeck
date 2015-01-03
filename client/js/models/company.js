@@ -116,7 +116,7 @@ module.exports = AmpModel.extend({
         })[0];
 
         var details = options.statuses.company.filter(function (status) {
-          return participation && participation.status == status.name;
+          return participation && participation.status == status.id;
         })[0] || {};
 
         details.style = details && details.color && 'background-color:' + details.color;
