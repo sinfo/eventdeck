@@ -41,6 +41,7 @@ options.kinds = {
     { name: 'TODO', id:'todo', color: '#fbca04' },
     { name: 'DECISION', id:'decision', color: '#e11d21' },
     { name: 'MEETING', id:'meeting', color: '#333' },
+    { name: 'TUTORIAL', id:'tutorial', color: '#333' },
   ],
   polls: [
     { name: 'Text', id:'text', color: '#207de5' },
