@@ -122,4 +122,10 @@ function checkType (el, value, previousValue) {
   else if(value.search(/^\bupdated\b/) === 0){
     el.classList.add('fa-pencil');
   }
+  else if(value.search(/^\bmentioned\b/) === 0){
+    el.classList.add('fa-at');
+  }
+  else if(value.search(/^\bchanged communication\b/) === 0){
+    el.classList.add('fa-check-square-o');
+  }
 }
