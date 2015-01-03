@@ -12,7 +12,7 @@ var dom = require('ampersand-dom');
 var templates = require('../templates');
 var setFavicon = require('favicon-setter');
 var BaseForm = require('client/js/forms/base');
-var NotificationView = require('client/js/views/notification');
+var NotificationView = require('client/js/views/notifications');
 var $ = require('client/js/helpers/jquery');
 var singular = require('client/js/helpers/singular');
 var plural = require('client/js/helpers/plural');
@@ -82,10 +82,12 @@ module.exports = View.extend({
       }
     },
     notifications: {
-      hook: 'private-notifications',
+      container: '[data-hook~=notification-container]',
       prepareView: function (el) {
         return new NotificationView({
-
+          el: el,
+          template: templates.partials.notifications.menu,
+          collection: this.collection
         });
       }
     }
@@ -126,8 +128,13 @@ module.exports = View.extend({
   },
 
   handleNotificationsClick: function () {
+    var el =  $(this.queryByHook('private-notifications'));
     app.me.save({unreadAccess: Date.now()}, {patch: true});
     app.me.unreadCount = 0;
+    el.mouseleave(function(){
+      el.addClass('hide-menu');
+    });
+    el.removeClass('hide-menu');
   },
 
   handleLinkClick: function (e) {
