@@ -18,16 +18,18 @@
       li.notifications
         padding: 5px 2px
         a
-          border: 1px solid
+          color: white
           padding: 2px 5px
         span
           margin-right: 3px
         .empty
-          border-color: $empty
-          color: $empty
+          background: $empty
+        .empty:hover
+            background: #2A9E2A
         .unread
-          border-color: $unread
-          color: $unread
+          background: $unread
+        .unread:hover
+            background: #b10f0f
       li.status
         .online
           color: $on
