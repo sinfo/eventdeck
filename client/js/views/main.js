@@ -82,6 +82,7 @@ module.exports = View.extend({
       }
     },
     notifications: {
+      waitFor: 'collection',
       container: '[data-hook~=notification-container]',
       prepareView: function (el) {
         return new NotificationView({

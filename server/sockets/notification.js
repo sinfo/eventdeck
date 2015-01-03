@@ -41,7 +41,7 @@ function notificationListeners(socket){
       if(!notifications){
         socket.emit(events.getResp, {response: []});
         return cbClient();
-      } 
+      }
       server.methods.notification.decorateWithUnreadStatus(socket.nickname, notifications, function(err, result){
         if(err){
           log.error({err: err, user: socket.nickname, notifications: result}, '[socket-notification] error getting notifications');

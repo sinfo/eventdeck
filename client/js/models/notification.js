@@ -41,7 +41,6 @@ module.exports = function(socket){
       posted: ['string']
     },
     session: {
-      unread: ['boolean'],
       memberDetails: Member,
       threadDetails: ThreadDetails,
     },

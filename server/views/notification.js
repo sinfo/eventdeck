@@ -15,5 +15,6 @@ function renderObject(model) {
     description: model.description,
     targets: model.targets,
     posted: model.posted,
+    unread: model.unread
   };
 }

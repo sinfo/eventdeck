@@ -61,7 +61,7 @@ module.exports = {
 
       // ...and render it
       mainView.render();
-      console.log(mainView);
+      log(self.notifications.private);
 
       // we have what we need, we can now start our router and show the appropriate page
       self.router.history.start({pushState: true, root: '/'});

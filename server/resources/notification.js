@@ -236,13 +236,17 @@ function getByMember(memberId, query, cb) {
   async.waterfall([
     function getSubscriptions(cbAsync){
       var filter = {member: memberId};
-      Subscription.find(filter, function(err, subscriptions) {
+      var fields = {thread: true};
+      var result = [];
+      Subscription.find(filter, fields, function(err, subscriptions) {
         if (err) {
           log.error({ err: err, subscriptions: subscriptions}, 'error getting subscriptions');
           return cbAsync(Boom.internal());
         }
-
-        cbAsync(null, subscriptions);
+        for(var i = 0; i < subscriptions.length; i++){
+          result.push(subscriptions[i].thread);
+        }
+        cbAsync(null, result);
       });
     },
     function getNotificationsFromSubscriptions(subscriptions, cbAsync){

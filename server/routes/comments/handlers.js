@@ -22,7 +22,7 @@ exports.create = {
     { method: 'comment.create(payload, auth.credentials.id)', assign: 'comment' },
     { method: 'notification.notifyComment(auth.credentials.id, payload.thread, pre.comment._id)', assign: 'notification' },
     { method: 'notification.broadcast(pre.notification)', assign: 'broadcastNotification' },
-    { method: 'parser.members(payload.text, payload.thread, pre.comment._id, pre.comment.member)', assign: 'mention' },
+    { method: 'parser.members(payload.text, payload.thread, pre.comment._id, auth.credentials.id)', assign: 'mention' },
     { method: 'notification.broadcast(pre.mention)', assign: 'broadcastMention' }
   ],
   handler: function (request, reply) {
