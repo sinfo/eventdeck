@@ -12,6 +12,7 @@ var dom = require('ampersand-dom');
 var templates = require('../templates');
 var setFavicon = require('favicon-setter');
 var BaseForm = require('client/js/forms/base');
+var NotificationView = require('client/js/views/notification');
 var $ = require('client/js/helpers/jquery');
 var singular = require('client/js/helpers/singular');
 var plural = require('client/js/helpers/plural');
@@ -77,6 +78,14 @@ module.exports = View.extend({
       prepareView: function (el) {
         return new BaseForm({
           el: el,
+        });
+      }
+    },
+    notifications: {
+      hook: 'private-notifications',
+      prepareView: function (el) {
+        return new NotificationView({
+
         });
       }
     }

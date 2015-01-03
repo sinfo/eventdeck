@@ -72,10 +72,8 @@ function notificationListeners(socket){
   });
 
   socket.on(events.notify, function(notification, cbClient){
-    log.debug(notification);
     if(notification.targets.length){
       async.each(notification.targets, function(target, cb){
-        log.debug(target, events.notifyTarget);
         IO.to(target).emit(events.notifyTarget, {response: render(notification)});
         cb();
       });
@@ -88,7 +86,6 @@ function notificationListeners(socket){
         return cbClient(err);
       }
       async.each(subscriptions, function(subscription, cb){
-        log.debug(subscription.member, events.notifySubscripton);
         IO.to(subscription.member).emit(events.notifySubscripton, {response: render(notification)});
         cb();
       });

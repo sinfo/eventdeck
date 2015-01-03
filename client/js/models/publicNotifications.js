@@ -25,7 +25,7 @@ module.exports = function(socket){
 						log(data.err);
 						return callback();
 					}
-					app.notifications.public.add(data.response);
+					app.notifications.public.add(data.response, {at: 0});
 					callback();
 				},
 				active: false

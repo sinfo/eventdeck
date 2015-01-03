@@ -16,12 +16,18 @@
   .ink-navigation
     ul
       li.notifications
+        padding: 5px 2px
+        a
+          border: 1px solid
+          padding: 2px 5px
         span
           margin-right: 3px
         .empty
-          color: $on
+          border-color: $empty
+          color: $empty
         .unread
-          color: $off
+          border-color: $unread
+          color: $unread
       li.status
         .online
           color: $on
@@ -84,10 +90,13 @@
             background: #eee
 
 .ink-navigation ul.menu.horizontal > li:first-child,
-.ink-navigation ul.menu.horizontal > li:first-child a,
+.ink-navigation ul.menu.horizontal > li:first-child a
+  border-radius: 5px
+
 .ink-navigation ul.menu.horizontal > li:last-child,
 .ink-navigation ul.menu.horizontal > li:last-child a
   border-radius: 0
+  
 
 body.ink-drawer
   .left-drawer

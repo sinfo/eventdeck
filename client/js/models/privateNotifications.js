@@ -29,7 +29,7 @@ module.exports = function(socket){
 						return callback();
 					}
 					app.me.unreadCount++;
-					app.notifications.private.add(data.response);
+					app.notifications.private.add(data.response, {at: 0});
 					callback();
 				},
 				active: false

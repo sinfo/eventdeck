@@ -6,7 +6,7 @@ var notifications = require('./notification');
 
 IO.on('connection', function (socket) {
 
-	log.debug('[sockets] New user connected');
+	log.debug('[sockets] New connection');
 
   socket.emit('connected');
 
@@ -21,6 +21,7 @@ IO.on('connection', function (socket) {
     socket.nickname = user.id;
     socket.join(user.id);
     notifications.setListeners(socket);
+    log.debug('[sockets] User logged in', {member: user.id});
     cbClient();
   });
 });
