@@ -53,6 +53,11 @@ module.exports = AmpModel.extend({
         return 'company-' + this.id;
       }
     },
+    threadKind: {
+      fn: function () {
+        return 'company';
+      }
+    },
     editUrl: {
       deps: ['id'],
       fn: function () {
@@ -149,6 +154,7 @@ module.exports = AmpModel.extend({
     delete res.comments;
     delete res.communications;
     delete res.storedImg;
+    delete res.unread;
 
     return res;
   }

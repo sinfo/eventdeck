@@ -62,6 +62,11 @@ module.exports = AmpModel.extend({
         return 'topic-' + this.id;
       }
     },
+    threadKind: {
+      fn: function () {
+        return 'topic';
+      }
+    },
     editUrl: {
       deps: ['id'],
       fn: function () {
@@ -126,6 +131,7 @@ module.exports = AmpModel.extend({
     }, this);
 
     delete res.comments;
+    delete res.unread;
 
     return res;
   }

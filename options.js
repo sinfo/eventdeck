@@ -9,7 +9,7 @@ options.statuses = {
     { name: 'Accepted', color: '#009800'},
     { name: 'Rejected', color: '#e11d21'},
     { name: 'Give Up', color: '#333'},
-    { name: 'Annouced', color: '#009800'},
+    { name: 'Announced', color: '#009800'},
   ],
   company: [
     { name: 'Selected', color: '#5319e7', default: true},
@@ -19,7 +19,7 @@ options.statuses = {
     { name: 'Closed Deal', color: '#009800'},
     { name: 'Rejected', color: '#e11d21'},
     { name: 'Give Up', color: '#333'},
-    { name: 'Annouced', color: '#009800'},
+    { name: 'Announced', color: '#009800'},
   ],
   communication: [
     { name: 'Pending Review...', id: 'pending-review', color: '#fbca04' },
