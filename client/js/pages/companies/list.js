@@ -18,8 +18,6 @@ function filtering(collection,filter){
   });
 }
 function rerender(page, collection, filter){
-
-  console.log(page.queryByHook(selectedFilter));
   page.renderWithTemplate();
   page.renderCollection(collection, CompanyView, page.queryByHook('companies-list'));
 
@@ -48,6 +46,8 @@ module.exports = PageView.extend({
   },
   hidden: false,
   render: function () {
+    selectedFilter = 'showall';
+
     this.renderWithTemplate();
     this.renderCollection(this.collection, CompanyView, this.queryByHook('companies-list'));
     if (!this.collection.length) {

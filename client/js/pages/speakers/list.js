@@ -47,6 +47,8 @@ module.exports = PageView.extend({
   },
   hidden: false,
   render: function () {
+    selectedFilter = 'showall';
+
     this.renderWithTemplate();
     this.renderCollection(this.collection, SpeakerView, this.queryByHook('speakers-list'));
     if (!this.collection.length) {

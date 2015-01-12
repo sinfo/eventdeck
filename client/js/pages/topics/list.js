@@ -63,6 +63,10 @@ module.exports = PageView.extend({
 
   initialize: function () {
     var self = this;
+
+    selectedTag = 'showall';
+    selectedKind = 'showall';
+
     if (!this.collection.length) {
       this.fetchCollection({success: function() {
         self.render();
@@ -86,6 +90,8 @@ module.exports = PageView.extend({
     this.queryByHook(selectedTag).classList.add('selected');
 
     tempCollection = this.collection;
+
+    this.showall();
   },
 
   fetchCollection: function () {

@@ -12,14 +12,14 @@ module.exports = View.extend({
   initialize: function(){
     var self = this;
     if(self.model.member){
-          app.members.getOrFetch(self.model.member, {all: true}, function (err, model) {
-            if (err) {
-              log.error('couldnt find a member with id: ' + self.model.member);
-            }
-            self.model.memberDetails = model;
-            log('Got member', model.name);
-          });
+      app.members.getOrFetch(self.model.member, {all: true}, function (err, model) {
+        if (err) {
+          log.error('couldnt find a member with id: ' + self.model.member);
         }
+        self.model.memberDetails = model;
+        // log('Got member', model.name);
+      });
+    }
   },
   render: function () {
     this.renderWithTemplate();

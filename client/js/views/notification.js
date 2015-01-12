@@ -18,7 +18,7 @@ module.exports = View.extend({
               return cb();
             }
             self.model.memberDetails = model;
-            log('Got member', model.name);
+            // log('Got member', model.name);
             cb();
           });
         }

@@ -5,58 +5,68 @@ var PageView = require('ampersand-infinite-scroll');
 var templates = require('client/js/templates');
 var NotificationView = require('client/js/views/notification');
 
+var FORCE_FETCH = false;
+
 module.exports = PageView.extend({
   template: templates.partials.notifications.list,
   initialize: function (spec) {
     var self = this;
     async.parallel([
       function getMembers (cb){
-        app.members.fetch({
-          success: function (collection, response, options) {
-            log('Got members');
-            cb();
-          },
-          error: function (collection, response, options) {
-            log('Error getting members', response);
-            cb();
-          }
-        });
+        if(FORCE_FETCH || !app.members.length) {
+          app.members.fetch({
+            success: function (collection, response, options) {
+              log('Got members');
+              cb();
+            },
+            error: function (collection, response, options) {
+              log('Error getting members', response);
+              cb();
+            }
+          });
+        }
       },
       function getCompanies (cb){
-        app.companies.fetch({
-          success: function (collection, response, options) {
-            log('Got companies');
-            cb();
-          },
-          error: function (collection, response, options) {
-            log('Error getting companies', response);
-            cb();
-          }
-        });
+        if(FORCE_FETCH || !app.companies.length) {
+          app.companies.fetch({
+            success: function (collection, response, options) {
+              log('Got companies');
+              cb();
+            },
+            error: function (collection, response, options) {
+              log('Error getting companies', response);
+              cb();
+            }
+          });
+        }
       },
       function getSpeakers (cb){
-        app.speakers.fetch({
-          success: function (collection, response, options) {
-            log('Got speakers');
-            cb();
-          },
-          error: function (collection, response, options) {
-            log('Error getting speakers', response);
-            cb();
-          }
-        });
+        if(FORCE_FETCH || !app.speakers.length) {
+          app.speakers.fetch({
+            success: function (collection, response, options) {
+              log('Got speakers');
+              cb();
+            },
+            error: function (collection, response, options) {
+              log('Error getting speakers', response);
+              cb();
+            }
+          });
+        }
       },
       function getTopics (cb){
-        app.topics.fetch({
-          success: function (collection, response, options) {
-            log('Got topics');
-            cb();
-          },
-          error: function (collection, response, options) {
-            log('Error getting topics', response);
-            cb();
-          }
-        });
+        if(FORCE_FETCH || !app.topics.length) {
+          app.topics.fetch({
+            success: function (collection, response, options) {
+              log('Got topics');
+              cb();
+            },
+            error: function (collection, response, options) {
+              log('Error getting topics', response);
+              cb();
+            }
+          });
+        }
       },
     ], function () {
       self.render();
