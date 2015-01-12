@@ -36,6 +36,9 @@ module.exports = PageView.extend({
     'model.duedate': {
       hook: 'duedate'
     },
+    'model.closed': {
+      hook: 'closed'
+    },
     'model.postedTimeSpan': '[data-hook~=posted]',
     'model.textHtml': {
       type: 'innerHTML',
@@ -60,32 +63,36 @@ module.exports = PageView.extend({
       app.access(model);
       log('Got topic', model.name);
 
-
-      app.tags.fetch({success: function () {
-        log('Rendering tags!!!');
-        self.renderTagFilters();
+      if(!app.tags.length) {
+        app.tags.fetch({
+          success: function () {
+            self.render();
           }
         });
-
-      var filterContainer = $(self.queryByHook('closed'));
-      var closed = 'Open';
-      if(self.model.closed){
-        closed = 'Closed';
-        filterContainer.append('<div>'+closed+'</div>');
       }
+
+      self.render();
     });
+  },
+  render: function () {
+    var self = this;
+    this.renderWithTemplate();
+
+    self.renderTagFilters();
   },
   renderTagFilters: function () {
     var self = this;
+
+    log('Rendering tags!!!');
 
     var details = app.tags.serialize().filter(function (tag) {
       return self.model.tags.indexOf(tag.id) != -1;
     });
 
-    var filterContainer = $(self.queryByHook('tags'));
+    var tagsContainer = $(self.queryByHook('topic-tags'));
 
     _.each(details, function (tag) {
-      filterContainer.append('<div class=\'ink-button\' data-hook=\''+tag.id+'\' style = \"color:#F0F8FF; background:'+tag.color+'">'+tag.name+'</div>');
+      tagsContainer.append('<div class=\'ink-label\' data-hook=\''+tag.id+'\' style = \"color:#F0F8FF; background:'+tag.color+'">'+tag.name+'</div>');
     });
   },
   subviews: {
