@@ -1,3 +1,4 @@
+/*global app*/
 var log = require('bows')('home');
 var async = require('async');
 var PageView = require('ampersand-infinite-scroll');
