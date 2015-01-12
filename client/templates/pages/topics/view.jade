@@ -2,16 +2,15 @@ section.page.topics.view
   div.ink-grid
     div.column-group.horizontal-gutters
       div.all-100
-        h1.push-left
+        h1
           div
             span.kind(data-hook='kind')
             span(data-hook='name')
-        div.push-left
-          p.button-group.small(data-hook='topic-tags')
-        ul
-          h1
-            .push-right.a(data-hook='posted')
-            .push-right.a(data-hook='duedate')
+        div
+          .note.push-left
+            div(data-hook='posted')
+            div(data-hook='duedate')
+            div(data-hook='topic-tags')
 
           .button-group.small.push-right
             a.ink-button.orange(data-hook='edit') Edit

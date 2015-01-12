@@ -76,8 +76,7 @@ module.exports = PageView.extend({
   },
   render: function () {
     var self = this;
-    this.renderWithTemplate();
-
+    PageView.prototype.render.apply(self);
     self.renderTagFilters();
   },
   renderTagFilters: function () {
