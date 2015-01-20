@@ -1,7 +1,9 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
 var render = require('server/views/topic');
+var options = require('options');
 
+var topicKinds = options.kinds.topics.map(function(t) { return t.id; });
 
 var handlers = module.exports;
 
@@ -11,7 +13,7 @@ exports.create = {
   tags: ['api','topic'],
   validate: {
     payload: {
-      kind: Joi.string().required().valid('info','idea','decision','todo','meeting').description('kind of the topic'),
+      kind: Joi.string().required().valid(topicKinds).description('kind of the topic'),
       name: Joi.string().description('name of the topic'),
       text: Joi.string().description('text of the topic (can be markdown)'),
       targets: Joi.array().includes(Joi.string()).description('targets of the topic'),
@@ -46,7 +48,7 @@ exports.update = {
       id: Joi.string().required().description('id of the topic we want to update'),
     },
     payload: {
-      kind: Joi.string().valid('info','idea','decision','todo','meeting').description('kind of the topic'),
+      kind: Joi.string().valid(topicKinds).description('kind of the topic'),
       name: Joi.string().description('name of the topic'),
       text: Joi.string().description('text of the topic'),
       author: Joi.string().description('author of the topic'),
