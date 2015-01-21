@@ -25,6 +25,18 @@ options.statuses = {
     { name: 'Pending Review...', id: 'pending-review', color: '#fbca04' },
     { name: 'Reviewed.', id: 'reviewed', color: '#e11d21' },
     { name: 'Approved!', id: 'approved', color: '#009800' },
+  ],
+  payment: [
+    { name: 'Emmited', id: 'emmited', color: '#e11d21' },
+    { name: 'Sent', id: 'sent', color: '#e11d21' },
+    { name: 'Paid', id: 'paid', color: '#009800' },
+  ]
+};
+
+options.vias = {
+  payment: [
+    { name: 'Mail', id: 'mail' },
+    { name: 'Email', id: 'email' },
   ]
 };
 
