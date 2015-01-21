@@ -91,7 +91,7 @@ module.exports = PageView.extend({
     var tagsContainer = $(self.queryByHook('topic-tags'));
 
     _.each(details, function (tag) {
-      tagsContainer.append('<div class=\'ink-label\' data-hook=\''+tag.id+'\' style = \"color:#F0F8FF; background:'+tag.color+'">'+tag.name+'</div>');
+      tagsContainer.append('<span class=\'tag\' data-hook=\''+tag.id+'\' style = \"color:#F0F8FF; background:'+tag.color+'">'+tag.name+'</span>');
     });
   },
   subviews: {
@@ -140,6 +140,7 @@ module.exports = PageView.extend({
       container: '[data-hook=topic-comments]',
       waitFor: 'model.commentsApi',
       prepareView: function (el) {
+        log('Preparing topics!');
         var Comms = new Comments(this.model.commentsApi);
         return new CommentsView({
           el: el,

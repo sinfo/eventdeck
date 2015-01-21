@@ -2,22 +2,21 @@ section.page.topics.view
   div.ink-grid
     div.column-group.horizontal-gutters
       div.all-100
-        h1
-          div
+        .all-80.small-100.tiny-100
+          h1
             span.kind(data-hook='kind')
             span(data-hook='name')
-        div
-          .note.push-left
-            div(data-hook='posted')
-            div(data-hook='duedate')
-            div(data-hook='topic-tags')
-
+        .all-20.small-100.tiny-100
           .button-group.small.push-right
             a.ink-button.orange(data-hook='edit') Edit
             button.ink-button.red(data-hook='delete') Delete
             div(data-hook='topic-subscription')
 
         div.all-100
+          .note
+            div(data-hook='posted')
+            div(data-hook='duedate')
+          .tags(data-hook='topic-tags')
           div
             a(data-hook = 'author')
           p(data-hook='text')
