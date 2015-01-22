@@ -4,6 +4,7 @@ var AmpModel = require('ampersand-model');
 var AmpCollection = require('ampersand-collection');
 var options = require('options');
 var marked = require('client/js/helpers/marked');
+//var Comment = require('./comment');
 
 var Speaker = AmpState.extend({
   props: {
@@ -16,6 +17,10 @@ var Speaker = AmpState.extend({
 var SpeakerCollection = AmpCollection.extend({
   model: Speaker
 });
+
+/*var CommentCollection = AmpCollection.extend({
+    model: Comment
+});*/
 
 module.exports = AmpModel.extend({
   props: {
@@ -31,7 +36,8 @@ module.exports = AmpModel.extend({
     companies: ['array'],
   },
   collections: {
-    speakers: SpeakerCollection
+    speakers: SpeakerCollection,
+    //comments: CommentCollection,
   },
   derived: {
     thread: {
@@ -57,6 +63,12 @@ module.exports = AmpModel.extend({
       fn: function () {
         return 'background-image:url(' + this.img + ');';
       }
-    }
+    },
+/*  commentsApi: {
+      deps: ['id'],
+      fn: function () {
+        return '/api/sessions/' + this.id + '/comments';
+      }
+    }*/
   }
 });

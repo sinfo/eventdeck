@@ -18,12 +18,29 @@ module.exports = PageView.extend({
     'model.name': {
       hook: 'name'
     },
+    'model.kind': {
+      hook: 'kind'
+    },
+    'model.place': {
+      hook: 'place'
+    },
+    'model.description': {
+      hook: 'description'
+    },
     'model.date': {
       hook: 'date'
     },
+    'model.duration': {
+      hook: 'duration'
+    },
+    'model.img': {
+      type: 'attribute',
+      hook: 'img',
+      name: 'src'
+    },
     'model.descriptionHtml': {
       type: 'innerHTML',
-      hook: 'description'
+      hook: 'descriptionHtml'
     },
     'model.editUrl': {
       type: 'attribute',
