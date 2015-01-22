@@ -50,7 +50,7 @@
     "ampersand-model": "^4.0.0",
     "ampersand-rest-collection": "^2.0.0",
     "ampersand-router": "^1.0.1",
-    "ampersand-select-view": "~2.2.1",
+    "ampersand-select-view": "https://github.com/sinfo/ampersand-select-view/tarball/master",
     "ampersand-state": "~4.3.14",
     "ampersand-view": "^7.0.1",
     "ampersand-view-switcher": "^1.0.2",

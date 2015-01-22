@@ -6,8 +6,8 @@ var options = require('options');
 
 var Payment = AmpState.extend({
   props: {
-    price: ['number'],
-    date: ['string'],
+    price: ['any'],
+    date: ['any'],
     invoice: ['string'],
     status: ['string'],
     via: ['string']

@@ -24,7 +24,7 @@ module.exports = FormView.extend({
       }));
       self.addField(new ExtendedInput({
         label: 'Price',
-        name: 'price',
+        name: 'payment.price',
         value: self.model && self.model.payment && self.model.payment.price || '',
         required: false,
         placeholder: 'Price',
@@ -32,7 +32,7 @@ module.exports = FormView.extend({
       }));
       self.addField(new ExtendedInput({
         label: 'Invoice Number',
-        name: 'invoice-number',
+        name: 'payment.invoice',
         value: self.model && self.model.payment && self.model.payment.invoice || '',
         required: false,
         placeholder: 'Invoice Number',
@@ -41,11 +41,12 @@ module.exports = FormView.extend({
       self.addField(new DateView({
         label: 'Invoice Date',
         value: self.model && self.model.payment && self.model.payment.date || '',
-        name: 'invoice-date'
+        name: 'payment.date'
       }));
       self.addField(new SelectView({
         template: templates.includes.formSelect(),
-        name: 'invoice-status',
+        unselectedText: 'please choose one',
+        name: 'payment.status',
         label: 'Invoice Status',
         parent: self,
         options: options.statuses.payment.map(function(t) { return [t.id, t.name]; }),
@@ -55,7 +56,8 @@ module.exports = FormView.extend({
       }));
       self.addField(new SelectView({
         template: templates.includes.formSelect(),
-        name: 'invoice-via',
+        unselectedText: 'please choose one',
+        name: 'payment.via',
         label: 'Via',
         parent: self,
         options: options.vias.payment.map(function(t) { return [t.id, t.name]; }),
@@ -73,6 +75,7 @@ module.exports = FormView.extend({
     return [
       new SelectView({
         template: templates.includes.formSelect(),
+        unselectedText: 'please choose one',
         name: 'event',
         label: 'Event',
         parent: this,
@@ -84,6 +87,7 @@ module.exports = FormView.extend({
       }),
       new SelectView({
         template: templates.includes.formSelect(),
+        unselectedText: 'please choose one',
         name: 'member',
         label: 'Member',
         parent: this,
@@ -95,10 +99,11 @@ module.exports = FormView.extend({
       }),
       new SelectView({
         template: templates.includes.formSelect(),
+        unselectedText: 'please choose one',
         name: 'status',
         label: 'Status',
         parent: this,
-        options: options.statuses[this.model && this.model.threadKind || 'company'].map(function (s) { return s.name; }),
+        options: options.statuses[this.model && this.model.threadKind || 'company'].map(function (s) { return [s.id, s.name]; }),
         value: this.model && this.model.status || '',
         yieldModel: false
       })

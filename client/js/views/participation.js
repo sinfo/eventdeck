@@ -4,6 +4,7 @@ var View = require('ampersand-view');
 var templates = require('client/js/templates');
 var ViewSwitcher = require('ampersand-view-switcher');
 var ParticipationForm = require('client/js/forms/participation');
+var populate = require('client/js/helpers/populate');
 var async = require('async');
 
 module.exports =  View.extend({
@@ -19,7 +20,7 @@ module.exports =  View.extend({
               return cb();
             }
             self.model.memberDetails = model;
-            log('Got member', model.name);
+            // log('Got member', model.name);
             cb();
           });
         }
@@ -31,7 +32,7 @@ module.exports =  View.extend({
               log.error('couldnt find a event with id: ' + self.model.event);
             }
             self.model.eventDetails = model;
-            log('Got event', model.name);
+            // log('Got event', model.name);
           });
         }
       }
@@ -120,12 +121,39 @@ var EditParticipation = View.extend({
           model: this.model,
           parent: self,
           submitCallback: function (data) {
-            data = self.model.changedAttributes(data);
-            if(!data) {
+            // var populated = populate(data, self.model, ['payment.price', 'payment.invoice', 'payment.date', 'payment.date', 'payment.status', 'payment.via']);
+
+            var changedAttributes = self.model.changedAttributes(data);
+
+            if(data['payment.price'] || data['payment.date'] || data['payment.invoice'] || data['payment.status'] || data['payment.via']) {
+              data.payment = {
+                price: data['payment.price'] || self.model.payment && self.model.payment.price,
+                date: data['payment.date'] || self.model.payment && self.model.payment.date,
+                invoice: data['payment.invoice'] || self.model.payment && self.model.payment.invoice,
+                status: data['payment.status'] || self.model.payment && self.model.payment.status,
+                via: data['payment.via'] || self.model.payment && self.model.payment.via,
+              }
+
+              delete  data['payment.price'];
+              delete  data['payment.date'];
+              delete  data['payment.invoice'];
+              delete  data['payment.status'];
+              delete  data['payment.via'];
+
+              if(!changedAttributes) {
+                changedAttributes = {};
+              }
+
+              changedAttributes.payment = data.payment;
+            }
+
+            log('data', data, changedAttributes);
+
+            if(!changedAttributes) {
               return self.parent.handleViewClick();
             }
 
-            self.model.set(data);
+            self.model.set(changedAttributes);
 
             self.parent.parent.parent.parent.model.save({
               wait: false,

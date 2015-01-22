@@ -6,8 +6,8 @@ module.exports = function(data, model, properties){
 		if(data[property]){
 			childs = property.split('.');
 			data[childs[0]] = model[childs[0]];
-			data[childs[0]][childs[1]] = data[childs[0] + '.' + childs[1]] || data[childs[0]][childs[1]];
-			delete data[childs[0] + '.' + childs[1]];
+			data[childs[0]][childs[1]] = data[property] || data[childs[0]][childs[1]];
+			delete data[property];
 		}
 	});
 	return data;
