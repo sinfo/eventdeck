@@ -80,6 +80,29 @@ module.exports =  View.extend({
   }
 });
 
+var ViewPayment = View.extend({
+  template: templates.partials.participations.payment,
+  bindings: {
+    'model.kind': { type: 'toggle', hook: 'kind' },
+    'model.payment.price': { type: 'toggle', hook: 'price' },
+    'model.payment.invoice': { type: 'toggle', hook: 'invoice' },
+    'model.payment.date': { type: 'toggle', hook: 'date' },
+    'model.payment.via': { type: 'toggle', hook: 'via' },
+    'model.kind': '[data-hook~=kind] span',
+    'model.payment.price': '[data-hook~=price] span',
+    'model.payment.invoice': '[data-hook~=invoice] span',
+    'model.payment.date': '[data-hook~=date] span',
+    'model.payment.via': '[data-hook~=via] span',
+  },
+  render: function() {
+    var self = this;
+    if(self.model.threadKind != 'company') {
+      return;
+    }
+    self.renderWithTemplate();
+  }
+});
+
 var ViewParticipation = View.extend({
   template: templates.partials.participations.view,
   bindings: {
@@ -101,9 +124,19 @@ var ViewParticipation = View.extend({
   events: {
     'click [data-hook~=action-delete]': 'handleRemoveClick'
   },
-  render: function () {
-    this.renderWithTemplate();
-  }
+  subviews: {
+    payment: {
+      container: '[data-hook=payment-container]',
+      waitFor: 'model.payment',
+      prepareView: function (el) {
+        var self = this;
+        return new ViewPayment({
+          el: el,
+          model: self.model
+        });
+      }
+    },
+  },
 });
 
 var EditParticipation = View.extend({
