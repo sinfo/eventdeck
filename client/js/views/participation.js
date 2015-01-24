@@ -5,6 +5,7 @@ var templates = require('client/js/templates');
 var ViewSwitcher = require('ampersand-view-switcher');
 var ParticipationForm = require('client/js/forms/participation');
 var populate = require('client/js/helpers/populate');
+var _ = require('client/js/helpers/underscore');
 var async = require('async');
 
 module.exports =  View.extend({
@@ -96,7 +97,7 @@ var ViewPayment = View.extend({
   },
   render: function() {
     var self = this;
-    if(self.model.threadKind != 'company') {
+    if(_.isEmpty(self.model.payment.serialize())) {
       return;
     }
     self.renderWithTemplate();
@@ -154,9 +155,7 @@ var EditParticipation = View.extend({
           model: this.model,
           parent: self,
           submitCallback: function (data) {
-            // var populated = populate(data, self.model, ['payment.price', 'payment.invoice', 'payment.date', 'payment.date', 'payment.status', 'payment.via']);
-
-            var changedAttributes = self.model.changedAttributes(data);
+            var changedAttributes = _.compactObject(self.model.changedAttributes(data));
 
             if(data['payment.price'] || data['payment.date'] || data['payment.invoice'] || data['payment.status'] || data['payment.via']) {
               data.payment = {
@@ -188,7 +187,10 @@ var EditParticipation = View.extend({
 
             self.model.set(changedAttributes);
 
-            self.parent.parent.parent.parent.model.save({
+            var parentModel = self.parent.parent.parent.parent.model;
+
+            parentModel.save({participations: parentModel.participations.serialize() }, {
+              patch: true,
               wait: false,
               success: function () {
                 log('participation saved', data);
