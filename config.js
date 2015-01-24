@@ -30,7 +30,19 @@ config.facebook = {
 
 config.bunyan = {
   name: pack.name,
-  level: process.env.EVENTDECK_LOG_LEVEL || 'trace'
+  streams: [
+    {
+      level: process.env.NODE_ENV=='test' && 'error' || process.env.EVENTDECK_LOG_LEVEL || 'trace',
+      stream: process.stdout
+    },
+    {
+      type: 'rotating-file',
+      level: process.env.EVENTDECK_LOG_LEVEL || 'trace',
+      path: './eventdeck.log',
+      period: '1d',   // daily rotation
+      count: 3        // keep 3 back copies
+    }
+  ]
 };
 
 config.swagger = {
