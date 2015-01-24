@@ -23,11 +23,6 @@ module.exports = PageView.extend({
       hook: 'img',
       name: 'src'
     },
-    'model.img': {
-      type: 'attribute',
-      hook: 'img',
-      name: 'src'
-    },
     'model.title': {
       hook: 'title'
     },

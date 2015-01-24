@@ -16,7 +16,7 @@ module.exports = View.extend({
       hook: 'status',
       name: 'style'
     },
-    'model.img': {
+    'model.storedImg': {
       type: 'attribute',
       hook: 'img',
       name: 'src'

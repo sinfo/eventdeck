@@ -38,6 +38,7 @@ function renderObject(model, isAuthenticated) {
     title: model.title,
     description: model.description,
     img: model.img,
+    storedImg: model.img && '/api/images/'+ new Buffer(model.img || '').toString('base64'),
     contacts: model.contacts,
     participations: model.participations && model.participations.map(function(participation) {
       return {
