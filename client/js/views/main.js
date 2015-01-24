@@ -32,7 +32,8 @@ module.exports = View.extend({
     'change [data-hook~=base-form] select': 'handleEventChange',
     'input [data-hook~=base-form] input': 'handleSearchInput',
     'keydown [data-hook~=base-form] input': 'handleSearchKeydown',
-    'click .left-drawer-trigger': 'toggleLeftDrawer'
+    'click .left-drawer-trigger': 'toggleLeftDrawer',
+    'click .left-drawer a': 'toggleLeftDrawer',
   },
   bindings: {
     'model.unreadCount':[
