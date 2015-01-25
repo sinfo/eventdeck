@@ -6,6 +6,7 @@ var marked = require('client/js/helpers/marked');
 var log = require('bows')('topics');
 var timeSince = require('client/js/helpers/timeSince');
 var _ = require('client/js/helpers/underscore');
+var Member = require('./member');
 
 var PollOption = AmpState.extend({
   props: {
@@ -55,11 +56,21 @@ module.exports = AmpModel.extend({
     poll: Poll
   },
 
+  session: {
+    memberDetails: Member,
+  },
+
   derived: {
     thread: {
       deps: ['id'],
       fn: function () {
         return 'topic-' + this.id;
+      }
+    },
+    member: {
+      deps: ['author'],
+      fn: function () {
+        return this.author;
       }
     },
     threadKind: {

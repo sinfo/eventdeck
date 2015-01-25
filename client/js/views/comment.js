@@ -5,22 +5,11 @@ var templates = require('client/js/templates');
 var ViewSwitcher = require('ampersand-view-switcher');
 var CommentForm = require('client/js/forms/comment');
 var _ = require('client/js/helpers/underscore');
-var async = require('async');
+var MemberBadge = require('client/js/views/memberBadge');
+
 
 module.exports = View.extend({
   template: templates.cards.comment,
-  initialize: function(){
-    var self = this;
-    if(self.model.member){
-      app.members.getOrFetch(self.model.member, {all: true}, function (err, model) {
-        if (err) {
-          log.error('couldnt find a member with id: ' + self.model.member);
-        }
-        self.model.memberDetails = model;
-        // log('Got member', model.name);
-      });
-    }
-  },
   render: function () {
     this.renderWithTemplate();
     this.viewContainer = this.queryByHook('view-container');
@@ -82,7 +71,20 @@ var ViewComment = View.extend({
     if(app.me.isAdmin) {
       this.renderSubview(new AdminComment(), '[data-hook=admin-container]');
     }
-  }
+  },
+  subviews: {
+    member: {
+      container: '[data-hook=member-container]',
+      waitFor: 'model.member',
+      prepareView: function (el) {
+        var self = this;
+        return new MemberBadge({
+          el: el,
+          model: self.model
+        });
+      }
+    },
+  },
 });
 
 

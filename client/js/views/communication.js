@@ -5,6 +5,8 @@ var templates = require('client/js/templates');
 var ViewSwitcher = require('ampersand-view-switcher');
 var CommunicationForm = require('client/js/forms/communication');
 var _ = require('client/js/helpers/underscore');
+var MemberBadge = require('client/js/views/memberBadge');
+
 
 module.exports = View.extend({
   template: templates.cards.communication,
@@ -90,7 +92,20 @@ var ViewCommunication = View.extend({
     if(app.me.isAdmin) {
       this.renderSubview(new AdminCommunication(), '[data-hook=admin-container]');
     }
-  }
+  },
+  subviews: {
+    member: {
+      container: '[data-hook=member-container]',
+      waitFor: 'model.member',
+      prepareView: function (el) {
+        var self = this;
+        return new MemberBadge({
+          el: el,
+          model: self.model
+        });
+      }
+    },
+  },
 });
 
 

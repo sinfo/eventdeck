@@ -7,6 +7,7 @@ var CommentsView = require('client/js/views/comments');
 var SubscriptionView = require('client/js/views/subscription');
 var Comments = require('client/js/models/comments');
 var PollForm = require('client/js/forms/poll');
+var MemberBadge = require('client/js/views/memberBadge');
 
 var $ = require('client/js/helpers/jquery');
 var _ = require('client/js/helpers/underscore');
@@ -18,13 +19,9 @@ module.exports = PageView.extend({
     'model.name': {
       hook: 'name'
     },
-    'model.author': {
-      hook: 'author'
-    },
     'model.targets': {
       hook: 'targets'
     },
-
     'model.kindDetails.name': {
       hook: 'kind'
     },
@@ -59,49 +56,86 @@ module.exports = PageView.extend({
       if (err) {
         log.error('couldnt find a topic with id: ' + spec.id);
       }
-      self.model = model;
-      app.access(model);
       log('Got topic', model.name);
 
-      if(!app.tags.length) {
-        app.tags.fetch({
-          success: function () {
-            self.render();
-          }
-        });
+      self.model = model;
+      app.access(model);
+      // self.render();
+      if(app.tags.length) {
+        self.renderTagFilters();
+      } else {
+        app.tags.fetch();
       }
-
-      self.render();
     });
   },
   render: function () {
+    log('RENDEEEER');
+
     var self = this;
     PageView.prototype.render.apply(self);
-    self.renderTagFilters();
+
+    if(!self.model) {
+      return;
+    }
+
+    if(app.tags.length) {
+      return self.renderTagFilters();
+    }
+
+    app.tags.on('sync', function () {
+      log('got tags', app.tags.serialize());
+      self.renderTagFilters();
+    });
   },
   renderTagFilters: function () {
     var self = this;
-
-    log('Rendering tags!!!');
-
     var details = app.tags.serialize().filter(function (tag) {
       return self.model.tags.indexOf(tag.id) != -1;
     });
 
-    var tagsContainer = $(self.queryByHook('topic-tags'));
+    log('Rendering tags!!!', details);
 
+    // var tagsContainer = $(self.queryByHook('topic-tags'));
+    var tagsContainer = $('[data-hook=topic-tags]');
     _.each(details, function (tag) {
       tagsContainer.append('<span class=\'tag\' data-hook=\''+tag.id+'\' style = \"color:#F0F8FF; background:'+tag.color+'">'+tag.name+'</span>');
     });
   },
   subviews: {
-    form: {
+    subscription:{
+      container: '[data-hook=topic-subscription]',
+      parent: this,
+      waitFor: 'model.thread',
+      prepareView: function (el) {
+        var self = this;
+        return new SubscriptionView({
+          el: el,
+          model: self.model,
+          parent: self,
+        });
+      }
+    },
+    member: {
+      container: '[data-hook=member-container]',
+      waitFor: 'model.member',
+      prepareView: function (el) {
+        var self = this;
+        return new MemberBadge({
+          el: el,
+          model: self.model
+        });
+      }
+    },
+    poll: {
       container: '[data-hook=topic-poll]',
-      waitFor: 'model.hasPoll',
+      waitFor: 'model.poll.options',
       parent: this,
       prepareView: function (el) {
         var self = this;
         var model = this.model;
+
+        self.queryByHook('topic-poll').innerHTML = '';
+        log('POOOLLLLLLL')
 
         var poll = new PollForm({
           el: el,
@@ -148,19 +182,6 @@ module.exports = PageView.extend({
         });
       }
     },
-    subscription:{
-      container: '[data-hook=topic-subscription]',
-      parent: this,
-      waitFor: 'model.thread',
-      prepareView: function (el) {
-        var self = this;
-        return new SubscriptionView({
-          el: el,
-          model: self.model,
-          parent: self,
-        });
-      }
-    }
   },
   handleDeleteClick: function () {
     this.model.destroy({success: function () {

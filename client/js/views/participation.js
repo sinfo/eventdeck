@@ -4,40 +4,24 @@ var View = require('ampersand-view');
 var templates = require('client/js/templates');
 var ViewSwitcher = require('ampersand-view-switcher');
 var ParticipationForm = require('client/js/forms/participation');
+var MemberBadge = require('client/js/views/memberBadge');
 var populate = require('client/js/helpers/populate');
 var _ = require('client/js/helpers/underscore');
-var async = require('async');
 
 module.exports =  View.extend({
   template: templates.cards.participation,
   initialize: function (spec) {
     var self = this;
-    async.parallel([
-      function getMember (cb){
-        if(self.model.member){
-          app.members.getOrFetch(self.model.member, {all: true}, function (err, model) {
-            if (err) {
-              log.error('couldnt find a member with id: ' + self.model.member);
-              return cb();
-            }
-            self.model.memberDetails = model;
-            // log('Got member', model.name);
-            cb();
-          });
+    if(self.model.event && !self.model.eventDetails){
+      app.events.getOrFetch(self.model.event, {all: true}, function (err, model) {
+        if (err) {
+          log.error('couldnt find a event with id: ' + self.model.event);
         }
-      },
-      function getEvent (cb){
-        if(self.model.event){
-          app.events.getOrFetch(self.model.event, {all: true}, function (err, model) {
-            if (err) {
-              log.error('couldnt find a event with id: ' + self.model.event);
-            }
-            self.model.eventDetails = model;
-            // log('Got event', model.name);
-          });
-        }
-      }
-    ], self.render);
+        self.model.eventDetails = model;
+        self.render();
+        // log('Got event', model.name);
+      });
+    }
   },
   render: function () {
     this.renderWithTemplate();
@@ -132,6 +116,17 @@ var ViewParticipation = View.extend({
       prepareView: function (el) {
         var self = this;
         return new ViewPayment({
+          el: el,
+          model: self.model
+        });
+      }
+    },
+    member: {
+      container: '[data-hook=member-container]',
+      waitFor: 'model.member',
+      prepareView: function (el) {
+        var self = this;
+        return new MemberBadge({
           el: el,
           model: self.model
         });

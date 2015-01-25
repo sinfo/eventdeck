@@ -1,10 +1,12 @@
 .content
 
-  .member
-    img(data-hook='member-img')
-    span(data-hook='member-name')
-  .note.push-right(data-hook='posted')
-  .paragraphs(data-hook='text')
+  .all-100
+    .push-left
+      span(data-hook='member-container')
+    .push-right
+      span.note(data-hook='posted')
+
+  .all-100(data-hook='text')
 
   .button-group
     a.ink-button.orange.small(data-hook='action-edit') Edit
