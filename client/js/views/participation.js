@@ -68,16 +68,26 @@ module.exports =  View.extend({
 var ViewPayment = View.extend({
   template: templates.partials.participations.payment,
   bindings: {
-    'model.kind': { type: 'toggle', hook: 'kind' },
-    'model.payment.price': { type: 'toggle', hook: 'price' },
-    'model.payment.invoice': { type: 'toggle', hook: 'invoice' },
-    'model.payment.date': { type: 'toggle', hook: 'date' },
-    'model.payment.via': { type: 'toggle', hook: 'via' },
-    'model.kind': '[data-hook~=kind] span',
-    'model.payment.price': '[data-hook~=price] span',
-    'model.payment.invoice': '[data-hook~=invoice] span',
-    'model.payment.date': '[data-hook~=date] span',
-    'model.payment.via': '[data-hook~=via] span',
+    'model.kind': [
+      { type: 'toggle', hook: 'kind' },
+      { selector: '[data-hook~=kind] span' },
+    ],
+    'model.payment.price': [
+      { type: 'toggle', hook: 'price' },
+      { selector: '[data-hook~=price] span' },
+    ],
+    'model.payment.invoice': [
+      { type: 'toggle', hook: 'invoice' },
+      { selector: '[data-hook~=invoice] span' },
+    ],
+    'model.payment.date': [
+      { type: 'toggle', hook: 'date' },
+      { selector: '[data-hook~=date] span' },
+    ],
+    'model.payment.via': [
+      { type: 'toggle', hook: 'via' },
+      { selector: '[data-hook~=via] span' },
+    ],
   },
   render: function() {
     var self = this;
@@ -159,7 +169,7 @@ var EditParticipation = View.extend({
                 invoice: data['payment.invoice'] || self.model.payment && self.model.payment.invoice,
                 status: data['payment.status'] || self.model.payment && self.model.payment.status,
                 via: data['payment.via'] || self.model.payment && self.model.payment.via,
-              }
+              };
 
               delete  data['payment.price'];
               delete  data['payment.date'];

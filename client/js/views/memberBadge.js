@@ -1,3 +1,4 @@
+/*global app*/
 var log = require('bows')('member-badge');
 var View = require('ampersand-view');
 var templates = require('client/js/templates');
@@ -24,7 +25,7 @@ module.exports = View.extend({
       app.members.getOrFetch(self.model.member, {all: true}, function (err, model) {
         if (err) {
           log.error('couldnt find a member with id: ' + self.model.member);
-          return cb();
+          return;
         }
         self.model.memberDetails = model;
         log('Got member', model.name);

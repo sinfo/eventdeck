@@ -135,7 +135,6 @@ module.exports = PageView.extend({
         var model = this.model;
 
         self.queryByHook('topic-poll').innerHTML = '';
-        log('POOOLLLLLLL')
 
         var poll = new PollForm({
           el: el,

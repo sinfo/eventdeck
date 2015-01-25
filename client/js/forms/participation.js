@@ -51,7 +51,6 @@ module.exports = FormView.extend({
         parent: self,
         options: options.statuses.payment.map(function(t) { return [t.id, t.name]; }),
         value: self.model && self.model.payment && self.model.payment.status || '',
-        unselectedText: 'please choose one',
         yieldModel: false
       }));
       self.addField(new SelectView({
@@ -62,7 +61,6 @@ module.exports = FormView.extend({
         parent: self,
         options: options.vias.payment.map(function(t) { return [t.id, t.name]; }),
         value: self.model && self.model.payment && self.model.payment.via || '',
-        unselectedText: 'please choose one',
         yieldModel: false
       }));
     }
