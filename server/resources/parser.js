@@ -16,4 +16,7 @@ function parseMembers(text, thread, objectId, memberId, cb) {
   if(membersFound && membersFound.length > 0) {
     server.methods.notification.notifyMention(memberId, thread, membersFound, objectId, cb);
   }
+  else{
+  	return cb();
+  }
 }

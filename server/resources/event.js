@@ -3,7 +3,7 @@ var slug = require('slug');
 var server = require('server').hapi;
 var log = require('server/helpers/logger');
 var parser = require('server/helpers/fieldsParser');
-var Event = require('server/db/event');
+var eventModel = require('server/db/event');
 
 
 server.method('event.create', create, {});
@@ -17,7 +17,7 @@ function create(event, memberId, cb) {
   event.id = slug(event.id || event.name).toLowerCase();
   event.updated = Date.now();
 
-  Event.create(event, function(err, _event) {
+  eventModel.create(event, function(err, _event) {
     if (err) {
       log.error({ err: err, event: event}, 'error creating event');
       return cb(Boom.internal());
@@ -30,7 +30,7 @@ function create(event, memberId, cb) {
 function update(id, event, cb) {
   event.updated = Date.now();
 
-  Event.findOneAndUpdate({id: id}, event, function(err, _event) {
+  eventModel.findOneAndUpdate({id: id}, event, function(err, _event) {
     if (err) {
       log.error({ err: err, event: id}, 'error updating event');
       return cb(Boom.internal());
@@ -49,7 +49,7 @@ function get(id, query, cb) {
 
   var fields = parser(query.fields);
 
-  Event.findOne({id: id}, fields, function(err, event) {
+  eventModel.findOne({id: id}, fields, function(err, event) {
     if (err) {
       log.error({ err: err, event: id}, 'error getting event');
       return cb(Boom.internal());
@@ -74,7 +74,7 @@ function list(query, cb) {
     sort: parser(query.sort)
   };
 
-  Event.find(filter, fields,options, function(err, events) {
+  eventModel.find(filter, fields,options, function(err, events) {
     if (err) {
       log.error({ err: err}, 'error getting all events');
       return cb(Boom.internal());
@@ -85,7 +85,7 @@ function list(query, cb) {
 }
 
 function remove(id, cb) {
-  Event.findOneAndRemove({id: id}, function(err, event){
+  eventModel.findOneAndRemove({id: id}, function(err, event){
     if (err) {
       log.error({ err: err, event: id}, 'error deleting event');
       return cb(Boom.internal());

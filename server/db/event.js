@@ -10,4 +10,4 @@ var schema = new mongoose.Schema({
   updated: { type: Date }
 });
 
-var Event = module.exports = mongoose.model('Event', schema);
+var eventModel = module.exports = mongoose.model('Event', schema);

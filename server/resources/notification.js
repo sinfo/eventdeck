@@ -34,7 +34,12 @@ function broadcast(notification, cb){
   if(!notification){
     return cb();
   }
-  IO.emit(events.notify, notification, cb);
+  IO.emit(events.notify, notification, function(err){
+    if(err){
+      log.error({err: err, notification: notification}, 'notification broadcast failed');
+    }
+  });
+  cb();
 }
 
 function notifyCreate(memberId, path, thing, cb) {
