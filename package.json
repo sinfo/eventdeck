@@ -10,12 +10,13 @@
     "test": "NODE_PATH=. node_modules/lab/bin/lab server/test -l  -m 2000 --verbose",
     "test-cov": "NODE_PATH=. node_modules/lab/bin/lab server/test -c",
     "lint": "npm run lint-client && npm run lint-server",
-    "lint-client": "node_modules/.bin/jshint -c .jshintrc-client --exclude server --exclude node_modules .",
-    "lint-server": "node_modules/.bin/jshint -c .jshintrc-server  --exclude client --exclude node_modules ."
+    "lint-client": "node_modules/.bin/jshint . -c .jshintrc-client --exclude server",
+    "lint-server": "node_modules/.bin/jshint . -c .jshintrc-server  --exclude client"
   },
   "pre-commit": [
     "lint-client",
-    "lint-server"
+    "lint-server",
+    "test"
   ],
   "repository": {
     "type": "git",

@@ -15,7 +15,7 @@ var credentials = {
   }],
 };
 
-var subscriptionA = {  
+var subscriptionA = {
     thread : 'company-example',
 };
 
@@ -28,7 +28,7 @@ lab.experiment('Subscription', function() {
       credentials: credentials,
       payload: subscriptionA
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -45,17 +45,16 @@ lab.experiment('Subscription', function() {
     var options = {
       method: 'GET',
       url: '/api/subscriptions?thread='+subscriptionA.thread,
-
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
-      Code.expect(response.statusCode).to.equal(200);
+      Code.expect(response.statusCode, 'statusCode').to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.thread).to.equal(subscriptionA.thread);
-      
+      Code.expect(result.subscribed, 'subscribed').to.equal(true);
+
       done();
     });
   });
@@ -67,7 +66,7 @@ lab.experiment('Subscription', function() {
       payload: subscriptionA,
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
