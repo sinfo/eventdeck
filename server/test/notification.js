@@ -46,7 +46,7 @@ lab.experiment('Notification', function() {
       Code.expect(result.member, 'member').to.equal(notificationA.member);
       Code.expect(result.description, 'description').to.equal(notificationA.description);
 
-      notificationAid = result.id.toString();
+      notificationAid = result._id.toString();
 
       done();
     });
