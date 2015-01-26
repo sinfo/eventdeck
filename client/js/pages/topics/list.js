@@ -68,7 +68,11 @@ module.exports = PageView.extend({
     selectedKind = 'showall';
 
     if (!this.collection.length) {
-      this.fetchCollection({success: function() {
+      this.fetchCollection();
+    }
+    if (!app.tags.length) {
+      app.tags.fetch({success: function () {
+        log('got tags', app.tags.serialize());
         self.render();
       }});
     }
@@ -77,12 +81,11 @@ module.exports = PageView.extend({
     var self = this;
     this.renderWithTemplate();
 
-    app.tags.fetch({success: function () {
-        log('got tags', app.tags.serialize());
-        self.renderTagFilters();
-        self.renderCards(tempCollection);
-    }});
+    if (app.tags.length) {
+      self.renderTagFilters();
+    }
 
+    self.renderCards(tempCollection);
     this.renderKindFilters();
     this.renderClosedFilters();
 
@@ -96,13 +99,15 @@ module.exports = PageView.extend({
 
   fetchCollection: function () {
     log('Fetching topics');
-    var that = this;
+    var self = this;
     this.collection.fetch({
       success: function () {
-        var aux = that.collection.filter(function(topic){
+        var aux = self.collection.filter(function(topic){
           return topic.closed === false;
         });
         tempCollection = new AmpersandCollection(aux, {model: Topic});
+
+        self.render();
       }
     });
 
@@ -110,6 +115,10 @@ module.exports = PageView.extend({
   },
 
   renderCards: function (collection) {
+    if(!collection || !collection.length) {
+      return;
+    }
+
     var groups = $(this.queryByHook('topics-list')).children('div');
 
     for (var i = 0; i < groups.length; i++) {
@@ -202,8 +211,8 @@ module.exports = PageView.extend({
     var self = this;
 
     var filterContainer = $(self.queryByHook('closed-filters'));
-      filterContainer.append('<li><div class=\'ink-button\' data-hook=\'open\'>Open</div></li>');
-      filterContainer.append('<li><div class=\'ink-button\' data-hook=\'closed\'>Closed</div></li>');
+    filterContainer.append('<li><div class=\'ink-button\' data-hook=\'open\'>Open</div></li>');
+    filterContainer.append('<li><div class=\'ink-button\' data-hook=\'closed\'>Closed</div></li>');
   },
   handleClosed: function (ev) {
     var closed = ev.target.getAttribute('data-hook');
