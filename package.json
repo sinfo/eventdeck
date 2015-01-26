@@ -7,7 +7,7 @@
     "start": "NODE_PATH=. node server/index.js | bunyan",
     "mon": "NODE_PATH=. node_modules/.bin/nodemon server/index.js --ignore client/ | node_modules/.bin/bunyan",
     "pretest": "touch client/css/app.css && echo \"module.exports={}\" >> client/js/templates.js",
-    "test": "NODE_PATH=. node_modules/lab/bin/lab server/test -l  -m 2000 --verbose",
+    "test": "NODE_PATH=. node_modules/lab/bin/lab server/test -l  -m 4000 --verbose",
     "test-cov": "NODE_PATH=. node_modules/lab/bin/lab server/test -c",
     "lint": "npm run lint-client && npm run lint-server",
     "lint-client": "node_modules/.bin/jshint . -c .jshintrc-client --exclude server",
