@@ -1,8 +1,7 @@
 /*global app*/
 var View = require('ampersand-view');
 var templates = require('client/js/templates');
-var _ = require('client/js/helpers/underscore');
-var $ = require('client/js/helpers/jquery');
+var TagsView = require('client/js/views/topicTags');
 
 module.exports = View.extend({
   template: templates.cards.topic,
@@ -29,19 +28,17 @@ module.exports = View.extend({
       name: 'id'
     }
   },
-  initialize: function(){
-    var self = this;
-
-    self.renderWithTemplate();
-
-    var topicTags = app.tags.serialize().filter(function (tag) {
-      return self.model.tags.indexOf(tag.id) != -1;
-    });
-
-    var tagsContainer = $('#'+this.model.thread+' [data-hook=tags]');
-    tagsContainer.empty();
-    _.each(topicTags, function (tag) {
-      tagsContainer.append('<div style=\'color:'+tag.color+'\'>'+tag.name+'</div>');
-    });
+  subviews: {
+    tags: {
+      container: '[data-hook=tags-container]',
+      waitFor: 'model.tags',
+      prepareView: function (el) {
+        var self = this;
+        return new TagsView({
+          el: el,
+          model: self.model
+        });
+      }
+    },
   }
 });

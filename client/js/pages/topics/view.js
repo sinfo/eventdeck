@@ -2,15 +2,12 @@
 var log = require('bows')('topics');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
-var TopicView = require('client/js/views/topic');
+var TagsView = require('client/js/views/topicTags');
 var CommentsView = require('client/js/views/comments');
 var SubscriptionView = require('client/js/views/subscription');
 var Comments = require('client/js/models/comments');
 var PollForm = require('client/js/forms/poll');
 var MemberBadge = require('client/js/views/memberBadge');
-
-var $ = require('client/js/helpers/jquery');
-var _ = require('client/js/helpers/underscore');
 
 module.exports = PageView.extend({
   pageTitle: 'View topic',
@@ -60,12 +57,6 @@ module.exports = PageView.extend({
 
       self.model = model;
       app.access(model);
-      // self.render();
-      if(app.tags.length) {
-        self.renderTagFilters();
-      } else {
-        app.tags.fetch();
-      }
     });
   },
   render: function () {
@@ -73,33 +64,6 @@ module.exports = PageView.extend({
 
     var self = this;
     PageView.prototype.render.apply(self);
-
-    if(!self.model) {
-      return;
-    }
-
-    if(app.tags.length) {
-      return self.renderTagFilters();
-    }
-
-    app.tags.on('sync', function () {
-      log('got tags', app.tags.serialize());
-      self.renderTagFilters();
-    });
-  },
-  renderTagFilters: function () {
-    var self = this;
-    var details = app.tags.serialize().filter(function (tag) {
-      return self.model.tags.indexOf(tag.id) != -1;
-    });
-
-    log('Rendering tags!!!', details);
-
-    // var tagsContainer = $(self.queryByHook('topic-tags'));
-    var tagsContainer = $('[data-hook=topic-tags]');
-    _.each(details, function (tag) {
-      tagsContainer.append('<span class=\'tag\' data-hook=\''+tag.id+'\' style = \"color:#F0F8FF; background:'+tag.color+'">'+tag.name+'</span>');
-    });
   },
   subviews: {
     subscription:{
@@ -121,6 +85,17 @@ module.exports = PageView.extend({
       prepareView: function (el) {
         var self = this;
         return new MemberBadge({
+          el: el,
+          model: self.model
+        });
+      }
+    },
+    tags: {
+      container: '[data-hook=tags-container]',
+      waitFor: 'model.tags',
+      prepareView: function (el) {
+        var self = this;
+        return new TagsView({
           el: el,
           model: self.model
         });

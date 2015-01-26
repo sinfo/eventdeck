@@ -7,6 +7,7 @@ var log = require('bows')('topics');
 var timeSince = require('client/js/helpers/timeSince');
 var _ = require('client/js/helpers/underscore');
 var Member = require('./member');
+var Tag = require('./tag');
 
 var PollOption = AmpState.extend({
   props: {
@@ -26,6 +27,10 @@ var Poll = AmpState.extend({
   collections: {
     options: PollOptions
   }
+});
+
+var Tags = AmpCollection.extend({
+    model: Tag
 });
 
 
@@ -58,6 +63,10 @@ module.exports = AmpModel.extend({
 
   session: {
     memberDetails: Member,
+  },
+
+  collections: {
+    tagsDetails: Tags
   },
 
   derived: {

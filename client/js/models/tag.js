@@ -7,4 +7,12 @@ module.exports = AmpModel.extend({
     name: ['string'],
     color: ['string'],
   },
+  derived: {
+    style: {
+      deps: ['color'],
+      fn: function () {
+        return 'background-color:' + this.color;
+      }
+    },
+  }
 });

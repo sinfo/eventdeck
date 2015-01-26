@@ -53,6 +53,7 @@
     "ampersand-router": "^1.0.1",
     "ampersand-select-view": "https://github.com/sinfo/ampersand-select-view/tarball/master",
     "ampersand-state": "~4.3.14",
+    "ampersand-subcollection": "^2.0.1",
     "ampersand-view": "^7.0.1",
     "ampersand-view-switcher": "^1.0.2",
     "andlog": "^1.0.0",
