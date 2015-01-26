@@ -2,7 +2,7 @@ var FormView = require('ampersand-form-view');
 var InputView = require('ampersand-input-view');
 var ArrayInputView = require('ampersand-array-input-view');
 var SelectView = require('ampersand-select-view');
-var DateView = require('ampersand-date-view');
+var DateView = require('ampersand-pikaday-view');
 var templates = require('client/js/templates');
 var ExtendedInput = InputView.extend({
   template: templates.includes.formInput()

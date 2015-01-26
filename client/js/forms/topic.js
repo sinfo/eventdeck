@@ -5,7 +5,7 @@ var ArrayInputView = require('ampersand-array-input-view');
 var ArrayCheckboxView = require('ampersand-array-checkbox-view');
 var CheckboxView = require('ampersand-checkbox-view');
 var SelectView = require('ampersand-select-view');
-var DateView = require('ampersand-date-view');
+var DateView = require('ampersand-pikaday-view');
 var ChosenView = require('ampersand-chosen-view');
 var templates = require('client/js/templates');
 var options = require('options');
@@ -82,28 +82,6 @@ module.exports = FormView.extend({
         placeholder: 'Text',
         parent: this
       }),
-      // new ArrayCheckboxView({
-      //   label: 'Targets',
-      //   name: 'targets',
-      //   template: templates.includes.formCheckboxGroup(),
-      //   fieldTemplate: templates.includes.formCheckboxGroupElement(),
-      //   value: this.model && this.model.targets || [],
-      //   options: app.members && app.members.map(function (m) { return [m.id, m.name]; }),
-      //   minLength: 0,
-      //   maxLength: 50,
-      //   parent: this
-      // }),
-      // new ArrayCheckboxView({
-      //   label: 'Tags',
-      //   name: 'tags',
-      //   template: templates.includes.formCheckboxGroup(),
-      //   fieldTemplate: templates.includes.formCheckboxGroupElement(),
-      //   value: this.model && this.model.tags || [],
-      //   options: app.tags && app.tags.map(function (m) { return [m.id, m.name]; }),
-      //   minLength: 0,
-      //   maxLength: 50,
-      //   parent: this
-      // }),
       new ChosenView({
           label: 'Targets',
           name: 'targets',

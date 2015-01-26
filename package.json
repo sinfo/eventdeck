@@ -49,6 +49,7 @@
     "ampersand-io-collection": "^0.1.4",
     "ampersand-io-model": "^0.1.1",
     "ampersand-model": "^4.0.0",
+    "ampersand-pikaday-view": "0.0.1",
     "ampersand-rest-collection": "^2.0.0",
     "ampersand-router": "^1.0.1",
     "ampersand-select-view": "https://github.com/sinfo/ampersand-select-view/tarball/master",

@@ -35,6 +35,7 @@ module.exports = {
             cssDir + '/vendor/ink.css',
             cssDir + '/vendor/font-awesome.css',
             cssDir + '/vendor/chosen.css',
+            cssDir + '/vendor/pikaday.css',
             cssDir + '/app.css'
         ],
         beforeBuildJS: function () {
