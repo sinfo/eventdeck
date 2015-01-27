@@ -31,19 +31,22 @@ module.exports = PageView.extend({
               }
             }
 
-            if (data['session-duration']) {
-              data.duration = data['session-duration'];
-              delete data['session-duration'];
+            if (data['session-end']) {
+              data.end = data['session-end'];
+              delete data['session-end'];
 
-              if (data['session-duration-hours']) {
-                data.duration.setHours(data['session-duration-hours']);
-                delete data['session-duration-hours'];
+              if (data['session-end-hours']) {
+                data.end.setHours(data['session-end-hours']);
+                delete data['session-end-hours'];
               }
-              if (data['session-duration-minutes']) {
-                data.duration.setMinutes(data['session-duration-minutes']);
-                delete data['session-duration-minutes'];
+              if (data['session-end-minutes']) {
+                data.end.setMinutes(data['session-end-minutes']);
+                delete data['session-end-minutes'];
               }
             }
+
+            data.duration = data.end - data.date;
+            delete data.end;
 
             if(data['session-speakers']) {
               data.speakers = data['session-speakers'] && data['session-speakers'].map(function(s) {return {id: s};});
@@ -54,7 +57,7 @@ module.exports = PageView.extend({
               wait: true,
               success: function (model, response, options) {
                 app.navigate('/sessions/'+model.id);
-                app.members.fetch();
+                app.sessions.fetch();
               }
             });
           }

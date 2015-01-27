@@ -64,22 +64,16 @@ module.exports = AmpModel.extend({
         return this.name;
       }
     },
-    url: {
-      deps: ['viewUrl'],
-      fn: function () {
-        return this.viewUrl;
-      }
-    },
     start: {
       deps: ['date'],
       fn: function () {
-        return this.date;
+        return new Date(this.date);
       }
     },
     end: {
       deps: ['date', 'duration'],
       fn: function () {
-        return this.date + this.duration;
+        return new Date(this.date.getTime() + this.duration.getTime());
       }
     },
     background: {
@@ -94,5 +88,12 @@ module.exports = AmpModel.extend({
         return '/api/sessions/' + this.id + '/comments';
       }
     }*/
-  }
+  },
+  parse: function (attrs) {
+    console.log('parsing', attrs);
+    attrs.date = new Date(attrs.date);
+    attrs.duration = new Date(attrs.duration);
+    return attrs;
+  },
+
 });

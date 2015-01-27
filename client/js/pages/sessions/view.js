@@ -30,7 +30,7 @@ module.exports = PageView.extend({
     'model.date': {
       hook: 'date'
     },
-    'model.duration': {
+    'model.end': {
       hook: 'duration'
     },
     'model.img': {

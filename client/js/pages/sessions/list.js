@@ -20,12 +20,13 @@ module.exports = PageView.extend({
 
     'click [data-hook~=hide]': 'hide',
   },
-  hidden: false,
-  render: function () {
-    this.renderWithTemplate();
+  initialize: function () {
+    var self = this;
     if (!this.collection.length) {
-      this.fetchCollection();
+      return this.fetchCollection();
     }
+
+    self.render();
   },
   fetchCollection: function () {
     var self = this;
@@ -52,9 +53,18 @@ module.exports = PageView.extend({
       waitFor: 'collection.length',
       prepareView: function (el) {
         log('Rendering calendar!');
+        var events = this.collection.serialize().map(function(s) {
+          s.title = s.name;
+          s.start = new Date(s.date);
+          s.duration = new Date(s.duration);
+          s.end = new Date(s.start.getTime() + s.duration.getTime());
+          s.url = '/sessions/'+s.id;
+          return s;
+        });
+
         return new Calendar({
           el: el,
-          collection: this.collection,
+          events: events,
           header: {
             left: 'prev,next today',
             center: 'title',
