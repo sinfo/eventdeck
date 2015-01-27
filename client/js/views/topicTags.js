@@ -16,7 +16,6 @@ var TagView = View.extend({
   }
 });
 
-
 module.exports = View.extend({
   template: templates.partials.topics.tags,
   initialize: function () {

@@ -156,7 +156,6 @@ module.exports = PageView.extend({
     });
   },
 
-
   handleKindFilter: function (ev) {
     var kind = ev.target.getAttribute('data-hook');
 
