@@ -8,7 +8,7 @@ options.statuses = {
     { name: 'In Conversations', id: 'in-conversations', color: '#207de5'},
     { name: 'Accepted', id: 'accepted', color: '#009800'},
     { name: 'Rejected', id: 'rejected', color: '#e11d21'},
-    { name: 'Give Up', id: 'give-ip', color: '#333'},
+    { name: 'Give Up', id: 'give-up', color: '#333'},
     { name: 'Announced', id: 'announced', color: '#009800'},
   ],
   company: [
