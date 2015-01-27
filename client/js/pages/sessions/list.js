@@ -25,8 +25,6 @@ module.exports = PageView.extend({
     if (!this.collection.length) {
       return this.fetchCollection();
     }
-
-    self.render();
   },
   fetchCollection: function () {
     var self = this;
@@ -61,9 +59,7 @@ module.exports = PageView.extend({
           return s;
         });
 
-        log('Rendering calendar!', el, events);
-
-        var cal = new Calendar({
+        return new Calendar({
           el: el,
           events: events,
           header: {
@@ -72,10 +68,6 @@ module.exports = PageView.extend({
             right: 'month,agendaWeek,agendaDay'
           },
         });
-
-        cal.render();
-
-        return cal;
       }
     },
   }
