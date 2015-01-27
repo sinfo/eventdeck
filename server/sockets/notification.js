@@ -86,6 +86,9 @@ function notificationListeners(socket){
         return cbClient(err);
       }
       async.each(subscriptions, function(subscription, cb){
+        if(subscription.member === notification.member){
+          return cb();
+        }
         IO.to(subscription.member).emit(events.notifySubscripton, {response: render(notification)});
         cb();
       });

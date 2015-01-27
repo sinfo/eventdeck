@@ -73,8 +73,6 @@ function getRemote(id, cb) {
   var filePath = Path.join(settings.directory, id);
   var url = new Buffer(id, 'base64').toString('ascii');
 
-  log.debug({ url: url }, 'Image not found on disk, remote requesting...');
-
   if(url.indexOf('data:image/jpeg;base64') != -1) {
     return cb(Boom.badRequest('Malformed image url'));
   }

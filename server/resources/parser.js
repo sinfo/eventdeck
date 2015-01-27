@@ -8,6 +8,7 @@ server.method('parser.members', parseMembers, {});
 function parseMembers(text, thread, objectId, memberId, cb) {
   var memberPattern = /\B@[a-z0-9\._-]+/gi;
 
+
   var membersFound = text.match(memberPattern);
   for(var i in membersFound) {
     membersFound[i] = membersFound[i].replace('@','').toLowerCase();

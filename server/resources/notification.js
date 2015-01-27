@@ -65,7 +65,7 @@ function notifyUpdate(memberId, path, thing, cb) {
 }
 
 function notifyMention(memberId, thread, targets, source, cb) {
-  var index = targets.indexOf[memberId];
+  var index = targets.indexOf(memberId);
   if(index !== -1){
     targets.splice(index, 1);
     if(!targets.length){
@@ -125,7 +125,7 @@ function notify(memberId, thread, description, objectId, targets, cb) {
 function create(notification, cb) {
   notification.posted = Date.now();
 
- Notification.create(notification, function(err, _notification) {
+  Notification.create(notification, function(err, _notification) {
     if (err) {
       log.error({ err: err, notification: notification}, 'error creating notification');
       return cb(Boom.internal());
