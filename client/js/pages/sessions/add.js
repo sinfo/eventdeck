@@ -16,11 +16,11 @@ module.exports = PageView.extend({
           el: el,
           submitCallback: function (data) {
             data = _.compactObject(data);
-            
+
             if (data['session-date']) {
               data.date = data['session-date'];
               delete data['session-date'];
-              
+
               if (data['session-date-hours']) {
                 data.date.setHours(data['session-date-hours']);
                 delete data['session-date-hours'];
@@ -30,11 +30,11 @@ module.exports = PageView.extend({
                 delete data['session-date-minutes'];
               }
             }
-            
+
             if (data['session-duration']) {
               data.duration = data['session-duration'];
               delete data['session-duration'];
-              
+
               if (data['session-duration-hours']) {
                 data.duration.setHours(data['session-duration-hours']);
                 delete data['session-duration-hours'];
@@ -52,8 +52,8 @@ module.exports = PageView.extend({
 
             app.sessions.create(data, {
               wait: true,
-              success: function () {
-                app.navigate('/sessions');
+              success: function (model, response, options) {
+                app.navigate('/sessions/'+model.id);
                 app.members.fetch();
               }
             });

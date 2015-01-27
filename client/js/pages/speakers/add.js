@@ -19,8 +19,8 @@ module.exports = PageView.extend({
 
             app.speakers.create(data, {
               wait: true,
-              success: function () {
-                app.navigate('/speakers');
+              success: function (model, response, options) {
+                app.navigate('/speakers/'+model.id);
                 app.speakers.fetch();
               }
             });

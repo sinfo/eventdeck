@@ -19,8 +19,8 @@ module.exports = PageView.extend({
 
             app.members.create(data, {
               wait: true,
-              success: function () {
-                app.navigate('/members');
+              success: function (model, response, options) {
+                app.navigate('/members/'+model.id);
                 app.members.fetch();
               }
             });
