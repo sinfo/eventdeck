@@ -8,15 +8,7 @@ module.exports = PageView.extend({
   render: function () {
     this.renderWithTemplate();
     this.renderCollection(this.collection, ParticipationView, this.queryByHook('participations-list'));
-    log(this.collection.length);
-    if (!this.collection.length) {
-      this.fetchCollection();
-    }
-  },
-  fetchCollection: function () {
-    log('Fetching participations');
-    this.collection.fetch();
-    return false;
+    log('Rendering', this.collection.length, 'participation(s)');
   },
   events: {
     'click [data-hook~=add]': 'addNew',
