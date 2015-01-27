@@ -4,6 +4,7 @@ var AmpModel = require('ampersand-model');
 var AmpCollection = require('ampersand-collection');
 var options = require('options');
 var marked = require('client/js/helpers/marked');
+var SpeakerDetails = require('./speaker');
 //var Comment = require('./comment');
 
 var Speaker = AmpState.extend({
@@ -16,6 +17,10 @@ var Speaker = AmpState.extend({
 
 var SpeakerCollection = AmpCollection.extend({
   model: Speaker
+});
+
+var SpeakersDetailsCollection = AmpCollection.extend({
+  model: SpeakerDetails
 });
 
 /*var CommentCollection = AmpCollection.extend({
@@ -37,6 +42,7 @@ module.exports = AmpModel.extend({
   },
   collections: {
     speakers: SpeakerCollection,
+    speakersDetails: SpeakersDetailsCollection,
     //comments: CommentCollection,
   },
   derived: {
