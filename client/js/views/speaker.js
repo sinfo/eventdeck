@@ -6,6 +6,7 @@ module.exports = View.extend({
   template: templates.cards.speaker,
   bindings: {
     'model.name': '[data-hook~=name]',
+    'model.title': '[data-hook~=title]',
     'model.unread': {
       hook: 'unread',
       type: 'toggle'

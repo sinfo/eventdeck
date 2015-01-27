@@ -52,7 +52,6 @@ module.exports = PageView.extend({
       container: '[data-hook=sessions-list]',
       waitFor: 'collection.length',
       prepareView: function (el) {
-        log('Rendering calendar!');
         var events = this.collection.serialize().map(function(s) {
           s.title = s.name;
           s.start = new Date(s.date);
@@ -62,7 +61,9 @@ module.exports = PageView.extend({
           return s;
         });
 
-        return new Calendar({
+        log('Rendering calendar!', el, events);
+
+        var cal = new Calendar({
           el: el,
           events: events,
           header: {
@@ -71,6 +72,10 @@ module.exports = PageView.extend({
             right: 'month,agendaWeek,agendaDay'
           },
         });
+
+        cal.render();
+
+        return cal;
       }
     },
   }
