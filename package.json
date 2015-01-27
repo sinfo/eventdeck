@@ -43,6 +43,7 @@
     "ampersand-date-view": "https://github.com/sinfo/ampersand-date-view/tarball/master",
     "ampersand-dom": "^1.2.1",
     "ampersand-form-view": "^2.0.0",
+    "ampersand-fullcalendar-view": "0.0.1",
     "ampersand-infinite-scroll": "https://github.com/sinfo/ampersand-infinite-scroll/tarball/master",
     "ampersand-input-view": "~2.1.0",
     "ampersand-io": "^0.1.0",

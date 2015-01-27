@@ -5,6 +5,7 @@ var templates = require('client/js/templates');
 var SessionView = require('client/js/views/session');
 var Session = require('client/js/models/session');
 var AmpersandCollection = require('ampersand-collection');
+var Calendar = require('ampersand-fullcalendar-view');
 
 
 var selectedFilter = 'showall';
@@ -22,14 +23,16 @@ module.exports = PageView.extend({
   hidden: false,
   render: function () {
     this.renderWithTemplate();
-    this.renderCollection(this.collection, SessionView, this.queryByHook('sessions-list'));
     if (!this.collection.length) {
       this.fetchCollection();
     }
   },
   fetchCollection: function () {
+    var self = this;
     log('Fetching sessions');
-    this.collection.fetch();
+    this.collection.fetch({success: function () {
+      self.render();
+    }});
 
     return false;
   },
@@ -42,5 +45,23 @@ module.exports = PageView.extend({
       this.queryByHook('awesome-sidebar').style.display = 'block';
       this.hidden = false;
     }
+  },
+  subviews: {
+    calendar: {
+      container: '[data-hook=sessions-list]',
+      waitFor: 'collection.length',
+      prepareView: function (el) {
+        log('Rendering calendar!');
+        return new Calendar({
+          el: el,
+          collection: this.collection,
+          header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+          },
+        });
+      }
+    },
   }
 });

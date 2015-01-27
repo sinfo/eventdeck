@@ -58,6 +58,30 @@ module.exports = AmpModel.extend({
         return '/sessions/' + this.id;
       }
     },
+    title: {
+      deps: ['name'],
+      fn: function () {
+        return this.name;
+      }
+    },
+    url: {
+      deps: ['viewUrl'],
+      fn: function () {
+        return this.viewUrl;
+      }
+    },
+    start: {
+      deps: ['date'],
+      fn: function () {
+        return this.date;
+      }
+    },
+    end: {
+      deps: ['date', 'duration'],
+      fn: function () {
+        return this.date + this.duration;
+      }
+    },
     background: {
       deps: ['img'],
       fn: function () {
