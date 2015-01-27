@@ -157,5 +157,12 @@ module.exports = AmpModel.extend({
     delete res.unread;
 
     return res;
+  },
+  parse: function(attrs) {
+    attrs.participations = attrs.participations && attrs.participations.map(function(p) {
+      p.threadKind = 'company';
+      return p;
+    });
+    return attrs;
   }
 });

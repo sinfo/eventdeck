@@ -25,8 +25,6 @@ module.exports = PageView.extend({
     if (!this.collection.length) {
       return this.fetchCollection();
     }
-
-    self.render();
   },
   fetchCollection: function () {
     var self = this;
@@ -52,7 +50,6 @@ module.exports = PageView.extend({
       container: '[data-hook=sessions-list]',
       waitFor: 'collection.length',
       prepareView: function (el) {
-        log('Rendering calendar!');
         var events = this.collection.serialize().map(function(s) {
           s.title = s.name;
           s.start = new Date(s.date);
