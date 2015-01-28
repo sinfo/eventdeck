@@ -77,7 +77,10 @@ var ViewCommunication = View.extend({
       hook: 'posted',
       name: 'title'
     },
-    'model.text': '[data-hook~=text]',
+    'model.textHtml': {
+      type: 'innerHTML',
+      hook: 'text',
+    },
     'model.memberName': '[data-hook~=member-name]'
   },
   events: {
