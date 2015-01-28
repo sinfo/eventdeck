@@ -84,6 +84,10 @@ module.exports = View.extend({
       {
         hook: 'type',
         type: checkType
+      },
+      {
+        hook: 'on',
+        type: needsOn
       }
     ],
     'model.postedTimeSpan': {
@@ -93,6 +97,9 @@ module.exports = View.extend({
       hook: 'threadUrl',
       type: 'attribute',
       name: 'href'
+    },
+    'model.threadKind': {
+      hook: 'threadKind'
     },
     'model.unread': {
       type: 'booleanClass',
@@ -132,5 +139,11 @@ function checkType (el, value, previousValue) {
   }
   else if(value.search(/^\bchanged communication\b/) === 0){
     el.classList.add('fa-check-square-o');
+  }
+}
+
+function needsOn (el, value, previousValue) {
+  if(value.search(/^\bcreated\b/) === 0 || value.search(/^\bupdated\b/) === 0){
+    el.classList.add('hide-all');
   }
 }

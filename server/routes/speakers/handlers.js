@@ -135,7 +135,6 @@ exports.list = {
   handler: function (request, reply) {
     reply(render(request.pre.speakers, request.auth.isAuthenticated));
   },
-  cors: true,
   description: 'Gets all the speakers'
 };
 

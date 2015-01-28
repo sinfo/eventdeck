@@ -164,7 +164,6 @@ exports.list = {
   handler: function (request, reply) {
     reply(render(request.pre.companies, request.auth.isAuthenticated));
   },
-  cors: true,
   description: 'Gets all the companies'
 };
 

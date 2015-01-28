@@ -43,10 +43,11 @@ function broadcast(notification, cb){
 }
 
 function notifyCreate(memberId, path, thing, cb) {
+
   var notification = {
     thread: threadFromPath(path, thing.id),
     member: memberId,
-    description: 'created '+thing.name || thing.kind,
+    description: 'created',
     posted: Date.now()
   };
 
@@ -54,10 +55,11 @@ function notifyCreate(memberId, path, thing, cb) {
 }
 
 function notifyUpdate(memberId, path, thing, cb) {
+
   var notification = {
     thread: threadFromPath(path, thing.id),
     member: memberId,
-    description: 'updated '+thing.name || thing.kind,
+    description: 'updated',
     posted: Date.now()
   };
 

@@ -7,7 +7,7 @@ var moonbootsConfig = require('moonbootsConfig');
 
 log.error('### Starting EventDeck ###');
 
-var server = module.exports.hapi = new Hapi.Server(config.port);
+var server = module.exports.hapi = new Hapi.Server(config.port, { cors: true });
 
 require('./db');
 
