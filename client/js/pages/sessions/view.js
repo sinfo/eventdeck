@@ -7,6 +7,9 @@ var CommunicationsView = require('client/js/views/communications');
 var Communications = require('client/js/models/communications');
 var CommentsView = require('client/js/views/comments');
 var Comments = require('client/js/models/comments');
+var SpeakersView = require('client/js/views/sessionSpeaker');
+var CompaniesView = require('client/js/views/sessionCompany');
+var Speakers = require('client/js/models/speakers');
 var ParticipationsView = require('client/js/views/participations');
 var SubscriptionView = require('client/js/views/subscription');
 
@@ -27,11 +30,11 @@ module.exports = PageView.extend({
     'model.description': {
       hook: 'description'
     },
-    'model.date': {
-      hook: 'date'
+    'model.startParsed': {
+      hook: 'start'
     },
-    'model.end': {
-      hook: 'duration'
+    'model.endParsed': {
+      hook: 'end'
     },
     'model.img': {
       type: 'attribute',
@@ -62,6 +65,30 @@ module.exports = PageView.extend({
     });
   },
   subviews: {
+    speakers: {
+      container: '[data-hook=session-speakers]',
+      parent: this,
+      waitFor: 'model.speakers',
+      prepareView: function (el) {
+        var self = this;
+        return new SpeakersView({
+          el: el,
+          model: self.model
+        });
+      }
+    },
+    companies: {
+      container: '[data-hook=session-companies]',
+      parent: this,
+      waitFor: 'model.companies',
+      prepareView: function (el) {
+        var self = this;
+        return new CompaniesView({
+          el: el,
+          model: self.model
+        });
+      }
+    },
     comments:{
       container: '[data-hook=session-comments]',
       waitFor: 'model.commentsApi',

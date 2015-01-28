@@ -37,6 +37,7 @@ module.exports = AmpState.extend({
     payment: Payment
   },
   session: {
+    threadKind: ['string'],
     memberDetails: Member,
     eventDetails: Event,
     editing: ['boolean']
@@ -46,11 +47,12 @@ module.exports = AmpState.extend({
   },
   derived: {
     statusDetails: {
-      deps: ['participations'],
+      deps: ['status', 'threadKind'],
       fn: function () {
         var self = this;
-        var details = options.statuses.company.filter(function (status) {
-          return self.status == status.name;
+
+        var details = options.statuses[this.threadKind || 'company'].filter(function (status) {
+          return self.status == status.id;
         })[0] || {};
 
         details.style = details && details.color && 'background-color:' + details.color;
