@@ -323,8 +323,7 @@ function decorateWithUnreadStatus(memberId, collection, cb) {
     async.map(collection, function (o, asyncCb) {
       if(accessedThreads.indexOf(o.thread) == -1) {
         o.set('unread', true, { strict: false });
-
-        return asyncCb(null, o);
+        return asyncCb(null,  o.toObject({ getters: true }));
       }
 
       var notificationFilter = {thread: o.thread, posted: {$gt: accessLookup[o.thread].last}};
@@ -335,8 +334,7 @@ function decorateWithUnreadStatus(memberId, collection, cb) {
         }
 
         o.set('unread', count > 0, { strict: false });
-
-        asyncCb(null, o);
+        asyncCb(null,  o.toObject({ getters: true }));
       });
     }, function (err, result) {
 

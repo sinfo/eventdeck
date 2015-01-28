@@ -46,7 +46,7 @@
     "ampersand-fullcalendar-view": "0.0.1",
     "ampersand-infinite-scroll": "https://github.com/sinfo/ampersand-infinite-scroll/tarball/master",
     "ampersand-input-view": "~2.1.0",
-    "ampersand-io": "^0.1.0",
+    "ampersand-io": "~0.1.0",
     "ampersand-io-collection": "^0.1.4",
     "ampersand-io-model": "^0.1.1",
     "ampersand-model": "^4.0.0",
