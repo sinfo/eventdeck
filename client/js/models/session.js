@@ -6,6 +6,7 @@ var options = require('options');
 var marked = require('client/js/helpers/marked');
 var SpeakerDetails = require('./speaker');
 var CompanyDetails = require('./company');
+var Moment = require('moment');
 
 //var Comment = require('./comment');
 var _ = require('client/js/helpers/underscore');
@@ -84,10 +85,24 @@ module.exports = AmpModel.extend({
         return new Date(this.date);
       }
     },
+    startParsed: {
+      deps: ['date'],
+      fn: function() {
+        var date = new Date(this.date);
+        return new Moment(date).format('MMMM Do YYYY, HH:mm');  
+      }
+    },
     end: {
       deps: ['date', 'duration'],
       fn: function () {
         return new Date(this.date.getTime() + this.duration.getTime());
+      }
+    },
+    endParsed: {
+      deps: ['end'],
+      fn: function() {
+        var date = new Date(this.end);
+        return new Moment(date).format('MMMM Do YYYY, HH:mm');  
       }
     },
     background: {
@@ -112,10 +127,10 @@ module.exports = AmpModel.extend({
   serialize: function () {
     var res = this.getAttributes({props: true}, true);
     _.each(this._children, function (value, key) {
-        res[key] = this[key].serialize();
+        res[key] = this[key].serialize && this[key].serialize() || this[key];
     }, this);
     _.each(this._collections, function (value, key) {
-        res[key] = this[key].serialize();
+        res[key] = this[key].serialize && this[key].serialize() || this[key];
     }, this);
 
     delete res.speakersDetails;

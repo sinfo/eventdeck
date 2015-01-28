@@ -52,11 +52,6 @@ module.exports = View.extend({
   filterCompanies: function() {
     var self = this;
     if(!self.model.companiesDetails.length) {   
-      log(self.model.companies)
-//      var sessionSpeakerIds = self.model.speakers.serialize()
-//        .filter(function(s) { return s.id; })
-//        .map(function(s) { return s.id; });
-      
       self.model.companiesDetails = new SubCollection(app.companies, {
         filter: function (company) {
           return self.model.companies.indexOf(company.id) != -1;

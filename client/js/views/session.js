@@ -25,5 +25,5 @@ module.exports = View.extend({
       hook: 'action-edit',
       name: 'href'
     },
-  },
+  }
 });

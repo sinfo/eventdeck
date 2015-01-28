@@ -30,11 +30,11 @@ module.exports = PageView.extend({
     'model.description': {
       hook: 'description'
     },
-    'model.date': {
-      hook: 'date'
+    'model.startParsed': {
+      hook: 'start'
     },
-    'model.end': {
-      hook: 'duration'
+    'model.endParsed': {
+      hook: 'end'
     },
     'model.img': {
       type: 'attribute',
