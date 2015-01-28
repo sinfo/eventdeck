@@ -31,7 +31,9 @@ exports.create = {
   },
   pre: [
     { method: 'topic.create(payload, auth.credentials.id)', assign: 'topic' },
-    { method: 'notification.notifyCreate(auth.credentials.id, path, pre.topic)', assign: 'notification' }
+    { method: 'subscription.create(pre.topic.thread, auth.credentials.id)', assign: 'subscription' },
+    { method: 'notification.notifyCreate(auth.credentials.id, path, pre.topic)', assign: 'notification' },
+    { method: 'notification.broadcast(pre.notification)', assign: 'broadcast'}
   ],
   handler: function (request, reply) {
     reply(render(request.pre.topic)).created('/api/topics/'+request.pre.topic.id);
@@ -68,7 +70,8 @@ exports.update = {
   pre: [
     // TODO: CHECK PERMISSIONS
     { method: 'topic.update(params.id, payload)', assign: 'topic' },
-    { method: 'notification.notifyUpdate(auth.credentials.id, path, pre.topic)', assign: 'notification' }
+    { method: 'notification.notifyUpdate(auth.credentials.id, path, pre.topic)', assign: 'notification' },
+    { method: 'notification.broadcast(pre.notification)', assign: 'broadcast'}
   ],
   handler: function (request, reply) {
     reply(render(request.pre.topic));

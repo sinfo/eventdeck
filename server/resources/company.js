@@ -27,7 +27,7 @@ function create(company, memberId, cb) {
       return cb(Boom.internal());
     }
 
-    cb(null, _company);
+    cb(null, _company.toObject({ getters: true }));
   });
 }
 

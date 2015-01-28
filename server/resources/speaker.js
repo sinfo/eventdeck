@@ -27,7 +27,7 @@ function create(speaker, memberId, cb) {
       return cb(Boom.internal());
     }
 
-    cb(null, _speaker);
+    cb(null, _speaker.toObject({ getters: true }));
   });
 }
 

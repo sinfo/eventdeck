@@ -16,7 +16,9 @@ module.exports = function render(content, isAuthenticated) {
 };
 
 function renderObject(model, isAuthenticated) {
-  model = model.toJSON();
+  if(model.toObject){
+    model = model.toObject({ getters: true });
+  }
 
   if(isAuthenticated === false) {
     return {

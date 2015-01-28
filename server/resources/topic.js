@@ -29,7 +29,7 @@ function create(topic, memberId, cb) {
       return cb(Boom.internal());
     }
 
-    cb(null, _topic);
+    cb(null, _topic.toObject({ getters: true }));
   });
 }
 

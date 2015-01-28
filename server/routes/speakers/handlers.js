@@ -25,6 +25,7 @@ exports.create = {
   },
   pre: [
     { method: 'speaker.create(payload, auth.credentials.id)', assign: 'speaker' },
+    { method: 'subscription.create(pre.speaker.thread, auth.credentials.id)', assign: 'subscription' },
     { method: 'notification.notifyCreate(auth.credentials.id, path, pre.speaker)', assign: 'notification' },
     { method: 'notification.broadcast(pre.notification)', assign: 'broadcast'}
   ],

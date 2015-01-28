@@ -7,7 +7,9 @@ module.exports = function render(content) {
 };
 
 function renderObject(model) {
-  model = model.toJSON();
+  if(model.toObject){
+    model = model.toObject({ getters: true });
+  }
 
   var topic = {
     id: model._id,
