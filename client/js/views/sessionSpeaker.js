@@ -5,7 +5,7 @@ var templates = require('client/js/templates');
 var SubCollection = require('ampersand-subcollection');
 
 var SessionView = View.extend({
-  template: templates.cards.sessionSpeaker,
+  template: templates.cards.speaker,
   bindings: {
     'model.name': '[data-hook~=name]',
     'model.storedImg': {
@@ -39,7 +39,7 @@ var SessionView = View.extend({
 });
 
 module.exports = View.extend({
-  template: templates.cards.sessionSpeakers,
+  template: templates.cards.session,
   initialize: function() {
     var self = this; 
     if(!app.speakers.length) {
