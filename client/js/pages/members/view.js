@@ -21,18 +21,26 @@ module.exports = PageView.extend({
       hook: 'edit',
       name: 'href'
     },
-    'model.mails.dropbox': {
-      hook: 'mails.dropbox'
-    },
-    'model.mails.main': {
-      hook: 'mails.main'
-    },
-    'model.mails.google': {
-      hook: 'mails.google'
-    },
-    'model.mails.microsoft': {
-      hook: 'mails.microsoft'
-    },
+    'model.mails.main': [
+      { type: 'toggle', hook: 'mails-main' },
+      { selector: '[data-hook~=mails-main] span' },
+    ],
+    'model.mails.institutional': [
+      { type: 'toggle', hook: 'mails-institutional' },
+      { selector: '[data-hook~=mails-institutional] span' },
+    ],
+    'model.mails.google': [
+      { type: 'toggle', hook: 'mails-google' },
+      { selector: '[data-hook~=mails-google] span' },
+    ],
+    'model.mails.microsoft': [
+      { type: 'toggle', hook: 'mails-microsoft' },
+      { selector: '[data-hook~=mails-microsoft] span' },
+    ],
+    'model.mails.dropbox': [
+      { type: 'toggle', hook: 'mails-dropbox' },
+      { selector: '[data-hook~=mails-dropbox] span' },
+    ],
     'model.phones': {
       hook: 'phones'
     },

@@ -1,6 +1,8 @@
+/*global app*/
 var FormView = require('ampersand-form-view');
 var InputView = require('ampersand-input-view');
 var ArrayInputView = require('ampersand-array-input-view');
+var ChosenView = require('ampersand-chosen-view');
 var SelectView = require('ampersand-select-view');
 var DateView = require('ampersand-pikaday-view');
 var templates = require('client/js/templates');
@@ -125,22 +127,24 @@ module.exports = FormView.extend({
         required: false,
         yieldModel: false,
       }),
-      new ArrayInputView({
+      new ChosenView({
         label: 'Speakers',
         name: 'session-speakers',
+        unselectedText: 'Select one or more',
         value: this.model && this.model.speakers.map(function(r) {
           return r.id;
         }) || [],
-        minLength: 0,
-        parent: this
+        isMultiple: true,
+        options: app.speakers && app.speakers.map(function (m) { return [m.id, m.name]; }),
       }),
-      new ArrayInputView({
+      new ChosenView({
         label: 'Companies',
         name: 'companies',
-        value: this.model && this.model.companies || [],
-        minLength: 0,
-        parent: this
-      })
+        unselectedText: 'Select one or more',
+        value: this.model && this.model.companies,
+        isMultiple: true,
+        options: app.companies && app.companies.map(function (m) { return [m.id, m.name]; }),
+      }),
     ];
   }
 });

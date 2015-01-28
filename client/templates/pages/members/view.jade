@@ -1,4 +1,4 @@
-section.page.member.view
+section.page.members.view
   div.ink-grid
     div.column-group.horizontal-gutters
       div.all-100
@@ -10,22 +10,33 @@ section.page.member.view
       div.all-33.medium-50.small-100.tiny-100
         img.image-logo(data-hook='img')
 
-        h4(data-hook='roleIds')
+        h2(data-hook='roleIds')
 
         h4 Mails
-        ul
-          li
-            div(data-hook='mails.main')
-          li
-            div(data-hook='mails.google')
-          li
-            div(data-hook='mails.microsoft')
-          li
-            div(data-hook='mails.dropbox')
+        ul.list.unstyled
+          li(data-hook='mails-main')
+            i.fa.fa-envelope
+            span
+          li(data-hook='mails-institutional')
+            i.fa.fa-graduation-cap
+            span
+          li(data-hook='mails-google')
+            i.fa.fa-google
+            span
+          li(data-hook='mails-microsoft')
+            i.fa.fa-windows
+            span
+          li(data-hook='mails-dropbox')
+            i.fa.fa-dropbox
+            span
 
-        h4.div Phone
+        h4 Phone
         ul
           li
             div(data-hook='phones')
 
-        a(data-hook='fbURL') Facebook
+        h4 Other
+        .list
+          a(data-hook='fbURL')
+            i.fa.fa-facebook-square
+            span Facebook
