@@ -93,6 +93,11 @@ module.exports = View.extend({
       hook: 'threadUrl',
       type: 'attribute',
       name: 'href'
+    },
+    'model.unread': {
+      type: 'booleanClass',
+      hook: 'notification',
+      name: 'unread'
     }
   }
 });

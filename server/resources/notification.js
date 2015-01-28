@@ -130,7 +130,8 @@ function create(notification, cb) {
       log.error({ err: err, notification: notification}, 'error creating notification');
       return cb(Boom.internal());
     }
-    cb(null, _notification.toObject());
+    _notification.set('unread', true, { strict: false });
+    cb(null, _notification);
   });
 }
 
@@ -323,7 +324,7 @@ function decorateWithUnreadStatus(memberId, collection, cb) {
     async.map(collection, function (o, asyncCb) {
       if(accessedThreads.indexOf(o.thread) == -1) {
         o.set('unread', true, { strict: false });
-        return asyncCb(null,  o.toObject({ getters: true }));
+        return asyncCb(null,  o);
       }
 
       var notificationFilter = {thread: o.thread, posted: {$gt: accessLookup[o.thread].last}};
@@ -334,7 +335,7 @@ function decorateWithUnreadStatus(memberId, collection, cb) {
         }
 
         o.set('unread', count > 0, { strict: false });
-        asyncCb(null,  o.toObject({ getters: true }));
+        asyncCb(null,  o);
       });
     }, function (err, result) {
 

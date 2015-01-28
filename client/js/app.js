@@ -136,7 +136,9 @@ module.exports = {
     app.notifications.private.emit('access', data,{callback: function(err, result){
       if(err){
         log(err);
+        return;
       }
+      app.notifications.private.fetchPage({reset: true});
     }});
   }
 };

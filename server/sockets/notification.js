@@ -89,11 +89,11 @@ function notificationListeners(socket){
         if(subscription.member === notification.member){
           return cb();
         }
+
         IO.to(subscription.member).emit(events.notifySubscripton, {response: render(notification)});
         cb();
       });
     });
-
     IO.emit(events.notifyPublic, {response: render(notification)});
     cbClient();
   });

@@ -43,6 +43,7 @@ module.exports = function(socket){
     session: {
       memberDetails: Member,
       threadDetails: ThreadDetails,
+      unread: ['boolean']
     },
     derived: {
       postedTimeSpan: {

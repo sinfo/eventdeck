@@ -7,6 +7,10 @@ module.exports = function render(content) {
 };
 
 function renderObject(model) {
+  if(model.toObject){
+    model = model.toObject({ getters: true });
+  }
+
   return {
     id: model._id,
     thread: model.thread,

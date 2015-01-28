@@ -6,11 +6,7 @@ var log = require('bows')('io-notifications');
 
 module.exports = function(socket){
 
-	var model = notification(socket).extend({
-		session:{
-			unread: ['boolean']
-		}
-	});
+	var model = notification(socket);
 
 	return AmpIOCollection.extend(socket, PageFetchMixin, {
 		events: {
