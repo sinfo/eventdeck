@@ -134,6 +134,7 @@ module.exports = AmpModel.extend({
     }, this);
 
     delete res.speakersDetails;
+    delete res.companiesDetails;
     delete res.unread;
 
     return res;
