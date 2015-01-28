@@ -6,6 +6,7 @@ var options = require('options');
 var marked = require('client/js/helpers/marked');
 var SpeakerDetails = require('./speaker');
 //var Comment = require('./comment');
+var _ = require('client/js/helpers/underscore');
 
 var Speaker = AmpState.extend({
   props: {
@@ -101,5 +102,19 @@ module.exports = AmpModel.extend({
     attrs.duration = new Date(attrs.duration);
     return attrs;
   },
+  serialize: function () {
+    var res = this.getAttributes({props: true}, true);
+    _.each(this._children, function (value, key) {
+        res[key] = this[key].serialize();
+    }, this);
+    _.each(this._collections, function (value, key) {
+        res[key] = this[key].serialize();
+    }, this);
+
+    delete res.speakersDetails;
+    delete res.unread;
+
+    return res;
+  }
 
 });
