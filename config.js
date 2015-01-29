@@ -53,7 +53,10 @@ config.swagger = {
 
 config.client = {
   apiUrl: config.url,
-  debugMode: true
+  debugMode: true,
+  facebook: {
+    appId: config.facebook.appId
+  }
 };
 
 config.images = {
