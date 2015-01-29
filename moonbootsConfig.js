@@ -33,7 +33,6 @@ module.exports = {
         // Specify the stylesheets we want to bundle
         stylesheets: [
             cssDir + '/vendor/ink.css',
-            cssDir + '/vendor/font-awesome.css',
             cssDir + '/vendor/chosen.css',
             cssDir + '/vendor/pikaday.css',
             cssDir + '/vendor/fullcalendar.css',
