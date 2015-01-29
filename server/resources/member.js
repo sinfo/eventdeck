@@ -136,8 +136,9 @@ function getTeamLeaders(query, cb) {
   });
 }
 
-function getSubscribers(thread, query, cb) {
+function getSubscribers(path, id, query, cb) {
   cb = cb||query;
+  var thread = threadFromPath(path, id);
 
   var filter = {$or:[{'subscriptions.threads': thread}, {'subscriptions.all': true}]};
   var fields = parser(query.fields);
