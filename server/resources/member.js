@@ -136,7 +136,7 @@ function getTeamLeaders(query, cb) {
   });
 }
 
-function getSubscribers(thread,query, cb) {
+function getSubscribers(thread, query, cb) {
   cb = cb||query;
 
   var filter = {$or:[{'subscriptions.threads': thread}, {'subscriptions.all': true}]};
