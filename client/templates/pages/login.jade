@@ -3,14 +3,21 @@ section.page.login
   h2 Welcome to EventDeck!
 
   form.ink-form
+    div.control-group
+      div.control.append-button(style='margin:auto;')
+        div.ink-button.blue(data-hook='login-facebook')
+          span(style='width:30px')
+            i.fa.fa-facebook
+          span login with facebook
+
     div.control-group#id
       div.control.append-button
         span
           input(type='text', placeholder='joaquim.couves')
-        div.ink-button#loginId Log in
+        div.ink-button#loginId(data-hook='login-id') Log in
     div.control-group#code
       div.control.append-button
         span
           input(type='text', placeholder='AAAA')
-        div.ink-button#loginCode Log in
+        div.ink-button#loginCode(data-hook='login-code') Log in
       p Type in the field above the code you received on your email.<br>It may take a few minutes so be patient.

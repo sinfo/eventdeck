@@ -16,6 +16,12 @@ server.route({
 
 server.route({
   method: 'GET',
+  path: '/api/auth/facebook/{id}/{token}',
+  config: handlers.loginWithFacebook
+});
+
+server.route({
+  method: 'GET',
   path: '/api/auth/logout',
   config: handlers.logout
 });

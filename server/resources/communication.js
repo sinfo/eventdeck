@@ -113,7 +113,7 @@ function getByThread(path, id,query, cb) {
 
 function getByEvent(eventId,query, cb) {
   cb = cb || query; // fields is optional
-  
+
   var filter = {event: eventId};
   var fields = parser(query.fields);
   var options = {
@@ -135,6 +135,11 @@ function list(query, cb) {
   cb = cb || query; // fields is optional
 
   var filter = {};
+  if(query.status) { filter.status = query.status; }
+  if(query.member) { filter.member = query.member; }
+  if(query.kind) { filter.kind = query.kind; }
+  if(query.event) { filter.event = query.event; }
+
   var fields = parser(query.fields);
   var options = {
     skip: query.skip,
@@ -146,7 +151,7 @@ function list(query, cb) {
       log.error({ err: err}, 'error getting all communications');
       return cb(Boom.internal());
     }
-    
+
     cb(null, communications);
   });
 }

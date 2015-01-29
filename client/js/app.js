@@ -120,6 +120,14 @@ module.exports = {
     });
   },
 
+  loginWithFacebook: function (id, token) {
+    $.get('/api/auth/facebook/' + id + '/' + token, function () {
+      app.fetchInitialData();
+      app.me.authenticated = true;
+      app.navigate('/');
+    });
+  },
+
   logout: function () {
     $.get('/api/auth/logout', function () {
       app.me.authenticated = false;
