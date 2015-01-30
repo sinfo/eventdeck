@@ -6,7 +6,7 @@ module.exports = function(url) {
     model: communication,
     url: url,
     comparator: function (o1, o2) {
-      return o1.posted < o2.posted;
+      return new Date(o1.posted).getTime() < new Date(o2.posted).getTime();
     }
   });
 };
