@@ -8,22 +8,22 @@ module.exports = function render(content, isAuthenticated) {
 
 function renderObject(model, isAuthenticated) {
   return {
-    id: model.id,
-    name: model.name,
+    id: model.id || '',
+    name: model.name || '',
     kind: model.kind,
-    img: model.img,
-    place: model.place,
-    description: model.description,
+    img: model.img || '',
+    place: model.place || '',
+    description: model.description || '',
     speakers: model.speakers && model.speakers.map(function(speaker) {
       return {
-        id: speaker.id,
-        name: speaker.name,
-        position: speaker.position,
+        id: speaker.id || '',
+        name: speaker.name || '',
+        position: speaker.position || '',
       };
-    }),
-    companies: model.companies,
-    date: model.date,
-    duration: model.duration,
-    updated: model.updated,
+    }) || [],
+    companies: model.companies || [],
+    date: model.date || '',
+    duration: model.duration || '',
+    updated: model.updated || '',
   };
 }
