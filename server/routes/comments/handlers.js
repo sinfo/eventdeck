@@ -127,6 +127,30 @@ exports.getByThread = {
 };
 
 
+exports.getBySubthread = {
+  auth: 'session',
+  tags: ['api','comment'],
+  validate: {
+    params: {
+      id: Joi.string().required().description('Id of the subthread'),
+    },
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
+    }
+  },
+  pre: [
+    { method: 'comment.getBySubthread(path, params.id,query)', assign: 'comments' }
+  ],
+  handler: function (request, reply) {
+    reply(render(request.pre.comments));
+  },
+  description: 'Gets comments of a given subthread'
+};
+
+
 exports.list = {
   auth: 'session',
   tags: ['api','comment'],

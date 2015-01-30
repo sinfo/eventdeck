@@ -11,6 +11,7 @@ server.method('comment.update', update, {});
 server.method('comment.get', get, {});
 server.method('comment.getByMember', getByMember, {});
 server.method('comment.getByThread', getByThread, {});
+server.method('comment.getBySubthread', getBySubthread, {});
 server.method('comment.list', list, {});
 server.method('comment.remove', remove, {});
 server.method('comment.removeByThread', removeByThread, {});
@@ -49,12 +50,12 @@ function update(id, comment, cb) {
   });
 }
 
-function get(id,query, cb) {
+function get(id, query, cb) {
   cb = cb||query;
   var filter ={_id: id};
   var fields = parser(query.fields);
 
-  Comment.findOne(filter,fields, function(err, comment) {
+  Comment.findOne(filter, fields, function(err, comment) {
     if (err) {
       log.error({ err: err, comment: id}, 'error getting comment');
       return cb(Boom.internal());
@@ -68,7 +69,7 @@ function get(id,query, cb) {
   });
 }
 
-function getByMember(memberId,query, cb) {
+function getByMember(memberId, query, cb) {
   cb= cb||query;
   var filter ={member:memberId};
   var fields = parser(query.fields);
@@ -77,7 +78,7 @@ function getByMember(memberId,query, cb) {
     limit: query.limit,
     sort: parser(query.sort)
   };
-  Comment.find(filter,fields,options, function(err, comments) {
+  Comment.find(filter, fields, options, function(err, comments) {
     if (err) {
       log.error({ err: err, member: memberId}, 'error getting comments');
       return cb(Boom.internal());
@@ -87,7 +88,7 @@ function getByMember(memberId,query, cb) {
   });
 }
 
-function getByThread(path, id,query, cb) {
+function getByThread(path, id, query, cb) {
   cb = cb||query;
   var thread = threadFromPath(path, id);
   var filter = {thread:thread};
@@ -97,9 +98,29 @@ function getByThread(path, id,query, cb) {
     limit: query.limit,
     sort: parser(query.sort)
   };
-  Comment.find(filter,fields,filter, function(err, comments) {
+  Comment.find(filter, fields, filter, function(err, comments) {
     if (err) {
       log.error({ err: err, thread: thread}, 'error getting comments');
+      return cb(Boom.internal());
+    }
+
+    cb(null, comments);
+  });
+}
+
+function getBySubthread(path, id, query, cb) {
+  cb = cb||query;
+  var subthread = threadFromPath(path, id);
+  var filter = {subthread: subthread};
+  var fields = parser(query.fields);
+  var options = {
+    skip: query.skip,
+    limit: query.limit,
+    sort: parser(query.sort)
+  };
+  Comment.find(filter, fields, filter, function(err, comments) {
+    if (err) {
+      log.error({ err: err, subthread: subthread}, 'error getting comments');
       return cb(Boom.internal());
     }
 
@@ -117,12 +138,12 @@ function list(query, cb) {
     limit: query.limit,
     sort: parser(query.sort)
   };
-  Comment.find(filter,fields,options, function(err, comments) {
+  Comment.find(filter, fields, options, function(err, comments) {
     if (err) {
       log.error({ err: err}, 'error getting all comments');
       return cb(Boom.internal());
     }
-    
+
     cb(null, comments);
   });
 }
@@ -163,4 +184,3 @@ function removeByThread(path, id, cb) {
     cb(null, comments);
   });
 }
-

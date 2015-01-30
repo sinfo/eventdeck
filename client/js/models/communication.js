@@ -1,8 +1,15 @@
 /*global app*/
 var AmpModel = require('ampersand-model');
+var AmpCollection = require('ampersand-collection');
 var timeSince = require('client/js/helpers/timeSince');
 var options = require('options');
 var marked = require('client/js/helpers/marked');
+
+var Comment = require('./comment');
+
+var CommentCollection = AmpCollection.extend({
+  model: Comment
+});
 
 module.exports = AmpModel.extend({
   props: {
@@ -16,7 +23,16 @@ module.exports = AmpModel.extend({
     posted: ['string'],
     updated: ['string']
   },
+  collections: {
+    comments: CommentCollection
+  },
   derived: {
+    subthread: {
+      deps: ['id'],
+      fn: function () {
+        return 'communication-' + this.id;
+      }
+    },
     postedTimeSpan: {
       deps: ['posted'],
       fn: function () {
@@ -54,6 +70,12 @@ module.exports = AmpModel.extend({
       fn: function () {
         return this.text && marked(this.text) || '';
       },
+    },
+    commentsApi: {
+      deps: ['id'],
+      fn: function () {
+        return '/api/communications/' + this.id + '/comments';
+      }
     }
   }
 });

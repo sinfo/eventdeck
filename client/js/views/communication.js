@@ -1,9 +1,12 @@
 /*global app*/
+var $ = require('jquery');
 var log = require('bows')('communications');
 var View = require('ampersand-view');
 var templates = require('client/js/templates');
 var ViewSwitcher = require('ampersand-view-switcher');
 var CommunicationForm = require('client/js/forms/communication');
+var Comments = require('client/js/models/comments');
+var CommentsView = require('client/js/views/comments');
 var _ = require('client/js/helpers/underscore');
 var MemberBadge = require('client/js/views/memberBadge');
 
@@ -57,7 +60,7 @@ module.exports = View.extend({
       }
     });
     return false;
-  },
+  }
 });
 
 
@@ -84,17 +87,27 @@ var ViewCommunication = View.extend({
     'model.memberName': '[data-hook~=member-name]'
   },
   events: {
-    'click [data-hook~=action-delete]': 'handleRemoveClick'
+    'click [data-hook~=action-delete]': 'handleRemoveClick',
+    'click [data-hook~=toggle-comments]': 'toggleComments'
   },
   handleRemoveClick: function () {
     this.model.destroy();
     return false;
+  },
+  toggleComments: function () {
+    $(this.queryByHook('comments-area')).toggle();
   },
   render: function () {
     this.renderWithTemplate();
     if(app.me.isAdmin) {
       this.renderSubview(new AdminCommunication(), '[data-hook=admin-container]');
     }
+    $(this.queryByHook('comments-area')).hide();
+
+    var self = this;
+    setInterval(function () {
+      $(self.queryByHook('toggle-comments')).text($(self.queryByHook('comments-list')).children("div").length + ' comments');
+    }, 1000);
   },
   subviews: {
     member: {
@@ -108,7 +121,18 @@ var ViewCommunication = View.extend({
         });
       }
     },
-  },
+    comments: {
+      container: '[data-hook=communication-comments]',
+      waitFor: 'model.commentsApi',
+      prepareView: function (el) {
+        var Comms = new Comments(this.model.commentsApi);
+        return new CommentsView({
+          el: el,
+          collection: new Comms()
+        });
+      }
+    }
+  }
 });
 
 

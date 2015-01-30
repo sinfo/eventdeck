@@ -65,7 +65,7 @@ module.exports = PageView.extend({
   },
   initialize: function (spec) {
     var self = this;
-    
+
     app.companies.getOrFetch(spec.id, {all: true}, function (err, model) {
       if (err) {
         log.error('couldnt find a company with id: ' + spec.id);
@@ -86,7 +86,7 @@ module.exports = PageView.extend({
         });
       }
     },
-    comments:{
+    comments: {
       container: '[data-hook=company-comments]',
       waitFor: 'model.commentsApi',
       prepareView: function (el) {

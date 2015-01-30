@@ -58,6 +58,12 @@ server.route({
 
 server.route({
   method: 'GET',
+  path: '/api/communications/{id}/comments',
+  config: handlers.getBySubthread
+});
+
+server.route({
+  method: 'GET',
   path: '/api/members/{id}/comments',
   config: handlers.getByMember
 });
