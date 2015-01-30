@@ -24,13 +24,13 @@ function renderObject(model, isAuthenticated) {
 
   if(isAuthenticated === false) {
     return {
-      id: model.id,
-      thread: model.thread,
-      name: model.name,
-      area: model.area,
-      description: model.description,
-      img: model.img,
-      updated: model.updated,
+      id: model.id || '',
+      thread: model.thread || '',
+      name: model.name || '',
+      area: model.area || '',
+      description: model.description || '',
+      img: model.img || '',
+      updated: model.updated || '',
     };
   }
 
