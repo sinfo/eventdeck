@@ -4,6 +4,7 @@ var AmpCollection = require('ampersand-collection');
 var timeSince = require('client/js/helpers/timeSince');
 var options = require('options');
 var marked = require('client/js/helpers/marked');
+var _ = require('client/js/helpers/underscore');
 
 var Comment = require('./comment');
 
@@ -77,5 +78,18 @@ module.exports = AmpModel.extend({
         return '/api/communications/' + this.id + '/comments';
       }
     }
-  }
+  },
+  serialize: function () {
+    var res = this.getAttributes({props: true}, true);
+    _.each(this._children, function (value, key) {
+        res[key] = this[key].serialize();
+    }, this);
+    _.each(this._collections, function (value, key) {
+        res[key] = this[key].serialize();
+    }, this);
+
+    delete res.comments;
+
+    return res;
+  },
 });

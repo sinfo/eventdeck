@@ -106,7 +106,7 @@ var ViewCommunication = View.extend({
 
     var self = this;
     setInterval(function () {
-      $(self.queryByHook('toggle-comments')).text($(self.queryByHook('comments-list')).children("div").length + ' comments');
+      $(self.queryByHook('toggle-comments')).text($(self.queryByHook('comments-list')).children('div').length + ' comments');
     }, 1000);
   },
   subviews: {
