@@ -29,6 +29,7 @@ exports.create = {
   pre: [
     { method: 'company.create(payload, auth.credentials.id)', assign: 'company' },
     { method: 'subscription.create(pre.company.thread, auth.credentials.id)', assign: 'subscription' },
+    { method: 'subscription.createForCoordinators(pre.company.thread)', assign: 'coordinatorSubscriptions' },
     { method: 'notification.notifyCreate(auth.credentials.id, path, pre.company)', assign: 'notification' },
     { method: 'notification.broadcast(pre.notification)', assign: 'broadcast'}
   ],
