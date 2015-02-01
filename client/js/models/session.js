@@ -8,7 +8,6 @@ var SpeakerDetails = require('./speaker');
 var CompanyDetails = require('./company');
 var Moment = require('moment');
 
-//var Comment = require('./comment');
 var _ = require('client/js/helpers/underscore');
 
 var Speaker = AmpState.extend({
@@ -31,10 +30,6 @@ var CompaniesDetailsCollection = AmpCollection.extend({
   model: CompanyDetails
 });
 
-/*var CommentCollection = AmpCollection.extend({
-    model: Comment
-});*/
-
 module.exports = AmpModel.extend({
   props: {
     id: ['string'],
@@ -52,7 +47,6 @@ module.exports = AmpModel.extend({
     speakers: SpeakerCollection,
     speakersDetails: SpeakersDetailsCollection,
     companiesDetails: CompaniesDetailsCollection,
-    //comments: CommentCollection,
   },
   derived: {
     thread: {
@@ -111,17 +105,12 @@ module.exports = AmpModel.extend({
         return 'background-image:url(' + this.img + ');';
       }
     },
-/*  commentsApi: {
-      deps: ['id'],
-      fn: function () {
-        return '/api/sessions/' + this.id + '/comments';
-      }
-    }*/
   },
   parse: function (attrs) {
     console.log('parsing', attrs);
     attrs.date = new Date(attrs.date);
     attrs.duration = new Date(attrs.duration);
+    attrs.updated = new Date(attrs.updated);
     return attrs;
   },
   serialize: function () {
