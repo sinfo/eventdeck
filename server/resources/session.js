@@ -14,6 +14,7 @@ server.method('session.remove', remove, {});
 
 
 function create(session, memberId, cb) {
+  session.updated = Date.now();
   session.id = slug(session.id || session.name).toLowerCase();
 
   Session.create(session, function(err, _session) {
@@ -27,6 +28,7 @@ function create(session, memberId, cb) {
 }
 
 function update(id, session, cb) {
+  session.updated = Date.now();
   var filter = {id:id};
   Session.findOneAndUpdate(filter, session, function(err, _session) {
     if (err) {

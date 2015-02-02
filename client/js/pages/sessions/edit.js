@@ -69,8 +69,6 @@ module.exports = PageView.extend({
             data.duration = data.end - data.date;
             delete data.end;
 
-            data.updated = new Date();
-
             var changedAttributes = self.model.changedAttributes(data) || {};
 
             if(data['session-speakers']) {
