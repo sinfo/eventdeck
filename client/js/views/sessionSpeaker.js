@@ -42,7 +42,7 @@ module.exports = View.extend({
   template: templates.cards.session,
   initialize: function() {
     var self = this; 
-    if(!app.speakers.length) {
+    if(app.speakers.length) {
       return self.filterSpeakers(); 
     }
     

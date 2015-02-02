@@ -42,7 +42,7 @@ module.exports = View.extend({
   template: templates.cards.session,
   initialize: function() {
     var self = this; 
-    if(!app.companies.length) {
+    if(app.companies.length) {
       return self.filterCompanies(); 
     }
     
