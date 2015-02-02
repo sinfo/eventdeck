@@ -48,6 +48,8 @@ module.exports = PageView.extend({
             data.duration = data.end - data.date;
             delete data.end;
 
+            data.updated = new Date();
+
             if(data['session-speakers']) {
               data.speakers = data['session-speakers'] && data['session-speakers'].map(function(s) {return {id: s};});
               delete data['session-speakers'];
