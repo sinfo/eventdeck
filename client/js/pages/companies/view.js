@@ -2,7 +2,6 @@
 var log = require('bows')('companies');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
-var CompanyView = require('client/js/views/company');
 var CommunicationsView = require('client/js/views/communications');
 var Communications = require('client/js/models/communications');
 var CommentsView = require('client/js/views/comments');
@@ -40,9 +39,6 @@ module.exports = PageView.extend({
     'model.descriptionHtml': {
       type: 'innerHTML',
       hook: 'description'
-    },
-    'model.access': {
-      hook: 'access'
     },
     'model.editUrl': {
       type: 'attribute',

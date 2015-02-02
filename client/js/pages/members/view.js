@@ -1,8 +1,6 @@
 /*global app, alert*/
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
-var MemberView = require('client/js/views/member');
-
 
 module.exports = PageView.extend({
   pageTitle: 'View member',

@@ -2,7 +2,6 @@
 var log = require('bows')('sessions');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
-var SessionView = require('client/js/views/session');
 var CommunicationsView = require('client/js/views/communications');
 var Communications = require('client/js/models/communications');
 var CommentsView = require('client/js/views/comments');
