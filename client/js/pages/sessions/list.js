@@ -4,8 +4,8 @@ var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var AmpersandCollection = require('ampersand-collection');
 var Calendar = require('ampersand-fullcalendar-view');
-var options = require('options');
-var _ = require('underscore');
+//var options = require('options');
+//var _ = require('underscore');
 
 var selectedFilter = 'showall';
 
@@ -55,9 +55,9 @@ module.exports = PageView.extend({
           s.duration = new Date(s.duration);
           s.end = new Date(s.start.getTime() + s.duration.getTime());
           s.url = '/sessions/'+s.id;
-          s.color = _.find(options.kinds.sessions, function(o) {
-            return s.kind == o.name;
-          }).color;
+          //s.color = _.find(options.kinds.sessions, function(o) {
+          //  return s.kind == o.name;
+          //}).color;
           return s;
         });
 
