@@ -1,7 +1,7 @@
 /*global app*/
 var _ = require('underscore');
 var log = require('bows')('eventdeck');
-var config = require('clientconfig');
+var config = require('client/js/helpers/clientconfig');
 var $ = require('jquery');
 var Ink = require('./ink-all');
 
