@@ -93,6 +93,9 @@ exports.list = {
   },
   tags: ['api','session'],
   validate: {
+    headers: Joi.object({
+      'Only-Public': Joi.boolean().description('Set to true if you only want to receive the public list, even if you are authenticated')
+    }).unknown(),
     query: {
       fields: Joi.string().default('').description('Fields we want to retrieve'),
       skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
@@ -104,7 +107,7 @@ exports.list = {
     { method: 'session.list(query)', assign: 'sessions' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.sessions, request.auth.isAuthenticated));
+    reply(render(request.pre.sessions, request.auth.isAuthenticated && !request.headers['Only-Public']));
   },
   description: 'Gets all the sessions'
 };

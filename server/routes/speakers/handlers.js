@@ -124,6 +124,9 @@ exports.list = {
   },
   tags: ['api','speaker'],
   validate: {
+    headers: Joi.object({
+      'Only-Public': Joi.boolean().description('Set to true if you only want to receive the public list, even if you are authenticated')
+    }).unknown(),
     query: {
       fields: Joi.string().default('').description('Fields we want to retrieve'),
       skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
@@ -136,7 +139,7 @@ exports.list = {
     { method: 'notification.decorateWithUnreadStatus(auth.credentials.id, pre.speakers)', assign: 'speakers' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.speakers, request.auth.isAuthenticated));
+    reply(render(request.pre.speakers, request.auth.isAuthenticated && !request.headers['Only-Public']));
   },
   description: 'Gets all the speakers'
 };

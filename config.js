@@ -63,6 +63,11 @@ config.images = {
   directory: __dirname+'/public/images'
 };
 
+config.cors = {
+  origin: ['*'],
+  additionalHeaders: ['Only-Public']
+};
+
 config.templates = {};
 
 if(process.env.NODE_ENV == 'test') {
