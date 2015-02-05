@@ -33,9 +33,9 @@ module.exports = PageView.extend({
       type: 'innerHTML',
       hook: 'description'
     },
-    'model.historyHtml': {
+    'model.informationHtml': {
       type: 'innerHTML',
-      hook: 'history'
+      hook: 'information'
     },
     'model.editUrl': {
       type: 'attribute',

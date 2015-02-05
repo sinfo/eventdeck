@@ -31,11 +31,19 @@ module.exports = FormView.extend({
         parent: this
       }),
       new TextareaInput({
-        label: 'Description',
+        label: 'Public Description (Bio)',
         name: 'description',
         value: this.model && this.model.description || '',
         required: false,
         placeholder: 'Description',
+        parent: this
+      }),
+      new TextareaInput({
+        label: 'Information',
+        name: 'information',
+        value: this.model && this.model.information || '',
+        required: false,
+        placeholder: 'Information',
         parent: this
       }),
       new ExtendedInput({

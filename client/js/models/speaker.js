@@ -31,7 +31,7 @@ module.exports = AmpModel.extend({
     name: ['string'],
     title: ['string'],
     description: ['string'],
-    history: ['string'],
+    information: ['string'],
     img: ['string'],
     storedImg: ['string'],
     contacts:['string'],
@@ -116,10 +116,10 @@ module.exports = AmpModel.extend({
         return this.description && marked(this.description) || '';
       },
     },
-    historyHtml: {
-      deps: ['history'],
+    informationHtml: {
+      deps: ['information'],
       fn: function () {
-        return this.history && marked(this.history) || '';
+        return this.information && marked(this.information) || '';
       },
     },
     contactsHtml: {
