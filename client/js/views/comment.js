@@ -15,7 +15,11 @@ module.exports = View.extend({
     this.viewContainer = this.queryByHook('view-container');
     this.switcher = new ViewSwitcher(this.viewContainer);
 
-    this.handleViewClick();
+    if(!this.model.editing) {
+      this.handleViewClick();
+    } else {
+      this.handleEditClick();
+    }
   },
   events: {
     'click [data-hook~=action-delete]': 'handleRemoveClick',
@@ -98,20 +102,34 @@ var EditComment = View.extend({
         var model = this.model;
         return new CommentForm({
           el: el,
-          model: this.model,
+          model: model,
           submitCallback: function (data) {
-            data = self.model.changedAttributes(_.compactObject(data));
+            data = model.changedAttributes(_.compactObject(data));
             if(!data) {
               return self.parent.handleViewClick();
             }
-            self.model.save(data, {
-              patch: true,
-              wait: false,
-              success: function () {
-                log('comment saved', data);
-                self.parent.handleViewClick();
-              }
-            });
+
+            if (!model.posted) {
+              model.text = data.text;
+
+              model.save(model, {
+                wait: false,
+                success: function () {
+                  log('comment saved', data);
+                  self.parent.handleViewClick();
+                }
+              });
+            }
+            else {
+              model.save(data, {
+                patch: true,
+                wait: false,
+                success: function () {
+                  log('comment saved', data);
+                  self.parent.handleViewClick();
+                }
+              });
+            }
           }
         });
       }

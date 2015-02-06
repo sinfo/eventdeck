@@ -15,5 +15,5 @@ module.exports = PageView.extend({
   },
   addNew: function () {
     this.collection.add({editing: true});
-  },
+  }
 });

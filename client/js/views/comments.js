@@ -8,6 +8,7 @@ module.exports = PageView.extend({
   template: templates.partials.comments.area,
   events: {
     'click [data-hook~=fetch]': 'fetchCollection',
+    'click [data-hook~=add]': 'addNew'
   },
   render: function () {
     this.renderWithTemplate();
@@ -21,30 +22,13 @@ module.exports = PageView.extend({
     this.collection.fetch();
     return false;
   },
-  subviews: {
-    form: {
-      container: '[data-hook~=new-comment]',
-      prepareView: function (el) {
-        var self = this;
-        return new CommentForm({
-          el: el,
-          submitCallback: function (data) {
-            var comment = {
-              thread: self.parent.model.thread,
-              subthread: self.parent.model.subthread,
-              text: data.text
-            };
+  addNew: function () {
+    var self = this;
 
-            self.collection.create(comment, {
-              wait: true,
-              success: function () {
-                self.fetchCollection();
-                log('new comment created', comment);
-              }
-            });
-          }
-        });
-      }
-    }
+    this.collection.add({
+      editing: true,
+      thread: self.parent.model.thread,
+      subthread: self.parent.model.subthread
+    });
   }
 });
