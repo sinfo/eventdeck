@@ -26,11 +26,11 @@ module.exports = FormView.extend({
         parent: this
       }),
       new ExtendedInput({
-        label: 'Img',
+        label: 'Image',
         name: 'img',
         value: this.model && this.model.img || '',
         required: false,
-        placeholder: 'Img',
+        placeholder: 'Image',
         parent: this
       }),
       new ExtendedInput({
