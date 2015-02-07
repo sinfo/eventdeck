@@ -13,7 +13,7 @@ config.mongo = {
 };
 
 config.cookie = {
-  name: process.env.EVENTDECK_COOKIE_NAME || 'eventdeck',
+  name: process.env.EVENTDECK_COOKIE_NAME || 'eventdeck-auth',
   password: process.env.EVENTDECK_COOKIE_PASSWORD || 'YOUR COOKIE PASSWORD'
 };
 
@@ -61,6 +61,11 @@ config.client = {
 
 config.images = {
   directory: __dirname+'/public/images'
+};
+
+config.cors = {
+  origin: ['*'],
+  additionalHeaders: ['Only-Public']
 };
 
 config.templates = {};

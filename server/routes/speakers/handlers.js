@@ -16,7 +16,7 @@ exports.create = {
       name: Joi.string().required().description('name of the speaker'),
       title: Joi.string().description('title of the speaker'),
       description: Joi.string().description('description of the speaker'),
-      history: Joi.string().description('history of the speaker'),
+      information: Joi.string().description('information of the speaker'),
       img: Joi.string().description('image of the speaker'),
       url: Joi.string().description('url of the speaker'),
       contacts: Joi.string().description('contacts of the speaker'),
@@ -50,7 +50,7 @@ exports.update = {
       name: Joi.string().description('name of the speaker'),
       title: Joi.string().description('title of the speaker'),
       description: Joi.string().description('description of the speaker'),
-      history: Joi.string().description('history of the speaker'),
+      information: Joi.string().description('information of the speaker'),
       img: Joi.string().description('image of the speaker'),
       url: Joi.string().description('url of the speaker'),
       contacts: Joi.string().description('contacts of the speaker'),
@@ -124,6 +124,9 @@ exports.list = {
   },
   tags: ['api','speaker'],
   validate: {
+    headers: Joi.object({
+      'Only-Public': Joi.boolean().description('Set to true if you only want to receive the public list, even if you are authenticated')
+    }).unknown(),
     query: {
       fields: Joi.string().default('').description('Fields we want to retrieve'),
       skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
@@ -136,7 +139,7 @@ exports.list = {
     { method: 'notification.decorateWithUnreadStatus(auth.credentials.id, pre.speakers)', assign: 'speakers' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.speakers, request.auth.isAuthenticated));
+    reply(render(request.pre.speakers, request.auth.isAuthenticated && !request.headers['Only-Public']));
   },
   description: 'Gets all the speakers'
 };

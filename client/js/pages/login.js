@@ -2,7 +2,7 @@
 var log = require('bows')('auth');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
-var config = require('clientconfig');
+var config = require('client/js/helpers/clientconfig');
 var $ = require('jquery');
 
 module.exports = PageView.extend({

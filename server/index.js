@@ -5,9 +5,11 @@ var config = require('config');
 var cookieConfig = config.cookie;
 var moonbootsConfig = require('moonbootsConfig');
 
+var CONFIG_COOKIE_NAME = 'eventdeck-config';
+
 log.error({ env: process.env.NODE_ENV }, '### Starting EventDeck ###');
 
-var server = module.exports.hapi = new Hapi.Server(config.port, { cors: true });
+var server = module.exports.hapi = new Hapi.Server(config.port, { cors: config.cors });
 
 require('./db');
 
@@ -19,12 +21,12 @@ internals.configStateConfig = {
     isSecure: config.isSecure
 };
 
-server.state('config', internals.configStateConfig);
+server.state(CONFIG_COOKIE_NAME, internals.configStateConfig);
 internals.clientConfig = JSON.stringify(config.client);
 server.ext('onPreResponse', function(request, reply) {
   if (!request.state.config && !request.response.isBoom) {
     var response = request.response;
-    return reply(response.state('config', encodeURIComponent(internals.clientConfig)));
+    return reply(response.state(CONFIG_COOKIE_NAME, encodeURIComponent(internals.clientConfig)));
   }
 
   return reply();

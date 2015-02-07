@@ -151,6 +151,9 @@ exports.list = {
   },
   tags: ['api','company'],
   validate: {
+    headers: Joi.object({
+      'Only-Public': Joi.boolean().description('Set to true if you only want to receive the public list, even if you are authenticated')
+    }).unknown(),
     query: {
       fields: Joi.string().description('Fields we want to retrieve'),
       skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
@@ -163,7 +166,7 @@ exports.list = {
     { method: 'notification.decorateWithUnreadStatus(auth.credentials.id, pre.companies)', assign: 'companies' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.companies, request.auth.isAuthenticated));
+    reply(render(request.pre.companies, request.auth.isAuthenticated && !request.headers['Only-Public']));
   },
   description: 'Gets all the companies'
 };

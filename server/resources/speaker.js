@@ -164,7 +164,7 @@ function search(str, query, cb) {
       $or: [
         { contacts: new RegExp(str, 'i') },
         { area: new RegExp(str, 'i') },
-        { history: new RegExp(str, 'i') },
+        { information: new RegExp(str, 'i') },
         { 'participations.status': new RegExp(str, 'i') },
       ]
     };
