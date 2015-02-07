@@ -56,7 +56,7 @@ module.exports = PageView.extend({
           s.end = new Date(s.start.getTime() + s.duration.getTime());
           s.url = '/sessions/'+s.id;
           s.color = _.find(options.kinds.sessions, function(o) {
-            return s.kind == o.name 
+            return s.kind == o.name;
           }).color;
           return s;
         });
