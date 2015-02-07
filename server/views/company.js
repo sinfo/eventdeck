@@ -61,6 +61,7 @@ function renderObject(model, isAuthenticated) {
           status: participation.payment.status,
           via: participation.payment.via,
         },
+        advertisementLvl: participation.advertisementLvl,
         items: participation.items && participation.items.map(function(item) {
           return {
             id: item.id,

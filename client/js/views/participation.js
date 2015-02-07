@@ -72,6 +72,10 @@ var ViewPayment = View.extend({
       { type: 'toggle', hook: 'kind' },
       { selector: '[data-hook~=kind] span' },
     ],
+    'model.advertisementLvl': [
+      { type: 'toggle', hook: 'advertisementLvl' },
+      { selector: '[data-hook~=advertisementLvl] span' },
+    ],
     'model.payment.price': [
       { type: 'toggle', hook: 'price' },
       { selector: '[data-hook~=price] span' },
@@ -110,6 +114,7 @@ var ViewParticipation = View.extend({
       name: 'style'
     },
     'model.kind': '[data-hook~=kind]',
+    'model.advertisementLvl': '[data-hook~=advertisementLvl]',
     'model.memberDetails.img': {
       type: 'attribute',
       hook: 'member-img',

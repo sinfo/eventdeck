@@ -20,6 +20,7 @@ var schema = new mongoose.Schema({
       status: String,
       via: String
     },
+    advertisementLvl: String,
     items: [{
       id: String,
       amount: Number,

@@ -22,6 +22,16 @@ module.exports = FormView.extend({
         placeholder: 'Kind',
         parent: self
       }));
+      self.addField(new SelectView({
+        template: templates.includes.formSelect(),
+        unselectedText: 'please choose one',
+        label: 'Advertisement Level',
+        name: 'advertisementLvl',
+        parent: self,
+        options: options.advertisementLvl.map(function(t) { return [t.id, t.name]; }),
+        value: self.model && self.model.advertisementLvl,
+        yieldModel: false
+      }));
       self.addField(new ExtendedInput({
         label: 'Price',
         name: 'payment.price',

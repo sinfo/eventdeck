@@ -31,7 +31,8 @@ module.exports = AmpState.extend({
     event: ['string'],
     member: ['string'],
     status: ['string'],
-    kind: ['string']
+    kind: ['string'],
+    advertisementLvl: ['string'],
   },
   children: {
     payment: Payment

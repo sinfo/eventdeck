@@ -68,6 +68,13 @@ options.kinds = {
   ]
 };
 
+options.advertisementLvl = [
+ { name: 'Exclusive', id: 'exclusive' },
+ { name: 'Maximum', id: 'max' },
+ { name: 'Medium', id: 'med' },
+ { name: 'Minimum', id: 'min' }
+];
+
 options.roles = [
   { name: 'Public Relations', id: 'public-relations' },
   { name: 'Marketing', id: 'marketing' },
