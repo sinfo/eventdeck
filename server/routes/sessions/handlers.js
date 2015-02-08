@@ -19,7 +19,13 @@ exports.create = {
       speakers: Joi.array().description('speakers associated to the session'),
       companies: Joi.array().description('companies associated to the session'),
       date: Joi.date().description('start date of the session'),
-      duration: Joi.date().description('duration of the session')
+      duration: Joi.date().description('duration of the session'),
+      tickets: {
+        needed: Joi.boolean().description('if the tickets are needed for a session or not'),
+        start: Joi.date().description('start date of the session'),
+        end: Joi.date().description('ending date of the session'),
+        max: Joi.number().description('max number of tickets to distribute'),
+        },
     }
   },
   pre: [
@@ -50,7 +56,13 @@ exports.update = {
       speakers: Joi.array().description('speakers associated to the session'),
       companies: Joi.array().description('companies associated to the session'),
       date: Joi.date().description('start date of the session'),
-      duration: Joi.date().description('duration of the session')
+      duration: Joi.date().description('duration of the session'),
+      tickets: {
+        needed: Joi.boolean().description('if the tickets are needed for a session or not'),
+        start: Joi.date().description('start date of the session'),
+        end: Joi.date().description('ending date of the session'),
+        max: Joi.number().description('max number of tickets to distribute'),
+      },
     }
   },
   pre: [
