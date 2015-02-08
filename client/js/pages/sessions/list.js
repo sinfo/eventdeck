@@ -3,9 +3,9 @@ var log = require('bows')('sessions');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var AmpersandCollection = require('ampersand-collection');
-var Calendar = require('ampersand-fullcalendar-view');
 var options = require('options');
 var _ = require('underscore');
+var Calendar = require('ampersand-fullcalendar-view');
 
 var selectedFilter = 'showall';
 

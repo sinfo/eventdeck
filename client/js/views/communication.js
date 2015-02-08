@@ -18,11 +18,7 @@ module.exports = View.extend({
     this.viewContainer = this.queryByHook('view-container');
     this.switcher = new ViewSwitcher(this.viewContainer);
 
-    if(!this.model.editing) {
-      this.handleViewClick();
-    } else {
-      this.handleEditClick();
-    }
+    this.handleViewClick();
   },
   events: {
     'click [data-hook~=action-delete]': 'handleRemoveClick',
@@ -129,10 +125,6 @@ var ViewCommunication = View.extend({
       container: '[data-hook=communication-comments]',
       waitFor: 'model.commentsApi',
       prepareView: function (el) {
-        if (!this.model.id) {
-          return;
-        }
-
         var Comms = new Comments(this.model.commentsApi);
         return new CommentsView({
           el: el,
@@ -154,36 +146,20 @@ var EditCommunication = View.extend({
         var model = this.model;
         return new CommunicationForm({
           el: el,
-          model: model,
+          model: this.model,
           submitCallback: function (data) {
-            data = model.changedAttributes(_.compactObject(data));
+            data = self.model.changedAttributes(_.compactObject(data));
             if(!data) {
               return self.parent.handleViewClick();
             }
-
-            if (!model.posted) {
-              model.event = data.event;
-              model.kind = data.kind;
-              model.text = data.text;
-
-              model.save(model, {
-                wait: false,
-                success: function () {
-                  log('communication saved', data);
-                  self.parent.handleViewClick();
-                }
-              });
-            }
-            else {
-              model.save(data, {
-                patch: true,
-                wait: false,
-                success: function () {
-                  log('communication saved', data);
-                  self.parent.handleViewClick();
-                }
-              });
-            }
+            self.model.save(data, {
+              patch: true,
+              wait: false,
+              success: function () {
+                log('communication saved', data);
+                self.parent.handleViewClick();
+              }
+            });
           }
         });
       }
@@ -195,5 +171,3 @@ var EditCommunication = View.extend({
 var AdminCommunication = View.extend({
   template: templates.partials.communications.admin,
 });
-
-

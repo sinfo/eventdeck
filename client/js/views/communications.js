@@ -8,7 +8,6 @@ module.exports = PageView.extend({
   template: templates.partials.communications.area,
   events: {
     'click [data-hook~=fetch]': 'fetchCollection',
-    'click [data-hook~=add]': 'addNew'
   },
   render: function () {
     this.renderWithTemplate();
@@ -22,12 +21,31 @@ module.exports = PageView.extend({
     this.collection.fetch();
     return false;
   },
-  addNew: function () {
-    var self = this;
+  subviews: {
+    form: {
+      container: '[data-hook~=new-commmunication]',
+      prepareView: function (el) {
+        var self = this;
+        return new CommunicationForm({
+          el: el,
+          submitCallback: function (data) {
+            var communication = {
+              thread: self.parent.model.thread,
+              event: data.event,
+              kind: data.kind,
+              text: data.text
+            };
 
-    this.collection.add({
-      editing: true,
-      thread: self.parent.model.thread
-    });
+            self.collection.create(communication, {
+              wait: true,
+              success: function () {
+                self.fetchCollection();
+                log('new communication created', communication);
+              }
+            });
+          }
+        });
+      }
+    }
   }
 });
