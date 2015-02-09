@@ -1,5 +1,4 @@
 var CURRENT_EVENT = 'xxii-sinfo';
-var PUBLIC_STATUS = 'closed deal';
 
 var IVA = 1.23;
 
@@ -7,7 +6,7 @@ module.exports = function render(content, isAuthenticated) {
   if(content instanceof Array) {
     if(isAuthenticated === false) {
       content = content && content.filter(function(model) {
-        return model.participations && model.participations.filter(function(p) { return p.event == CURRENT_EVENT && p.status && p.status.toLowerCase() == PUBLIC_STATUS; }).length > 0;
+        return model.participations && model.participations.filter(function(p) { return p.event == CURRENT_EVENT && p.advertisementLvl; }).length > 0;
       });
     }
 
@@ -31,6 +30,7 @@ function renderObject(model, isAuthenticated) {
       description: model.description || '',
       img: model.img || '',
       updated: model.updated || '',
+      advertisementLvl: model.participations.filter(function(p) { return p.event == CURRENT_EVENT && p.advertisementLvl; })[0].advertisementLvl
     };
   }
 

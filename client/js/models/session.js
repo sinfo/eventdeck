@@ -18,6 +18,15 @@ var Speaker = AmpState.extend({
   }
 });
 
+var Tickets = AmpState.extend({
+  props: {
+    needed: 'boolean',
+    start: 'date',
+    end: 'date',
+    max: 'number'
+  }
+});
+
 var SpeakerCollection = AmpCollection.extend({
   model: Speaker
 });
@@ -42,6 +51,9 @@ module.exports = AmpModel.extend({
     duration: ['date'],
     updated: ['date'],
     companies: ['array'],
+  },
+  children:{
+    tickets: Tickets
   },
   collections: {
     speakers: SpeakerCollection,
@@ -83,7 +95,7 @@ module.exports = AmpModel.extend({
       deps: ['date'],
       fn: function() {
         var date = new Date(this.date);
-        return new Moment(date).format('MMMM Do YYYY, HH:mm');  
+        return new Moment(date).format('MMMM Do YYYY, HH:mm');
       }
     },
     end: {
@@ -96,7 +108,7 @@ module.exports = AmpModel.extend({
       deps: ['end'],
       fn: function() {
         var date = new Date(this.end);
-        return new Moment(date).format('MMMM Do YYYY, HH:mm');  
+        return new Moment(date).format('MMMM Do YYYY, HH:mm');
       }
     },
     background: {

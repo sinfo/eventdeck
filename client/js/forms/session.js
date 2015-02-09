@@ -3,6 +3,7 @@ var FormView = require('ampersand-form-view');
 var InputView = require('ampersand-input-view');
 var ArrayInputView = require('ampersand-array-input-view');
 var ChosenView = require('ampersand-chosen-view');
+var CheckBoxView = require('ampersand-checkbox-view');
 var SelectView = require('ampersand-select-view');
 var DateView = require('ampersand-pikaday-view');
 var templates = require('client/js/templates');
@@ -144,6 +145,34 @@ module.exports = FormView.extend({
         value: this.model && this.model.companies,
         isMultiple: true,
         options: app.companies && app.companies.map(function (m) { return [m.id, m.name]; }),
+      }),
+      new CheckBoxView({
+        name: 'tickets.needed',
+        label: 'Tickets Required',
+        value: this.model && this.model.tickets && this.model.tickets.needed || false,
+        required: false,
+        validClass: 'input-valid',
+        invalidClass: 'input-invalid',
+        requiredMessage: 'This box must be checked.',
+        parent:  this
+      }),
+      new DateView({
+        label: 'Date to start ticket distribution',
+        value: this.model && this.model.tickets && this.model.tickets.start || '',
+        name: 'tickets.start'
+      }),
+      new DateView({
+        label: 'Date to end ticket distribution',
+        value: this.model && this.model.tickets && this.model.tickets.end || '',
+        name: 'tickets.end'
+      }),
+      new ExtendedInput({
+        label: 'Number of Tickets',
+        name: 'tickets.max',
+        value: this.model && this.model.tickets && this.model.tickets.max || '',
+        required: false,
+        placeholder: 'Number of Tickets',
+        parent: this
       }),
     ];
   }

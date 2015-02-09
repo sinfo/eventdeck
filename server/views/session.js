@@ -25,5 +25,11 @@ function renderObject(model, isAuthenticated) {
     date: model.date || '',
     duration: model.duration || '',
     updated: model.updated || '',
+    tickets: model.tickets && {
+      needed: model.tickets.needed,
+      start: model.tickets.start,
+      end: model.tickets.end,
+      max: model.tickets.max
+    },
   };
 }
