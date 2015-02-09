@@ -92,4 +92,9 @@ options.roles = [
   { name: 'Marketing Manager', id: 'marketing-manager' }
 ];
 
+options.needed = [
+  { name: 'Yes', value: 'true' },
+  { name: 'No', value:'false' },
+];
+
 module.exports = options;

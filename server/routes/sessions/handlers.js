@@ -21,10 +21,10 @@ exports.create = {
       date: Joi.date().description('start date of the session'),
       duration: Joi.date().description('duration of the session'),
       tickets: {
-        needed: Joi.boolean().description('if the tickets are needed for a session or not'),
-        start: Joi.date().description('start date of the session'),
-        end: Joi.date().description('ending date of the session'),
-        max: Joi.number().description('max number of tickets to distribute'),
+        needed: Joi.boolean().description('Says if the session has tickets or not'),
+        start: Joi.date().description('The date when the tickets become available'),
+        end: Joi.date().description('The closing date for getting tickets'),
+        max: Joi.number().description('Number max of tickets to be distributed'),
         },
     }
   },
@@ -58,11 +58,10 @@ exports.update = {
       date: Joi.date().description('start date of the session'),
       duration: Joi.date().description('duration of the session'),
       tickets: {
-        needed: Joi.boolean().description('if the tickets are needed for a session or not'),
-        start: Joi.date().description('start date of the session'),
-        end: Joi.date().description('ending date of the session'),
-        max: Joi.number().description('max number of tickets to distribute'),
-      },
+        needed: Joi.boolean().description('Says if the session has tickets or not'),
+        start: Joi.date().description('The date when the tickets become available'),
+        end: Joi.date().description('The closing date for getting tickets'),
+        max: Joi.number().description('Number max of tickets to be distributed'),      },
     }
   },
   pre: [

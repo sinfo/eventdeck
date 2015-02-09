@@ -49,6 +49,18 @@ module.exports = PageView.extend({
       hook: 'edit',
       name: 'href'
     },
+    'model.tickets.needed': {
+      hook: 'ticketneeded'
+    },
+    'model.tickets.start': {
+      hook: 'ticketstart'
+    },
+    'model.tickets.end': {
+      hook: 'ticketend'
+    },
+    'model.tickets.max': {
+      hook: 'ticketmax'
+    },
   },
   events: {
     'click [data-hook~=delete]': 'handleDeleteClick',

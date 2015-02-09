@@ -145,6 +145,35 @@ module.exports = FormView.extend({
         isMultiple: true,
         options: app.companies && app.companies.map(function (m) { return [m.id, m.name]; }),
       }),
+      new SelectView({
+        // template: templates.includes.formSelect(),
+        name: 'tickets.needed',
+        label: 'Ticket Required',
+        parent: this,
+        options: options.needed,
+        value: this.model && this.model.tickets && this.model.tickets.needed || false,
+        unselectedText: 'Please choose one',
+        required: false,
+        yieldModel: false,
+      }),
+      new DateView({
+        label: 'Date to start ticket distribution',
+        value: this.model && this.model.tickets && this.model.tickets.start || '',
+        name: 'tickets.start'
+      }),
+      new DateView({
+        label: 'Date to end ticket distribution',
+        value: this.model && this.model.tickets && this.model.tickets.end || '',
+        name: 'tickets.end'
+      }),
+      new ExtendedInput({
+        label: 'Number of Tickets',
+        name: 'tickets.max',
+        value: this.model && this.model.tickets && this.model.tickets.max || 0,
+        required: false,
+        placeholder: 'Number of Tickets',
+        parent: this
+      }),
     ];
   }
 });
