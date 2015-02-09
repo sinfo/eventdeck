@@ -20,10 +20,10 @@ var Speaker = AmpState.extend({
 
 var Tickets = AmpState.extend({
   props: {
-    needed: 'boolean',
-    start: 'date',
-    end: 'date',
-    max: 'number'
+    needed: ['boolean'],
+    start: ['date'],
+    end: ['date'],
+    max: ['number']
   }
 });
 

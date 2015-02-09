@@ -69,6 +69,18 @@ module.exports = PageView.extend({
             data.duration = data.end - data.date;
             delete data.end;
 
+            var tickets = {
+              needed : data['tickets.needed'],
+              start: new Date(data['tickets.start']),
+              end: new Date(data['tickets.end']),
+              max: parseInt(data['tickets.max'])
+            };
+
+            delete data['tickets.needed'];
+            delete data['tickets.start'];
+            delete data['tickets.end'];
+            delete data['tickets.max'];
+
             var changedAttributes = self.model.changedAttributes(data) || {};
 
             if(data['session-speakers']) {
