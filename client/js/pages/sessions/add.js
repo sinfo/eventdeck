@@ -56,6 +56,7 @@ module.exports = PageView.extend({
             app.sessions.create(data, {
               wait: true,
               success: function (model, response, options) {
+                console.log(model);
                 app.navigate('/sessions/'+model.id);
                 app.sessions.fetch();
               }
