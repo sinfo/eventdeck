@@ -27,7 +27,9 @@ module.exports = View.extend({
     'click [data-hook~=action-view]': 'handleViewClick',
   },
   handleRemoveClick: function () {
-    this.model.destroy({wait: true});
+    if (window.confirm('Do you really want to delete this comment?')) {
+      this.model.destroy({wait: true});
+    }
     return false;
   },
   handleEditClick: function () {
