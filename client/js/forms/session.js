@@ -159,12 +159,15 @@ module.exports = FormView.extend({
       new DateView({
         label: 'Date to start ticket distribution',
         value: this.model && this.model.tickets && this.model.tickets.start || '',
-        name: 'tickets.start'
+        name: 'tickets.start',
+        required: false,
       }),
       new DateView({
         label: 'Date to end ticket distribution',
         value: this.model && this.model.tickets && this.model.tickets.end || '',
-        name: 'tickets.end'
+        name: 'tickets.end',
+        required: false,
+        requiredMessage:'Required...'
       }),
       new ExtendedInput({
         label: 'Number of Tickets',

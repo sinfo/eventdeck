@@ -49,7 +49,7 @@ module.exports = PageView.extend({
       hook: 'edit',
       name: 'href'
     },
-    'model.tickets.needed': {
+    'model.ticketneeded': {
       hook: 'ticketneeded'
     },
     'model.tickets.start': {
@@ -72,6 +72,7 @@ module.exports = PageView.extend({
         log.error('couldnt find a session with id: ' + spec.id);
       }
       self.model = model;
+
       log('Got session', model.name);
     });
   },

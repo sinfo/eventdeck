@@ -45,22 +45,34 @@ module.exports = PageView.extend({
               }
             }
 
-            data.tickets ={
-              needed : '',
-              start: new Date(),
-              end: new Date(),
-              max: 0
-            };
+            if(data['tickets.needed'] === true){
 
-            data.tickets.needed = data['tickets.needed'];
-            data.tickets.start = data['tickets.start'];
-            data.tickets.end =  data['tickets.end'];
-            data.tickets.max = parseInt(data['tickets.max']);
+              data.tickets ={
+                needed : false,
+                start: data.date,
+                end: data.date,
+                max: 0
+              };
 
-            delete data['tickets.needed'];
-            delete data['tickets.start'];
-            delete data['tickets.end'];
-            delete data['tickets.max'];
+
+              if (data['tickets.start']) {
+                data.tickets.start = data['tickets.start'];
+                delete data['tickets.start'];
+              }
+
+              if (data['tickets.end']) {
+                data.tickets.end = data['tickets.end'];
+                delete data['tickets.end'];
+              }
+
+              if (data['tickets.max']) {
+                data.tickets.max = parseInt(data['tickets.max']);
+                delete data['tickets.max'];
+              }
+
+              data.tickets.needed = true;
+              delete data['tickets.needed'];
+            }
 
             data.duration = data.end - data.date;
             delete data.end;

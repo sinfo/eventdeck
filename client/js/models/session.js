@@ -117,6 +117,16 @@ module.exports = AmpModel.extend({
         return 'background-image:url(' + this.img + ');';
       }
     },
+    ticketneeded:{
+      deps: ['tickets'],
+      fn: function(){
+        if(this.tickets.needed){
+          return 'Required';
+        }
+        return 'Not required';
+
+      }
+    }
   },
   parse: function (attrs) {
     console.log('parsing', attrs);
@@ -124,9 +134,12 @@ module.exports = AmpModel.extend({
     attrs.duration = new Date(attrs.duration);
     attrs.updated = new Date(attrs.updated);
 
-
-    attrs.tickets.start = new Date(attrs.tickets.start);
-    attrs.tickets.end = new Date(attrs.tickets.end);
+    if(attrs.tickets.start !== null){
+      attrs.tickets.start = new Date(attrs.tickets.start);
+    }
+    if(attrs.tickets.end !== null){
+      attrs.tickets.end = new Date(attrs.tickets.end);
+    }
 
     return attrs;
   },
