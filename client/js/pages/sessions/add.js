@@ -45,18 +45,22 @@ module.exports = PageView.extend({
               }
             }
 
-            var tickets = {
-              needed : data['tickets.needed'],
-              start: new Date(data['tickets.start']),
-              end: new Date(data['tickets.end']),
-              max: parseInt(data['tickets.max'])
+            data.tickets ={
+              needed : '',
+              start: new Date(),
+              end: new Date(),
+              max: 0
             };
+
+            data.tickets.needed = data['tickets.needed'];
+            data.tickets.start = data['tickets.start'];
+            data.tickets.end =  data['tickets.end'];
+            data.tickets.max = parseInt(data['tickets.max']);
+
             delete data['tickets.needed'];
             delete data['tickets.start'];
             delete data['tickets.end'];
             delete data['tickets.max'];
-
-            data.tickets = tickets;
 
             data.duration = data.end - data.date;
             delete data.end;
@@ -65,12 +69,10 @@ module.exports = PageView.extend({
               data.speakers = data['session-speakers'] && data['session-speakers'].map(function(s) {return {id: s};});
               delete data['session-speakers'];
             }
-            console.log(data);
 
             app.sessions.create(data, {
               wait: true,
               success: function (model, response, options) {
-                console.log(model);
                 app.navigate('/sessions/'+model.id);
                 app.sessions.fetch();
               }

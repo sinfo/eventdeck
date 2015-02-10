@@ -124,6 +124,10 @@ module.exports = AmpModel.extend({
     attrs.duration = new Date(attrs.duration);
     attrs.updated = new Date(attrs.updated);
 
+
+    attrs.tickets.start = new Date(attrs.tickets.start);
+    attrs.tickets.end = new Date(attrs.tickets.end);
+
     return attrs;
   },
   serialize: function () {

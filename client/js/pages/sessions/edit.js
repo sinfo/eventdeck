@@ -69,12 +69,17 @@ module.exports = PageView.extend({
             data.duration = data.end - data.date;
             delete data.end;
 
-            var tickets = {
-              needed : data['tickets.needed'],
-              start: new Date(data['tickets.start']),
-              end: new Date(data['tickets.end']),
-              max: parseInt(data['tickets.max'])
+            data.tickets ={
+              needed : '',
+              start: new Date(),
+              end: new Date(),
+              max: 0
             };
+
+            data.tickets.needed = data['tickets.needed'];
+            data.tickets.start = data['tickets.start'];
+            data.tickets.end =  data['tickets.end'];
+            data.tickets.max = parseInt(data['tickets.max']);
 
             delete data['tickets.needed'];
             delete data['tickets.start'];

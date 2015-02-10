@@ -2,7 +2,6 @@ module.exports = function render(content, isAuthenticated) {
   if(content instanceof Array) {
     return content.map(function(model) { return renderObject(model, isAuthenticated); });
   }
-
   return renderObject(content);
 };
 
