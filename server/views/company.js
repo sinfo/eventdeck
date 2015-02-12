@@ -13,7 +13,7 @@ module.exports = function render(content, isAuthenticated) {
     return content.map(function(model) { return renderObject(model, isAuthenticated); });
   }
 
-  return renderObject(content);
+  return renderObject(content, isAuthenticated);
 };
 
 function renderObject(model, isAuthenticated) {

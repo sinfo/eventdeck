@@ -73,12 +73,18 @@ exports.update = {
 
 
 exports.get = {
-  auth: 'session',
+  auth: {
+    strategies: ['session'],
+    mode: 'try'
+  },
   tags: ['api','speaker'],
   validate: {
+    headers: Joi.object({
+      'Only-Public': Joi.boolean().description('Set to true if you only want to receive the public list, even if you are authenticated')
+    }).unknown(),
     query: {
       fields: Joi.string().default('').description('Fields we want to retrieve'),
-  },
+    },
     params: {
       id: Joi.string().required().description('id of the speaker we want to retrieve'),
     }
@@ -87,7 +93,7 @@ exports.get = {
     { method: 'speaker.get(params.id,query)', assign: 'speaker' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.speaker));
+    reply(render(request.pre.speaker, request.auth.isAuthenticated && !request.headers['Only-Public']));
   },
   description: 'Gets an speaker'
 };

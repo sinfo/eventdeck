@@ -76,21 +76,27 @@ exports.update = {
 
 
 exports.get = {
-  auth: 'session',
+  auth: {
+    strategies: ['session'],
+    mode: 'try'
+  },
   tags: ['api','company'],
   validate: {
+    headers: Joi.object({
+      'Only-Public': Joi.boolean().description('Set to true if you only want to receive the public list, even if you are authenticated')
+    }).unknown(),
     params: {
       id: Joi.string().required().description('id of the company we want to retrieve'),
     },
     query: {
-      fields: Joi.string().default('id,name,img').description('Fields we want to retrieve'),
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
     }
   },
   pre: [
     { method: 'company.get(params.id, query)', assign: 'company' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.company));
+    reply(render(request.pre.company, request.auth.isAuthenticated && !request.headers['Only-Public']));
   },
   description: 'Gets an company'
 };

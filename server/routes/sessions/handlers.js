@@ -25,7 +25,7 @@ exports.create = {
         start: Joi.date().description('The date when the tickets become available'),
         end: Joi.date().description('The closing date for getting tickets'),
         max: Joi.number().description('Number max of tickets to be distributed'),
-        },
+      },
     }
   },
   pre: [
@@ -61,7 +61,8 @@ exports.update = {
         needed: Joi.boolean().description('Says if the session has tickets or not'),
         start: Joi.date().description('The date when the tickets become available'),
         end: Joi.date().description('The closing date for getting tickets'),
-        max: Joi.number().description('Number max of tickets to be distributed'),      },
+        max: Joi.number().description('Number max of tickets to be distributed'),
+      },
     }
   },
   pre: [
@@ -77,12 +78,18 @@ exports.update = {
 
 
 exports.get = {
-  auth: 'session',
+  auth: {
+    strategies: ['session'],
+    mode: 'try'
+  },
   tags: ['api','session'],
   validate: {
+    headers: Joi.object({
+      'Only-Public': Joi.boolean().description('Set to true if you only want to receive the public list, even if you are authenticated')
+    }).unknown(),
     query: {
       fields: Joi.string().default('').description('Fields we want to retrieve'),
-  },
+    },
     params: {
       id: Joi.string().required().description('id of the session we want to retrieve'),
     }
@@ -91,7 +98,7 @@ exports.get = {
     { method: 'session.get(params.id,query)', assign: 'session' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.session));
+    reply(render(request.pre.session, request.auth.isAuthenticated && !request.headers['Only-Public']));
   },
   description: 'Gets an session'
 };
