@@ -3,6 +3,7 @@ var url = require('url');
 
 var config = {
   url: process.env.EVENTDECK_URL || 'http://localhost:8080',
+  host: process.env.EVENTDECK_HOST || 'localhost',
   port: process.env.EVENTDECK_PORT || 8080,
   isDev: process.env.NODE_ENV != 'production',
   isSecure: process.env.EVENTDECK_IS_SECURE === true || process.env.EVENTDECK_IS_SECURE === 'true'

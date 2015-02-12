@@ -9,7 +9,7 @@ var CONFIG_COOKIE_NAME = 'eventdeck-config';
 
 log.error({ env: process.env.NODE_ENV }, '### Starting EventDeck ###');
 
-var server = module.exports.hapi = new Hapi.Server(config.port, { cors: config.cors });
+var server = module.exports.hapi = new Hapi.Server(config.host, config.port, { cors: config.cors });
 
 require('./db');
 
