@@ -117,8 +117,14 @@ module.exports = AmpModel.extend({
         return 'background-image:url(' + this.img + ');';
       }
     },
+    descriptionHtml: {
+      deps: ['description'],
+      fn: function () {
+        return this.description && marked(this.description) || '';
+      },
+    },
     ticketneeded:{
-      deps: ['tickets'],
+      deps: ['tickets.needed'],
       fn: function(){
         if(this.tickets.needed){
           return 'Required';

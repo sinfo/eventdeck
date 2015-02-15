@@ -7,10 +7,16 @@ var CheckBoxView = require('ampersand-checkbox-view');
 var SelectView = require('ampersand-select-view');
 var DateView = require('ampersand-pikaday-view');
 var templates = require('client/js/templates');
+var options = require('options');
+
 var ExtendedInput = InputView.extend({
   template: templates.includes.formInput()
 });
-var options = require('options');
+
+var TextareaInput = InputView.extend({
+    template: templates.includes.formTextarea()
+});
+
 
 var hours = function () {
   var hours = [];
@@ -66,7 +72,7 @@ module.exports = FormView.extend({
         placeholder: 'Place',
         parent: this,
       }),
-      new ExtendedInput({
+      new TextareaInput({
         label: 'Description',
         name: 'description',
         value: this.model && this.model.description || '',

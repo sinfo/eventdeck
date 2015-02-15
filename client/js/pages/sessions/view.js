@@ -26,9 +26,6 @@ module.exports = PageView.extend({
     'model.place': {
       hook: 'place'
     },
-    'model.description': {
-      hook: 'description'
-    },
     'model.startParsed': {
       hook: 'start'
     },
@@ -42,7 +39,7 @@ module.exports = PageView.extend({
     },
     'model.descriptionHtml': {
       type: 'innerHTML',
-      hook: 'descriptionHtml'
+      hook: 'description'
     },
     'model.editUrl': {
       type: 'attribute',
