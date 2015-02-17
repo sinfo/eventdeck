@@ -1,4 +1,5 @@
 /*global app, alert*/
+var $ = require('jquery');
 var log = require('bows')('sessions');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
@@ -71,6 +72,39 @@ module.exports = PageView.extend({
       self.model = model;
 
       log('Got session', model.name);
+
+      // temporary piece of code below
+      $.ajax({
+        url: 'https://cannon.sinfo.org/tickets/' + self.model.id,
+        success: function (data) {
+          var users = $(self.queryByHook('users'));
+
+          if (!data.users || data.users.length < 1) {
+            users.append($('<p>There are no users.</p>'));
+          }
+          else {
+            data.users.forEach(function (user) {
+              users.append($('<p>' + user + '</p>'));
+            });
+          }
+
+          var confirmed = $(self.queryByHook('confirmed-users'));
+
+          if (!data.confirmed || data.confirmed.length < 1) {
+            confirmed.append($('<p>There are no users.</p>'));
+          }
+          else {
+            data.confirmed.forEach(function (user) {
+              confirmed.append($('<p>' + user + '</p>'));
+            });
+          }
+        },
+        error: function () {
+          $(self.queryByHook('users')).append($('<p>There are no users.</p>'));
+          $(self.queryByHook('confirmed-users')).append($('<p>There are no users.</p>'));
+        }
+      });
+      // temporary piece of code above
     });
   },
   subviews: {
