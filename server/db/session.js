@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
-  id: String,
+  id: {type: String, unique: true},
   name: String,
   kind: String,
   img: String,

@@ -77,7 +77,7 @@ function list(query,cb) {
       log.error({ err: err}, 'error getting all sessions');
       return cb(Boom.internal());
     }
-    
+
     cb(null, sessions);
   });
 }
