@@ -76,32 +76,54 @@ module.exports = PageView.extend({
       // temporary piece of code below
       $.ajax({
         url: 'https://cannon.sinfo.org/tickets/' + self.model.id,
-        success: function (data) {
-          var users = $(self.queryByHook('users'));
+        success: function (ids) {
+          $.ajax({
+            url: 'https://cannon.sinfo.org/tickets/' + self.model.id + '/users',
+            success: function (users) {
+              var usersDiv = $(self.queryByHook('users'));
 
-          if (!data.users || data.users.length < 1) {
-            users.append($('<p>There are no users.</p>'));
-          }
-          else {
-            data.users.forEach(function (user) {
-              users.append($('<p>' + user + '</p>'));
-            });
-          }
+              if (!users || users.length < 1) {
+                usersDiv.append($('<p>There are no users.</p>'));
+              }
+              else {
+                users.forEach(function (user) {
+                  usersDiv.append($('<p>' + user.name + '</p>'));
+                });
+              }
 
-          var confirmed = $(self.queryByHook('confirmed-users'));
+              var confirmedDiv = $(self.queryByHook('confirmed-users'));
 
-          if (!data.confirmed || data.confirmed.length < 1) {
-            confirmed.append($('<p>There are no users.</p>'));
-          }
-          else {
-            data.confirmed.forEach(function (user) {
-              confirmed.append($('<p>' + user + '</p>'));
-            });
-          }
+              if (!ids.confirmed || ids.confirmed.length < 1) {
+                confirmedDiv.append($('<p>There are no confirmed users.</p>'));
+              }
+              else {
+                var found = false;
+
+                ids.confirmed.forEach(function (id) {
+                  var user = findUserById(id);
+
+                  if (user) {
+                    found = true;
+                    confirmedDiv.append($('<p>' + user.name + '</p>'));
+                  }
+                });
+
+                if (!found) {
+                  confirmedDiv.append($('<p>There are no confirmed users.</p>'));
+                }
+              }
+
+              function findUserById(id) {
+                return users.filter(function (user) {
+                  return user.id === id;
+                })[0];
+              }
+            }
+          });
         },
         error: function () {
           $(self.queryByHook('users')).append($('<p>There are no users.</p>'));
-          $(self.queryByHook('confirmed-users')).append($('<p>There are no users.</p>'));
+          $(self.queryByHook('confirmed-users')).append($('<p>There are no confirmed users.</p>'));
         }
       });
       // temporary piece of code above
