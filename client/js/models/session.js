@@ -123,7 +123,7 @@ module.exports = AmpModel.extend({
         return this.description && marked(this.description) || '';
       },
     },
-    ticketneeded:{
+    ticketneeded: {
       deps: ['tickets.needed'],
       fn: function(){
         if(this.tickets.needed){
@@ -131,6 +131,12 @@ module.exports = AmpModel.extend({
         }
         return 'Not required';
 
+      }
+    },
+    ticketsApi: {
+      deps: ['id'],
+      fn: function () {
+        return 'https://cannon.sinfo.org/tickets/' + this.id;
       }
     }
   },

@@ -11,7 +11,8 @@ var CompaniesView = require('client/js/views/sessionCompany');
 var Speakers = require('client/js/models/speakers');
 var ParticipationsView = require('client/js/views/participations');
 var SubscriptionView = require('client/js/views/subscription');
-
+var Users = require('client/js/models/users');
+var UsersView = require('client/js/views/users');
 
 module.exports = PageView.extend({
   pageTitle: 'View session',
@@ -98,7 +99,7 @@ module.exports = PageView.extend({
         });
       }
     },
-    comments:{
+    comments: {
       container: '[data-hook=session-comments]',
       waitFor: 'model.commentsApi',
       prepareView: function (el) {
@@ -109,7 +110,7 @@ module.exports = PageView.extend({
         });
       }
     },
-    subscription:{
+    subscription: {
       container: '[data-hook=session-subscription]',
       parent: this,
       waitFor: 'model.thread',
@@ -119,6 +120,17 @@ module.exports = PageView.extend({
           el: el,
           model: self.model,
           parent: self,
+        });
+      }
+    },
+    users: {
+      container: '[data-hook=tickets]',
+      waitFor: 'model.ticketsApi',
+      prepareView: function (el) {
+        var Us = new Users(this.model.ticketsApi);
+        return new UsersView({
+          el: el,
+          model: new Us()
         });
       }
     }
