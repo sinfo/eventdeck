@@ -1,8 +1,9 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
 var render = require('server/views/session');
-
-
+var ical = require('server/helpers/ical');
+var config = require('config');
+var fs = require('fs');
 var handlers = module.exports;
 
 exports.create = {
@@ -148,4 +149,32 @@ exports.remove = {
     reply(render(request.pre.session));
   },
   description: 'Removes an session'
+};
+
+exports.getIcal = {
+  auth: {
+    strategies: ['session'],
+    mode: 'try'
+  },
+  tags: ['api','session'],
+  handler: function (request, reply) {
+    var icalPath = config.ical.path;
+    
+    fs.exists(icalPath, function(exists) {
+      if(exists) {
+        reply.file(icalPath);
+      }
+      else {
+        ical.generate(function(err, data) {
+          if (err) {
+            //todo
+            return;
+          }
+          
+          reply.File(icalPath);
+        });
+      }
+    })
+  },
+  description: 'Gets an iCal'
 };
