@@ -33,6 +33,6 @@ server.route({
 
 server.route({
   method: 'GET',
-  path: '/api/sessions.ics',
+  path: '/calendar.ics',
   config: handlers.getIcal
 });
