@@ -91,7 +91,8 @@
     "socket.io-client": "^1.2.0",
     "stylizer": "^1.0.0",
     "templatizer": "^1.0.0",
-    "underscore": "^1.6.0"
+    "underscore": "^1.6.0",
+    "icalendar": "^0.7.1"
   },
   "devDependencies": {
     "bunyan": "~1.2.1",
