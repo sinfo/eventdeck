@@ -16,7 +16,7 @@ ical.generate = function (cb) {
   function gotSessions(error, sessions) {
     if (error) {
       log.error({err: error}, 'error fetching sessions');
-      return cb(Boom.internal());
+      return (cb ? cb(Boom.internal()) : Boom.internal()); 
     }
 
     sessions.forEach(function (session) {
@@ -35,7 +35,8 @@ ical.generate = function (cb) {
     fs.writeFile(icalPath, ical.toString(), function (err) {
       if (err) {
         log.error({ err: err}, 'error writing icalendar');
-        return cb(Boom.internal());
+
+      return (cb ? cb(Boom.internal()) : Boom.internal()); 
       }
       
       if (cb) {cb(null, ical); }
