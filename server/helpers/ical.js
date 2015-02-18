@@ -24,7 +24,10 @@ ical.generate = function (cb) {
       event.setSummary(session.name);
       event.setDescription(session.description);
       event.setLocation(session.place);
-      event.setDate(new Date(session.date.getTime()), new Date(session.date.getTime() + session.duration.getTime()));
+      
+      if(session.date && session.duration) {
+        event.setDate(new Date(session.date.getTime()), new Date(session.date.getTime() + session.duration.getTime()));
+      }
 
       ical.addComponent(event);
     });

@@ -160,12 +160,11 @@ exports.getIcal = {
   handler: function (request, reply) {
     var icalPath = config.ical.path;
     
-    fs.exists(icalPath, function(exists) {
-      if(exists) {
+    fs.exists(icalPath, function (exists) {
+      if (exists) {
         reply.file(icalPath);
-      }
-      else {
-        ical.generate(function(err, data) {
+      } else {
+        ical.generate(function (err, data) {
           if (err) {
             //todo
             return;
@@ -174,7 +173,7 @@ exports.getIcal = {
           reply.File(icalPath);
         });
       }
-    })
+    });
   },
   description: 'Gets an iCal'
 };
