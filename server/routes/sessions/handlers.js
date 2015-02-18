@@ -170,7 +170,7 @@ exports.getIcal = {
             return;
           }
           
-          reply.File(icalPath);
+          reply.file(icalPath);
         });
       }
     });
