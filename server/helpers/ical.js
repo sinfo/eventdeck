@@ -31,8 +31,13 @@ ical.generate = function (cb) {
 
       ical.addComponent(event);
     });
-
-    fs.writeFile(icalPath, ical.toString(), function (err) {
+    
+    var icalString = ical.toString();
+    var icalTokens = icalString.split('BEGIN:VCALENDAR');
+    
+    icalString = 'BEGIN:VCALENDAR\nX-WR-CALNAME:SINFO Sessions' + icalTokens[1];
+    
+    fs.writeFile(icalPath, icalString, function (err) {
       if (err) {
         log.error({ err: err}, 'error writing icalendar');
 
