@@ -1,4 +1,5 @@
 /*global app, alert*/
+var $ = require('jquery');
 var log = require('bows')('sessions');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
@@ -71,6 +72,61 @@ module.exports = PageView.extend({
       self.model = model;
 
       log('Got session', model.name);
+
+      // temporary piece of code below
+      $.ajax({
+        url: 'https://cannon.sinfo.org/tickets/' + self.model.id,
+        success: function (ids) {
+          $.ajax({
+            url: 'https://cannon.sinfo.org/tickets/' + self.model.id + '/users',
+            success: function (users) {
+              var usersDiv = $(self.queryByHook('users'));
+
+              if (!users || users.length < 1) {
+                usersDiv.append($('<p>There are no users.</p>'));
+              }
+              else {
+                users.forEach(function (user) {
+                  usersDiv.append($('<p>' + user.name + '</p>'));
+                });
+              }
+
+              var confirmedDiv = $(self.queryByHook('confirmed-users'));
+
+              if (!ids.confirmed || ids.confirmed.length < 1) {
+                confirmedDiv.append($('<p>There are no confirmed users.</p>'));
+              }
+              else {
+                var found = false;
+
+                ids.confirmed.forEach(function (id) {
+                  var user = findUserById(id);
+
+                  if (user) {
+                    found = true;
+                    confirmedDiv.append($('<p>' + user.name + '</p>'));
+                  }
+                });
+
+                if (!found) {
+                  confirmedDiv.append($('<p>There are no confirmed users.</p>'));
+                }
+              }
+
+              function findUserById(id) {
+                return users.filter(function (user) {
+                  return user.id === id;
+                })[0];
+              }
+            }
+          });
+        },
+        error: function () {
+          $(self.queryByHook('users')).append($('<p>There are no users.</p>'));
+          $(self.queryByHook('confirmed-users')).append($('<p>There are no confirmed users.</p>'));
+        }
+      });
+      // temporary piece of code above
     });
   },
   subviews: {

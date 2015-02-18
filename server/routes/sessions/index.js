@@ -1,7 +1,6 @@
 var server = require('server').hapi;
 var handlers = require('./handlers');
 
-
 server.route({
   method: 'GET',
   path: '/api/sessions',
@@ -30,4 +29,10 @@ server.route({
   method: 'DELETE',
   path: '/api/sessions/{id}',
   config: handlers.remove
+});
+
+server.route({
+  method: 'GET',
+  path: '/api/sessions.ical',
+  config: handlers.getIcal
 });

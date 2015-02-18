@@ -69,6 +69,10 @@ config.cors = {
   additionalHeaders: ['Only-Public']
 };
 
+config.ical = {
+  path: __dirname + '/public/ical/ical.ics'
+};
+
 config.templates = {};
 
 if(process.env.NODE_ENV == 'test') {

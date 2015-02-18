@@ -4,7 +4,9 @@ var server = require('server').hapi;
 var log = require('server/helpers/logger');
 var parser = require('server/helpers/fieldsParser');
 var Session = require('server/db/session');
-
+var config = require('config');
+var fs = require('fs');
+var ical = require('server/helpers/ical');
 
 server.method('session.create', create, {});
 server.method('session.update', update, {});
@@ -12,25 +14,26 @@ server.method('session.get', get, {});
 server.method('session.list', list, {});
 server.method('session.remove', remove, {});
 
-
 function create(session, memberId, cb) {
   session.updated = Date.now();
   session.id = slug(session.id || session.name).toLowerCase();
 
-  Session.create(session, function(err, _session) {
+  Session.create(session, function (err, _session) {
     if (err) {
       log.error({ err: err, session: session}, 'error creating session');
       return cb(Boom.internal());
     }
-
+    
+    ical.generate();
+    
     cb(null, _session);
   });
 }
 
 function update(id, session, cb) {
   session.updated = Date.now();
-  var filter = {id:id};
-  Session.findOneAndUpdate(filter, session, function(err, _session) {
+  var filter = {id: id};
+  Session.findOneAndUpdate(filter, session, function (err, _session) {
     if (err) {
       log.error({ err: err, session: id}, 'error updating session');
       return cb(Boom.internal());
@@ -39,17 +42,19 @@ function update(id, session, cb) {
       log.warn({ err: 'not found', session: id}, 'error updating session');
       return cb(Boom.notFound());
     }
+    
+    ical.generate();
 
     cb(null, _session);
   });
 }
 
-function get(id,query, cb) {
-  cb = cb||query;
-  var filter = {id:id};
+function get(id, query, cb) {
+  cb = cb || query;
+  var filter = {id: id};
   var fields = query.fields;
 
-  Session.findOne(filter, fields, function(err, session) {
+  Session.findOne(filter, fields, function (err, session) {
     if (err) {
       log.error({ err: err, session: id}, 'error getting session');
       return cb(Boom.internal());
@@ -63,8 +68,8 @@ function get(id,query, cb) {
   });
 }
 
-function list(query,cb) {
-  cb = cb ||query;
+function list(query, cb) {
+  cb = cb || query;
   var filter = {};
   var fields = query.fields;
   var options = {
@@ -72,7 +77,7 @@ function list(query,cb) {
     limit: query.limit,
     sort: parser(query.sort)
   };
-  Session.find(filter,fields,options, function(err, sessions) {
+  Session.find(filter, fields, options, function (err, sessions) {
     if (err) {
       log.error({ err: err}, 'error getting all sessions');
       return cb(Boom.internal());
@@ -83,8 +88,8 @@ function list(query,cb) {
 }
 
 function remove(id, cb) {
-  var filter = {id:id};
-  Session.findOneAndRemove(filter, function(err, session){
+  var filter = {id: id};
+  Session.findOneAndRemove(filter, function (err, session) {
     if (err) {
       log.error({ err: err, session: id}, 'error deleting session');
       return cb(Boom.internal());
@@ -93,6 +98,8 @@ function remove(id, cb) {
       log.error({ err: err, session: id}, 'error deleting session');
       return cb(Boom.notFound());
     }
+    
+    ical.generate();
 
     return cb(null, session);
   });
