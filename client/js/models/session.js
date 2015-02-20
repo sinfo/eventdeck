@@ -133,15 +133,27 @@ module.exports = AmpModel.extend({
 
       }
     },
-    ticketsApi: {
+    usersApi: {
       deps: ['id'],
       fn: function () {
-        return 'https://cannon.sinfo.org/tickets/' + this.id;
+        return 'https://cannon.sinfo.org/tickets/' + this.id + '/users';
+      }
+    },
+    waitingUsersApi: {
+      deps: ['id'],
+      fn: function () {
+        return 'https://cannon.sinfo.org/tickets/' + this.id + '/waiting';
+      }
+    },
+    confirmedUsersApi: {
+      deps: ['id'],
+      fn: function () {
+        return 'https://cannon.sinfo.org/tickets/' + this.id + '/confirmed';
       }
     }
   },
   parse: function (attrs) {
-    console.log('parsing', attrs);
+    //console.log('parsing', attrs);
     attrs.date = new Date(attrs.date);
     attrs.duration = new Date(attrs.duration);
     attrs.updated = new Date(attrs.updated);

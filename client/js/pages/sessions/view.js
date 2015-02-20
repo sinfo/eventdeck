@@ -124,13 +124,13 @@ module.exports = PageView.extend({
       }
     },
     users: {
-      container: '[data-hook=tickets]',
-      waitFor: 'model.ticketsApi',
+      container: '[data-hook=users]',
+      waitFor: 'model.usersApi',
       prepareView: function (el) {
-        var Us = new Users(this.model.ticketsApi);
+        var Us = new Users(this.model.usersApi);
         return new UsersView({
           el: el,
-          model: new Us()
+          collection: new Us()
         });
       }
     }
