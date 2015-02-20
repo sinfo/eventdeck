@@ -89,6 +89,21 @@ module.exports = PageView.extend({
                 users.forEach(function (user) {
                   usersDiv.append($('<p>' + user.name + '</p>'));
                 });
+
+                $('#users').text($('#users').text() + ' (' + users.length + ')');
+              }
+
+              var waitingDiv = $(self.queryByHook('waiting-list'));
+
+              if (!ids.waiting || ids.waiting.length < 1) {
+                waitingDiv.append($('<p>There are no users in the waiting list.</p>'));
+              }
+              else {
+                ids.waiting.forEach(function (id) {
+                  waitingDiv.append($('<p>' + id + '</p>'));
+                });
+
+                $('#waiting-list').text($('#waiting-list').text() + ' (' + ids.waiting.length + ')');
               }
 
               var confirmedDiv = $(self.queryByHook('confirmed-users'));
@@ -111,6 +126,9 @@ module.exports = PageView.extend({
                 if (!found) {
                   confirmedDiv.append($('<p>There are no confirmed users.</p>'));
                 }
+                else {
+                  $('#confirmed-users').text($('#confirmed-users').text() + ' (' + ids.confirmed.length + ')');
+                }
               }
 
               function findUserById(id) {
@@ -124,6 +142,7 @@ module.exports = PageView.extend({
         error: function () {
           $(self.queryByHook('users')).append($('<p>There are no users.</p>'));
           $(self.queryByHook('confirmed-users')).append($('<p>There are no confirmed users.</p>'));
+          $(self.queryByHook('waiting-list')).append($('<p>There are no users in the waiting list.</p>'));
         }
       });
       // temporary piece of code above
