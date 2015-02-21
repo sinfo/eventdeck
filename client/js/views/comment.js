@@ -22,9 +22,9 @@ module.exports = View.extend({
     }
   },
   events: {
-    'click [data-hook~=action-delete]': 'handleRemoveClick',
-    'click [data-hook~=action-edit]': 'handleEditClick',
-    'click [data-hook~=action-view]': 'handleViewClick',
+    'click [data-hook~=delete-comment]': 'handleRemoveClick',
+    'click [data-hook~=edit-comment]': 'handleEditClick',
+    'click [data-hook~=view-comment]': 'handleViewClick',
   },
   handleRemoveClick: function () {
     if (window.confirm('Do you really want to delete this comment?')) {
@@ -142,5 +142,3 @@ var EditComment = View.extend({
 var AdminComment = View.extend({
   template: templates.partials.comments.admin,
 });
-
-
