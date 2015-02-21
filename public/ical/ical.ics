@@ -2,4 +2,857 @@ BEGIN:VCALENDAR
 X-WR-CALNAME:SINFO Sessions
 VERSION:2.0
 PRODID:-//Tri Tech Computers//node-icalendar//EN
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:everis
+SUMMARY:Everis
+DESCRIPTION:"Office 365"\n\n- Rodrigo Pinto\, SharePoint Architect Evangeli
+ st
+LOCATION:02.2
+DTSTART:20150223T120000Z
+DTEND:20150223T124500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:feross
+SUMMARY:Feross - Software Engineer na Yahoo!
+LOCATION:Grande Anfiteatro
+DTSTART:20150223T140000Z
+DTEND:20150223T152000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:steve-huffman
+SUMMARY:Steve Huffman - Reddit Co-Founder
+LOCATION:Grande Anfiteatro
+DTSTART:20150223T154000Z
+DTEND:20150223T170000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:bethany-andres-beck
+SUMMARY:Bethany Andres-Beck - Software Engineer at Twitter
+DESCRIPTION:“The Unintended Social Power of Software”\n\nHow software d
+ evelopment can affect society. The decisions we make when writing code can
+  either reinforce or subvert how society is currently organized\, but when
+  deciding whether or not to write unit tests or which JavaScript libraries
+  to use we don’t often think in those terms.
+LOCATION:Grande Anfiteatro
+DTSTART:20150223T172000Z
+DTEND:20150223T184000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:rust
+SUMMARY:Rust
+DESCRIPTION:"Introduction to Rust"\n\nA programming language focused in sec
+ urity and speed\, developed by Mozilla Research.
+LOCATION:V1.14
+DTSTART:20150223T190000Z
+DTEND:20150223T203000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:card.io
+SUMMARY:Josh Snyder - Director of Software Engineering at PayPal
+DESCRIPTION:"Card.io"\n\ncard.io is a widely used mobile computer vision pr
+ oduct. It was open-sourced in Dec 2014. Josh will give the first-ever publ
+ ic explanation of how card.io actually works. He'll provide a technical ov
+ erview\, discuss usability and performance considerations\, and share expe
+ riences for those who might want to experiment with computer vision projec
+ ts of their own.
+LOCATION:Grande Anfiteatro
+DTSTART:20150226T154000Z
+DTEND:20150226T170000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:the-future-of-open-source
+SUMMARY:Scott Chacon - GitHub Co-founder
+DESCRIPTION:"The Future of Open Source"
+LOCATION:Grande Anfiteatro
+DTSTART:20150225T172000Z
+DTEND:20150225T184000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:what-every-successful-open-source-project-needs
+SUMMARY:Steve Francia
+DESCRIPTION:"What every successful open source project needs"\n\nIn the las
+ t few years open source has transformed the software industry. From Androi
+ d to Wikipedia\, open source is everywhere\, but how does one succeed in i
+ t? While open source projects come in all shapes and sizes and all forms o
+ f governance\, no matter what kind of project you’re a part of\, there a
+ re a set of fundamentals that lead to success. I’d like to share some of
+  the lessons I’ve learned from running two of the largest commercial ope
+ n source projects\, Docker and MongoDB\, as well as some very successful c
+ ommunity projects.
+LOCATION:Salão Nobre
+DTSTART:20150227T100000Z
+DTEND:20150227T110000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:opensoft
+SUMMARY:Opensoft
+DESCRIPTION:"Real-Time Web using WebHooks!"\n\n- Mariana Sousa\n- Pedro Car
+ valho\n- Luís Neves
+LOCATION:02.2
+DTSTART:20150226T120000Z
+DTEND:20150226T124500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:big-data-or-smart-data
+SUMMARY:Accenture
+DESCRIPTION:"Big Data or Smart Data?"\n\n- Jorge Teixeira Silva\, Director 
+ Accenture Digital
+LOCATION:02.1
+DTSTART:20150223T110000Z
+DTEND:20150223T114500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:trabalhar-no-ita-um-dia-nem-sabes-o-bem-que-te-fazia
+SUMMARY:KPMG
+DESCRIPTION:"Trabalhar no ITA\, um dia\, nem sabes o bem que te fazia"\n\n-
+  Gonçalo Carvalho\, Director\n- Jorge Apura\, Senior Manager
+LOCATION:02.1
+DTSTART:20150223T120000Z
+DTEND:20150223T124500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:big-data-and-analytics
+SUMMARY:Big Data & Analytics
+DESCRIPTION:Gonçalo Carvalho (Director) e Pedro Dias (Senior Manager).
+LOCATION:V1.12
+DTSTART:20150224T190000Z
+DTEND:20150224T203000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:fenixedu
+SUMMARY:FenixEdu
+LOCATION:Grande Anfiteatro
+DTSTART:20150226T140000Z
+DTEND:20150226T152000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:have-you-met-sass-gatewit
+SUMMARY:Gatewit
+DESCRIPTION:"Have you met Sass?" \n\n- Bruno Seixas\, Software Engineer\n- 
+ Carla Carvalho\, Human Resources Director
+LOCATION:02.1
+DTSTART:20150224T110000Z
+DTEND:20150224T114500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:critical-systems-development-itgrow
+SUMMARY:Critical Systems Development
+DESCRIPTION:This workshop will be presented by Gonçalo Valadas\, Senior So
+ ftware Engineer at Critical Software\, and will focus on:\n - What is Syst
+ ems Engineering\n - How the different disciplines integrate themselves\n -
+  The concept of Lifecycle\n - The safety concerns at system level\n - Stan
+ dards in the different domains\n\nOptionally\, participants can install En
+ terprise Architect at home so that it can be demonstrated how the project'
+ s lifecicle is documented.
+LOCATION:V1.15
+DTSTART:20150225T190000Z
+DTEND:20150225T210000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:social-innovation-its-our-future
+SUMMARY:Hitachi Consulting
+DESCRIPTION:"Social Innovation - It's our future"\n\n- Eng. Constantino Alm
+ eida\n- Eng. Paulo Valério
+LOCATION:02.2
+DTSTART:20150223T110000Z
+DTEND:20150223T114500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:ict-global-recruitment-trends.-who-is-hiring-who-where-how-much
+SUMMARY:Cross Border Talents ICT
+DESCRIPTION:"ICT Global Recruitment Trends. Who is Hiring Who? Where? How m
+ uch?" \n\n- Ricardo Nobre\, Founder and Group Managing Director
+LOCATION:02.2
+DTSTART:20150223T100000Z
+DTEND:20150223T104500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:microsoft
+SUMMARY:Microsoft
+DESCRIPTION:"Microsoft"\n\n- Margarida Calado
+LOCATION:02.1
+DTSTART:20150223T100000Z
+DTEND:20150223T104500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:randstad-technologies
+SUMMARY:Randstad Technologies
+DESCRIPTION:"New IT Competence Center @ Siemens"\n\n- Andreas Maertz
+LOCATION:02.2
+DTSTART:20150224T100000Z
+DTEND:20150224T104500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:bold-international
+SUMMARY:Bold International
+DESCRIPTION:Bold International
+LOCATION:02.1
+DTSTART:20150224T100000Z
+DTEND:20150224T104500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:capgemini
+SUMMARY:Capgemini
+DESCRIPTION:Capgemini
+LOCATION:02.2
+DTSTART:20150224T110000Z
+DTEND:20150224T114500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:keep-on-your-toes-inovacao-tecnologica-a-alta-velocidade
+SUMMARY:IT People Consulting
+DESCRIPTION:"Keep on your Toes – Inovação Tecnológica a alta velocidad
+ e" \n\n- Rui Rodrigues Milagaia
+LOCATION:02.2
+DTSTART:20150224T120000Z
+DTEND:20150224T124500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:it-developments-on-a-global-scale-a-world-of-opportunities
+SUMMARY:Deloitte
+DESCRIPTION:"IT developments on a global scale – a world of opportunities
+ " \n\n- Eng. Tiago Durão
+LOCATION:02.1
+DTSTART:20150224T120000Z
+DTEND:20150224T124500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:agile-testing-is-nonsense-as-ferramentas-ageis-e-os-testes-de-software.
+SUMMARY:Rumos
+DESCRIPTION:"Agile Testing is nonsense! As ferramentas ágeis e os testes d
+ e software." \n\n- Hugo Lourenço\, Senior Project Manager Professional
+LOCATION:02.2
+DTSTART:20150225T100000Z
+DTEND:20150225T104500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:play-and-code-outsystems
+SUMMARY:Outsystems
+DESCRIPTION:"Play & Code @OutSystems" \n\n- Rodrigo Coutinho
+LOCATION:02.2
+DTSTART:20150225T110000Z
+DTEND:20150225T114500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:architecture-design-new-challenges
+SUMMARY:Novabase
+DESCRIPTION:"Architecture Design - New Challenges" \n\n- Susete Mendes\n- M
+ arco Aurélio Gonçalves
+LOCATION:02.1
+DTSTART:20150225T110000Z
+DTEND:20150225T114500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:strategic-careers-in-pwc-procuramos-pessoas-como-tu
+SUMMARY:PwC
+DESCRIPTION:"Strategic Careers in PwC! Procuramos pessoas como tu!" \n\n- M
+ anuel Lopes da Costa\, Partner da PwC\, Líder do Advisory e ex-aluno do I
+ ST
+LOCATION:02.2
+DTSTART:20150225T120000Z
+DTEND:20150225T124500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:e.near
+SUMMARY:E.Near
+DESCRIPTION:"E.Near" \n\n- Nuno Melo\, CEO
+LOCATION:02.1
+DTSTART:20150225T120000Z
+DTEND:20150225T124500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:what-nightout-at-cais-do-sodre-and-greek-crisis-have-in-common
+SUMMARY:Ericsson
+DESCRIPTION:"What nightout at Cais do Sodré and Greek Crisis have in commo
+ n?" \n\n- Manuel Costas\, Regional OBS Engagement Manager
+LOCATION:02.2
+DTSTART:20150225T130000Z
+DTEND:20150225T134500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:the-ultimate-tv-experience
+SUMMARY:Ericsson
+DESCRIPTION:"The Ultimate TV Experience" \n\n- Pedro Pinheiro\, Account Man
+ ager
+LOCATION:02.2
+DTSTART:20150226T100000Z
+DTEND:20150226T104500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:blip
+SUMMARY:Blip
+DESCRIPTION:The Gentle Art of Making Secure Software\n\nThis talk is target
+ ed to give an overview of Blip security procedures\, of the principles of 
+ secure development and security implementation in the software pipeline. W
+ e will look into the most common issues that we find in our products\, the
+  classification process\, automation processes\, how to keep track of vuln
+ erabilities and security challenges that may lie ahead.\n\nHolder of an MS
+ c in Informatics Engineering\, I delve in the world security. Currently a 
+ member of an application security team of a betting exchange company\,  I 
+ am driven by opportunities of exploring and exploiting the Web and mobile 
+ platforms\, particularly Android.When I find the time\, I surf some waves.
+  The world is too great to stand still and not to explore it.
+LOCATION:02.1
+DTSTART:20150226T100000Z
+DTEND:20150226T104500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:e-pluribus-unum-uma-solucao-de-masterdata-para-o-slb
+SUMMARY:Habber Tec
+DESCRIPTION:"E pluribus unum - Uma solução de MasterData para o SLB" \n\n
+ - Pedro Gomes\, Technical Manager
+LOCATION:02.1
+DTSTART:20150226T110000Z
+DTEND:20150226T114500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:blackhat-the-real-security-issues-behind-the-scenes
+SUMMARY:Unisys
+DESCRIPTION:"Blackhat -The real security issues behind the scenes" \n\n- Di
+ nis Fernandes\,Head of Managed Services and Security\n- Fernando Reino da 
+ Costa\, Enterprise Services Director
+LOCATION:02.1
+DTSTART:20150226T120000Z
+DTEND:20150226T124500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:unity
+SUMMARY:Unity
+DESCRIPTION:An advanced level workshop of Unity\, with the speaker Minh Le\
+ , creator of Counter-Strike.\n\n\n**Requirements**\n\nUnity installed in y
+ our laptop\n\n**The outline of the workshop.**\n\nhttp://www3.telus.net/pu
+ blic/a6a91102/SINFO_Workshop/SINFO_assignment.txt\n\nUnity .package that t
+ he participants will need to download and import into their unity project.
+ \n\nhttp://www3.telus.net/public/a6a91102/SINFO_Workshop/SINFO_Gooseman_Wo
+ rkshop.unitypackage\n\n**The steps to open the package are**\n\n1) Create 
+ a new Unity project ( you can use any name\, for example\, "Sinfo_project"
+  )\n\n2) In the Unity window\, click on Assets --> Import Package ---> Cus
+ tom Package...\n\n3) when the dialog box appears\, browse to the unity pac
+ kage I made "SINFO_Gooseman_Workshop.unitypackage"\n\n4) import all of the
+  assets\n\n5) Load the scene "test"\n\n**Here's a video showing what the f
+ inished AI should look like.**\n\nhttp://files.facepunch.com/minhle/2015-0
+ 2-15_19-59-22.mp4
+LOCATION:V1.15
+DTSTART:20150224T190000Z
+DTEND:20150224T203000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:native-vs-cross-platform-mobile-development
+SUMMARY:Native vs Cross-Platform Mobile Development
+DESCRIPTION:Apresentação de diferentes abordagens no desenvolvimento de s
+ oluções mobile para um universo fragmentado de dispositivos e plataforma
+ s. Como decidir a melhor abordagem: vantagens\, desvantagens e casos reais
+ .\n\n\n**Requirements**\n\nNone\n\n**Speaker**\n\nCarlos Gamito\, da empre
+ sa BOLD International
+LOCATION:V1.12
+DTSTART:20150225T190000Z
+DTEND:20150225T203000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:ruby-on-rails
+SUMMARY:Ruby On Rails
+DESCRIPTION:Introduction to the framework Ruby on Rails.
+LOCATION:V1.14
+DTSTART:20150225T190000Z
+DTEND:20150225T203000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:da-candidatura-ao-emprego
+SUMMARY:Da candidatura ao Emprego
+DESCRIPTION:Com: Rodrigo Pinto\, SharePoint Architect Evangelist na Everis
+LOCATION:V1.12
+DTSTART:20150226T190000Z
+DTEND:20150226T203000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:ios-101
+SUMMARY:iOS 101
+DESCRIPTION:A workshop that will tech you the basics of iOS.
+LOCATION:V1.14
+DTSTART:20150226T190000Z
+DTEND:20150226T203000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:helder-pinto
+SUMMARY:Hélder Pinto - 3D artist at Blizzard
+DESCRIPTION:"Saiste-me cá um artista..."\n\nEsta apresentação cobre 3 t
+ ópicos.\n\nO meu percurso e background\, que métodos usei para conseguir
+  entrar na industria dos video jogos. (Modding\, comunidades online e irei
+  mencionar um ou dois projectos que fiz para ganhar portfolio)\n\nA seguir
+  disso\, vou falar também dos projectos e empresas diferentes em que trab
+ alhei\, e as diferenças entre elas. Como segway a isso\, irei brevemente 
+ falar sobre algumas dicas para aqueles que também estão interessados em 
+ entrar na industria\, e falar um bocado sobre como as carreiras são estru
+ turadas. (Assumo que seja de interesse para muitos?)\n\nFinalmente\, irei 
+ falar sobre como os cenarios dos video jogos são feitos. Para aqueles que
+  queiram seguir game art. Mas estou a fazer de maneira a que os que não s
+ e interessem\, ao menos ficam com uma noção dos workflows usados na cria
+ ção dos mundos 3D dos video jogos. Para isso\, irei usar 2 scenes que tr
+ abalhei o ano passado\, usei exactamente as mesmas metodologias que uso na
+  blizzard. Quero mostrar todo o processo\, desde a fase da ideia até ao p
+ olish final.
+LOCATION:Grande Anfiteatro
+DTSTART:20150224T140000Z
+DTEND:20150224T152000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:minh-le
+SUMMARY:Minh Le - Co-creator of Counter-Strike
+DESCRIPTION:"Challenges of developing a PC game in today's game industry"\n
+ \nThis discussion will describe some of the challenges I faced when creati
+ ng Counter-Strike\, and my next game Tactical Intervention. It will go int
+ o detail the mistakes we made during the development of a multiplayer PC g
+ ame. I will cover topics such as game development and game testing and mar
+ keting of the game. I will also go over using data analytics to help make 
+ the game more appealing to a broader audience.
+LOCATION:Grande Anfiteatro
+DTSTART:20150224T172000Z
+DTEND:20150224T184000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:red-vs-blue-implicacoes-socio-politicas-de-um-sistema-bi-partidario
+SUMMARY:Red vs Blue: Implicações socio-políticas de um sistema bi-partid
+ ário
+DESCRIPTION:Painel de Discussão com:\n- Pedro Moreira Dias (moderador) - S
+ alão de Jogos/RFM\n- Ricardo Flores Santos - Biodroid\n- Nuno Barreto - T
+ itan Forged Games\n- Nuno Folhadela - Bica Studios\n- Filipe Pina - Nerd M
+ onkeys\n- Sérgio Varanda - Miniclip
+LOCATION:Grande Anfiteatro
+DTSTART:20150224T154000Z
+DTEND:20150224T170000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:carlos-fonseca
+SUMMARY:Carlos Fonseca - Executive IT Architect at IBM
+DESCRIPTION:"Getting Started with IBM Bluemix"\n\nI'll start with an introd
+ uction to IBM\, my experience\, IBM Research including demographics\, tech
+ nology developed at IBM Research\, and then dive into IBM Bluemix.\n\nIBM 
+ Bluemix Bluemix is an open-standards\, cloud-based platform for building\,
+  managing\, and running apps of all types\, such as web\, mobile\, big dat
+ a\, and smart devices. Capabilities include Java\, mobile back-end develop
+ ment\, and application monitoring\, as well as features from ecosystem par
+ tners and open source—all provided as-a-service in the cloud.
+LOCATION:Grande Anfiteatro
+DTSTART:20150225T140000Z
+DTEND:20150225T152000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:adam-baldwin
+SUMMARY:Breaking Into Security - Adam Baldwin
+DESCRIPTION:In my talk at SINFO 22 I plan to tell my story getting into the
+  security field\, what I find fascinating with it and some various technic
+ al bits about what is security\, things that I've seen through out my care
+ er and research I'm done specifically in node. I hope to inspire your inne
+ r hacker by the end of the talk.
+LOCATION:Grande Anfiteatro
+DTSTART:20150225T154000Z
+DTEND:20150225T170000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:peter-sunde
+SUMMARY:Peter Sunde - Co-founder of The Piratebay
+LOCATION:Grande Anfiteatro
+DTSTART:20150226T172000Z
+DTEND:20150226T184000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:sap
+SUMMARY:SAP
+DESCRIPTION:"University Excellence meets SAP"\n\n- Rui Parente\, EMEA Senio
+ r Recruiter
+LOCATION:02.2
+DTSTART:20150226T110000Z
+DTEND:20150226T114500Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:opening-presentation
+SUMMARY:Opening Presentation
+LOCATION:Salão Nobre
+DTSTART:20150227T093000Z
+DTEND:20150227T100000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:check-in
+SUMMARY:Check-In Day 2
+LOCATION:Átrio Central
+DTSTART:20150228T090000Z
+DTEND:20150228T093000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:jobbox
+SUMMARY:JOBBOX
+LOCATION:Salão Nobre
+DTSTART:20150227T113000Z
+DTEND:20150227T115000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:coffee-break-networking
+SUMMARY:Coffee Break +  Networking 5
+LOCATION:Átrio Central
+DTSTART:20150228T133000Z
+DTEND:20150228T140000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:imaginary-cloud
+SUMMARY:Imaginary Cloud
+LOCATION:Salão Nobre
+DTSTART:20150227T115000Z
+DTEND:20150227T121000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:feedzai
+SUMMARY:Feedzai
+LOCATION:Salão Nobre
+DTSTART:20150227T121000Z
+DTEND:20150227T123000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:lunch-networking
+SUMMARY:Lunch + Networking
+LOCATION:Átrio Central
+DTSTART:20150227T123000Z
+DTEND:20150227T140000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:phil-calcado
+SUMMARY:Phil Calçado
+DESCRIPTION:Growing a startup — What happens (and what breaks) when you g
+ o from 500 to 500 million users?
+LOCATION:Salão Nobre
+DTSTART:20150227T140000Z
+DTEND:20150227T150000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:mentor-speed-dating-networking
+SUMMARY:Mentor Speed Dating + Networking
+LOCATION:Átrio Central
+DTSTART:20150227T150000Z
+DTEND:20150227T160000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:coffee-break-networking
+SUMMARY:Coffee Break + Networking
+LOCATION:Átrio Central
+DTSTART:20150227T173000Z
+DTEND:20150227T180000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:coffee-break-networking
+SUMMARY:Coffee Break + Networking
+LOCATION:Átrio Central
+DTSTART:20150227T200000Z
+DTEND:20150227T203000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:lunacloud
+SUMMARY:Lunacloud
+LOCATION:Salão Nobre
+DTSTART:20150228T093000Z
+DTEND:20150228T095000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:check-in
+SUMMARY:Check-In
+LOCATION:Átrio Central
+DTSTART:20150228T090000Z
+DTEND:20150228T093000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:pharmassistant
+SUMMARY:PharmAssistant
+LOCATION:Salão Nobre
+DTSTART:20150228T095000Z
+DTEND:20150228T101000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:uniplaces
+SUMMARY:Uniplaces
+LOCATION:Salão Nobre
+DTSTART:20150228T101000Z
+DTEND:20150228T103000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:coffee-break-networking
+SUMMARY:Coffee Break + Networking
+LOCATION:Átrio Central
+DTSTART:20150228T103000Z
+DTEND:20150228T110000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:coffee-break-networking
+SUMMARY:Coffee Break + Networking
+LOCATION:Átrio Central
+DTSTART:20150228T133000Z
+DTEND:20150228T140000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:alberto-lopez
+SUMMARY:Alberto Lopez
+LOCATION:Salão Nobre
+DTSTART:20150228T140000Z
+DTEND:20150228T150000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:prizes
+SUMMARY:Prizes
+LOCATION:Salão Nobre
+DTSTART:20150228T150000Z
+DTEND:20150228T153000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:closing-presentation
+SUMMARY:Closing Presentation
+LOCATION:Salão Nobre
+DTSTART:20150228T153000Z
+DTEND:20150228T160000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:go
+SUMMARY:GO
+DESCRIPTION:An introduction to the programming language GO\, with the speak
+ er Josh Snyder from PayPal.\n\n**Requirements**\nThe participants should a
+ t a minimum install Go: http://golang.org/doc/install\n\nIdeally they woul
+ d also take the tour: http://tour.golang.org/
+LOCATION:V1.12
+DTSTART:20150223T190000Z
+DTEND:20150223T203000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:coffee-break-networking
+SUMMARY:Coffee Break + Networking
+LOCATION:Átrio Central
+DTSTART:20150227T173000Z
+DTEND:20150227T180000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:lip-and-linux-ws
+SUMMARY:LIP and Linux WS
+DESCRIPTION:This workshop will consist of an install party\, followed by an
+  introduction of the fundamentals to work in a Linux environment.
+LOCATION:V1.10
+DTSTART:20150224T190000Z
+DTEND:20150224T203000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:coffee-break-networking
+SUMMARY:Coffee Break + Networking
+LOCATION:Átrio Central
+DTSTART:20150227T200000Z
+DTEND:20150227T203000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:coffee-break-networking-2
+SUMMARY:Coffee Break + Networking 3
+LOCATION:Átrio Central
+DTSTART:20150227T200000Z
+DTEND:20150227T203000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:coffee-break-networking-1
+SUMMARY:Coffee Break + Networking 1
+LOCATION:Átrio Central
+DTSTART:20150227T110000Z
+DTEND:20150227T113000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:coffee-break-networking
+SUMMARY:Coffee Break + Networking
+LOCATION:Átrio Central
+DTSTART:20150228T110000Z
+DTEND:20150228T113000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:coffee-break-networking
+SUMMARY:Coffee Break +  Networking
+LOCATION:Átrio Central
+DTSTART:20150228T133000Z
+DTEND:20150228T140000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:coffee-break-networking-2
+SUMMARY:Coffee Break + Networking 2
+LOCATION:Átrio Central
+DTSTART:20150227T173000Z
+DTEND:20150227T180000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:coffee-break-networking-3
+SUMMARY:Coffee Break + Networking 3
+LOCATION:Átrio Central
+DTSTART:20150227T200000Z
+DTEND:20150227T203000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:coffee-break-networking-4
+SUMMARY:Coffee break + Networking 4
+LOCATION:Átrio Central
+DTSTART:20150228T103000Z
+DTEND:20150228T110000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:check-in-day-1
+SUMMARY:Check-In Day 1
+LOCATION:Átrio Central
+DTSTART:20150227T090000Z
+DTEND:20150227T093000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:startup-rush
+SUMMARY:Startup Rush!
+DESCRIPTION:Startup Rush nasceu inicialmente de uma ideia que pretendia inc
+ entivar mentalidades empreendedoras numa troca e partilha de experiências
+  entre Startups\, Mentores\, Empreendedores e alunos universitários.\nNo 
+ Startup Rush\, a partir de um ambiente descontraído irão estar reunidas 
+ algumas das empresas mais inovadores de Portugal\, juntamente com investid
+ ores à procura da próxima “Grande ideia” e ainda presença de orador
+ es de renome internacional para partilhar alguma da sua vasta experiência
+  na área. Durante dois dias\, tech talks\, networking\, mentorship e hack
+ ing serão as keywords para todos os nossos participantes.\n\nStartup Rush
+  initially came from an idea that intended to encourage people that want t
+ o do something new and innovative to share experiences and ideas among sta
+ rtups\, mentors\, entrepreneurs and university students.\nIn a laydback at
+ mosphere\, Startup Rush will be filled by some of the most innovative comp
+ anies in Portugal \, alongside with investors looking for the “Next Big 
+ Thing” and even the presence of internationally renowned speakers to sha
+ re some of their vast experience in the area. For two days\, tech talks\, 
+ networking\, mentorship\, investment and hacking are the keywords for all 
+ our participants.
+LOCATION:Salão Nobre / Átrio Central
+DTSTART:20150227T090000Z
+DTEND:20150228T160000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:hackathon-1
+SUMMARY:Hackathon 1
+LOCATION:Salão Nobre
+DTSTART:20150227T160000Z
+DTEND:20150227T173000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:pitch-your-idea-1
+SUMMARY:Pitch Your Idea! 1
+LOCATION:Salão Nobre
+DTSTART:20150227T160000Z
+DTEND:20150227T173000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:hackathon-2
+SUMMARY:Hackathon 2
+LOCATION:Salão Nobre
+DTSTART:20150227T180000Z
+DTEND:20150227T200000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:pitch-your-idea-2
+SUMMARY:Pitch Your Idea! 2
+LOCATION:Salão Nobre
+DTSTART:20150227T180000Z
+DTEND:20150227T200000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:hackathon-3
+SUMMARY:Hackathon 3
+LOCATION:Salão Nobre
+DTSTART:20150227T203000Z
+DTEND:20150228T000000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:hackathon-4
+SUMMARY:Hackathon 4
+LOCATION:Salão Nobre
+DTSTART:20150228T110000Z
+DTEND:20150228T133000Z
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20150221T034949Z
+UID:pitch-your-idea-3
+SUMMARY:Pitch Your Idea! 3
+LOCATION:Salão Nobre
+DTSTART:20150228T110000Z
+DTEND:20150228T133000Z
+END:VEVENT
 END:VCALENDAR

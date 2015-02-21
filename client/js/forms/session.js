@@ -80,6 +80,13 @@ module.exports = FormView.extend({
         placeholder: 'Description',
         parent: this
       }),
+      new CheckBoxView({
+        label: 'Survey needed',
+        name: 'surveyNeeded',
+        value: this.model && this.model.surveyNeeded || false,
+        required: false,
+        parent: this
+      }),
       new DateView({
         label: 'Date',
         value: this.model && this.model.date || '',

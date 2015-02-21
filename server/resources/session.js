@@ -23,9 +23,9 @@ function create(session, memberId, cb) {
       log.error({ err: err, session: session}, 'error creating session');
       return cb(Boom.internal());
     }
-    
+
     ical.generate();
-    
+
     cb(null, _session);
   });
 }
@@ -42,7 +42,7 @@ function update(id, session, cb) {
       log.warn({ err: 'not found', session: id}, 'error updating session');
       return cb(Boom.notFound());
     }
-    
+
     ical.generate();
 
     cb(null, _session);
@@ -98,7 +98,7 @@ function remove(id, cb) {
       log.error({ err: err, session: id}, 'error deleting session');
       return cb(Boom.notFound());
     }
-    
+
     ical.generate();
 
     return cb(null, session);

@@ -19,12 +19,19 @@ module.exports = PageView.extend({
       cache: false
     }
   },
+  session: {
+    fetched: 'boolean'
+  },
+  initialize: function () {
+    this.fetched = false;
+  },
   render: function () {
     this.renderWithTemplate();
     this.renderCollection(this.collection, UserView, this.queryByHook('users'));
 
-    if (!this.collection.length) {
+    if (!this.fetched) {
       this.fetchCollection();
+      this.fetched = true;
     }
   },
   fetchCollection: function () {

@@ -60,6 +60,9 @@ module.exports = PageView.extend({
     'model.tickets.max': {
       hook: 'ticketmax'
     },
+    'model.surveyText': {
+      hook: 'surveyneeded'
+    }
   },
   events: {
     'click [data-hook~=delete]': 'handleDeleteClick',

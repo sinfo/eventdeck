@@ -22,6 +22,7 @@ var schema = new mongoose.Schema({
     end: Date,
     max: Number
   },
+  surveyNeeded: Boolean
 });
 
 var Session = module.exports = mongoose.model('Session', schema);

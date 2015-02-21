@@ -30,5 +30,6 @@ function renderObject(model, isAuthenticated) {
       end: model.tickets.end,
       max: model.tickets.max
     },
+    surveyNeeded: model.surveyNeeded
   };
 }

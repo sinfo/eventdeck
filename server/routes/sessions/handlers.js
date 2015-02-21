@@ -27,6 +27,7 @@ exports.create = {
         end: Joi.date().description('The closing date for getting tickets'),
         max: Joi.number().description('Number max of tickets to be distributed'),
       },
+      surveyNeeded: Joi.boolean().description('Says if the session requires a survey')
     }
   },
   pre: [
@@ -64,6 +65,7 @@ exports.update = {
         end: Joi.date().description('The closing date for getting tickets'),
         max: Joi.number().description('Number max of tickets to be distributed'),
       },
+      surveyNeeded: Joi.boolean().description('Says if the session requires a survey')
     }
   },
   pre: [
@@ -159,7 +161,7 @@ exports.getIcal = {
   tags: ['api','session'],
   handler: function (request, reply) {
     var icalPath = config.ical.path;
-    
+
     fs.exists(icalPath, function (exists) {
       if (exists) {
         reply.file(icalPath);
@@ -169,7 +171,7 @@ exports.getIcal = {
             //todo
             return;
           }
-          
+
           reply.file(icalPath);
         });
       }

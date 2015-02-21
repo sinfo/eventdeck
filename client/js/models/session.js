@@ -51,6 +51,7 @@ module.exports = AmpModel.extend({
     duration: ['date'],
     updated: ['date'],
     companies: ['array'],
+    surveyNeeded: ['boolean']
   },
   children:{
     tickets: Tickets
@@ -150,6 +151,13 @@ module.exports = AmpModel.extend({
       fn: function () {
         return 'https://cannon.sinfo.org/tickets/' + this.id + '/confirmed';
       }
+    },
+    surveyText: {
+      deps: ['surveyNeeded'],
+      fn: function () {
+        return 'Survey ' + (this.surveyNeeded ? '' : 'not ') + 'needed.';
+      },
+      cache: false
     }
   },
   parse: function (attrs) {

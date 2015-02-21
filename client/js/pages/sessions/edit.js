@@ -69,15 +69,13 @@ module.exports = PageView.extend({
             data.duration = data.end - data.date;
             delete data.end;
 
-            if(data['tickets.needed'] === true){
-
+            if (data['tickets.needed'] === true) {
               data.tickets ={
                 needed : true,
                 start: data.date,
                 end: data.date,
                 max: 0
               };
-
 
               if (data['tickets.start']) {
                 data.tickets.start = data['tickets.start'];
@@ -97,12 +95,15 @@ module.exports = PageView.extend({
               delete data['tickets.needed'];
             }
 
+            if (!data.surveyNeeded) {
+              data.surveyNeeded = false;
+            }
 
             var changedAttributes = self.model.changedAttributes(data) || {};
 
             changedAttributes.tickets = data.tickets;
 
-            if(data['session-speakers']) {
+            if (data['session-speakers']) {
               changedAttributes.speakers = data['session-speakers'] && data['session-speakers'].map(function(s) {return {id: s};});
               delete data['session-speakers'];
             }
