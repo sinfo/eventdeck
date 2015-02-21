@@ -133,6 +133,28 @@ module.exports = PageView.extend({
           collection: new Us()
         });
       }
+    },
+    waitingUsers: {
+      container: '[data-hook=waiting-users]',
+      waitFor: 'model.waitingUsersApi',
+      prepareView: function (el) {
+        var Us = new Users(this.model.waitingUsersApi);
+        return new UsersView({
+          el: el,
+          collection: new Us()
+        });
+      }
+    },
+    confirmedUsers: {
+      container: '[data-hook=confirmed-users]',
+      waitFor: 'model.confirmedUsersApi',
+      prepareView: function (el) {
+        var Us = new Users(this.model.confirmedUsersApi);
+        return new UsersView({
+          el: el,
+          collection: new Us()
+        });
+      }
     }
   },
   handleDeleteClick: function () {

@@ -6,8 +6,8 @@ var templates = require('client/js/templates');
 module.exports = View.extend({
   template: templates.partials.sessions.user,
   bindings: {
-    'model.text': {
-      hook: 'text'
+    'model.name': {
+      hook: 'name'
     }
   },
   render: function () {

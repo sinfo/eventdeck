@@ -35,9 +35,12 @@ section.page.sessions.view
       .all-33.medium-50.small-100.tiny-100
           div(data-hook='session-speakers')
           div(data-hook='session-companies')
-      .all-100
-        .all-33(data-hook='users')
-        .all-33(data-hook='waiting')
-        .all-33(data-hook='confirmed')
+      .all-100.column-group.gutters
+        .all-33(data-title='Users')
+          div(data-hook='users')
+        .all-33(data-title='Waiting users')
+          div(data-hook='waiting-users')
+        .all-33(data-title='Confirmed users')
+          div(data-hook='confirmed-users')
       .all-100
         div(data-hook='session-comments')
