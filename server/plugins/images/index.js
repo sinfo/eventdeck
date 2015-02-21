@@ -5,6 +5,7 @@ var Joi = require('joi');
 var fs = require('fs');
 var Request = require('request');
 var log = require('server/helpers/logger');
+var crypto = require('crypto');
 
 var properties = require('./package.json');
 
@@ -58,7 +59,7 @@ function getResource(id, cb) {
 }
 
 function getLocal(id, cb) {
-  var filePath = Path.join(settings.directory, id);
+  var filePath = getLocalFilePath(id);
 
   fs.exists(filePath, function (exists) {
     if(!exists) {
@@ -70,7 +71,7 @@ function getLocal(id, cb) {
 }
 
 function getRemote(id, cb) {
-  var filePath = Path.join(settings.directory, id);
+  var filePath = getLocalFilePath(id);
   var url = new Buffer(id, 'base64').toString('ascii');
 
   if(url.indexOf('data:image/jpeg;base64') != -1) {
@@ -98,6 +99,12 @@ function getRemote(id, cb) {
     } catch (err) {
       return cb(Boom.notFound(err));
     }
+}
+
+function getLocalFilePath(id) {
+  var md5sum = crypto.createHash('md5');
+  md5sum.update(id);
+  return Path.join(settings.directory, md5sum.digest('hex'));
 }
 
 exports.register.attributes = {
