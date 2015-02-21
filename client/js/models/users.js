@@ -1,9 +1,10 @@
 var AmpCollection = require('ampersand-rest-collection');
-var comment = require('./comment');
+var user = require('./user');
 
 module.exports = function (url) {
   return AmpCollection.extend({
-    model: comment,
-    url: url
+    model: user,
+    url: url,
+    comparator: 'name'
   });
 };

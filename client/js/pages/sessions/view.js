@@ -12,7 +12,8 @@ var CompaniesView = require('client/js/views/sessionCompany');
 var Speakers = require('client/js/models/speakers');
 var ParticipationsView = require('client/js/views/participations');
 var SubscriptionView = require('client/js/views/subscription');
-
+var Users = require('client/js/models/users');
+var UsersView = require('client/js/views/users');
 
 module.exports = PageView.extend({
   pageTitle: 'View session',
@@ -72,80 +73,6 @@ module.exports = PageView.extend({
       self.model = model;
 
       log('Got session', model.name);
-
-      // temporary piece of code below
-      $.ajax({
-        url: 'https://cannon.sinfo.org/tickets/' + self.model.id,
-        success: function (ids) {
-          $.ajax({
-            url: 'https://cannon.sinfo.org/tickets/' + self.model.id + '/users',
-            success: function (users) {
-              var usersDiv = $(self.queryByHook('users'));
-
-              if (!users || users.length < 1) {
-                usersDiv.append($('<p>There are no users.</p>'));
-              }
-              else {
-                users.forEach(function (user) {
-                  usersDiv.append($('<p>' + user.name + '</p>'));
-                });
-
-                $('#users').text($('#users').text() + ' (' + users.length + ')');
-              }
-
-              var waitingDiv = $(self.queryByHook('waiting-list'));
-
-              if (!ids.waiting || ids.waiting.length < 1) {
-                waitingDiv.append($('<p>There are no users in the waiting list.</p>'));
-              }
-              else {
-                ids.waiting.forEach(function (id) {
-                  waitingDiv.append($('<p>' + id + '</p>'));
-                });
-
-                $('#waiting-list').text($('#waiting-list').text() + ' (' + ids.waiting.length + ')');
-              }
-
-              var confirmedDiv = $(self.queryByHook('confirmed-users'));
-
-              if (!ids.confirmed || ids.confirmed.length < 1) {
-                confirmedDiv.append($('<p>There are no confirmed users.</p>'));
-              }
-              else {
-                var found = false;
-
-                ids.confirmed.forEach(function (id) {
-                  var user = findUserById(id);
-
-                  if (user) {
-                    found = true;
-                    confirmedDiv.append($('<p>' + user.name + '</p>'));
-                  }
-                });
-
-                if (!found) {
-                  confirmedDiv.append($('<p>There are no confirmed users.</p>'));
-                }
-                else {
-                  $('#confirmed-users').text($('#confirmed-users').text() + ' (' + ids.confirmed.length + ')');
-                }
-              }
-
-              function findUserById(id) {
-                return users.filter(function (user) {
-                  return user.id === id;
-                })[0];
-              }
-            }
-          });
-        },
-        error: function () {
-          $(self.queryByHook('users')).append($('<p>There are no users.</p>'));
-          $(self.queryByHook('confirmed-users')).append($('<p>There are no confirmed users.</p>'));
-          $(self.queryByHook('waiting-list')).append($('<p>There are no users in the waiting list.</p>'));
-        }
-      });
-      // temporary piece of code above
     });
   },
   subviews: {
@@ -173,7 +100,7 @@ module.exports = PageView.extend({
         });
       }
     },
-    comments:{
+    comments: {
       container: '[data-hook=session-comments]',
       waitFor: 'model.commentsApi',
       prepareView: function (el) {
@@ -184,7 +111,7 @@ module.exports = PageView.extend({
         });
       }
     },
-    subscription:{
+    subscription: {
       container: '[data-hook=session-subscription]',
       parent: this,
       waitFor: 'model.thread',
@@ -194,6 +121,39 @@ module.exports = PageView.extend({
           el: el,
           model: self.model,
           parent: self,
+        });
+      }
+    },
+    users: {
+      container: '[data-hook=users]',
+      waitFor: 'model.usersApi',
+      prepareView: function (el) {
+        var Us = new Users(this.model.usersApi);
+        return new UsersView({
+          el: el,
+          collection: new Us()
+        });
+      }
+    },
+    waitingUsers: {
+      container: '[data-hook=waiting-users]',
+      waitFor: 'model.waitingUsersApi',
+      prepareView: function (el) {
+        var Us = new Users(this.model.waitingUsersApi);
+        return new UsersView({
+          el: el,
+          collection: new Us()
+        });
+      }
+    },
+    confirmedUsers: {
+      container: '[data-hook=confirmed-users]',
+      waitFor: 'model.confirmedUsersApi',
+      prepareView: function (el) {
+        var Us = new Users(this.model.confirmedUsersApi);
+        return new UsersView({
+          el: el,
+          collection: new Us()
         });
       }
     }

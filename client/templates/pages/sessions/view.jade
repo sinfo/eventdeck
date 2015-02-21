@@ -36,14 +36,11 @@ section.page.sessions.view
           div(data-hook='session-speakers')
           div(data-hook='session-companies')
       .all-100.column-group.gutters
-        .all-33
-          h4#users Users
-          .all-100(data-hook='users')
-        .all-33
-          h4#waiting-list Waiting list
-          .all-100(data-hook='waiting-list')
-        .all-33
-          h4#confirmed-users Confirmed users
-          .all-100(data-hook='confirmed-users')
+        .all-33(data-title='Users')
+          div(data-hook='users')
+        .all-33(data-title='Waiting users')
+          div(data-hook='waiting-users')
+        .all-33(data-title='Confirmed users')
+          div(data-hook='confirmed-users')
       .all-100
         div(data-hook='session-comments')
