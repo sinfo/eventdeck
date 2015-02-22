@@ -9,10 +9,6 @@ var config = {
   isSecure: process.env.EVENTDECK_IS_SECURE === true || process.env.EVENTDECK_IS_SECURE === 'true'
 };
 
-config.cannon = {
-  url: process.env.CANNON_URL || 'https://localhost:8090'
-};
-
 config.mongo = {
   url: process.env.EVENTDECK_MONGO_URL || 'mongodb://localhost/deck'
 };
@@ -61,7 +57,8 @@ config.client = {
   debugMode: true,
   facebook: {
     appId: config.facebook.appId
-  }
+  },
+  cannonUrl: 'https://cannon.sinfo.org'
 };
 
 config.images = {

@@ -138,19 +138,19 @@ module.exports = AmpModel.extend({
     usersApi: {
       deps: ['id'],
       fn: function () {
-        return config.cannon.url + '/tickets/' + this.id + '/users';
+        return config.client.cannonUrl + '/tickets/' + this.id + '/users';
       }
     },
     waitingUsersApi: {
       deps: ['id'],
       fn: function () {
-        return config.cannon.url + '/tickets/' + this.id + '/waiting';
+        return config.client.cannonUrl + '/tickets/' + this.id + '/waiting';
       }
     },
     confirmedUsersApi: {
       deps: ['id'],
       fn: function () {
-        return config.cannon.url + '/tickets/' + this.id + '/confirmed';
+        return config.client.cannonUrl + '/tickets/' + this.id + '/confirmed';
       }
     },
     surveyText: {
