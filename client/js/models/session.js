@@ -7,6 +7,7 @@ var marked = require('client/js/helpers/marked');
 var SpeakerDetails = require('./speaker');
 var CompanyDetails = require('./company');
 var Moment = require('moment');
+var config = require('config');
 
 var _ = require('client/js/helpers/underscore');
 
@@ -137,19 +138,19 @@ module.exports = AmpModel.extend({
     usersApi: {
       deps: ['id'],
       fn: function () {
-        return 'https://cannon.sinfo.org/tickets/' + this.id + '/users';
+        return config.cannon.url + '/tickets/' + this.id + '/users';
       }
     },
     waitingUsersApi: {
       deps: ['id'],
       fn: function () {
-        return 'https://cannon.sinfo.org/tickets/' + this.id + '/waiting';
+        return config.cannon.url + '/tickets/' + this.id + '/waiting';
       }
     },
     confirmedUsersApi: {
       deps: ['id'],
       fn: function () {
-        return 'https://cannon.sinfo.org/tickets/' + this.id + '/confirmed';
+        return config.cannon.url + '/tickets/' + this.id + '/confirmed';
       }
     },
     surveyText: {

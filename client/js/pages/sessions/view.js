@@ -1,5 +1,4 @@
 /*global app, alert*/
-var $ = require('jquery');
 var log = require('bows')('sessions');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
