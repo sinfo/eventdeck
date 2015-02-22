@@ -72,7 +72,9 @@ options.advertisementLvl = [
  { name: 'Exclusive', id: 'exclusive' },
  { name: 'Maximum', id: 'max' },
  { name: 'Medium', id: 'med' },
- { name: 'Minimum', id: 'min' }
+ { name: 'Minimum', id: 'min' },
+ { name: 'Media', id: 'media' },
+ { name: 'Other', id: 'other' }
 ];
 
 options.roles = [
