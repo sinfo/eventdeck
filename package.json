@@ -4,7 +4,6 @@
   "description": "eventdeck",
   "main": "index.js",
   "scripts": {
-    "s": "node server/index.js | bunyan",
     "start": "NODE_PATH=. node server/index.js | bunyan",
     "mon": "NODE_PATH=. node_modules/.bin/nodemon server/index.js --ignore client/ | node_modules/.bin/bunyan",
     "pretest": "touch client/css/app.css && echo \"module.exports={}\" >> client/js/templates.js",
