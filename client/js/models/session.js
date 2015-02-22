@@ -7,7 +7,7 @@ var marked = require('client/js/helpers/marked');
 var SpeakerDetails = require('./speaker');
 var CompanyDetails = require('./company');
 var Moment = require('moment');
-var config = require('config');
+var config = require('client/js/helpers/clientconfig');
 
 var _ = require('client/js/helpers/underscore');
 
@@ -138,19 +138,19 @@ module.exports = AmpModel.extend({
     usersApi: {
       deps: ['id'],
       fn: function () {
-        return config.client.cannonUrl + '/tickets/' + this.id + '/users';
+        return config.cannonUrl + '/tickets/' + this.id + '/users';
       }
     },
     waitingUsersApi: {
       deps: ['id'],
       fn: function () {
-        return config.client.cannonUrl + '/tickets/' + this.id + '/waiting';
+        return config.cannonUrl + '/tickets/' + this.id + '/waiting';
       }
     },
     confirmedUsersApi: {
       deps: ['id'],
       fn: function () {
-        return config.client.cannonUrl + '/tickets/' + this.id + '/confirmed';
+        return config.cannonUrl + '/tickets/' + this.id + '/confirmed';
       }
     },
     surveyText: {
