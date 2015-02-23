@@ -13,6 +13,7 @@ server.method('session.update', update, {});
 server.method('session.get', get, {});
 server.method('session.list', list, {});
 server.method('session.remove', remove, {});
+server.method('session.search', search, {});
 
 function create(session, memberId, cb) {
   session.updated = Date.now();
@@ -102,5 +103,45 @@ function remove(id, cb) {
     ical.generate();
 
     return cb(null, session);
+  });
+}
+
+function search(str, query, cb) {
+  cb = cb || query; // fields is optional
+
+  var filter = { name: new RegExp(str, 'i') };
+  var fields = parser(query.fields || 'id,name,img');
+  var options = {
+    skip: query.skip,
+    limit: query.limit || 10,
+    sort: parser(query.sort)
+  };
+
+  Session.find(filter, fields, options, function (err, exactSessions) {
+    if (err) {
+      log.error({ err: err, filter: filter}, 'error getting sessions');
+      return cb(Boom.internal());
+    }
+
+    if (exactSessions.length > 0) {
+      return cb(null, { exact: exactSessions });
+    }
+
+    filter = {
+      $or: [
+        { kind: new RegExp(str, 'i') },
+        { place: new RegExp(str, 'i') },
+        { description: new RegExp(str, 'i') }
+      ]
+    };
+
+    Session.find(filter, fields, options, function (err, extendedSessions) {
+      if (err) {
+        log.error({ err: err, filter: filter}, 'error getting sessions');
+        return cb(Boom.internal());
+      }
+
+      return cb(null, { exact: exactSessions, extended: extendedSessions });
+    });
   });
 }

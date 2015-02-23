@@ -264,7 +264,7 @@ module.exports = View.extend({
         log('Got', data);
 
         var resultsType = 'exact';
-        if(!data.companies.exact.length && !data.speakers.exact.length && !data.topics.exact.length && !data.members.exact.length) {
+        if(!data.companies.exact.length && !data.speakers.exact.length && !data.topics.exact.length && !data.members.exact.length && !data.sessions.exact.length) {
           resultsType = 'extended';
           searchResults.append('<li class="header">Showing Extended Results</li>');
         }
@@ -310,6 +310,17 @@ module.exports = View.extend({
             name: data.members[resultsType][i].name,
             img: data.members[resultsType][i].img,
             url: '/members/'+data.members[resultsType][i].id
+          };
+
+          searchResults.append(searchResultTemplate(result.name, result.url, result.img));
+        }
+
+        searchResults.append('<li class="header">'+data.sessions[resultsType].length+' Sessions</li>');
+        for(i=0; i<data.sessions[resultsType].length; i++) {
+          result = {
+            name: data.sessions[resultsType][i].name,
+            img: data.sessions[resultsType][i].img,
+            url: '/sessions/'+data.sessions[resultsType][i].id
           };
 
           searchResults.append(searchResultTemplate(result.name, result.url, result.img));

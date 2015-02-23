@@ -4,6 +4,7 @@ var companiesRender = require('server/views/company');
 var speakersRender = require('server/views/speaker');
 var membersRender = require('server/views/member');
 var topicsRender = require('server/views/topic');
+var sessionsRender = require('server/views/session');
 
 
 var handlers = module.exports;
@@ -27,6 +28,7 @@ exports.search = {
     { method: 'speaker.search(params.str, query)', assign: 'speakers' },
     { method: 'member.search(params.str, query)', assign: 'members' },
     { method: 'topic.search(params.str, query)', assign: 'topics' },
+    { method: 'session.search(params.str, query)', assign: 'sessions' }
   ],
   handler: function (request, reply) {
     reply({
@@ -38,14 +40,18 @@ exports.search = {
         exact: request.pre.speakers.exact && speakersRender(request.pre.speakers.exact),
         extended: request.pre.speakers.extended && speakersRender(request.pre.speakers.extended)
       },
-      topics: request.pre.topics && {
-        exact: request.pre.topics.exact && topicsRender(request.pre.topics.exact),
-        extended: request.pre.topics.extended && topicsRender(request.pre.topics.extended)
-      },
       members: request.pre.members && {
         exact: request.pre.members.exact && membersRender(request.pre.members.exact),
         extended: request.pre.members.extended && membersRender(request.pre.members.extended)
       },
+      topics: request.pre.topics && {
+        exact: request.pre.topics.exact && topicsRender(request.pre.topics.exact),
+        extended: request.pre.topics.extended && topicsRender(request.pre.topics.extended)
+      },
+      sessions: request.pre.sessions && {
+        exact: request.pre.sessions.exact && sessionsRender(request.pre.sessions.exact),
+        extended: request.pre.sessions.extended && sessionsRender(request.pre.sessions.extended)
+      }
     });
   },
   description: 'Lets you search for stuff'
