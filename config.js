@@ -78,6 +78,10 @@ config.ical = {
   path: __dirname + '/public/ical/ical.ics'
 };
 
+config.loginCodes = {
+  length: process.env.EVENTDECK_LOGIN_CODES_LENGTH || 100
+};
+
 config.templates = {};
 
 if(process.env.NODE_ENV == 'test') {

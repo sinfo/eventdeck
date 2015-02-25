@@ -7,6 +7,7 @@ var parser = require('server/helpers/fieldsParser');
 var dupKeyParser = require('server/helpers/dupKeyParser');
 var randtoken = require('rand-token');
 var Member = require('server/db/member');
+var config = require('config');
 
 // TODO: GET TARGETS
 server.method('member.create', create, {});
@@ -55,7 +56,7 @@ function update(id, member, cb) {
 }
 
 function createLoginCode(id, cb) {
-  var loginCode = randtoken.generate(4).toUpperCase();
+  var loginCode = randtoken.generate(config.loginCodes.length);
   var code = {$push: {'loginCodes': {code: loginCode, created: new Date()}}};
   var filter = {id: id};
   Member.findOneAndUpdate(filter,code , function(err, _member) {
