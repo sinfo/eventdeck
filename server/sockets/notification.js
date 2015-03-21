@@ -1,9 +1,12 @@
 var async = require('async');
 var servers = require('server');
+var Joi = require('joi');
+var Boom = require('boom');
 var log = require('server/helpers/logger');
 var IO = servers.socket.server;
 var server = servers.hapi;
-var render = require('server/views/notification');
+var renderNotification = require('server/views/notification');
+var renderAccess = require('server/views/access');
 
 var events = {
   count: 'notification-count',
@@ -58,20 +61,21 @@ var validators = {
 
   notify: Joi.object().keys({
     data: Joi.object().keys({
+      id: Joi.string().description('Notification id'),
       thread: Joi.string().description('The thread of the notification'),
-      source: Joi.string().uri().description('The source of the thread'),
+      source: Joi.string().description('The source of the thread'),
       member: Joi.string().description('The member from whom the notification comes'),
       description: Joi.string().description('Description of the notification'),
-      targets: Joi.array().items(Joi.string()).description('Targets to be notified'),
+      targets: Joi.array().includes(Joi.string()).description('Targets to be notified'),
+      unread: Joi.boolean(),
       posted: Joi.date()
     })
   }),
 
   access: Joi.object().keys({
     data: Joi.object().keys({
-      thread: Joi.string().description('The accessed thread'),
-      member: Joi.string().description('Id of the member'),
-      last: Joi.date()
+      thread: Joi.string().required().description('The accessed thread'),
+      member: Joi.string().required().description('Id of the member')
     })
   }),
 };
@@ -115,7 +119,7 @@ function notificationListeners(socket){
           socket.emit(events.getResp, {err: err});
           return cbClient(err);
         }
-        socket.emit(events.getResp, {response: render(result)});
+        socket.emit(events.getResp, {response: renderNotification(result)});
         cbClient();
       });
     });
@@ -134,7 +138,7 @@ function notificationListeners(socket){
         socket.emit(events.getPublicResp, {err: err});
         return cbClient(err);
       }
-      socket.emit(events.getPublicResp, {response: render(notifications)});
+      socket.emit(events.getPublicResp, {response: renderNotification(notifications)});
       cbClient();
     });
   });
@@ -144,7 +148,7 @@ function notificationListeners(socket){
   });
 
   socket.on(events.notify, function(request, cbClient){
-
+    request.data = renderNotification(request.data);
     Joi.validate(request, validators.notify, function(err, request){
       if(err){
         cbClient(Boom.badRequest('Invalid request', err));
@@ -154,7 +158,7 @@ function notificationListeners(socket){
     var notification = request.data;
     if(notification.targets.length){
       async.each(notification.targets, function(target, cb){
-        IO.to(target).emit(events.notifyTarget, {response: render(notification)});
+        IO.to(target).emit(events.notifyTarget, {response: renderNotification(notification)});
         cb();
       });
       return cbClient();
@@ -170,15 +174,16 @@ function notificationListeners(socket){
           return cb();
         }
 
-        IO.to(subscription.member).emit(events.notifySubscripton, {response: render(notification)});
+        IO.to(subscription.member).emit(events.notifySubscripton, {response: renderNotification(notification)});
         cb();
       });
     });
-    IO.emit(events.notifyPublic, {response: render(notification)});
+    IO.emit(events.notifyPublic, {response: renderNotification(notification)});
     cbClient();
   });
 
   socket.on(events.access, function(request, cbClient){
+    request.data = renderAccess(request.data);
     Joi.validate(request, validators.access, function(err, request){
       if(err){
         cbClient(Boom.badRequest('Invalid request', err));
@@ -186,7 +191,7 @@ function notificationListeners(socket){
     });
 
     var data = request.data || {};
-    server.methods.access.save(data.memberId, data.thread, function(err, result){
+    server.methods.access.save(data.member, data.thread, function(err, result){
       if(err){
         log.error({err: err, access: result}, '[socket-notification] error saving access');
       }

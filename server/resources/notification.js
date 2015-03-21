@@ -133,7 +133,7 @@ function create(notification, cb) {
       return cb(Boom.internal());
     }
     _notification.set('unread', true, { strict: false });
-    cb(null, _notification);
+    cb(null, _notification.toObject({ getters: true }));
   });
 }
 
@@ -152,7 +152,7 @@ function get(id,query, cb) {
       return cb(Boom.notFound());
     }
 
-    cb(null, notification);
+    cb(null, notification.toObject({ getters: true }));
   });
 }
 
@@ -358,7 +358,7 @@ function remove(id, cb) {
       return cb(Boom.notFound());
     }
 
-    return cb(null, notification);
+    return cb(null, notification.toObject({ getters: true }));
   });
 }
 
