@@ -88,6 +88,9 @@ exports.list = {
   validate: {
     query: {
       fields: Joi.string().default('id,name,kind,date').description('Fields we want to retrieve'),
+      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+      sort: Joi.string().description('How to sort the array'),
     }
   },
   pre: [
