@@ -205,6 +205,10 @@ function getUnreadCount(memberId, query, cb) {
           log.error({ err: err, member: member}, 'error getting member notification accesses');
           return cbAsync(Boom.internal());
         }
+        if (!member) {
+          log.error({ err: err, member: member}, 'member not found while getting last access');
+          return cbAsync(Boom.notFound());
+        }
 
         cbAsync(null, subscriptions, member.unreadAccess);
       });
