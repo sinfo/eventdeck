@@ -61,7 +61,12 @@ module.exports = PageView.extend({
     },
     'model.surveyText': {
       hook: 'surveyneeded'
-    }
+    },
+    'model.surveyResults': {
+      type: 'attribute',
+      hook: 'surveyresults',
+      name: 'href'
+    },
   },
   events: {
     'click [data-hook~=delete]': 'handleDeleteClick',
