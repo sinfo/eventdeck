@@ -1,4 +1,5 @@
 /*global app, alert*/
+var log = require('bows')('sessions');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var SessionForm = require('client/js/forms/session');
@@ -119,7 +120,7 @@ module.exports = PageView.extend({
                 app.navigate('/sessions/'+model.id);
               },
               error: function (model, response, options) {
-                console.log('error', response.statusCode, response.response);
+                log.error(response.statusCode +' '+ response.response);
               }
             });
           }

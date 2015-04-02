@@ -1,4 +1,5 @@
 /*global app, alert*/
+var log = require('bows')('companies');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var CompanyForm = require('client/js/forms/company');
@@ -46,7 +47,7 @@ module.exports = PageView.extend({
                 app.navigate('/companies/'+model.id);
               },
               error: function (model, response, options) {
-                console.log('error', response.statusCode, response.response);
+                log.error(response.statusCode +' '+ response.response);
               }
             });
           }

@@ -136,7 +136,7 @@ function remove(id, cb) {
       return cb(Boom.internal());
     }
     if (!company) {
-      log.error({ err: err, company: id}, 'error deleting company');
+      log.warn({ err: 'not found', company: id}, 'error deleting company');
       return cb(Boom.notFound());
     }
 

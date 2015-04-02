@@ -60,8 +60,6 @@ module.exports = PageView.extend({
     });
   },
   render: function () {
-    log('RENDEEEER');
-
     var self = this;
     PageView.prototype.render.apply(self);
   },

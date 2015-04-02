@@ -157,7 +157,7 @@ function remove(id, cb) {
       return cb(Boom.internal());
     }
     if (!comment) {
-      log.error({ err: err, comment: id}, 'error deleting comment');
+      log.warn({ err: 'not found', comment: id}, 'error updating comment');
       return cb(Boom.notFound());
     }
 

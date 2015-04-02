@@ -75,7 +75,7 @@ function list(query, cb) {
       log.error({ err: err}, 'error getting all chats');
       return cb(Boom.internal());
     }
-    
+
     cb(null, chats);
   });
 }
@@ -88,7 +88,7 @@ function remove(id, cb) {
       return cb(Boom.internal());
     }
     if (!chat) {
-      log.error({ err: err, chat: id}, 'error deleting chat');
+      log.warn({ err: 'not found', chat: id}, 'error removing chat');
       return cb(Boom.notFound());
     }
 
@@ -105,7 +105,7 @@ function addMessage(id, message, cb) {
       return cb(Boom.internal());
     }
     if (!chat) {
-      log.error({ err: err, chat: id}, 'error adding chat message');
+      log.warn({ err: 'not found', chat: id}, 'error adding message to chat');
       return cb(Boom.notFound());
     }
 
@@ -122,7 +122,7 @@ function removeMessage(id, message, cb) {
       return cb(Boom.internal());
     }
     if (!chat) {
-      log.error({ err: err, chat: id}, 'error removing chat message');
+      log.warn({ err: 'not found', chat: id}, 'error removing message from chat');
       return cb(Boom.notFound());
     }
 

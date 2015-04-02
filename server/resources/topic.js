@@ -155,7 +155,7 @@ function remove(id, cb) {
       return cb(Boom.internal());
     }
     if (!topic) {
-      log.error({ err: err, topic: id}, 'error deleting topic');
+      log.warn({ err: 'not found', topic: id}, 'error deleting topic');
       return cb(Boom.notFound());
     }
 
