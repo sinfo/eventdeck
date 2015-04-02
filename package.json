@@ -95,6 +95,7 @@
   },
   "devDependencies": {
     "bunyan": "~1.2.1",
+    "bunyan-logentries":"~1.0.0",
     "nodemon": "~1.2.1",
     "lab": "~5.0.1",
     "code": "~1.2.0",
