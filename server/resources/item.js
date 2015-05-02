@@ -79,21 +79,21 @@ function list(query, cb) {
       log.error({ err: err}, 'error getting all items');
       return cb(Boom.internal());
     }
-    
+
     cb(null, items);
   });
 }
 
 function remove(id, cb) {
   var filter = { id: id };
-  
+
   Item.findOneAndRemove(filter, function(err, item){
     if (err) {
       log.error({ err: err, item: id}, 'error deleting item');
       return cb(Boom.internal());
     }
     if (!item) {
-      log.error({ err: err, item: id}, 'error deleting item');
+      log.warn({ err: 'not found', item: id}, 'error deleting item');
       return cb(Boom.notFound());
     }
 

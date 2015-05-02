@@ -1,4 +1,5 @@
 /*global app, alert*/
+var log = require('bows')('topics');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var TopicForm = require('client/js/forms/topic');
@@ -83,7 +84,7 @@ module.exports = PageView.extend({
                 app.navigate('/topics/'+model.id);
               },
               error: function (model, response, options) {
-                console.log('error', response.statusCode, response.response);
+                log.error(response.statusCode +' '+ response.response);
               }
             });
           }

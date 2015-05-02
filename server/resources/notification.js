@@ -74,7 +74,7 @@ function notifyMention(memberId, thread, targets, source, cb) {
       return cb();
     }
   }
-  
+
   var notification = {
     thread: thread,
     member: memberId,
@@ -358,7 +358,7 @@ function remove(id, cb) {
       return cb(Boom.internal());
     }
     if (!notification) {
-      log.error({ err: err, notification: id}, 'error deleting notification');
+      log.warn({ err: 'not found', notification: id}, 'error deleting notification');
       return cb(Boom.notFound());
     }
 

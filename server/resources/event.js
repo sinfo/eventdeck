@@ -79,7 +79,7 @@ function list(query, cb) {
       log.error({ err: err}, 'error getting all events');
       return cb(Boom.internal());
     }
-    
+
     cb(null, events);
   });
 }
