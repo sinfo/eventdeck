@@ -1,3 +1,6 @@
+//init http monitoring
+require('pmx').init();
+
 var Hapi = require('hapi');
 var IO = {server: require('socket.io'), client: require('socket.io-client')};
 var log = require('server/helpers/logger');

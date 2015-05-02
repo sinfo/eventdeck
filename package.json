@@ -73,6 +73,7 @@
     "hapi-auth-cookie": "~1.3.2",
     "hapi-swagger": "~0.4.2",
     "hoek": "^2.9.0",
+    "icalendar": "^0.7.1",
     "joi": "^4.7.0",
     "jquery": "^2.1.1",
     "lout": "~5.1.1",
@@ -83,6 +84,7 @@
     "moment": "^2.8.4",
     "mongoose": "~3.8.4",
     "moonboots_hapi": "^3.0.2",
+    "pmx": "^0.3.9",
     "rand-token": "~0.2.1",
     "request": "~2.36.0",
     "slug": "~0.7.1",
@@ -90,8 +92,7 @@
     "socket.io-client": "^1.2.0",
     "stylizer": "^1.0.0",
     "templatizer": "^1.0.0",
-    "underscore": "^1.6.0",
-    "icalendar": "^0.7.1"
+    "underscore": "^1.6.0"
   },
   "devDependencies": {
     "bunyan": "~1.2.1",
