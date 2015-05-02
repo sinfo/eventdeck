@@ -50,7 +50,7 @@ config.bunyan = {
     },
     {
       level: process.env.EVENTDECK_LOG_LEVEL || 'trace',
-      stream: bunyanLogentries.createStream({token: process.env.EVENTDECK_LE_TOKEN}) || 'YOUR LOGENTRIES TOKEN FOR THe EVENTDECK',
+      stream: bunyanLogentries.createStream({token: process.env.EVENTDECK_LE_TOKEN || 'YOUR_LE_TOKEN'}),
       type: 'raw'
   }]
 };

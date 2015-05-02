@@ -8,7 +8,7 @@ var config = require('config');
 var cookieConfig = config.cookie;
 var moonbootsConfig = require('moonbootsConfig');
 
-var CONFIG_COOKIE_NAME = 'eventdeck-config';
+var cookieName = 'eventdeck-config';
 
 log.error({ env: process.env.NODE_ENV }, '### Starting EventDeck ###');
 
@@ -19,17 +19,17 @@ require('./db');
 var internals = {};
 // set clientconfig cookie
 internals.configStateConfig = {
-    encoding: 'none',
-    ttl: 1000 * 60 * 15,
-    isSecure: config.isSecure
+  encoding: 'none',
+  ttl: 1000 * 60 * 15,
+  isSecure: config.isSecure
 };
 
-server.state(CONFIG_COOKIE_NAME, internals.configStateConfig);
+server.state(cookieName, internals.configStateConfig);
 internals.clientConfig = JSON.stringify(config.client);
 server.ext('onPreResponse', function(request, reply) {
   if (!request.state.config && !request.response.isBoom) {
     var response = request.response;
-    return reply(response.state(CONFIG_COOKIE_NAME, encodeURIComponent(internals.clientConfig)));
+    return reply(response.state(cookieName, encodeURIComponent(internals.clientConfig)));
   }
 
   return reply();
@@ -44,38 +44,39 @@ server.pack.register([
   ],
   function (err) {
 
-  server.auth.strategy('session', 'cookie', {
-    cookie: cookieConfig.name,
-    password: cookieConfig.password,
-    ttl: 2592000000,
-/*  appendNext: true,
-    redirectTo: '/login',
-    redirectOnTry: true,
-    isSecure: false,
-    isHttpOnly: false,*/
-    isSecure: false,
-  });
-
-  var webSocket = {};
-  webSocket.server = IO.server.listen(server.listener);
-  log.info('Websocket server started at: ' + server.info.uri);
-  webSocket.client = IO.client('http://localhost:' + server.info.port);
-  module.exports.socket = webSocket;
-  require('./sockets');
-  webSocket.client.emit('init', {data: {id: 'toolbot'}}, function(){
-    log.info('Websocket client listeners set');
-  });
-
-  require('./resources');
-  require('./routes');
-
-  if (!module.parent) {
-    server.start(function () {
-      log.info('Server started at: ' + server.info.uri);
-      // var crono  = require('./scripts/crono');
-      // var reminders = require('./resources/reminder');
-      // reminders(null, function(stuff){});
-      // crono.reminder.start();
+    server.auth.strategy('session', 'cookie', {
+      cookie: cookieConfig.name,
+      password: cookieConfig.password,
+      ttl: 2592000000,
+    /*appendNext: true,
+      redirectTo: '/login',
+      redirectOnTry: true,
+      isSecure: false,
+      isHttpOnly: false,*/
+      isSecure: false,
     });
+
+    var webSocket = {};
+    webSocket.server = IO.server.listen(server.listener);
+    log.info('Websocket server started at: ' + server.info.uri);
+    webSocket.client = IO.client('http://localhost:' + server.info.port);
+    module.exports.socket = webSocket;
+    require('./sockets');
+    webSocket.client.emit('init', {data: {id: 'toolbot'}}, function(){
+      log.info('Websocket client listeners set');
+    });
+
+    require('./resources');
+    require('./routes');
+
+    if (!module.parent) {
+      server.start(function () {
+        log.info('Server started at: ' + server.info.uri);
+        // var crono  = require('./scripts/crono');
+        // var reminders = require('./resources/reminder');
+        // reminders(null, function(stuff){});
+        // crono.reminder.start();
+      });
+    }
   }
-});
+);
