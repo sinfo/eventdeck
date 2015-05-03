@@ -159,6 +159,12 @@ module.exports = AmpModel.extend({
         return 'Survey ' + (this.surveyNeeded ? '' : 'not ') + 'needed.';
       },
       cache: false
+    },
+    surveyResults: {
+      deps: ['id'],
+      fn: function () {
+        return config.cannonUrl + '/surveyresults/' + this.id;
+      }
     }
   },
   parse: function (attrs) {

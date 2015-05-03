@@ -20,8 +20,8 @@ function save(memberId, path, id, cb) {
   }
 
   var filter = { member: memberId, thread: thread };
-  var access = { 
-    member: memberId, 
+  var access = {
+    member: memberId,
     thread: thread,
     last: Date.now()
   };
@@ -47,7 +47,7 @@ function get(memberId, path, id, cb) {
   }
 
   var filter = { member: memberId, thread: thread };
-  
+
   Access.findOne(filter, function (err, savedAccess) {
     if (err) {
       log.error({ err: err, access: filter});

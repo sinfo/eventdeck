@@ -25,7 +25,7 @@ function get(id,query, cb) {
 
   var fields = parser(query.fields);
   var filter = {id: id};
-  
+
   Message.findOne(filter, fields, function(err, message) {
     if (err) {
       log.error({ err: err, message: id}, 'error getting message');
@@ -55,7 +55,7 @@ function getByChat(chatId, query, cb){
     if(err) {
       log.error({ err: err, chat: chatId}, 'error getting messages');
       return cb(Boom.internal());
-    } 
+    }
     cb(null, messages);
   });
 }
@@ -75,7 +75,7 @@ function list(query, cb) {
       log.error({ err: err}, 'error getting all messages');
       return cb(Boom.internal());
     }
-    
+
     cb(null, messages);
   });
 }

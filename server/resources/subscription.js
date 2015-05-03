@@ -88,7 +88,7 @@ function remove(thread, memberId, cb) {
       return cb(Boom.internal());
     }
     if (!subscription) {
-      log.error({ err: err, subscription: filter}, 'error deleting subscription');
+      log.error({ err: 'not found', subscription: filter}, 'error deleting subscription');
       return cb(Boom.notFound('member was not subscribed to this thread'));
     }
 

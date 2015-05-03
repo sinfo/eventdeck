@@ -34,7 +34,7 @@ function broadcast(notification, cb){
   if(!notification){
     return cb();
   }
-  IO.emit(events.notify, notification, function(err){
+  IO.emit(events.notify, {data: notification}, function(err){
     if(err){
       log.error({err: err, notification: notification}, 'notification broadcast failed');
     }
@@ -74,7 +74,7 @@ function notifyMention(memberId, thread, targets, source, cb) {
       return cb();
     }
   }
-  
+
   var notification = {
     thread: thread,
     member: memberId,
@@ -133,7 +133,7 @@ function create(notification, cb) {
       return cb(Boom.internal());
     }
     _notification.set('unread', true, { strict: false });
-    cb(null, _notification);
+    cb(null, _notification.toObject({ getters: true }));
   });
 }
 
@@ -152,7 +152,7 @@ function get(id,query, cb) {
       return cb(Boom.notFound());
     }
 
-    cb(null, notification);
+    cb(null, notification.toObject({ getters: true }));
   });
 }
 
@@ -204,6 +204,10 @@ function getUnreadCount(memberId, query, cb) {
         if (err) {
           log.error({ err: err, member: member}, 'error getting member notification accesses');
           return cbAsync(Boom.internal());
+        }
+        if (!member) {
+          log.error({ err: err, member: member}, 'member not found while getting last access');
+          return cbAsync(Boom.notFound());
         }
 
         cbAsync(null, subscriptions, member.unreadAccess);
@@ -354,11 +358,11 @@ function remove(id, cb) {
       return cb(Boom.internal());
     }
     if (!notification) {
-      log.error({ err: err, notification: id}, 'error deleting notification');
+      log.warn({ err: 'not found', notification: id}, 'error deleting notification');
       return cb(Boom.notFound());
     }
 
-    return cb(null, notification);
+    return cb(null, notification.toObject({ getters: true }));
   });
 }
 

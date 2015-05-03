@@ -1,4 +1,3 @@
-var $ = require('jquery');
 var log = require('bows')('communications');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
@@ -27,7 +26,8 @@ module.exports = PageView.extend({
       container: '[data-hook~=new-commmunication]',
       prepareView: function (el) {
         var self = this;
-        return new CommunicationForm({
+
+        var form = new CommunicationForm({
           el: el,
           submitCallback: function (data) {
             var communication = {
@@ -42,11 +42,13 @@ module.exports = PageView.extend({
               success: function () {
                 self.fetchCollection();
                 log('new communication created', communication);
-                $(self.queryByHook('field-container')).find('textarea').val('');
+                form.reset();
               }
             });
           }
         });
+
+        return form;
       }
     }
   }

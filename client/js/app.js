@@ -136,12 +136,12 @@ module.exports = {
   },
 
   access: function (model) {
-    var data ={
-      memberId: app.me.id,
+    var access ={
+      member: app.me.id,
       thread: model.thread
     };
     model.unread = false;
-    app.notifications.private.emit('access', data,{callback: function(err, result){
+    app.notifications.private.emit('access', access,{callback: function(err, result){
       if(err){
         log(err);
         return;

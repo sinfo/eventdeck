@@ -164,7 +164,7 @@ function remove(id, cb) {
       return cb(Boom.internal());
     }
     if (!communication) {
-      log.error({ err: err, communication: id}, 'error deleting communication');
+      log.warn({ err: 'not found', communication: id}, 'error removing communication');
       return cb(Boom.notFound());
     }
 

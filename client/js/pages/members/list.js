@@ -24,7 +24,6 @@ function filtering(page,filter){
 }
 function rerender(page, collection, filter){
 
-    console.log(page.queryByHook(selectedFilter));
     page.renderWithTemplate();
     page.renderCollection(collection, MemberView, page.queryByHook('members-list'));
 
@@ -103,7 +102,6 @@ module.exports = PageView.extend({
   me: function () {
     log('Fetching Selected Companies');
     var aux = this.collection.filter(function(member){
-      console.log(member.id == app.me.id);
       return member && member.id == app.me.id;
     });
 

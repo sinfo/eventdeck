@@ -1,5 +1,6 @@
 var pack = require('package');
 var url = require('url');
+var bunyanLogentries = require('bunyan-logentries');
 
 var config = {
   url: process.env.EVENTDECK_URL || 'http://localhost:8080',
@@ -46,8 +47,12 @@ config.bunyan = {
       path: './eventdeck.log',
       period: '1d',   // daily rotation
       count: 3        // keep 3 back copies
-    }
-  ]
+    },
+    {
+      level: process.env.EVENTDECK_LOG_LEVEL || 'trace',
+      stream: bunyanLogentries.createStream({token: process.env.EVENTDECK_LE_TOKEN || 'YOUR_LE_TOKEN'}),
+      type: 'raw'
+  }]
 };
 
 config.swagger = {

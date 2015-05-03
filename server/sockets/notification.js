@@ -1,9 +1,12 @@
 var async = require('async');
 var servers = require('server');
+var Joi = require('joi');
+var Boom = require('boom');
 var log = require('server/helpers/logger');
 var IO = servers.socket.server;
 var server = servers.hapi;
-var render = require('server/views/notification');
+var renderNotification = require('server/views/notification');
+var renderAccess = require('server/views/access');
 
 var events = {
   count: 'notification-count',
@@ -19,9 +22,72 @@ var events = {
   access: 'access'
 };
 
+var validators = {
+  count: Joi.object().keys({
+    data: Joi.object().keys({
+      id: Joi.string().required().description('id of the member')
+    }),
+    options: Joi.object().keys({
+      data: Joi.object().keys({
+        fields: Joi.string().default('').description('Fields we want to retrieve'),
+        skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+        limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+        sort: Joi.string().description('How to sort the array'),
+      })
+    })
+  }),
+
+  get: Joi.object().keys({
+    options: Joi.object().keys({
+      data: Joi.object().keys({
+        fields: Joi.string().default('').description('Fields we want to retrieve'),
+        skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+        limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+        sort: Joi.string().description('How to sort the array'),
+      })
+    })
+  }),
+
+  getPublic: Joi.object().keys({
+    options: Joi.object().keys({
+      data: Joi.object().keys({
+        fields: Joi.string().default('').description('Fields we want to retrieve'),
+        skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
+        limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
+        sort: Joi.string().description('How to sort the array'),
+      })
+    })
+  }),
+
+  notify: Joi.object().keys({
+    data: Joi.object().keys({
+      id: Joi.string().description('Notification id'),
+      thread: Joi.string().description('The thread of the notification'),
+      source: Joi.string().description('The source of the thread'),
+      member: Joi.string().description('The member from whom the notification comes'),
+      description: Joi.string().description('Description of the notification'),
+      targets: Joi.array().includes(Joi.string()).description('Targets to be notified'),
+      unread: Joi.boolean(),
+      posted: Joi.date()
+    })
+  }),
+
+  access: Joi.object().keys({
+    data: Joi.object().keys({
+      thread: Joi.string().required().description('The accessed thread'),
+      member: Joi.string().required().description('Id of the member')
+    })
+  }),
+};
+
 function notificationListeners(socket){
 
   socket.on(events.count, function(request, cbClient){
+    Joi.validate(request, validators.count, function(err, value){
+      if(err){
+        return cbClient(Boom.badRequest('Invalid request', err));
+      }
+    });
     var query = request.options.data || {};
     var data = request.data || {};
     server.methods.notification.getUnreadCount(data.id, query, function(err, result){
@@ -36,7 +102,12 @@ function notificationListeners(socket){
   });
 
   socket.on(events.get, function(request, cbClient){
-   var query = request.options.data || {};
+    Joi.validate(request, validators.get, function(err, value){
+      if(err){
+        return cbClient(Boom.badRequest('Invalid request', err));
+      }
+    });
+    var query = request.options.data || {};
     server.methods.notification.getByMember(socket.nickname, query, function(err, notifications){
       if(!notifications){
         socket.emit(events.getResp, {response: []});
@@ -48,13 +119,18 @@ function notificationListeners(socket){
           socket.emit(events.getResp, {err: err});
           return cbClient(err);
         }
-        socket.emit(events.getResp, {response: render(result)});
+        socket.emit(events.getResp, {response: renderNotification(result)});
         cbClient();
       });
     });
   });
 
   socket.on(events.getPublic, function(request, cbClient){
+    Joi.validate(request, validators.getPublic, function(err, value){
+      if(err){
+        return cbClient(Boom.badRequest('Invalid request', err));
+      }
+    });
     var query = request.options.data || {};
     server.methods.notification.list(query, function(err, notifications){
       if(err){
@@ -62,7 +138,7 @@ function notificationListeners(socket){
         socket.emit(events.getPublicResp, {err: err});
         return cbClient(err);
       }
-      socket.emit(events.getPublicResp, {response: render(notifications)});
+      socket.emit(events.getPublicResp, {response: renderNotification(notifications)});
       cbClient();
     });
   });
@@ -71,10 +147,18 @@ function notificationListeners(socket){
     //TODO notification fetch by id
   });
 
-  socket.on(events.notify, function(notification, cbClient){
+  socket.on(events.notify, function(request, cbClient){
+    request.data = renderNotification(request.data);
+    Joi.validate(request, validators.notify, function(err, request){
+      if(err){
+        return cbClient(Boom.badRequest('Invalid request', err));
+      }
+    });
+
+    var notification = request.data;
     if(notification.targets.length){
       async.each(notification.targets, function(target, cb){
-        IO.to(target).emit(events.notifyTarget, {response: render(notification)});
+        IO.to(target).emit(events.notifyTarget, {response: renderNotification(notification)});
         cb();
       });
       return cbClient();
@@ -90,17 +174,24 @@ function notificationListeners(socket){
           return cb();
         }
 
-        IO.to(subscription.member).emit(events.notifySubscripton, {response: render(notification)});
+        IO.to(subscription.member).emit(events.notifySubscripton, {response: renderNotification(notification)});
         cb();
       });
     });
-    IO.emit(events.notifyPublic, {response: render(notification)});
+    IO.emit(events.notifyPublic, {response: renderNotification(notification)});
     cbClient();
   });
 
   socket.on(events.access, function(request, cbClient){
+    request.data = renderAccess(request.data);
+    Joi.validate(request, validators.access, function(err, request){
+      if(err){
+        return cbClient(Boom.badRequest('Invalid request', err));
+      }
+    });
+
     var data = request.data || {};
-    server.methods.access.save(data.memberId, data.thread, function(err, result){
+    server.methods.access.save(data.member, data.thread, function(err, result){
       if(err){
         log.error({err: err, access: result}, '[socket-notification] error saving access');
       }
