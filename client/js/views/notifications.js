@@ -11,7 +11,7 @@ module.exports = PageView.extend({
   template: templates.partials.notifications.list,
   initialize: function (spec) {
     var self = this;
-    async.parallel([
+    /*async.parallel([
       function getMembers (cb){
         if(FORCE_FETCH || !app.members.length) {
           app.members.fetch({
@@ -70,7 +70,7 @@ module.exports = PageView.extend({
       },
     ], function () {
       self.render();
-    });
+    });*/
   },
   render: function () {
     this.renderWithTemplate();

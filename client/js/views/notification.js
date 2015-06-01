@@ -12,7 +12,7 @@ module.exports = View.extend({
     async.parallel([
       function getMember (cb){
         if(self.model.member){
-          app.members.getOrFetch(self.model.member, {all: true}, function (err, model) {
+          app.members.getOrFetch(self.model.member, function (err, model) {
             if (err) {
               log.error('couldnt find a member with id: ' + self.model.member);
               return cb();
@@ -26,7 +26,7 @@ module.exports = View.extend({
       function getThing (cb){
         switch (self.model.threadKind) {
           case 'company':
-            app.companies.getOrFetch(self.model.threadId, {all: true}, function (err, model) {
+            app.companies.getOrFetch(self.model.threadId, function (err, model) {
               if (err) {
                 log.error('couldnt find a company with id: ' + self.model.threadId);
                 return cb();
@@ -36,7 +36,7 @@ module.exports = View.extend({
             });
           break;
           case 'speaker':
-            app.speakers.getOrFetch(self.model.threadId, {all: true}, function (err, model) {
+            app.speakers.getOrFetch(self.model.threadId, function (err, model) {
               if (err) {
                 log.error('couldnt find a speaker with id: ' + self.model.threadId);
                 return cb();
@@ -46,7 +46,7 @@ module.exports = View.extend({
             });
           break;
           case 'topic':
-            app.topics.getOrFetch(self.model.threadId, {all: true}, function (err, model) {
+            app.topics.getOrFetch(self.model.threadId, function (err, model) {
               if (err) {
                 log.error('couldnt find a topic with id: ' + self.model.threadId);
                 return cb();
