@@ -13,10 +13,10 @@ module.exports ={
 	limit: 10,
 	skip: 0,
 	fetchPage: function(options){
-    options || (options = {remove: false, merge: false, add: true});
-    if(options.reset){
-      options = {};
-      this.skip = 0;
+      options || (options = {remove: false, merge: false, add: true});
+      if(options.reset){
+        options = {};
+        this.skip = 0;
     }
     _.extend(this, options.data);
     pageOptions.data.limit = this.limit;
