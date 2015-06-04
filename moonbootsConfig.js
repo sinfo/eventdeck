@@ -55,6 +55,7 @@ module.exports = {
           outfile:  cssDir + '/app.css',
           development: config.isDev
         }, done);
+        return;
       }
       // Re-compile stylus to css each time the app's main css file is requested.
       // In addition there's a "watch" option that will make stylizer also be able
