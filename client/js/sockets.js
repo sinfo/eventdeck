@@ -75,7 +75,7 @@ module.exports = io.extend({
 
     this.emit(this.events.init, app.me, function(err){
       callback(err);
-      app.notifications.private.emit( app.notifications.private.events.count, {id: app.me.id}, {callback: callback});
+      app.notifications.private.emit( app.notifications.private.events.count, {id: app.me.id}, callback);
       app.notifications.private.fetchPage({callback: callback, reset: true});
       app.notifications.public.fetchPage({callback: callback, reset: true});
     });

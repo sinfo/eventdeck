@@ -39,12 +39,12 @@ module.exports = {
     this.topics = new Topics();
     this.fetchInitialData();
 
-    this.socket = new IO(null, {setListeners: true});
+    this.socket = new IO(null, {initListeners: true});
     this.notifications = {};
     PublicNotifications = new PublicNotifications(this.socket);
     PrivateNotifications = new PrivateNotifications(this.socket);
-    this.notifications.public = new PublicNotifications(null, {setListeners: true});
-    this.notifications.private = new PrivateNotifications(null, {setListeners: true});
+    this.notifications.public = new PublicNotifications(null, {initListeners: true});
+    this.notifications.private = new PrivateNotifications(null, {initListeners: true});
 
     // init our URL handlers and the history tracker
     this.router = new Router();
@@ -141,13 +141,13 @@ module.exports = {
       thread: model.thread
     };
     model.unread = false;
-    app.notifications.private.emit('access', access,{callback: function(err, result){
+    app.notifications.private.emit('access', access, function(err, result){
       if(err){
         log(err);
         return;
       }
       app.notifications.private.fetchPage({reset: true});
-    }});
+    });
   }
 };
 

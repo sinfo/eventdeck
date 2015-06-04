@@ -1,6 +1,6 @@
 /*global app, alert*/
 var log = require('bows')('topics');
-var PageView = require('client/js/pages/base');
+var PageView = require('ampersand-infinite-scroll');
 var templates = require('client/js/templates');
 var TopicView = require('client/js/views/topic');
 var Topic = require('client/js/models/topic');
@@ -67,7 +67,7 @@ module.exports = PageView.extend({
     selectedTag = 'showall';
     selectedKind = 'showall';
 
-    if (!this.collection.length) {
+    if (this.collection.length < this.collection.data.limit) {
       this.fetchCollection();
     }
     if (!app.tags.length) {
@@ -100,7 +100,8 @@ module.exports = PageView.extend({
   fetchCollection: function () {
     log('Fetching topics');
     var self = this;
-    this.collection.fetch({
+    this.collection.fetchPage({
+      reset: true,
       success: function () {
         var aux = self.collection.filter(function(topic){
           return topic.closed === false;

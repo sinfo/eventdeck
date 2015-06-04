@@ -1,14 +1,19 @@
 /*global app*/
 var AmpIOCollection = require('ampersand-io-collection');
-var PageFetchMixin = require('./notifications');
-var notification = require('./notification');
+var PaginationMixin = require('ampersand-pagination-mixin');
+var Notification = require('./notification');
 var log = require('bows')('io-notifications');
 
 module.exports = function(socket){
 
-	var model = notification(socket);
+	var model = new Notification(socket);
 	
-	return AmpIOCollection.extend(socket, PageFetchMixin, {
+	return AmpIOCollection.extend(socket, PaginationMixin, {
+
+		data: {
+			sort: '-posted'
+		},
+
 		events: {
 		  fetch: 'notifications-public-get',
 		  onFetch: 'notifications-public-get-response',

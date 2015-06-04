@@ -1,6 +1,6 @@
 /*global app, alert*/
 var log = require('bows')('speakers');
-var PageView = require('client/js/pages/base');
+var PageView = require('ampersand-infinite-scroll');
 var templates = require('client/js/templates');
 var SpeakerView = require('client/js/views/speaker');
 var Speaker = require('client/js/models/speaker');
@@ -51,7 +51,7 @@ module.exports = PageView.extend({
 
     this.renderWithTemplate();
     this.renderCollection(this.collection, SpeakerView, this.queryByHook('speakers-list'));
-    if (!this.collection.length) {
+    if (this.collection.length < this.collection.data.limit) {
       this.fetchCollection();
     }
 
@@ -60,7 +60,7 @@ module.exports = PageView.extend({
   },
   fetchCollection: function () {
     log('Fetching speakers');
-    this.collection.fetch();
+    this.collection.fetchPage({reset: true});
 
     return false;
   },
