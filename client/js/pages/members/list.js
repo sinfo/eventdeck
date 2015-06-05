@@ -1,7 +1,7 @@
 /*global app*/
 var log = require('bows')('members');
 var Member= require('client/js/models/member');
-var PageView = require('client/js/pages/base');
+var PageView = require('ampersand-infinite-scroll');
 var templates = require('client/js/templates');
 var MemberView = require('client/js/views/member');
 var AmpersandCollection = require('ampersand-collection');
@@ -66,12 +66,12 @@ module.exports = PageView.extend({
   render: function () {
     this.renderWithTemplate();
     this.renderCollection(this.collection, MemberView, this.queryByHook('members-list'));
-    if (!this.collection.length) {
+    if (this.collection.length < this.collection.data.limit) {
       this.fetchCollection();
     }
   },
   fetchCollection: function () {
-    this.collection.fetch();
+    this.collection.fetchPage({reset: true});
     return false;
   },
   resetCollection: function () {
