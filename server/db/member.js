@@ -32,4 +32,8 @@ var schema = new mongoose.Schema({
   unreadAccess: { type: Date, default: Date.now }
 });
 
+schema.index({id: 1});
+schema.index({'roles.id': 1});
+schema.index({'facebook.id': 1});
+
 var Member = module.exports = mongoose.model('Member', schema);

@@ -10,4 +10,6 @@ var schema = new mongoose.Schema({
   updated: { type: Date }
 });
 
+schema.index({id: 1, date: -1});
+
 var eventModel = module.exports = mongoose.model('Event', schema);

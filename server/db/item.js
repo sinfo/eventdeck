@@ -9,4 +9,6 @@ var schema = new mongoose.Schema({
   minPrice: Number
 });
 
+schema.index({id: 1});
+
 var Item = module.exports = mongoose.model('Item', schema);
