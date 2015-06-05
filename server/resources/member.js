@@ -23,7 +23,7 @@ server.method('member.search', search, {});
 
 
 function create(member, cb) {
-  member.id = slug(member.id || member.name).toLowerCase();
+  member.id = slug(member.id || member.name, '.').toLowerCase();
 
   Member.create(member, function(err, _member) {
     if (err) {

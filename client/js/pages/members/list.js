@@ -71,7 +71,7 @@ module.exports = PageView.extend({
     }
   },
   fetchCollection: function () {
-    this.collection.fetchPage({reset: true});
+    this.collection.fetchPage({reset: true}).sortBy('id');
     return false;
   },
   resetCollection: function () {
