@@ -32,7 +32,7 @@ module.exports = PageView.extend({
       }
     ],
     function(err) {
-      app.topics.getOrFetch(spec.id, {all: true}, function (err, model) {
+      app.topics.getOrFetch(spec.id, function (err, model) {
         if (err) {
           return alert('couldnt find a model with id: ' + spec.id);
         }
