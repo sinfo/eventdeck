@@ -83,11 +83,11 @@ var validators = {
 function notificationListeners(socket){
 
   socket.on(events.count, function(request, cbClient){
-    Joi.validate(request, validators.count, function(err, value){
-      if(err){
-        return cbClient(Boom.badRequest('Invalid request', err));
-      }
-    });
+    var validate = Joi.validate(request, validators.count);
+    if(validate.err){
+      return cbClient(Boom.badRequest('Invalid request', validate.err));
+    }
+
     var query = request.options.data || {};
     var data = request.data || {};
     server.methods.notification.getUnreadCount(data.id, query, function(err, result){
@@ -102,11 +102,11 @@ function notificationListeners(socket){
   });
 
   socket.on(events.get, function(request, cbClient){
-    Joi.validate(request, validators.get, function(err, value){
-      if(err){
-        return cbClient(Boom.badRequest('Invalid request', err));
-      }
-    });
+    var validate = Joi.validate(request, validators.get);
+    if(validate.err){
+      return cbClient(Boom.badRequest('Invalid request', validate.err));
+    }
+
     var query = request.options.data || {};
     server.methods.notification.getByMember(socket.nickname, query, function(err, notifications){
       if(!notifications){
@@ -126,11 +126,11 @@ function notificationListeners(socket){
   });
 
   socket.on(events.getPublic, function(request, cbClient){
-    Joi.validate(request, validators.getPublic, function(err, value){
-      if(err){
-        return cbClient(Boom.badRequest('Invalid request', err));
-      }
-    });
+    var validate = Joi.validate(request, validators.getPublic);
+    if(validate.err){
+      return cbClient(Boom.badRequest('Invalid request', validate.err));
+    }
+
     var query = request.options.data || {};
     server.methods.notification.list(query, function(err, notifications){
       if(err){
@@ -149,11 +149,11 @@ function notificationListeners(socket){
 
   socket.on(events.notify, function(request, cbClient){
     request.data = renderNotification(request.data);
-    Joi.validate(request, validators.notify, function(err, request){
-      if(err){
-        return cbClient(Boom.badRequest('Invalid request', err));
-      }
-    });
+    var validate = Joi.validate(request, validators.notify);
+    if(validate.err){
+      return cbClient(Boom.badRequest('Invalid request', validate.err));
+    }
+
 
     var notification = request.data;
     if(notification.targets.length){
@@ -184,11 +184,10 @@ function notificationListeners(socket){
 
   socket.on(events.access, function(request, cbClient){
     request.data = renderAccess(request.data);
-    Joi.validate(request, validators.access, function(err, request){
-      if(err){
-        return cbClient(Boom.badRequest('Invalid request', err));
-      }
-    });
+    var validate = Joi.validate(request, validators.access);
+    if(validate.err){
+      return cbClient(Boom.badRequest('Invalid request', validate.err));
+    }
 
     var data = request.data || {};
     server.methods.access.save(data.member, data.thread, function(err, result){

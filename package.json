@@ -49,7 +49,7 @@
     "ampersand-infinite-scroll": "https://github.com/sinfo/ampersand-infinite-scroll/tarball/master",
     "ampersand-input-view": "~4.0.2",
     "ampersand-io": "^0.4.2",
-    "ampersand-io-collection": "https://github.com/sinfo/ampersand-io-collection/tarball/master",
+    "ampersand-io-collection": "^0.1.5",
     "ampersand-io-model": "^0.3.0",
     "ampersand-model": "^4.0.0",
     "ampersand-pikaday-view": "0.0.1",

@@ -64,6 +64,7 @@ module.exports = PageView.extend({
 
   },
   render: function () {
+    this.collection.sortBy('name');
     this.renderWithTemplate();
     this.renderCollection(this.collection, MemberView, this.queryByHook('members-list'));
     if (this.collection.length < this.collection.data.limit) {
@@ -71,6 +72,7 @@ module.exports = PageView.extend({
     }
   },
   fetchCollection: function () {
+
     this.collection.fetchPage({reset: true});
     return false;
   },
@@ -183,7 +185,7 @@ module.exports = PageView.extend({
 
     return false;
   },
-   treasury: function() {
+  treasury: function() {
     var aux = filtering(this,'treasury');
     rerender(this,aux,'treasury');
 
