@@ -28,6 +28,7 @@ module.exports = PageView.extend({
       prepareView: function (el) {
         var self = this;
         var model = this.model;
+
         return new MemberForm({
           el: el,
           model: this.model,
