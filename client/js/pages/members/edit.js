@@ -40,7 +40,25 @@ module.exports = PageView.extend({
             }) || [],
 
             populate(data, this.model, ['facebook.id', 'facebook.username', 'mails.main', 'mails.institutional', 'mails.dropbox', 'mails.google', 'mails.microsoft']);
+
+            if(data.img === ''){
+              delete data.img;
+            }
+
+            if(data.skype === ''){
+              delete data.skype;
+            }
+
+            if(data['facebook.username'] === ''){
+              delete data['facebook.username'];
+            }
+
+
             data = self.model.changedAttributes(data);
+            if(!data) {
+              return app.navigate('/members/'+model.id);
+            }
+
             model.save(data, {
               patch: true,
               wait: false,
