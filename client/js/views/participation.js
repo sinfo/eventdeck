@@ -12,6 +12,7 @@ module.exports =  View.extend({
   template: templates.cards.participation,
   initialize: function (spec) {
     var self = this;
+    app.members.fetch();
     if(self.model.event && !self.model.eventDetails){
       app.events.getOrFetch(self.model.event, {all: true}, function (err, model) {
         if (err) {
