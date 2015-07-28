@@ -4,8 +4,6 @@ var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var populate = require('client/js/helpers/populate');
 var MemberForm = require('client/js/forms/member');
-var Member = require('client/js/models/member');
-var AmpState = require('ampersand-state');
 
 module.exports = PageView.extend({
   pageTitle: 'Edit person',
@@ -32,7 +30,7 @@ module.exports = PageView.extend({
 
         return new MemberForm({
           el: el,
-          model: model,
+          model: this.model,
           submitCallback: function (data) {
 
             data.roles = data.roles.map(function(r) {
@@ -43,18 +41,24 @@ module.exports = PageView.extend({
 
             populate(data, ['facebook.id', 'facebook.username', 'mails.main', 'mails.institutional', 'mails.dropbox', 'mails.google', 'mails.microsoft']);
 
-            if(!model.mails.main)
+            if(!model.mails.main){
               model.mails.main = '';
-            if(!model.mails.dropbox)
+            }
+            if(!model.mails.dropbox){
               model.mails.dropbox = '';
-            if(!model.mails.institutional)
+            }
+            if(!model.mails.institutional){
               model.mails.institutional = '';
-            if(!model.mails.google)
+            }
+            if(!model.mails.google){
               model.mails.google = '';
-            if(!model.mails.microsoft)
+            }
+            if(!model.mails.microsoft){
               model.mails.microsoft = '';
-            if(!model.facebook.username)
+            }
+            if(!model.facebook.username){
               model.facebook.username = '';
+            }
 
             if(data.img === ''){
               delete data.img;
@@ -88,11 +92,13 @@ module.exports = PageView.extend({
             }
 
             aux= {};
-            if(mails)
+            if(mails){
               aux.mails = mails;
+            }
 
-            if(facebook)
+            if(facebook){
               aux.facebook = facebook;
+            }
 
             model.save(aux, {
               patch: true,
