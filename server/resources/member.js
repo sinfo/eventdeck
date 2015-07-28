@@ -41,6 +41,9 @@ function create(member, cb) {
 }
 
 function update(id, member, cb) {
+
+  log.warn(member);
+
   Member.findOneAndUpdate({id: id}, member, function(err, _member) {
     if (err && err != {}) {
       log.error({ err: err, member: id}, 'error updating member');

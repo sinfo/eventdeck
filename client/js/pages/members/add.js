@@ -27,6 +27,8 @@ module.exports = PageView.extend({
 
             data.mails = aux;
 
+            log(data);
+
             app.members.create(data, {
               wait: true,
               success: function (model, response, options) {
