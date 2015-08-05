@@ -18,14 +18,12 @@ function filtering(collection,filter){
   });
 }
 
-function rerender(page, collection, filter){
+function rerender(page, collection, filter, options){
   page.renderWithTemplate();
+  page.renderCollection(collection, SpeakerView, page.queryByHook('speakers-list'), options);
 
-  log(page.mainCollection);
-  page.renderCollection(collection, SpeakerView, page.queryByHook('speakers-list'));
-  log(page.mainCollection);
   page.renderStatusFilters();
-  log(page.mainCollection);
+
   page.queryByHook(selectedFilter).classList.remove('selected');
   page.queryByHook(filter).classList.add('selected');
   selectedFilter = filter;
@@ -89,21 +87,19 @@ module.exports = PageView.extend({
     log('Fetching Selected Speakers');
     var self = this;
 
-    self.mainCollection = self.mainCollection ? self.mainCollection : self.collection;
-
-    self.mainCollection.fetch({
+    self.collection.fetch({
+      add: true,
+      merge: true,
+      remove: false,
       data:{
         member: app.me.id 
       },
       success: function (collection, response, options) {
-        var aux = self.mainCollection.filter(function(speaker){
+        var aux = self.collection.filter(function(speaker){
           return speaker.participation && speaker.participation.member == app.me.id;
         });
-
         aux = new AmpersandCollection(aux, {model: Speaker});
-        
         rerender(self,aux,'me');
-        
         return false;
       },
       error: function (collection, response, options) {
@@ -115,14 +111,15 @@ module.exports = PageView.extend({
     log('Fetching Selected Speakers');
     var self = this;
 
-    self.mainCollection = self.mainCollection ? self.mainCollection : self.collection;
-
-    self.mainCollection.fetch({
+    self.collection.fetch({
+      add: true,
+      merge: true,
+      remove: false,
       data:{
         member: 'false' 
       },
       success: function (collection, response, options) {
-        var aux = self.mainCollection.filter(function(speaker){
+        var aux = self.collection.filter(function(speaker){
           return speaker.participation && !speaker.participation.member;
         });
 
@@ -141,15 +138,16 @@ module.exports = PageView.extend({
     log('Fetching Selected Speakers');
     var self = this;
 
-    self.mainCollection = self.mainCollection ? self.mainCollection : self.collection;
-
-    self.mainCollection.fetch({
+    self.collection.fetch({
+      add: true,
+      merge: true,
+      remove: false,
       data:{
         event: app.me.selectedEvent,
       },
       success: function (collection, response, options) {
-        var aux = self.mainCollection.filter(function(speaker){
-          return speaker.participation && speaker.participation.id === app.me.selectedEvent;
+        var aux = self.collection.filter(function(speaker){
+          return speaker.participation && speaker.participation.event === app.me.selectedEvent;
         });
 
         aux = new AmpersandCollection(aux, {model: Speaker});
@@ -166,17 +164,16 @@ module.exports = PageView.extend({
     log('Fetching Selected Speakers');
     var self = this;
 
-    self.mainCollection = self.mainCollection ? self.mainCollection : self.collection;
-
-    self.mainCollection.fetch({
+    self.collection.fetch({
+      add: true,
+      merge: true,
+      remove: false,
       data:{
         event: app.me.selectedEvent,
         participations: 'false'
       },
       success: function (collection, response, options) {
-        log('After fetch', self.collection);
-
-        var aux = self.mainCollection.filter(function(speaker){
+        var aux = self.collection.filter(function(speaker){
           return !speaker.participation;
         });
 
@@ -191,13 +188,10 @@ module.exports = PageView.extend({
     });
   },
   showall: function () {
-    this.collection = this.mainCollection;
-
     this.collection.comparator = 'updated';
     this.collection.sort();
     this.collection.comparator = false;
-
-    rerender(this, this.collection, 'showall');
+    rerender(this, this.collection, 'showall', {reverse: true});
     return false;
   },
   hide: function(){
