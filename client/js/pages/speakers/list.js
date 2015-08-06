@@ -20,7 +20,7 @@ function filtering(collection,filter){
 
 function rerender(page, collection, filter, options){
   page.renderWithTemplate();
-  page.renderCollection(collection, SpeakerView, page.queryByHook('speakers-list'), options);
+  page.renderCollection(page.collection, SpeakerView, page.queryByHook('speakers-list'), options);
 
   page.renderStatusFilters();
 
@@ -87,19 +87,18 @@ module.exports = PageView.extend({
     log('Fetching Selected Speakers');
     var self = this;
 
-    self.collection.fetch({
-      add: true,
-      merge: true,
-      remove: false,
-      data:{
-        member: app.me.id 
-      },
+    self.collection.data = {
+      member: app.me.id,
+      skip: 0,
+      limit: 30,
+      sort: '-updated'
+    };
+
+    self.collection.fetchPage({
       success: function (collection, response, options) {
-        var aux = self.collection.filter(function(speaker){
-          return speaker.participation && speaker.participation.member == app.me.id;
-        });
-        aux = new AmpersandCollection(aux, {model: Speaker});
-        rerender(self,aux,'me');
+
+        rerender(self, self.collection, 'me');
+
         return false;
       },
       error: function (collection, response, options) {
@@ -111,21 +110,17 @@ module.exports = PageView.extend({
     log('Fetching Selected Speakers');
     var self = this;
 
-    self.collection.fetch({
-      add: true,
-      merge: true,
-      remove: false,
-      data:{
-        member: 'false' 
-      },
+    self.collection.data = {
+      member: 'false',
+      skip: 0,
+      limit: 30,
+      sort: '-updated'
+    };
+
+    self.collection.fetchPage({
       success: function (collection, response, options) {
-        var aux = self.collection.filter(function(speaker){
-          return speaker.participation && !speaker.participation.member;
-        });
 
-        aux = new AmpersandCollection(aux, {model: Speaker});
-
-        rerender(self,aux,'noMember');
+        rerender(self, self.collection, 'noMember');
 
         return false;
       },
@@ -138,21 +133,18 @@ module.exports = PageView.extend({
     log('Fetching Selected Speakers');
     var self = this;
 
-    self.collection.fetch({
-      add: true,
-      merge: true,
-      remove: false,
-      data:{
-        event: app.me.selectedEvent,
-      },
+    self.collection.data = {
+      event: app.me.selectedEvent,
+      skip: 0,
+      limit: 30,
+      sort: '-updated'
+    };
+
+    self.collection.fetchPage({
       success: function (collection, response, options) {
-        var aux = self.collection.filter(function(speaker){
-          return speaker.participation && speaker.participation.event === app.me.selectedEvent;
-        });
 
-        aux = new AmpersandCollection(aux, {model: Speaker});
+        rerender(self, self.collection, 'thisEvent');
 
-        rerender(self,aux,'thisEvent');
         return false;
       },
       error: function (collection, response, options) {
@@ -164,22 +156,17 @@ module.exports = PageView.extend({
     log('Fetching Selected Speakers');
     var self = this;
 
-    self.collection.fetch({
-      add: true,
-      merge: true,
-      remove: false,
-      data:{
-        event: app.me.selectedEvent,
-        participations: 'false'
-      },
+    self.collection.data = {
+      event: app.me.selectedEvent,
+      participations: 'false',
+      skip: 0,
+      limit: 30,
+      sort: '-updated'
+    };
+
+    self.collection.fetchPage({
       success: function (collection, response, options) {
-        var aux = self.collection.filter(function(speaker){
-          return !speaker.participation;
-        });
-
-        aux = new AmpersandCollection(aux, {model: Speaker});
-
-        rerender(self,aux,'noParticipation');
+        rerender(self, self.collection, 'noParticipation');
         return false;
       },
       error: function (collection, response, options) {
@@ -188,11 +175,21 @@ module.exports = PageView.extend({
     });
   },
   showall: function () {
-    this.collection.comparator = 'updated';
-    this.collection.sort();
-    this.collection.comparator = false;
-    rerender(this, this.collection, 'showall', {reverse: true});
-    return false;
+    var self = this;
+    
+    self.collection.data = {limit: 30, skip: 0, sort: '-updated'};
+
+    self.collection.fetchPage({
+      success: function (collection, response, options) {
+
+        rerender(self, self.collection, 'thisEvent');
+
+        return false;
+      },
+      error: function (collection, response, options) {
+        log('Error fetching user speakers', {response: response});
+      }
+    });
   },
   hide: function(){
     if(!this.hidden){
