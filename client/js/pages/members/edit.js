@@ -5,7 +5,6 @@ var templates = require('client/js/templates');
 var populate = require('client/js/helpers/populate');
 var MemberForm = require('client/js/forms/member');
 
-
 module.exports = PageView.extend({
   pageTitle: 'Edit person',
   template: templates.pages.members.edit,
@@ -33,33 +32,75 @@ module.exports = PageView.extend({
           el: el,
           model: this.model,
           submitCallback: function (data) {
+
             data.roles = data.roles.map(function(r) {
               return {
                 id: r
               };
             }) || [],
 
-            populate(data, this.model, ['facebook.id', 'facebook.username', 'mails.main', 'mails.institutional', 'mails.dropbox', 'mails.google', 'mails.microsoft']);
+            populate(data, ['facebook.id', 'facebook.username', 'mails.main', 'mails.institutional', 'mails.dropbox', 'mails.google', 'mails.microsoft']);
+
+            if(!model.mails.main){
+              model.mails.main = '';
+            }
+            if(!model.mails.dropbox){
+              model.mails.dropbox = '';
+            }
+            if(!model.mails.institutional){
+              model.mails.institutional = '';
+            }
+            if(!model.mails.google){
+              model.mails.google = '';
+            }
+            if(!model.mails.microsoft){
+              model.mails.microsoft = '';
+            }
+            if(!model.facebook.username){
+              model.facebook.username = '';
+            }
 
             if(data.img === ''){
               delete data.img;
             }
-
             if(data.skype === ''){
               delete data.skype;
             }
 
-            if(data['facebook.username'] === ''){
-              delete data['facebook.username'];
-            }
+            var mails = {
+              main: data['mails.main'],
+              institutional: data['mails.institutional'],
+              dropbox: data['mails.dropbox'],
+              google: data['mails.google'],
+              microsoft: data['mails.microsoft']
+            };
 
+            var facebook = {
+              username: data['facebook.username']
+            };
 
-            data = self.model.changedAttributes(data);
-            if(!data) {
+            data.mails = mails;
+            data.facebook = facebook;
+
+            mails = model.mails.changedAttributes(data.mails);
+            facebook = model.facebook.changedAttributes(data.facebook);
+
+            var aux = self.model.changedAttributes(data);
+
+            if(!aux && !mails && !facebook) {
               return app.navigate('/members/'+model.id);
             }
 
-            model.save(data, {
+            aux= {};
+            if(mails){
+              aux.mails = mails;
+            }
+
+            if(facebook){
+              aux.facebook = facebook;
+            }
+
+            model.save(aux, {
               patch: true,
               wait: false,
               success: function (model, response, options) {
