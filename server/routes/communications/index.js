@@ -63,6 +63,12 @@ server.route({
 });
 
 server.route({
+  method: 'GET',
+  path: '/api/{threadKind}/{threadId}/communications/{id}/view',
+  config: handlers.getView
+});
+
+server.route({
   method: 'POST',
   path: '/api/{threadKind}/{threadId}/communications',
   config: handlers.create

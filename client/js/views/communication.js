@@ -1,5 +1,7 @@
 /*global app*/
 var $ = require('jquery');
+var threadUrl = require('client/js/helpers/threadUrl');
+var config = require('config');
 var log = require('bows')('communications');
 var View = require('ampersand-view');
 var templates = require('client/js/templates');
@@ -21,11 +23,16 @@ module.exports = View.extend({
     this.handleViewClick();
   },
   events: {
+    'click [data-hook~=initial-email]': 'handleInitialEmail',
     'click [data-hook~=action-delete]': 'handleRemoveClick',
     'click [data-hook~=action-edit]': 'handleEditClick',
     'click [data-hook~=action-view]': 'handleViewClick',
     'click [data-hook~=action-approve]': 'handleApproveClick',
     'click [data-hook~=action-review]': 'handleReviewClick',
+  },
+  handleInitialEmail: function () {
+    console.log(config);
+    window.open(config.url + '/api' + threadUrl(this.model.thread) + '/communications/' + this.model.id + '/view', '_blank');
   },
   handleRemoveClick: function () {
     if (window.confirm('Do you really want to delete this communication?')) {
@@ -105,6 +112,9 @@ var ViewCommunication = View.extend({
       this.renderSubview(new AdminCommunication(), '[data-hook=admin-container]');
     }
     $(this.queryByHook('comments-area')).hide();
+    if(this.model.kind !== 'Initial Email Paragraph') {
+      $(this.queryByHook('initial-email')).hide();
+    }
 
     var self = this;
     setInterval(function () {

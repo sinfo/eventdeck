@@ -42,6 +42,7 @@ options.vias = {
 
 options.kinds = {
   communications: [
+    'Initial Email Paragraph',
     'Email To',
     'Email From',
     'Meeting',

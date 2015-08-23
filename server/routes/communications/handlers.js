@@ -80,6 +80,29 @@ exports.get = {
   description: 'Gets an communication'
 };
 
+// TO DO, only working for speakers
+exports.getView = {
+  auth: 'session',
+  tags: ['api','communication'],
+  validate: {
+    params: {
+      id: Joi.string().required().description('Id of the communication we want to retrieve'),
+      threadKind: Joi.string().valid('speakers', 'companies').description('Kind of the thread of the communication we want to update'),
+      threadId: Joi.string().description('Id of the thread of the communication we want to update'),
+    },
+    query: {
+      fields: Joi.string().default('').description('Fields we want to retrieve'),
+    }
+  },
+  pre: [
+    [{ method: 'speaker.get(params.threadId,query)', assign: 'speaker' }],
+    [{ method: 'communication.get(params.id,query)', assign: 'communication' }]
+  ],
+  handler: function (request, reply) {
+    reply.view('speakers23',{speaker: request.pre.speaker.name, paragraph: request.pre.communication.text});
+  },
+  description: 'Gets a communication with an initial template view'
+};
 
 exports.getByMember = {
   auth: 'session',

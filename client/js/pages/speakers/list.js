@@ -12,6 +12,14 @@ var $ = require('client/js/helpers/jquery');
 
 var selectedFilter = 'showall';
 
+var filterTypes = {
+  me: ['noMember', 'showall'],
+  noMember: ['me', 'showall'],
+  showall: ['noMember', 'me', 'thisEvent', 'noParticipation'],
+  thisEvent: ['noParticipation', 'showall'],
+  noParticipation: ['thisEvent', 'showall']
+}
+
 function filtering(collection,filter){
   return collection.filter(function(speaker){
     return speaker.participation && speaker.participation.status == filter;
@@ -20,13 +28,10 @@ function filtering(collection,filter){
 
 function rerender(page, collection, filter, options){
   page.renderWithTemplate();
-  page.renderCollection(page.collection, SpeakerView, page.queryByHook('speakers-list'), options);
+  page.renderCollection(collection, SpeakerView, page.queryByHook('speakers-list'), options);
 
   page.renderStatusFilters();
-
-  page.queryByHook(selectedFilter).classList.remove('selected');
   page.queryByHook(filter).classList.add('selected');
-  selectedFilter = filter;
 
   return false;
 }
@@ -56,7 +61,6 @@ module.exports = PageView.extend({
     if (this.collection.length < this.collection.data.limit) {
       this.fetchCollection();
     }
-
     this.renderStatusFilters();
     this.queryByHook(selectedFilter).classList.add('selected');
   },
@@ -87,12 +91,10 @@ module.exports = PageView.extend({
     log('Fetching Selected Speakers');
     var self = this;
 
-    self.collection.data = {
-      member: app.me.id,
-      skip: 0,
-      limit: 30,
-      sort: '-updated'
-    };
+    self.collection.data.member = app.me.id;
+    self.collection.data.skip = 0;
+    self.collection.data.limit = 30;
+    self.collection.data.sort = '-updated';
 
     self.collection.fetchPage({
       success: function (collection, response, options) {
@@ -110,12 +112,10 @@ module.exports = PageView.extend({
     log('Fetching Selected Speakers');
     var self = this;
 
-    self.collection.data = {
-      member: 'false',
-      skip: 0,
-      limit: 30,
-      sort: '-updated'
-    };
+    self.collection.data.member = 'false';
+    self.collection.data.skip = 0;
+    self.collection.data.limit = 30;
+    self.collection.data.sort = '-updated';
 
     self.collection.fetchPage({
       success: function (collection, response, options) {
@@ -133,12 +133,12 @@ module.exports = PageView.extend({
     log('Fetching Selected Speakers');
     var self = this;
 
-    self.collection.data = {
-      event: app.me.selectedEvent,
-      skip: 0,
-      limit: 30,
-      sort: '-updated'
-    };
+    delete self.collection.data.participations;
+
+    self.collection.data.event = app.me.selectedEvent;
+    self.collection.data.skip = 0;
+    self.collection.data.limit = 30;
+    self.collection.data.sort = '-updated';
 
     self.collection.fetchPage({
       success: function (collection, response, options) {
@@ -156,13 +156,11 @@ module.exports = PageView.extend({
     log('Fetching Selected Speakers');
     var self = this;
 
-    self.collection.data = {
-      event: app.me.selectedEvent,
-      participations: 'false',
-      skip: 0,
-      limit: 30,
-      sort: '-updated'
-    };
+    self.collection.data.event = app.me.selectedEvent;
+    self.collection.data.participations = 'false';
+    self.collection.data.skip = 0;
+    self.collection.data.limit = 30;
+    self.collection.data.sort = '-updated';
 
     self.collection.fetchPage({
       success: function (collection, response, options) {
@@ -176,7 +174,7 @@ module.exports = PageView.extend({
   },
   showall: function () {
     var self = this;
-    
+
     self.collection.data = {limit: 30, skip: 0, sort: '-updated'};
 
     self.collection.fetchPage({

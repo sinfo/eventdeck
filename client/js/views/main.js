@@ -161,7 +161,9 @@ module.exports = View.extend({
     log('New event selected', app.me.selectedEvent, '(index: '+app.me.selectedEventIndex+')');
 
     app.companies.reset();
-    app.companies.fetch();
+    app.companies.fetchPage();
+    app.speakers.reset();
+    app.speakers.fetchPage();
   },
 
   handleSearchKeydown: function (e){
