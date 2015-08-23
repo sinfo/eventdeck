@@ -32,7 +32,7 @@ module.exports = View.extend({
   },
   handleInitialEmail: function () {
     console.log(config);
-    window.open(config.url + '/api' + threadUrl(this.model.thread) + '/communications/' + this.model.id + '/view', '_blank');
+    window.open(config.apiUrl + '/api' + threadUrl(this.model.thread) + '/communications/' + this.model.id + '/view', '_blank');
   },
   handleRemoveClick: function () {
     if (window.confirm('Do you really want to delete this communication?')) {
