@@ -91,7 +91,10 @@ module.exports = PageView.extend({
               return app.navigate('/members/'+model.id);
             }
 
-            aux= {};
+            if(!aux){
+              aux= {};
+            }
+
             if(mails){
               aux.mails = mails;
             }
