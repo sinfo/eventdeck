@@ -1,7 +1,6 @@
 /*global app*/
 var $ = require('jquery');
 var threadUrl = require('client/js/helpers/threadUrl');
-var config = require('config');
 var log = require('bows')('communications');
 var View = require('ampersand-view');
 var templates = require('client/js/templates');
@@ -31,8 +30,8 @@ module.exports = View.extend({
     'click [data-hook~=action-review]': 'handleReviewClick',
   },
   handleInitialEmail: function () {
-    console.log(config);
-    window.open(config.apiUrl + '/api' + threadUrl(this.model.thread) + '/communications/' + this.model.id + '/view', '_blank');
+    console.log(app.config);
+    window.open(app.config.apiUrl + '/api' + threadUrl(this.model.thread) + '/communications/' + this.model.id + '/view', '_blank');
   },
   handleRemoveClick: function () {
     if (window.confirm('Do you really want to delete this communication?')) {

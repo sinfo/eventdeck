@@ -30,6 +30,7 @@ module.exports = {
 
     log('Blasting off!');
 
+    this.config = config;
     this.me = new Me();
     this.events = new Events();
     this.members = new Members();
