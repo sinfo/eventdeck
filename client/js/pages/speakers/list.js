@@ -18,7 +18,7 @@ var filterTypes = {
   showall: ['noMember', 'me', 'thisEvent', 'noParticipation'],
   thisEvent: ['noParticipation', 'showall'],
   noParticipation: ['thisEvent', 'showall']
-}
+};
 
 function filtering(collection,filter){
   return collection.filter(function(speaker){
