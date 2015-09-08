@@ -55,7 +55,6 @@ function verifyCode(memberId, loginCode, cb) {
       log.warn({member: memberId, loginCode: loginCode, loginCodes: member.loginCodes}, '[auth] member tried to login with an invalid code');
       return cb(Boom.unauthorized());
     }
-
     cb(null, member);
   });
 }
