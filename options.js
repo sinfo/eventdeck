@@ -2,7 +2,8 @@ var options = {};
 
 options.statuses = {
   speaker: [
-    { name: 'Selected', id: 'selected', color: '#5319e7', default: true},
+    { name: 'Suggestion', id: 'suggestion', color: '#ff8f1f', default: true},
+    { name: 'Selected', id: 'selected', color: '#5319e7'},
     { name: 'Approved', id: 'approved', color: '#0052cc'},
     { name: 'Contacted', id: 'contacted', color: '#fbca04'},
     { name: 'In Conversations', id: 'in-conversations', color: '#207de5'},
@@ -12,7 +13,8 @@ options.statuses = {
     { name: 'Announced', id: 'announced', color: '#009800'},
   ],
   company: [
-    { name: 'Selected', id: 'selected', color: '#5319e7', default: true},
+    { name: 'Suggestion', id: 'suggestion', color: '#ff8f1f', default: true},
+    { name: 'Selected', id: 'selected', color: '#5319e7'},
     { name: 'Contacted', id: 'contacted', color: '#fbca04'},
     { name: 'In Conversations', id: 'in-conversations', color: '#207de5'},
     { name: 'In Negotiations', id: 'in-negotiations', color: '#006b75'},
