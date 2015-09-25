@@ -23,7 +23,7 @@ server.method('member.search', search, {});
 
 
 function create(member, cb) {
-  member.id = slug(member.id || member.name).toLowerCase();
+  member.id = slug(member.id || member.name, '.').toLowerCase();
 
   Member.create(member, function(err, _member) {
     if (err) {
@@ -41,6 +41,7 @@ function create(member, cb) {
 }
 
 function update(id, member, cb) {
+
   Member.findOneAndUpdate({id: id}, member, function(err, _member) {
     if (err && err != {}) {
       log.error({ err: err, member: id}, 'error updating member');

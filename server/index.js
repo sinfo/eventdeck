@@ -5,6 +5,7 @@ var Hapi = require('hapi');
 var IO = {server: require('socket.io'), client: require('socket.io-client')};
 var log = require('server/helpers/logger');
 var config = require('config');
+var path = require('path');
 var cookieConfig = config.cookie;
 var moonbootsConfig = require('moonbootsConfig');
 
@@ -33,6 +34,14 @@ server.ext('onPreResponse', function(request, reply) {
   }
 
   return reply();
+});
+
+// Set view template engine
+server.views({
+    engines: {
+        hbs: require('handlebars')
+    },
+    path: path.join(__dirname, 'templates')
 });
 
 server.pack.register([

@@ -6,4 +6,6 @@ var schema = new mongoose.Schema({
   color: String
 });
 
+schema.index({id: 1});
+
 var Tag = module.exports = mongoose.model('Tag', schema);

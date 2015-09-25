@@ -62,8 +62,9 @@ module.exports = PageView.extend({
   initialize: function (spec) {
     var self = this;
 
-    app.companies.getOrFetch(spec.id, {all: true}, function (err, model) {
+    app.companies.getOrFetch(spec.id, function (err, model) {
       if (err) {
+        log(err);
         log.error('couldnt find a company with id: ' + spec.id);
       }
       self.model = model;

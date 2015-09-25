@@ -21,4 +21,9 @@ schema.virtual('thread').get(function () {
   return 'speaker-'+this.id;
 });
 
+schema.index({id: 1, updated: -1});
+schema.index({'participations.event': 1, updated: -1});
+schema.index({'participations.member': 1});
+schema.index({'participations.status': 1});
+
 var Speaker = module.exports = mongoose.model('Speaker', schema);

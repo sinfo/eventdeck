@@ -9,4 +9,8 @@ var schema = new mongoose.Schema({
   posted: { type: Date }
 });
 
+schema.index({posted: -1});
+schema.index({thread: 1});
+schema.index({member: 1});
+
 var Notification = module.exports = mongoose.model('Notification', schema);

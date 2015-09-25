@@ -12,4 +12,8 @@ var schema = new mongoose.Schema({
   updated: { type: Date, default: Date.now }
 });
 
+schema.index({thread: 1, posted: -1});
+schema.index({event: 1, posted: -1});
+schema.index({member: 1});
+
 var Communication = module.exports = mongoose.model('Communication', schema);

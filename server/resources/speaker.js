@@ -106,6 +106,7 @@ function getByEvent(eventId,query, cb) {
 
 function list(query,cb) {
   cb = cb ||query;
+  var eventsFilter = {};
   var filter = {};
   var fields = query.fields;
   var options = {
@@ -113,7 +114,22 @@ function list(query,cb) {
     limit: query.limit,
     sort: parser(query.sort)
   };
-  Speaker.find(filter,fields,options, function(err, speaker) {
+
+  if (typeof query.member !== 'undefined') {
+    if (query.member === false) {
+      query.member = { $exists: false };
+    }
+    eventsFilter.member = query.member;
+  }
+  if (query.event) {
+    eventsFilter.event = query.event;
+  }
+
+  if (eventsFilter.event || eventsFilter.member) {
+    filter.participations = query.participations ? {$elemMatch : eventsFilter} : {$not: {$elemMatch : eventsFilter} };
+  }
+
+  Speaker.find(filter, fields, options, function(err, speaker) {
     if (err) {
       log.error({ err: err}, 'error getting all speaker');
       return cb(Boom.internal());

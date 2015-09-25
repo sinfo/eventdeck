@@ -25,4 +25,7 @@ var schema = new mongoose.Schema({
   surveyNeeded: Boolean
 });
 
+schema.index({id: 1});
+schema.index({date: -1});
+
 var Session = module.exports = mongoose.model('Session', schema);

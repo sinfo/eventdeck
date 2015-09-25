@@ -30,4 +30,7 @@ schema.virtual('thread').get(function () {
   return 'topic-'+this.id;
 });
 
+schema.index({posted: -1});
+schema.index({author: 1});
+
 var Topic = module.exports = mongoose.model('Topic', schema);

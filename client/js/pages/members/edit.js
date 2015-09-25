@@ -5,13 +5,12 @@ var templates = require('client/js/templates');
 var populate = require('client/js/helpers/populate');
 var MemberForm = require('client/js/forms/member');
 
-
 module.exports = PageView.extend({
   pageTitle: 'Edit person',
   template: templates.pages.members.edit,
   initialize: function (spec) {
     var self = this;
-    app.members.getOrFetch(spec.id, {all: true}, function (err, model) {
+    app.members.getOrFetch(spec.id, function (err, model) {
       if (err) {
         return alert('couldnt find a model with id: ' + spec.id);
       }
@@ -28,19 +27,83 @@ module.exports = PageView.extend({
       prepareView: function (el) {
         var self = this;
         var model = this.model;
+
         return new MemberForm({
           el: el,
           model: this.model,
           submitCallback: function (data) {
+
             data.roles = data.roles.map(function(r) {
               return {
                 id: r
               };
             }) || [],
 
-            populate(data, this.model, ['facebook.id', 'facebook.username', 'mails.main', 'mails.institutional', 'mails.dropbox', 'mails.google', 'mails.microsoft']);
-            data = self.model.changedAttributes(data);
-            model.save(data, {
+            populate(data, ['facebook.id', 'facebook.username', 'mails.main', 'mails.institutional', 'mails.dropbox', 'mails.google', 'mails.microsoft']);
+
+            if(!model.mails.main){
+              model.mails.main = '';
+            }
+            if(!model.mails.dropbox){
+              model.mails.dropbox = '';
+            }
+            if(!model.mails.institutional){
+              model.mails.institutional = '';
+            }
+            if(!model.mails.google){
+              model.mails.google = '';
+            }
+            if(!model.mails.microsoft){
+              model.mails.microsoft = '';
+            }
+            if(!model.facebook.username){
+              model.facebook.username = '';
+            }
+
+            if(data.img === ''){
+              delete data.img;
+            }
+            if(data.skype === ''){
+              delete data.skype;
+            }
+
+            var mails = {
+              main: data['mails.main'],
+              institutional: data['mails.institutional'],
+              dropbox: data['mails.dropbox'],
+              google: data['mails.google'],
+              microsoft: data['mails.microsoft']
+            };
+
+            var facebook = {
+              username: data['facebook.username']
+            };
+
+            data.mails = mails;
+            data.facebook = facebook;
+
+            mails = model.mails.changedAttributes(data.mails);
+            facebook = model.facebook.changedAttributes(data.facebook);
+
+            var aux = self.model.changedAttributes(data);
+
+            if(!aux && !mails && !facebook) {
+              return app.navigate('/members/'+model.id);
+            }
+
+            if(!aux){
+              aux= {};
+            }
+
+            if(mails){
+              aux.mails = mails;
+            }
+
+            if(facebook){
+              aux.facebook = facebook;
+            }
+
+            model.save(aux, {
               patch: true,
               wait: false,
               success: function (model, response, options) {

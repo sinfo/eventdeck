@@ -12,14 +12,15 @@ module.exports =  View.extend({
   template: templates.cards.participation,
   initialize: function (spec) {
     var self = this;
-    app.members.fetch();
+
+    log('initing');
     if(self.model.event && !self.model.eventDetails){
       app.events.getOrFetch(self.model.event, {all: true}, function (err, model) {
         if (err) {
           log.error('couldnt find a event with id: ' + self.model.event);
         }
         self.model.eventDetails = model;
-        self.render();
+        // self.render();
         // log('Got event', model.name);
       });
     }
@@ -41,9 +42,9 @@ module.exports =  View.extend({
   },
   handleRemoveClick: function () {
     var self = this;
-    self.parent.parent.parent.model.participations.remove(self.model);
+    self.parent.parent.model.participations.remove(self.model);
 
-    self.parent.parent.parent.model.save({
+    self.parent.parent.model.save({
       wait: false,
       success: function () {
         log('participation removed');
@@ -55,13 +56,13 @@ module.exports =  View.extend({
   handleEditClick: function () {
     var view = new EditParticipation({ model: this.model, parent: this });
     this.switcher.set(view);
-    this.model.editing = true;
+    // this.model.editing = true;
     return false;
   },
   handleViewClick: function () {
     var view = new ViewParticipation({ model: this.model, parent: this });
     this.switcher.set(view);
-    this.model.editing = false;
+    // this.model.editing = false;
     return false;
   }
 });
@@ -153,6 +154,9 @@ var ViewParticipation = View.extend({
 
 var EditParticipation = View.extend({
   template: templates.partials.participations.edit,
+  render: function () {
+    this.renderWithTemplate();
+  },
   subviews: {
     form: {
       container: '[data-hook~=new-participation]',
@@ -160,10 +164,10 @@ var EditParticipation = View.extend({
       prepareView: function (el) {
         var self = this;
         var model = this.model;
-        model.threadKind = self.parent.parent.parent.parent.model.threadKind;
+        model.set({threadKind: self.parent.parent.parent.model.threadKind}, {silent: true});
         return new ParticipationForm({
           el: el,
-          model: this.model,
+          model: model,
           parent: self,
           submitCallback: function (data) {
             var changedAttributes = _.compactObject(self.model.changedAttributes(data));
@@ -198,7 +202,7 @@ var EditParticipation = View.extend({
 
             self.model.set(changedAttributes);
 
-            var parentModel = self.parent.parent.parent.parent.model;
+            var parentModel = self.parent.parent.parent.model;
 
             parentModel.save({participations: parentModel.participations.serialize() }, {
               patch: true,

@@ -1,6 +1,6 @@
 var Joi = require('joi');
 var log = require('server/helpers/logger');
-
+var render = require('server/views/member');
 
 var handlers = module.exports;
 
@@ -37,7 +37,7 @@ exports.loginWithCode = {
   ],
   handler: function (request, reply) {
     log.info({member: request.pre.member.id}, '[auth] logged in using code');
-    request.auth.session.set(request.pre.member);
+    request.auth.session.set(render(request.pre.member));
     reply({success: 'logged in'});
   },
   description: 'Lets a member log in using a code'
@@ -58,7 +58,7 @@ exports.loginWithFacebook = {
   ],
   handler: function (request, reply) {
     log.info({member: request.pre.member.id}, '[auth] logged in using facebook');
-    request.auth.session.set(request.pre.member);
+    request.auth.session.set(render(request.pre.member));
     reply({success: 'logged in'});
   },
   description: 'Lets a member log in using a code'
@@ -74,5 +74,3 @@ exports.logout = {
   },
   description: 'Lets a member log out'
 };
-
-

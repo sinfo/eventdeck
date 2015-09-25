@@ -71,13 +71,13 @@ module.exports = PageView.extend({
     ], function () {
       self.render();
     });*/
+    if (!this.collection.length) {
+      this.fetchCollection();
+    }
   },
   render: function () {
     this.renderWithTemplate();
     this.renderCollection(this.collection, NotificationView, this.queryByHook('notifications-list'));
-    if (!this.collection.length) {
-      this.fetchCollection({reset: true});
-    }
   },
   fetchCollection: function () {
     log('Fetching notifications');

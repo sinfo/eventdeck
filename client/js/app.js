@@ -1,5 +1,6 @@
 /*global app*/
 var _ = require('underscore');
+var async = require('async');
 var log = require('bows')('eventdeck');
 var config = require('client/js/helpers/clientconfig');
 var $ = require('jquery');
@@ -29,6 +30,7 @@ module.exports = {
 
     log('Blasting off!');
 
+    this.config = config;
     this.me = new Me();
     this.events = new Events();
     this.members = new Members();
@@ -37,7 +39,6 @@ module.exports = {
     this.speakers = new Speakers();
     this.tags = new Tags();
     this.topics = new Topics();
-    this.fetchInitialData();
 
     this.socket = new IO(null, {initListeners: true});
     this.notifications = {};
@@ -46,54 +47,85 @@ module.exports = {
     this.notifications.public = new PublicNotifications(null, {initListeners: true});
     this.notifications.private = new PrivateNotifications(null, {initListeners: true});
 
+    //assign error callbacks
+    this.notifications.public.on('error', this.notifications.public.error);
+    this.notifications.private.on('error', this.notifications.public.error);
+
     // init our URL handlers and the history tracker
-    this.router = new Router();
+    self.router = new Router();
 
-    // wait for document ready to render our main view
-    // this ensures the document has a body, etc.
-    domReady(function () {
-      // init our main view
-      var mainView = self.view = new MainView({
-        el: document.body,
-        model: self.me,
-        collection: self.notifications.private
+    this.fetchInitialData(function(){
+
+      // wait for document ready to render our main view
+      // this ensures the document has a body, etc.
+      domReady(function () {
+
+        // init our main view
+        var mainView = self.view = new MainView({
+          el: document.body,
+          model: self.me,
+          collection: self.notifications.private
+        });
+
+        // ...and render it
+        mainView.render();
+
+        // we have what we need, we can now start our router and show the appropriate page
+        self.router.history.start({pushState: true, root: '/'});
+
+        //401 navigate to login
+        if(!self.me.authenticated){
+          return self.router.history.navigate('/login', {trigger: true});
+        }
       });
-
-      // ...and render it
-      mainView.render();
-
-      // we have what we need, we can now start our router and show the appropriate page
-      self.router.history.start({pushState: true, root: '/'});
     });
   },
 
-  fetchInitialData: function () {
+  fetchInitialData: function (cb) {
     var self = this;
 
-    self.me.fetch({
-      success: function(model, response, options) {
-        log('Hello ' + model.name + '!');
-        model.authenticated = true;
+    async.parallel([
+      function fetchMe (cbAsync){
+        self.me.fetch({
+          success: function(model, response, options) {
+            log('Hello ' + model.name + '!');
+            model.authenticated = true;
 
-        self.socket.init();
+            self.socket.init();
+            cbAsync();
+          },
+          error: function(model, response, options) {
+            log('Please log in first!');
+            model.authenticated = false;
+            cbAsync();
+          }
+        });
       },
-      error: function(model, response, options) {
-        log('Please log in first!');
-        model.authenticated = false;
-
-        self.router.history.navigate('/login', {trigger: true});
+      function fetchEvents (cbAsync){
+        self.events.fetch({
+          success: function(collection, response, options) {
+            app.me.selectedEvent = collection.toJSON()[0].id;
+            log('Got '+collection.length+' events, '+app.me.selectedEvent+' is the default one. ', collection.toJSON());
+            cbAsync();
+          },
+          error: function(collection, response, options) {
+            log('Error fetching events', response);
+            cbAsync();
+          }
+        });
+      },
+      function fetchTags (cbAsync){
+        app.tags.fetch({
+          success: function(collection, response, options) {
+            cbAsync();
+          },
+          error: function(collection, response, options) {
+            log('Error fetching tags', response);
+            cbAsync();
+          }
+        });
       }
-    });
-
-    self.events.fetch({
-      success: function(collection, response, options) {
-        app.me.selectedEvent = collection.toJSON()[0].id;
-        log('Got '+collection.length+' events, '+app.me.selectedEvent+' is the default one. ', collection.toJSON());
-      }
-    });
-
-
-    app.tags.fetch();
+    ], cb);
 
   },
 
@@ -114,17 +146,17 @@ module.exports = {
 
   login: function (id, code) {
     $.get('/api/auth/login/' + id + '/' + code, function () {
-      app.fetchInitialData();
-      app.me.authenticated = true;
-      app.navigate('/');
+      app.fetchInitialData(function(){
+        app.navigate('/');
+      });
     });
   },
 
   loginWithFacebook: function (id, token) {
     $.get('/api/auth/facebook/' + id + '/' + token, function () {
-      app.fetchInitialData();
-      app.me.authenticated = true;
-      app.navigate('/');
+      app.fetchInitialData(function(){
+        app.navigate('/');
+      });
     });
   },
 

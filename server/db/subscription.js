@@ -5,4 +5,7 @@ var schema = new mongoose.Schema({
   thread: String
 });
 
+schema.index({member: 1});
+schema.index({thread: 1});
+
 var Subscription = module.exports = mongoose.model('Subscription', schema);

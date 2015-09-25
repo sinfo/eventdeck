@@ -11,7 +11,7 @@ module.exports = PageView.extend({
   template: templates.pages.speakers.edit,
   initialize: function (spec) {
     var self = this;
-    app.speakers.getOrFetch(spec.id, {all: true}, function (err, model) {
+    app.speakers.getOrFetch(spec.id, function (err, model) {
       if (err) {
         return alert('couldnt find a model with id: ' + spec.id);
       }

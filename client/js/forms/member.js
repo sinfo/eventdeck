@@ -10,14 +10,6 @@ module.exports = FormView.extend({
   fields: function () {
     return [
       new ExtendedInput({
-        label: 'Id',
-        name: 'id',
-        value: this.model && this.model.id || '',
-        required: false,
-        placeholder: 'Id',
-        parent: this
-      }),
-      new ExtendedInput({
         label: 'Name',
         name: 'name',
         value: this.model && this.model.name || '',

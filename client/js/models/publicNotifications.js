@@ -36,6 +36,10 @@ module.exports = function(socket){
 				active: false
 			}
 		},
-		model: model
+		model: model,
+		
+  	error: function(err, model, options){
+	    log('Error on notifications', err);
+	  }
 	});
 };

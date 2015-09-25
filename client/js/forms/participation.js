@@ -13,70 +13,8 @@ module.exports = FormView.extend({
   initialize: function() {
     var self = this;
 
-    function addPollFields() {
-      self.addField(new ExtendedInput({
-        label: 'Kind',
-        name: 'kind',
-        value: self.model && self.model.kind || '',
-        required: false,
-        placeholder: 'Kind',
-        parent: self
-      }));
-      self.addField(new SelectView({
-        template: templates.includes.formSelect(),
-        unselectedText: 'please choose one',
-        label: 'Advertisement Level',
-        name: 'advertisementLvl',
-        parent: self,
-        options: options.advertisementLvl.map(function(t) { return [t.id, t.name]; }),
-        value: self.model && self.model.advertisementLvl,
-        yieldModel: false
-      }));
-      self.addField(new ExtendedInput({
-        label: 'Price',
-        name: 'payment.price',
-        value: self.model && self.model.payment && self.model.payment.price || '',
-        required: false,
-        placeholder: 'Price',
-        parent: self
-      }));
-      self.addField(new ExtendedInput({
-        label: 'Invoice Number',
-        name: 'payment.invoice',
-        value: self.model && self.model.payment && self.model.payment.invoice || '',
-        required: false,
-        placeholder: 'Invoice Number',
-        parent: self
-      }));
-      self.addField(new DateView({
-        label: 'Invoice Date',
-        value: self.model && self.model.payment && self.model.payment.date || '',
-        name: 'payment.date'
-      }));
-      self.addField(new SelectView({
-        template: templates.includes.formSelect(),
-        unselectedText: 'please choose one',
-        name: 'payment.status',
-        label: 'Invoice Status',
-        parent: self,
-        options: options.statuses.payment.map(function(t) { return [t.id, t.name]; }),
-        value: self.model && self.model.payment && self.model.payment.status || '',
-        yieldModel: false
-      }));
-      self.addField(new SelectView({
-        template: templates.includes.formSelect(),
-        unselectedText: 'please choose one',
-        name: 'payment.via',
-        label: 'Via',
-        parent: self,
-        options: options.vias.payment.map(function(t) { return [t.id, t.name]; }),
-        value: self.model && self.model.payment && self.model.payment.via || '',
-        yieldModel: false
-      }));
-    }
-
     if(this.model && this.model.threadKind == 'company') {
-      addPollFields();
+      _addPollFields(self);
     }
   },
   fields: function () {
@@ -118,3 +56,65 @@ module.exports = FormView.extend({
     ];
   }
 });
+
+function _addPollFields (view) {
+  view.addField(new ExtendedInput({
+    label: 'Kind',
+    name: 'kind',
+    value: view.model && view.model.kind || '',
+    required: false,
+    placeholder: 'Kind',
+    parent: view
+  }));
+  view.addField(new SelectView({
+    template: templates.includes.formSelect(),
+    unselectedText: 'please choose one',
+    label: 'Advertisement Level',
+    name: 'advertisementLvl',
+    parent: view,
+    options: options.advertisementLvl.map(function(t) { return [t.id, t.name]; }),
+    value: view.model && view.model.advertisementLvl,
+    yieldModel: false
+  }));
+  view.addField(new ExtendedInput({
+    label: 'Price',
+    name: 'payment.price',
+    value: view.model && view.model.payment && view.model.payment.price || '',
+    required: false,
+    placeholder: 'Price',
+    parent: view
+  }));
+  view.addField(new ExtendedInput({
+    label: 'Invoice Number',
+    name: 'payment.invoice',
+    value: view.model && view.model.payment && view.model.payment.invoice || '',
+    required: false,
+    placeholder: 'Invoice Number',
+    parent: view
+  }));
+  view.addField(new DateView({
+    label: 'Invoice Date',
+    value: view.model && view.model.payment && view.model.payment.date || '',
+    name: 'payment.date'
+  }));
+  view.addField(new SelectView({
+    template: templates.includes.formSelect(),
+    unselectedText: 'please choose one',
+    name: 'payment.status',
+    label: 'Invoice Status',
+    parent: view,
+    options: options.statuses.payment.map(function(t) { return [t.id, t.name]; }),
+    value: view.model && view.model.payment && view.model.payment.status || '',
+    yieldModel: false
+  }));
+  view.addField(new SelectView({
+    template: templates.includes.formSelect(),
+    unselectedText: 'please choose one',
+    name: 'payment.via',
+    label: 'Via',
+    parent: view,
+    options: options.vias.payment.map(function(t) { return [t.id, t.name]; }),
+    value: view.model && view.model.payment && view.model.payment.via || '',
+    yieldModel: false
+  }));
+}
