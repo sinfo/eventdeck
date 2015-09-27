@@ -1,4 +1,8 @@
-div
+.communication-area
+  h4 New Comment
+  form.ink-form(data-hook='new-comment')
+    fieldset(data-hook='field-container')
+    button.ink-button.small(data-hook='reset', type='submit') Add new comment
+
   h4 Comments
   div(data-hook='comments-list')
-  .ink-button(data-hook='add') Add new comment
