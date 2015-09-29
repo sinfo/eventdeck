@@ -37,7 +37,7 @@ module.exports = FormView.extend({
         name: 'member',
         label: 'Member',
         parent: this,
-        options: app.members,
+        options: this.model.membersList,
         value: this.model && this.model.member || '',
         idAttribute: 'id',
         textAttribute: 'name',

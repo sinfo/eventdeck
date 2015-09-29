@@ -7,13 +7,20 @@ var ParticipationForm = require('client/js/forms/participation');
 var MemberBadge = require('client/js/views/memberBadge');
 var populate = require('client/js/helpers/populate');
 var _ = require('client/js/helpers/underscore');
+var Collection = require('ampersand-collection');
 
 module.exports =  View.extend({
   template: templates.cards.participation,
   initialize: function (spec) {
     var self = this;
-
     log('initing');
+
+    self.model.membersList = new Collection();
+    $.get('/api/members?fields=id,name', function (data) {
+      self.model.membersList = new Collection(data);
+      self.render();
+    });
+
     if(self.model.event && !self.model.eventDetails){
       app.events.getOrFetch(self.model.event, {all: true}, function (err, model) {
         if (err) {
