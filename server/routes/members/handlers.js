@@ -14,7 +14,10 @@ exports.create = {
       id: Joi.string().description('id of the member'),
       name: Joi.string().required().description('name of the member'),
       img: Joi.string().description('image of the member'),
-      roles: Joi.array().description('roles of the member'),
+      participations: Joi.array().includes(Joi.object().keys({
+        role: Joi.string().description('the user role id'),
+        event: Joi.string().description('the event id')
+      })).description('participations of the member'),
       facebook: {
         id: Joi.string().description('facebook id of the member'),
         username: Joi.string().description('facebook username of the member'),
@@ -53,7 +56,10 @@ exports.update = {
       id: Joi.string().description('id of the member'),
       name: Joi.string().description('name of the member'),
       img: Joi.string().description('image of the member'),
-      roles: Joi.array().description('roles of the member'),
+      participations: Joi.array().includes(Joi.object().keys({
+        role: Joi.string().description('the user role id'),
+        event: Joi.string().description('the event id')
+      })).description('participations of the member'),
       facebook: {
         id: Joi.string().description('facebook id of the member'),
         username: Joi.string().description('facebook username of the member'),
@@ -157,52 +163,6 @@ exports.getMe = {
   description: 'Gets the connected user'
 };
 
-
-exports.getByRole = {
-  auth: 'session',
-  tags: ['api','member'],
-  validate: {
-    query: {
-      fields: Joi.string().default('').description('Fields we want to retrieve'),
-      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
-      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
-      sort: Joi.string().description('How to sort the array'),
-    },
-    params: {
-      id: Joi.string().required().description('id of the role'),
-    }
-  },
-  pre: [
-    { method: 'member.getByRole(params.id, query)', assign: 'members' }
-  ],
-  handler: function (request, reply) {
-    reply(render(request.pre.members));
-  },
-  description: 'Gets members of a given role'
-};
-
-
-exports.getTeamLeaders = {
-  auth: 'session',
-  tags: ['api','member'],
-  validate: {
-    query: {
-      fields: Joi.string().default('').description('Fields we want to retrieve'),
-      skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
-      limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
-      sort: Joi.string().description('How to sort the array'),
-    }
-  },
-  pre: [
-    { method: 'member.getTeamLeaders(query)', assign: 'members' }
-  ],
-  handler: function (request, reply) {
-    reply(render(request.pre.members));
-  },
-  description: 'Gets members who are team leaders'
-};
-
-
 exports.getSubscribers = {
   auth: 'session',
   tags: ['api','member'],
@@ -236,6 +196,9 @@ exports.list = {
       skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
       limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
       sort: Joi.string().description('How to sort the array'),
+      event: Joi.string().description('Select members assigned to a specific event'),
+      role: Joi.string().description('Select members assigned to a specific role'),
+      participations: Joi.boolean().default(true).description('Based on role & event selects to query for those in or out of the group')
     }
   },
   pre: [

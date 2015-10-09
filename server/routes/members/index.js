@@ -46,18 +46,6 @@ server.route({
 
 server.route({
   method: 'GET',
-  path: '/api/roles/{id}/members',
-  config: handlers.getByRole
-});
-
-server.route({
-  method: 'GET',
-  path: '/api/roles/teamleaders',
-  config: handlers.getTeamLeaders
-});
-
-server.route({
-  method: 'GET',
   path: '/api/companies/{id}/subscribers',
   config: handlers.getSubscribers
 });
