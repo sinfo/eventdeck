@@ -7,12 +7,24 @@ var ParticipationForm = require('client/js/forms/participation');
 var MemberBadge = require('client/js/views/memberBadge');
 var populate = require('client/js/helpers/populate');
 var _ = require('client/js/helpers/underscore');
+var AmpersandRestCollection = require('ampersand-rest-collection');
+
+
+var OptionsCollection = AmpersandRestCollection.extend({
+    url: '/api/members?fields=id,name',
+});
 
 module.exports =  View.extend({
   template: templates.cards.participation,
   initialize: function (spec) {
     var self = this;
     log('initing');
+
+    self.model.membersList = new OptionsCollection();
+    self.model.membersList.fetch(function() {
+      self.render();
+    });
+
     if(self.model.event && !self.model.eventDetails){
       app.events.getOrFetch(self.model.event, {all: true}, function (err, model) {
         if (err) {
