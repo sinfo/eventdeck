@@ -1,6 +1,7 @@
 /*global app, alert*/
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
+var MemberParticipationsView = require('client/js/views/memberParticipations');
 
 module.exports = PageView.extend({
   pageTitle: 'View member',
@@ -21,23 +22,23 @@ module.exports = PageView.extend({
     },
     'model.mails.main': [
       { type: 'toggle', hook: 'mails-main' },
-      { selector: '[data-hook~=mails-main] span' },
+      { selector: '[data-hook~=mails-main] span' }
     ],
     'model.mails.institutional': [
       { type: 'toggle', hook: 'mails-institutional' },
-      { selector: '[data-hook~=mails-institutional] span' },
+      { selector: '[data-hook~=mails-institutional] span' }
     ],
     'model.mails.google': [
       { type: 'toggle', hook: 'mails-google' },
-      { selector: '[data-hook~=mails-google] span' },
+      { selector: '[data-hook~=mails-google] span' }
     ],
     'model.mails.microsoft': [
       { type: 'toggle', hook: 'mails-microsoft' },
-      { selector: '[data-hook~=mails-microsoft] span' },
+      { selector: '[data-hook~=mails-microsoft] span' }
     ],
     'model.mails.dropbox': [
       { type: 'toggle', hook: 'mails-dropbox' },
-      { selector: '[data-hook~=mails-dropbox] span' },
+      { selector: '[data-hook~=mails-dropbox] span' }
     ],
     'model.phones': {
       hook: 'phones'
@@ -45,7 +46,7 @@ module.exports = PageView.extend({
     'model.roleIds': {
       hook: 'roleIds'
     },
-    'model.fbURL':{
+    'model.fbURL': {
       type: 'attribute',
       hook: 'fbURL',
       name: 'href'
@@ -62,6 +63,18 @@ module.exports = PageView.extend({
       }
       self.model = model;
     });
+  },
+  subviews: {
+    participations: {
+      container: '[data-hook=member-participations]',
+      waitFor: 'model.participations',
+      prepareView: function (el) {
+        return new MemberParticipationsView({
+          el: el,
+          collection: this.model.participations
+        });
+      }
+    }
   },
 
   handleDeleteClick: function () {
