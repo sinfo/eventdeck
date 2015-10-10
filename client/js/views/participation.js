@@ -20,20 +20,10 @@ module.exports =  View.extend({
     var self = this;
     log('initing');
 
-    /*
-
- new Collection();
-    $.get('/api/members?fields=id,name', function (data) {
-      self.model.membersList = new Collection(data);
-      self.render();
-    });
-
-    */
-
-    self.model.membersList = new OptionsCollection()
+    self.model.membersList = new OptionsCollection();
     self.model.membersList.fetch(function() {
       self.render();
-    })
+    });
 
     if(self.model.event && !self.model.eventDetails){
       app.events.getOrFetch(self.model.event, {all: true}, function (err, model) {
