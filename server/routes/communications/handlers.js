@@ -2,7 +2,6 @@ var Joi = require('joi');
 var log = require('server/helpers/logger');
 var render = require('server/views/communication');
 
-
 var handlers = module.exports;
 
 exports.create = {
@@ -96,10 +95,12 @@ exports.getView = {
   },
   pre: [
     [{ method: 'speaker.get(params.threadId,query)', assign: 'speaker' }],
-    [{ method: 'communication.get(params.id,query)', assign: 'communication' }]
-  ],
+    [{ method: 'communication.get(params.id,query)', assign: 'communication' }],
+    [{ method: 'member.get(auth.credentials.id,query)', assign: 'member'}]
+     ],
   handler: function (request, reply) {
-    reply.view('speakers23',{speaker: request.pre.speaker.name, paragraph: request.pre.communication.text});
+    //console.log(request.auth);
+     reply.view('speakers23',{speaker: request.pre.speaker.name, paragraph: request.pre.communication.text,member: request.pre.member.name});
   },
   description: 'Gets a communication with an initial template view'
 };
