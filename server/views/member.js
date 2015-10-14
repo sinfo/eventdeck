@@ -16,6 +16,8 @@ function renderObject(model) {
       id: model.facebook.id,
       username: model.facebook.username,
     },
+    twitter: model.twitter,
+    github: model.github,
     skype: model.skype,
     phones: model.phones,
     mails: model.mails && {

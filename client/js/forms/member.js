@@ -34,6 +34,22 @@ module.exports = FormView.extend({
         parent: this
       }),
       new ExtendedInput({
+        label: 'Twitter',
+        name: 'twitter',
+        value: this.model && this.model.twitter || '',
+        required: false,
+        placeholder: 'Twitter',
+        parent: this
+      }),
+      new ExtendedInput({
+        label: 'GitHub',
+        name: 'github',
+        value: this.model && this.model.github || '',
+        required: false,
+        placeholder: 'GitHub',
+        parent: this
+      }),
+      new ExtendedInput({
         label: 'Facebook Username',
         name: 'facebook.username',
         value: this.model && this.model.facebook && this.model.facebook.username || '',

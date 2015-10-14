@@ -60,6 +60,12 @@ module.exports = PageView.extend({
             if(data.skype === ''){
               delete data.skype;
             }
+            if(data.twitter === ''){
+              delete data.twitter;
+            }
+            if(data.github === ''){
+              delete data.github;
+            }
 
             var mails = {
               main: data['mails.main'],

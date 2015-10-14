@@ -33,6 +33,8 @@ module.exports = AmpModel.extend({
     name: ['string'],
     img: ['string'],
     skype: ['string'],
+    twitter: ['string'],
+    github: ['string'],
     phones: ['array']
   },
   children: {
@@ -82,7 +84,18 @@ module.exports = AmpModel.extend({
         return 'http://www.facebook.com/'+this.facebook.username;
       }
     },
-
+    twitterURL: {
+      deps: ['twitter'],
+      fn: function () {
+        return 'https://www.twitter.com/'+this.twitter;
+      }
+    },
+    githubURL: {
+      deps: ['github'],
+      fn: function () {
+        return 'https://www.github.com/'+this.github;
+      }
+    }
   },
   parse: function (attrs) {
     return attrs;
