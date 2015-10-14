@@ -8,7 +8,6 @@ var schema = new mongoose.Schema({
     event: String,
     role: String
   }],
-  role: String,
   facebook: {
     id: {type: String, unique: true, sparse: true},
     username: String
