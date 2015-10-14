@@ -43,9 +43,6 @@ module.exports = PageView.extend({
     'model.phones': {
       hook: 'phones'
     },
-    'model.roleIds': {
-      hook: 'roleIds'
-    },
     'model.fbURL': {
       type: 'attribute',
       hook: 'fbURL',

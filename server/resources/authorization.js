@@ -7,8 +7,8 @@ server.method('authorization.isAdmin', isAdmin, {});
 
 
 function isAdmin(member, cb) {
-  var isAuthorized = member.roles.filter(function (role) {
-    return role.id === 'development-team' || role.id === 'coordination';
+  var isAuthorized = member.participations.filter(function (participation) {
+    return participation.role === 'coordination';
   }).length > 0;
 
   if(!isAuthorized) {

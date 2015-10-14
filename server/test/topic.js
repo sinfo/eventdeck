@@ -9,10 +9,10 @@ var lab = exports.lab = Lab.script();
 var credentials = {
   id: 'john.doe',
   name: 'John Doe',
-  roles: [{
-    id: 'development-team',
-    isTeamLeader: false
-  }],
+  participations: [{
+    role: 'development-team',
+    event: '1000-sinfo'
+  }]
 };
 
 var topicA = {

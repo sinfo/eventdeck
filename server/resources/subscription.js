@@ -28,11 +28,12 @@ function create(thread, memberId, cb) {
   });
 }
 
+// TODO creating for every coordinator WRONG
 function createForCoordinators(thread, cb) {
   Member.find({
-    roles: {
+    participations: {
       $elemMatch: {
-        id: 'coordination'
+        role: 'coordination'
       }
     }
   }, function (err, coordinators) {
@@ -135,4 +136,3 @@ function getByThread(thread,query, cb) {
     cb(null, subscriptions);
   });
 }
-

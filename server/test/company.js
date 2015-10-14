@@ -9,13 +9,13 @@ var lab = exports.lab = Lab.script();
 var credentials = {
   id: 'john.doe',
   name: 'John Doe',
-  roles: [{
-    id: 'development-team',
-    isTeamLeader: false
-  }],
+  participations: [{
+    role: 'coordination',
+    event: '1000-sinfo'
+  }]
 };
 
-var companyA = {  
+var companyA = {
   id: 'sinfo',
   name: 'SINFO XXII',
 };
@@ -34,7 +34,7 @@ lab.experiment('Company', function() {
       credentials: credentials,
       payload: companyA
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -53,7 +53,7 @@ lab.experiment('Company', function() {
       url: '/api/companies',
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -70,7 +70,7 @@ lab.experiment('Company', function() {
       url: '/api/companies/'+companyA.id,
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -78,7 +78,7 @@ lab.experiment('Company', function() {
       Code.expect(result).to.be.instanceof(Object);
       Code.expect(result.id).to.equal(companyA.id);
       Code.expect(result.name).to.equal(companyA.name);
-      
+
       done();
     });
   });
@@ -90,7 +90,7 @@ lab.experiment('Company', function() {
       credentials: credentials,
       payload: changesToA
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -98,7 +98,7 @@ lab.experiment('Company', function() {
       Code.expect(result).to.be.instanceof(Object);
       Code.expect(result.id).to.equal(companyA.id);
       Code.expect(result.name).to.equal(changesToA.name);
-      
+
       done();
     });
   });
@@ -109,14 +109,14 @@ lab.experiment('Company', function() {
       url: '/api/companies/'+companyA.id,
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
       Code.expect(result.id).to.equal(companyA.id);
-      Code.expect(result.name).to.equal(changesToA.name); 
+      Code.expect(result.name).to.equal(changesToA.name);
       done();
     });
   });

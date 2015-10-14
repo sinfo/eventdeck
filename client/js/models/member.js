@@ -45,10 +45,10 @@ module.exports = AmpModel.extend({
 
   derived: {
     isAdmin: {
-      deps: ['roles'],
+      deps: ['participations'],
       fn: function () {
-        return this.roles.filter(function (role) {
-          return role.id === 'development-team' || role.id === 'coordination';
+        return this.roles.filter(function (participation) {
+          return participation.role === 'coordination';
         }).length > 0;
       }
     },

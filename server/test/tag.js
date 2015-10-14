@@ -9,10 +9,10 @@ var lab = exports.lab = Lab.script();
 var credentials = {
   id: 'john.doe',
   name: 'John Doe',
-  roles: [{
-    id: 'development-team',
-    isTeamLeader: false
-  }],
+  participations: [{
+    role: 'development-team',
+    event: '1000-sinfo'
+  }]
 };
 
 var tagA = {
@@ -35,7 +35,7 @@ lab.experiment('Tag', function() {
       credentials: credentials,
       payload: tagA
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -54,7 +54,7 @@ lab.experiment('Tag', function() {
       url: '/api/tags',
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -62,7 +62,7 @@ lab.experiment('Tag', function() {
       Code.expect(result).to.be.instanceof(Array);
       Code.expect(result[0].id).to.be.string;
       Code.expect(result[0].name).to.be.string;
-      Code.expect(result[0].color).to.be.string;      
+      Code.expect(result[0].color).to.be.string;
       done();
     });
   });
@@ -73,7 +73,7 @@ lab.experiment('Tag', function() {
       url: '/api/tags/'+tagA.id,
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -81,7 +81,7 @@ lab.experiment('Tag', function() {
       Code.expect(result).to.be.instanceof(Object);
       Code.expect(result.id).to.equal(tagA.id);
       Code.expect(result.name).to.equal(tagA.name);
-      
+
       done();
     });
   });
@@ -93,7 +93,7 @@ lab.experiment('Tag', function() {
       credentials: credentials,
       payload: changesTagA
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -102,7 +102,7 @@ lab.experiment('Tag', function() {
       Code.expect(result.id).to.equal(tagA.id);
       Code.expect(result.name).to.equal(changesTagA.name);
       Code.expect(result.color).to.equal(changesTagA.color);
-      
+
       done();
     });
   });
@@ -113,7 +113,7 @@ lab.experiment('Tag', function() {
       url: '/api/tags/'+tagA.id,
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -122,7 +122,7 @@ lab.experiment('Tag', function() {
       Code.expect(result.id).to.equal(tagA.id);
       Code.expect(result.name).to.equal(changesTagA.name);
       Code.expect(result.color).to.equal(changesTagA.color);
-      
+
       done();
     });
   });
