@@ -22,6 +22,8 @@ exports.create = {
         id: Joi.string().description('facebook id of the member'),
         username: Joi.string().description('facebook username of the member'),
       },
+      twitter: Joi.string().description('twitter handler of the member'),
+      github: Joi.string().description('github username of the member'),
       skype: Joi.string().description('skype username of the member'),
       phones: Joi.array().description('phones of the member'),
       mails: {
@@ -64,6 +66,8 @@ exports.update = {
         id: Joi.string().description('facebook id of the member'),
         username: Joi.string().description('facebook username of the member'),
       },
+      twitter: Joi.string().description('twitter handler of the member'),
+      github: Joi.string().description('github username of the member'),
       skype: Joi.string().description('skype username of the member'),
       phones: Joi.array().description('phones of the member'),
       mails: {
@@ -100,6 +104,8 @@ exports.updateMe = {
         id: Joi.string().description('facebook id of the member'),
         username: Joi.string().description('facebook username of the member'),
       },
+      twitter: Joi.string().description('twitter handler of the member'),
+      github: Joi.string().description('github username of the member'),
       skype: Joi.string().description('skype username of the member'),
       phones: Joi.array().description('phones of the member'),
       mails: {

@@ -43,6 +43,16 @@ module.exports = PageView.extend({
     'model.phones': {
       hook: 'phones'
     },
+    'model.githubURL': {
+      type: 'attribute',
+      hook: 'githubURL',
+      name: 'href'
+    },
+    'model.twitterURL': {
+      type: 'attribute',
+      hook: 'twitterURL',
+      name: 'href'
+    },
     'model.fbURL': {
       type: 'attribute',
       hook: 'fbURL',

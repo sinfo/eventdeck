@@ -8,11 +8,12 @@ var schema = new mongoose.Schema({
     event: String,
     role: String
   }],
-  role: String,
   facebook: {
     id: {type: String, unique: true, sparse: true},
     username: String
   },
+  twitter: String,
+  github: String,
   skype: String,
   phones: [String],
   mails: {
@@ -34,7 +35,7 @@ var schema = new mongoose.Schema({
 });
 
 schema.index({id: 1});
-schema.index({'roles.id': 1});
+schema.index({'participations.role': 1});
 schema.index({'facebook.id': 1});
 
 var Member = module.exports = mongoose.model('Member', schema);
