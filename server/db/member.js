@@ -4,10 +4,11 @@ var schema = new mongoose.Schema({
   id: {type: String, unique: true},
   name: String,
   img: String,
-  roles: [{
-    id: String,
-    isTeamLeader: Boolean
+  participations: [{
+    event: String,
+    role: String
   }],
+  role: String,
   facebook: {
     id: {type: String, unique: true, sparse: true},
     username: String

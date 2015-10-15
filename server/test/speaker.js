@@ -9,10 +9,10 @@ var lab = exports.lab = Lab.script();
 var credentials = {
   id: 'john.doe',
   name: 'John Doe',
-  roles: [{
-    id: 'development-team',
-    isTeamLeader: false
-  }],
+  participations: [{
+    role: 'coordination',
+    event: '1000-sinfo'
+  }]
 };
 
 var speakerA = {
@@ -35,7 +35,7 @@ lab.experiment('Speaker', function() {
       credentials: credentials,
       payload: speakerA
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -54,14 +54,14 @@ lab.experiment('Speaker', function() {
       url: '/api/speakers',
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Array);
       Code.expect(result[0].id).to.be.string;
-      Code.expect(result[0].name).to.be.string;  
+      Code.expect(result[0].name).to.be.string;
       done();
     });
   });
@@ -72,7 +72,7 @@ lab.experiment('Speaker', function() {
       url: '/api/speakers/'+speakerA.id,
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -80,7 +80,7 @@ lab.experiment('Speaker', function() {
       Code.expect(result).to.be.instanceof(Object);
       Code.expect(result.id).to.equal(speakerA.id);
       Code.expect(result.name).to.equal(speakerA.name);
-      
+
       done();
     });
   });
@@ -92,7 +92,7 @@ lab.experiment('Speaker', function() {
       credentials: credentials,
       payload: changesToA
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -100,7 +100,7 @@ lab.experiment('Speaker', function() {
       Code.expect(result).to.be.instanceof(Object);
       Code.expect(result.id).to.equal(speakerA.id);
       Code.expect(result.name).to.equal(changesToA.name);
-      
+
       done();
     });
   });
@@ -111,14 +111,14 @@ lab.experiment('Speaker', function() {
       url: '/api/speakers/'+speakerA.id,
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
       Code.expect(result.id).to.equal(speakerA.id);
-      Code.expect(result.name).to.equal(changesToA.name); 
+      Code.expect(result.name).to.equal(changesToA.name);
       done();
     });
   });

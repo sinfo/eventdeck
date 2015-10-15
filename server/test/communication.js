@@ -9,13 +9,13 @@ var lab = exports.lab = Lab.script();
 var credentials = {
   id: 'john.doe',
   name: 'John Doe',
-  roles: [{
-    id: 'development-team',
-    isTeamLeader: false
-  }],
+  participations: [{
+    role: 'development-team',
+    event: '1000-sinfo'
+  }]
 };
 
-var communicationA = {  
+var communicationA = {
   thread : 'company-example',
   event : 'John Does promotion',
   kind : 'geral',
@@ -36,7 +36,7 @@ lab.experiment('Communication', function() {
       credentials: credentials,
       payload: communicationA
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -59,7 +59,7 @@ lab.experiment('Communication', function() {
       url: '/api/communications',
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -79,7 +79,7 @@ lab.experiment('Communication', function() {
       url: '/api/communications/'+commId,
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -90,7 +90,7 @@ lab.experiment('Communication', function() {
       Code.expect(result.kind, 'kind').to.equal(communicationA.kind);
       Code.expect(result.text, 'text').to.equal(communicationA.text);
 
-      
+
       done();
     });
   });
@@ -102,7 +102,7 @@ lab.experiment('Communication', function() {
       credentials: credentials,
       payload: changesToA
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -113,7 +113,7 @@ lab.experiment('Communication', function() {
       Code.expect(result.kind, 'kind').to.equal(communicationA.kind);
       Code.expect(result.text, 'text').to.equal(changesToA.text);
 
-      
+
       done();
     });
   });
@@ -124,7 +124,7 @@ lab.experiment('Communication', function() {
       url: '/api/communications/'+commId,
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 

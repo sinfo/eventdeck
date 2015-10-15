@@ -11,12 +11,7 @@ function renderObject(model) {
     id: model.id,
     name: model.name,
     img: model.img || '/static/default-profile.png',
-    roles: model.roles && model.roles.map(function(role) {
-      return {
-        id: role && role.id,
-        isTeamLeader: role && role.isTeamLeader,
-      };
-    }),
+    participations: model.participations,
     facebook: model.facebook && {
       id: model.facebook.id,
       username: model.facebook.username,

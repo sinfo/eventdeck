@@ -9,13 +9,13 @@ var lab = exports.lab = Lab.script();
 var credentials = {
   id: 'john.doe',
   name: 'John Doe',
-  roles: [{
-    id: 'development-team',
-    isTeamLeader: false
-  }],
+  participations: [{
+    role: 'development-team',
+    event: '1000-sinfo'
+  }]
 };
 
-var eventA = {  
+var eventA = {
   name: 'Super Festinha de anos do Chico',
 };
 
@@ -34,7 +34,7 @@ lab.experiment('Event', function() {
       credentials: credentials,
       payload: eventA
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
       eventAId = result.id.toString();
@@ -52,7 +52,7 @@ lab.experiment('Event', function() {
       url: '/api/events',
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -69,14 +69,14 @@ lab.experiment('Event', function() {
       url: '/api/events/'+eventAId,
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
       Code.expect(result.name).to.equal(eventA.name);
-      
+
       done();
     });
   });
@@ -88,14 +88,14 @@ lab.experiment('Event', function() {
       credentials: credentials,
       payload: changesToA
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
       Code.expect(result.name).to.equal(changesToA.name);
-      
+
       done();
     });
   });
@@ -106,13 +106,13 @@ lab.experiment('Event', function() {
       url: '/api/events/'+eventAId,
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.name).to.equal(changesToA.name); 
+      Code.expect(result.name).to.equal(changesToA.name);
       done();
     });
   });

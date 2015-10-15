@@ -108,7 +108,7 @@ function list(query,cb) {
   cb = cb ||query;
   var eventsFilter = {};
   var filter = {};
-  var fields = query.fields;
+  var fields = parser(query.fields);
   var options = {
     skip: query.skip,
     limit: query.limit,

@@ -12,8 +12,8 @@ function filtering(page,filter){
     log('Fetching Selected Members');
 
     var aux = page.collection.filter(function(member){
-    var ids = member.roles.map(function (role){
-        return role.id;
+    var ids = member.participations.map(function (participation){
+        return participation.role;
       }
     );
 

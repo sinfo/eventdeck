@@ -1,6 +1,8 @@
+/*global app*/
 var AmpState = require('ampersand-state');
 var AmpModel = require('ampersand-model');
 var AmpCollection = require('ampersand-collection');
+var MemberParticipation = require('./memberParticipation');
 
 
 var Facebook = AmpState.extend({
@@ -20,16 +22,9 @@ var Mails = AmpState.extend({
   }
 });
 
-var Role = AmpState.extend({
-  props: {
-    id: 'string',
-    isTeamLeader: 'boolean'
-  }
-});
 
-
-var RoleCollection = AmpCollection.extend({
-    model: Role
+var ParticipationCollection = AmpCollection.extend({
+    model: MemberParticipation
 });
 
 module.exports = AmpModel.extend({
@@ -45,15 +40,15 @@ module.exports = AmpModel.extend({
     mails: Mails
   },
   collections: {
-    roles: RoleCollection
+    participations: ParticipationCollection
   },
 
   derived: {
     isAdmin: {
-      deps: ['roles'],
+      deps: ['participations'],
       fn: function () {
-        return this.roles.filter(function (role) {
-          return role.id === 'development-team' || role.id === 'coordination';
+        return this.roles.filter(function (participation) {
+          return participation.role === 'coordination';
         }).length > 0;
       }
     },
@@ -75,12 +70,10 @@ module.exports = AmpModel.extend({
         return 'background-image:url('+this.img+');';
       }
     },
-    roleIds: {
-      deps: ['roles'],
+    participation: {
+      deps:['participations'],
       fn: function () {
-        return this.roles.map(function (role){
-          return role.id;
-        });
+        return this.participations.filter(function(p){ return p.event == app.me.selectedEvent; })[0];
       }
     },
     fbURL: {

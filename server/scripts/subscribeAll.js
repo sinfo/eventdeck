@@ -10,10 +10,11 @@ mongoose.connect('mongodb://localhost/deck');
 
 var coordinators;
 
+// TODO creating for all coordinators
 Member.find({
-  roles: {
+  participations: {
     $elemMatch: {
-      id: 'coordination'
+      role: 'coordination'
     }
   }
 }, gotCoordinators);

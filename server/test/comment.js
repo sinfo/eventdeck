@@ -9,13 +9,13 @@ var lab = exports.lab = Lab.script();
 var credentials = {
   id: 'john.doe',
   name: 'John Doe',
-  roles: [{
-    id: 'development-team',
-    isTeamLeader: false
-  }],
+  participations: [{
+    role: 'development-team',
+    event: '1000-sinfo'
+  }]
 };
 
-var commentA = {  
+var commentA = {
   thread: 'company-example',
   subthread: 'company-example-subexample',
   text: 'this is an example of a comentary',
@@ -35,7 +35,7 @@ lab.experiment('Comment', function() {
       credentials: credentials,
       payload: commentA
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -57,7 +57,7 @@ lab.experiment('Comment', function() {
       url: '/api/comments',
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -76,7 +76,7 @@ lab.experiment('Comment', function() {
       url: '/api/comments/'+commId,
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -86,7 +86,7 @@ lab.experiment('Comment', function() {
       Code.expect(result.subthread, 'subthread').to.equal(commentA.subthread);
       Code.expect(result.text, 'text').to.equal(commentA.text);
 
-      
+
       done();
     });
   });
@@ -98,7 +98,7 @@ lab.experiment('Comment', function() {
       credentials: credentials,
       payload: changesToA
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -107,7 +107,7 @@ lab.experiment('Comment', function() {
       Code.expect(result.thread, 'thread').to.equal(commentA.thread);
       Code.expect(result.subthread, 'subthread').to.equal(commentA.subthread);
       Code.expect(result.text, 'text').to.equal(changesToA.text);
-      
+
       done();
     });
   });
@@ -118,7 +118,7 @@ lab.experiment('Comment', function() {
       url: '/api/comments/'+commId,
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 

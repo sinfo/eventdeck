@@ -8,9 +8,9 @@ var lab = exports.lab = Lab.script();
 var memberA = {
   id: 'john.doe',
   name: 'John Doe',
-  roles: [{
-    id: 'development-team',
-    isTeamLeader: false
+  participations: [{
+    role: 'development-team',
+    event: '23-sinfo'
   }],
 };
 
@@ -30,7 +30,7 @@ lab.experiment('Members', function() {
       credentials: credentials,
       payload: memberA
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -49,7 +49,7 @@ lab.experiment('Members', function() {
       url: '/api/members',
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -57,8 +57,8 @@ lab.experiment('Members', function() {
       Code.expect(result).to.be.instanceof(Array);
       Code.expect(result[0].id).to.be.string;
       Code.expect(result[0].name).to.be.string;
-      Code.expect(result[0].roles).to.be.instanceof(Array);
-      
+      Code.expect(result[0].participations).to.be.instanceof(Array);
+
       done();
     });
   });
@@ -69,7 +69,7 @@ lab.experiment('Members', function() {
       url: '/api/members/me',
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -77,7 +77,7 @@ lab.experiment('Members', function() {
       Code.expect(result).to.be.instanceof(Object);
       Code.expect(result.id).to.equal(credentials.id);
       Code.expect(result.name).to.equal(credentials.name);
-      
+
       done();
     });
   });
@@ -88,7 +88,7 @@ lab.experiment('Members', function() {
       url: '/api/members/'+memberA.id,
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -96,7 +96,7 @@ lab.experiment('Members', function() {
       Code.expect(result).to.be.instanceof(Object);
       Code.expect(result.id).to.equal(memberA.id);
       Code.expect(result.name).to.equal(memberA.name);
-      
+
       done();
     });
   });
@@ -108,7 +108,7 @@ lab.experiment('Members', function() {
       credentials: credentials,
       payload: changesMemberA
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -116,7 +116,7 @@ lab.experiment('Members', function() {
       Code.expect(result).to.be.instanceof(Object);
       Code.expect(result.id).to.equal(memberA.id);
       Code.expect(result.name).to.equal(changesMemberA.name);
-      
+
       done();
     });
   });
@@ -127,7 +127,7 @@ lab.experiment('Members', function() {
       url: '/api/members/'+memberA.id,
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -135,7 +135,7 @@ lab.experiment('Members', function() {
       Code.expect(result).to.be.instanceof(Object);
       Code.expect(result.id).to.equal(memberA.id);
       Code.expect(result.name).to.equal(changesMemberA.name);
-      
+
       done();
     });
   });

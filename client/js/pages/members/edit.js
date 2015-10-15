@@ -33,12 +33,6 @@ module.exports = PageView.extend({
           model: this.model,
           submitCallback: function (data) {
 
-            data.roles = data.roles.map(function(r) {
-              return {
-                id: r
-              };
-            }) || [],
-
             populate(data, ['facebook.id', 'facebook.username', 'mails.main', 'mails.institutional', 'mails.dropbox', 'mails.google', 'mails.microsoft']);
 
             if(!model.mails.main){

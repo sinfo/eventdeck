@@ -14,8 +14,6 @@ server.method('member.create', create, {});
 server.method('member.update', update, {});
 server.method('member.createLoginCode', createLoginCode, {});
 server.method('member.get', get, {});
-server.method('member.getByRole', getByRole, {});
-server.method('member.getTeamLeaders', getTeamLeaders, {});
 server.method('member.getSubscribers', getSubscribers, {});
 server.method('member.list', list, {});
 server.method('member.remove', remove, {});
@@ -95,49 +93,6 @@ function get(id, query, cb) {
   });
 }
 
-function getByRole(roleId, query, cb) {
-  cb = cb || query; // fields is optional
-
-
-  var filter = { participations: { $elemMatch: { event: roleId } } };
-  var fields = parser(query.fields);
-  var options = {
-    skip: query.skip,
-    limit: query.limit,
-    sort: parser(query.sort)
-  };
-
-  Member.find(filter,fields,options, function(err, members) {
-    if (err) {
-      log.error({ err: err, role: roleId}, 'error getting members');
-      return cb(Boom.internal());
-    }
-
-    cb(null, members);
-  });
-}
-
-function getTeamLeaders(query, cb) {
-  cb = cb || query; // fields is optional
-
-    var filter ={'roles.isTeamLeader': true};
-    var fields = parser(query.fields);
-    var options = {
-    skip: query.skip,
-    limit: query.limit,
-    sort: parser(query.sort)
-  };
-
-  Member.find(filter,fields,options, function(err, members) {
-    if (err) {
-      log.error({ err: err, isTeamLeader: true}, 'error getting members');
-      return cb(Boom.internal());
-    }
-
-    cb(null, members);
-  });
-}
-
 function getSubscribers(path, id, query, cb) {
   cb = cb||query;
   var thread = threadFromPath(path, id);
@@ -162,6 +117,7 @@ function getSubscribers(path, id, query, cb) {
 function list(query, cb) {
   cb = cb || query; // fields is optional
 
+  var eventsFilter = {};
   var filter = {};
   var fields = parser(query.fields);
   var options = {
@@ -169,6 +125,17 @@ function list(query, cb) {
     limit: query.limit,
     sort: parser(query.sort)
   };
+
+  if (query.role) {
+    eventsFilter.role = query.role;
+  }
+  if (query.event) {
+    eventsFilter.event = query.event;
+  }
+
+  if (eventsFilter.event || eventsFilter.role) {
+    filter.participations = query.participations ? {$elemMatch : eventsFilter} : {$not: {$elemMatch : eventsFilter} };
+  }
 
   Member.find(filter,fields,options, function(err, members) {
     if (err) {

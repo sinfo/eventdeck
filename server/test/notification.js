@@ -9,13 +9,13 @@ var lab = exports.lab = Lab.script();
 var credentials = {
   id: 'john.doe',
   name: 'John Doe',
-  roles: [{
-    id: 'development-team',
-    isTeamLeader: false
-  }],
+  participations: [{
+    role: 'development-team',
+    event: '1000-sinfo'
+  }]
 };
 
-var notificationA = {  
+var notificationA = {
   thread: 'company-example',
   member: 'john.doe',
   description: 'example offered us some cookies and cake',
@@ -37,7 +37,7 @@ lab.experiment('Notification', function() {
       credentials: credentials,
       payload: notificationA
     };
- 
+
     server.methods.notification.create(notificationA , function(err, result) {
 
       Code.expect(err, 'err').to.be.null;
@@ -58,7 +58,7 @@ lab.experiment('Notification', function() {
       url: '/api/notifications',
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -78,7 +78,7 @@ lab.experiment('Notification', function() {
       url: '/api/notifications/'+notificationAid,
       credentials: credentials,
     };
- 
+
     server.inject(options, function(response) {
       var result = response.result;
 
@@ -98,9 +98,9 @@ lab.experiment('Notification', function() {
       url: '/api/notifications/'+notificationAid,
       credentials: credentials,
     };
- 
+
     server.methods.notification.removeByThread('/companies',notificationAid, function(err,result) {
-      
+
       Code.expect(err).to.be.null;
 
       done();
