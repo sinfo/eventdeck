@@ -10,9 +10,8 @@ var Communication = require('./communication');
 var Comment = require('./comment');
 var Participation = require('./participation');
 
-
 var CommunicationCollection = AmpCollection.extend({
-    model: Communication
+  model: Communication
 });
 
 var CommentCollection = AmpCollection.extend({
@@ -35,7 +34,8 @@ module.exports = AmpModel.extend({
     img: ['string'],
     storedImg: ['string'],
     contacts:['string'],
-    updated:['string']
+    updated:['string'],
+    feedback:['string']
   },
   collections: {
     communications: CommunicationCollection,
@@ -72,7 +72,7 @@ module.exports = AmpModel.extend({
     background: {
       deps: ['img'],
       fn: function () {
-        return 'background-image:url('+this.storedImg+');';
+        return 'background-image:url(' + this.storedImg + ');';
       }
     },
     commentsApi: {
@@ -90,7 +90,7 @@ module.exports = AmpModel.extend({
     participation: {
       deps:['participations'],
       fn: function () {
-        return this.participations.filter(function(p){ return p.event == app.me.selectedEvent; })[0];
+        return this.participations.filter(function (p) { return p.event == app.me.selectedEvent; })[0];
       }
     },
     statusDetails: {
@@ -98,7 +98,7 @@ module.exports = AmpModel.extend({
       fn: function () {
         var self = this;
         var participations = self.participations.toJSON();
-        var participation = participations.filter(function(p){
+        var participation = participations.filter(function (p) {
           return p.event == app.me.selectedEvent;
         })[0];
 
@@ -127,15 +127,15 @@ module.exports = AmpModel.extend({
       fn: function () {
         return this.contacts && marked(this.contacts) || '';
       },
-    },
+    }
   },
   serialize: function () {
-    var res = this.getAttributes({props: true}, true);
+    var res = this.getAttributes({ props: true }, true);
     _.each(this._children, function (value, key) {
-        res[key] = this[key].serialize();
+      res[key] = this[key].serialize();
     }, this);
     _.each(this._collections, function (value, key) {
-        res[key] = this[key].serialize();
+      res[key] = this[key].serialize();
     }, this);
 
     delete res.comments;
@@ -145,8 +145,8 @@ module.exports = AmpModel.extend({
 
     return res;
   },
-  parse: function(attrs) {
-    attrs.participations = attrs.participations && attrs.participations.map(function(p) {
+  parse: function (attrs) {
+    attrs.participations = attrs.participations && attrs.participations.map(function (p) {
       p.threadKind = 'speaker';
       return p;
     });

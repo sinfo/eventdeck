@@ -3,13 +3,12 @@ var InputView = require('ampersand-input-view');
 var ArrayInputView = require('ampersand-array-input-view');
 var templates = require('client/js/templates');
 var ExtendedInput = InputView.extend({
-    template: templates.includes.formInput()
+  template: templates.includes.formInput()
 });
 
 var TextareaInput = InputView.extend({
-    template: templates.includes.formTextarea()
+  template: templates.includes.formTextarea()
 });
-
 
 module.exports = FormView.extend({
   fields: function () {
@@ -60,6 +59,14 @@ module.exports = FormView.extend({
         value: this.model && this.model.contacts || '',
         required: false,
         placeholder: 'Contacts',
+        parent: this
+      }),
+      new ExtendedInput({
+        label: 'Feedback',
+        name: 'feedback',
+        value: this.model && this.model.feedback || '',
+        required: false,
+        placeholder: 'Feedback',
         parent: this
       })
     ];
