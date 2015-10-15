@@ -1,11 +1,10 @@
-var CURRENT_EVENT = 'xxii-sinfo';
 var PUBLIC_STATUS = 'announced';
 
 module.exports = function render(content, isAuthenticated) {
   if(content instanceof Array) {
     if(isAuthenticated === false) {
       content = content && content.filter(function(model) {
-        return model.participations && model.participations.filter(function(p) { return p.event == CURRENT_EVENT && p.status && p.status.toLowerCase() == PUBLIC_STATUS; }).length > 0;
+        return model.participations && model.participations.filter(function(p) { return p.status && p.status.toLowerCase() == PUBLIC_STATUS; }).length > 0;
       });
     }
 
