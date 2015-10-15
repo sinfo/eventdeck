@@ -1,12 +1,34 @@
-module.exports = function render(content) {
+var CURRENT_EVENT = '23-sinfo';
+
+module.exports = function render(content, isAuthenticated) {
   if(content instanceof Array) {
-    return content.map(renderObject);
+    if(isAuthenticated === false) {
+      content = content && content.filter(function(model) {
+        return model.participations && model.participations.filter(function(p) { return p.role && p.event === CURRENT_EVENT; }).length > 0;
+      });
+    }
+
+    return content.map(function(model) { return renderObject(model, isAuthenticated); });
   }
 
   return renderObject(content);
 };
 
-function renderObject(model) {
+function renderObject (model, isAuthenticated) {
+
+  if(isAuthenticated === false) {
+    return {
+      id: model.id,
+      name: model.name,
+      img: model.img || '/static/default-profile.png',
+      twitter: model.twitter,
+      github: model.github,
+      mail: model.mails && model.mails.main,
+      updated: model.updated,
+      participations: model.participations
+    };
+  }
+
   return {
     id: model.id,
     name: model.name,
