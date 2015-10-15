@@ -42,6 +42,9 @@ module.exports = PageView.extend({
       hook: 'edit',
       name: 'href'
     },
+    'model.feedback': {
+      hook: 'feedback'
+    }
   },
   events: {
     'click [data-hook~=delete]': 'handleDeleteClick'

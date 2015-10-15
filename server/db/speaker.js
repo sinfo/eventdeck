@@ -14,7 +14,8 @@ var schema = new mongoose.Schema({
     status: String,
     kind: String
   }],
-  updated: { type: Date, default: Date.now }
+  updated: { type: Date, default: Date.now },
+  feedback: String
 });
 
 schema.virtual('thread').get(function () {
