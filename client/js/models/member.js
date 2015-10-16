@@ -47,7 +47,7 @@ module.exports = AmpModel.extend({
     isAdmin: {
       deps: ['participations'],
       fn: function () {
-        return this.roles.filter(function (participation) {
+        return this.participations.filter(function (participation) {
           return participation.role === 'coordination';
         }).length > 0;
       }
