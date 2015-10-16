@@ -22,6 +22,7 @@ exports.create = {
       contacts: Joi.string().description('contacts of the speaker'),
       participations: Joi.array().description('participations of the speaker'),
       updated: Joi.date().description('date the speaker was last updated'),
+      feedback: Joi.string().description('speaker\'s feedback about us')
     }
   },
   pre: [
@@ -56,6 +57,7 @@ exports.update = {
       contacts: Joi.string().description('contacts of the speaker'),
       participations: Joi.array().description('participations of the speaker'),
       updated: Joi.date().description('date the speaker was last updated'),
+      feedback: Joi.string().description('speaker\'s feedback about us')
     }
   },
   pre: [
@@ -138,7 +140,7 @@ exports.list = {
       skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
       limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
       sort: Joi.string().description('How to sort the array'),
-      event: Joi.string().description('Select speakers assigned to a specific event'), 
+      event: Joi.string().description('Select speakers assigned to a specific event'),
       member: Joi.alternatives().try(
         Joi.boolean().valid(false),
         Joi.string()

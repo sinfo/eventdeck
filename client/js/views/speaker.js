@@ -36,7 +36,8 @@ module.exports = View.extend({
       type: 'attribute',
       hook: 'name',
       name: 'href'
-    }
+    },
+    'model.feedback': '[data-hook~=feedback]'
   },
   events: {
     'click [data-hook~=action-delete]': 'handleRemoveClick'
