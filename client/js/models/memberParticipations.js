@@ -4,5 +4,6 @@ var MemberParticipation = require('./memberParticipation');
 
 
 module.exports = AmpCollection.extend({
+  mainIndex: 'event',
   model: MemberParticipation
 }, SingleRequest);

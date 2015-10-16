@@ -4,14 +4,13 @@ var View = require('ampersand-view');
 var async = require('async');
 var templates = require('client/js/templates');
 
-
 module.exports = View.extend({
   template: templates.partials.notifications.view,
   initialize: function (spec) {
     var self = this;
     async.parallel([
-      function getMember (cb){
-        if(self.model.member){
+      function getMember (cb) {
+        if (self.model.member) {
           app.members.singleRequest(self.model.member, function (err, model) {
             if (err) {
               log.error('couldnt find a member with id: ' + self.model.member);
@@ -23,7 +22,7 @@ module.exports = View.extend({
           });
         }
       },
-      function getThing (cb){
+      function getThing (cb) {
         switch (self.model.threadKind) {
           case 'company':
             app.companies.singleRequest(self.model.threadId, function (err, model) {
@@ -34,7 +33,7 @@ module.exports = View.extend({
               self.model.threadDetails = { name: model.name, img: model.img };
               cb();
             });
-          break;
+            break;
           case 'speaker':
             app.speakers.singleRequest(self.model.threadId, function (err, model) {
               if (err) {
@@ -44,7 +43,7 @@ module.exports = View.extend({
               self.model.threadDetails = { name: model.name, img: model.img };
               cb();
             });
-          break;
+            break;
           case 'topic':
             app.topics.singleRequest(self.model.threadId, function (err, model) {
               if (err) {
@@ -54,7 +53,7 @@ module.exports = View.extend({
               self.model.threadDetails = { name: model.name, img: model.img };
               cb();
             });
-          break;
+            break;
         }
       }
     ], function () {
@@ -62,7 +61,7 @@ module.exports = View.extend({
     });
   },
   render: function () {
-    if(this.renderWithTemplate) {
+    if (this.renderWithTemplate) {
       this.renderWithTemplate();
     }
   },
@@ -71,7 +70,7 @@ module.exports = View.extend({
       type: checkMember,
       hook: 'memberName',
     },
-    'model.memberDetails.roles': {
+    'model.memberDetails.isAdmin': {
       type: checkRole,
       hook: 'memberName',
     },
@@ -110,40 +109,39 @@ module.exports = View.extend({
 });
 
 function checkMember (el, value, previousValue) {
-  if(value === app.me.id){
+  if (value === app.me.id) {
     el.classList.add('me');
-  }
-  else{
+  } else {
     el.classList.add('others');
   }
 }
 
 function checkRole (el, value, previousValue) {
-  if(value && value.get('coordination')){
+  if (value) {
     el.classList.add('coordination');
   }
 }
 
 function checkType (el, value, previousValue) {
-  if(value.search(/^\bposted\b/) === 0){
+  if (value.search(/^\bposted\b/) === 0) {
     el.classList.add('fa-envelope');
   }
-  else if(value.search(/^\bcreated\b/) === 0){
+  else if (value.search(/^\bcreated\b/) === 0) {
     el.classList.add('fa-plus-square');
   }
-  else if(value.search(/^\bupdated\b/) === 0){
+  else if (value.search(/^\bupdated\b/) === 0) {
     el.classList.add('fa-pencil');
   }
-  else if(value.search(/^\bmentioned\b/) === 0){
+  else if (value.search(/^\bmentioned\b/) === 0) {
     el.classList.add('fa-at');
   }
-  else if(value.search(/^\bchanged communication\b/) === 0){
+  else if (value.search(/^\bchanged communication\b/) === 0) {
     el.classList.add('fa-check-square-o');
   }
 }
 
 function needsOn (el, value, previousValue) {
-  if(value.search(/^\bcreated\b/) === 0 || value.search(/^\bupdated\b/) === 0){
+  if (value.search(/^\bcreated\b/) === 0 || value.search(/^\bupdated\b/) === 0) {
     el.classList.add('hide-all');
   }
 }
