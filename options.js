@@ -94,6 +94,7 @@ options.roles = [
   { name: 'External Relations', id: 'external-relations' },
   { name: 'Strategic Partnerships', id: 'strategic-partnerships' },
   { name: 'Sys Admin', id: 'sys-admin' },
+  { name: 'Logistics', id: 'logistics' },
   { name: 'Marketing Manager', id: 'marketing-manager' }
 ];
 
