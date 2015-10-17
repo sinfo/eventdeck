@@ -1,10 +1,9 @@
-var CURRENT_EVENT = '23-sinfo';
 
 module.exports = function render(content, isAuthenticated) {
   if(content instanceof Array) {
     if(isAuthenticated === false) {
       content = content && content.filter(function(model) {
-        return model.participations && model.participations.filter(function(p) { return p.role && p.event === CURRENT_EVENT; }).length > 0;
+        return model.participations && model.participations.length > 0;
       });
     }
 
