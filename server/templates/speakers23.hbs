@@ -1,179 +1,50 @@
-<!DOCTYPE html>
-<html>
-
-    <head>
-        <meta charset="utf-8">
-        <!-- NAME: 1 COLUMN -->
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>*|MC:SUBJECT|*</title>
-        <!--- <link rel="stylesheet" href="invitation.css"> -->
-
-
-
-        <style>
-
-            .box-600{
-                width: 600px;
-            }
-
-            #window{
-                padding: 0px calc((100% - 600px) / 2);
-
-            }
-
-
-            #body td,
-            body{
-
-                font-family: "Tahoma", Verdana, Segoe, sans-serif;
-                padding: 0px 10px;
-            }
-
-            h1, h2, h3, h4, h5, h6 {
-                text-align: justify;
-                font-size: 13px;
-                line-height: 1.5em;
-                color: #545454;
-            }
-
-            h2{ font-weight: 600; }
-
-            h3{ font-weight: 400; }
-
-            .heading{
-                background: #07a url('https://gallery.mailchimp.com/de57247db0922adf365af7eef/images/dd0f46b1-3749-4607-84dc-ae038a3b61ad.png') 50%/200px 150px no-repeat;
-                background-color: #07a;
-                background-image: ('https://gallery.mailchimp.com/de57247db0922adf365af7eef/images/dd0f46b1-3749-4607-84dc-ae038a3b61ad.png');
-                background-position:  50%;
-                background-size: 200px 150px;
-                background-repeat:  no-repeat;
-
-                background: #07a url('https://gallery.mailchimp.com/de57247db0922adf365af7eef/images/dd0f46b1-3749-4607-84dc-ae038a3b61ad.png') 50%/200px 150px no-repeat;
-                background: #07a url('https://gallery.mailchimp.com/de57247db0922adf365af7eef/images/dd0f46b1-3749-4607-84dc-ae038a3b61ad.png') 50%/200px 150px no-repeat;
-                height: 150px;
-
-            }
-
-
-            .signature h3{
-                line-height: .7em;
-                font-style: italic;
-            }
-
-            .innerDivider{
-                border-bottom: .1em solid gray;
-                padding: 1em 0em
-            }
-
-            .circular{
-                width: 110px;
-                height: 110px;
-                max-height: 110px;
-                border-radius: 55px;
-                -webkit-border-radius: 55px;
-                -moz-border-radius: 55px;
-            }
-
-            .innerButton{
-                font-weight: bold;
-                display: inline-block;
-                text-decoration: none;
-                color: #FFFFFF;
-                border-radius: 5px;
-                background-color: #07a;
-                padding: 18px;
-                white-space: nowrap;
-            }
-
-            .speaker{
-                padding: initial !important;
-            }
-
-            .speaker td{
-                width: 150px;
-            }
-            .speaker td.img-speaker{
-
-
-                padding-left: 15px;
-            }
-
-            .speaker h3,
-            .speaker h2{
-                text-align: center;
-                line-height: .2em;
-                white-space: nowrap;
-                margin: 5px auto; /** does not work in mail?**/
-            }
-
-            #body td.invite-outer{
-                padding: 10px 60px;
-            }
-
-            .invite-table-section{
-                vertical-align: middle;
-                align="center";
-                width: 450px;
-                background-color: whitesmoke;
-            }
-
-            .invite-table-text{
-                width:  320px;
-                line-height: 1em;
-                padding-left: 10px;
-            }
-
-            .invite-table-title {
-                text-align: right;
-                line-height: .4em;
-                padding-right: 10px;
-            }
-
-            #body td.button-outer{
-                padding: 20px 210px;
-            }
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body>
 
 
 
 
-        </style>
-    </head>
 
-    <body>
+
+
+
+
+
+
+
+    <div style="font-family:&quot;Tahoma&quot;,Verdana,Segoe,sans-serif;padding:0px 10px">
         <center>
-            <table id="window">
+            <table style="padding:0px calc((100% - 600px)/2)">
                 <tbody>
                     <tr>
                         <td>
-                            <table id="body">
+                            <table>
                                 <tbody>
                                     <tr>
-                                        <th class="heading" ></th>
+                                        <th></th>
                                     </tr>
                                     <tr>
-                                        <td class="box-600">
-                                            <h2>Dear {{speaker}},</h2>
-                                            <h3>I’m {{member}}, a proud member at SINFO. On behalf of the team organizing SINFO we would be pleased if you would accept our invitation to speak at our event.</h3>
-                                            <h3>SINFO is on its 23rd edition and is an event organized by college students who have a passion for technology and innovation.</h3>
+                                        <td style="width:600px;font-family:&quot;Tahoma&quot;,Verdana,Segoe,sans-serif;padding:0px 10px">
+                                            <h2 style="text-align:justify;font-size:13px;line-height:1.5em;color:#545454;font-weight:600">Dear {{speaker}},</h2>
+                                            <h3 style="text-align:justify;font-size:13px;line-height:1.5em;color:#545454;font-weight:400">I’m {{member}}, a proud member at SINFO. On behalf of the team organizing SINFO we would be pleased if you would accept our invitation to speak at our event.</h3>
+                                            <h3 style="text-align:justify;font-size:13px;line-height:1.5em;color:#545454;font-weight:400">SINFO is on its 23rd edition and is an event organized by college students who have a passion for technology and innovation.</h3>
                                         </td>
                                     </tr>
 
                                     <tr>
-                                        <td class="invite-outer box-600">
-                                            <table id="invite-table">
+                                        <td style="width:600px;font-family:&quot;Tahoma&quot;,Verdana,Segoe,sans-serif;padding:10px 60px">
+                                            <table>
                                                 <tbody>
-                                                    <tr class="invite-table-section">
-                                                        <td><h2 class="invite-table-title">Event Name:</h2></td>
-                                                        <td><h3 class="invite-table-text" >23rd SINFO</h3></td>
+                                                    <tr>
+                                                        <td style="font-family:&quot;Tahoma&quot;,Verdana,Segoe,sans-serif;padding:0px 10px"><h2 style="text-align:right;font-size:13px;line-height:.4em;color:#545454;font-weight:600;padding-right:10px">Event Name:</h2></td>
+                                                        <td style="font-family:&quot;Tahoma&quot;,Verdana,Segoe,sans-serif;padding:0px 10px"><h3 style="text-align:justify;font-size:13px;line-height:1em;color:#545454;font-weight:400;width:320px;padding-left:10px">23rd SINFO</h3></td>
                                                     </tr>
-                                                    <tr class="invite-table-section">
-                                                        <td><h2 class="invite-table-title">When:</h2></td>
-                                                        <td><h3 class="invite-table-text" >The week from February 22nd to February 26th, 2016</h3></td>
+                                                    <tr>
+                                                        <td style="font-family:&quot;Tahoma&quot;,Verdana,Segoe,sans-serif;padding:0px 10px"><h2 style="text-align:right;font-size:13px;line-height:.4em;color:#545454;font-weight:600;padding-right:10px">When:</h2></td>
+                                                        <td style="font-family:&quot;Tahoma&quot;,Verdana,Segoe,sans-serif;padding:0px 10px"><h3 style="text-align:justify;font-size:13px;line-height:1em;color:#545454;font-weight:400;width:320px;padding-left:10px">The week from February 22nd to February 26th, 2016</h3></td>
                                                     </tr>
-                                                    <tr class="invite-table-section">
-                                                        <td><h2 class="invite-table-title">Where:</h2></td>
-                                                        <td><h3 class="invite-table-text" >Lisbon Tech (IST - Alameda Campus) - Lisbon, Portugal</h3></td>
+                                                    <tr>
+                                                        <td style="font-family:&quot;Tahoma&quot;,Verdana,Segoe,sans-serif;padding:0px 10px"><h2 style="text-align:right;font-size:13px;line-height:.4em;color:#545454;font-weight:600;padding-right:10px">Where:</h2></td>
+                                                        <td style="font-family:&quot;Tahoma&quot;,Verdana,Segoe,sans-serif;padding:0px 10px"><h3 style="text-align:justify;font-size:13px;line-height:1em;color:#545454;font-weight:400;width:320px;padding-left:10px">Lisbon Tech (IST - Alameda Campus) - Lisbon, Portugal</h3></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -181,38 +52,38 @@
                                     </tr>
 
                                     <tr>
-                                        <td  class="box-600">
-                                            <h3>Even though we're a non-funded university event, we're fully prepared to cover all travel and lodging expenses.</h3>
-                                            <h3>{{paragraph}}</h3>
+                                        <td style="width:600px;font-family:&quot;Tahoma&quot;,Verdana,Segoe,sans-serif;padding:0px 10px">
+                                            <h3 style="text-align:justify;font-size:13px;line-height:1.5em;color:#545454;font-weight:400">Even though we&#39;re a non-funded university event, we&#39;re fully prepared to cover all travel and lodging expenses.</h3>
+                                            <h3 style="text-align:justify;font-size:13px;line-height:1.5em;color:#545454;font-weight:400">{{paragraph}}</h3>
                                         </td>
                                     </tr>
 
                                     <tr>
-                                        <td class="button-outer box-600">
-                                            <a class="innerButton" title="Visit SINFO" href="https://www.sinfo.org" target="_blank">Visit our website</a>
+                                        <td style="width:600px;font-family:&quot;Tahoma&quot;,Verdana,Segoe,sans-serif;padding:20px 210px">
+                                            <a title="Visit SINFO" href="https://www.sinfo.org" style="font-weight:bold;display:inline-block;text-decoration:none;color:#ffffff;border-radius:5px;background-color:#07a;padding:18px;white-space:nowrap" target="_blank">Visit our website</a>
                                         </td>
                                     </tr>
 
                                     <tr>
-                                        <td  class="box-600">
+                                        <td style="width:600px;font-family:&quot;Tahoma&quot;,Verdana,Segoe,sans-serif;padding:0px 10px">
 
 
-                                            <h3>My Best Regards,</h3>
-                                            <div class="signature">
-                                                <h3>*{{member}}*</h3>
-                                                <h3>SINFO team</h3>
+                                            <h3 style="text-align:justify;font-size:13px;line-height:1.5em;color:#545454;font-weight:400">My Best Regards,</h3>
+                                            <div>
+                                                <h3 style="text-align:justify;font-size:13px;line-height:.7em;color:#545454;font-weight:400;font-style:italic">*{{member}}*</h3>
+                                                <h3 style="text-align:justify;font-size:13px;line-height:.7em;color:#545454;font-weight:400;font-style:italic">SINFO team</h3>
                                             </div>
                                         </td>
                                     </tr>
 
                                     <tr>
-                                        <td class="box-600 innerDivider">
+                                        <td style="width:600px;border-bottom:.1em solid gray;padding:0px 10px;font-family:&quot;Tahoma&quot;,Verdana,Segoe,sans-serif">
                                         </td>
                                     </tr>
 
                                     <tr>
-                                        <td class="speakersRow box-600">
-                                            <h2>Previous Speakers</h2>
+                                        <td style="width:600px;font-family:&quot;Tahoma&quot;,Verdana,Segoe,sans-serif;padding:0px 10px">
+                                            <h2 style="text-align:justify;font-size:13px;line-height:1.5em;color:#545454;font-weight:600">Previous Speakers</h2>
                                         </td>
                                     </tr>
 
@@ -221,47 +92,47 @@
                         </td>
                     </tr>
                     <tr>
-                        <td  class="box-600">
-                            <table id="ending">
+                        <td style="width:600px">
+                            <table>
                                 <tbody>
                                     <tr>
-                                        <td class="speaker">
+                                        <td style="padding:initial!important">
                                             <table>
                                                 <tbody>
-                                                    <tr><td class="img-speaker"><a href="https://www.youtube.com/watch?v=w7O_y9PKq8c"><img class="circular" src="http://sinfo.org/img/speakers/ScottChacon.jpg"></a></td></tr>
-                                                    <tr><td><h2>Scott Chacon</h2></td></tr>
-                                                    <tr><td><h3>Github,</h3></td></tr>
-                                                    <tr><td><h3>CIO</h3></td></tr>
+                                                    <tr><td style="width:150px;padding-left:15px"><a href="https://www.youtube.com/watch?v=w7O_y9PKq8c" target="_blank"><img src="http://sinfo.org/img/speakers/ScottChacon.jpg" style="width:110px;height:110px;max-height:110px;border-radius:55px"></a></td></tr>
+                                                    <tr><td style="width:150px"><h2 style="text-align:center;font-size:13px;line-height:.2em;color:#545454;font-weight:600;white-space:nowrap;margin:5px auto">Scott Chacon</h2></td></tr>
+                                                    <tr><td style="width:150px"><h3 style="text-align:center;font-size:13px;line-height:.2em;color:#545454;font-weight:400;white-space:nowrap;margin:5px auto">Github,</h3></td></tr>
+                                                    <tr><td style="width:150px"><h3 style="text-align:center;font-size:13px;line-height:.2em;color:#545454;font-weight:400;white-space:nowrap;margin:5px auto">CIO</h3></td></tr>
                                                 </tbody>
                                             </table>
                                         </td>
-                                        <td class="speaker">
+                                        <td style="padding:initial!important">
                                             <table>
                                                 <tbody>
-                                                    <tr><td class="img-speaker"><a href="https://www.youtube.com/watch?v=-yDM9XRK2lU"><img class="circular" src="http://sinfo.org/img/speakers/gooseman.png"></a></td></tr>
-                                                    <tr><td><h2>Minh Le</h2></td></tr>
-                                                    <tr><td><h3>Counter-Strike,</h3></td></tr>
-                                                    <tr><td><h3>Co-creator</h3></td></tr>
+                                                    <tr><td style="width:150px;padding-left:15px"><a href="https://www.youtube.com/watch?v=-yDM9XRK2lU" target="_blank"><img src="http://sinfo.org/img/speakers/gooseman.png" style="width:110px;height:110px;max-height:110px;border-radius:55px"></a></td></tr>
+                                                    <tr><td style="width:150px"><h2 style="text-align:center;font-size:13px;line-height:.2em;color:#545454;font-weight:600;white-space:nowrap;margin:5px auto">Minh Le</h2></td></tr>
+                                                    <tr><td style="width:150px"><h3 style="text-align:center;font-size:13px;line-height:.2em;color:#545454;font-weight:400;white-space:nowrap;margin:5px auto">Counter-Strike,</h3></td></tr>
+                                                    <tr><td style="width:150px"><h3 style="text-align:center;font-size:13px;line-height:.2em;color:#545454;font-weight:400;white-space:nowrap;margin:5px auto">Co-creator</h3></td></tr>
                                                 </tbody>
                                             </table>
                                         </td>
-                                        <td class="speaker">
+                                        <td style="padding:initial!important">
                                             <table>
                                                 <tbody>
-                                                    <tr><td class="img-speaker"><a href="https://www.youtube.com/watch?v=MVlsOLvBdw4"><img class="circular" src="http://www.sinfo.org/22/assets/img/speaker/PeterSunde.png"></a></td></tr>
-                                                    <tr><td><h2>Peter Sunde</h2></td></tr>
-                                                    <tr><td><h3>The Pirate Bay,</h3></td></tr>
-                                                    <tr><td><h3>Co-founder</h3></td></tr>
+                                                    <tr><td style="width:150px;padding-left:15px"><a href="https://www.youtube.com/watch?v=MVlsOLvBdw4" target="_blank"><img src="http://www.sinfo.org/22/assets/img/speaker/PeterSunde.png" style="width:110px;height:110px;max-height:110px;border-radius:55px"></a></td></tr>
+                                                    <tr><td style="width:150px"><h2 style="text-align:center;font-size:13px;line-height:.2em;color:#545454;font-weight:600;white-space:nowrap;margin:5px auto">Peter Sunde</h2></td></tr>
+                                                    <tr><td style="width:150px"><h3 style="text-align:center;font-size:13px;line-height:.2em;color:#545454;font-weight:400;white-space:nowrap;margin:5px auto">The Pirate Bay,</h3></td></tr>
+                                                    <tr><td style="width:150px"><h3 style="text-align:center;font-size:13px;line-height:.2em;color:#545454;font-weight:400;white-space:nowrap;margin:5px auto">Co-founder</h3></td></tr>
                                                 </tbody>
                                             </table>
                                         </td>
-                                        <td class="speaker">
+                                        <td style="padding:initial!important">
                                             <table>
                                                 <tbody>
-                                                    <tr><td class="img-speaker"><a href="https://www.youtube.com/watch?v=tamF4p04bfk"><img class="circular" src="http://sinfo.org/img/speakers/spolsky.jpg"></a></td></tr>
-                                                    <tr><td><h2>Joel Spolsky</h2></td></tr>
-                                                    <tr><td><h3>Stack Overflow, Trello</h3></td></tr>
-                                                    <tr><td><h3>Founder</h3></td></tr>
+                                                    <tr><td style="width:150px;padding-left:15px"><a href="https://www.youtube.com/watch?v=tamF4p04bfk" target="_blank"><img src="http://xx.sinfo.org/sites/default/files/joel_spolsky.jpeg" style="width:110px;height:110px;max-height:110px;border-radius:55px"></a></td></tr>
+                                                    <tr><td style="width:150px"><h2 style="text-align:center;font-size:13px;line-height:.2em;color:#545454;font-weight:600;white-space:nowrap;margin:5px auto">Joel Spolsky</h2></td></tr>
+                                                    <tr><td style="width:150px"><h3 style="text-align:center;font-size:13px;line-height:.2em;color:#545454;font-weight:400;white-space:nowrap;margin:5px auto">Stack Overflow, Trello</h3></td></tr>
+                                                    <tr><td style="width:150px"><h3 style="text-align:center;font-size:13px;line-height:.2em;color:#545454;font-weight:400;white-space:nowrap;margin:5px auto">Founder</h3></td></tr>
                                                 </tbody>
                                             </table>
                                         </td>
@@ -273,5 +144,10 @@
                 </tbody>
             </table>
         </center>
-    </body>
-</html>
+
+
+
+
+
+
+</div></body></html>
