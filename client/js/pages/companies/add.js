@@ -25,7 +25,7 @@ module.exports = PageView.extend({
               },
               error: function(response){
                 window.alert('This company already exists.');
-                app.navigate('/companies/');
+                app.navigate('');
               },
             });
           }

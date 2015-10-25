@@ -25,7 +25,7 @@ module.exports = PageView.extend({
               },
               error: function(response){
                 window.alert('This speaker already exists.');
-                app.navigate('/speakers/');
+                app.navigate('');
               },
             });
           }

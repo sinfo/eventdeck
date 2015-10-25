@@ -36,7 +36,7 @@ module.exports = PageView.extend({
               },
               error: function(response){
                 window.alert('This member already exists.');
-                app.navigate('/members/');
+                app.navigate('');
               },
             });
           }
