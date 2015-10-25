@@ -5,6 +5,7 @@ var log = require('server/helpers/logger');
 var threadFromPath = require('server/helpers/threadFromPath');
 var parser = require('server/helpers/fieldsParser');
 var Speaker = require('server/db/speaker');
+var dupKeyParser = require('server/helpers/dupKeyParser');
 
 
 server.method('speaker.create', create, {});
@@ -23,10 +24,14 @@ function create(speaker, memberId, cb) {
 
   Speaker.create(speaker, function(err, _speaker) {
     if (err) {
+      if(err.code == 11000) {
+        log.warn({err:err, requestedSpeaker: speaker.id}, 'speaker is a duplicate');
+        return cb(Boom.conflict(dupKeyParser(err.err)+' is a duplicate'));
+      }
+
       log.error({ err: err, speaker: speaker}, 'error creating speaker');
       return cb(Boom.internal());
     }
-
     cb(null, _speaker.toObject({ getters: true }));
   });
 }

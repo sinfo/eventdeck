@@ -26,12 +26,18 @@ module.exports = PageView.extend({
             };
 
             data.mails = aux;
+
             app.members.create(data, {
               wait: true,
               success: function (model, response, options) {
+
                 app.navigate('/members/'+model.id);
                 app.members.fetch();
-              }
+              },
+              error: function(response){
+                window.alert('This member already exists.');
+                app.navigate('/members/');
+              },
             });
           }
         });

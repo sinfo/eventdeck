@@ -4,7 +4,7 @@ var server = require('server').hapi;
 var log = require('server/helpers/logger');
 var parser = require('server/helpers/fieldsParser');
 var eventModel = require('server/db/event');
-
+var dupKeyParser = require('server/helpers/dupKeyParser');
 
 server.method('event.create', create, {});
 server.method('event.update', update, {});
@@ -19,7 +19,12 @@ function create(event, memberId, cb) {
 
   eventModel.create(event, function(err, _event) {
     if (err) {
-      log.error({ err: err, event: event}, 'error creating event');
+      if(err.code == 11000) {
+        log.warn({err:err, requestedEvent: _event.id}, 'event is a duplicate');
+        return cb(Boom.conflict(dupKeyParser(err.err)+' is a duplicate'));
+      }
+
+      log.error({ err: err, _event: _event}, 'error creating event');
       return cb(Boom.internal());
     }
 
