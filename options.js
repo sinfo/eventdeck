@@ -95,7 +95,9 @@ options.roles = [
   { name: 'Strategic Partnerships', id: 'strategic-partnerships' },
   { name: 'Sys Admin', id: 'sys-admin' },
   { name: 'Logistics', id: 'logistics' },
-  { name: 'Marketing Manager', id: 'marketing-manager' }
+  { name: 'Marketing Manager', id: 'marketing-manager' },
+  { name: 'Social Networks', id: 'social-networks'},
+  { name: 'Graphics', id: 'graphics'}
 ];
 
 options.needed = [
