@@ -165,6 +165,12 @@ exports.list = {
       skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
       limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
       sort: Joi.string().description('How to sort the array'),
+      event: Joi.string().description('Select companies assigned to a specific event'),
+      member: Joi.alternatives().try(
+        Joi.boolean().valid(false),
+        Joi.string()
+      ).description('Select companies assigned to a specific user'),
+      participations: Joi.boolean().default(true).description('Based on member & event selects thow who are or not in the group')
     }
   },
   pre: [

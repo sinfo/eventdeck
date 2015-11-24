@@ -115,7 +115,7 @@ function getByEvent(eventId, query, cb) {
 
 function list(query, cb) {
   cb = cb || query; // fields is optional
-
+  var eventsFilter = {};
   var filter = {};
   var fields = parser(query.fields);
   var options = {
@@ -123,6 +123,20 @@ function list(query, cb) {
     limit: query.limit,
     sort: parser(query.sort)
   };
+
+  if (typeof query.member !== 'undefined') {
+    if (query.member === false) {
+      query.member = { $exists: false };
+    }
+    eventsFilter.member = query.member;
+  }
+  if (query.event) {
+    eventsFilter.event = query.event;
+  }
+
+  if (eventsFilter.event || eventsFilter.member) {
+    filter.participations = query.participations ? {$elemMatch : eventsFilter} : {$not: {$elemMatch : eventsFilter} };
+  }
 
   Company.find(filter, fields, options, function(err, companies) {
     if (err) {
@@ -190,4 +204,3 @@ function search(str, query, cb) {
 
   });
 }
-
