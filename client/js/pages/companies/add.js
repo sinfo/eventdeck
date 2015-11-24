@@ -22,7 +22,11 @@ module.exports = PageView.extend({
               success: function (model, response, options) {
                 app.navigate('/companies/'+model.id);
                 app.companies.fetch();
-              }
+              },
+              error: function(response){
+                window.alert('This company already exists.');
+                app.navigate('');
+              },
             });
           }
         });

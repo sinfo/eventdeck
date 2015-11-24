@@ -5,6 +5,7 @@ var log = require('server/helpers/logger');
 var threadFromPath = require('server/helpers/threadFromPath');
 var parser = require('server/helpers/fieldsParser');
 var Company = require('server/db/company');
+var dupKeyParser = require('server/helpers/dupKeyParser');
 
 
 server.method('company.create', create, {});
@@ -23,10 +24,14 @@ function create(company, memberId, cb) {
 
   Company.create(company, function(err, _company) {
     if (err) {
+      if(err.code == 11000) {
+        log.warn({err:err, requestedCompany: company.id}, 'company is a duplicate');
+        return cb(Boom.conflict(dupKeyParser(err.err)+' is a duplicate'));
+      }
+
       log.error({ err: err, company: company}, 'error creating company');
       return cb(Boom.internal());
     }
-
     cb(null, _company.toObject({ getters: true }));
   });
 }

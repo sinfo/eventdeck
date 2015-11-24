@@ -22,7 +22,11 @@ module.exports = PageView.extend({
               success: function (model, response, options) {
                 app.navigate('/speakers/'+model.id);
                 app.speakers.fetch();
-              }
+              },
+              error: function(response){
+                window.alert('This speaker already exists.');
+                app.navigate('');
+              },
             });
           }
         });

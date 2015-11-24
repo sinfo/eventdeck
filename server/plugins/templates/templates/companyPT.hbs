@@ -1,64 +1,262 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-    <head>
+
+<html><head>
+        <meta charset="utf-8">
+        <!-- NAME: 1 COLUMN -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <style type="text/css">
-            p {
-                font-size: 11pt;
-                font-family: Arial;
-                color: #000000;
-                background-color: transparent;
-                font-weight: normal;
-                font-style: normal;
-                font-variant: normal;
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Convite de participação</title>
+        <!--- <link rel="stylesheet" href="invitation.css"> -->
+
+
+
+        <style>
+
+            .box-600{
+                width: 600px;
             }
+
+            #window{
+                padding: 0px calc((100% - 600px) / 2);
+
+            }
+
+
+            #body td,
+            body{
+
+                font-family: "Tahoma", Verdana, Segoe, sans-serif;
+                padding: 0px 10px;
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+                text-align: justify;
+                font-size: 13px;
+                line-height: 1.5em;
+                color: #545454;
+            }
+
+            h2{ font-weight: 600; }
+
+            h3{ font-weight: 400; }
+
+            .heading{
+                background: #07a url('https://gallery.mailchimp.com/de57247db0922adf365af7eef/images/dd0f46b1-3749-4607-84dc-ae038a3b61ad.png') 50%/200px 150px no-repeat;
+                background-color: #07a;
+                background-image: ('https://gallery.mailchimp.com/de57247db0922adf365af7eef/images/dd0f46b1-3749-4607-84dc-ae038a3b61ad.png');
+                background-position:  50%;
+                background-size: 200px 150px;
+                background-repeat:  no-repeat;
+
+                background: #07a url('https://gallery.mailchimp.com/de57247db0922adf365af7eef/images/dd0f46b1-3749-4607-84dc-ae038a3b61ad.png') 50%/200px 150px no-repeat;
+                background: #07a url('https://gallery.mailchimp.com/de57247db0922adf365af7eef/images/dd0f46b1-3749-4607-84dc-ae038a3b61ad.png') 50%/200px 150px no-repeat;
+                height: 150px;
+
+            }
+
+
+            .signature h3{
+                line-height: .7em;
+                font-style: italic;
+            }
+
+            .innerDivider{
+                border-bottom: .1em solid gray;
+                padding: 1em 0em
+            }
+
+            .circular{
+                width: 110px;
+                height: 110px;
+                max-height: 110px;
+                border-radius: 55px;
+                -webkit-border-radius: 55px;
+                -moz-border-radius: 55px;
+            }
+
+            .innerButton{
+                font-weight: bold;
+                display: inline-block;
+                text-decoration: none;
+                color: #FFFFFF;
+                border-radius: 5px;
+                background-color: #07a;
+                padding: 18px;
+                white-space: nowrap;
+            }
+
+            .speaker{
+                padding: initial !important;
+            }
+
+            .speaker td{
+                width: 150px;
+            }
+            .speaker td.img-speaker{
+
+
+                padding-left: 15px;
+            }
+
+            .speaker h3,
+            .speaker h2{
+                text-align: center;
+                line-height: .2em;
+                white-space: nowrap;
+                margin: 5px auto; /** does not work in mail?**/
+            }
+
+            #body td.invite-outer{
+                padding: 10px 60px;
+            }
+
+            .invite-table-section{
+                vertical-align: middle;
+                align="center";
+                width: 450px;
+                background-color: whitesmoke;
+            }
+
+            .invite-table-text{
+                width:  320px;
+                line-height: 1em;
+                padding-left: 10px;
+            }
+
+            .invite-table-title {
+                text-align: right;
+                line-height: .4em;
+                padding-right: 10px;
+            }
+
+            #body td.button-outer{
+                padding: 20px 210px;
+            }
+
+
+
+
         </style>
-        <title>Convite para a 22ª edição da Semana Informática e parceria SINFO</title>
     </head>
-    <body>
-        <div style="width: 100%;">
 
-            <div style="margin: 0px auto; text-align: center; overflow: hidden;">
-              <p style="font-size: 40px; font-family: Arial; font-weight: bold; font-style: normal; font-variant: normal; text-decoration: none;">Convidamos a {{company.name}} a participar na</p>
-              <img src="http://static.sinfo.org/SINFO_22/mailTemplates/Logo.jpg" alt="SINFO - Semana Informática" />
-            </div>
+    <body style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;padding: 0px 10px;">
+        <center>
+            <table id="window" style="padding: 0px calc((100% - 600px) / 2);">
+                <tbody>
+                    <tr>
+                        <td>
+                            <table id="body">
+                                <tbody>
+                                    <tr>
+                                        <th class="heading" style="background: url(https://app.sinfo.org/static/logo2.png) 50%/350px 100px no-repeat;height: 100px;"></th>
+                                    </tr>
+                                    <tr>
+                                        <td class="box-600" style="width: 600px;font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;padding: 0px 10px;">
+                                            <h2 style="text-align: justify;font-size: 13px;line-height: 1.5em;color: #545454;font-weight: 600; padding-top: 10px;">A SINFO tem todo o prazer e vêm por este meio convidar a {{company.name}} a
 
-            <p>
-              A SINFO tem todo o prazer e vêm por este meio convidar a {{company.name}} a participar na 22ª edição da Semana Informática.
-            </p>
+                                            participar na SINFO 23.</h2>
+                                           <h3 style="text-align: justify;font-size: 13px;line-height: 1.5em;color: #545454;font-weight: 400;">A SINFO organiza neste momento o maior evento de tecnologia da Europa
 
-            <p><strong>Quando: Semana de 2ª-feira 23 de Fevereiro a 6ª-feira 27 de Fevereiro de 2015.</strong></p>
-            <p><strong>Onde: Instituto Superior Técnico, Campus Alameda, em Lisboa.</strong></p>
-            <p><strong>
-              A SINFO é neste momento o maior evento de tecnologia da Europa organizado exclusivamente por estudantes, que contará este ano com cerca de 10 000 participantes entre estudantes e parceiros, e ficaríamos honrados em contar com a vossa presença e parceria na presente edição.
-            </strong></p>
+preparado exclusivamente por uma equipa de estudantes universitários. Este
 
-            <p>
-              No nosso <a href="//sinfo.org">website</a> poderão encontrar mais informação sobre o evento, assim como as <a href="//sinfo.org/sponsor.html">condições de participação</a> standard no mesmo.
-            </p>
+ano, prevemos contar com cerca de 10 000 participantes entre estudantes e
 
-            <p>
-              Com o objectivo de continuar a crescer cada vez mais e proporcionar um melhor serviço aos nossos parceiros e aos participantes, a SINFO melhorou este ano a sua estratégia, não só para fortalecer o serviço já dado até aqui mas também para chegar muito mais além. Este ano apresentaremos, novos itens e novos pacotes, mas mais importante, novas estratégias e oportunidades para criar uma parceria forte, com o retorno esperado.
-            </p>
+parceiros e ficaríamos honrados em contar com a vossa presença e parceria na
 
-            <p>
-              Através de parcerias com faculdades como a FCUL, FCT-UNL, ISCTE, FEUP, entre muitas outras, a {{company.name}} terá a possibilidade de estar presente junto das melhores faculdades do país entrando em contacto com os melhores alunos do país.
-            </p>
+presente edição.</h3>
 
-            <p>
-              Procurando chegar a uma parceria que possa potenciar ainda mais a {{company.name}} e ajudar a sobrelevar os seus objectivos e metas delineados e por forma a podermos apresentar estas e muitas outras novidades que preparamos a partir deste ano, assim como apresentar os dados que obtivemos e as previsões que temos para o futuro, teríamos todo o gosto em reunir com a {{company.name}} na data que vos for mais conveniente.
-            </p>
+                                        </td>
+                                    </tr>
 
-            <p>
-              Para qualquer questão e para marcação da reunião não hesite em contactar-me via email ou telefone (ver assinatura do email).
-            </p>
+                                    <tr>
+                                        <td class="invite-outer box-600" style="width: 600px;font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;padding: 10px 60px;">
+                                            <table id="invite-table">
+                                                <tbody>
+                                                    <tr class="invite-table-section" style="vertical-align: middle;align=&quot;center&quot;: ;width: 450px;background-color: whitesmoke;">
+                                                        <td style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;padding: 0px 10px;"><h2 class="invite-table-title" style="text-align: right;font-size: 13px;line-height: .4em;color: #545454;font-weight: 600;padding-right: 10px;">Evento:</h2></td>
+                                                        <td style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;padding: 0px 10px;"><h3 class="invite-table-text" style="text-align: justify;font-size: 13px;line-height: 1em;color: #545454;font-weight: 400;width: 320px;padding-left: 10px;">SINFO 23</h3></td>
+                                                    </tr>
+                                                    <tr class="invite-table-section" style="vertical-align: middle;align=&quot;center&quot;: ;width: 450px;background-color: whitesmoke;">
+                                                        <td style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;padding: 0px 10px;"><h2 class="invite-table-title" style="text-align: right;font-size: 13px;line-height: .4em;color: #545454;font-weight: 600;padding-right: 10px;">Quando:</h2></td>
+                                                        <td style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;padding: 0px 10px;"><h3 class="invite-table-text" style="text-align: justify;font-size: 13px;line-height: 1em;color: #545454;font-weight: 400;width: 320px;padding-left: 10px;">De 22 Fevereiro a 26 Fevereiro, 2016</h3></td>
+                                                    </tr>
+                                                    <tr class="invite-table-section" style="vertical-align: middle;align=&quot;center&quot;: ;width: 450px;background-color: whitesmoke;">
+                                                        <td style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;padding: 0px 10px;"><h2 class="invite-table-title" style="text-align: right;font-size: 13px;line-height: .4em;color: #545454;font-weight: 600;padding-right: 10px;">Onde:</h2></td>
+                                                        <td style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;padding: 0px 10px;"><h3 class="invite-table-text" style="text-align: justify;font-size: 13px;line-height: 1em;color: #545454;font-weight: 400;width: 320px;padding-left: 10px;">Instituto Superior Técnico - Campus Alameda - Lisboa</h3></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
 
-            <p>
-              Agradecidos pela atenção prestada e esperando uma resposta favorável, apresentamos os nossos mais cordiais cumprimentos.
-            </p>
-            <p>
-                Pela Equipa da SINFO,
-            </p>
-        </div>
-    </body>
-</html>
+                                    <tr>
+                                        <td class="box-600" style="width: 600px;font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;padding: 0px 10px;">
+
+<h3 style="text-align: justify;font-size: 13px;line-height: 1.5em;color: #545454;font-weight: 400; padding-top:10px;">Nesta edição a SINFO voltou a inovar. Apresentaremos
+
+novas e melhores oportunidades para criar uma parceria forte e com o retorno
+
+esperado.</h3>
+                                            <h3 style="text-align: justify;font-size: 13px;line-height: 1.5em;color: #545454;font-weight: 400;">No nosso website poderão encontrar mais informação sobre o evento, assim como
+
+as condições de participação no mesmo.</h3>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="button-outer box-600" style="width: 600px;font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;padding: 20px 175px;">
+                                            <a class="innerButton" title="Visit SINFO" href="https://www.sinfo.org/#sponsor" target="_blank" style="font-weight: bold;display: inline-block;text-decoration: none;color: #FFFFFF;border-radius: 5px;background-color: #07a;padding: 18px;white-space: nowrap;">Visite o nosso Website</a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="box-600" style="width: 600px;font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;padding: 0px 10px;">
+
+                                             <h3 style="text-align: justify;font-size: 13px;line-height: 1.5em;color: #545454;font-weight: 400;">Teríamos todo o gosto
+
+em reunir com a {{company.name}} na data que vos for mais conveniente. Desta
+
+forma poderíamos apresentar todas as novidades que preparámos para a SINFO 23,
+
+assim como apresentar alguns dados obtidos em edições anteriores e algumas
+
+previsões que temos para o futuro.</h3>
+
+
+                                            <h3 style="text-align: justify;font-size: 13px;line-height: 1.5em;color: #545454;font-weight: 400;">No caso de ter qualquer questão e de forma a marcarmos a referida reunião não
+
+hesite em contactar-me via email ou telefone (ver assinatura do email).</h3>
+                                            <h3 style="text-align: justify;font-size: 13px;line-height: 1.5em;color: #545454;font-weight: 400;">Com os melhores cumprimentos,</h3>
+                                            <div class="signature">
+
+                                                <h3 style="text-align: justify;font-size: 13px;line-height: .7em;color: #545454;font-weight: 400;font-style: italic;">Pela Equipa da SINFO,</h3>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="box-600 innerDivider" style="width: 600px;border-bottom: .1em solid gray;padding: 0px 10px;font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="speakersRow box-600" style="width: 600px;font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;padding: 0px 10px;">
+                                            <h2 style="text-align: justify;font-size: 13px;line-height: 1.5em;color: #545454;font-weight: 600;"></h2>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </center>
+
+
+
+
+
+
+</body></html>
