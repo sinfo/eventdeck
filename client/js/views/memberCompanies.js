@@ -23,20 +23,20 @@ module.exports = View.extend({
     var self = this;
     this.collection = null;
 
-    var companiesCollection = AmpersandRestCollection.extend({
+    var CompaniesCollection = AmpersandRestCollection.extend({
       url: '/api/companies?event=' + app.me.selectedEvent + '&member=' + self.model.id,
       model: Company
     });
-    companiesCollection = new companiesCollection();
+    var companies = new CompaniesCollection();
 
     var options = {
       success: function () {
-        self.collection = companiesCollection;
+        self.collection = companies;
         self.render();
       }
-    }
+    };
 
-    companiesCollection.fetch(options);
+    companies.fetch(options);
   },
   render: function () {
     this.renderWithTemplate();

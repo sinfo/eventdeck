@@ -21,23 +21,22 @@ module.exports = View.extend({
   },
   initialize: function() {
     var self = this;
-    console.log("init");
     self.collection = null;
 
-    var speakersCollection = AmpersandRestCollection.extend({
+    var SpeakersCollection = AmpersandRestCollection.extend({
       url: '/api/speakers?event=' + app.me.selectedEvent + '&member=' + self.model.id,
       model: Speaker
     });
-    speakersCollection = new speakersCollection();
+    var speakers = new SpeakersCollection();
 
     var options = {
       success: function () {
-        self.collection = speakersCollection;
+        self.collection = speakers;
         self.render();
       }
-    }
+    };
 
-    speakersCollection.fetch(options);
+    speakers.fetch(options);
   },
   render: function () {
     this.renderWithTemplate();

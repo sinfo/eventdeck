@@ -55,8 +55,8 @@ module.exports = {
     self.router = new Router();
 
     this.fetchInitialData(function(){
-      
-      self.members.url += '?event=' + app.me.selectedEvent
+
+      self.members.url += '?event=' + app.me.selectedEvent;
       
       // wait for document ready to render our main view
       // this ensures the document has a body, etc.
