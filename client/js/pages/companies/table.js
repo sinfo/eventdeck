@@ -1,5 +1,5 @@
 /*global app, alert*/
-var PageView = require('client/js/pages/base');
+var PageView = require('ampersand-infinite-scroll');
 var templates = require('client/js/templates');
 var MemberCompaniesView = require('client/js/views/memberCompanies');
 var AmpersandCollection = require('ampersand-collection');
@@ -14,25 +14,22 @@ module.exports = PageView.extend({
   render: function () {
     this.renderWithTemplate();
 
-    if (!this.collection.length) {
+    this.collection.sortBy('name');
+    this.renderWithTemplate();
+    this.renderCollection(this.collection, MemberCompaniesView, 'companies-list');
+    //this.renderCards(this.collection);
+    if (this.collection.length < this.collection.data.limit) {
       this.fetchCollection();
-    }
-    else {
-      this.renderCards(this.collection);
     }
   },
 
   fetchCollection: function () {
-    var that = this;
-    this.collection.fetch({
-      success: function () {
-        that.collection.comparator = 'name';
-        that.collection.sort();
-        that.renderCards(that.collection);
-      }
-    });
-
+    this.collection.fetchPage({reset: true});
     return false;
+  },
+
+  resetCollection: function () {
+    this.collection.reset();
   },
 
   renderCards: function (collection) {
@@ -66,6 +63,6 @@ module.exports = PageView.extend({
   },
 
   initialize: function () {
-    app.companies.fetch();
+    //app.companies.fetch();
   }
 });
