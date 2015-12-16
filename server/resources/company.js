@@ -144,6 +144,16 @@ function list(query, cb) {
       return cb(Boom.internal());
     }
 
+    if(query.random){
+      var aux = companies;
+      companies = [];
+
+      for(var i=0;i<30;i++){
+        var j = Math.floor((Math.random() * companies.length));
+        companies[i] = aux[j];
+      }
+    }
+
     cb(null, companies);
   });
 }

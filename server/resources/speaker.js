@@ -119,7 +119,6 @@ function list(query,cb) {
     limit: query.limit,
     sort: parser(query.sort)
   };
-
   if (typeof query.member !== 'undefined') {
     if (query.member === false) {
       query.member = { $exists: false };
@@ -140,6 +139,15 @@ function list(query,cb) {
       return cb(Boom.internal());
     }
 
+    if(query.random){
+      var aux = speaker;
+      speaker = [];
+
+      for(var i=0;i<30;i++){
+        var j = Math.floor((Math.random() * speaker.length));
+        speaker[i] = aux[j];
+      }
+    }
     cb(null, speaker);
   });
 }

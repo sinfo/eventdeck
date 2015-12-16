@@ -6,7 +6,7 @@ var speaker = require('./speaker');
 
 module.exports = AmpCollection.extend({
   model: speaker,
-  url: '/api/speakers',
+  url: '/api/speakers?random=true',
   data: {
     sort: '-updated',
     limit: 30

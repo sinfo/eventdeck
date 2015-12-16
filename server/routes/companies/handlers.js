@@ -166,6 +166,7 @@ exports.list = {
       limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
       sort: Joi.string().description('How to sort the array'),
       event: Joi.string().description('Select companies assigned to a specific event'),
+      random: Joi.boolean().description('wether we want to return random companies'),
       member: Joi.alternatives().try(
         Joi.boolean().valid(false),
         Joi.string()

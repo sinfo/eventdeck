@@ -6,7 +6,7 @@ var company = require('./company');
 
 module.exports = AmpCollection.extend({
   model: company,
-  url: '/api/companies',
+  url: '/api/companies?random=true',
   data: {
     sort: '-updated',
     limit: 30
