@@ -5,7 +5,6 @@ var MemberCompaniesView = require('client/js/views/memberCompanies');
 var AmpersandCollection = require('ampersand-collection');
 var $ = require('client/js/helpers/jquery');
 
-
 module.exports = PageView.extend({
   pageTitle: 'Companies by Member',
 
@@ -17,7 +16,7 @@ module.exports = PageView.extend({
     this.collection.sortBy('name');
     this.renderWithTemplate();
     this.renderCollection(this.collection, MemberCompaniesView, 'companies-list');
-    //this.renderCards(this.collection);
+
     if (this.collection.length < this.collection.data.limit) {
       this.fetchCollection();
     }
@@ -60,9 +59,5 @@ module.exports = PageView.extend({
         this.renderCollection(collections[m], MemberCompaniesView, columns[m]);
       }
     }
-  },
-
-  initialize: function () {
-    //app.companies.fetch();
   }
 });

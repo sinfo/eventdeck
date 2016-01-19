@@ -5,10 +5,13 @@ var Member = require('./member');
 
 module.exports = AmpCollection.extend({
   model: Member,
-  url: '/api/members',
+  url: "/api/members",
   data: {
     sort: 'id',
     limit: 30
+  },
+  initialize: function() {
+  	this.url += "?event=" + app.me.selectedEvent;
   }
 }, SingleRequest, PaginationMixin);
 
