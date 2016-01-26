@@ -12,16 +12,15 @@ server.method('event.get', get, {});
 server.method('event.list', list, {});
 server.method('event.remove', remove, {});
 
-
-function create(event, memberId, cb) {
+function create (event, memberId, cb) {
   event.id = slug(event.id || event.name).toLowerCase();
   event.updated = Date.now();
 
-  eventModel.create(event, function(err, _event) {
+  eventModel.create(event, function (err, _event) {
     if (err) {
-      if(err.code == 11000) {
-        log.warn({err:err, requestedEvent: _event.id}, 'event is a duplicate');
-        return cb(Boom.conflict(dupKeyParser(err.err)+' is a duplicate'));
+      if (err.code == 11000) {
+        log.warn({err: err, requestedEvent: _event.id}, 'event is a duplicate');
+        return cb(Boom.conflict(dupKeyParser(err.err) + ' is a duplicate'));
       }
 
       log.error({ err: err, _event: _event}, 'error creating event');
@@ -32,10 +31,10 @@ function create(event, memberId, cb) {
   });
 }
 
-function update(id, event, cb) {
+function update (id, event, cb) {
   event.updated = Date.now();
 
-  eventModel.findOneAndUpdate({id: id}, event, function(err, _event) {
+  eventModel.findOneAndUpdate({id: id}, event, function (err, _event) {
     if (err) {
       log.error({ err: err, event: id}, 'error updating event');
       return cb(Boom.internal());
@@ -49,12 +48,12 @@ function update(id, event, cb) {
   });
 }
 
-function get(id, query, cb) {
+function get (id, query, cb) {
   cb = cb || query; // fields is optional
 
   var fields = parser(query.fields);
 
-  eventModel.findOne({id: id}, fields, function(err, event) {
+  eventModel.findOne({id: id}, fields, function (err, event) {
     if (err) {
       log.error({ err: err, event: id}, 'error getting event');
       return cb(Boom.internal());
@@ -68,7 +67,7 @@ function get(id, query, cb) {
   });
 }
 
-function list(query, cb) {
+function list (query, cb) {
   cb = cb || query; // fields is optional
 
   var filter = {};
@@ -79,7 +78,7 @@ function list(query, cb) {
     sort: parser(query.sort)
   };
 
-  eventModel.find(filter, fields,options, function(err, events) {
+  eventModel.find(filter, fields, options, function (err, events) {
     if (err) {
       log.error({ err: err}, 'error getting all events');
       return cb(Boom.internal());
@@ -89,8 +88,8 @@ function list(query, cb) {
   });
 }
 
-function remove(id, cb) {
-  eventModel.findOneAndRemove({id: id}, function(err, event){
+function remove (id, cb) {
+  eventModel.findOneAndRemove({id: id}, function (err, event) {
     if (err) {
       log.error({ err: err, event: id}, 'error deleting event');
       return cb(Boom.internal());

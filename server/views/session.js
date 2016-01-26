@@ -24,6 +24,7 @@ function renderObject(model, isAuthenticated) {
     date: model.date || '',
     duration: model.duration || '',
     updated: model.updated || '',
+    event: model.event,
     tickets: model.tickets && {
       needed: model.tickets.needed,
       start: model.tickets.start,

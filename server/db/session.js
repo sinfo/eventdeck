@@ -22,6 +22,7 @@ var schema = new mongoose.Schema({
     end: Date,
     max: Number
   },
+  event: String,
   surveyNeeded: Boolean
 });
 

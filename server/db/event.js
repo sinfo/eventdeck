@@ -5,6 +5,7 @@ var schema = new mongoose.Schema({
   name: String,
   kind: String,
   description: String,
+  public: { type: Boolean, default: false }, // Should it appear on the web site
   date: { type: Date },
   duration: { type: Date },
   updated: { type: Date }

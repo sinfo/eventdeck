@@ -122,6 +122,7 @@ exports.list = {
       skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
       limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
       sort: Joi.string().description('How to sort the array'),
+      event: Joi.string().description('Select sesions assigned to a specific event')
     }
   },
   pre: [

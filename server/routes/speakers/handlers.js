@@ -130,7 +130,7 @@ exports.list = {
     strategies: ['session'],
     mode: 'try'
   },
-  tags: ['api','speaker'],
+  tags: ['api', 'speaker'],
   validate: {
     headers: Joi.object({
       'Only-Public': Joi.boolean().description('Set to true if you only want to receive the public list, even if you are authenticated')
@@ -161,7 +161,7 @@ exports.list = {
 
 exports.remove = {
   auth: 'session',
-  tags: ['api','speaker'],
+  tags: ['api', 'speaker'],
   validate: {
     params: {
      id: Joi.string().required().description('id of the speaker we want to remove'),
