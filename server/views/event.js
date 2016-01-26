@@ -11,7 +11,7 @@ module.exports = function render (content, isAuthenticated) {
   } else {
     // Hack, this shouldn't probably be done here, but as all the related logic is here, let's keep on...
     if (isAuthenticated === false) {
-      if (!content.public) return Boom.notFound();
+      if (!content.public) { return Boom.notFound(); }
     }
   }
 

@@ -78,7 +78,7 @@ function list(query, cb) {
     limit: query.limit,
     sort: parser(query.sort)
   };
-  if (query.event) filter.event = query.event;
+  if (query.event) { filter.event = query.event; }
 
   Session.find(filter, fields, options, function (err, sessions) {
     if (err) {
