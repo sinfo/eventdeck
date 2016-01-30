@@ -1,10 +1,9 @@
 /*global app, alert*/
-var PageView = require('client/js/pages/base');
+var PageView = require('ampersand-infinite-scroll');
 var templates = require('client/js/templates');
 var MemberSpeakersView = require('client/js/views/memberSpeakers');
 var AmpersandCollection = require('ampersand-collection');
 var $ = require('client/js/helpers/jquery');
-
 
 module.exports = PageView.extend({
   pageTitle: 'Speakers by Member',
@@ -14,25 +13,22 @@ module.exports = PageView.extend({
   render: function () {
     this.renderWithTemplate();
 
-    if (!this.collection.length) {
+    this.collection.sortBy('name');
+    this.renderWithTemplate();
+    this.renderCollection(this.collection, MemberSpeakersView, 'speakers-list');
+    //this.renderCards(this.collection);
+    if (this.collection.length < this.collection.data.limit) {
       this.fetchCollection();
-    }
-    else {
-      this.renderCards(this.collection);
     }
   },
 
   fetchCollection: function () {
-    var that = this;
-    this.collection.fetch({
-      success: function () {
-        that.collection.comparator = 'name';
-        that.collection.sort();
-        that.renderCards(that.collection);
-      }
-    });
-
+    this.collection.fetchPage({reset: true});
     return false;
+  },
+
+  resetCollection: function () {
+    this.collection.reset();
   },
 
   renderCards: function (collection) {
@@ -55,7 +51,7 @@ module.exports = PageView.extend({
         collections.push(o);
       }
 
-      for (var k = 0, l = 0; k < collection.models.length; k++, l = (l+1) % collections.length) {
+      for (var k = 0, l = 0; k < this.collection.length; k++, l = (l+1) % collections.length) {
         collections[l].models.push(collection.models[k]);
       }
 
@@ -66,6 +62,6 @@ module.exports = PageView.extend({
   },
 
   initialize: function () {
-    app.speakers.fetch();
+    //app.speakers.fetch();
   }
 });

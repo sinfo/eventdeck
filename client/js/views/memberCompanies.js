@@ -2,7 +2,7 @@
 var View = require('ampersand-view');
 var templates = require('client/js/templates');
 var Company = require('client/js/models/company');
-var AmpersandCollection = require('ampersand-collection');
+var AmpersandRestCollection = require('ampersand-rest-collection');
 
 module.exports = View.extend({
   template: templates.cards.memberCompanies,
@@ -22,14 +22,21 @@ module.exports = View.extend({
   initialize: function() {
     var self = this;
     this.collection = null;
-    app.companies.on('sync', function() {
-      var companies = app.companies.filter(function(company){
-        return company.participation && company.participation.member == self.model.id;
-      });
-      self.collection = new AmpersandCollection(companies, {model: Company});
-      self.render();
-    });
 
+    var CompaniesCollection = AmpersandRestCollection.extend({
+      url: '/api/companies?event=' + app.me.selectedEvent + '&member=' + self.model.id,
+      model: Company
+    });
+    var companies = new CompaniesCollection();
+
+    var options = {
+      success: function () {
+        self.collection = companies;
+        self.render();
+      }
+    };
+
+    companies.fetch(options);
   },
   render: function () {
     this.renderWithTemplate();

@@ -1,8 +1,8 @@
 /*global app*/
 var View = require('ampersand-view');
 var templates = require('client/js/templates');
-var Company = require('client/js/models/speaker');
-var AmpersandCollection = require('ampersand-collection');
+var Speaker = require('client/js/models/speaker');
+var AmpersandRestCollection = require('ampersand-rest-collection');
 
 module.exports = View.extend({
   template: templates.cards.memberSpeakers,
@@ -21,15 +21,22 @@ module.exports = View.extend({
   },
   initialize: function() {
     var self = this;
-    this.collection = null;
-    app.speakers.on('sync', function() {
-      var speakers = app.speakers.filter(function(speaker){
-        return speaker.participation && speaker.participation.member == self.model.id;
-      });
-      self.collection = new AmpersandCollection(speakers, {model: Company});
-      self.render();
-    });
+    self.collection = null;
 
+    var SpeakersCollection = AmpersandRestCollection.extend({
+      url: '/api/speakers?event=' + app.me.selectedEvent + '&member=' + self.model.id,
+      model: Speaker
+    });
+    var speakers = new SpeakersCollection();
+
+    var options = {
+      success: function () {
+        self.collection = speakers;
+        self.render();
+      }
+    };
+
+    speakers.fetch(options);
   },
   render: function () {
     this.renderWithTemplate();

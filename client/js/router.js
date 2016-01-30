@@ -33,6 +33,7 @@ var TopicAddPage = require('./pages/topics/add');
 var TopicEditPage = require('./pages/topics/edit');
 var TopicViewPage = require('./pages/topics/view');
 
+var MembersCurrentParticipation = require('./models/membersCurrentParticipation');
 
 module.exports = Router.extend({
   routes: {
@@ -85,7 +86,7 @@ module.exports = Router.extend({
 
   members: function () {
     this.trigger('page', new Members({
-      collection: app.members
+      collection: new MembersCurrentParticipation()
     }));
   },
 
@@ -130,7 +131,7 @@ module.exports = Router.extend({
 
   companiesTable: function () {
     this.trigger('page', new CompanyMemberTable({
-      collection: app.members
+      collection: new MembersCurrentParticipation()
     }));
   },
 
@@ -182,7 +183,7 @@ module.exports = Router.extend({
 
   speakersTable: function () {
     this.trigger('page', new SpeakerMemberTable({
-      collection: app.members
+      collection: new MembersCurrentParticipation()
     }));
   },
 
