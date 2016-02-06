@@ -21,6 +21,7 @@ exports.create = {
       companies: Joi.array().description('companies associated to the session'),
       date: Joi.date().description('start date of the session'),
       duration: Joi.date().description('duration of the session'),
+      event: Joi.string().description('event to which the session is associated with'),
       tickets: {
         needed: Joi.boolean().description('Says if the session has tickets or not'),
         start: Joi.date().description('The date when the tickets become available'),
@@ -59,6 +60,7 @@ exports.update = {
       companies: Joi.array().description('companies associated to the session'),
       date: Joi.date().description('start date of the session'),
       duration: Joi.date().description('duration of the session'),
+      event: Joi.string().description('event to which the session is associated with'),
       tickets: {
         needed: Joi.boolean().description('Says if the session has tickets or not'),
         start: Joi.date().description('The date when the tickets become available'),
@@ -122,7 +124,7 @@ exports.list = {
       skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
       limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
       sort: Joi.string().description('How to sort the array'),
-      event: Joi.string().description('Select sesions assigned to a specific event')
+      event: Joi.string().description('Select sessions assigned to a specific event')
     }
   },
   pre: [

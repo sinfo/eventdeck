@@ -55,6 +55,17 @@ module.exports = FormView.extend({
       }),
       new SelectView({
         template: templates.includes.formSelect(),
+        name: 'event',
+        label: 'Event',
+        parent: this,
+        options: app.events.map(function (s) { return s.name; }),
+        unselectedText: app.events.models[0].name,
+        required: false,
+        value: this.model && this.model.event || app.events.find(function(s){return s.id == app.me.selectedEvent;}).name,
+        yieldModel: false,
+      }),
+      new SelectView({
+        template: templates.includes.formSelect(),
         name: 'kind',
         label: 'Kind',
         parent: this,

@@ -52,7 +52,8 @@ module.exports = AmpModel.extend({
     duration: ['date'],
     updated: ['date'],
     companies: ['array'],
-    surveyNeeded: ['boolean']
+    surveyNeeded: ['boolean'],
+    event: ['string']
   },
   children:{
     tickets: Tickets

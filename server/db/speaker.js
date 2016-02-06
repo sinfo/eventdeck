@@ -15,7 +15,8 @@ var schema = new mongoose.Schema({
     kind: String
   }],
   updated: { type: Date, default: Date.now },
-  feedback: String
+  feedback: String,
+  random_sample: Number
 });
 
 schema.virtual('thread').get(function () {

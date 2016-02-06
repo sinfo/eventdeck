@@ -17,6 +17,12 @@ module.exports = PageView.extend({
           submitCallback: function (data) {
             data = _.compactObject(data);
 
+            if(data.event){
+              console.log(data.event);
+
+              data.event = app.events.find(function(s){return s.name == data.event;}).id;
+            }
+
             if (data['session-date']) {
               data.date = data['session-date'];
               delete data['session-date'];
