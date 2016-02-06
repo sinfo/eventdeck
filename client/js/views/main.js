@@ -167,7 +167,7 @@ module.exports = View.extend({
     app.sessions.reset();
     app.sessions.initialize();
     app.sessions.fetch();
-    app.sessions.render();
+    app.currentPage.fetchCollection();
   },
 
   handleSearchKeydown: function (e){
