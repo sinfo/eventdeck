@@ -72,7 +72,7 @@ exports.get = {
       id: Joi.string().required().description('id of the event we want to retrieve')
     },
     query: {
-      fields: Joi.string().default('id,name,kind,date').description('Fields we want to retrieve')
+      fields: Joi.string().description('Fields we want to retrieve')
     }
   },
   pre: [
