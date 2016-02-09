@@ -16,6 +16,7 @@ var Events = require('./models/events');
 var Members = require('./models/members');
 var Companies = require('./models/companies');
 var Sessions = require('./models/sessions');
+var SessionsEvent = require('./models/sessionsEvent');
 var Speakers = require('./models/speakers');
 var Tags = require('./models/tags');
 var Topics = require('./models/topics');
@@ -72,7 +73,6 @@ module.exports = {
 
         // we have what we need, we can now start our router and show the appropriate page
         self.router.history.start({pushState: true, root: '/'});
-
         //401 navigate to login
         if(!self.me.authenticated){
           return self.router.history.navigate('/login', {trigger: true});
@@ -90,7 +90,6 @@ module.exports = {
           success: function(model, response, options) {
             log('Hello ' + model.name + '!');
             model.authenticated = true;
-
             self.socket.init();
             cbAsync();
           },
@@ -105,6 +104,7 @@ module.exports = {
         self.events.fetch({
           success: function(collection, response, options) {
             app.me.selectedEvent = collection.toJSON()[0].id;
+            app.sessions = new SessionsEvent();
             log('Got '+collection.length+' events, '+app.me.selectedEvent+' is the default one. ', collection.toJSON());
             cbAsync();
           },

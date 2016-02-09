@@ -164,6 +164,10 @@ module.exports = View.extend({
     app.companies.fetchPage();
     app.speakers.reset();
     app.speakers.fetchPage();
+    app.sessions.reset();
+    app.sessions.initialize();
+    app.sessions.fetch();
+    app.currentPage.fetchCollection();
   },
 
   handleSearchKeydown: function (e){

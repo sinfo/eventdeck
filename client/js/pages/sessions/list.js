@@ -34,6 +34,10 @@ module.exports = PageView.extend({
 
     return false;
   },
+  render: function(){
+      this._initializeSubviews();
+      return PageView.prototype.render.apply(this, arguments);
+  },
   hide: function(){
     if(!this.hidden){
       this.queryByHook('awesome-sidebar').style.display = 'none';

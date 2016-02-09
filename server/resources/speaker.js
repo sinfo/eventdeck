@@ -117,7 +117,8 @@ function list(query,cb) {
   var options = {
     skip: query.skip,
     limit: query.limit,
-    sort: parser(query.sort)
+    sort: parser(query.sort),
+    random_sample:Math.floor((Math.random()*50)+1)
   };
 
   if (typeof query.member !== 'undefined') {

@@ -21,6 +21,9 @@ module.exports = PageView.extend({
     'model.name': {
       hook: 'name'
     },
+    'model.event': {
+      hook: 'event'
+    },
     'model.kind': {
       hook: 'kind'
     },
@@ -80,6 +83,8 @@ module.exports = PageView.extend({
       self.model = model;
 
       log('Got session', model.name);
+
+      model.event = app.events.find(function(s){return s.id == model.event;}).name; 
     });
   },
   subviews: {
