@@ -17,6 +17,14 @@ module.exports = PageView.extend({
       }
       self.model = model;
     });
+
+    self.model.speakersDetails.fetch(function() {
+      self.render();
+    });
+    self.model.companiesDetails.fetch(function() {
+      self.render();
+    });
+
   },
   subviews: {
     form: {
@@ -32,6 +40,7 @@ module.exports = PageView.extend({
       prepareView: function (el) {
         var self = this;
         var model = this.model;
+
         return new SpeakerForm({
           el: el,
           model: this.model,

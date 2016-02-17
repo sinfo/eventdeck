@@ -160,7 +160,7 @@ module.exports = FormView.extend({
           return r.id;
         }) || [],
         isMultiple: true,
-        options: app.speakers && app.speakers.map(function (m) { return [m.id, m.name]; }),
+        options: this.model.speakers && this.model.speakers.map(function (m) { return [m.id, m.name]; }),
       }),
       new ChosenView({
         label: 'Companies',
