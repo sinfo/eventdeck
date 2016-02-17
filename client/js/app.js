@@ -16,7 +16,6 @@ var Events = require('./models/events');
 var Members = require('./models/members');
 var Companies = require('./models/companies');
 var Sessions = require('./models/sessions');
-var SessionsEvent = require('./models/sessionsEvent');
 var Speakers = require('./models/speakers');
 var Tags = require('./models/tags');
 var Topics = require('./models/topics');
@@ -104,7 +103,6 @@ module.exports = {
         self.events.fetch({
           success: function(collection, response, options) {
             app.me.selectedEvent = collection.toJSON()[0].id;
-            app.sessions = new SessionsEvent();
             log('Got '+collection.length+' events, '+app.me.selectedEvent+' is the default one. ', collection.toJSON());
             cbAsync();
           },

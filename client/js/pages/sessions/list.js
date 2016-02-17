@@ -28,6 +28,7 @@ module.exports = PageView.extend({
   fetchCollection: function () {
     var self = this;
     log('Fetching sessions');
+    this.collection.update();
     this.collection.fetch({success: function () {
       self.render();
     }});

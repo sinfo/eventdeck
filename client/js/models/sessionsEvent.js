@@ -7,5 +7,8 @@ module.exports = AmpCollection.extend({
   url: '/api/sessions',
   initialize: function() {
   	this.url = '/api/sessions?event=' + app.me.selectedEvent;
+  },
+  update:function(){
+  	this.url = '/api/sessions?event=' + app.me.selectedEvent;
   }
 });
