@@ -18,6 +18,7 @@ var CompanyViewPage = require('./pages/companies/view');
 var CompanyMemberTable = require('./pages/companies/table');
 
 var Sessions = require('./pages/sessions/list');
+var SessionsEvent = require('client/js/models/sessionsEvent');
 var SessionAddPage = require('./pages/sessions/add');
 var SessionEditPage = require('./pages/sessions/edit');
 var SessionViewPage = require('./pages/sessions/view');
@@ -138,7 +139,7 @@ module.exports = Router.extend({
 
   sessions: function () {
    this.trigger('page', new Sessions({
-     collection: app.sessions
+     collection: new SessionsEvent()
    }));
   },
 
