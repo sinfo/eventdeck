@@ -17,7 +17,7 @@ server.method('session.search', search, {});
 
 function create(session, memberId, cb) {
   session.updated = Date.now();
-  session.id = slug(session.id || session.name).toLowerCase();
+  session.id = slug((session.id || session.name) + '-' + session.event).toLowerCase();
 
   Session.create(session, function (err, _session) {
     if (err) {
