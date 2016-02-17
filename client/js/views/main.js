@@ -165,7 +165,6 @@ module.exports = View.extend({
     app.speakers.reset();
     app.speakers.fetchPage();
     app.currentPage.fetchCollection();
-    app.currentPage.render();
   },
 
   handleSearchKeydown: function (e){
