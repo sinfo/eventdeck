@@ -9,7 +9,6 @@ var populate = require('client/js/helpers/populate');
 var _ = require('client/js/helpers/underscore');
 var AmpersandRestCollection = require('ampersand-rest-collection');
 
-
 var OptionsCollection = AmpersandRestCollection.extend({
     url: '/api/members?fields=id,name',
 });

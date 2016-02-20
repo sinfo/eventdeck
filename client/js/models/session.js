@@ -33,12 +33,12 @@ var SpeakerCollection = AmpCollection.extend({
   model: Speaker
 });
 
-var SpeakersDetailsCollection = AmpCollection.extend({
-  url: '/api/speakers?fields=id,name',
+var CompaniesListCollection = AmpRestCollection.extend({
+  url: '/api/companies?fields=id,name',
 });
 
-var CompaniesDetailsCollection = AmpCollection.extend({
-  url: '/api/companies?fields=id,name',
+var SpeakersListCollection = AmpRestCollection.extend({
+  url: '/api/speakers?fields=id,name',
 });
 
 module.exports = AmpModel.extend({
@@ -61,8 +61,8 @@ module.exports = AmpModel.extend({
   },
   collections: {
     speakers: SpeakerCollection,
-    speakersDetails: SpeakersDetailsCollection,
-    companiesDetails: CompaniesDetailsCollection,
+    speakersList: SpeakersListCollection,
+    companiesList: CompaniesListCollection,
   },
   derived: {
     thread: {

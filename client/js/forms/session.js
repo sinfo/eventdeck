@@ -160,7 +160,7 @@ module.exports = FormView.extend({
           return r.id;
         }) || [],
         isMultiple: true,
-        options: this.model.speakers && this.model.speakers.map(function (m) { return [m.id, m.name]; }),
+        options: this.speakersList && this.speakersList.map(function (m) { return [m.id, m.name]; }) || [],
       }),
       new ChosenView({
         label: 'Companies',
@@ -168,7 +168,7 @@ module.exports = FormView.extend({
         unselectedText: 'Select one or more',
         value: this.model && this.model.companies,
         isMultiple: true,
-        options: app.companies && app.companies.map(function (m) { return [m.id, m.name]; }),
+        options: this.companiesList && this.companiesList.map(function (m) { console.log(m); return [m.id, m.name]; }) || [],
       }),
       new CheckBoxView({
         name: 'tickets.needed',

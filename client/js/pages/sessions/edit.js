@@ -5,7 +5,15 @@ var templates = require('client/js/templates');
 var SessionForm = require('client/js/forms/session');
 var _ = require('client/js/helpers/underscore');
 var moment = require('moment');
+var AmpRestCollection = require('ampersand-rest-collection');
 
+var CompaniesListCollection = AmpRestCollection.extend({
+  url: '/api/companies?fields=id,name',
+});
+
+var SpeakersListCollection = AmpRestCollection.extend({
+  url: '/api/speakers?fields=id,name',
+});
 
 module.exports = PageView.extend({
   pageTitle: 'Edit session',
@@ -18,6 +26,20 @@ module.exports = PageView.extend({
       }
       self.model = model;
     });
+
+    self.companiesList = new CompaniesDetailsCollection();
+    self.companiesList.fetch({success: function(collection, response, options) {
+      self.render()
+    }});
+
+    self.speakersList = new SpeakersDetailsCollection();
+    self.speakersList.fetch({success: function(collection, response, options) {
+      self.render()
+    }});
+  },
+  render: function(){
+    this._initializeSubviews();
+    return PageView.prototype.render.apply(this, arguments);
   },
   subviews: {
     form: {
@@ -40,7 +62,7 @@ module.exports = PageView.extend({
             data = _.compactObject(data);
 
             if (data.event) {
-              data.event = app.events.find(function(s){return s.name == data.event;}).id; 
+              data.event = app.events.find(function(s){return s.name == data.event;}).id;
             }
 
             if (data['session-date']) {

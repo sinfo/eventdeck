@@ -4,15 +4,42 @@ var templates = require('client/js/templates');
 var SessionForm = require('client/js/forms/session');
 var _ = require('client/js/helpers/underscore');
 var moment = require('moment');
+var AmpRestCollection = require('ampersand-rest-collection');
+
+var CompaniesListCollection = AmpRestCollection.extend({
+  url: '/api/companies?fields=id,name',
+});
+
+var SpeakersListCollection = AmpRestCollection.extend({
+  url: '/api/speakers?fields=id,name',
+});
 
 module.exports = PageView.extend({
   pageTitle: 'Add session',
   template: templates.pages.sessions.add,
+  initialize: function (spec) {
+    var self = this;
+
+    self.companiesList = new CompaniesListCollection();
+    self.companiesList.fetch({success: function(collection, response, options) {
+      self.render()
+    }});
+
+    self.speakersList = new SpeakersListCollection();
+    self.speakersList.fetch({success: function(collection, response, options) {
+      self.render()
+    }});
+  },
+  render: function(){
+    this._initializeSubviews();
+    return PageView.prototype.render.apply(this, arguments);
+  },
   subviews: {
     form: {
       container: 'form',
       prepareView: function (el) {
         return new SessionForm({
+          autoRender: true,
           el: el,
           submitCallback: function (data) {
             data = _.compactObject(data);
