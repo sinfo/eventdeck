@@ -153,7 +153,9 @@ exports.list = {
     { method: 'notification.decorateWithUnreadStatus(auth.credentials.id, pre.speakers)', assign: 'speakers' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.speakers, request.auth.isAuthenticated && !request.headers['Only-Public']));
+    // Because in public views, when an event is selected, we want to address that participation
+    var selectedEvent = request.query && request.query.event;
+    reply(render(request.pre.speakers, request.auth.isAuthenticated && !request.headers['Only-Public'], selectedEvent));
   },
   description: 'Gets all the speakers'
 };

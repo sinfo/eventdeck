@@ -2,11 +2,14 @@ var Boom = require('boom');
 var IVA = 1.23;
 var PUBLIC_STATUS = 'announced';
 
-module.exports = function render(content, isAuthenticated) {
+module.exports = function render(content, isAuthenticated, event) {
   if(content instanceof Array) {
     if(isAuthenticated === false) {
       content = content && content.filter(function(model) {
-        return model.participations && model.participations.filter(function(p) { return p.advertisementLvl && p.status === PUBLIC_STATUS; }).length > 0;
+        return model.participations && model.participations.filter(function(p) {
+          if (event) return p.advertisementLvl && p.event === event && p.status === PUBLIC_STATUS;
+          return p.advertisementLvl && p.status === PUBLIC_STATUS;
+        }).length > 0;
       });
     }
 
@@ -14,7 +17,10 @@ module.exports = function render(content, isAuthenticated) {
   } else {
     // Hack, this shouldn't probably be done here, but as all the related logic is here, let's keep on...
     if (isAuthenticated === false) {
-      if (!content.participations || content.participations.filter(function (p) { return p.status && p.status.toLowerCase() === PUBLIC_STATUS; }).length < 1) {
+      if (!content.participations || content.participations.filter(function (p) {
+          if (event) return p.event === event && p.status && p.status.toLowerCase() === PUBLIC_STATUS;
+          return p.status && p.status.toLowerCase() === PUBLIC_STATUS;
+        }).length < 1) {
         return Boom.notFound();
       }
     }

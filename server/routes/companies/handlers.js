@@ -178,7 +178,9 @@ exports.list = {
     { method: 'notification.decorateWithUnreadStatus(auth.credentials.id, pre.companies)', assign: 'companies' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.companies, request.auth.isAuthenticated && !request.headers['Only-Public']));
+    // Because in public views, when an event is selected, we want to address that participation
+    var selectedEvent = request.query && request.query.event;
+    reply(render(request.pre.companies, request.auth.isAuthenticated && !request.headers['Only-Public'], selectedEvent));
   },
   description: 'Gets all the companies'
 };
