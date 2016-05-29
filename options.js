@@ -98,6 +98,8 @@ options.roles = [
   { name: 'Marketing Manager', id: 'marketing-manager' },
   { name: 'Social Networks', id: 'social-networks'},
   { name: 'Graphics', id: 'graphics'},
+  { name: 'Multimedia', id: 'multimedia'},
+  { name: 'Communication', id: 'communication'},
   { name: 'Content Producer', id: 'content-producer'},
   { name: 'Content Developer', id: 'content-developer'}
 ];
