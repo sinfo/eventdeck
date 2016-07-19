@@ -100,7 +100,7 @@ exports.getView = {
      ],
   handler: function (request, reply) {
     //console.log(request.auth);
-     reply.view('speakers23',{speaker: request.pre.speaker.name, paragraph: request.pre.communication.text,member: request.pre.member.name});
+     reply.view('speakers24',{speaker: request.pre.speaker.name, paragraph: request.pre.communication.text,member: request.pre.member.name});
   },
   description: 'Gets a communication with an initial template view'
 };
