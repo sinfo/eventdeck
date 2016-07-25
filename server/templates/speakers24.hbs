@@ -1,0 +1,313 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>*|MC:SUBJECT|*</title>
+    <style>
+      .box-600{
+        width: 600px;
+        padding: 0px;
+      }
+      #window{
+        padding: 0px calc((100% - 600px) / 2);
+      }
+
+      #window > tbody {
+        border-style: solid;
+        border-width: 3px;
+        border-color: #07a;
+        display: block;
+        border-spacing: 0px;
+      }
+
+      #body td,
+      body{
+        font-family: "Tahoma", Verdana, Segoe, sans-serif;
+        padding: 0px 10px;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        text-align: justify;
+        font-size: 13px;
+        line-height: 1.5em;
+        color: #545454;
+      }
+
+      h2{ font-weight: 600; }
+
+      h3{ font-weight: 400; }
+
+      .heading{
+        padding: 0px;
+        width: 600px;
+        height: 150px;
+        background: url('http://static.sinfo.org/SINFO_24/TemplateMail/Header.png');
+        display: block;
+      }
+
+      .block {
+        display:block;
+      }
+
+      .signature h3{
+        line-height: .7em;
+        font-style: italic;
+      }
+
+      .innerDivider{
+        border-bottom: .1em solid #07a;
+        padding: 1em 0em
+      }
+
+      .circular{
+        width: 110px;
+        height: 110px;
+        max-height: 110px;
+        border-radius: 55px;
+        -webkit-border-radius: 55px;
+        -moz-border-radius: 55px;
+      }
+
+      .innerButton{
+        font-weight: bold;
+        display: inline-block;
+        text-decoration: none;
+        color: #FFFFFF;
+        border-radius: 5px;
+        background-color: #07a;
+        padding: 18px;
+        white-space: nowrap;
+      }
+
+      .speaker{
+        padding: initial !important;
+      }
+
+      .speaker td{
+        width: 150px;
+      }
+      .speaker td.img-speaker{
+
+
+        padding-left: 15px;
+      }
+
+      .speaker h3,
+      .speaker h2{
+        text-align: center;
+        line-height: .2em;
+        white-space: nowrap;
+        margin: 5px auto; /** does not work in mail?**/
+      }
+
+      #body td.invite-outer{
+        padding: 10px 60px;
+      }
+
+      .invite-table-section{
+        vertical-align: middle;
+          align="center";
+        width: 450px;
+        background-color: #dddddd;
+      }
+
+      .invite-table-text{
+        width:  320px;
+        line-height: 1em;
+        padding-left: 10px;
+      }
+
+      .invite-table-title {
+        text-align: right;
+        line-height: .4em;
+        padding-right: 10px;
+      }
+
+      #body td.button-outer{
+        padding: 20px 210px;
+      }
+
+    </style>
+  </head>
+</html>
+<body>
+  <center>
+    <table id="window">
+      <tbody>
+        <tr>
+          <td class="box-600">
+            <table id="body" class="block">
+              <tbody class="block">
+                <tr class="block">
+                  <th class="heading"></th>
+                </tr>
+                <tr>
+                  <td class="box-600">
+                    <h2>Dear {{speaker}},</h2>
+                    <h3>I’m {{member}}, a proud member at SINFO. On behalf of the team organizing SINFO we would be pleased if you would accept our invitation to speak at our event.</h3>
+                    <h3>SINFO is on its 24th edition and is an event organized by college students who have a passion for technology and innovation.</h3>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="invite-outer box-600">
+                    <table id="invite-table">
+                      <tbody>
+                        <tr class="invite-table-section">
+                          <td><h2 class="invite-table-title">Event Name:</h2></td>
+                          <td><h3 class="invite-table-text">24th SINFO</h3></td>
+                        </tr>
+                        <tr class="invite-table-section">
+                          <td><h2 class="invite-table-title">When:</h2></td>
+                          <td><h3 class="invite-table-text">The week from February 20th to February 24th, 2017</h3></td>
+                        </tr>
+                        <tr class="invite-table-section">
+                          <td><h2 class="invite-table-title">Where:</h2></td>
+                          <td><h3 class="invite-table-text">Lisbon Tech (IST - Alameda Campus) - Lisbon, Portugal</h3></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="box-600">
+                    <h3>Even though we're a non-funded university event, we're fully prepared to cover all travel and lodging expenses.</h3>
+                    <h3>{{paragraph}}</h3>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="button-outer box-600">
+                    <a class="innerButton" title="Visit SINFO" href="https://www.sinfo.org/" target="_blank">Visit our website</a>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="box-600">
+
+
+                    <h3>My Best Regards,</h3>
+                    <div class="signature">
+                      <h3>*{{member}}*</h3>
+                      <h3>SINFO team</h3>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="box-600 innerDivider">
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="speakersRow box-600">
+                    <h2>Previous Speakers</h2>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td class="box-600">
+            <table id="ending">
+              <tbody>
+                <tr>
+                  <td class="speaker">
+                    <table>
+                      <tbody>
+                        <tr><td class="img-speaker"><a href="https://www.youtube.com/watch?v=w7O_y9PKq8c" target="_blank"><img class="circular" src="http://static.sinfo.org/SINFO_24/TemplateMail/ScottChacon.jpg"></a></td></tr>
+                        <tr><td><h2>Scott Chacon</h2></td></tr>
+                        <tr><td><h3>Github,</h3></td></tr>
+                        <tr><td><h3>CIO</h3></td></tr>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td class="speaker">
+                    <table>
+                      <tbody>
+                        <tr><td class="img-speaker"><a href="https://www.youtube.com/watch?v=-yDM9XRK2lU" target="_blank"><img class="circular" src="http://static.sinfo.org/SINFO_24/TemplateMail/MinhLee.jpg"></a></td></tr>
+                        <tr><td><h2>Minh Le</h2></td></tr>
+                        <tr><td><h3>Counter-Strike,</h3></td></tr>
+                        <tr><td><h3>Co-creator</h3></td></tr>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td class="speaker">
+                    <table>
+                      <tbody>
+                        <tr><td class="img-speaker"><a href="https://www.youtube.com/watch?v=MVlsOLvBdw4" target="_blank"><img class="circular" src="http://static.sinfo.org/SINFO_24/TemplateMail/PeterSunde.jpg"></a></td></tr>
+                        <tr><td><h2>Peter Sunde</h2></td></tr>
+                        <tr><td><h3>The Pirate Bay,</h3></td></tr>
+                        <tr><td><h3>Co-founder</h3></td></tr>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td class="speaker">
+                    <table>
+                      <tbody>
+                        <tr><td class="img-speaker"><a href="https://www.youtube.com/watch?v=tamF4p04bfk" target="_blank"><img class="circular" src="http://static.sinfo.org/SINFO_24/TemplateMail/joel_spolsky.jpg"></a></td></tr>
+                        <tr><td><h2>Joel Spolsky</h2></td></tr>
+                        <tr><td><h3>Stack Overflow, Trello,</h3></td></tr>
+                        <tr><td><h3>Founder</h3></td></tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td><br></td>
+                </tr>
+                <tr>
+                  <td class="speaker">
+                    <table>
+                      <tbody>
+                        <tr><td class="img-speaker"><a target="_blank"><img class="circular" src="http://static.sinfo.org/SINFO_24/TemplateMail/richard.jpg"></a></td></tr>
+                        <tr><td><h2>Richard Stallman</h2></td></tr>
+                        <tr><td><h3>GNU Project,</h3></td></tr>
+                        <tr><td><h3>Founder</h3></td></tr>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td class="speaker">
+                    <table>
+                      <tbody>
+                        <tr><td class="img-speaker"><a href="https://www.youtube.com/watch?v=0iQ2qujuu94" target="_blank"><img class="circular" src="http://static.sinfo.org/SINFO_24/TemplateMail/steve.jpg"></a></td></tr>
+                        <tr><td><h2>Steve Huffman</h2></td></tr>
+                        <tr><td><h3>Reddit,</h3></td></tr>
+                        <tr><td><h3>Co-Founder</h3></td></tr>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td class="speaker">
+                    <table>
+                      <tbody>
+                        <tr><td class="img-speaker"><a target="_blank"><img class="circular" src="http://static.sinfo.org/SINFO_24/TemplateMail/danielle_feinberg.jpg"></a></td></tr>
+                        <tr><td><h2>Danielle Feinberg</h2></td></tr>
+                        <tr><td><h3>Pixar,</h3></td></tr>
+                        <tr><td><h3>Director of Photography</h3></td></tr>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td class="speaker">
+                    <table>
+                      <tbody>
+                        <tr><td class="img-speaker"><a target="_blank"><img class="circular" src="http://static.sinfo.org/SINFO_24/TemplateMail/david_jacoby.jpg"></a></td></tr>
+                        <tr><td><h2>David Jacoby</h2></td></tr>
+                        <tr><td><h3>Kaspersky,</h3></td></tr>
+                        <tr><td><h3>Security Evangelist</h3></td></tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table><br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </center>
+</body>
+</html>
