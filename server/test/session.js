@@ -8,7 +8,10 @@ var lab = exports.lab = Lab.script();
 var sessionA = {
   id: 'john.doe',
   name: 'John Doe',
+  event: 'test-event'
 };
+
+var sessionId = sessionA.id + '-' + sessionA.event
 
 var changesSessionA = {
   name: 'Jane Doe'
@@ -39,7 +42,7 @@ lab.experiment('Session', function() {
 
       Code.expect(response.statusCode).to.equal(201);
       Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.id).to.equal(sessionA.id);
+      Code.expect(result.id).to.equal(sessionId);
       Code.expect(result.name).to.equal(sessionA.name);
 
       done();
@@ -68,7 +71,7 @@ lab.experiment('Session', function() {
   lab.test('Get one', function(done) {
     var options = {
       method: 'GET',
-      url: '/api/sessions/'+sessionA.id,
+      url: '/api/sessions/'+sessionId,
       credentials: credentials,
     };
 
@@ -77,7 +80,7 @@ lab.experiment('Session', function() {
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.id).to.equal(sessionA.id);
+      Code.expect(result.id).to.equal(sessionId);
       Code.expect(result.name).to.equal(sessionA.name);
 
       done();
@@ -87,7 +90,7 @@ lab.experiment('Session', function() {
   lab.test('Update', function(done) {
     var options = {
       method: 'PUT',
-      url: '/api/sessions/'+sessionA.id,
+      url: '/api/sessions/'+sessionId,
       credentials: credentials,
       payload: changesSessionA
     };
@@ -97,7 +100,7 @@ lab.experiment('Session', function() {
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.id).to.equal(sessionA.id);
+      Code.expect(result.id).to.equal(sessionId);
       Code.expect(result.name).to.equal(changesSessionA.name);
 
       done();
@@ -107,7 +110,7 @@ lab.experiment('Session', function() {
   lab.test('Delete', function(done) {
     var options = {
       method: 'DELETE',
-      url: '/api/sessions/'+sessionA.id,
+      url: '/api/sessions/'+sessionId,
       credentials: credentials,
     };
 
@@ -116,7 +119,7 @@ lab.experiment('Session', function() {
 
       Code.expect(response.statusCode).to.equal(200);
       Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.id).to.equal(sessionA.id);
+      Code.expect(result.id).to.equal(sessionId);
       Code.expect(result.name).to.equal(changesSessionA.name);
 
       done();
