@@ -1,38 +1,37 @@
 /*global app*/
-var FormView = require('ampersand-form-view');
-var InputView = require('ampersand-input-view');
-var ArrayInputView = require('ampersand-array-input-view');
-var ChosenView = require('ampersand-chosen-view');
-var CheckBoxView = require('ampersand-checkbox-view');
-var SelectView = require('ampersand-select-view');
-var DateView = require('ampersand-pikaday-view');
-var templates = require('client/js/templates');
-var options = require('options');
+var FormView = require('ampersand-form-view')
+var InputView = require('ampersand-input-view')
+var ArrayInputView = require('ampersand-array-input-view')
+var ChosenView = require('ampersand-chosen-view')
+var CheckBoxView = require('ampersand-checkbox-view')
+var SelectView = require('ampersand-select-view')
+var DateView = require('ampersand-pikaday-view')
+var templates = require('client/js/templates')
+var options = require('options')
 
 var ExtendedInput = InputView.extend({
   template: templates.includes.formInput()
-});
+})
 
 var TextareaInput = InputView.extend({
-    template: templates.includes.formTextarea()
-});
-
+  template: templates.includes.formTextarea()
+})
 
 var hours = function () {
-  var hours = [];
-  for (var i = 0; i<24; i++){
-    hours.push('' + i);
+  var hours = []
+  for (var i = 0; i < 24; i++) {
+    hours.push('' + i)
   }
-  return hours;
-};
+  return hours
+}
 
 var minutes = function () {
-  var minutes = [];
-  for (var i = 0; i<60; i+=5){
-    minutes.push('' + i);
+  var minutes = []
+  for (var i = 0; i < 60; i += 5) {
+    minutes.push('' + i)
   }
-  return minutes;
-};
+  return minutes
+}
 
 module.exports = FormView.extend({
   fields: function () {
@@ -61,8 +60,8 @@ module.exports = FormView.extend({
         options: app.events.map(function (s) { return s.name; }),
         unselectedText: app.events.models[0].name,
         required: false,
-        value: this.model && this.model.event || app.events.find(function(s){return s.id == app.me.selectedEvent;}).name,
-        yieldModel: false,
+        value: this.model && this.model.event || app.events.find(function (s) { return s.id === app.me.selectedEvent }).name,
+        yieldModel: false
       }),
       new SelectView({
         template: templates.includes.formSelect(),
@@ -73,7 +72,7 @@ module.exports = FormView.extend({
         unselectedText: 'Please choose one',
         required: true,
         value: this.model && this.model.kind || '',
-        yieldModel: false,
+        yieldModel: false
       }),
       new ExtendedInput({
         label: 'Place',
@@ -81,7 +80,7 @@ module.exports = FormView.extend({
         value: this.model && this.model.place || '',
         required: false,
         placeholder: 'Place',
-        parent: this,
+        parent: this
       }),
       new TextareaInput({
         label: 'Description',
@@ -112,7 +111,7 @@ module.exports = FormView.extend({
         value: this.model && this.model.date.getHours().toString() || '',
         unselectedText: 'Please choose one',
         required: false,
-        yieldModel: false,
+        yieldModel: false
       }),
       new SelectView({
         // template: templates.includes.formSelect(),
@@ -123,7 +122,7 @@ module.exports = FormView.extend({
         value: this.model && this.model.date.getMinutes().toString() || '',
         unselectedText: 'Please choose one',
         required: false,
-        yieldModel: false,
+        yieldModel: false
       }),
       new DateView({
         label: 'End',
@@ -139,7 +138,7 @@ module.exports = FormView.extend({
         value: this.model && this.model.end.getHours().toString() || '',
         unselectedText: 'Please choose one',
         required: false,
-        yieldModel: false,
+        yieldModel: false
       }),
       new SelectView({
         // template: templates.includes.formSelect(),
@@ -150,17 +149,17 @@ module.exports = FormView.extend({
         value: this.model && this.model.end.getMinutes().toString() || '',
         unselectedText: 'Please choose one',
         required: false,
-        yieldModel: false,
+        yieldModel: false
       }),
       new ChosenView({
         label: 'Speakers',
         name: 'session-speakers',
         unselectedText: 'Select one or more',
-        value: this.model && this.model.speakers.map(function(r) {
-          return r.id;
-        }) || [],
+        value: this.model && this.model.speakers.map(function (r) {
+            return r.id
+          }) || [],
         isMultiple: true,
-        options: app.speakers && app.speakers.map(function (m) { return [m.id, m.name]; }),
+        options: app.speakers && app.speakers.map(function (m) { return [m.id, m.name]; })
       }),
       new ChosenView({
         label: 'Companies',
@@ -168,7 +167,7 @@ module.exports = FormView.extend({
         unselectedText: 'Select one or more',
         value: this.model && this.model.companies,
         isMultiple: true,
-        options: app.companies && app.companies.map(function (m) { return [m.id, m.name]; }),
+        options: app.companies && app.companies.map(function (m) { return [m.id, m.name]; })
       }),
       new CheckBoxView({
         name: 'tickets.needed',
@@ -178,20 +177,20 @@ module.exports = FormView.extend({
         validClass: 'input-valid',
         invalidClass: 'input-invalid',
         requiredMessage: 'This box must be checked.',
-        parent:  this
+        parent: this
       }),
       new DateView({
         label: 'Date to start ticket distribution',
         value: this.model && this.model.tickets && this.model.tickets.start || '',
         name: 'tickets.start',
-        required: false,
+        required: false
       }),
       new DateView({
         label: 'Date to end ticket distribution',
         value: this.model && this.model.tickets && this.model.tickets.end || '',
         name: 'tickets.end',
         required: false,
-        requiredMessage:'Required...'
+        requiredMessage: 'Required...'
       }),
       new ExtendedInput({
         label: 'Number of Tickets',
@@ -200,7 +199,7 @@ module.exports = FormView.extend({
         required: false,
         placeholder: 'Number of Tickets',
         parent: this
-      }),
-    ];
+      })
+    ]
   }
-});
+})

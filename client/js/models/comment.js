@@ -1,9 +1,9 @@
 /*global app*/
-var AmpModel = require('ampersand-model');
-var timeSince = require('client/js/helpers/timeSince');
-var options = require('options');
-var Member = require('./member');
-var marked = require('client/js/helpers/marked');
+var AmpModel = require('ampersand-model')
+var timeSince = require('client/js/helpers/timeSince')
+var options = require('options')
+var Member = require('./member')
+var marked = require('client/js/helpers/marked')
 
 module.exports = AmpModel.extend({
   props: {
@@ -23,15 +23,15 @@ module.exports = AmpModel.extend({
     postedTimeSpan: {
       deps: ['posted'],
       fn: function () {
-        return timeSince(this.posted);
+        return timeSince(this.posted)
       },
       cache: false
     },
     textHtml: {
       deps: ['text'],
       fn: function () {
-        return this.text && marked(this.text) || '';
-      },
+        return this.text && marked(this.text) || ''
+      }
     }
   }
-});
+})

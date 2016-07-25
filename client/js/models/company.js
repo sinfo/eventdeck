@@ -1,27 +1,26 @@
 /*global app*/
-var AmpState = require('ampersand-state');
-var AmpModel = require('ampersand-model');
-var AmpCollection = require('ampersand-collection');
-var options = require('options');
-var marked = require('client/js/helpers/marked');
-var _ = require('client/js/helpers/underscore');
+var AmpState = require('ampersand-state')
+var AmpModel = require('ampersand-model')
+var AmpCollection = require('ampersand-collection')
+var options = require('options')
+var marked = require('client/js/helpers/marked')
+var _ = require('client/js/helpers/underscore')
 
-var Communication = require('./communication');
-var Comment = require('./comment');
-var Participation = require('./participation');
-
+var Communication = require('./communication')
+var Comment = require('./comment')
+var Participation = require('./participation')
 
 var CommunicationCollection = AmpCollection.extend({
-    model: Communication
-});
+  model: Communication
+})
 
 var CommentCollection = AmpCollection.extend({
-    model: Comment
-});
+  model: Comment
+})
 
 var ParticipationCollection = AmpCollection.extend({
   model: Participation
-});
+})
 
 module.exports = AmpModel.extend({
   props: {
@@ -31,12 +30,12 @@ module.exports = AmpModel.extend({
     description: ['string'],
     img: ['string'],
     storedImg: ['string'],
-    site:['string'],
-    status:['status'],
-    contacts:['string'],
-    history:['string'],
-    area:['string'],
-    updated:['string']
+    site: ['string'],
+    status: ['status'],
+    contacts: ['string'],
+    history: ['string'],
+    area: ['string'],
+    updated: ['string']
   },
   collections: {
     communications: CommunicationCollection,
@@ -50,119 +49,119 @@ module.exports = AmpModel.extend({
     thread: {
       deps: ['id'],
       fn: function () {
-        return 'company-' + this.id;
+        return 'company-' + this.id
       }
     },
     threadKind: {
       fn: function () {
-        return 'company';
+        return 'company'
       }
     },
     editUrl: {
       deps: ['id'],
       fn: function () {
-        return '/companies/' + this.id + '/edit';
+        return '/companies/' + this.id + '/edit'
       }
     },
     viewUrl: {
       deps: ['id'],
       fn: function () {
-        return '/companies/' + this.id;
+        return '/companies/' + this.id
       }
     },
     templateUrl: {
       deps: ['id'],
       fn: function () {
-        return '/templates/companies/' + this.id;
+        return '/templates/companies/' + this.id
       }
     },
     startupTemplateUrl: {
       deps: ['id'],
       fn: function () {
-        return '/templates/startups/' + this.id;
+        return '/templates/startups/' + this.id
       }
     },
     background: {
       deps: ['img'],
       fn: function () {
-        return 'background-image:url('+this.storedImg+');';
+        return 'background-image:url(' + this.storedImg + ');'
       }
     },
     commentsApi: {
       deps: ['id'],
       fn: function () {
-        return '/api/companies/' + this.id + '/comments';
+        return '/api/companies/' + this.id + '/comments'
       }
     },
     communicationsApi: {
       deps: ['id'],
       fn: function () {
-        return '/api/companies/' + this.id + '/communications';
+        return '/api/companies/' + this.id + '/communications'
       }
     },
     participation: {
-      deps:['participations'],
+      deps: ['participations'],
       fn: function () {
-        return this.participations.filter(function(p){ return p.event == app.me.selectedEvent; })[0];
+        return this.participations.filter(function (p) { return p.event == app.me.selectedEvent; })[0]
       }
     },
     statusDetails: {
       deps: ['participations'],
       fn: function () {
-        var self = this;
-        var participations = self.participations.toJSON();
-        var participation = participations.filter(function(p){
-          return p.event == app.me.selectedEvent;
-        })[0];
+        var self = this
+        var participations = self.participations.toJSON()
+        var participation = participations.filter(function (p) {
+          return p.event == app.me.selectedEvent
+        })[0]
 
         var details = options.statuses.company.filter(function (status) {
-          return participation && participation.status == status.id;
-        })[0] || {};
+          return participation && participation.status == status.id
+        })[0] || {}
 
-        details.style = details && details.color && 'background-color:' + details.color;
-        return details;
-      },
+        details.style = details && details.color && 'background-color:' + details.color
+        return details
+      }
     },
     descriptionHtml: {
       deps: ['description'],
       fn: function () {
-        return this.description && marked(this.description) || '';
-      },
+        return this.description && marked(this.description) || ''
+      }
     },
     contactsHtml: {
       deps: ['contacts'],
       fn: function () {
-        return this.contacts && marked(this.contacts) || '';
-      },
+        return this.contacts && marked(this.contacts) || ''
+      }
     },
     historyHtml: {
       deps: ['history'],
       fn: function () {
-        return this.history && marked(this.history) || '';
-      },
+        return this.history && marked(this.history) || ''
+      }
     }
   },
   serialize: function () {
-    var res = this.getAttributes({props: true}, true);
+    var res = this.getAttributes({props: true}, true)
     _.each(this._children, function (value, key) {
-        res[key] = this[key].serialize();
-    }, this);
+      res[key] = this[key].serialize()
+    }, this)
     _.each(this._collections, function (value, key) {
-        res[key] = this[key].serialize();
-    }, this);
+      res[key] = this[key].serialize()
+    }, this)
 
-    delete res.comments;
-    delete res.communications;
-    delete res.storedImg;
-    delete res.unread;
+    delete res.comments
+    delete res.communications
+    delete res.storedImg
+    delete res.unread
 
-    return res;
+    return res
   },
-  parse: function(attrs) {
-    attrs.participations = attrs.participations && attrs.participations.map(function(p) {
-      p.threadKind = 'company';
-      return p;
-    });
-    return attrs;
+  parse: function (attrs) {
+    attrs.participations = attrs.participations && attrs.participations.map(function (p) {
+      p.threadKind = 'company'
+      return p
+    })
+    return attrs
   }
-});
+})

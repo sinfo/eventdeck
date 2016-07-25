@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
 
 var schema = new mongoose.Schema({
   id: {type: String, unique: true},
@@ -7,8 +7,8 @@ var schema = new mongoose.Schema({
   img: String,
   price: Number,
   minPrice: Number
-});
+})
 
-schema.index({id: 1});
+schema.index({id: 1})
 
-var Item = module.exports = mongoose.model('Item', schema);
+var Item = module.exports = mongoose.model('Item', schema)

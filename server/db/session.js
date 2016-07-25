@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
 
 var schema = new mongoose.Schema({
   id: {type: String, unique: true},
@@ -24,9 +24,9 @@ var schema = new mongoose.Schema({
   },
   event: String,
   surveyNeeded: Boolean
-});
+})
 
-schema.index({id: 1});
-schema.index({date: -1});
+schema.index({id: 1})
+schema.index({date: -1})
 
-var Session = module.exports = mongoose.model('Session', schema);
+var Session = module.exports = mongoose.model('Session', schema)

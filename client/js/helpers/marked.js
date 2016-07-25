@@ -1,19 +1,19 @@
-var marked = require('marked');
+var marked = require('marked')
 
 // define custom renderer
-var renderer = new marked.Renderer();
+var renderer = new marked.Renderer()
 
-var link = renderer.link;
+var link = renderer.link
 
 renderer.link = function () {
-  return link.apply(renderer, arguments).replace('<a', '<a target="_blank"');
-};
+  return link.apply(renderer, arguments).replace('<a', '<a target="_blank"')
+}
 
 // set marked options
 marked.setOptions({
   renderer: renderer,
-  gfm: true,
-});
+  gfm: true
+})
 
 // define custom marked
 var customMarked = function () {
@@ -24,9 +24,9 @@ var customMarked = function () {
     .replace(/(\W)@(\w+)(?!(?:\w|\.\w))/g, '$1<a target="_blank" href="https://twitter.com/$2">@$2</a>')
     // mentions
     .replace(/(\W)@(\w+\.\w+)(?=\W)/g, function () {
-      return arguments[1] + '<a href="/members/' + arguments[2].toLowerCase() + '">@' + arguments[2] + '</a>';
-    });
-};
+      return arguments[1] + '<a href="/members/' + arguments[2].toLowerCase() + '">@' + arguments[2] + '</a>'
+    })
+}
 
 // export custom marked
-module.exports = customMarked;
+module.exports = customMarked

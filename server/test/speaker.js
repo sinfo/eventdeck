@@ -1,10 +1,9 @@
-var Lab = require('lab');
-var Code = require('code');
+var Lab = require('lab')
+var Code = require('code')
 
-var server = require('../').hapi;
+var server = require('../').hapi
 
-var lab = exports.lab = Lab.script();
-
+var lab = exports.lab = Lab.script()
 
 var credentials = {
   id: 'john.doe',
@@ -13,115 +12,110 @@ var credentials = {
     role: 'coordination',
     event: '1000-sinfo'
   }]
-};
+}
 
 var speakerA = {
   id: 'mane.das.couves',
-  name: 'O Grande Mane das Couves',
-};
+  name: 'O Grande Mane das Couves'
+}
 
 var changesToA = {
   name: 'O Grandioso Mane das Couves'
-};
+}
 
-var id;
-
-lab.experiment('Speaker', function() {
-
-  lab.test('Create', function(done) {
+lab.experiment('Speaker', function () {
+  lab.test('Create', function (done) {
     var options = {
       method: 'POST',
       url: '/api/speakers',
       credentials: credentials,
       payload: speakerA
-    };
+    }
 
-    server.inject(options, function(response) {
-      var result = response.result;
+    server.inject(options, function (response) {
+      var result = response.result
 
-      Code.expect(response.statusCode).to.equal(201);
-      Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.id).to.equal(speakerA.id);
-      Code.expect(result.name).to.equal(speakerA.name);
+      Code.expect(response.statusCode).to.equal(201)
+      Code.expect(result).to.be.instanceof(Object)
+      Code.expect(result.id).to.equal(speakerA.id)
+      Code.expect(result.name).to.equal(speakerA.name)
 
-      done();
-    });
-  });
+      done()
+    })
+  })
 
-  lab.test('List all', function(done) {
+  lab.test('List all', function (done) {
     var options = {
       method: 'GET',
       url: '/api/speakers',
-      credentials: credentials,
-    };
+      credentials: credentials
+    }
 
-    server.inject(options, function(response) {
-      var result = response.result;
+    server.inject(options, function (response) {
+      var result = response.result
 
-      Code.expect(response.statusCode).to.equal(200);
-      Code.expect(result).to.be.instanceof(Array);
-      Code.expect(result[0].id).to.be.string;
-      Code.expect(result[0].name).to.be.string;
-      done();
-    });
-  });
+      Code.expect(response.statusCode).to.equal(200)
+      Code.expect(result).to.be.instanceof(Array)
+      Code.expect(result[0].id).to.be.string
+      Code.expect(result[0].name).to.be.string
+      done()
+    })
+  })
 
-  lab.test('Get one', function(done) {
+  lab.test('Get one', function (done) {
     var options = {
       method: 'GET',
-      url: '/api/speakers/'+speakerA.id,
-      credentials: credentials,
-    };
+      url: '/api/speakers/' + speakerA.id,
+      credentials: credentials
+    }
 
-    server.inject(options, function(response) {
-      var result = response.result;
+    server.inject(options, function (response) {
+      var result = response.result
 
-      Code.expect(response.statusCode).to.equal(200);
-      Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.id).to.equal(speakerA.id);
-      Code.expect(result.name).to.equal(speakerA.name);
+      Code.expect(response.statusCode).to.equal(200)
+      Code.expect(result).to.be.instanceof(Object)
+      Code.expect(result.id).to.equal(speakerA.id)
+      Code.expect(result.name).to.equal(speakerA.name)
 
-      done();
-    });
-  });
+      done()
+    })
+  })
 
-  lab.test('Update', function(done) {
+  lab.test('Update', function (done) {
     var options = {
       method: 'PUT',
-      url: '/api/speakers/'+speakerA.id,
+      url: '/api/speakers/' + speakerA.id,
       credentials: credentials,
       payload: changesToA
-    };
+    }
 
-    server.inject(options, function(response) {
-      var result = response.result;
+    server.inject(options, function (response) {
+      var result = response.result
 
-      Code.expect(response.statusCode).to.equal(200);
-      Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.id).to.equal(speakerA.id);
-      Code.expect(result.name).to.equal(changesToA.name);
+      Code.expect(response.statusCode).to.equal(200)
+      Code.expect(result).to.be.instanceof(Object)
+      Code.expect(result.id).to.equal(speakerA.id)
+      Code.expect(result.name).to.equal(changesToA.name)
 
-      done();
-    });
-  });
+      done()
+    })
+  })
 
-  lab.test('Delete', function(done) {
+  lab.test('Delete', function (done) {
     var options = {
       method: 'DELETE',
-      url: '/api/speakers/'+speakerA.id,
-      credentials: credentials,
-    };
+      url: '/api/speakers/' + speakerA.id,
+      credentials: credentials
+    }
 
-    server.inject(options, function(response) {
-      var result = response.result;
+    server.inject(options, function (response) {
+      var result = response.result
 
-      Code.expect(response.statusCode).to.equal(200);
-      Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.id).to.equal(speakerA.id);
-      Code.expect(result.name).to.equal(changesToA.name);
-      done();
-    });
-  });
-
-
-});
+      Code.expect(response.statusCode).to.equal(200)
+      Code.expect(result).to.be.instanceof(Object)
+      Code.expect(result.id).to.equal(speakerA.id)
+      Code.expect(result.name).to.equal(changesToA.name)
+      done()
+    })
+  })
+})

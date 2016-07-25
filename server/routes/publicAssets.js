@@ -1,4 +1,4 @@
-var server = require('server').hapi;
+var server = require('server').hapi
 
 var publicAssets = {
   method: 'GET',
@@ -12,6 +12,6 @@ var publicAssets = {
       }
     }
   }
-};
+}
 
-server.route(publicAssets);
+server.route(publicAssets)

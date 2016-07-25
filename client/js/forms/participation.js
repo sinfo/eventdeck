@@ -1,20 +1,20 @@
 /*global app*/
-var FormView = require('ampersand-form-view');
-var InputView = require('ampersand-input-view');
-var SelectView = require('ampersand-select-view');
-var DateView = require('ampersand-date-view');
-var templates = require('client/js/templates');
-var options = require('options');
+var FormView = require('ampersand-form-view')
+var InputView = require('ampersand-input-view')
+var SelectView = require('ampersand-select-view')
+var DateView = require('ampersand-date-view')
+var templates = require('client/js/templates')
+var options = require('options')
 var ExtendedInput = InputView.extend({
-    template: templates.includes.formInput()
-});
+  template: templates.includes.formInput()
+})
 
 module.exports = FormView.extend({
-  initialize: function() {
-    var self = this;
+  initialize: function () {
+    var self = this
 
-    if(this.model && this.model.threadKind == 'company') {
-      _addPollFields(self);
+    if (this.model && this.model.threadKind === 'company') {
+      _addPollFields(self)
     }
   },
   fields: function () {
@@ -53,9 +53,9 @@ module.exports = FormView.extend({
         value: this.model && this.model.status || '',
         yieldModel: false
       })
-    ];
+    ]
   }
-});
+})
 
 function _addPollFields (view) {
   view.addField(new ExtendedInput({
@@ -65,17 +65,17 @@ function _addPollFields (view) {
     required: false,
     placeholder: 'Kind',
     parent: view
-  }));
+  }))
   view.addField(new SelectView({
     template: templates.includes.formSelect(),
     unselectedText: 'please choose one',
     label: 'Advertisement Level',
     name: 'advertisementLvl',
     parent: view,
-    options: options.advertisementLvl.map(function(t) { return [t.id, t.name]; }),
+    options: options.advertisementLvl.map(function (t) { return [t.id, t.name]; }),
     value: view.model && view.model.advertisementLvl,
     yieldModel: false
-  }));
+  }))
   view.addField(new ExtendedInput({
     label: 'Price',
     name: 'payment.price',
@@ -83,7 +83,7 @@ function _addPollFields (view) {
     required: false,
     placeholder: 'Price',
     parent: view
-  }));
+  }))
   view.addField(new ExtendedInput({
     label: 'Invoice Number',
     name: 'payment.invoice',
@@ -91,30 +91,30 @@ function _addPollFields (view) {
     required: false,
     placeholder: 'Invoice Number',
     parent: view
-  }));
+  }))
   view.addField(new DateView({
     label: 'Invoice Date',
     value: view.model && view.model.payment && view.model.payment.date || '',
     name: 'payment.date'
-  }));
+  }))
   view.addField(new SelectView({
     template: templates.includes.formSelect(),
     unselectedText: 'please choose one',
     name: 'payment.status',
     label: 'Invoice Status',
     parent: view,
-    options: options.statuses.payment.map(function(t) { return [t.id, t.name]; }),
+    options: options.statuses.payment.map(function (t) { return [t.id, t.name]; }),
     value: view.model && view.model.payment && view.model.payment.status || '',
     yieldModel: false
-  }));
+  }))
   view.addField(new SelectView({
     template: templates.includes.formSelect(),
     unselectedText: 'please choose one',
     name: 'payment.via',
     label: 'Via',
     parent: view,
-    options: options.vias.payment.map(function(t) { return [t.id, t.name]; }),
+    options: options.vias.payment.map(function (t) { return [t.id, t.name]; }),
     value: view.model && view.model.payment && view.model.payment.via || '',
     yieldModel: false
-  }));
+  }))
 }

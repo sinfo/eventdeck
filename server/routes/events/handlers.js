@@ -1,8 +1,8 @@
-var Joi = require('joi');
-var log = require('server/helpers/logger');
-var render = require('server/views/event');
+var Joi = require('joi')
+var log = require('server/helpers/logger')
+var render = require('server/views/event')
 
-var handlers = module.exports;
+var handlers = module.exports
 
 // TODO: GET LAST EVENT
 
@@ -17,7 +17,7 @@ exports.create = {
       description: Joi.string().description('description of the event'),
       date: Joi.date().description('date of the event'),
       duration: Joi.date().description('duration of the event'),
-      updated: Joi.date().description('date the event was last updated'),
+      updated: Joi.date().description('date the event was last updated')
     }
   },
   pre: [
@@ -25,10 +25,10 @@ exports.create = {
   // TODO: CREATE NOTIFICATION
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.event)).created('/api/events/' + request.pre.event.id);
+    reply(render(request.pre.event)).created('/api/events/' + request.pre.event.id)
   },
   description: 'Creates a new event'
-};
+}
 
 exports.update = {
   auth: 'session',
@@ -44,7 +44,7 @@ exports.update = {
       description: Joi.string().description('description of the event'),
       date: Joi.date().description('date of the event'),
       duration: Joi.date().description('duration of the event'),
-      updated: Joi.date().description('date the event was last updated'),
+      updated: Joi.date().description('date the event was last updated')
     }
   },
   pre: [
@@ -53,10 +53,10 @@ exports.update = {
   // TODO: CREATE NOTIFICATION
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.event));
+    reply(render(request.pre.event))
   },
   description: 'Updates an event'
-};
+}
 
 exports.get = {
   auth: {
@@ -79,10 +79,10 @@ exports.get = {
     { method: 'event.get(params.id, query)', assign: 'event' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.event, request.auth.isAuthenticated && !request.headers['Only-Public']));
+    reply(render(request.pre.event, request.auth.isAuthenticated && !request.headers['Only-Public']))
   },
   description: 'Gets an event'
-};
+}
 
 exports.list = {
   auth: {
@@ -105,10 +105,10 @@ exports.list = {
     { method: 'event.list(query)', assign: 'events' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.events, request.auth.isAuthenticated && !request.headers['Only-Public']));
+    reply(render(request.pre.events, request.auth.isAuthenticated && !request.headers['Only-Public']))
   },
   description: 'Gets all the events'
-};
+}
 
 exports.remove = {
   auth: 'session',
@@ -124,7 +124,7 @@ exports.remove = {
     { method: 'event.remove(params.id)', assign: 'event' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.event));
+    reply(render(request.pre.event))
   },
   description: 'Removes an event'
-};
+}

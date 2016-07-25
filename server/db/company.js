@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
 
 var schema = new mongoose.Schema({
   id: {type: String, unique: true},
@@ -33,15 +33,15 @@ var schema = new mongoose.Schema({
     where: String
   }],
   updated: Date
-});
+})
 
 schema.virtual('thread').get(function () {
-  return 'company-'+this.id;
-});
+  return 'company-' + this.id
+})
 
-schema.index({id: 1, updated: -1});
-schema.index({'participations.event': 1, updated: -1});
-schema.index({'participations.member': 1});
-schema.index({'participations.status': 1});
+schema.index({id: 1, updated: -1})
+schema.index({'participations.event': 1, updated: -1})
+schema.index({'participations.member': 1})
+schema.index({'participations.status': 1})
 
-var Company = module.exports = mongoose.model('Company', schema);
+var Company = module.exports = mongoose.model('Company', schema)

@@ -1,12 +1,12 @@
-module.exports = function render(content) {
-  if(content instanceof Array) {
-    return content.map(renderObject);
+module.exports = function render (content) {
+  if (content instanceof Array) {
+    return content.map(renderObject)
   }
 
-  return renderObject(content);  
-};
+  return renderObject(content)
+}
 
-function renderObject(model) {
+function renderObject (model) {
   return {
     id: model._id,
     member: model.member,
@@ -14,6 +14,6 @@ function renderObject(model) {
     thread: model.thread,
     subthread: model.subthread,
     posted: model.posted,
-    updated: model.updated,
-  };
+    updated: model.updated
+  }
 }

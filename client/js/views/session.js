@@ -1,6 +1,5 @@
-var View = require('ampersand-view');
-var templates = require('client/js/templates');
-
+var View = require('ampersand-view')
+var templates = require('client/js/templates')
 
 module.exports = View.extend({
   template: templates.cards.session,
@@ -24,6 +23,6 @@ module.exports = View.extend({
       type: 'attribute',
       hook: 'action-edit',
       name: 'href'
-    },
+    }
   }
-});
+})

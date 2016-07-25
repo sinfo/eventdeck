@@ -1,14 +1,14 @@
-var Joi = require('joi');
-var log = require('server/helpers/logger');
-var render = require('server/views/session');
-var ical = require('server/helpers/ical');
-var config = require('config');
-var fs = require('fs');
-var handlers = module.exports;
+var Joi = require('joi')
+var log = require('server/helpers/logger')
+var render = require('server/views/session')
+var ical = require('server/helpers/ical')
+var config = require('config')
+var fs = require('fs')
+var handlers = module.exports
 
 exports.create = {
   auth: 'session',
-  tags: ['api','session'],
+  tags: ['api', 'session'],
   validate: {
     payload: {
       id: Joi.string().description('id of the session'),
@@ -26,28 +26,27 @@ exports.create = {
         needed: Joi.boolean().description('Says if the session has tickets or not'),
         start: Joi.date().description('The date when the tickets become available'),
         end: Joi.date().description('The closing date for getting tickets'),
-        max: Joi.number().description('Number max of tickets to be distributed'),
+        max: Joi.number().description('Number max of tickets to be distributed')
       },
       surveyNeeded: Joi.boolean().description('Says if the session requires a survey')
     }
   },
   pre: [
     { method: 'session.create(payload, auth.credentials.id)', assign: 'session' }
-    // TODO: CREATE NOTIFICATION
+  // TODO: CREATE NOTIFICATION
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.session)).created('/api/sessions/'+request.pre.session.id);
+    reply(render(request.pre.session)).created('/api/sessions/' + request.pre.session.id)
   },
   description: 'Creates a new session'
-};
-
+}
 
 exports.update = {
   auth: 'session',
-  tags: ['api','session'],
+  tags: ['api', 'session'],
   validate: {
     params: {
-      id: Joi.string().required().description('id of the session we want to update'),
+      id: Joi.string().required().description('id of the session we want to update')
     },
     payload: {
       id: Joi.string().description('id of the session'),
@@ -65,7 +64,7 @@ exports.update = {
         needed: Joi.boolean().description('Says if the session has tickets or not'),
         start: Joi.date().description('The date when the tickets become available'),
         end: Joi.date().description('The closing date for getting tickets'),
-        max: Joi.number().description('Number max of tickets to be distributed'),
+        max: Joi.number().description('Number max of tickets to be distributed')
       },
       surveyNeeded: Joi.boolean().description('Says if the session requires a survey')
     }
@@ -73,48 +72,46 @@ exports.update = {
   pre: [
     // TODO: CHECK PERMISSIONS
     { method: 'session.update(params.id, payload)', assign: 'session' }
-    // TODO: CREATE NOTIFICATION ?
+  // TODO: CREATE NOTIFICATION ?
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.session));
+    reply(render(request.pre.session))
   },
   description: 'Updates an session'
-};
-
+}
 
 exports.get = {
   auth: {
     strategies: ['session'],
     mode: 'try'
   },
-  tags: ['api','session'],
+  tags: ['api', 'session'],
   validate: {
     headers: Joi.object({
       'Only-Public': Joi.boolean().description('Set to true if you only want to receive the public list, even if you are authenticated')
     }).unknown(),
     query: {
-      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      fields: Joi.string().default('').description('Fields we want to retrieve')
     },
     params: {
-      id: Joi.string().required().description('id of the session we want to retrieve'),
+      id: Joi.string().required().description('id of the session we want to retrieve')
     }
   },
   pre: [
     { method: 'session.get(params.id,query)', assign: 'session' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.session, request.auth.isAuthenticated && !request.headers['Only-Public']));
+    reply(render(request.pre.session, request.auth.isAuthenticated && !request.headers['Only-Public']))
   },
   description: 'Gets an session'
-};
-
+}
 
 exports.list = {
   auth: {
     strategies: ['session'],
     mode: 'try'
   },
-  tags: ['api','session'],
+  tags: ['api', 'session'],
   validate: {
     headers: Joi.object({
       'Only-Public': Joi.boolean().description('Set to true if you only want to receive the public list, even if you are authenticated')
@@ -131,54 +128,53 @@ exports.list = {
     { method: 'session.list(query)', assign: 'sessions' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.sessions, request.auth.isAuthenticated && !request.headers['Only-Public']));
+    reply(render(request.pre.sessions, request.auth.isAuthenticated && !request.headers['Only-Public']))
   },
   description: 'Gets all the sessions'
-};
-
+}
 
 exports.remove = {
   auth: 'session',
-  tags: ['api','session'],
+  tags: ['api', 'session'],
   validate: {
     params: {
-     // TODO: CHECK PERMISSIONS
-     id: Joi.string().required().description('id of the session we want to remove'),
-     // TODO: REMOVE NOTIFICATIONS
+      // TODO: CHECK PERMISSIONS
+      id: Joi.string().required().description('id of the session we want to remove'),
+    // TODO: REMOVE NOTIFICATIONS
     }
   },
   pre: [
     { method: 'session.remove(params.id)', assign: 'session' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.session));
+    reply(render(request.pre.session))
   },
   description: 'Removes an session'
-};
+}
 
 exports.getIcal = {
   auth: {
     strategies: ['session'],
     mode: 'try'
   },
-  tags: ['api','session'],
+  tags: ['api', 'session'],
   handler: function (request, reply) {
-    var icalPath = config.ical.path;
+    var icalPath = config.ical.path
 
     fs.exists(icalPath, function (exists) {
       if (exists) {
-        reply.file(icalPath);
+        reply.file(icalPath)
       } else {
         ical.generate(function (err, data) {
           if (err) {
-            //todo
-            return;
+            // todo
+            return
           }
 
-          reply.file(icalPath);
-        });
+          reply.file(icalPath)
+        })
       }
-    });
+    })
   },
   description: 'Gets an iCal'
-};
+}

@@ -1,7 +1,7 @@
 /*global app*/
-var View = require('ampersand-view');
-var templates = require('client/js/templates');
-var TagsView = require('client/js/views/topicTags');
+var View = require('ampersand-view')
+var templates = require('client/js/templates')
+var TagsView = require('client/js/views/topicTags')
 
 module.exports = View.extend({
   template: templates.cards.topic,
@@ -33,12 +33,12 @@ module.exports = View.extend({
       container: '[data-hook=tags-container]',
       waitFor: 'model.tags',
       prepareView: function (el) {
-        var self = this;
+        var self = this
         return new TagsView({
           el: el,
           model: self.model
-        });
+        })
       }
-    },
+    }
   }
-});
+})

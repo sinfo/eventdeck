@@ -1,7 +1,7 @@
 /*global app, alert*/
-var PageView = require('client/js/pages/base');
-var templates = require('client/js/templates');
-var MemberParticipationsView = require('client/js/views/memberParticipations');
+var PageView = require('client/js/pages/base')
+var templates = require('client/js/templates')
+var MemberParticipationsView = require('client/js/views/memberParticipations')
 
 module.exports = PageView.extend({
   pageTitle: 'View member',
@@ -63,13 +63,13 @@ module.exports = PageView.extend({
     'click [data-hook~=delete]': 'handleDeleteClick'
   },
   initialize: function (spec) {
-    var self = this;
+    var self = this
     app.members.getOrFetch(spec.id, {all: true}, function (err, model) {
       if (err) {
-        return alert('couldnt find a model with id: ' + spec.id);
+        return alert('couldnt find a model with id: ' + spec.id)
       }
-      self.model = model;
-    });
+      self.model = model
+    })
   },
   subviews: {
     participations: {
@@ -79,14 +79,14 @@ module.exports = PageView.extend({
         return new MemberParticipationsView({
           el: el,
           collection: this.model.participations
-        });
+        })
       }
     }
   },
 
   handleDeleteClick: function () {
     this.model.destroy({success: function () {
-      app.navigate('members');
-    }});
+        app.navigate('members')
+    }})
   }
-});
+})

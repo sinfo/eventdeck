@@ -1,14 +1,14 @@
-var FormView = require('ampersand-form-view');
-var InputView = require('ampersand-input-view');
-var ArrayInputView = require('ampersand-array-input-view');
-var templates = require('client/js/templates');
+var FormView = require('ampersand-form-view')
+var InputView = require('ampersand-input-view')
+var ArrayInputView = require('ampersand-array-input-view')
+var templates = require('client/js/templates')
 var ExtendedInput = InputView.extend({
-    template: templates.includes.formInput()
-});
+  template: templates.includes.formInput()
+})
 
 var TextareaInput = InputView.extend({
-    template: templates.includes.formTextarea()
-});
+  template: templates.includes.formTextarea()
+})
 
 module.exports = FormView.extend({
   fields: function () {
@@ -68,7 +68,7 @@ module.exports = FormView.extend({
         required: false,
         placeholder: 'History',
         parent: this
-      }),
-    ];
+      })
+    ]
   }
-});
+})

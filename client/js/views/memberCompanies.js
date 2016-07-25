@@ -1,8 +1,8 @@
 /*global app*/
-var View = require('ampersand-view');
-var templates = require('client/js/templates');
-var Company = require('client/js/models/company');
-var AmpersandRestCollection = require('ampersand-rest-collection');
+var View = require('ampersand-view')
+var templates = require('client/js/templates')
+var Company = require('client/js/models/company')
+var AmpersandRestCollection = require('ampersand-rest-collection')
 
 module.exports = View.extend({
   template: templates.cards.memberCompanies,
@@ -19,30 +19,30 @@ module.exports = View.extend({
       name: 'href'
     }
   },
-  initialize: function() {
-    var self = this;
-    this.collection = null;
+  initialize: function () {
+    var self = this
+    this.collection = null
 
     var CompaniesCollection = AmpersandRestCollection.extend({
       url: '/api/companies?event=' + app.me.selectedEvent + '&member=' + self.model.id,
       model: Company
-    });
-    var companies = new CompaniesCollection();
+    })
+    var companies = new CompaniesCollection()
 
     var options = {
       success: function () {
-        self.collection = companies;
-        self.render();
+        self.collection = companies
+        self.render()
       }
-    };
+    }
 
-    companies.fetch(options);
+    companies.fetch(options)
   },
   render: function () {
-    this.renderWithTemplate();
-    this.renderCollection(this.collection, MemberCompaniesRow, this.queryByHook('companiesContainer'));
-  },
-});
+    this.renderWithTemplate()
+    this.renderCollection(this.collection, MemberCompaniesRow, this.queryByHook('companiesContainer'))
+  }
+})
 
 var MemberCompaniesRow = View.extend({
   template: templates.cards.memberCompaniesRow,
@@ -63,6 +63,5 @@ var MemberCompaniesRow = View.extend({
       hook: 'status',
       name: 'style'
     }
-  },
-});
-
+  }
+})

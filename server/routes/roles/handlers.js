@@ -1,17 +1,16 @@
-var Joi = require('joi');
-var log = require('server/helpers/logger');
-// var render = require('server/views/roles');
+var Joi = require('joi')
+var log = require('server/helpers/logger')
+// var render = require('server/views/roles')
 
-var roles = require('options').roles;
+var roles = require('options').roles
 
-
-var handlers = module.exports;
+var handlers = module.exports
 
 exports.list = {
   auth: 'session',
-  tags: ['api','roles'],
+  tags: ['api', 'roles'],
   handler: function (request, reply) {
-    reply(roles);
+    reply(roles)
   },
   description: 'Gets all the roles'
-};
+}

@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
 
 var schema = new mongoose.Schema({
   chatId: String,
@@ -6,6 +6,6 @@ var schema = new mongoose.Schema({
   source: { type: String, default: ''},
   text: String,
   date: { type: Date, default: Date.now }
-});
- 
-var Message = module.exports = mongoose.model('Message', schema);
+})
+
+var Message = module.exports = mongoose.model('Message', schema)

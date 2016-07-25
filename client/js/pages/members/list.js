@@ -1,39 +1,37 @@
 /*global app*/
-var log = require('bows')('members');
-var Member= require('client/js/models/member');
-var PageView = require('ampersand-infinite-scroll');
-var templates = require('client/js/templates');
-var MemberView = require('client/js/views/member');
-var AmpersandCollection = require('ampersand-collection');
+var log = require('bows')('members')
+var Member = require('client/js/models/member')
+var PageView = require('ampersand-infinite-scroll')
+var templates = require('client/js/templates')
+var MemberView = require('client/js/views/member')
+var AmpersandCollection = require('ampersand-collection')
 
-var selectedFilter = 'showall';
+var selectedFilter = 'showall'
 
-function filtering(page,filter){
-    log('Fetching Selected Members');
+function filtering (page, filter) {
+  log('Fetching Selected Members')
 
-    var aux = page.collection.filter(function(member){
-    var ids = member.participations.map(function (participation){
-        return participation.role;
-      }
-    );
+  var aux = page.collection.filter(function (member) {
+    var ids = member.participations.map(function (participation) {
+      return participation.role
+    }
+    )
 
-    return member && ids.indexOf(filter)!= -1;
-    });
+    return member && ids.indexOf(filter) != -1
+  })
 
-    return new AmpersandCollection(aux, {model: Member});
+  return new AmpersandCollection(aux, {model: Member})
 }
-function rerender(page, collection, filter){
+function rerender (page, collection, filter) {
+  page.renderWithTemplate()
+  page.renderCollection(collection, MemberView, page.queryByHook('members-list'))
 
-    page.renderWithTemplate();
-    page.renderCollection(collection, MemberView, page.queryByHook('members-list'));
+  page.queryByHook(selectedFilter).classList.remove('selected')
+  page.queryByHook(filter).classList.add('selected')
+  selectedFilter = filter
 
-    page.queryByHook(selectedFilter).classList.remove('selected');
-    page.queryByHook(filter).classList.add('selected');
-    selectedFilter = filter;
-
-    return false;
+  return false
 }
-
 
 module.exports = PageView.extend({
   pageTitle: 'Members',
@@ -60,135 +58,133 @@ module.exports = PageView.extend({
     'click [data-hook~=me]': 'me',
     'click [data-hook~=showall]': 'showall',
 
-    'click [data-hook~=hide]': 'hide',
+    'click [data-hook~=hide]': 'hide'
 
   },
   render: function () {
-    this.collection.sortBy('name');
-    this.renderWithTemplate();
-    this.renderCollection(this.collection, MemberView, this.queryByHook('members-list'));
+    this.collection.sortBy('name')
+    this.renderWithTemplate()
+    this.renderCollection(this.collection, MemberView, this.queryByHook('members-list'))
     if (this.collection.length < this.collection.data.limit) {
-      this.fetchCollection();
+      this.fetchCollection()
     }
   },
   fetchCollection: function () {
-
-    this.collection.fetchPage({reset: true});
-    return false;
+    this.collection.fetchPage({reset: true})
+    return false
   },
   resetCollection: function () {
-    this.collection.reset();
+    this.collection.reset()
   },
   shuffle: function () {
     this.collection.comparator = function () {
-      return !Math.round(Math.random());
-    };
-    this.collection.sort();
-    delete this.collection.comparator;
-    return false;
-  },
-  hide: function(){
-    if(!this.hidden){
-      this.queryByHook('awesome-sidebar').style.display = 'none';
-      this.hidden = true;
+      return !Math.round(Math.random())
     }
-    else{
-      this.queryByHook('awesome-sidebar').style.display = 'block';
-      this.hidden = false;
+    this.collection.sort()
+    delete this.collection.comparator
+    return false
+  },
+  hide: function () {
+    if (!this.hidden) {
+      this.queryByHook('awesome-sidebar').style.display = 'none'
+      this.hidden = true
+    }else {
+      this.queryByHook('awesome-sidebar').style.display = 'block'
+      this.hidden = false
     }
   },
   showall: function () {
-    rerender(this,this.collection,'showall');
-    return false;
+    rerender(this, this.collection, 'showall')
+    return false
   },
   me: function () {
-    log('Fetching Selected Companies');
-    var aux = this.collection.filter(function(member){
-      return member && member.id == app.me.id;
-    });
+    log('Fetching Selected Companies')
+    var aux = this.collection.filter(function (member) {
+      return member && member.id == app.me.id
+    })
 
-    aux = new AmpersandCollection(aux, {model: Member});
+    aux = new AmpersandCollection(aux, {model: Member})
 
-    rerender(this,aux,'me');
+    rerender(this, aux, 'me')
 
-    return false;
+    return false
   },
-  coordination: function() {
-    var aux = filtering(this,'coordination');
-    rerender(this,aux,'coordination');
+  coordination: function () {
+    var aux = filtering(this, 'coordination')
+    rerender(this, aux, 'coordination')
 
-    return false;
+    return false
   },
-  design: function() {
-    var aux = filtering(this,'design');
-    rerender(this,aux,'design');
+  design: function () {
+    var aux = filtering(this, 'design')
+    rerender(this, aux, 'design')
 
-    return false;
+    return false
   },
-  devteam: function() {
-    var aux = filtering(this,'development-team');
-    rerender(this,aux,'devteam');
+  devteam: function () {
+    var aux = filtering(this, 'development-team')
+    rerender(this, aux, 'devteam')
 
-    return false;
+    return false
   },
-  ev: function() {
-    var aux = filtering(this,'events');
-    rerender(this,aux,'events');
+  ev: function () {
+    var aux = filtering(this, 'events')
+    rerender(this, aux, 'events')
 
-    return false;
+    return false
   },
-  extrelations: function() {
-    var aux = filtering(this,'external-relations');
-    rerender(this,aux,'extrelations');
+  extrelations: function () {
+    var aux = filtering(this, 'external-relations')
+    rerender(this, aux, 'extrelations')
 
-    return false;
+    return false
   },
-  ia: function() {
-    var aux = filtering(this,'innovation-awards');
-    rerender(this,aux,'ia');
+  ia: function () {
+    var aux = filtering(this, 'innovation-awards')
+    rerender(this, aux, 'ia')
 
-    return false;
+    return false
   },
-  internalrelations: function() {
-    var aux = filtering(this,'internal-relations');
-    rerender(this,aux,'internalrelations');
+  internalrelations: function () {
+    var aux = filtering(this, 'internal-relations')
+    rerender(this, aux, 'internalrelations')
 
-    return false;
+    return false
   },
-  marketing: function() {
-    var aux = filtering(this,'marketing');
-    rerender(this,aux,'marketing');
+  marketing: function () {
+    var aux = filtering(this, 'marketing')
+    rerender(this, aux, 'marketing')
 
-    return false;
+    return false
   },
-  marketingManager: function() {
-    var aux = filtering(this,'marketing-manager');
-    rerender(this,aux,'marketingManager');
+  marketingManager: function () {
+    var aux = filtering(this, 'marketing-manager')
+    rerender(this, aux, 'marketingManager')
 
-    return false;
+    return false
   },
-  pr: function() {
-    var aux = filtering(this,'public-relations');
-    rerender(this,aux,'pr');
+  pr: function () {
+    var aux = filtering(this, 'public-relations')
+    rerender(this, aux, 'pr')
 
-    return false;
+    return false
   },
-  partnerships: function() {
-    var aux = filtering(this,'strategic-partnerships');
-    rerender(this,aux,'partnerships');
+  partnerships: function () {
+    var aux = filtering(this, 'strategic-partnerships')
+    rerender(this, aux, 'partnerships')
 
-    return false;
+    return false
   },
-  sysadmin: function() {
-    var aux = filtering(this,'sys-admin');
-    rerender(this,aux,'sysadmin');
+  sysadmin: function () {
+    var aux = filtering(this, 'sys-admin')
+    rerender(this, aux, 'sysadmin')
 
-    return false;
+    return false
   },
-  treasury: function() {
-    var aux = filtering(this,'treasury');
-    rerender(this,aux,'treasury');
+  treasury: function () {
+    var aux = filtering(this, 'treasury')
+    rerender(this, aux, 'treasury')
 
-    return false;
-  },
-});
+    return false
+  }
+})

@@ -1,6 +1,5 @@
-var View = require('ampersand-view');
-var templates = require('client/js/templates');
-
+var View = require('ampersand-view')
+var templates = require('client/js/templates')
 
 module.exports = View.extend({
   template: templates.cards.speaker,
@@ -43,7 +42,7 @@ module.exports = View.extend({
     'click [data-hook~=action-delete]': 'handleRemoveClick'
   },
   handleRemoveClick: function () {
-    this.model.destroy();
-    return false;
+    this.model.destroy()
+    return false
   }
-});
+})

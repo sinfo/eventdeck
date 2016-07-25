@@ -1,16 +1,15 @@
-var Joi = require('joi');
-var log = require('server/helpers/logger');
-var render = require('server/views/topic');
-var options = require('options');
+var Joi = require('joi')
+var log = require('server/helpers/logger')
+var render = require('server/views/topic')
+var options = require('options')
 
-var topicKinds = options.kinds.topics.map(function(t) { return t.id; });
+var topicKinds = options.kinds.topics.map(function (t) { return t.id; })
 
-var handlers = module.exports;
-
+var handlers = module.exports
 
 exports.create = {
   auth: 'session',
-  tags: ['api','topic'],
+  tags: ['api', 'topic'],
   validate: {
     payload: {
       kind: Joi.string().required().valid(topicKinds).description('kind of the topic'),
@@ -19,14 +18,14 @@ exports.create = {
       targets: Joi.array().includes(Joi.string()).description('targets of the topic'),
       closed: Joi.boolean().description('closed of the topic'),
       poll: {
-        kind: Joi.string().valid('text','images').description('kind of the poll'),
+        kind: Joi.string().valid('text', 'images').description('kind of the poll'),
         options: Joi.array().includes(Joi.object().keys({
           content: Joi.string().description('content of the option - can be image url or text'),
           votes: Joi.array().includes(Joi.string()).description('members who voted for this option')
-        })).description('options of the poll'),
+        })).description('options of the poll')
       },
       duedate: Joi.date().description('duedate of the poll'),
-      tags: Joi.array().includes(Joi.string()).description('tags of the topic'),
+      tags: Joi.array().includes(Joi.string()).description('tags of the topic')
     }
   },
   pre: [
@@ -37,18 +36,17 @@ exports.create = {
     { method: 'notification.broadcast(pre.notification)', assign: 'broadcast'}
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.topic)).created('/api/topics/'+request.pre.topic.id);
+    reply(render(request.pre.topic)).created('/api/topics/' + request.pre.topic.id)
   },
   description: 'Creates a new topic'
-};
-
+}
 
 exports.update = {
   auth: 'session',
-  tags: ['api','topic'],
+  tags: ['api', 'topic'],
   validate: {
     params: {
-      id: Joi.string().required().description('id of the topic we want to update'),
+      id: Joi.string().required().description('id of the topic we want to update')
     },
     payload: {
       kind: Joi.string().valid(topicKinds).description('kind of the topic'),
@@ -58,14 +56,14 @@ exports.update = {
       targets: Joi.array().includes(Joi.string()).description('targets of the topic'),
       closed: Joi.boolean().description('closed of the topic'),
       poll: {
-        kind: Joi.string().valid('text','images').description('kind of the poll'),
+        kind: Joi.string().valid('text', 'images').description('kind of the poll'),
         options: Joi.array().includes(Joi.object().keys({
           content: Joi.string().description('content of the option - can be image url or text'),
           votes: Joi.array().includes(Joi.string()).description('members who voted for this option')
-        })).description('options of the poll'),
+        })).description('options of the poll')
       },
       duedate: Joi.date().description('duedate of the poll'),
-      tags: Joi.array().includes(Joi.string()).description('tags of the topic'),
+      tags: Joi.array().includes(Joi.string()).description('tags of the topic')
     }
   },
   pre: [
@@ -75,84 +73,80 @@ exports.update = {
     { method: 'notification.broadcast(pre.notification)', assign: 'broadcast'}
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.topic));
+    reply(render(request.pre.topic))
   },
   description: 'Updates an topic'
-};
-
+}
 
 exports.get = {
   auth: 'session',
-  tags: ['api','topic'],
+  tags: ['api', 'topic'],
   validate: {
     query: {
-      fields: Joi.string().default('').description('Fields we want to retrieve'),
+      fields: Joi.string().default('').description('Fields we want to retrieve')
     },
     params: {
-      id: Joi.string().required().description('id of the topic we want to retrieve'),
+      id: Joi.string().required().description('id of the topic we want to retrieve')
     }
   },
   pre: [
     { method: 'topic.get(params.id,query)', assign: 'topic' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.topic));
+    reply(render(request.pre.topic))
   },
   description: 'Gets an topic'
-};
-
+}
 
 exports.getByMember = {
   auth: 'session',
-  tags: ['api','topic'],
+  tags: ['api', 'topic'],
   validate: {
     query: {
       fields: Joi.string().default('').description('Fields we want to retrieve'),
       skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
       limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
-      sort: Joi.string().description('How to sort the array'),
-  },
+      sort: Joi.string().description('How to sort the array')
+    },
     params: {
-      id: Joi.string().required().description('id of the member'),
+      id: Joi.string().required().description('id of the member')
     }
   },
   pre: [
     { method: 'topic.getByMember(params.id,query)', assign: 'topics' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.topics));
+    reply(render(request.pre.topics))
   },
   description: 'Gets topics of a given member'
-};
-
+}
 
 exports.findByTag = {
   auth: 'session',
-  tags: ['api','topic'],
+  tags: ['api', 'topic'],
   validate: {
     params: {
-      id: Joi.string().required().description('id of the tag'),
+      id: Joi.string().required().description('id of the tag')
     }
   },
   pre: [
     { method: 'topic.findByTag(params.id)', assign: 'topics' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.topics));
+    reply(render(request.pre.topics))
   },
   description: 'Gets topics of a given tag'
-};
-
+}
 
 exports.list = {
   auth: 'session',
-  tags: ['api','topic'],
+  tags: ['api', 'topic'],
   validate: {
     query: {
       fields: Joi.string().default('').description('Fields we want to retrieve'),
       skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
       limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
-      sort: Joi.string().description('How to sort the array'),
+      sort: Joi.string().description('How to sort the array')
     }
   },
   pre: [
@@ -160,18 +154,17 @@ exports.list = {
     { method: 'notification.decorateWithUnreadStatus(auth.credentials.id, pre.topics)', assign: 'topics' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.topics));
+    reply(render(request.pre.topics))
   },
   description: 'Gets all the topics'
-};
-
+}
 
 exports.remove = {
   auth: 'session',
-  tags: ['api','topic'],
+  tags: ['api', 'topic'],
   validate: {
     params: {
-      id: Joi.string().required().description('id of the topic we want to remove'),
+      id: Joi.string().required().description('id of the topic we want to remove')
     }
   },
   pre: [
@@ -179,10 +172,10 @@ exports.remove = {
     { method: 'topic.remove(params.id)', assign: 'topic' },
     { method: 'notification.removeByThread(path, params.id)' },
     { method: 'comment.removeByThread(path, params.id)' },
-    { method: 'communication.removeByThread(path, params.id)' },
+    { method: 'communication.removeByThread(path, params.id)' }
   ],
   handler: function (request, reply) {
-    reply(render(request.pre.topic));
+    reply(render(request.pre.topic))
   },
   description: 'Removes an topic'
-};
+}

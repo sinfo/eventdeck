@@ -1,14 +1,13 @@
 module.exports = function (thread) {
-  var split = thread.split(/-(.+)?/);
-  var result = '/';
+  var split = thread.split(/-(.+)?/)
+  var result = '/'
   if (thread.indexOf('company') != -1) {
-    result += 'companies';
-  }
-  else {
-  	result += split[0] + 's';
+    result += 'companies'
+  }else {
+    result += split[0] + 's'
   }
 
-  result += '/' + split[1];
+  result += '/' + split[1]
 
-  return result;
-};
+  return result
+}

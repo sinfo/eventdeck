@@ -1,14 +1,13 @@
-module.exports = function render(content) {
-  if(content instanceof Array) {
-    return content.map(renderObject);
+module.exports = function render (content) {
+  if (content instanceof Array) {
+    return content.map(renderObject)
   }
+  return renderObject(content)
+}
 
-  return renderObject(content);  
-};
-
-function renderObject(model) {
-  if(model.toObject){
-    model = model.toObject({ getters: true });
+function renderObject (model) {
+  if (model.toObject) {
+    model = model.toObject({ getters: true })
   }
 
   return {
@@ -20,5 +19,5 @@ function renderObject(model) {
     targets: model.targets,
     posted: model.posted,
     unread: model.unread
-  };
+  }
 }

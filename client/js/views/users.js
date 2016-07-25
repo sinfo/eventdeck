@@ -1,7 +1,7 @@
-var log = require('bows')('users');
-var PageView = require('client/js/pages/base');
-var templates = require('client/js/templates');
-var UserView = require('client/js/views/user');
+var log = require('bows')('users')
+var PageView = require('client/js/pages/base')
+var templates = require('client/js/templates')
+var UserView = require('client/js/views/user')
 
 module.exports = PageView.extend({
   template: templates.partials.sessions.users,
@@ -14,7 +14,7 @@ module.exports = PageView.extend({
     title: {
       deps: ['collection'],
       fn: function () {
-        return this.el.parentElement.getAttribute('data-title') + ' (' + this.collection.length + ')';
+        return this.el.parentElement.getAttribute('data-title') + ' (' + this.collection.length + ')'
       },
       cache: false
     }
@@ -23,25 +23,25 @@ module.exports = PageView.extend({
     fetched: 'boolean'
   },
   initialize: function () {
-    this.fetched = false;
+    this.fetched = false
   },
   render: function () {
-    this.renderWithTemplate();
-    this.renderCollection(this.collection, UserView, this.queryByHook('users'));
+    this.renderWithTemplate()
+    this.renderCollection(this.collection, UserView, this.queryByHook('users'))
 
     if (!this.fetched) {
-      this.fetchCollection();
-      this.fetched = true;
+      this.fetchCollection()
+      this.fetched = true
     }
   },
   fetchCollection: function () {
-    log('Fetching users');
-    var self = this;
+    log('Fetching users')
+    var self = this
     self.collection.fetch({
       success: function () {
-        self.render();
+        self.render()
       }
-    });
-    return false;
+    })
+    return false
   }
-});
+})

@@ -1,8 +1,7 @@
 /*global app*/
-var log = require('bows')('member-badge');
-var View = require('ampersand-view');
-var templates = require('client/js/templates');
-
+var log = require('bows')('member-badge')
+var View = require('ampersand-view')
+var templates = require('client/js/templates')
 
 module.exports = View.extend({
   template: templates.partials.members.badge,
@@ -17,19 +16,19 @@ module.exports = View.extend({
       type: 'attribute',
       hook: 'action-view',
       name: 'href'
-    },
-  },
-  initialize: function (spec) {
-    var self = this;
-    if(self.model.member && !self.model.memberDetails){
-      app.members.getOrFetch(self.model.member, {all: true}, function (err, model) {
-        if (err) {
-          log.error('couldnt find a member with id: ' + self.model.member);
-          return;
-        }
-        self.model.memberDetails = model;
-        // log('Got member', model.name);
-      });
     }
   },
-});
+  initialize: function (spec) {
+    var self = this
+    if (self.model.member && !self.model.memberDetails) {
+      app.members.getOrFetch(self.model.member, {all: true}, function (err, model) {
+        if (err) {
+          log.error('couldnt find a member with id: ' + self.model.member)
+          return
+        }
+        self.model.memberDetails = model
+      // log('Got member', model.name)
+      })
+    }
+  }
+})

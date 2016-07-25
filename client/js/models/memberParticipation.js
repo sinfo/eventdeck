@@ -1,6 +1,6 @@
-var AmpState = require('ampersand-state');
-var EventModel = require('./event');
-var options = require('options');
+var AmpState = require('ampersand-state')
+var EventModel = require('./event')
+var options = require('options')
 
 module.exports = AmpState.extend({
   props: {
@@ -17,10 +17,10 @@ module.exports = AmpState.extend({
       fn: function () {
         for (var i = 0; i < options.roles.length; i++) {
           if (options.roles[i].id === this.role) {
-            return options.roles[i].name;
+            return options.roles[i].name
           }
         }
       }
-    },
+    }
   }
-});
+})

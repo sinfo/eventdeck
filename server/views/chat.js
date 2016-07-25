@@ -1,17 +1,17 @@
-module.exports = function render(content) {
-  if(content instanceof Array) {
-    return content.map(renderObject);
+module.exports = function render (content) {
+  if (content instanceof Array) {
+    return content.map(renderObject)
   }
 
-  return renderObject(content);  
-};
+  return renderObject(content)
+}
 
-function renderObject(model) {
+function renderObject (model) {
   return {
     id: model.id,
     name: model.name,
     members: model.members,
     messages: model.messages,
-    date: model.date,
-  };
+    date: model.date
+  }
 }
