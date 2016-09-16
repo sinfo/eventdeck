@@ -1,4 +1,4 @@
-/*global app, alert, FB*/
+/* global app, FB */
 var log = require('bows')('auth')
 var PageView = require('client/js/pages/base')
 var templates = require('client/js/templates')

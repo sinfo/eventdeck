@@ -24,7 +24,7 @@ function create (member, cb) {
 
   Member.create(member, function (err, _member) {
     if (err) {
-      if (err.code == 11000) {
+      if (err.code === 11000) {
         log.warn({err: err, requestedMember: member.id}, 'member is a duplicate')
         return cb(Boom.conflict(dupKeyParser(err.err) + ' is a duplicate'))
       }
@@ -39,7 +39,7 @@ function create (member, cb) {
 
 function update (id, member, cb) {
   Member.findOneAndUpdate({id: id}, member, function (err, _member) {
-    if (err && err != {}) {
+    if (err && err !== {}) {
       log.error({err: err, member: id}, 'error updating member')
       return cb(Boom.badRequest('error updating member'))
     }
@@ -56,7 +56,7 @@ function createLoginCode (id, cb) {
   var loginCode = randtoken.generate(config.loginCodes.length)
   var code = {$push: {'loginCodes': {code: loginCode, created: new Date()}}}
   var filter = {id: id}
-  Member.findOneAndUpdate(filter, code , function (err, _member) {
+  Member.findOneAndUpdate(filter, code, function (err, _member) {
     if (err) {
       log.error({err: err, member: id}, 'error creating login code for member')
       return cb(Boom.internal())
@@ -132,7 +132,7 @@ function list (query, cb) {
   }
 
   if (eventsFilter.event || eventsFilter.role) {
-    filter.participations = query.participations ? {$elemMatch: eventsFilter} : {$not: {$elemMatch: eventsFilter} }
+    filter.participations = query.participations ? {$elemMatch: eventsFilter} : {$not: {$elemMatch: eventsFilter}}
   }
 
   Member.find(filter, fields, options, function (err, members) {

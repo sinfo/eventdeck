@@ -1,10 +1,8 @@
-/*global app*/
-var _ = require('underscore')
+/* global app */
 var async = require('async')
 var log = require('bows')('eventdeck')
 var config = require('client/js/helpers/clientconfig')
 var $ = require('jquery')
-var Ink = require('./ink-all')
 
 var Router = require('./router')
 var MainView = require('./views/main')
@@ -19,7 +17,6 @@ var Sessions = require('./models/sessions')
 var Speakers = require('./models/speakers')
 var Tags = require('./models/tags')
 var Topics = require('./models/topics')
-var Communications = require('./models/communications')
 var PublicNotifications = require('./models/publicNotifications')
 var PrivateNotifications = require('./models/privateNotifications')
 
@@ -55,11 +52,9 @@ module.exports = {
     self.router = new Router()
 
     this.fetchInitialData(function () {
-
       // wait for document ready to render our main view
       // this ensures the document has a body, etc.
       domReady(function () {
-
         // init our main view
         var mainView = self.view = new MainView({
           el: document.body,
@@ -135,7 +130,7 @@ module.exports = {
     if (app.me.authenticated) {
       var url = (page.charAt(0) === '/') ? page.slice(1) : page
       this.router.history.navigate(url, {trigger: true})
-    }else {
+    } else {
       this.router.history.navigate('/login', {trigger: true})
     }
   },

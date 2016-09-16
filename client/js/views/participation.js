@@ -1,11 +1,10 @@
-/*global app*/
+/* global app */
 var log = require('bows')('participations')
 var View = require('ampersand-view')
 var templates = require('client/js/templates')
 var ViewSwitcher = require('ampersand-view-switcher')
 var ParticipationForm = require('client/js/forms/participation')
 var MemberBadge = require('client/js/views/memberBadge')
-var populate = require('client/js/helpers/populate')
 var _ = require('client/js/helpers/underscore')
 var AmpersandRestCollection = require('ampersand-rest-collection')
 
@@ -214,7 +213,7 @@ var EditParticipation = View.extend({
 
             var parentModel = self.parent.parent.parent.model
 
-            parentModel.save({participations: parentModel.participations.serialize() }, {
+            parentModel.save({participations: parentModel.participations.serialize()}, {
               patch: true,
               wait: false,
               success: function () {

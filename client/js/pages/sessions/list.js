@@ -1,13 +1,10 @@
-/*global app, alert*/
+
 var log = require('bows')('sessions')
 var PageView = require('client/js/pages/base')
 var templates = require('client/js/templates')
-var AmpersandCollection = require('ampersand-collection')
 var options = require('options')
 var _ = require('underscore')
 var Calendar = require('ampersand-fullcalendar-view')
-
-var selectedFilter = 'showall'
 
 module.exports = PageView.extend({
   pageTitle: 'Sessions',
@@ -20,7 +17,6 @@ module.exports = PageView.extend({
     'click [data-hook~=hide]': 'hide'
   },
   initialize: function () {
-    var self = this
     if (!this.collection.length) {
       return this.fetchCollection()
     }
@@ -30,7 +26,7 @@ module.exports = PageView.extend({
     log('Fetching sessions')
     this.collection.update()
     this.collection.fetch({success: function () {
-        self.render()
+      self.render()
     }})
 
     return false
@@ -43,7 +39,7 @@ module.exports = PageView.extend({
     if (!this.hidden) {
       this.queryByHook('awesome-sidebar').style.display = 'none'
       this.hidden = true
-    }else {
+    } else {
       this.queryByHook('awesome-sidebar').style.display = 'block'
       this.hidden = false
     }
@@ -60,7 +56,7 @@ module.exports = PageView.extend({
           s.end = new Date(s.start.getTime() + s.duration.getTime())
           s.url = '/sessions/' + s.id
           s.color = _.find(options.kinds.sessions, function (o) {
-            return s.kind == o.name
+            return s.kind === o.name
           }).color
           return s
         })

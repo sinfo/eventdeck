@@ -1,9 +1,8 @@
-/*global app*/
+/* global app */
 var PageView = require('client/js/pages/base')
 var templates = require('client/js/templates')
 var MemberForm = require('client/js/forms/member')
 var _ = require('client/js/helpers/underscore')
-var log = require('bows')('members')
 
 module.exports = PageView.extend({
   pageTitle: 'Add member',

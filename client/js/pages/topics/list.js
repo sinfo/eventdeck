@@ -1,4 +1,4 @@
-/*global app, alert*/
+/* global app */
 var log = require('bows')('topics')
 var PageView = require('ampersand-infinite-scroll')
 var templates = require('client/js/templates')
@@ -6,10 +6,8 @@ var TopicView = require('client/js/views/topic')
 var Topic = require('client/js/models/topic')
 var AmpersandCollection = require('ampersand-collection')
 var topicKinds = require('options').kinds.topics
-var Tag = require('client/js/models/tag')
 var _ = require('client/js/helpers/underscore')
 var $ = require('client/js/helpers/jquery')
-var async = require('async')
 
 var selectedKind = 'showall'
 var selectedTag = 'showall'
@@ -18,26 +16,26 @@ var tempCollection
 
 function filterClosed (collection, filter) {
   return collection.filter(function (topic) {
-    return topic.closed == filter
+    return topic.closed === filter
   })
 }
 
 function filterKind (collection, filter) {
-  if (filter != 'showall') {
+  if (filter !== 'showall') {
     return collection.filter(function (topic) {
-      return topic.kind == filter
+      return topic.kind === filter
     })
-  }else {
+  } else {
     return collection
   }
 }
 
 function filterTag (collection, filter) {
-  if (filter != 'showall') {
+  if (filter !== 'showall') {
     return collection.filter(function (topic) {
-      return topic.tags.indexOf(filter) != -1
+      return topic.tags.indexOf(filter) !== -1
     })
-  }else {
+  } else {
     return collection
   }
 }
@@ -69,8 +67,8 @@ module.exports = PageView.extend({
     }
     if (!app.tags.length) {
       app.tags.fetch({success: function () {
-          log('got tags', app.tags.serialize())
-          self.render()
+        log('got tags', app.tags.serialize())
+        self.render()
       }})
     }
   },
@@ -148,7 +146,7 @@ module.exports = PageView.extend({
 
   renderKindFilters: function () {
     var self = this
-    var filterContainer = $(self.queryByHook('kind-filters')); // $.hook('kind-filters')
+    var filterContainer = $(self.queryByHook('kind-filters')) // $.hook('kind-filters')
     _.each(topicKinds, function (kind) {
       filterContainer.append("<li><div class='ink-button' data-hook='" + kind.id + "'>" + kind.name + '</div></li>')
     })
@@ -162,7 +160,7 @@ module.exports = PageView.extend({
     log('filtering by kind', kind)
 
     var aux = filterKind(tempCollection, kind)
-    aux = filterClosed(aux, selectedClosed == 'closed')
+    aux = filterClosed(aux, selectedClosed === 'closed')
     aux = filterTag(aux, selectedTag)
     tempCollection = new AmpersandCollection(aux, {model: Topic})
 
@@ -191,7 +189,7 @@ module.exports = PageView.extend({
     log('filtering by tag', tag)
 
     var aux = filterKind(tempCollection, selectedKind)
-    aux = filterClosed(aux, selectedClosed == 'closed')
+    aux = filterClosed(aux, selectedClosed === 'closed')
     aux = filterTag(aux, tag)
     tempCollection = new AmpersandCollection(aux, {model: Topic})
 
@@ -219,7 +217,7 @@ module.exports = PageView.extend({
     log('filtering by closed', closed)
 
     var aux = filterKind(tempCollection, selectedKind)
-    aux = filterClosed(aux, closed == 'closed')
+    aux = filterClosed(aux, closed === 'closed')
     aux = filterTag(aux, selectedTag)
     tempCollection = new AmpersandCollection(aux, {model: Topic})
 
@@ -236,7 +234,7 @@ module.exports = PageView.extend({
   me: function () {
     log('Fetching my topics')
     var aux = this.collection.filter(function (topic) {
-      return topic.targets && topic.targets.indexOf(app.me.id) != -1
+      return topic.targets && topic.targets.indexOf(app.me.id) !== -1
     })
 
     aux = new AmpersandCollection(aux, {model: Topic})
@@ -266,7 +264,7 @@ module.exports = PageView.extend({
     if (!this.hidden) {
       this.queryByHook('awesome-sidebar').style.display = 'none'
       this.hidden = true
-    }else {
+    } else {
       this.queryByHook('awesome-sidebar').style.display = 'block'
       this.hidden = false
     }

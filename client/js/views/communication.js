@@ -1,4 +1,4 @@
-/*global app*/
+/* global app */
 var $ = require('jquery')
 var threadUrl = require('client/js/helpers/threadUrl')
 var log = require('bows')('communications')
@@ -151,7 +151,6 @@ var EditCommunication = View.extend({
       container: '[data-hook~=new-commmunication]',
       prepareView: function (el) {
         var self = this
-        var model = this.model
         return new CommunicationForm({
           el: el,
           model: this.model,

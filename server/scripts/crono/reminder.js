@@ -8,7 +8,7 @@ module.exports = new CronJob({
     reminder(null, function (reply) {
       if (reply.success) {
         console.log('Success while running crono reminder ' + reply.success)
-      }else {
+      } else {
         console.log('Error while running crono reminder ' + reply.error)
       }
     })

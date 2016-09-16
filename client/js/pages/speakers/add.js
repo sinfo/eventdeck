@@ -1,4 +1,4 @@
-/*global app*/
+/* global app */
 var PageView = require('client/js/pages/base')
 var templates = require('client/js/templates')
 var SpeakerForm = require('client/js/forms/speaker')

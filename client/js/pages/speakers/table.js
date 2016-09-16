@@ -1,4 +1,4 @@
-/*global app, alert*/
+
 var PageView = require('ampersand-infinite-scroll')
 var templates = require('client/js/templates')
 var MemberSpeakersView = require('client/js/views/memberSpeakers')

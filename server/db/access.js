@@ -8,4 +8,4 @@ var schema = new mongoose.Schema({
 
 schema.index({member: 1})
 
-var access = module.exports = mongoose.model('Access', schema)
+module.exports = mongoose.model('Access', schema)

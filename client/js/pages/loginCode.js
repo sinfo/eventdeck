@@ -1,4 +1,4 @@
-/*global app, alert*/
+/* global app */
 var PageView = require('client/js/pages/base')
 var templates = require('client/js/templates')
 

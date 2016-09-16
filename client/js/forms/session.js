@@ -1,7 +1,6 @@
-/*global app*/
+/* global app */
 var FormView = require('ampersand-form-view')
 var InputView = require('ampersand-input-view')
-var ArrayInputView = require('ampersand-array-input-view')
 var ChosenView = require('ampersand-chosen-view')
 var CheckBoxView = require('ampersand-checkbox-view')
 var SelectView = require('ampersand-select-view')
@@ -57,7 +56,7 @@ module.exports = FormView.extend({
         name: 'event',
         label: 'Event',
         parent: this,
-        options: app.events.map(function (s) { return s.name; }),
+        options: app.events.map(function (s) { return s.name }),
         unselectedText: app.events.models[0].name,
         required: false,
         value: this.model && this.model.event || app.events.find(function (s) { return s.id === app.me.selectedEvent }).name,
@@ -68,7 +67,7 @@ module.exports = FormView.extend({
         name: 'kind',
         label: 'Kind',
         parent: this,
-        options: options.kinds.sessions.map(function (s) { return s.name; }),
+        options: options.kinds.sessions.map(function (s) { return s.name }),
         unselectedText: 'Please choose one',
         required: true,
         value: this.model && this.model.kind || '',
@@ -156,10 +155,10 @@ module.exports = FormView.extend({
         name: 'session-speakers',
         unselectedText: 'Select one or more',
         value: this.model && this.model.speakers.map(function (r) {
-            return r.id
-          }) || [],
+          return r.id
+        }) || [],
         isMultiple: true,
-        options: app.speakers && app.speakers.map(function (m) { return [m.id, m.name]; })
+        options: app.speakers && app.speakers.map(function (m) { return [m.id, m.name] })
       }),
       new ChosenView({
         label: 'Companies',
@@ -167,7 +166,7 @@ module.exports = FormView.extend({
         unselectedText: 'Select one or more',
         value: this.model && this.model.companies,
         isMultiple: true,
-        options: app.companies && app.companies.map(function (m) { return [m.id, m.name]; })
+        options: app.companies && app.companies.map(function (m) { return [m.id, m.name] })
       }),
       new CheckBoxView({
         name: 'tickets.needed',

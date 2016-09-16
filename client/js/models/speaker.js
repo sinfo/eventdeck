@@ -1,5 +1,4 @@
-/*global app*/
-var AmpState = require('ampersand-state')
+/* global app */
 var AmpModel = require('ampersand-model')
 var AmpCollection = require('ampersand-collection')
 var options = require('options')
@@ -89,7 +88,7 @@ module.exports = AmpModel.extend({
     participation: {
       deps: ['participations'],
       fn: function () {
-        return this.participations.filter(function (p) { return p.event == app.me.selectedEvent; })[0]
+        return this.participations.filter(function (p) { return p.event === app.me.selectedEvent })[0]
       }
     },
     statusDetails: {
@@ -98,11 +97,11 @@ module.exports = AmpModel.extend({
         var self = this
         var participations = self.participations.toJSON()
         var participation = participations.filter(function (p) {
-          return p.event == app.me.selectedEvent
+          return p.event === app.me.selectedEvent
         })[0]
 
         var details = options.statuses.speaker.filter(function (status) {
-          return participation && participation.status == status.id
+          return participation && participation.status === status.id
         })[0] || {}
 
         details.style = details && details.color && 'background-color:' + details.color

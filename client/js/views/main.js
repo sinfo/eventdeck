@@ -1,4 +1,4 @@
-/*global app*/
+/* global app */
 // This app view is responsible for rendering all content that goes into
 // <html>. It's initted right away and renders itself on DOM ready.
 
@@ -141,7 +141,7 @@ module.exports = View.extend({
 
   handleLinkClick: function (e) {
     function getATag (el) {
-      return el.nodeName == 'A' && el || el.parentNode && getATag(el.parentNode) || {}
+      return el.nodeName === 'A' && el || el.parentNode && getATag(el.parentNode) || {}
     }
 
     var aTag = getATag(e.target)
@@ -149,7 +149,7 @@ module.exports = View.extend({
 
     // if it's a plain click (no modifier keys)
     // and it's a local url, navigate internally
-    if (local && !e.ctrlKey && !e.shiftKey && !e.altKey && !e.metaKey && aTag.target != '_blank') {
+    if (local && !e.ctrlKey && !e.shiftKey && !e.altKey && !e.metaKey && aTag.target !== '_blank') {
       e.preventDefault()
       app.navigate(aTag.pathname)
     }
@@ -170,12 +170,11 @@ module.exports = View.extend({
   handleSearchKeydown: function (e) {
     var searchResults = $(this.queryByHook('search-results'))
     // down arrow or enter
-    if (e.keyCode == 40 || e.keyCode == 13) {
+    if (e.keyCode === 40 || e.keyCode === 13) {
       searchResults.find('a').first().focus()
       return false
-    }
     // up arrow
-    else if (e.keyCode == 38) {
+    } else if (e.keyCode === 38) {
       searchResults.find('a').last().focus()
       return false
     }
@@ -194,18 +193,16 @@ module.exports = View.extend({
     }).on('keydown', 'a', function (e) {
       var $this = $(this)
       // backspace or escape
-      if (e.keyCode == 8 || e.keyCode == 27) {
+      if (e.keyCode === 8 || e.keyCode === 27) {
         e.preventDefault()
         $('.event input').focus()
-      }
       // enter
-      else if (e.keyCode == 13) {
+      } else if (e.keyCode === 13) {
         e.preventDefault()
         self.handleLinkClick(e)
         searchResults.hide()
-      }
       // down arrow
-      else if (e.keyCode == 40) {
+      } else if (e.keyCode === 40) {
         var next = $this.parent().next()
         if (next.hasClass('header')) {
           next = next.next()
@@ -213,9 +210,8 @@ module.exports = View.extend({
 
         next.find('a').focus()
         return false
-      }
       // up arrow
-      else if (e.keyCode == 38) {
+      } else if (e.keyCode === 38) {
         var prev = $this.parent().prev()
         if (prev.hasClass('header')) {
           prev = prev.prev()

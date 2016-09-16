@@ -13,4 +13,4 @@ schema.index({posted: -1})
 schema.index({thread: 1})
 schema.index({member: 1})
 
-var Notification = module.exports = mongoose.model('Notification', schema)
+module.exports = mongoose.model('Notification', schema)

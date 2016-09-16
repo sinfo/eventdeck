@@ -1,4 +1,4 @@
-/*global app, alert*/
+/* global app */
 var log = require('bows')('speakers')
 var PageView = require('client/js/pages/base')
 var templates = require('client/js/templates')
@@ -108,7 +108,7 @@ module.exports = PageView.extend({
   },
   handleDeleteClick: function () {
     this.model.destroy({success: function () {
-        app.navigate('speakers')
+      app.navigate('speakers')
     }})
   }
 })

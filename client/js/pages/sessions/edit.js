@@ -1,10 +1,9 @@
-/*global app, alert*/
+/* global app, alert */
 var log = require('bows')('sessions')
 var PageView = require('client/js/pages/base')
 var templates = require('client/js/templates')
 var SessionForm = require('client/js/forms/session')
 var _ = require('client/js/helpers/underscore')
-var moment = require('moment')
 
 module.exports = PageView.extend({
   pageTitle: 'Edit session',
@@ -39,7 +38,7 @@ module.exports = PageView.extend({
             data = _.compactObject(data)
 
             if (data.event) {
-              data.event = app.events.find(function (s) {return s.name == data.event;}).id
+              data.event = app.events.find(function (s) { return s.name === data.event }).id
             }
 
             if (data['session-date']) {
@@ -108,7 +107,7 @@ module.exports = PageView.extend({
             changedAttributes.tickets = data.tickets
 
             if (data['session-speakers']) {
-              changedAttributes.speakers = data['session-speakers'] && data['session-speakers'].map(function (s) {return {id: s};})
+              changedAttributes.speakers = data['session-speakers'] && data['session-speakers'].map(function (s) { return {id: s} })
               delete data['session-speakers']
             }
 

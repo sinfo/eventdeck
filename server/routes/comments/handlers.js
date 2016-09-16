@@ -1,8 +1,7 @@
 var Joi = require('joi')
-var log = require('server/helpers/logger')
 var render = require('server/views/comment')
 
-var handlers = module.exports
+exports = module.exports
 
 exports.create = {
   auth: 'session',

@@ -1,4 +1,4 @@
-/*global app*/
+/* global app */
 var log = require('bows')('members')
 var Member = require('client/js/models/member')
 var PageView = require('ampersand-infinite-scroll')
@@ -17,7 +17,7 @@ function filtering (page, filter) {
     }
     )
 
-    return member && ids.indexOf(filter) != -1
+    return member && ids.indexOf(filter) !== -1
   })
 
   return new AmpersandCollection(aux, {model: Member})
@@ -88,7 +88,7 @@ module.exports = PageView.extend({
     if (!this.hidden) {
       this.queryByHook('awesome-sidebar').style.display = 'none'
       this.hidden = true
-    }else {
+    } else {
       this.queryByHook('awesome-sidebar').style.display = 'block'
       this.hidden = false
     }
@@ -100,7 +100,7 @@ module.exports = PageView.extend({
   me: function () {
     log('Fetching Selected Companies')
     var aux = this.collection.filter(function (member) {
-      return member && member.id == app.me.id
+      return member && member.id === app.me.id
     })
 
     aux = new AmpersandCollection(aux, {model: Member})

@@ -20,6 +20,7 @@ Member.find({
 }, gotCoordinators)
 
 function gotCoordinators (error, _coordinators) {
+  if (error) throw error
   coordinators = _coordinators
   Company.find({}, gotCompanies)
   Topic.find({}, gotTopics)
@@ -27,8 +28,10 @@ function gotCoordinators (error, _coordinators) {
 }
 
 function gotCompanies (error, companies) {
+  if (error) throw error
   companies.forEach(function (company) {
     Subscription.find({thread: 'company-' + company.id}, function (error, subscriptions) {
+      if (error) throw error
       coordinators.forEach(function (coordinator) {
         var subscribed = false
 
@@ -58,8 +61,10 @@ function gotCompanies (error, companies) {
 }
 
 function gotTopics (error, topics) {
+  if (error) throw error
   topics.forEach(function (topic) {
     Subscription.find({thread: 'topic-' + topic.id}, function (error, subscriptions) {
+      if (error) throw error
       coordinators.forEach(function (coordinator) {
         var subscribed = false
 
@@ -89,8 +94,10 @@ function gotTopics (error, topics) {
 }
 
 function gotSpeakers (error, speakers) {
+  if (error) throw error
   speakers.forEach(function (speaker) {
     Subscription.find({thread: 'speaker-' + speaker.id}, function (error, subscriptions) {
+      if (error) throw error
       coordinators.forEach(function (coordinator) {
         var subscribed = false
 

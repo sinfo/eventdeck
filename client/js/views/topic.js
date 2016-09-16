@@ -1,4 +1,4 @@
-/*global app*/
+
 var View = require('ampersand-view')
 var templates = require('client/js/templates')
 var TagsView = require('client/js/views/topicTags')

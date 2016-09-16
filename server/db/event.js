@@ -13,4 +13,4 @@ var schema = new mongoose.Schema({
 
 schema.index({id: 1, date: -1})
 
-var eventModel = module.exports = mongoose.model('Event', schema)
+module.exports = mongoose.model('Event', schema)

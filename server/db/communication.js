@@ -16,4 +16,4 @@ schema.index({thread: 1, posted: -1})
 schema.index({event: 1, posted: -1})
 schema.index({member: 1})
 
-var Communication = module.exports = mongoose.model('Communication', schema)
+module.exports = mongoose.model('Communication', schema)

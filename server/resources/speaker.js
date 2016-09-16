@@ -2,7 +2,6 @@ var Boom = require('boom')
 var slug = require('slug')
 var server = require('server').hapi
 var log = require('server/helpers/logger')
-var threadFromPath = require('server/helpers/threadFromPath')
 var parser = require('server/helpers/fieldsParser')
 var Speaker = require('server/db/speaker')
 var dupKeyParser = require('server/helpers/dupKeyParser')
@@ -22,7 +21,7 @@ function create (speaker, memberId, cb) {
 
   Speaker.create(speaker, function (err, _speaker) {
     if (err) {
-      if (err.code == 11000) {
+      if (err.code === 11000) {
         log.warn({err: err, requestedSpeaker: speaker.id}, 'speaker is a duplicate')
         return cb(Boom.conflict(dupKeyParser(err.err) + ' is a duplicate'))
       }
@@ -130,7 +129,7 @@ function list (query, cb) {
   }
 
   if (eventsFilter.event || eventsFilter.member) {
-    filter.participations = query.participations ? {$elemMatch: eventsFilter} : {$not: {$elemMatch: eventsFilter} }
+    filter.participations = query.participations ? {$elemMatch: eventsFilter} : {$not: {$elemMatch: eventsFilter}}
   }
 
   Speaker.find(filter, fields, options, function (err, speaker) {

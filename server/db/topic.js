@@ -33,4 +33,4 @@ schema.virtual('thread').get(function () {
 schema.index({posted: -1})
 schema.index({author: 1})
 
-var Topic = module.exports = mongoose.model('Topic', schema)
+module.exports = mongoose.model('Topic', schema)

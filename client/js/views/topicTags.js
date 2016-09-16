@@ -1,5 +1,4 @@
-/*global app*/
-var log = require('bows')('topic-tags')
+/* global app */
 var View = require('ampersand-view')
 var templates = require('client/js/templates')
 var SubCollection = require('ampersand-subcollection')
@@ -25,7 +24,7 @@ module.exports = View.extend({
     }
 
     app.tags.fetch({success: function () {
-        self.filterTags()
+      self.filterTags()
     }})
   },
   filterTags: function () {
@@ -33,7 +32,7 @@ module.exports = View.extend({
     if (!this.model.tagsDetails.length) {
       this.model.tagsDetails = new SubCollection(app.tags, {
         filter: function (tag) {
-          return self.model.tags.indexOf(tag.id) != -1
+          return self.model.tags.indexOf(tag.id) !== -1
         }
       })
     }

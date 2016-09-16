@@ -1,8 +1,7 @@
 var Joi = require('joi')
-var log = require('server/helpers/logger')
 var render = require('server/views/member')
 
-var handlers = module.exports
+exports = module.exports
 
 exports.create = {
   auth: 'session',
@@ -154,7 +153,7 @@ exports.getMe = {
       skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
       limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
       sort: Joi.string().description('How to sort the array')
-  }},
+    }},
   pre: [
     { method: 'member.get(auth.credentials.id, query)', assign: 'member' }
   ],
@@ -222,7 +221,7 @@ exports.remove = {
   validate: {
     params: {
       // TODO: CHECK PERMISSIONS
-      id: Joi.string().required().description('id of the member we want to remove'),
+      id: Joi.string().required().description('id of the member we want to remove')
     // TODO: REMOVE NOTIFICATIONS
     // TODO: REMOVE COMMENTS
     // TODO: REMOVE COMMUNICATIONS

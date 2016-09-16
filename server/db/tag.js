@@ -8,4 +8,4 @@ var schema = new mongoose.Schema({
 
 schema.index({id: 1})
 
-var Tag = module.exports = mongoose.model('Tag', schema)
+module.exports = mongoose.model('Tag', schema)

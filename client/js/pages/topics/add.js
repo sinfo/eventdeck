@@ -1,4 +1,4 @@
-/*global app*/
+/* global app */
 var PageView = require('client/js/pages/base')
 var templates = require('client/js/templates')
 var TopicForm = require('client/js/forms/topic')
@@ -17,7 +17,7 @@ module.exports = PageView.extend({
           return cb()
         }
         app.members.fetch({ success: function () {
-            cb()
+          cb()
         }})
       },
       function (cb) {
@@ -25,12 +25,13 @@ module.exports = PageView.extend({
           return cb()
         }
         app.tags.fetch({ success: function () {
-            cb()
+          cb()
         }})
       }
     ],
       function (err) {
-        self.moder = {}
+        if (err) throw err
+        self.model = {}
       })
   },
   subviews: {
@@ -45,7 +46,7 @@ module.exports = PageView.extend({
             if (data['poll-kind'] || data['poll-options']) {
               data.poll = {
                 kind: data['poll-kind'],
-                options: data['poll-options'] && data['poll-options'].map(function (o) { return { content: o }; })
+                options: data['poll-options'] && data['poll-options'].map(function (o) { return { content: o } })
               }
               delete data['poll-kind']
               delete data['poll-options']

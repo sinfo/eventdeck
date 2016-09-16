@@ -1,12 +1,11 @@
 var Joi = require('joi')
-var log = require('server/helpers/logger')
 var companiesRender = require('server/views/company')
 var speakersRender = require('server/views/speaker')
 var membersRender = require('server/views/member')
 var topicsRender = require('server/views/topic')
 var sessionsRender = require('server/views/session')
 
-var handlers = module.exports
+exports = module.exports
 
 exports.search = {
   auth: 'session',
@@ -32,24 +31,24 @@ exports.search = {
   handler: function (request, reply) {
     reply({
       companies: request.pre.companies && {
-          exact: request.pre.companies.exact && companiesRender(request.pre.companies.exact),
-          extended: request.pre.companies.extended && companiesRender(request.pre.companies.extended)
+        exact: request.pre.companies.exact && companiesRender(request.pre.companies.exact),
+        extended: request.pre.companies.extended && companiesRender(request.pre.companies.extended)
       },
       speakers: request.pre.speakers && {
-          exact: request.pre.speakers.exact && speakersRender(request.pre.speakers.exact),
-          extended: request.pre.speakers.extended && speakersRender(request.pre.speakers.extended)
+        exact: request.pre.speakers.exact && speakersRender(request.pre.speakers.exact),
+        extended: request.pre.speakers.extended && speakersRender(request.pre.speakers.extended)
       },
       members: request.pre.members && {
-          exact: request.pre.members.exact && membersRender(request.pre.members.exact),
-          extended: request.pre.members.extended && membersRender(request.pre.members.extended)
+        exact: request.pre.members.exact && membersRender(request.pre.members.exact),
+        extended: request.pre.members.extended && membersRender(request.pre.members.extended)
       },
       topics: request.pre.topics && {
-          exact: request.pre.topics.exact && topicsRender(request.pre.topics.exact),
-          extended: request.pre.topics.extended && topicsRender(request.pre.topics.extended)
+        exact: request.pre.topics.exact && topicsRender(request.pre.topics.exact),
+        extended: request.pre.topics.extended && topicsRender(request.pre.topics.extended)
       },
       sessions: request.pre.sessions && {
-          exact: request.pre.sessions.exact && sessionsRender(request.pre.sessions.exact),
-          extended: request.pre.sessions.extended && sessionsRender(request.pre.sessions.extended)
+        exact: request.pre.sessions.exact && sessionsRender(request.pre.sessions.exact),
+        extended: request.pre.sessions.extended && sessionsRender(request.pre.sessions.extended)
       }
     })
   },

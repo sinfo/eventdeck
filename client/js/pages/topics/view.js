@@ -1,4 +1,4 @@
-/*global app, alert*/
+/* global app */
 var log = require('bows')('topics')
 var PageView = require('client/js/pages/base')
 var templates = require('client/js/templates')
@@ -105,7 +105,6 @@ module.exports = PageView.extend({
       parent: this,
       prepareView: function (el) {
         var self = this
-        var model = this.model
 
         self.queryByHook('topic-poll').innerHTML = ''
 
@@ -121,11 +120,11 @@ module.exports = PageView.extend({
             var memberIndexInVotes = o.votes.indexOf(app.me.id)
 
             // Nothing changed
-            if ((optionIndexInPollValue != -1) == (memberIndexInVotes != -1)) {
+            if ((optionIndexInPollValue !== -1) === (memberIndexInVotes !== -1)) {
               return
             }
 
-            if (optionIndexInPollValue != -1) {
+            if (optionIndexInPollValue !== -1) {
               // Option is selected - Add member to votes
               o.votes.push(app.me.id)
             } else {
@@ -157,7 +156,7 @@ module.exports = PageView.extend({
   },
   handleDeleteClick: function () {
     this.model.destroy({success: function () {
-        app.navigate('topics')
+      app.navigate('topics')
     }})
   }
 })

@@ -1,13 +1,13 @@
-/*global app*/
+/* global app */
 var FormView = require('ampersand-form-view')
 var ArrayCheckboxView = require('ampersand-array-checkbox-view')
 var templates = require('client/js/templates')
 
 module.exports = FormView.extend({
   fields: function () {
-    var options = this.model && this.model.poll.options.serialize().map(function (o) { return o.content; })
+    var options = this.model && this.model.poll.options.serialize().map(function (o) { return o.content })
     var value = this.model && this.model.poll.options.serialize().map(function (o) {
-      return o.votes.indexOf(app.me.id) != -1 && o.content
+      return o.votes.indexOf(app.me.id) !== -1 && o.content
     }).filter(function (o) {
       return o
     })

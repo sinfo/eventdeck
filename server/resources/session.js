@@ -4,8 +4,6 @@ var server = require('server').hapi
 var log = require('server/helpers/logger')
 var parser = require('server/helpers/fieldsParser')
 var Session = require('server/db/session')
-var config = require('config')
-var fs = require('fs')
 var ical = require('server/helpers/ical')
 
 server.method('session.create', create, {})
@@ -78,7 +76,7 @@ function list (query, cb) {
     limit: query.limit,
     sort: parser(query.sort)
   }
-  if (query.event) { filter.event = query.event; }
+  if (query.event) { filter.event = query.event }
 
   Session.find(filter, fields, options, function (err, sessions) {
     if (err) {

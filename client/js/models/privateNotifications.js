@@ -1,4 +1,4 @@
-/*global app*/
+/* global app */
 var AmpIOCollection = require('ampersand-io-collection')
 var PaginationMixin = require('ampersand-pagination-mixin')
 var Notification = require('./notification')
@@ -28,7 +28,7 @@ module.exports = function (socket) {
     listeners: {
       onNew: {
         fn: function (data, cb) {
-          var callback = function () {if (cb) { cb();}}
+          var callback = function () { if (cb) { cb() } }
           log('Received private notification.')
           log(data)
           if (data.err) {
@@ -43,7 +43,7 @@ module.exports = function (socket) {
       },
       onCount: {
         fn: function (data, cb) {
-          var callback = function () {if (cb) { cb();}}
+          var callback = function () { if (cb) { cb() } }
           log('Received notification count.')
           if (data.err) {
             log(data.err)

@@ -1,4 +1,4 @@
-/*global app*/
+/* global app */
 var View = require('ampersand-view')
 var templates = require('client/js/templates')
 var Speaker = require('client/js/models/speaker')

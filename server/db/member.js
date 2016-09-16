@@ -38,4 +38,4 @@ schema.index({id: 1})
 schema.index({'participations.role': 1})
 schema.index({'facebook.id': 1})
 
-var Member = module.exports = mongoose.model('Member', schema)
+module.exports = mongoose.model('Member', schema)

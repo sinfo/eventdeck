@@ -1,6 +1,6 @@
 var AmpState = require('ampersand-state')
-var AmpModel = require('ampersand-model')
 var AmpCollection = require('ampersand-collection')
+var Event = require('./event')
 var Member = require('./member')
 var options = require('options')
 
@@ -53,7 +53,7 @@ module.exports = AmpState.extend({
         var self = this
 
         var details = options.statuses[this.threadKind || 'company'].filter(function (status) {
-          return self.status == status.id
+          return self.status === status.id
         })[0] || {}
 
         details.style = details && details.color && 'background-color:' + details.color

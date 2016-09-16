@@ -1,5 +1,5 @@
 var Session = require('server/db/session')
-var icalendar = require('icalendar')
+var Icalendar = require('icalendar')
 var fs = require('fs')
 var config = require('config')
 var Boom = require('boom')
@@ -9,7 +9,7 @@ var icalPath = config.ical.path
 var ical = {}
 
 ical.generate = function (cb) {
-  var ical = new icalendar.iCalendar()
+  var ical = new Icalendar.iCalendar() // eslint-disable-line
 
   Session.find({}, gotSessions)
 
@@ -20,7 +20,7 @@ ical.generate = function (cb) {
     }
 
     sessions.forEach(function (session) {
-      var event = new icalendar.VEvent(session.id)
+      var event = new Icalendar.VEvent(session.id)
       event.setSummary(session.name)
       event.setDescription(session.description)
       event.setLocation(session.place)
@@ -44,7 +44,7 @@ ical.generate = function (cb) {
         return (cb ? cb(Boom.internal()) : Boom.internal())
       }
 
-      if (cb) {cb(null, ical); }
+      if (cb) { cb(null, ical) }
     })
   }
 }

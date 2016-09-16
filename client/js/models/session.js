@@ -1,8 +1,6 @@
-/*global app*/
 var AmpState = require('ampersand-state')
 var AmpModel = require('ampersand-model')
 var AmpCollection = require('ampersand-collection')
-var options = require('options')
 var marked = require('client/js/helpers/marked')
 var SpeakerDetails = require('./speaker')
 var CompanyDetails = require('./company')

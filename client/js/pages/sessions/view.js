@@ -1,15 +1,11 @@
-/*global app, alert*/
+/* global app */
 var log = require('bows')('sessions')
 var PageView = require('client/js/pages/base')
 var templates = require('client/js/templates')
-var CommunicationsView = require('client/js/views/communications')
-var Communications = require('client/js/models/communications')
 var CommentsView = require('client/js/views/comments')
 var Comments = require('client/js/models/comments')
 var SpeakersView = require('client/js/views/sessionSpeaker')
 var CompaniesView = require('client/js/views/sessionCompany')
-var Speakers = require('client/js/models/speakers')
-var ParticipationsView = require('client/js/views/participations')
 var SubscriptionView = require('client/js/views/subscription')
 var Users = require('client/js/models/users')
 var UsersView = require('client/js/views/users')
@@ -84,7 +80,7 @@ module.exports = PageView.extend({
 
       log('Got session', model.name)
 
-      model.event = app.events.find(function (s) {return s.id == model.event;}).name
+      model.event = app.events.find(function (s) { return s.id === model.event }).name
     })
   },
   subviews: {
@@ -172,7 +168,7 @@ module.exports = PageView.extend({
   },
   handleDeleteClick: function () {
     this.model.destroy({success: function () {
-        app.navigate('sessions')
+      app.navigate('sessions')
     }})
   }
 })

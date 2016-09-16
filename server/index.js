@@ -11,7 +11,7 @@ var moonbootsConfig = require('moonbootsConfig')
 
 var cookieName = 'eventdeck-config'
 
-log.error({env: process.env.NODE_ENV }, '### Starting EventDeck ###')
+log.error({ env: process.env.NODE_ENV }, '### Starting EventDeck ###')
 
 var server = module.exports.hapi = new Hapi.Server(config.host, config.port, { cors: config.cors })
 
@@ -62,7 +62,7 @@ server.pack.register([
         redirectTo: '/login',
         redirectOnTry: true,
         isSecure: false,
-        isHttpOnly: false,*/
+        isHttpOnly: false, */
       isSecure: false
     })
 

@@ -176,12 +176,12 @@ function getByThread (path, id, query, cb) {
 function getUnreadCount (memberId, query, cb) {
   cb = cb || query
 
-  var fields = parser(query.fields)
-  var options = {
-    skip: query.skip,
-    limit: query.limit,
-    sort: parser(query.sort)
-  }
+  // var fields = parser(query.fields)
+  // var options = {
+  //   skip: query.skip,
+  //   limit: query.limit,
+  //   sort: parser(query.sort)
+  // }
 
   async.waterfall([
     function getSubscriptions (cbAsync) {
@@ -306,7 +306,7 @@ function decorateWithUnreadStatus (memberId, collection, cb) {
     return o.thread
   })
 
-  var filter = { member: memberId, thread: { $in: threads }}
+  var filter = { member: memberId, thread: { $in: threads } }
   Access.find(filter, function (err, accesses) {
     if (err) {
       log.error({err: err, access: filter})
@@ -323,7 +323,7 @@ function decorateWithUnreadStatus (memberId, collection, cb) {
     })
 
     async.map(collection, function (o, asyncCb) {
-      if (accessedThreads.indexOf(o.thread) == -1) {
+      if (accessedThreads.indexOf(o.thread) === -1) {
         o.set('unread', true, { strict: false })
         return asyncCb(null, o)
       }
@@ -362,7 +362,7 @@ function remove (id, cb) {
 
 function removeByThread (path, id, cb) {
   var thread = ''
-  if (typeof (id) == 'function') {
+  if (typeof (id) === 'function') {
     thread = path
     cb = id
   } else {

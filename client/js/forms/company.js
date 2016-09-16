@@ -1,6 +1,5 @@
 var FormView = require('ampersand-form-view')
 var InputView = require('ampersand-input-view')
-var ArrayInputView = require('ampersand-array-input-view')
 var templates = require('client/js/templates')
 var ExtendedInput = InputView.extend({
   template: templates.includes.formInput()

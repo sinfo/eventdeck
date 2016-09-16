@@ -1,8 +1,7 @@
 var Joi = require('joi')
-var log = require('server/helpers/logger')
 var render = require('server/views/tag')
 
-var handlers = module.exports
+exports = module.exports
 
 exports.create = {
   auth: 'session',
@@ -76,7 +75,7 @@ exports.list = {
       skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
       limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
       sort: Joi.string().description('How to sort the array')
-  }},
+    }},
   pre: [
     { method: 'tag.list(query)', assign: 'tags' }
   ],

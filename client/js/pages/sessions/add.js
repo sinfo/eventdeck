@@ -1,9 +1,8 @@
-/*global app*/
+/* global app */
 var PageView = require('client/js/pages/base')
 var templates = require('client/js/templates')
 var SessionForm = require('client/js/forms/session')
 var _ = require('client/js/helpers/underscore')
-var moment = require('moment')
 
 module.exports = PageView.extend({
   pageTitle: 'Add session',
@@ -20,7 +19,7 @@ module.exports = PageView.extend({
             if (data.event) {
               console.log(data.event)
 
-              data.event = app.events.find(function (s) {return s.name == data.event;}).id
+              data.event = app.events.find(function (s) { return s.name === data.event }).id
             }
 
             if (data['session-date']) {
@@ -82,7 +81,7 @@ module.exports = PageView.extend({
             delete data.end
 
             if (data['session-speakers']) {
-              data.speakers = data['session-speakers'] && data['session-speakers'].map(function (s) {return {id: s};})
+              data.speakers = data['session-speakers'] && data['session-speakers'].map(function (s) { return {id: s} })
               delete data['session-speakers']
             }
 

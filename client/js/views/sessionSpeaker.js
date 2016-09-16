@@ -1,5 +1,4 @@
-/*global app*/
-var log = require('bows')('session-speaker-view')
+/* global app */
 var View = require('ampersand-view')
 var templates = require('client/js/templates')
 var SubCollection = require('ampersand-subcollection')
@@ -47,19 +46,19 @@ module.exports = View.extend({
     }
 
     app.speakers.fetch({ success: function () {
-        self.filterSpeakers()
+      self.filterSpeakers()
     }})
   },
   filterSpeakers: function () {
     var self = this
     if (!self.model.speakersDetails.length) {
       var sessionSpeakerIds = self.model.speakers.serialize()
-        .filter(function (s) { return s.id; })
-        .map(function (s) { return s.id; })
+        .filter(function (s) { return s.id })
+        .map(function (s) { return s.id })
 
       self.model.speakersDetails = new SubCollection(app.speakers, {
         filter: function (speaker) {
-          return sessionSpeakerIds.indexOf(speaker.id) != -1
+          return sessionSpeakerIds.indexOf(speaker.id) !== -1
         }
       })
     }

@@ -1,5 +1,4 @@
-/*global app*/
-var log = require('bows')('session-company-view')
+/* global app */
 var View = require('ampersand-view')
 var templates = require('client/js/templates')
 var SubCollection = require('ampersand-subcollection')
@@ -47,7 +46,7 @@ module.exports = View.extend({
     }
 
     app.companies.fetch({ success: function () {
-        self.filterCompanies()
+      self.filterCompanies()
     }})
   },
   filterCompanies: function () {
@@ -55,7 +54,7 @@ module.exports = View.extend({
     if (!self.model.companiesDetails.length) {
       self.model.companiesDetails = new SubCollection(app.companies, {
         filter: function (company) {
-          return self.model.companies.indexOf(company.id) != -1
+          return self.model.companies.indexOf(company.id) !== -1
         }
       })
     }

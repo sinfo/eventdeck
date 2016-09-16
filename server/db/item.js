@@ -11,4 +11,4 @@ var schema = new mongoose.Schema({
 
 schema.index({id: 1})
 
-var Item = module.exports = mongoose.model('Item', schema)
+module.exports = mongoose.model('Item', schema)

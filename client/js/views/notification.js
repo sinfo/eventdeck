@@ -1,4 +1,4 @@
-/*global app*/
+/* global app */
 var log = require('bows')('notifications')
 var View = require('ampersand-view')
 var async = require('async')
@@ -125,17 +125,13 @@ function checkRole (el, value, previousValue) {
 function checkType (el, value, previousValue) {
   if (value.search(/^\bposted\b/) === 0) {
     el.classList.add('fa-envelope')
-  }
-  else if (value.search(/^\bcreated\b/) === 0) {
+  } else if (value.search(/^\bcreated\b/) === 0) {
     el.classList.add('fa-plus-square')
-  }
-  else if (value.search(/^\bupdated\b/) === 0) {
+  } else if (value.search(/^\bupdated\b/) === 0) {
     el.classList.add('fa-pencil')
-  }
-  else if (value.search(/^\bmentioned\b/) === 0) {
+  } else if (value.search(/^\bmentioned\b/) === 0) {
     el.classList.add('fa-at')
-  }
-  else if (value.search(/^\bchanged communication\b/) === 0) {
+  } else if (value.search(/^\bchanged communication\b/) === 0) {
     el.classList.add('fa-check-square-o')
   }
 }

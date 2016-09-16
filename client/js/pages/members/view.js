@@ -1,4 +1,4 @@
-/*global app, alert*/
+/* global app, alert */
 var PageView = require('client/js/pages/base')
 var templates = require('client/js/templates')
 var MemberParticipationsView = require('client/js/views/memberParticipations')
@@ -86,7 +86,7 @@ module.exports = PageView.extend({
 
   handleDeleteClick: function () {
     this.model.destroy({success: function () {
-        app.navigate('members')
+      app.navigate('members')
     }})
   }
 })

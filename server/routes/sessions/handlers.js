@@ -1,10 +1,10 @@
 var Joi = require('joi')
-var log = require('server/helpers/logger')
 var render = require('server/views/session')
 var ical = require('server/helpers/ical')
 var config = require('config')
 var fs = require('fs')
-var handlers = module.exports
+
+exports = module.exports
 
 exports.create = {
   auth: 'session',
@@ -139,7 +139,7 @@ exports.remove = {
   validate: {
     params: {
       // TODO: CHECK PERMISSIONS
-      id: Joi.string().required().description('id of the session we want to remove'),
+      id: Joi.string().required().description('id of the session we want to remove')
     // TODO: REMOVE NOTIFICATIONS
     }
   },

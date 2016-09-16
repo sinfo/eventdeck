@@ -1,4 +1,4 @@
-/*global app, alert*/
+/* global app */
 var log = require('bows')('companies')
 var PageView = require('ampersand-infinite-scroll')
 var templates = require('client/js/templates')
@@ -13,7 +13,7 @@ var selectedFilter = 'showall'
 
 function filtering (collection, filter) {
   return collection.filter(function (company) {
-    return company.participation && company.participation.status == filter
+    return company.participation && company.participation.status === filter
   })
 }
 function rerender (page, collection, filter) {
@@ -64,7 +64,7 @@ module.exports = PageView.extend({
   },
   renderStatusFilters: function () {
     var self = this
-    var filterContainer = $(self.queryByHook('status-filters')); // $.hook('status-filters')
+    var filterContainer = $(self.queryByHook('status-filters')) // $.hook('status-filters')
     _.each(companyStatuses, function (status) {
       filterContainer.append("<li><div class='ink-button' data-hook='" + status.id + "'>" + status.name + '</div></li>')
     })
@@ -82,7 +82,7 @@ module.exports = PageView.extend({
   me: function () {
     log('Fetching Selected Companies')
     var aux = this.collection.filter(function (company) {
-      return company.participation && company.participation.member == app.me.id
+      return company.participation && company.participation.member === app.me.id
     })
 
     aux = new AmpersandCollection(aux, {model: Company})
@@ -122,7 +122,7 @@ module.exports = PageView.extend({
     if (!this.hidden) {
       this.queryByHook('awesome-sidebar').style.display = 'none'
       this.hidden = true
-    }else {
+    } else {
       this.queryByHook('awesome-sidebar').style.display = 'block'
       this.hidden = false
     }

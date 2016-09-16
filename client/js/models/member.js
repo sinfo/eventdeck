@@ -1,4 +1,4 @@
-/*global app*/
+/* global app */
 var AmpState = require('ampersand-state')
 var AmpModel = require('ampersand-model')
 var AmpCollection = require('ampersand-collection')
@@ -48,8 +48,8 @@ module.exports = AmpModel.extend({
       deps: ['participations'],
       fn: function () {
         return this.participations.filter(function (participation) {
-            return participation.role === 'coordination'
-          }).length > 0
+          return participation.role === 'coordination'
+        }).length > 0
       }
     },
     editUrl: {
@@ -73,7 +73,7 @@ module.exports = AmpModel.extend({
     participation: {
       deps: ['participations'],
       fn: function () {
-        return this.participations.filter(function (p) { return p.event == app.me.selectedEvent; })[0]
+        return this.participations.filter(function (p) { return p.event === app.me.selectedEvent })[0]
       }
     },
     fbURL: {

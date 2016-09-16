@@ -1,8 +1,7 @@
 var Joi = require('joi')
-var log = require('server/helpers/logger')
 var render = require('server/views/company')
 
-var handlers = module.exports
+exports = module.exports
 
 // TODO: SPONSOR PAGE TRACKER
 // TODO: EMAIL TRACKER
@@ -30,7 +29,7 @@ exports.create = {
     { method: 'subscription.create(pre.company.thread, auth.credentials.id)', assign: 'subscription' },
     { method: 'subscription.createForCoordinators(pre.company.thread)', assign: 'coordinatorSubscriptions' },
     { method: 'notification.notifyCreate(auth.credentials.id, path, pre.company)', assign: 'notification' },
-    { method: 'notification.broadcast(pre.notification)', assign: 'broadcast'}
+    { method: 'notification.broadcast(pre.notification)', assign: 'broadcast' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.company)).created('/api/companies/' + request.pre.company.id)
@@ -63,7 +62,7 @@ exports.update = {
     // TODO: CHECK PERMISSIONS
     { method: 'company.update(params.id, payload)', assign: 'company' },
     { method: 'notification.notifyUpdate(auth.credentials.id, path, pre.company)', assign: 'notification' },
-    { method: 'notification.broadcast(pre.notification)', assign: 'broadcast'}
+    { method: 'notification.broadcast(pre.notification)', assign: 'broadcast' }
   // TODO: EMAIL IF MEMBER NECESSARY FOR NEW MEMBER
   ],
   handler: function (request, reply) {

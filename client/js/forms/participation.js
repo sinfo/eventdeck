@@ -1,4 +1,4 @@
-/*global app*/
+/* global app */
 var FormView = require('ampersand-form-view')
 var InputView = require('ampersand-input-view')
 var SelectView = require('ampersand-select-view')
@@ -49,7 +49,7 @@ module.exports = FormView.extend({
         name: 'status',
         label: 'Status',
         parent: this,
-        options: options.statuses[this.model && this.model.threadKind || 'company'].map(function (s) { return [s.id, s.name]; }),
+        options: options.statuses[this.model && this.model.threadKind || 'company'].map(function (s) { return [s.id, s.name] }),
         value: this.model && this.model.status || '',
         yieldModel: false
       })
@@ -72,7 +72,7 @@ function _addPollFields (view) {
     label: 'Advertisement Level',
     name: 'advertisementLvl',
     parent: view,
-    options: options.advertisementLvl.map(function (t) { return [t.id, t.name]; }),
+    options: options.advertisementLvl.map(function (t) { return [t.id, t.name] }),
     value: view.model && view.model.advertisementLvl,
     yieldModel: false
   }))
@@ -103,7 +103,7 @@ function _addPollFields (view) {
     name: 'payment.status',
     label: 'Invoice Status',
     parent: view,
-    options: options.statuses.payment.map(function (t) { return [t.id, t.name]; }),
+    options: options.statuses.payment.map(function (t) { return [t.id, t.name] }),
     value: view.model && view.model.payment && view.model.payment.status || '',
     yieldModel: false
   }))
@@ -113,7 +113,7 @@ function _addPollFields (view) {
     name: 'payment.via',
     label: 'Via',
     parent: view,
-    options: options.vias.payment.map(function (t) { return [t.id, t.name]; }),
+    options: options.vias.payment.map(function (t) { return [t.id, t.name] }),
     value: view.model && view.model.payment && view.model.payment.via || '',
     yieldModel: false
   }))

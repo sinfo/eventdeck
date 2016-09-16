@@ -1,11 +1,12 @@
 var config = require('config')
 var stylizer = require('stylizer')
 var templatizer = require('templatizer')
+var join = require('path').join
 
 // for reuse
-var appDir = __dirname + '/client/js'
-var cssDir = __dirname + '/client/css'
-var templatesDir = __dirname + '/client/templates'
+var appDir = join(__dirname, '/client/js')
+var cssDir = join(__dirname, '/client/css')
+var templatesDir = join(__dirname, '/client/templates')
 
 module.exports = {
   // Tell the Hapi server what URLs the application should be served from.

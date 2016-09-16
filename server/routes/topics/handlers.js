@@ -1,11 +1,10 @@
 var Joi = require('joi')
-var log = require('server/helpers/logger')
 var render = require('server/views/topic')
 var options = require('options')
 
-var topicKinds = options.kinds.topics.map(function (t) { return t.id; })
+var topicKinds = options.kinds.topics.map(function (t) { return t.id })
 
-var handlers = module.exports
+exports = module.exports
 
 exports.create = {
   auth: 'session',
@@ -33,7 +32,7 @@ exports.create = {
     { method: 'subscription.create(pre.topic.thread, auth.credentials.id)', assign: 'subscription' },
     { method: 'subscription.createForCoordinators(pre.topic.thread)', assign: 'coordinatorSubscriptions' },
     { method: 'notification.notifyCreate(auth.credentials.id, path, pre.topic)', assign: 'notification' },
-    { method: 'notification.broadcast(pre.notification)', assign: 'broadcast'}
+    { method: 'notification.broadcast(pre.notification)', assign: 'broadcast' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.topic)).created('/api/topics/' + request.pre.topic.id)
@@ -70,7 +69,7 @@ exports.update = {
     // TODO: CHECK PERMISSIONS
     { method: 'topic.update(params.id, payload)', assign: 'topic' },
     { method: 'notification.notifyUpdate(auth.credentials.id, path, pre.topic)', assign: 'notification' },
-    { method: 'notification.broadcast(pre.notification)', assign: 'broadcast'}
+    { method: 'notification.broadcast(pre.notification)', assign: 'broadcast' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.topic))

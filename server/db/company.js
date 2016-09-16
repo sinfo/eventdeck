@@ -44,4 +44,4 @@ schema.index({'participations.event': 1, updated: -1})
 schema.index({'participations.member': 1})
 schema.index({'participations.status': 1})
 
-var Company = module.exports = mongoose.model('Company', schema)
+module.exports = mongoose.model('Company', schema)

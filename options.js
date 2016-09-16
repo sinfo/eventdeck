@@ -2,26 +2,26 @@ var options = {}
 
 options.statuses = {
   speaker: [
-    { name: 'Suggestion', id: 'suggestion', color: '#ff8f1f', default: true},
-    { name: 'Selected', id: 'selected', color: '#5319e7'},
-    { name: 'Approved', id: 'approved', color: '#0052cc'},
-    { name: 'Contacted', id: 'contacted', color: '#fbca04'},
-    { name: 'In Conversations', id: 'in-conversations', color: '#207de5'},
-    { name: 'Accepted', id: 'accepted', color: '#009800'},
-    { name: 'Rejected', id: 'rejected', color: '#e11d21'},
-    { name: 'Give Up', id: 'give-up', color: '#333'},
-    { name: 'Announced', id: 'announced', color: '#009800'}
+    { name: 'Suggestion', id: 'suggestion', color: '#ff8f1f', default: true },
+    { name: 'Selected', id: 'selected', color: '#5319e7' },
+    { name: 'Approved', id: 'approved', color: '#0052cc' },
+    { name: 'Contacted', id: 'contacted', color: '#fbca04' },
+    { name: 'In Conversations', id: 'in-conversations', color: '#207de5' },
+    { name: 'Accepted', id: 'accepted', color: '#009800' },
+    { name: 'Rejected', id: 'rejected', color: '#e11d21' },
+    { name: 'Give Up', id: 'give-up', color: '#333' },
+    { name: 'Announced', id: 'announced', color: '#009800' }
   ],
   company: [
-    { name: 'Suggestion', id: 'suggestion', color: '#ff8f1f', default: true},
-    { name: 'Selected', id: 'selected', color: '#5319e7'},
-    { name: 'Contacted', id: 'contacted', color: '#fbca04'},
-    { name: 'In Conversations', id: 'in-conversations', color: '#207de5'},
-    { name: 'In Negotiations', id: 'in-negotiations', color: '#006b75'},
-    { name: 'Closed Deal', id: 'closed-deal', color: '#009800'},
-    { name: 'Rejected', id: 'rejected', color: '#e11d21'},
-    { name: 'Give Up', id: 'give-up', color: '#333'},
-    { name: 'Announced', id: 'announced', color: '#009800'}
+    { name: 'Suggestion', id: 'suggestion', color: '#ff8f1f', default: true },
+    { name: 'Selected', id: 'selected', color: '#5319e7' },
+    { name: 'Contacted', id: 'contacted', color: '#fbca04' },
+    { name: 'In Conversations', id: 'in-conversations', color: '#207de5' },
+    { name: 'In Negotiations', id: 'in-negotiations', color: '#006b75' },
+    { name: 'Closed Deal', id: 'closed-deal', color: '#009800' },
+    { name: 'Rejected', id: 'rejected', color: '#e11d21' },
+    { name: 'Give Up', id: 'give-up', color: '#333' },
+    { name: 'Announced', id: 'announced', color: '#009800' }
   ],
   communication: [
     { name: 'Pending Review...', id: 'pending-review', color: '#fbca04' },
@@ -63,11 +63,11 @@ options.kinds = {
     { name: 'Images', id: 'images', color: '#5319e7' }
   ],
   sessions: [
-    {id: 'keynote', name: 'Keynote', color: '#439BE8'},
-    {id: 'meetup', name: 'Meetup', color: '#47F230'},
-    {id: 'presentation', name: 'Presentation', color: '#5F4EF5'},
-    {id: 'talk', name: 'Talk', color: '#FA8405'},
-    {id: 'workshop', name: 'Workshop', color: '#F51414'}
+    { id: 'keynote', name: 'Keynote', color: '#439BE8' },
+    { id: 'meetup', name: 'Meetup', color: '#47F230' },
+    { id: 'presentation', name: 'Presentation', color: '#5F4EF5' },
+    { id: 'talk', name: 'Talk', color: '#FA8405' },
+    { id: 'workshop', name: 'Workshop', color: '#F51414' }
   ]
 }
 
@@ -96,12 +96,12 @@ options.roles = [
   { name: 'Sys Admin', id: 'sys-admin' },
   { name: 'Logistics', id: 'logistics' },
   { name: 'Marketing Manager', id: 'marketing-manager' },
-  { name: 'Social Networks', id: 'social-networks'},
-  { name: 'Graphics', id: 'graphics'},
-  { name: 'Multimedia', id: 'multimedia'},
-  { name: 'Communication', id: 'communication'},
-  { name: 'Content Producer', id: 'content-producer'},
-  { name: 'Content Developer', id: 'content-developer'}
+  { name: 'Social Networks', id: 'social-networks' },
+  { name: 'Graphics', id: 'graphics' },
+  { name: 'Multimedia', id: 'multimedia' },
+  { name: 'Communication', id: 'communication' },
+  { name: 'Content Producer', id: 'content-producer' },
+  { name: 'Content Developer', id: 'content-developer' }
 ]
 
 options.needed = [

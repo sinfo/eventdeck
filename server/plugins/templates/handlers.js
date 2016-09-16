@@ -1,5 +1,4 @@
 var Joi = require('joi')
-var log = require('server/helpers/logger')
 
 var handlers = module.exports
 

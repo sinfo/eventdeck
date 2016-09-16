@@ -1,4 +1,4 @@
-/*global app*/
+/* global app */
 var io = require('ampersand-io')
 var log = require('bows')('io-app')
 

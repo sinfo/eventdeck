@@ -1,7 +1,6 @@
-/*global app*/
+
 var AmpModel = require('ampersand-model')
 var timeSince = require('client/js/helpers/timeSince')
-var options = require('options')
 var Member = require('./member')
 var marked = require('client/js/helpers/marked')
 

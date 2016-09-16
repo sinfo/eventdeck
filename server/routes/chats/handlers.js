@@ -1,8 +1,7 @@
 var Joi = require('joi')
-var log = require('server/helpers/logger')
 var render = require('server/views/chat')
 
-var handlers = module.exports
+exports = module.exports
 
 exports.create = {
   auth: 'session',
@@ -86,7 +85,7 @@ exports.remove = {
   tags: ['api', 'chat'],
   validate: {
     params: {
-      id: Joi.string().required().description('Id of the chat we want to remove'),
+      id: Joi.string().required().description('Id of the chat we want to remove')
     // TODO: REMOVE MESSAGES
     }
   },

@@ -1,7 +1,6 @@
 var Hoek = require('hoek')
 var Path = require('path')
 var Handlebars = require('handlebars')
-var log = require('server/helpers/logger')
 
 var handlers = require('./handlers')
 
@@ -21,9 +20,9 @@ exports.register = function (plugin, options, next) {
 
   plugin.views({
     engines: settings.engines || {
-        hbs: {
-          module: Handlebars
-        }
+      hbs: {
+        module: Handlebars
+      }
     },
     path: settings.basePath
   })

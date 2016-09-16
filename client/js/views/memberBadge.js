@@ -1,4 +1,4 @@
-/*global app*/
+/* global app */
 var log = require('bows')('member-badge')
 var View = require('ampersand-view')
 var templates = require('client/js/templates')

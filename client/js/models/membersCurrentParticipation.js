@@ -1,3 +1,4 @@
+/* global app */
 var AmpCollection = require('ampersand-rest-collection')
 var SingleRequest = require('ampersand-collection-single-request-mixin')
 var PaginationMixin = require('ampersand-pagination-mixin')

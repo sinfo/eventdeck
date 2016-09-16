@@ -1,4 +1,4 @@
-/*global app, alert*/
+/* global app, alert */
 var log = require('bows')('topics')
 var PageView = require('client/js/pages/base')
 var templates = require('client/js/templates')
@@ -18,7 +18,7 @@ module.exports = PageView.extend({
           return cb()
         }
         app.members.fetch({ success: function () {
-            cb()
+          cb()
         }})
       },
       function (cb) {
@@ -26,11 +26,12 @@ module.exports = PageView.extend({
           return cb()
         }
         app.tags.fetch({ success: function () {
-            cb()
+          cb()
         }})
       }
     ],
       function (err) {
+        if (err) throw err
         app.topics.getOrFetch(spec.id, function (err, model) {
           if (err) {
             return alert('couldnt find a model with id: ' + spec.id)
@@ -56,7 +57,7 @@ module.exports = PageView.extend({
             if (data['poll-kind'] || data['poll-options']) {
               data.poll = {
                 kind: data['poll-kind'],
-                options: data['poll-options'].map(function (o) { return { content: o }; })
+                options: data['poll-options'].map(function (o) { return { content: o } })
               }
               delete data['poll-kind']
               delete data['poll-options']
@@ -64,7 +65,7 @@ module.exports = PageView.extend({
               // If there's a poll, let's populate each option with the saved votes
               var savedOptions = self.model.poll.options.serialize()
               _.each(data.poll.options, function (option) {
-                var savedOption = _.find(savedOptions, function (o) { return o.content == option.content; })
+                var savedOption = _.find(savedOptions, function (o) { return o.content === option.content })
                 if (savedOption) {
                   option.votes = savedOption.votes
                 }

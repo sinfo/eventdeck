@@ -1,8 +1,7 @@
 var Joi = require('joi')
-var log = require('server/helpers/logger')
 var render = require('server/views/communication')
 
-var handlers = module.exports
+exports = module.exports
 
 exports.create = {
   auth: 'session',
@@ -22,7 +21,7 @@ exports.create = {
   pre: [
     { method: 'communication.create(payload, auth.credentials.id)', assign: 'communication' },
     { method: 'notification.notifyCommunication(auth.credentials.id, payload.thread, pre.communication._id)', assign: 'notification' },
-    { method: 'notification.broadcast(pre.notification)', assign: 'broadcast'}
+    { method: 'notification.broadcast(pre.notification)', assign: 'broadcast' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.communication)).created('/api/communications/' + request.pre.communication._id)
@@ -94,10 +93,10 @@ exports.getView = {
   pre: [
     [{ method: 'speaker.get(params.threadId,query)', assign: 'speaker' }],
     [{ method: 'communication.get(params.id,query)', assign: 'communication' }],
-    [{ method: 'member.get(auth.credentials.id,query)', assign: 'member'}]
+    [{ method: 'member.get(auth.credentials.id,query)', assign: 'member' }]
   ],
   handler: function (request, reply) {
-    //console.log(request.auth);
+    // console.log(request.auth);
     reply.view('speakers24', {speaker: request.pre.speaker.name, paragraph: request.pre.communication.text, member: request.pre.member.name})
   },
   description: 'Gets a communication with an initial template view'

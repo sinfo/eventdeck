@@ -1,8 +1,7 @@
 var Joi = require('joi')
-var log = require('server/helpers/logger')
 var render = require('server/views/event')
 
-var handlers = module.exports
+exports = module.exports
 
 // TODO: GET LAST EVENT
 
@@ -116,7 +115,7 @@ exports.remove = {
   validate: {
     params: {
       // TODO: CHECK PERMISSIONS
-      id: Joi.string().required().description('Id of the event we want to remove'),
+      id: Joi.string().required().description('Id of the event we want to remove')
     // TODO: REMOVE NOTIFICATIONS
     }
   },

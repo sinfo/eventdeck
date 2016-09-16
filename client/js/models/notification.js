@@ -1,13 +1,7 @@
-/*global app*/
 var AmpState = require('ampersand-state')
 var AmpIOModel = require('ampersand-io-model')
 var timeSince = require('client/js/helpers/timeSince')
 var threadUrl = require('client/js/helpers/threadUrl')
-var options = require('options')
-var log = require('bows')('io-notification')
-var Company = require('./company')
-var Speaker = require('./speaker')
-var Topic = require('./topic')
 var Member = require('./member')
 
 var ThreadDetails = AmpState.extend({

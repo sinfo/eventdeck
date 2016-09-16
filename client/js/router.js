@@ -1,4 +1,4 @@
-/*global me, app*/
+/* global app */
 var Router = require('ampersand-router')
 
 var HomePage = require('./pages/home')

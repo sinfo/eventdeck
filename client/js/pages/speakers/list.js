@@ -1,4 +1,4 @@
-/*global app, alert*/
+/* global app */
 var log = require('bows')('speakers')
 var PageView = require('ampersand-infinite-scroll')
 var templates = require('client/js/templates')
@@ -11,17 +11,17 @@ var $ = require('client/js/helpers/jquery')
 
 var selectedFilter = 'showall'
 
-var filterTypes = {
-  me: ['noMember', 'showall'],
-  noMember: ['me', 'showall'],
-  showall: ['noMember', 'me', 'thisEvent', 'noParticipation'],
-  thisEvent: ['noParticipation', 'showall'],
-  noParticipation: ['thisEvent', 'showall']
-}
+// var filterTypes = {
+//   me: ['noMember', 'showall'],
+//   noMember: ['me', 'showall'],
+//   showall: ['noMember', 'me', 'thisEvent', 'noParticipation'],
+//   thisEvent: ['noParticipation', 'showall'],
+//   noParticipation: ['thisEvent', 'showall']
+// }
 
 function filtering (collection, filter) {
   return collection.filter(function (speaker) {
-    return speaker.participation && speaker.participation.status == filter
+    return speaker.participation && speaker.participation.status === filter
   })
 }
 
@@ -71,7 +71,7 @@ module.exports = PageView.extend({
   },
   renderStatusFilters: function () {
     var self = this
-    var filterContainer = $(self.queryByHook('status-filters')); // $.hook('status-filters')
+    var filterContainer = $(self.queryByHook('status-filters')) // $.hook('status-filters')
     _.each(speakerStatuses, function (status) {
       filterContainer.append("<li><div class='ink-button' data-hook='" + status.id + "'>" + status.name + '</div></li>')
     })
@@ -188,7 +188,7 @@ module.exports = PageView.extend({
     if (!this.hidden) {
       this.queryByHook('awesome-sidebar').style.display = 'none'
       this.hidden = true
-    }else {
+    } else {
       this.queryByHook('awesome-sidebar').style.display = 'block'
       this.hidden = false
     }

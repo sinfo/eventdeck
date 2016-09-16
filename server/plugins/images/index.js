@@ -74,7 +74,7 @@ function getRemote (id, cb) {
   var filePath = getLocalFilePath(id)
   var url = new Buffer(id, 'base64').toString('ascii')
 
-  if (url.indexOf('data:image/jpeg;base64') != -1) {
+  if (url.indexOf('data:image/jpeg;base64') !== -1) {
     return cb(Boom.badRequest('Malformed image url'))
   }
 
@@ -92,7 +92,7 @@ function getRemote (id, cb) {
       })
       .pipe(fs.createWriteStream(filePath))
       .on('error', function (err) {
-        log.error({url: url, err: err }, 'Error saving file, make sure the directory `' + settings.directory + '` exists')
+        log.error({ url: url, err: err }, 'Error saving file, make sure the directory `' + settings.directory + '` exists')
         return cb(Boom.badRequest('Make sure the directory `' + settings.directory + '` exists'))
       })
   } catch (err) {

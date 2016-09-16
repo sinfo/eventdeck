@@ -3,7 +3,6 @@ var AmpModel = require('ampersand-model')
 var AmpCollection = require('ampersand-collection')
 var options = require('options')
 var marked = require('client/js/helpers/marked')
-var log = require('bows')('topics')
 var timeSince = require('client/js/helpers/timeSince')
 var _ = require('client/js/helpers/underscore')
 var Member = require('./member')
@@ -109,7 +108,7 @@ module.exports = AmpModel.extend({
       fn: function () {
         var self = this
         var details = options.kinds.topics.filter(function (kind) {
-          return kind.id == self.kind
+          return kind.id === self.kind
         })[0]
 
         if (!details) {
@@ -123,7 +122,7 @@ module.exports = AmpModel.extend({
     hasPoll: {
       deps: ['kind', 'poll'],
       fn: function () {
-        return this.kind == 'decision' && this.poll
+        return this.kind === 'decision' && this.poll
       }
     },
     textHtml: {

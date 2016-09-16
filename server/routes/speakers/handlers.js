@@ -1,8 +1,7 @@
 var Joi = require('joi')
-var log = require('server/helpers/logger')
 var render = require('server/views/speaker')
 
-var handlers = module.exports
+exports = module.exports
 
 // TODO: EMAIL TRACKER
 
@@ -29,7 +28,7 @@ exports.create = {
     { method: 'subscription.create(pre.speaker.thread, auth.credentials.id)', assign: 'subscription' },
     { method: 'subscription.createForCoordinators(pre.speaker.thread)', assign: 'coordinatorSubscriptions' },
     { method: 'notification.notifyCreate(auth.credentials.id, path, pre.speaker)', assign: 'notification' },
-    { method: 'notification.broadcast(pre.notification)', assign: 'broadcast'}
+    { method: 'notification.broadcast(pre.notification)', assign: 'broadcast' }
   ],
   handler: function (request, reply) {
     reply(render(request.pre.speaker)).created('/api/speakers/' + request.pre.speaker.id)
@@ -62,7 +61,7 @@ exports.update = {
     // TODO: CHECK PERMISSIONS
     { method: 'speaker.update(params.id, payload)', assign: 'speaker' },
     { method: 'notification.notifyUpdate(auth.credentials.id, path, pre.speaker)', assign: 'notification' },
-    { method: 'notification.broadcast(pre.notification)', assign: 'broadcast'}
+    { method: 'notification.broadcast(pre.notification)', assign: 'broadcast' }
   // TODO: EMAIL IF MEMBER NECESSARY FOR NEW MEMBER
   ],
   handler: function (request, reply) {

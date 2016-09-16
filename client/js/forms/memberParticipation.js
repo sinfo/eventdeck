@@ -1,4 +1,4 @@
-/*global app*/
+/* global app */
 var FormView = require('ampersand-form-view')
 var SelectView = require('ampersand-select-view')
 var templates = require('client/js/templates')
@@ -25,7 +25,7 @@ module.exports = FormView.extend({
         name: 'role',
         label: 'Role',
         parent: this,
-        options: options.roles.map(function (r) { return [r.id, r.name]; }),
+        options: options.roles.map(function (r) { return [r.id, r.name] }),
         value: this.model && this.model.role || '',
         idAttribute: 'id',
         textAttribute: 'name',

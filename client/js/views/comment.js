@@ -1,4 +1,4 @@
-/*global app*/
+/* global app */
 var log = require('bows')('comments')
 var View = require('ampersand-view')
 var templates = require('client/js/templates')
@@ -118,7 +118,7 @@ var EditComment = View.extend({
                   self.parent.handleViewClick()
                 }
               })
-            }else {
+            } else {
               model.save(data, {
                 patch: true,
                 wait: false,

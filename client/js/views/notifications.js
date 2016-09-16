@@ -1,17 +1,17 @@
-/*global app*/
+
 var log = require('bows')('home')
-var async = require('async')
+// var async = require('async')
 var PageView = require('ampersand-infinite-scroll')
 var templates = require('client/js/templates')
 var NotificationView = require('client/js/views/notification')
 
-var FORCE_FETCH = false
+// var FORCE_FETCH = false
 
 module.exports = PageView.extend({
   template: templates.partials.notifications.list,
   initialize: function (spec) {
-    var self = this
-    /*async.parallel([
+    // var self = this
+    /* async.parallel([
       function getMembers (cb){
         if(FORCE_FETCH || !app.members.length) {
           app.members.fetch({
@@ -70,7 +70,7 @@ module.exports = PageView.extend({
       },
     ], function () {
       self.render()
-    });*/
+    }); */
     if (!this.collection.length) {
       this.fetchCollection()
     }

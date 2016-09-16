@@ -1,4 +1,4 @@
-/*global app*/
+/* global app */
 var AmpModel = require('ampersand-model')
 var AmpCollection = require('ampersand-collection')
 var timeSince = require('client/js/helpers/timeSince')
@@ -45,6 +45,7 @@ module.exports = AmpModel.extend({
       deps: ['member'],
       fn: function () {
         app.members.getOrFetch(this.member, {all: true}, function (err, model) {
+          if (err) throw err
           return model.name
         })
       }
@@ -54,7 +55,7 @@ module.exports = AmpModel.extend({
       fn: function () {
         var self = this
         var details = options.statuses.communication.filter(function (status) {
-          return status.id == self.status
+          return status.id === self.status
         })[0]
 
         if (!details) {

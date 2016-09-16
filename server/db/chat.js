@@ -8,4 +8,4 @@ var schema = new mongoose.Schema({
   date: { type: Date, default: Date.now }
 })
 
-var Chat = module.exports = mongoose.model('Chat', schema)
+module.exports = mongoose.model('Chat', schema)

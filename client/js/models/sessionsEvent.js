@@ -1,3 +1,4 @@
+/* global app */
 var AmpCollection = require('ampersand-rest-collection')
 var session = require('./session')
 
