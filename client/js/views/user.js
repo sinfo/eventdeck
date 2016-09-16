@@ -1,7 +1,6 @@
-/*global app*/
-var log = require('bows')('user');
-var View = require('ampersand-view');
-var templates = require('client/js/templates');
+
+var View = require('ampersand-view')
+var templates = require('client/js/templates')
 
 module.exports = View.extend({
   template: templates.partials.sessions.user,
@@ -11,6 +10,6 @@ module.exports = View.extend({
     }
   },
   render: function () {
-    this.renderWithTemplate();
+    this.renderWithTemplate()
   }
-});
+})

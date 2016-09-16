@@ -1,8 +1,6 @@
-var FormView = require('ampersand-form-view');
-var InputView = require('ampersand-input-view');
-var SelectView = require('ampersand-select-view');
-var templates = require('client/js/templates');
-var options = require('options');
+var FormView = require('ampersand-form-view')
+var InputView = require('ampersand-input-view')
+var templates = require('client/js/templates')
 
 module.exports = FormView.extend({
   fields: function () {
@@ -16,6 +14,6 @@ module.exports = FormView.extend({
         required: true,
         parent: this
       })
-    ];
+    ]
   }
-});
+})

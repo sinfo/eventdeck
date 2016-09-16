@@ -1,9 +1,8 @@
-/*global app*/
-var PageView = require('client/js/pages/base');
-var templates = require('client/js/templates');
-var MemberForm = require('client/js/forms/member');
-var _ = require('client/js/helpers/underscore');
-var log = require('bows')('members');
+/* global app */
+var PageView = require('client/js/pages/base')
+var templates = require('client/js/templates')
+var MemberForm = require('client/js/forms/member')
+var _ = require('client/js/helpers/underscore')
 
 module.exports = PageView.extend({
   pageTitle: 'Add member',
@@ -15,7 +14,7 @@ module.exports = PageView.extend({
         return new MemberForm({
           el: el,
           submitCallback: function (data) {
-            data = _.compactObject(data);
+            data = _.compactObject(data)
 
             var aux = {
               main: data['mails.main'],
@@ -23,25 +22,24 @@ module.exports = PageView.extend({
               dropbox: data['mails.dropbox'],
               google: data['mails.google'],
               microsoft: data['mails.microsoft']
-            };
+            }
 
-            data.mails = aux;
+            data.mails = aux
 
             app.members.create(data, {
               wait: true,
               success: function (model, response, options) {
-
-                app.navigate('/members/'+model.id);
-                app.members.fetch();
+                app.navigate('/members/' + model.id)
+                app.members.fetch()
               },
-              error: function(response){
-                window.alert('This member already exists.');
-                app.navigate('');
-              },
-            });
+              error: function (response) {
+                window.alert('This member already exists.')
+                app.navigate('')
+              }
+            })
           }
-        });
+        })
       }
     }
   }
-});
+})

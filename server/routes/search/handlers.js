@@ -1,26 +1,24 @@
-var Joi = require('joi');
-var log = require('server/helpers/logger');
-var companiesRender = require('server/views/company');
-var speakersRender = require('server/views/speaker');
-var membersRender = require('server/views/member');
-var topicsRender = require('server/views/topic');
-var sessionsRender = require('server/views/session');
+var Joi = require('joi')
+var companiesRender = require('server/views/company')
+var speakersRender = require('server/views/speaker')
+var membersRender = require('server/views/member')
+var topicsRender = require('server/views/topic')
+var sessionsRender = require('server/views/session')
 
-
-var handlers = module.exports;
+exports = module.exports
 
 exports.search = {
   auth: 'session',
-  tags: ['api','search'],
+  tags: ['api', 'search'],
   validate: {
     params: {
-      str: Joi.string().required().description('String you\'re looking for'),
+      str: Joi.string().required().description("String you're looking for")
     },
     query: {
       fields: Joi.string().description('Fields we want to retrieve'),
       skip: Joi.number().integer().min(0).default(0).description('Number of documents to skip'),
       limit: Joi.number().integer().min(1).description('Max number of documents to retrieve'),
-      sort: Joi.string().description('How to sort the array'),
+      sort: Joi.string().description('How to sort the array')
     }
   },
   pre: [
@@ -52,7 +50,7 @@ exports.search = {
         exact: request.pre.sessions.exact && sessionsRender(request.pre.sessions.exact),
         extended: request.pre.sessions.extended && sessionsRender(request.pre.sessions.extended)
       }
-    });
+    })
   },
   description: 'Lets you search for stuff'
-};
+}

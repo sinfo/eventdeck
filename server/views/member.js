@@ -1,21 +1,19 @@
-
-module.exports = function render(content, isAuthenticated) {
-  if(content instanceof Array) {
-    if(isAuthenticated === false) {
-      content = content && content.filter(function(model) {
-        return model.participations && model.participations.length > 0;
-      });
+module.exports = function render (content, isAuthenticated) {
+  if (content instanceof Array) {
+    if (isAuthenticated === false) {
+      content = content && content.filter(function (model) {
+        return model.participations && model.participations.length > 0
+      })
     }
 
-    return content.map(function(model) { return renderObject(model, isAuthenticated); });
+    return content.map(function (model) { return renderObject(model, isAuthenticated) })
   }
 
-  return renderObject(content);
-};
+  return renderObject(content)
+}
 
 function renderObject (model, isAuthenticated) {
-
-  if(isAuthenticated === false) {
+  if (isAuthenticated === false) {
     return {
       id: model.id,
       name: model.name,
@@ -25,7 +23,7 @@ function renderObject (model, isAuthenticated) {
       mail: model.mails && model.mails.main,
       updated: model.updated,
       participations: model.participations
-    };
+    }
   }
 
   return {
@@ -35,7 +33,7 @@ function renderObject (model, isAuthenticated) {
     participations: model.participations,
     facebook: model.facebook && {
       id: model.facebook.id,
-      username: model.facebook.username,
+      username: model.facebook.username
     },
     twitter: model.twitter,
     github: model.github,
@@ -46,9 +44,9 @@ function renderObject (model, isAuthenticated) {
       institutional: model.mails.institutional,
       dropbox: model.mails.dropbox,
       google: model.mails.google,
-      microsoft: model.mails.microsoft,
+      microsoft: model.mails.microsoft
     },
     updated: model.updated,
     unreadAccess: model.unreadAccess
-  };
+  }
 }

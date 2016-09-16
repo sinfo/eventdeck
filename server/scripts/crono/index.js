@@ -1,1 +1,1 @@
-exports.reminder = require('./reminder');
+exports.reminder = require('./reminder')

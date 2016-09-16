@@ -1,4 +1,4 @@
-var server = require('server').hapi;
+var server = require('server').hapi
 
 var fonts = {
   method: 'GET',
@@ -12,6 +12,6 @@ var fonts = {
       }
     }
   }
-};
+}
 
-server.route(fonts);
+server.route(fonts)

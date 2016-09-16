@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
 
 var schema = new mongoose.Schema({
   thread: String,
@@ -10,10 +10,10 @@ var schema = new mongoose.Schema({
   approved: Boolean,
   posted: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now }
-});
+})
 
-schema.index({thread: 1, posted: -1});
-schema.index({event: 1, posted: -1});
-schema.index({member: 1});
+schema.index({thread: 1, posted: -1})
+schema.index({event: 1, posted: -1})
+schema.index({member: 1})
 
-var Communication = module.exports = mongoose.model('Communication', schema);
+module.exports = mongoose.model('Communication', schema)

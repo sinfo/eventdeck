@@ -1,8 +1,8 @@
-/*global app*/
-var View = require('ampersand-view');
-var templates = require('client/js/templates');
-var Speaker = require('client/js/models/speaker');
-var AmpersandRestCollection = require('ampersand-rest-collection');
+/* global app */
+var View = require('ampersand-view')
+var templates = require('client/js/templates')
+var Speaker = require('client/js/models/speaker')
+var AmpersandRestCollection = require('ampersand-rest-collection')
 
 module.exports = View.extend({
   template: templates.cards.memberSpeakers,
@@ -19,30 +19,30 @@ module.exports = View.extend({
       name: 'href'
     }
   },
-  initialize: function() {
-    var self = this;
-    self.collection = null;
+  initialize: function () {
+    var self = this
+    self.collection = null
 
     var SpeakersCollection = AmpersandRestCollection.extend({
       url: '/api/speakers?event=' + app.me.selectedEvent + '&member=' + self.model.id,
       model: Speaker
-    });
-    var speakers = new SpeakersCollection();
+    })
+    var speakers = new SpeakersCollection()
 
     var options = {
       success: function () {
-        self.collection = speakers;
-        self.render();
+        self.collection = speakers
+        self.render()
       }
-    };
+    }
 
-    speakers.fetch(options);
+    speakers.fetch(options)
   },
   render: function () {
-    this.renderWithTemplate();
-    this.renderCollection(this.collection, MemberCompaniesRow, this.queryByHook('speakersContainer'));
-  },
-});
+    this.renderWithTemplate()
+    this.renderCollection(this.collection, MemberCompaniesRow, this.queryByHook('speakersContainer'))
+  }
+})
 
 var MemberCompaniesRow = View.extend({
   template: templates.cards.memberSpeakersRow,
@@ -63,6 +63,5 @@ var MemberCompaniesRow = View.extend({
       hook: 'status',
       name: 'style'
     }
-  },
-});
-
+  }
+})

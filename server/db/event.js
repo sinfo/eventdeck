@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
 
 var schema = new mongoose.Schema({
   id: String,
@@ -9,8 +9,8 @@ var schema = new mongoose.Schema({
   date: { type: Date },
   duration: { type: Date },
   updated: { type: Date }
-});
+})
 
-schema.index({id: 1, date: -1});
+schema.index({id: 1, date: -1})
 
-var eventModel = module.exports = mongoose.model('Event', schema);
+module.exports = mongoose.model('Event', schema)

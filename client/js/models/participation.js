@@ -1,8 +1,8 @@
-var AmpState = require('ampersand-state');
-var AmpModel = require('ampersand-model');
-var AmpCollection = require('ampersand-collection');
-var Member = require('./member');
-var options = require('options');
+var AmpState = require('ampersand-state')
+var AmpCollection = require('ampersand-collection')
+var Event = require('./event')
+var Member = require('./member')
+var options = require('options')
 
 var Payment = AmpState.extend({
   props: {
@@ -12,7 +12,7 @@ var Payment = AmpState.extend({
     status: ['string'],
     via: ['string']
   }
-});
+})
 
 var Item = AmpState.extend({
   props: {
@@ -20,11 +20,11 @@ var Item = AmpState.extend({
     amount: ['number'],
     kind: ['string']
   }
-});
+})
 
 var ItemCollection = AmpCollection.extend({
   model: Item
-});
+})
 
 module.exports = AmpState.extend({
   props: {
@@ -32,7 +32,7 @@ module.exports = AmpState.extend({
     member: ['string'],
     status: ['string'],
     kind: ['string'],
-    advertisementLvl: ['string'],
+    advertisementLvl: ['string']
   },
   children: {
     payment: Payment
@@ -50,15 +50,15 @@ module.exports = AmpState.extend({
     statusDetails: {
       deps: ['status', 'threadKind'],
       fn: function () {
-        var self = this;
+        var self = this
 
         var details = options.statuses[this.threadKind || 'company'].filter(function (status) {
-          return self.status == status.id;
-        })[0] || {};
+          return self.status === status.id
+        })[0] || {}
 
-        details.style = details && details.color && 'background-color:' + details.color;
-        return details;
+        details.style = details && details.color && 'background-color:' + details.color
+        return details
       }
-    },
+    }
   }
-});
+})

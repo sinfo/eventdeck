@@ -1,8 +1,7 @@
-/*global app*/
-var FormView = require('ampersand-form-view');
-var SelectView = require('ampersand-select-view');
-var InputView = require('ampersand-input-view');
-
+/* global app */
+var FormView = require('ampersand-form-view')
+var SelectView = require('ampersand-select-view')
+var InputView = require('ampersand-input-view')
 
 module.exports = FormView.extend({
   fields: function () {
@@ -31,7 +30,7 @@ module.exports = FormView.extend({
         required: false,
         placeholder: 'Super search!!!',
         parent: this
-      }),
-    ];
+      })
+    ]
   }
-});
+})

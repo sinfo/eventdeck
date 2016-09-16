@@ -1,10 +1,9 @@
-var Lab = require('lab');
-var Code = require('code');
+var Lab = require('lab')
+var Code = require('code')
 
-var server = require('../').hapi;
+var server = require('../').hapi
 
-var lab = exports.lab = Lab.script();
-
+var lab = exports.lab = Lab.script()
 
 var credentials = {
   id: 'john.doe',
@@ -13,119 +12,116 @@ var credentials = {
     role: 'development-team',
     event: '1000-sinfo'
   }]
-};
+}
 
 var tagA = {
   id: 'im.a.tag',
   name: 'Tagging your post',
   color: 'blue'
-};
+}
 
 var changesTagA = {
-  name:'updated yer tag',
+  name: 'updated yer tag',
   color: 'green'
-};
+}
 
-lab.experiment('Tag', function() {
-
-  lab.test('Create', function(done) {
+lab.experiment('Tag', function () {
+  lab.test('Create', function (done) {
     var options = {
       method: 'POST',
       url: '/api/tags',
       credentials: credentials,
       payload: tagA
-    };
+    }
 
-    server.inject(options, function(response) {
-      var result = response.result;
+    server.inject(options, function (response) {
+      var result = response.result
 
-      Code.expect(response.statusCode).to.equal(201);
-      Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.id).to.equal(tagA.id);
-      Code.expect(result.name).to.equal(tagA.name);
+      Code.expect(response.statusCode).to.equal(201)
+      Code.expect(result).to.be.instanceof(Object)
+      Code.expect(result.id).to.equal(tagA.id)
+      Code.expect(result.name).to.equal(tagA.name)
 
-      done();
-    });
-  });
+      done()
+    })
+  })
 
-  lab.test('List all', function(done) {
+  lab.test('List all', function (done) {
     var options = {
       method: 'GET',
       url: '/api/tags',
-      credentials: credentials,
-    };
+      credentials: credentials
+    }
 
-    server.inject(options, function(response) {
-      var result = response.result;
+    server.inject(options, function (response) {
+      var result = response.result
 
-      Code.expect(response.statusCode).to.equal(200);
-      Code.expect(result).to.be.instanceof(Array);
-      Code.expect(result[0].id).to.be.string;
-      Code.expect(result[0].name).to.be.string;
-      Code.expect(result[0].color).to.be.string;
-      done();
-    });
-  });
+      Code.expect(response.statusCode).to.equal(200)
+      Code.expect(result).to.be.instanceof(Array)
+      Code.expect(result[0].id).to.be.string
+      Code.expect(result[0].name).to.be.string
+      Code.expect(result[0].color).to.be.string
+      done()
+    })
+  })
 
-  lab.test('Get one', function(done) {
+  lab.test('Get one', function (done) {
     var options = {
       method: 'GET',
-      url: '/api/tags/'+tagA.id,
-      credentials: credentials,
-    };
+      url: '/api/tags/' + tagA.id,
+      credentials: credentials
+    }
 
-    server.inject(options, function(response) {
-      var result = response.result;
+    server.inject(options, function (response) {
+      var result = response.result
 
-      Code.expect(response.statusCode).to.equal(200);
-      Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.id).to.equal(tagA.id);
-      Code.expect(result.name).to.equal(tagA.name);
+      Code.expect(response.statusCode).to.equal(200)
+      Code.expect(result).to.be.instanceof(Object)
+      Code.expect(result.id).to.equal(tagA.id)
+      Code.expect(result.name).to.equal(tagA.name)
 
-      done();
-    });
-  });
+      done()
+    })
+  })
 
-  lab.test('Update', function(done) {
+  lab.test('Update', function (done) {
     var options = {
       method: 'PUT',
-      url: '/api/tags/'+tagA.id,
+      url: '/api/tags/' + tagA.id,
       credentials: credentials,
       payload: changesTagA
-    };
+    }
 
-    server.inject(options, function(response) {
-      var result = response.result;
+    server.inject(options, function (response) {
+      var result = response.result
 
-      Code.expect(response.statusCode).to.equal(200);
-      Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.id).to.equal(tagA.id);
-      Code.expect(result.name).to.equal(changesTagA.name);
-      Code.expect(result.color).to.equal(changesTagA.color);
+      Code.expect(response.statusCode).to.equal(200)
+      Code.expect(result).to.be.instanceof(Object)
+      Code.expect(result.id).to.equal(tagA.id)
+      Code.expect(result.name).to.equal(changesTagA.name)
+      Code.expect(result.color).to.equal(changesTagA.color)
 
-      done();
-    });
-  });
+      done()
+    })
+  })
 
-  lab.test('Delete', function(done) {
+  lab.test('Delete', function (done) {
     var options = {
       method: 'DELETE',
-      url: '/api/tags/'+tagA.id,
-      credentials: credentials,
-    };
+      url: '/api/tags/' + tagA.id,
+      credentials: credentials
+    }
 
-    server.inject(options, function(response) {
-      var result = response.result;
+    server.inject(options, function (response) {
+      var result = response.result
 
-      Code.expect(response.statusCode).to.equal(200);
-      Code.expect(result).to.be.instanceof(Object);
-      Code.expect(result.id).to.equal(tagA.id);
-      Code.expect(result.name).to.equal(changesTagA.name);
-      Code.expect(result.color).to.equal(changesTagA.color);
+      Code.expect(response.statusCode).to.equal(200)
+      Code.expect(result).to.be.instanceof(Object)
+      Code.expect(result.id).to.equal(tagA.id)
+      Code.expect(result.name).to.equal(changesTagA.name)
+      Code.expect(result.color).to.equal(changesTagA.color)
 
-      done();
-    });
-  });
-
-
-});
+      done()
+    })
+  })
+})

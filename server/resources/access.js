@@ -1,59 +1,55 @@
-var Boom = require('boom');
-var server = require('server').hapi;
-var log = require('server/helpers/logger');
-var threadFromPath = require('server/helpers/threadFromPath');
-var parser = require('server/helpers/fieldsParser');
-var Access = require('server/db/access');
+var Boom = require('boom')
+var server = require('server').hapi
+var log = require('server/helpers/logger')
+var threadFromPath = require('server/helpers/threadFromPath')
+var Access = require('server/db/access')
 
+server.method('access.save', save, {})
+server.method('access.get', get, {})
 
-server.method('access.save', save, {});
-server.method('access.get', get, {});
-
-
-function save(memberId, path, id, cb) {
-  var thread = '';
-  if(typeof(id) == 'function') {
-    thread = path;
-    cb = id;
+function save (memberId, path, id, cb) {
+  var thread = ''
+  if (typeof (id) === 'function') {
+    thread = path
+    cb = id
   } else {
-    thread = threadFromPath(path, id);
+    thread = threadFromPath(path, id)
   }
 
-  var filter = { member: memberId, thread: thread };
+  var filter = { member: memberId, thread: thread }
   var access = {
     member: memberId,
     thread: thread,
     last: Date.now()
-  };
+  }
 
   Access.findOneAndUpdate(filter, access, {upsert: true}, function (err, savedAccess) {
     if (err) {
-      log.error({ err: err, access: access});
-      return cb(Boom.internal());
+      log.error({err: err, access: access})
+      return cb(Boom.internal())
     }
 
-    return cb(null, savedAccess);
-  });
+    return cb(null, savedAccess)
+  })
 }
 
-
-function get(memberId, path, id, cb) {
-  var thread = '';
-  if(typeof(id) == 'function') {
-    thread = path;
-    cb = id;
+function get (memberId, path, id, cb) {
+  var thread = ''
+  if (typeof (id) === 'function') {
+    thread = path
+    cb = id
   } else {
-    thread = threadFromPath(path, id);
+    thread = threadFromPath(path, id)
   }
 
-  var filter = { member: memberId, thread: thread };
+  var filter = { member: memberId, thread: thread }
 
   Access.findOne(filter, function (err, savedAccess) {
     if (err) {
-      log.error({ err: err, access: filter});
-      return cb(Boom.internal());
+      log.error({err: err, access: filter})
+      return cb(Boom.internal())
     }
 
-    return cb(null, savedAccess);
-  });
+    return cb(null, savedAccess)
+  })
 }

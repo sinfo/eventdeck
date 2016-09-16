@@ -1,5 +1,5 @@
-/*global app*/
-var Member = require('./member');
+/* global app */
+var Member = require('./member')
 
 module.exports = Member.extend({
   url: '/api/members/me',
@@ -21,8 +21,8 @@ module.exports = Member.extend({
     selectedEventIndex: {
       deps: ['selectedEvent'],
       fn: function () {
-        return app.events.map(function (e) { return e.id; }).indexOf(this.selectedEvent);
+        return app.events.map(function (e) { return e.id }).indexOf(this.selectedEvent)
       }
     }
   }
-});
+})

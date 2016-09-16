@@ -1,11 +1,11 @@
-module.exports = function render(content, isAuthenticated) {
-  if(content instanceof Array) {
-    return content.map(function(model) { return renderObject(model, isAuthenticated); });
+module.exports = function render (content, isAuthenticated) {
+  if (content instanceof Array) {
+    return content.map(function (model) { return renderObject(model, isAuthenticated) })
   }
-  return renderObject(content);
-};
+  return renderObject(content)
+}
 
-function renderObject(model, isAuthenticated) {
+function renderObject (model, isAuthenticated) {
   return {
     id: model.id || '',
     name: model.name || '',
@@ -13,12 +13,12 @@ function renderObject(model, isAuthenticated) {
     img: model.img || '',
     place: model.place || '',
     description: model.description || '',
-    speakers: model.speakers && model.speakers.map(function(speaker) {
+    speakers: model.speakers && model.speakers.map(function (speaker) {
       return {
         id: speaker.id || '',
         name: speaker.name || '',
-        position: speaker.position || '',
-      };
+        position: speaker.position || ''
+      }
     }) || [],
     companies: model.companies || [],
     date: model.date || '',
@@ -32,5 +32,5 @@ function renderObject(model, isAuthenticated) {
       max: model.tickets.max
     },
     surveyNeeded: model.surveyNeeded
-  };
+  }
 }

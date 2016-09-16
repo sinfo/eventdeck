@@ -1,28 +1,18 @@
-/*global app*/
-var AmpState = require('ampersand-state');
-var AmpIOModel = require('ampersand-io-model');
-var timeSince = require('client/js/helpers/timeSince');
-var threadUrl = require('client/js/helpers/threadUrl');
-var options = require('options');
-var log = require('bows')('io-notification');
-var Company = require('./company');
-var Speaker = require('./speaker');
-var Topic = require('./topic');
-var Member = require('./member');
-
+var AmpState = require('ampersand-state')
+var AmpIOModel = require('ampersand-io-model')
+var timeSince = require('client/js/helpers/timeSince')
+var threadUrl = require('client/js/helpers/threadUrl')
+var Member = require('./member')
 
 var ThreadDetails = AmpState.extend({
   props: {
     name: 'string',
     img: 'string'
   }
-});
+})
 
-
-module.exports = function(socket){
-
+module.exports = function (socket) {
   return AmpIOModel.extend(socket, {
-
     events: {
       create: 'notify',
       fetch: 'notification-get',
@@ -48,28 +38,28 @@ module.exports = function(socket){
       postedTimeSpan: {
         deps: ['posted'],
         fn: function () {
-          return timeSince(this.posted);
+          return timeSince(this.posted)
         },
         cache: false
       },
       threadUrl: {
         deps: ['thread'],
         fn: function () {
-          return threadUrl(this.thread);
+          return threadUrl(this.thread)
         }
       },
       threadKind: {
         deps: ['thread'],
         fn: function () {
-          return this.thread.split('-')[0];
+          return this.thread.split('-')[0]
         }
       },
       threadId: {
         deps: ['thread'],
         fn: function () {
-          return this.thread.substring(this.thread.indexOf('-')+1);
+          return this.thread.substring(this.thread.indexOf('-') + 1)
         }
       }
     }
-  });
-};
+  })
+}

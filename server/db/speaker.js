@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
 
 var schema = new mongoose.Schema({
   id: {type: String, unique: true},
@@ -17,15 +17,15 @@ var schema = new mongoose.Schema({
   updated: { type: Date, default: Date.now },
   feedback: String,
   random_sample: Number
-});
+})
 
 schema.virtual('thread').get(function () {
-  return 'speaker-'+this.id;
-});
+  return 'speaker-' + this.id
+})
 
-schema.index({id: 1, updated: -1});
-schema.index({'participations.event': 1, updated: -1});
-schema.index({'participations.member': 1});
-schema.index({'participations.status': 1});
+schema.index({id: 1, updated: -1})
+schema.index({'participations.event': 1, updated: -1})
+schema.index({'participations.member': 1})
+schema.index({'participations.status': 1})
 
-var Speaker = module.exports = mongoose.model('Speaker', schema);
+module.exports = mongoose.model('Speaker', schema)

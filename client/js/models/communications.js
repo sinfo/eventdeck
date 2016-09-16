@@ -1,13 +1,12 @@
-var AmpCollection = require('ampersand-rest-collection');
-var communication = require('./communication');
+var AmpCollection = require('ampersand-rest-collection')
+var communication = require('./communication')
 
-module.exports = function(url) {
+module.exports = function (url) {
   return AmpCollection.extend({
     model: communication,
     url: url,
     comparator: function (o1, o2) {
-      return new Date(o2.posted).getTime() - new Date(o1.posted).getTime();
+      return new Date(o2.posted).getTime() - new Date(o1.posted).getTime()
     }
-  });
-};
-
+  })
+}

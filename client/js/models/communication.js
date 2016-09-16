@@ -1,16 +1,16 @@
-/*global app*/
-var AmpModel = require('ampersand-model');
-var AmpCollection = require('ampersand-collection');
-var timeSince = require('client/js/helpers/timeSince');
-var options = require('options');
-var marked = require('client/js/helpers/marked');
-var _ = require('client/js/helpers/underscore');
+/* global app */
+var AmpModel = require('ampersand-model')
+var AmpCollection = require('ampersand-collection')
+var timeSince = require('client/js/helpers/timeSince')
+var options = require('options')
+var marked = require('client/js/helpers/marked')
+var _ = require('client/js/helpers/underscore')
 
-var Comment = require('./comment');
+var Comment = require('./comment')
 
 var CommentCollection = AmpCollection.extend({
   model: Comment
-});
+})
 
 module.exports = AmpModel.extend({
   props: {
@@ -31,13 +31,13 @@ module.exports = AmpModel.extend({
     subthread: {
       deps: ['id'],
       fn: function () {
-        return 'communication-' + this.id;
+        return 'communication-' + this.id
       }
     },
     postedTimeSpan: {
       deps: ['posted'],
       fn: function () {
-        return timeSince(this.posted);
+        return timeSince(this.posted)
       },
       cache: false
     },
@@ -45,51 +45,52 @@ module.exports = AmpModel.extend({
       deps: ['member'],
       fn: function () {
         app.members.getOrFetch(this.member, {all: true}, function (err, model) {
-          return model.name;
-        });
+          if (err) throw err
+          return model.name
+        })
       }
     },
     statusDetails: {
       deps: ['status'],
       fn: function () {
-        var self = this;
+        var self = this
         var details = options.statuses.communication.filter(function (status) {
-          return status.id == self.status;
-        })[0];
+          return status.id === self.status
+        })[0]
 
-        if(!details) {
-          return;
+        if (!details) {
+          return
         }
 
-        details.style = details.color && 'background-color:' +details.color;
+        details.style = details.color && 'background-color:' + details.color
 
-        return details;
+        return details
       }
     },
     textHtml: {
       deps: ['text'],
       fn: function () {
-        return this.text && marked(this.text) || '';
-      },
+        return this.text && marked(this.text) || ''
+      }
     },
     commentsApi: {
       deps: ['id'],
       fn: function () {
-        return '/api/communications/' + this.id + '/comments';
+        return '/api/communications/' + this.id + '/comments'
       }
     }
   },
   serialize: function () {
-    var res = this.getAttributes({props: true}, true);
+    var res = this.getAttributes({props: true}, true)
     _.each(this._children, function (value, key) {
-        res[key] = this[key].serialize();
-    }, this);
+      res[key] = this[key].serialize()
+    }, this)
     _.each(this._collections, function (value, key) {
-        res[key] = this[key].serialize();
-    }, this);
+      res[key] = this[key].serialize()
+    }, this)
 
-    delete res.comments;
+    delete res.comments
 
-    return res;
-  },
-});
+    return res
+  }
+})

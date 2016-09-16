@@ -1,10 +1,9 @@
-var Lab = require('lab');
-var Code = require('code');
+var Lab = require('lab')
+var Code = require('code')
 
-var server = require('../').hapi;
+var server = require('../').hapi
 
-var lab = exports.lab = Lab.script();
-
+var lab = exports.lab = Lab.script()
 
 var credentials = {
   id: 'john.doe',
@@ -13,32 +12,26 @@ var credentials = {
     role: 'development-team',
     event: '1000-sinfo'
   }]
-};
+}
 
-var auth;
+var auth
 
-lab.experiment('Auth', function() {
+lab.experiment('Auth', function () {
+  lab.test('Get code', function (done) {
+    server.methods.auth.createCode(credentials.id, function (err, result) {
+      Code.expect(err, 'err').to.be.null
+      auth = result
 
-  lab.test('Get code', function(done) {
+      done()
+    })
+  })
 
-    server.methods.auth.createCode(credentials.id, function(err, result) {
+  lab.test('Get code', function (done) {
+    server.methods.auth.verifyCode(credentials.id, auth, function (err, result) {
+      Code.expect(err, 'err').to.be.null
+      auth = result
 
-      Code.expect(err, 'err').to.be.null;
-      auth = result;
-
-      done();
-    });
-  });
-
-  lab.test('Get code', function(done) {
-
-    server.methods.auth.verifyCode(credentials.id, auth, function(err, result) {
-
-      Code.expect(err, 'err').to.be.null;
-      auth = result;
-
-      done();
-    });
-  });
-
-});
+      done()
+    })
+  })
+})
