@@ -1,4 +1,4 @@
-var config = require('config')
+var config = require('./config')
 var stylizer = require('stylizer')
 var templatizer = require('templatizer')
 var join = require('path').join

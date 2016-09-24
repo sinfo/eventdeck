@@ -6,16 +6,16 @@
 var log = require('bows')('base')
 var View = require('ampersand-view')
 var ViewSwitcher = require('ampersand-view-switcher')
-var _ = require('client/js/helpers/underscore')
+var _ = require('../helpers/underscore')
 var domify = require('domify')
 var dom = require('ampersand-dom')
 var templates = require('../templates')
 var setFavicon = require('favicon-setter')
-var BaseForm = require('client/js/forms/base')
-var NotificationView = require('client/js/views/notifications')
-var $ = require('client/js/helpers/jquery')
-var singular = require('client/js/helpers/singular')
-var plural = require('client/js/helpers/plural')
+var BaseForm = require('../forms/base')
+var NotificationView = require('./notifications')
+var $ = require('../helpers/jquery')
+var singular = require('../helpers/singular')
+var plural = require('../helpers/plural')
 
 var searchTypeTimeout = null
 

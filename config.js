@@ -1,4 +1,4 @@
-var pack = require('package')
+var pack = require('./package')
 var path = require('path')
 var bunyanLogentries = require('bunyan-logentries')
 

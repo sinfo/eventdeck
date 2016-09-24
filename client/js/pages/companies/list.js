@@ -1,13 +1,13 @@
 /* global app */
 var log = require('bows')('companies')
 var PageView = require('ampersand-infinite-scroll')
-var templates = require('client/js/templates')
-var CompanyView = require('client/js/views/company')
-var Company = require('client/js/models/company')
+var templates = require('../../templates')
+var CompanyView = require('../../views/company')
+var Company = require('../../models/company')
 var AmpersandCollection = require('ampersand-collection')
-var companyStatuses = require('options').statuses.company
-var _ = require('client/js/helpers/underscore')
-var $ = require('client/js/helpers/jquery')
+var companyStatuses = require('../../../../options').statuses.company
+var _ = require('../../helpers/underscore')
+var $ = require('../../helpers/jquery')
 
 var selectedFilter = 'showall'
 

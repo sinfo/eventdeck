@@ -1,6 +1,6 @@
 /* global app */
 var View = require('ampersand-view')
-var templates = require('client/js/templates')
+var templates = require('../templates')
 var SubCollection = require('ampersand-subcollection')
 
 var CompanyView = View.extend({

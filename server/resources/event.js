@@ -1,10 +1,10 @@
 var Boom = require('boom')
 var slug = require('slug')
-var server = require('server').hapi
-var log = require('server/helpers/logger')
-var parser = require('server/helpers/fieldsParser')
-var eventModel = require('server/db/event')
-var dupKeyParser = require('server/helpers/dupKeyParser')
+var server = require('../index').hapi
+var log = require('../helpers/logger')
+var parser = require('../helpers/fieldsParser')
+var eventModel = require('../db/event')
+var dupKeyParser = require('../helpers/dupKeyParser')
 
 server.method('event.create', create, {})
 server.method('event.update', update, {})

@@ -1,7 +1,7 @@
 var log = require('bows')('subscription')
-var PageView = require('client/js/pages/base')
-var templates = require('client/js/templates')
-var $ = require('client/js/helpers/jquery')
+var PageView = require('../pages/base')
+var templates = require('../templates')
+var $ = require('../helpers/jquery')
 
 module.exports = PageView.extend({
   template: templates.partials.subscription,

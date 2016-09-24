@@ -1,7 +1,7 @@
 var log = require('bows')('users')
-var PageView = require('client/js/pages/base')
-var templates = require('client/js/templates')
-var UserView = require('client/js/views/user')
+var PageView = require('../pages/base')
+var templates = require('../templates')
+var UserView = require('./user')
 
 module.exports = PageView.extend({
   template: templates.partials.sessions.users,

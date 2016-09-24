@@ -1,4 +1,4 @@
-var server = require('server').hapi
+var server = require('../../index').hapi
 var handlers = require('./handlers')
 
 server.route({

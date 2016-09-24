@@ -1,7 +1,7 @@
 var AmpState = require('ampersand-state')
 var AmpIOModel = require('ampersand-io-model')
-var timeSince = require('client/js/helpers/timeSince')
-var threadUrl = require('client/js/helpers/threadUrl')
+var timeSince = require('../helpers/timeSince')
+var threadUrl = require('../helpers/threadUrl')
 var Member = require('./member')
 
 var ThreadDetails = AmpState.extend({

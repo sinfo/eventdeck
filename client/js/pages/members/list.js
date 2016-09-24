@@ -1,9 +1,9 @@
 /* global app */
 var log = require('bows')('members')
-var Member = require('client/js/models/member')
+var Member = require('../../models/member')
 var PageView = require('ampersand-infinite-scroll')
-var templates = require('client/js/templates')
-var MemberView = require('client/js/views/member')
+var templates = require('../../templates')
+var MemberView = require('../../views/member')
 var AmpersandCollection = require('ampersand-collection')
 
 var selectedFilter = 'showall'

@@ -1,7 +1,7 @@
 /* global app, alert */
-var PageView = require('client/js/pages/base')
-var templates = require('client/js/templates')
-var MemberParticipationsView = require('client/js/views/memberParticipations')
+var PageView = require('../base')
+var templates = require('../../templates')
+var MemberParticipationsView = require('../../views/memberParticipations')
 
 module.exports = PageView.extend({
   pageTitle: 'View member',

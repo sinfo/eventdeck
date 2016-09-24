@@ -1,13 +1,13 @@
 /* global app */
 var log = require('bows')('companies')
-var PageView = require('client/js/pages/base')
-var templates = require('client/js/templates')
-var CommunicationsView = require('client/js/views/communications')
-var Communications = require('client/js/models/communications')
-var CommentsView = require('client/js/views/comments')
-var Comments = require('client/js/models/comments')
-var ParticipationsView = require('client/js/views/participations')
-var SubscriptionView = require('client/js/views/subscription')
+var PageView = require('../base')
+var templates = require('../../templates')
+var CommunicationsView = require('../../views/communications')
+var Communications = require('../../models/communications')
+var CommentsView = require('../../views/comments')
+var Comments = require('../../models/comments')
+var ParticipationsView = require('../../views/participations')
+var SubscriptionView = require('../../views/subscription')
 
 module.exports = PageView.extend({
   pageTitle: 'View company',

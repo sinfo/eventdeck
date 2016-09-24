@@ -1,9 +1,9 @@
 /* global app, alert */
 var log = require('bows')('companies')
-var PageView = require('client/js/pages/base')
-var templates = require('client/js/templates')
-var CompanyForm = require('client/js/forms/company')
-var _ = require('client/js/helpers/underscore')
+var PageView = require('../base')
+var templates = require('../../templates')
+var CompanyForm = require('../../forms/company')
+var _ = require('../../helpers/underscore')
 
 module.exports = PageView.extend({
   pageTitle: 'Edit company',

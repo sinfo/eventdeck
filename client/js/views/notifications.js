@@ -2,8 +2,8 @@
 var log = require('bows')('home')
 // var async = require('async')
 var PageView = require('ampersand-infinite-scroll')
-var templates = require('client/js/templates')
-var NotificationView = require('client/js/views/notification')
+var templates = require('../templates')
+var NotificationView = require('./notification')
 
 // var FORCE_FETCH = false
 

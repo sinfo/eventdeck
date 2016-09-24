@@ -1,7 +1,7 @@
 var Joi = require('joi')
-var render = require('server/views/session')
-var ical = require('server/helpers/ical')
-var config = require('config')
+var render = require('../../views/session')
+var ical = require('../../helpers/ical')
+var config = require('../../../config')
 var fs = require('fs')
 
 exports = module.exports

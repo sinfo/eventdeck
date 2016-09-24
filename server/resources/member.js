@@ -1,13 +1,13 @@
 var Boom = require('boom')
 var slug = require('slug')
-var server = require('server').hapi
-var log = require('server/helpers/logger')
-var threadFromPath = require('server/helpers/threadFromPath')
-var parser = require('server/helpers/fieldsParser')
-var dupKeyParser = require('server/helpers/dupKeyParser')
+var server = require('../index').hapi
+var log = require('../helpers/logger')
+var threadFromPath = require('../helpers/threadFromPath')
+var parser = require('../helpers/fieldsParser')
+var dupKeyParser = require('../helpers/dupKeyParser')
 var randtoken = require('rand-token')
-var Member = require('server/db/member')
-var config = require('config')
+var Member = require('../db/member')
+var config = require('../../config')
 
 // TODO: GET TARGETS
 server.method('member.create', create, {})

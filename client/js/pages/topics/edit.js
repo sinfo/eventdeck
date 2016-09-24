@@ -1,9 +1,9 @@
 /* global app, alert */
 var log = require('bows')('topics')
-var PageView = require('client/js/pages/base')
-var templates = require('client/js/templates')
-var TopicForm = require('client/js/forms/topic')
-var _ = require('client/js/helpers/underscore')
+var PageView = require('../base')
+var templates = require('../../templates')
+var TopicForm = require('../../forms/topic')
+var _ = require('../../helpers/underscore')
 var async = require('async')
 
 module.exports = PageView.extend({

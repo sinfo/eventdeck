@@ -3,11 +3,11 @@ require('pmx').init()
 
 var Hapi = require('hapi')
 var IO = {server: require('socket.io'), client: require('socket.io-client')}
-var log = require('server/helpers/logger')
-var config = require('config')
+var log = require('./helpers/logger')
+var config = require('../config')
 var path = require('path')
 var cookieConfig = config.cookie
-var moonbootsConfig = require('moonbootsConfig')
+var moonbootsConfig = require('../moonbootsConfig')
 
 var cookieName = 'eventdeck-config'
 

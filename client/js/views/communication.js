@@ -1,15 +1,15 @@
 /* global app */
 var $ = require('jquery')
-var threadUrl = require('client/js/helpers/threadUrl')
+var threadUrl = require('../helpers/threadUrl')
 var log = require('bows')('communications')
 var View = require('ampersand-view')
-var templates = require('client/js/templates')
+var templates = require('../templates')
 var ViewSwitcher = require('ampersand-view-switcher')
-var CommunicationForm = require('client/js/forms/communication')
-var Comments = require('client/js/models/comments')
-var CommentsView = require('client/js/views/comments')
-var _ = require('client/js/helpers/underscore')
-var MemberBadge = require('client/js/views/memberBadge')
+var CommunicationForm = require('../forms/communication')
+var Comments = require('../models/comments')
+var CommentsView = require('./comments')
+var _ = require('../helpers/underscore')
+var MemberBadge = require('./memberBadge')
 
 module.exports = View.extend({
   template: templates.cards.communication,

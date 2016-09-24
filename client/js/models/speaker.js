@@ -1,9 +1,9 @@
 /* global app */
 var AmpModel = require('ampersand-model')
 var AmpCollection = require('ampersand-collection')
-var options = require('options')
-var marked = require('client/js/helpers/marked')
-var _ = require('client/js/helpers/underscore')
+var options = require('../../../options')
+var marked = require('../helpers/marked')
+var _ = require('../helpers/underscore')
 
 var Communication = require('./communication')
 var Comment = require('./comment')

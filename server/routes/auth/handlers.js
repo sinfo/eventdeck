@@ -1,6 +1,6 @@
 var Joi = require('joi')
-var log = require('server/helpers/logger')
-var render = require('server/views/member')
+var log = require('../../helpers/logger')
+var render = require('../../views/member')
 
 exports = module.exports
 

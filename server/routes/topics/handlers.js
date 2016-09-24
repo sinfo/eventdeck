@@ -1,6 +1,6 @@
 var Joi = require('joi')
-var render = require('server/views/topic')
-var options = require('options')
+var render = require('../../views/topic')
+var options = require('../../../options')
 
 var topicKinds = options.kinds.topics.map(function (t) { return t.id })
 

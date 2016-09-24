@@ -1,7 +1,7 @@
-var server = require('server').hapi
-var log = require('server/helpers/logger')
+var server = require('../index').hapi
+var log = require('../helpers/logger')
 var Mailgun = require('mailgun').Mailgun
-var mgConfig = require('config').mailgun
+var mgConfig = require('../../config').mailgun
 
 var MailComposer = require('mailcomposer').MailComposer
 

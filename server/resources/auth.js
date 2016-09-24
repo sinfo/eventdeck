@@ -1,9 +1,9 @@
 var Boom = require('boom')
-var server = require('server').hapi
-var log = require('server/helpers/logger')
-var urlPrefix = require('config').url
+var server = require('../index').hapi
+var log = require('../helpers/logger')
+var urlPrefix = require('../../config').url
 var Request = require('request')
-var facebookConfig = require('config').facebook
+var facebookConfig = require('../../config').facebook
 
 server.method('auth.createCode', createCode, {})
 server.method('auth.verifyCode', verifyCode, {})

@@ -1,4 +1,4 @@
-var server = require('server').hapi
+var server = require('../index').hapi
 
 server.method('parser.members', parseMembers, {})
 

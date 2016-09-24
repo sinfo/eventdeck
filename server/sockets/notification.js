@@ -1,12 +1,12 @@
 var async = require('async')
-var servers = require('server')
+var servers = require('../index')
 var Joi = require('joi')
 var Boom = require('boom')
-var log = require('server/helpers/logger')
+var log = require('../helpers/logger')
 var IO = servers.socket.server
 var server = servers.hapi
-var renderNotification = require('server/views/notification')
-var renderAccess = require('server/views/access')
+var renderNotification = require('../views/notification')
+var renderAccess = require('../views/access')
 
 var events = {
   count: 'notification-count',

@@ -1,6 +1,6 @@
 var async = require('async')
-var server = require('server')
-var log = require('server/helpers/logger')
+var server = require('../index')
+var log = require('../helpers/logger')
 var IO = server.socket.server
 
 function chatServer (socket) {

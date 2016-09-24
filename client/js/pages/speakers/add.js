@@ -1,8 +1,8 @@
 /* global app */
-var PageView = require('client/js/pages/base')
-var templates = require('client/js/templates')
-var SpeakerForm = require('client/js/forms/speaker')
-var _ = require('client/js/helpers/underscore')
+var PageView = require('../base')
+var templates = require('../../templates')
+var SpeakerForm = require('../../forms/speaker')
+var _ = require('../../helpers/underscore')
 
 module.exports = PageView.extend({
   pageTitle: 'Add speaker',

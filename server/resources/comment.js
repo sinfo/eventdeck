@@ -1,9 +1,9 @@
 var Boom = require('boom')
-var server = require('server').hapi
-var log = require('server/helpers/logger')
-var parser = require('server/helpers/fieldsParser')
-var threadFromPath = require('server/helpers/threadFromPath')
-var Comment = require('server/db/comment')
+var server = require('../index').hapi
+var log = require('../helpers/logger')
+var parser = require('../helpers/fieldsParser')
+var threadFromPath = require('../helpers/threadFromPath')
+var Comment = require('../db/comment')
 
 server.method('comment.create', create, {})
 server.method('comment.update', update, {})

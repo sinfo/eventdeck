@@ -1,7 +1,7 @@
 /* global app */
 var async = require('async')
 var log = require('bows')('eventdeck')
-var config = require('client/js/helpers/clientconfig')
+var config = require('./helpers/clientconfig')
 var $ = require('jquery')
 
 var Router = require('./router')

@@ -1,13 +1,13 @@
 /* global app */
 var log = require('bows')('speakers')
 var PageView = require('ampersand-infinite-scroll')
-var templates = require('client/js/templates')
-var SpeakerView = require('client/js/views/speaker')
-var Speaker = require('client/js/models/speaker')
+var templates = require('../../templates')
+var SpeakerView = require('../../views/speaker')
+var Speaker = require('../../models/speaker')
 var AmpersandCollection = require('ampersand-collection')
-var speakerStatuses = require('options').statuses.speaker
-var _ = require('client/js/helpers/underscore')
-var $ = require('client/js/helpers/jquery')
+var speakerStatuses = require('../../../../options').statuses.speaker
+var _ = require('../../helpers/underscore')
+var $ = require('../../helpers/jquery')
 
 var selectedFilter = 'showall'
 

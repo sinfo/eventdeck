@@ -1,14 +1,14 @@
 /* global app */
 var log = require('bows')('sessions')
-var PageView = require('client/js/pages/base')
-var templates = require('client/js/templates')
-var CommentsView = require('client/js/views/comments')
-var Comments = require('client/js/models/comments')
-var SpeakersView = require('client/js/views/sessionSpeaker')
-var CompaniesView = require('client/js/views/sessionCompany')
-var SubscriptionView = require('client/js/views/subscription')
-var Users = require('client/js/models/users')
-var UsersView = require('client/js/views/users')
+var PageView = require('../base')
+var templates = require('../../templates')
+var CommentsView = require('../../views/comments')
+var Comments = require('../../models/comments')
+var SpeakersView = require('../../views/sessionSpeaker')
+var CompaniesView = require('../../views/sessionCompany')
+var SubscriptionView = require('../../views/subscription')
+var Users = require('../../models/users')
+var UsersView = require('../../views/users')
 
 module.exports = PageView.extend({
   pageTitle: 'View session',

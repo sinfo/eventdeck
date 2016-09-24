@@ -1,9 +1,9 @@
 var Boom = require('boom')
-var server = require('server').hapi
-var log = require('server/helpers/logger')
-var threadFromPath = require('server/helpers/threadFromPath')
-var parser = require('server/helpers/fieldsParser')
-var Communication = require('server/db/communication')
+var server = require('../index').hapi
+var log = require('../helpers/logger')
+var threadFromPath = require('../helpers/threadFromPath')
+var parser = require('../helpers/fieldsParser')
+var Communication = require('../db/communication')
 
 server.method('communication.create', create, {})
 server.method('communication.update', update, {})

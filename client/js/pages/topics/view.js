@@ -1,13 +1,13 @@
 /* global app */
 var log = require('bows')('topics')
-var PageView = require('client/js/pages/base')
-var templates = require('client/js/templates')
-var TagsView = require('client/js/views/topicTags')
-var CommentsView = require('client/js/views/comments')
-var SubscriptionView = require('client/js/views/subscription')
-var Comments = require('client/js/models/comments')
-var PollForm = require('client/js/forms/poll')
-var MemberBadge = require('client/js/views/memberBadge')
+var PageView = require('../base')
+var templates = require('../../templates')
+var TagsView = require('../../views/topicTags')
+var CommentsView = require('../../views/comments')
+var SubscriptionView = require('../../views/subscription')
+var Comments = require('../../models/comments')
+var PollForm = require('../../forms/poll')
+var MemberBadge = require('../../views/memberBadge')
 
 module.exports = PageView.extend({
   pageTitle: 'View topic',

@@ -1,8 +1,8 @@
 var log = require('bows')('communications')
-var PageView = require('client/js/pages/base')
-var templates = require('client/js/templates')
-var CommunicationView = require('client/js/views/communication')
-var CommunicationForm = require('client/js/forms/communication')
+var PageView = require('../pages/base')
+var templates = require('../templates')
+var CommunicationView = require('./communication')
+var CommunicationForm = require('../forms/communication')
 
 module.exports = PageView.extend({
   template: templates.partials.communications.area,

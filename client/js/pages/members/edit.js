@@ -1,9 +1,9 @@
 /* global app, alert */
 var log = require('bows')('members')
-var PageView = require('client/js/pages/base')
-var templates = require('client/js/templates')
-var populate = require('client/js/helpers/populate')
-var MemberForm = require('client/js/forms/member')
+var PageView = require('../base')
+var templates = require('../../templates')
+var populate = require('../../helpers/populate')
+var MemberForm = require('../../forms/member')
 
 module.exports = PageView.extend({
   pageTitle: 'Edit person',

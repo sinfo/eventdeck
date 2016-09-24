@@ -1,10 +1,10 @@
 var Boom = require('boom')
 var slug = require('slug')
-var server = require('server').hapi
-var log = require('server/helpers/logger')
-var parser = require('server/helpers/fieldsParser')
-var Session = require('server/db/session')
-var ical = require('server/helpers/ical')
+var server = require('../index').hapi
+var log = require('../helpers/logger')
+var parser = require('../helpers/fieldsParser')
+var Session = require('../db/session')
+var ical = require('../helpers/ical')
 
 server.method('session.create', create, {})
 server.method('session.update', update, {})

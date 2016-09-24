@@ -1,7 +1,7 @@
 /* global app */
 var View = require('ampersand-view')
-var templates = require('client/js/templates')
-var Company = require('client/js/models/company')
+var templates = require('../templates')
+var Company = require('../models/company')
 var AmpersandRestCollection = require('ampersand-rest-collection')
 
 module.exports = View.extend({

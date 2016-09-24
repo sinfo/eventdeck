@@ -1,9 +1,9 @@
 
 var PageView = require('ampersand-infinite-scroll')
-var templates = require('client/js/templates')
-var MemberCompaniesView = require('client/js/views/memberCompanies')
+var templates = require('../../templates')
+var MemberCompaniesView = require('../../views/memberCompanies')
 var AmpersandCollection = require('ampersand-collection')
-var $ = require('client/js/helpers/jquery')
+var $ = require('../../helpers/jquery')
 
 module.exports = PageView.extend({
   pageTitle: 'Companies by Member',

@@ -1,6 +1,6 @@
 var Boom = require('boom')
-var log = require('server/helpers/logger')
-var IO = require('server').socket.server
+var log = require('../helpers/logger')
+var IO = require('../index').socket.server
 // var chatServer = require('./chat')
 var notifications = require('./notification')
 

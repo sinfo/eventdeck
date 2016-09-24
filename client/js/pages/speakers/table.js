@@ -1,9 +1,9 @@
 
 var PageView = require('ampersand-infinite-scroll')
-var templates = require('client/js/templates')
-var MemberSpeakersView = require('client/js/views/memberSpeakers')
+var templates = require('../../templates')
+var MemberSpeakersView = require('../../views/memberSpeakers')
 var AmpersandCollection = require('ampersand-collection')
-var $ = require('client/js/helpers/jquery')
+var $ = require('../../helpers/jquery')
 
 module.exports = PageView.extend({
   pageTitle: 'Speakers by Member',
