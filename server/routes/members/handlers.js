@@ -1,5 +1,5 @@
 var Joi = require('joi')
-var render = require('server/views/member')
+var render = require('../../views/member')
 
 exports = module.exports
 

@@ -1,5 +1,5 @@
 var Boom = require('boom')
-var server = require('server').hapi
+var server = require('../index').hapi
 
 server.method('authorization.isAdmin', isAdmin, {})
 

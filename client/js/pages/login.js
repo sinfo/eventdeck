@@ -1,8 +1,8 @@
 /* global app, FB */
 var log = require('bows')('auth')
-var PageView = require('client/js/pages/base')
-var templates = require('client/js/templates')
-var config = require('client/js/helpers/clientconfig')
+var PageView = require('./base')
+var templates = require('../templates')
+var config = require('../helpers/clientconfig')
 var $ = require('jquery')
 
 module.exports = PageView.extend({

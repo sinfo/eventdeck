@@ -2,7 +2,7 @@
 var log = require('bows')('notifications')
 var View = require('ampersand-view')
 var async = require('async')
-var templates = require('client/js/templates')
+var templates = require('../templates')
 
 module.exports = View.extend({
   template: templates.partials.notifications.view,

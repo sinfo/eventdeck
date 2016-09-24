@@ -1,15 +1,15 @@
 var Boom = require('boom')
 var async = require('async')
-var server = require('server').hapi
-var IO = require('server').socket.client
-var events = require('server/sockets').notification.events
-var log = require('server/helpers/logger')
-var threadFromPath = require('server/helpers/threadFromPath')
-var parser = require('server/helpers/fieldsParser')
-var Notification = require('server/db/notification')
-var Member = require('server/db/member')
-var Access = require('server/db/access')
-var Subscription = require('server/db/subscription')
+var server = require('../index').hapi
+var IO = require('../index').socket.client
+var events = require('../sockets').notification.events
+var log = require('../helpers/logger')
+var threadFromPath = require('../helpers/threadFromPath')
+var parser = require('../helpers/fieldsParser')
+var Notification = require('../db/notification')
+var Member = require('../db/member')
+var Access = require('../db/access')
+var Subscription = require('../db/subscription')
 
 server.method('notification.notifyCreate', notifyCreate, {})
 server.method('notification.notifyUpdate', notifyUpdate, {})

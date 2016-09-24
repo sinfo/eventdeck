@@ -1,8 +1,8 @@
 var log = require('bows')('comments')
-var PageView = require('client/js/pages/base')
-var templates = require('client/js/templates')
-var CommentView = require('client/js/views/comment')
-var CommentForm = require('client/js/forms/comment')
+var PageView = require('../pages/base')
+var templates = require('../templates')
+var CommentView = require('./comment')
+var CommentForm = require('../forms/comment')
 
 module.exports = PageView.extend({
   template: templates.partials.comments.area,

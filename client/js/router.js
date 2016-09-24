@@ -18,7 +18,7 @@ var CompanyViewPage = require('./pages/companies/view')
 var CompanyMemberTable = require('./pages/companies/table')
 
 var Sessions = require('./pages/sessions/list')
-var SessionsEvent = require('client/js/models/sessionsEvent')
+var SessionsEvent = require('./models/sessionsEvent')
 var SessionAddPage = require('./pages/sessions/add')
 var SessionEditPage = require('./pages/sessions/edit')
 var SessionViewPage = require('./pages/sessions/view')

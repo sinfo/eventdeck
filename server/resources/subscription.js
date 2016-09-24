@@ -1,9 +1,9 @@
 var Boom = require('boom')
-var server = require('server').hapi
-var log = require('server/helpers/logger')
-var parser = require('server/helpers/fieldsParser')
-var Subscription = require('server/db/subscription')
-var Member = require('server/db/member')
+var server = require('../index').hapi
+var log = require('../helpers/logger')
+var parser = require('../helpers/fieldsParser')
+var Subscription = require('../db/subscription')
+var Member = require('../db/member')
 
 server.method('subscription.create', create, {})
 server.method('subscription.createForCoordinators', createForCoordinators, {})

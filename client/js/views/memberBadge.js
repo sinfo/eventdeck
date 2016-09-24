@@ -1,7 +1,7 @@
 /* global app */
 var log = require('bows')('member-badge')
 var View = require('ampersand-view')
-var templates = require('client/js/templates')
+var templates = require('../templates')
 
 module.exports = View.extend({
   template: templates.partials.members.badge,

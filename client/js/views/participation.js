@@ -1,11 +1,11 @@
 /* global app */
 var log = require('bows')('participations')
 var View = require('ampersand-view')
-var templates = require('client/js/templates')
+var templates = require('../templates')
 var ViewSwitcher = require('ampersand-view-switcher')
-var ParticipationForm = require('client/js/forms/participation')
-var MemberBadge = require('client/js/views/memberBadge')
-var _ = require('client/js/helpers/underscore')
+var ParticipationForm = require('../forms/participation')
+var MemberBadge = require('./memberBadge')
+var _ = require('../helpers/underscore')
 var AmpersandRestCollection = require('ampersand-rest-collection')
 
 var OptionsCollection = AmpersandRestCollection.extend({

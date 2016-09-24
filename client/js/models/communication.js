@@ -1,10 +1,10 @@
 /* global app */
 var AmpModel = require('ampersand-model')
 var AmpCollection = require('ampersand-collection')
-var timeSince = require('client/js/helpers/timeSince')
-var options = require('options')
-var marked = require('client/js/helpers/marked')
-var _ = require('client/js/helpers/underscore')
+var timeSince = require('../helpers/timeSince')
+var options = require('../../../options')
+var marked = require('../helpers/marked')
+var _ = require('../helpers/underscore')
 
 var Comment = require('./comment')
 

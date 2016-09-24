@@ -1,7 +1,7 @@
 var log = require('bows')('participations')
-var PageView = require('client/js/pages/base')
-var templates = require('client/js/templates')
-var ParticipationView = require('client/js/views/participation')
+var PageView = require('../pages/base')
+var templates = require('../templates')
+var ParticipationView = require('./participation')
 
 module.exports = PageView.extend({
   template: templates.partials.participations.area,

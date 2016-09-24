@@ -1,13 +1,13 @@
 var AmpState = require('ampersand-state')
 var AmpModel = require('ampersand-model')
 var AmpCollection = require('ampersand-collection')
-var marked = require('client/js/helpers/marked')
+var marked = require('../helpers/marked')
 var SpeakerDetails = require('./speaker')
 var CompanyDetails = require('./company')
 var Moment = require('moment')
-var config = require('client/js/helpers/clientconfig')
+var config = require('../helpers/clientconfig')
 
-var _ = require('client/js/helpers/underscore')
+var _ = require('../helpers/underscore')
 
 var Speaker = AmpState.extend({
   props: {

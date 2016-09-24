@@ -1,6 +1,6 @@
-// var render = require('server/views/roles')
+// var render = require('../../views/roles')
 
-var roles = require('options').roles
+var roles = require('../../../options').roles
 
 exports = module.exports
 

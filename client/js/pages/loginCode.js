@@ -1,6 +1,6 @@
 /* global app */
-var PageView = require('client/js/pages/base')
-var templates = require('client/js/templates')
+var PageView = require('./base')
+var templates = require('../templates')
 
 module.exports = PageView.extend({
   pageTitle: 'EventDeck',

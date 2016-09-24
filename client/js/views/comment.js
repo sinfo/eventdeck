@@ -1,11 +1,11 @@
 /* global app */
 var log = require('bows')('comments')
 var View = require('ampersand-view')
-var templates = require('client/js/templates')
+var templates = require('../templates')
 var ViewSwitcher = require('ampersand-view-switcher')
-var CommentForm = require('client/js/forms/comment')
-var _ = require('client/js/helpers/underscore')
-var MemberBadge = require('client/js/views/memberBadge')
+var CommentForm = require('../forms/comment')
+var _ = require('../helpers/underscore')
+var MemberBadge = require('./memberBadge')
 
 module.exports = View.extend({
   template: templates.cards.comment,

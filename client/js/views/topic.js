@@ -1,7 +1,7 @@
 
 var View = require('ampersand-view')
-var templates = require('client/js/templates')
-var TagsView = require('client/js/views/topicTags')
+var templates = require('../templates')
+var TagsView = require('./topicTags')
 
 module.exports = View.extend({
   template: templates.cards.topic,

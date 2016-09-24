@@ -2,7 +2,7 @@ var AmpState = require('ampersand-state')
 var AmpCollection = require('ampersand-collection')
 var Event = require('./event')
 var Member = require('./member')
-var options = require('options')
+var options = require('../../../options')
 
 var Payment = AmpState.extend({
   props: {

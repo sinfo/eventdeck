@@ -1,9 +1,9 @@
-var Session = require('server/db/session')
+var Session = require('../db/session')
 var Icalendar = require('icalendar')
 var fs = require('fs')
-var config = require('config')
+var config = require('../../config')
 var Boom = require('boom')
-var log = require('server/helpers/logger')
+var log = require('../helpers/logger')
 
 var icalPath = config.ical.path
 var ical = {}

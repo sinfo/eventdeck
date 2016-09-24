@@ -1,10 +1,10 @@
 /* global app */
 var log = require('bows')('member-participations')
 var View = require('ampersand-view')
-var templates = require('client/js/templates')
+var templates = require('../templates')
 var ViewSwitcher = require('ampersand-view-switcher')
-var MemberParticipationForm = require('client/js/forms/memberParticipation')
-var _ = require('client/js/helpers/underscore')
+var MemberParticipationForm = require('../forms/memberParticipation')
+var _ = require('../helpers/underscore')
 
 module.exports = View.extend({
   template: templates.cards.participation,

@@ -1,8 +1,8 @@
 var Boom = require('boom')
-var server = require('server').hapi
-var log = require('server/helpers/logger')
-var parser = require('server/helpers/fieldsParser')
-var Message = require('server/db/message')
+var server = require('../index').hapi
+var log = require('../helpers/logger')
+var parser = require('../helpers/fieldsParser')
+var Message = require('../db/message')
 
 server.method('message.create', create, {})
 server.method('message.get', get, {})

@@ -1,5 +1,5 @@
 var Joi = require('joi')
-var render = require('server/views/speaker')
+var render = require('../../views/speaker')
 
 exports = module.exports
 

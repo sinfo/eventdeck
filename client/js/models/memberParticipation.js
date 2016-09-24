@@ -1,6 +1,6 @@
 var AmpState = require('ampersand-state')
 var EventModel = require('./event')
-var options = require('options')
+var options = require('../../../options')
 
 module.exports = AmpState.extend({
   props: {

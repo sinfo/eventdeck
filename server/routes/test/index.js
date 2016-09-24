@@ -1,5 +1,5 @@
-var server = require('server').hapi
-var socketServer = require('server').socket.server
+var server = require('../../index').hapi
+var socketServer = require('../../index').socket.server
 
 server.route({
   method: 'GET',

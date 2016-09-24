@@ -4,7 +4,7 @@ var Boom = require('boom')
 var Joi = require('joi')
 var fs = require('fs')
 var Request = require('request')
-var log = require('server/helpers/logger')
+var log = require('../../helpers/logger')
 var crypto = require('crypto')
 
 var properties = require('./package.json')

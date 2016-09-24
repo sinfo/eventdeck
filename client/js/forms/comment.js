@@ -1,6 +1,6 @@
 var FormView = require('ampersand-form-view')
 var InputView = require('ampersand-input-view')
-var templates = require('client/js/templates')
+var templates = require('../templates')
 
 module.exports = FormView.extend({
   fields: function () {

@@ -1,8 +1,8 @@
 
 var log = require('bows')('sessions')
-var PageView = require('client/js/pages/base')
-var templates = require('client/js/templates')
-var options = require('options')
+var PageView = require('../base')
+var templates = require('../../templates')
+var options = require('../../../../options')
 var _ = require('underscore')
 var Calendar = require('ampersand-fullcalendar-view')
 

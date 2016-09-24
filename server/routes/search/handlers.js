@@ -1,9 +1,9 @@
 var Joi = require('joi')
-var companiesRender = require('server/views/company')
-var speakersRender = require('server/views/speaker')
-var membersRender = require('server/views/member')
-var topicsRender = require('server/views/topic')
-var sessionsRender = require('server/views/session')
+var companiesRender = require('../../views/company')
+var speakersRender = require('../../views/speaker')
+var membersRender = require('../../views/member')
+var topicsRender = require('../../views/topic')
+var sessionsRender = require('../../views/session')
 
 exports = module.exports
 

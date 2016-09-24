@@ -1,8 +1,8 @@
 
 var AmpModel = require('ampersand-model')
-var timeSince = require('client/js/helpers/timeSince')
+var timeSince = require('../helpers/timeSince')
 var Member = require('./member')
-var marked = require('client/js/helpers/marked')
+var marked = require('../helpers/marked')
 
 module.exports = AmpModel.extend({
   props: {
