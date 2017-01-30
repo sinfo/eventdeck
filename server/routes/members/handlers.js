@@ -1,5 +1,5 @@
-var Joi = require('joi')
-var render = require('../../views/member')
+const Joi = require('joi')
+const render = require('../../views/member')
 
 exports = module.exports
 
@@ -11,7 +11,7 @@ exports.create = {
       id: Joi.string().description('id of the member'),
       name: Joi.string().required().description('name of the member'),
       img: Joi.string().description('image of the member'),
-      participations: Joi.array().includes(Joi.object().keys({
+      participations: Joi.array().items(Joi.object().keys({
         role: Joi.string().description('the user role id'),
         event: Joi.string().description('the event id')
       })).description('participations of the member'),
@@ -54,7 +54,7 @@ exports.update = {
       id: Joi.string().description('id of the member'),
       name: Joi.string().description('name of the member'),
       img: Joi.string().description('image of the member'),
-      participations: Joi.array().includes(Joi.object().keys({
+      participations: Joi.array().items(Joi.object().keys({
         role: Joi.string().description('the user role id'),
         event: Joi.string().description('the event id')
       })).description('participations of the member'),

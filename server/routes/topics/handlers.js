@@ -1,8 +1,8 @@
-var Joi = require('joi')
-var render = require('../../views/topic')
-var options = require('../../../options')
+const Joi = require('joi')
+const render = require('../../views/topic')
+const options = require('../../../options')
 
-var topicKinds = options.kinds.topics.map(function (t) { return t.id })
+let topicKinds = options.kinds.topics.map(function (t) { return t.id })
 
 exports = module.exports
 
@@ -14,17 +14,17 @@ exports.create = {
       kind: Joi.string().required().valid(topicKinds).description('kind of the topic'),
       name: Joi.string().description('name of the topic'),
       text: Joi.string().description('text of the topic (can be markdown)'),
-      targets: Joi.array().includes(Joi.string()).description('targets of the topic'),
+      targets: Joi.array().items(Joi.string()).description('targets of the topic'),
       closed: Joi.boolean().description('closed of the topic'),
       poll: {
         kind: Joi.string().valid('text', 'images').description('kind of the poll'),
-        options: Joi.array().includes(Joi.object().keys({
+        options: Joi.array().items(Joi.object().keys({
           content: Joi.string().description('content of the option - can be image url or text'),
-          votes: Joi.array().includes(Joi.string()).description('members who voted for this option')
+          votes: Joi.array().items(Joi.string()).description('members who voted for this option')
         })).description('options of the poll')
       },
       duedate: Joi.date().description('duedate of the poll'),
-      tags: Joi.array().includes(Joi.string()).description('tags of the topic')
+      tags: Joi.array().items(Joi.string()).description('tags of the topic')
     }
   },
   pre: [
@@ -52,17 +52,17 @@ exports.update = {
       name: Joi.string().description('name of the topic'),
       text: Joi.string().description('text of the topic'),
       author: Joi.string().description('author of the topic'),
-      targets: Joi.array().includes(Joi.string()).description('targets of the topic'),
+      targets: Joi.array().items(Joi.string()).description('targets of the topic'),
       closed: Joi.boolean().description('closed of the topic'),
       poll: {
         kind: Joi.string().valid('text', 'images').description('kind of the poll'),
-        options: Joi.array().includes(Joi.object().keys({
+        options: Joi.array().items(Joi.object().keys({
           content: Joi.string().description('content of the option - can be image url or text'),
-          votes: Joi.array().includes(Joi.string()).description('members who voted for this option')
+          votes: Joi.array().items(Joi.string()).description('members who voted for this option')
         })).description('options of the poll')
       },
       duedate: Joi.date().description('duedate of the poll'),
-      tags: Joi.array().includes(Joi.string()).description('tags of the topic')
+      tags: Joi.array().items(Joi.string()).description('tags of the topic')
     }
   },
   pre: [

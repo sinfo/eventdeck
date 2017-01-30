@@ -1,12 +1,12 @@
-var server = require('../index').hapi
+const server = require('../index').hapi
 
 server.method('parser.members', parseMembers, {})
 
 function parseMembers (text, thread, objectId, memberId, cb) {
-  var memberPattern = /\B@[a-z0-9\._-]+/gi
+  const memberPattern = /\B@[a-z0-9_-]+/gi
 
-  var membersFound = text.match(memberPattern)
-  for (var i in membersFound) {
+  let membersFound = text.match(memberPattern)
+  for (let i in membersFound) {
     membersFound[i] = membersFound[i].replace('@', '').toLowerCase()
   }
 
