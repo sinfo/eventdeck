@@ -32,7 +32,7 @@ function create (session, memberId, cb) {
 function update (id, session, cb) {
   session.updated = Date.now()
   var filter = {id: id}
-  Session.findOneAndUpdate(filter, session, function (err, _session) {
+  Session.findOneAndUpdate(filter, session, {new: true}, function (err, _session) {
     if (err) {
       log.error({err: err, session: id}, 'error updating session')
       return cb(Boom.internal())

@@ -27,7 +27,7 @@ function create (item, memberId, cb) {
 function update (id, item, cb) {
   var filter = { id: id }
 
-  Item.findOneAndUpdate(filter, item, function (err, _item) {
+  Item.findOneAndUpdate(filter, item, {new: true}, (err, _item) => {
     if (err) {
       log.error({err: err, item: id}, 'error updating item')
       return cb(Boom.internal())

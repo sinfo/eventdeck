@@ -34,7 +34,7 @@ function create (communication, memberId, cb) {
 function update (id, communication, cb) {
   communication.updated = Date.now()
   var filter = {_id: id}
-  Communication.findOneAndUpdate(filter, communication, function (err, _communication) {
+  Communication.findOneAndUpdate(filter, communication, {new: true}, function (err, _communication) {
     if (err) {
       log.error({err: err, communication: id}, 'error updating communication')
       return cb(Boom.internal())

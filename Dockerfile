@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:0.10.48
+FROM mhart/alpine-node:6.9.5
 
 LABEL Description="The awesome web app that supports awesome events" Vendor="SINFO" Version="0.0"
 
