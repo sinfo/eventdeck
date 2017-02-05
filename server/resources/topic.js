@@ -21,7 +21,7 @@ function create (topic, memberId, cb) {
 
   Topic.create(topic, (err, _topic) => {
     if (err) {
-      log.error({err: err, topic: topic}, 'error creating topic')
+      log.error({err, topic}, 'error creating topic')
       return cb(Boom.internal())
     }
 
@@ -33,7 +33,7 @@ function update (id, topic, cb) {
   topic.updated = Date.now()
   Topic.findByIdAndUpdate(id, topic, {new: true}, (err, _topic) => {
     if (err) {
-      log.error({err: err, topic: id}, 'error updating topic')
+      log.error({err, topic: id}, 'error updating topic')
       return cb(Boom.internal())
     }
     if (!_topic) {
@@ -50,7 +50,7 @@ function get (id, query, cb) {
   const fields = query.fields
   Topic.findById(id, fields, (err, topic) => {
     if (err) {
-      log.error({err: err, topic: id}, 'error getting topic')
+      log.error({err, topic: id}, 'error getting topic')
       return cb(Boom.internal())
     }
     if (!topic) {
@@ -74,7 +74,7 @@ function getByMember (memberId, query, cb) {
   }
   Topic.find(filter, fields, options, (err, topics) => {
     if (err) {
-      log.error({err: err, member: memberId}, 'error getting topics')
+      log.error({err, member: memberId}, 'error getting topics')
       return cb(Boom.internal())
     }
 
@@ -93,7 +93,7 @@ function getByDueDate (start, end, query, cb) {
   }
   Topic.find(filter, fields, options, (err, topics) => {
     if (err) {
-      log.error({err: err, dates: filter}, 'error getting topics')
+      log.error({err, dates: filter}, 'error getting topics')
       return cb(Boom.internal())
     }
 
@@ -112,7 +112,7 @@ function getByTag (tagId, query, cb) {
   }
   Topic.find(filter, fields, options, (err, topics) => {
     if (err) {
-      log.error({err: err, tag: tagId}, 'error getting topics')
+      log.error({err, tag: tagId}, 'error getting topics')
       return cb(Boom.internal())
     }
 
@@ -144,7 +144,7 @@ function list (query, cb) {
 function remove (id, cb) {
   Topic.findByIdAndRemove(id, (err, topic) => {
     if (err) {
-      log.error({err: err, topic: id}, 'error deleting topic')
+      log.error({err, topic: id}, 'error deleting topic')
       return cb(Boom.internal())
     }
     if (!topic) {
@@ -169,7 +169,7 @@ function search (str, query, cb) {
 
   Topic.find(filter, fields, options, (err, exactTopics) => {
     if (err) {
-      log.error({err: err, filter: filter}, 'error getting topics')
+      log.error({err, filter}, 'error getting topics')
       return cb(Boom.internal())
     }
 
@@ -186,7 +186,7 @@ function search (str, query, cb) {
 
     Topic.find(filter, fields, options, (err, extendedTopics) => {
       if (err) {
-        log.error({err: err, filter: filter}, 'error getting topics')
+        log.error({err, filter}, 'error getting topics')
         return cb(Boom.internal())
       }
 

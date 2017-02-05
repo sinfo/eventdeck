@@ -1,9 +1,9 @@
-var Boom = require('boom')
-var server = require('../index').hapi
-var log = require('../helpers/logger')
-var threadFromPath = require('../helpers/threadFromPath')
-var parser = require('../helpers/fieldsParser')
-var Communication = require('../db/communication')
+const Boom = require('boom')
+const server = require('../index').hapi
+const log = require('../helpers/logger')
+const threadFromPath = require('../helpers/threadFromPath')
+const parser = require('../helpers/fieldsParser')
+const Communication = require('../db/communication')
 
 server.method('communication.create', create, {})
 server.method('communication.update', update, {})
@@ -21,9 +21,9 @@ function create (communication, memberId, cb) {
   communication.posted = Date.now()
   communication.updated = Date.now()
 
-  Communication.create(communication, function (err, _communication) {
+  Communication.create(communication, (err, _communication) => {
     if (err) {
-      log.error({err: err, communication: communication}, 'error creating communication')
+      log.error({err, communication}, 'error creating communication')
       return cb(Boom.internal())
     }
 
@@ -33,10 +33,10 @@ function create (communication, memberId, cb) {
 
 function update (id, communication, cb) {
   communication.updated = Date.now()
-  var filter = {_id: id}
-  Communication.findOneAndUpdate(filter, communication, {new: true}, function (err, _communication) {
+
+  Communication.findByIdAndUpdate(id, communication, {new: true}, (err, _communication) => {
     if (err) {
-      log.error({err: err, communication: id}, 'error updating communication')
+      log.error({err, communication: id}, 'error updating communication')
       return cb(Boom.internal())
     }
     if (!_communication) {
@@ -51,12 +51,11 @@ function update (id, communication, cb) {
 function get (id, query, cb) {
   cb = cb || query // fields is optional
 
-  var filter = {_id: id}
-  var fields = parser(query.fields)
+  const fields = parser(query.fields)
 
-  Communication.findOne(filter, fields, function (err, communication) {
+  Communication.findById(id, fields, (err, communication) => {
     if (err) {
-      log.error({err: err, communication: id}, 'error getting communication')
+      log.error({err, communication: id}, 'error getting communication')
       return cb(Boom.internal())
     }
     if (!communication) {
@@ -71,14 +70,14 @@ function get (id, query, cb) {
 function getByMember (memberId, query, cb) {
   cb = cb || query // fields is optional
 
-  var filter = {member: memberId}
-  var fields = parser(query.fields)
-  var options = {
+  const filter = {member: memberId}
+  const fields = parser(query.fields)
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
   }
-  Communication.find(filter, fields, options, function (err, communications) {
+  Communication.find(filter, fields, options, (err, communications) => {
     if (err) {
       log.error({err: err, member: memberId}, 'error getting communications')
       return cb(Boom.internal())
@@ -91,11 +90,11 @@ function getByMember (memberId, query, cb) {
 function getByThread (path, id, query, cb) {
   cb = cb || query // fields is optional
 
-  var thread = threadFromPath(path, id)
-  var filter = {thread: thread}
-  Communication.find(filter, function (err, communications) {
+  const thread = threadFromPath(path, id)
+  const filter = {thread}
+  Communication.find(filter, (err, communications) => {
     if (err) {
-      log.error({err: err, thread: thread}, 'error getting communications')
+      log.error({err: err, thread}, 'error getting communications')
       return cb(Boom.internal())
     }
 
@@ -106,8 +105,8 @@ function getByThread (path, id, query, cb) {
 function getByEvent (eventId, query, cb) {
   cb = cb || query // fields is optional
 
-  var filter = {event: eventId}
-  Communication.find(filter, function (err, communications) {
+  const filter = {event: eventId}
+  Communication.find(filter, (err, communications) => {
     if (err) {
       log.error({err: err, event: eventId}, 'error getting communications')
       return cb(Boom.internal())
@@ -120,19 +119,19 @@ function getByEvent (eventId, query, cb) {
 function list (query, cb) {
   cb = cb || query // fields is optional
 
-  var filter = {}
+  let filter = {}
   if (query.status) { filter.status = query.status }
   if (query.member) { filter.member = query.member }
   if (query.kind) { filter.kind = query.kind }
   if (query.event) { filter.event = query.event }
 
-  var fields = parser(query.fields)
-  var options = {
+  const fields = parser(query.fields)
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
   }
-  Communication.find(filter, fields, options, function (err, communications) {
+  Communication.find(filter, fields, options, (err, communications) => {
     if (err) {
       log.error({err: err}, 'error getting all communications')
       return cb(Boom.internal())
@@ -143,8 +142,7 @@ function list (query, cb) {
 }
 
 function remove (id, cb) {
-  var filter = {_id: id}
-  Communication.findOneAndRemove(filter, function (err, communication) {
+  Communication.findByIdAndRemove(id, (err, communication) => {
     if (err) {
       log.error({err: err, communication: id}, 'error deleting communication')
       return cb(Boom.internal())
@@ -159,7 +157,7 @@ function remove (id, cb) {
 }
 
 function removeByThread (path, id, cb) {
-  var thread = ''
+  let thread = ''
   if (typeof (id) === 'function') {
     thread = path
     cb = id
@@ -167,10 +165,9 @@ function removeByThread (path, id, cb) {
     thread = threadFromPath(path, id)
   }
 
-  var filter = {thread: thread}
-  Communication.remove(filter, function (err, communications) {
+  Communication.remove({thread}, (err, communications) => {
     if (err) {
-      log.error({err: err, thread: thread}, 'error getting communications')
+      log.error({err, thread}, 'error getting communications')
       return cb(Boom.internal())
     }
 

@@ -1,8 +1,8 @@
-var Boom = require('boom')
-var server = require('../index').hapi
-var log = require('../helpers/logger')
-var parser = require('../helpers/fieldsParser')
-var Message = require('../db/message')
+const Boom = require('boom')
+const server = require('../index').hapi
+const log = require('../helpers/logger')
+const parser = require('../helpers/fieldsParser')
+const Message = require('../db/message')
 
 server.method('message.create', create, {})
 server.method('message.get', get, {})
@@ -10,9 +10,9 @@ server.method('message.list', list, {})
 server.method('message.getByChat', getByChat, {})
 
 function create (message, cb) {
-  Message.create(message, function (err, _message) {
+  Message.create(message, (err, _message) => {
     if (err) {
-      log.error({err: err, message: message}, 'error creating message')
+      log.error({err, message}, 'error creating message')
       return cb(Boom.internal())
     }
 
@@ -22,13 +22,11 @@ function create (message, cb) {
 
 function get (id, query, cb) {
   cb = cb || query // fields is optional
+  const fields = parser(query.fields)
 
-  var fields = parser(query.fields)
-  var filter = {id: id}
-
-  Message.findOne(filter, fields, function (err, message) {
+  Message.findOne({id: id}, fields, (err, message) => {
     if (err) {
-      log.error({err: err, message: id}, 'error getting message')
+      log.error({err, message: id}, 'error getting message')
       return cb(Boom.internal())
     }
     if (!message) {
@@ -43,17 +41,16 @@ function get (id, query, cb) {
 function getByChat (chatId, query, cb) {
   cb = cb || query
 
-  var filter = {chatId: chatId}
-  var fields = parser(query.fields)
-  var options = {
+  const fields = parser(query.fields)
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
   }
 
-  Message.find(filter, fields, options, function (err, messages) {
+  Message.find({chatId: chatId}, fields, options, (err, messages) => {
     if (err) {
-      log.error({err: err, chat: chatId}, 'error getting messages')
+      log.error({err, chat: chatId}, 'error getting messages')
       return cb(Boom.internal())
     }
     cb(null, messages)
@@ -63,16 +60,15 @@ function getByChat (chatId, query, cb) {
 function list (query, cb) {
   cb = cb || query // fields is optional
 
-  var filter = {}
-  var fields = parser(query.fields)
-  var options = {
+  const fields = parser(query.fields)
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
   }
-  Message.find(filter, fields, options, function (err, messages) {
+  Message.find({}, fields, options, (err, messages) => {
     if (err) {
-      log.error({err: err}, 'error getting all messages')
+      log.error({err}, 'error getting all messages')
       return cb(Boom.internal())
     }
 

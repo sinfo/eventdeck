@@ -1,5 +1,5 @@
-var Joi = require('joi')
-var render = require('../../views/company')
+const Joi = require('joi')
+const render = require('../../views/company')
 
 exports = module.exports
 
@@ -172,7 +172,7 @@ exports.list = {
   ],
   handler: function (request, reply) {
     // Because in public views, when an event is selected, we want to address that participation
-    var selectedEvent = request.query && request.query.event
+    const selectedEvent = request.query && request.query.event
     reply(render(request.pre.companies, request.auth.isAuthenticated && !request.headers['Only-Public'], selectedEvent))
   },
   description: 'Gets all the companies'

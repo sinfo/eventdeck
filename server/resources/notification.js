@@ -1,15 +1,15 @@
-var Boom = require('boom')
-var async = require('async')
-var server = require('../index').hapi
-var IO = require('../index').socket.client
-var events = require('../sockets').notification.events
-var log = require('../helpers/logger')
-var threadFromPath = require('../helpers/threadFromPath')
-var parser = require('../helpers/fieldsParser')
-var Notification = require('../db/notification')
-var Member = require('../db/member')
-var Access = require('../db/access')
-var Subscription = require('../db/subscription')
+const Boom = require('boom')
+const async = require('async')
+const server = require('../index').hapi
+const IO = require('../index').socket.client
+const events = require('../sockets').notification.events
+const log = require('../helpers/logger')
+const threadFromPath = require('../helpers/threadFromPath')
+const parser = require('../helpers/fieldsParser')
+const Notification = require('../db/notification')
+const Member = require('../db/member')
+const Access = require('../db/access')
+const Subscription = require('../db/subscription')
 
 server.method('notification.notifyCreate', notifyCreate, {})
 server.method('notification.notifyUpdate', notifyUpdate, {})
@@ -33,7 +33,7 @@ function broadcast (notification, cb) {
   if (!notification) {
     return cb()
   }
-  IO.emit(events.notify, {data: notification}, function (err) {
+  IO.emit(events.notify, {data: notification}, (err) => {
     if (err) {
       log.error({err: err, notification: notification}, 'notification broadcast failed')
     }
@@ -42,7 +42,7 @@ function broadcast (notification, cb) {
 }
 
 function notifyCreate (memberId, path, thing, cb) {
-  var notification = {
+  const notification = {
     thread: threadFromPath(path, thing.id),
     member: memberId,
     description: 'created',
@@ -53,7 +53,7 @@ function notifyCreate (memberId, path, thing, cb) {
 }
 
 function notifyUpdate (memberId, path, thing, cb) {
-  var notification = {
+  const notification = {
     thread: threadFromPath(path, thing.id),
     member: memberId,
     description: 'updated',
@@ -64,7 +64,7 @@ function notifyUpdate (memberId, path, thing, cb) {
 }
 
 function notifyMention (memberId, thread, targets, source, cb) {
-  var index = targets.indexOf(memberId)
+  const index = targets.indexOf(memberId)
   if (index !== -1) {
     targets.splice(index, 1)
     if (!targets.length) {
@@ -72,7 +72,7 @@ function notifyMention (memberId, thread, targets, source, cb) {
     }
   }
 
-  var notification = {
+  const notification = {
     thread: thread,
     member: memberId,
     description: 'mentioned you',
@@ -85,7 +85,7 @@ function notifyMention (memberId, thread, targets, source, cb) {
 }
 
 function notifyComment (memberId, thread, source, cb) {
-  var notification = {
+  const notification = {
     thread: thread,
     member: memberId,
     description: 'posted a new comment',
@@ -97,7 +97,7 @@ function notifyComment (memberId, thread, source, cb) {
 }
 
 function notifyCommunication (memberId, thread, source, cb) {
-  var notification = {
+  const notification = {
     thread: thread,
     member: memberId,
     description: 'posted a new communication',
@@ -109,7 +109,7 @@ function notifyCommunication (memberId, thread, source, cb) {
 }
 
 function notify (memberId, thread, description, objectId, targets, cb) {
-  var notification = {
+  const notification = {
     thread: thread,
     source: objectId,
     member: memberId,
@@ -124,9 +124,9 @@ function notify (memberId, thread, description, objectId, targets, cb) {
 function create (notification, cb) {
   notification.posted = Date.now()
 
-  Notification.create(notification, function (err, _notification) {
+  Notification.create(notification, (err, _notification) => {
     if (err) {
-      log.error({err: err, notification: notification}, 'error creating notification')
+      log.error({err, notification}, 'error creating notification')
       return cb(Boom.internal())
     }
     _notification.set('unread', true, { strict: false })
@@ -136,12 +136,11 @@ function create (notification, cb) {
 
 function get (id, query, cb) {
   cb = cb || query
-  var filter = {_id: id}
-  var fields = query.fields
+  const fields = query.fields
 
-  Notification.findOne(filter, fields, function (err, notification) {
+  Notification.findOne({_id: id}, fields, (err, notification) => {
     if (err) {
-      log.error({err: err, notification: id}, 'error getting notification')
+      log.error({err, notification: id}, 'error getting notification')
       return cb(Boom.internal())
     }
     if (!notification) {
@@ -155,17 +154,17 @@ function get (id, query, cb) {
 
 function getByThread (path, id, query, cb) {
   cb = cb || query
-  var thread = threadFromPath(path, id)
-  var filter = {thread: thread, targets: []}
-  var fields = query.fields
-  var options = {
+  const thread = threadFromPath(path, id)
+  const filter = {thread, targets: []}
+  const fields = query.fields
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
   }
-  Notification.find(filter, fields, options, function (err, notifications) {
+  Notification.find(filter, fields, options, (err, notifications) => {
     if (err) {
-      log.error({err: err, thread: thread}, 'error getting notifications')
+      log.error({err, thread}, 'error getting notifications')
       return cb(Boom.internal())
     }
 
@@ -185,25 +184,25 @@ function getUnreadCount (memberId, query, cb) {
 
   async.waterfall([
     function getSubscriptions (cbAsync) {
-      var filter = {member: memberId}
-      Subscription.find(filter, function (err, subscriptions) {
+      const filter = {member: memberId}
+      Subscription.find(filter, (err, subscriptions) => {
         if (err) {
-          log.error({err: err, subscriptions: subscriptions}, 'error getting subscriptions')
+          log.error({err, subscriptions}, 'error getting subscriptions')
           return cbAsync(Boom.internal())
         }
         cbAsync(null, subscriptions)
       })
     },
     function getLastAccess (subscriptions, cbAsync) {
-      var filter = {id: memberId}
-      var memberFields = {unreadAccess: true}
-      Member.findOne(filter, memberFields, function (err, member) {
+      const filter = {id: memberId}
+      const memberFields = {unreadAccess: true}
+      Member.findOne(filter, memberFields, (err, member) => {
         if (err) {
-          log.error({err: err, member: member}, 'error getting member notification accesses')
+          log.error({err, member}, 'error getting member notification accesses')
           return cbAsync(Boom.internal())
         }
         if (!member) {
-          log.error({err: err, member: member}, 'member not found while getting last access')
+          log.error({err, member}, 'member not found while getting last access')
           return cbAsync(Boom.notFound())
         }
 
@@ -211,13 +210,13 @@ function getUnreadCount (memberId, query, cb) {
       })
     },
     function getUnreadNotifications (subscriptions, access, cbAsync) {
-      var filter = {$or: [{targets: {$in: [memberId]}}], posted: {$gt: access}}
+      const filter = {$or: [{targets: {$in: [memberId]}}], posted: {$gt: access}}
       if (subscriptions.length) {
         filter.$or.push({thread: {$in: subscriptions}})
       }
-      Notification.count(filter, function (err, count) {
+      Notification.count(filter, (err, count) => {
         if (err) {
-          log.error({err: err, count: count}, 'error counting notifications')
+          log.error({err, count}, 'error counting notifications')
           return cbAsync(Boom.internal())
         }
         cbAsync(null, count)
@@ -225,7 +224,7 @@ function getUnreadCount (memberId, query, cb) {
     }
   ], function done (err, result) {
     if (err) {
-      log.error({err: err}, 'error counting notifications')
+      log.error({err}, 'error counting notifications')
       return cb(err)
     }
     cb(null, result)
@@ -235,8 +234,8 @@ function getUnreadCount (memberId, query, cb) {
 function getByMember (memberId, query, cb) {
   cb = cb || query
 
-  var fields = parser(query.fields)
-  var options = {
+  const fields = parser(query.fields)
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
@@ -244,28 +243,28 @@ function getByMember (memberId, query, cb) {
 
   async.waterfall([
     function getSubscriptions (cbAsync) {
-      var filter = {member: memberId}
-      var fields = {thread: true}
-      var result = []
-      Subscription.find(filter, fields, function (err, subscriptions) {
+      const filter = {member: memberId}
+      const fields = {thread: true}
+      let result = []
+      Subscription.find(filter, fields, (err, subscriptions) => {
         if (err) {
-          log.error({err: err, subscriptions: subscriptions}, 'error getting subscriptions')
+          log.error({err, subscriptions}, 'error getting subscriptions')
           return cbAsync(Boom.internal())
         }
-        for (var i = 0; i < subscriptions.length; i++) {
+        for (let i = 0; i < subscriptions.length; i++) {
           result.push(subscriptions[i].thread)
         }
         cbAsync(null, result)
       })
     },
     function getNotificationsFromSubscriptions (subscriptions, cbAsync) {
-      var filter = {$or: [{targets: {$in: [memberId]}}], member: {$ne: memberId}}
+      let filter = {$or: [{targets: {$in: [memberId]}}], member: {$ne: memberId}}
       if (subscriptions.length) {
         filter.$or.push({thread: {$in: subscriptions}})
       }
-      Notification.find(filter, fields, options, function (err, notifications) {
+      Notification.find(filter, fields, options, (err, notifications) => {
         if (err) {
-          log.error({err: err, filter: filter}, 'error getting notifications')
+          log.error({err, filter}, 'error getting notifications')
           return cbAsync(Boom.internal())
         }
 
@@ -284,16 +283,16 @@ function getByMember (memberId, query, cb) {
 function list (query, cb) {
   cb = cb || query // fields is optional
 
-  var filter = {targets: {$size: 0}}
-  var fields = parser(query.fields)
-  var options = {
+  const filter = {targets: {$size: 0}}
+  const fields = parser(query.fields)
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
   }
-  Notification.find(filter, fields, options, function (err, notifications) {
+  Notification.find(filter, fields, options, (err, notifications) => {
     if (err) {
-      log.error({err: err}, 'error getting all notifications')
+      log.error({err}, 'error getting all notifications')
       return cb(Boom.internal())
     }
 
@@ -302,53 +301,52 @@ function list (query, cb) {
 }
 
 function decorateWithUnreadStatus (memberId, collection, cb) {
-  var threads = collection.map(function (o) {
+  const threads = collection.map((o) => {
     return o.thread
   })
 
-  var filter = { member: memberId, thread: { $in: threads } }
-  Access.find(filter, function (err, accesses) {
+  const filter = { member: memberId, thread: { $in: threads } }
+  Access.find(filter, (err, accesses) => {
     if (err) {
-      log.error({err: err, access: filter})
+      log.error({err, access: filter})
       return cb(Boom.internal())
     }
 
-    var accessLookup = {}
-    for (var i = 0, len = accesses.length; i < len; i++) {
+    let accessLookup = {}
+    for (let i = 0, len = accesses.length; i < len; i++) {
       accessLookup[accesses[i].thread] = accesses[i]
     }
 
-    var accessedThreads = accesses.map(function (o) {
+    const accessedThreads = accesses.map(function (o) {
       return o.thread
     })
 
-    async.map(collection, function (o, asyncCb) {
+    async.map(collection, (o, asyncCb) => {
       if (accessedThreads.indexOf(o.thread) === -1) {
         o.set('unread', true, { strict: false })
         return asyncCb(null, o)
       }
 
-      var notificationFilter = {thread: o.thread, posted: {$gt: accessLookup[o.thread].last}}
-      Notification.count(notificationFilter, function (err, count) {
+      const notificationFilter = {thread: o.thread, posted: {$gt: accessLookup[o.thread].last}}
+      Notification.count(notificationFilter, (err, count) => {
         if (err) {
-          log.error({err: err, count: count}, 'error counting notifications')
+          log.error({err, count}, 'error counting notifications')
           return asyncCb()
         }
 
         o.set('unread', count > 0, { strict: false })
         asyncCb(null, o)
       })
-    }, function (err, result) {
+    }, (err, result) => {
       cb(err, result)
     })
   })
 }
 
 function remove (id, cb) {
-  var filter = {id: id}
-  Notification.findOneAndRemove(filter, function (err, notification) {
+  Notification.findOneAndRemove({id: id}, (err, notification) => {
     if (err) {
-      log.error({err: err, notification: id}, 'error deleting notification')
+      log.error({err, notification: id}, 'error deleting notification')
       return cb(Boom.internal())
     }
     if (!notification) {
@@ -361,7 +359,7 @@ function remove (id, cb) {
 }
 
 function removeByThread (path, id, cb) {
-  var thread = ''
+  let thread = ''
   if (typeof (id) === 'function') {
     thread = path
     cb = id
@@ -369,10 +367,9 @@ function removeByThread (path, id, cb) {
     thread = threadFromPath(path, id)
   }
 
-  var filter = {thread: thread}
-  Notification.remove(filter, function (err, notifications) {
+  Notification.remove({thread}, (err, notifications) => {
     if (err) {
-      log.error({err: err, thread: thread}, 'error removing notifications')
+      log.error({err, thread}, 'error removing notifications')
       return cb(Boom.internal())
     }
 
@@ -381,10 +378,9 @@ function removeByThread (path, id, cb) {
 }
 
 function removeBySource (source, cb) {
-  var filter = { source: source }
-  Notification.remove(filter, function (err, notifications) {
+  Notification.remove({source}, (err, notifications) => {
     if (err) {
-      log.error({err: err, source: source}, 'error removing notifications')
+      log.error({err, source}, 'error removing notifications')
       return cb(Boom.internal())
     }
 

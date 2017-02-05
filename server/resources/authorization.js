@@ -1,10 +1,10 @@
-var Boom = require('boom')
-var server = require('../index').hapi
+const Boom = require('boom')
+const server = require('../index').hapi
 
 server.method('authorization.isAdmin', isAdmin, {})
 
 function isAdmin (member, cb) {
-  var isAuthorized = member.participations.filter(function (participation) {
+  let isAuthorized = member.participations.filter((participation) => {
     return participation.role === 'coordination'
   }).length > 0
 

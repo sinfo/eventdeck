@@ -1,6 +1,6 @@
-// var render = require('../../views/roles')
+// const render = require('../../views/roles')
 
-var roles = require('../../../options').roles
+const roles = require('../../../options').roles
 
 exports = module.exports
 

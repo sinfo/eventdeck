@@ -22,7 +22,7 @@ function create (comment, memberId, cb) {
 
   Comment.create(comment, (err, _comment) => {
     if (err) {
-      log.error({err: err, comment: comment}, 'error creating comment')
+      log.error({err, comment}, 'error creating comment')
       return cb(Boom.internal())
     }
 
@@ -35,7 +35,7 @@ function update (id, comment, cb) {
 
   Comment.findByIdAndUpdate(id, comment, {new: true}, (err, _comment) => {
     if (err) {
-      log.error({err: err, comment: id}, 'error updating comment')
+      log.error({err, comment: id}, 'error updating comment')
       return cb(Boom.internal())
     }
     if (!_comment) {
@@ -53,7 +53,7 @@ function get (id, query, cb) {
 
   Comment.findById(id, fields, (err, comment) => {
     if (err) {
-      log.error({err: err, comment: id}, 'error getting comment')
+      log.error({err, comment: id}, 'error getting comment')
       return cb(Boom.internal())
     }
     if (!comment) {
@@ -75,7 +75,7 @@ function getByMember (memberId, query, cb) {
   }
   Comment.find({member: memberId}, fields, options, (err, comments) => {
     if (err) {
-      log.error({err: err, member: memberId}, 'error getting comments')
+      log.error({err, member: memberId}, 'error getting comments')
       return cb(Boom.internal())
     }
 
@@ -90,7 +90,7 @@ function getByThread (path, id, query, cb) {
   const fields = parser(query.fields)
   Comment.find(filter, fields, filter, (err, comments) => {
     if (err) {
-      log.error({err: err, thread: thread}, 'error getting comments')
+      log.error({err, thread}, 'error getting comments')
       return cb(Boom.internal())
     }
 
@@ -101,11 +101,11 @@ function getByThread (path, id, query, cb) {
 function getBySubthread (path, id, query, cb) {
   cb = cb || query
   const subthread = threadFromPath(path, id)
-  const filter = {subthread: subthread}
+  const filter = {subthread}
   const fields = parser(query.fields)
   Comment.find(filter, fields, filter, (err, comments) => {
     if (err) {
-      log.error({err: err, subthread: subthread}, 'error getting comments')
+      log.error({err, subthread}, 'error getting comments')
       return cb(Boom.internal())
     }
 
@@ -159,7 +159,7 @@ function removeByThread (path, id, cb) {
   const filter = {thread: thread}
   Comment.remove(filter, (err, comments) => {
     if (err) {
-      log.error({err: err, thread: thread}, 'error getting comments')
+      log.error({err, thread}, 'error getting comments')
       return cb(Boom.internal())
     }
 
