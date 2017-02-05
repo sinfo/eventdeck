@@ -14,7 +14,7 @@ server.method('tag.remove', remove, {})
 function create (tag, memberId, cb) {
   tag.id = slug(tag.id || tag.name).toLowerCase()
 
-  Tag.create(tag, function (err, _tag) {
+  Tag.create(tag, (err, _tag) => {
     if (err) {
       log.error({err: err, tag: tag}, 'error creating tag')
       return cb(Boom.internal())
@@ -26,7 +26,7 @@ function create (tag, memberId, cb) {
 
 function update (id, tag, cb) {
   var filter = {id: id}
-  Tag.findOneAndUpdate(filter, tag, function (err, _tag) {
+  Tag.findOneAndUpdate(filter, tag, {new: true}, (err, _tag) => {
     if (err) {
       log.error({err: err, tag: id}, 'error updating tag')
       return cb(Boom.internal())

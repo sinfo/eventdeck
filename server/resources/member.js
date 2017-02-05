@@ -1,13 +1,13 @@
-var Boom = require('boom')
-var slug = require('slug')
-var server = require('../index').hapi
-var log = require('../helpers/logger')
-var threadFromPath = require('../helpers/threadFromPath')
-var parser = require('../helpers/fieldsParser')
-var dupKeyParser = require('../helpers/dupKeyParser')
-var randtoken = require('rand-token')
-var Member = require('../db/member')
-var config = require('../../config')
+const Boom = require('boom')
+const slug = require('slug')
+const server = require('../index').hapi
+const log = require('../helpers/logger')
+const threadFromPath = require('../helpers/threadFromPath')
+const parser = require('../helpers/fieldsParser')
+const dupKeyParser = require('../helpers/dupKeyParser')
+const randtoken = require('rand-token')
+const Member = require('../db/member')
+const config = require('../../config')
 
 // TODO: GET TARGETS
 server.method('member.create', create, {})
@@ -21,12 +21,11 @@ server.method('member.search', search, {})
 
 function create (member, cb) {
   member.id = slug(member.id || member.name, '.').toLowerCase()
-
-  Member.create(member, function (err, _member) {
+  Member.create(member, (err, _member) => {
     if (err) {
       if (err.code === 11000) {
         log.warn({err: err, requestedMember: member.id}, 'member is a duplicate')
-        return cb(Boom.conflict(dupKeyParser(err.err) + ' is a duplicate'))
+        return cb(Boom.conflict(dupKeyParser(err.msg) + ' is a duplicate'))
       }
 
       log.error({err: err, member: member}, 'error creating member')
@@ -38,7 +37,7 @@ function create (member, cb) {
 }
 
 function update (id, member, cb) {
-  Member.findOneAndUpdate({id: id}, member, function (err, _member) {
+  Member.findOneAndUpdate({id: id}, member, {new: true}, (err, _member) => {
     if (err && err !== {}) {
       log.error({err: err, member: id}, 'error updating member')
       return cb(Boom.badRequest('error updating member'))
@@ -53,10 +52,9 @@ function update (id, member, cb) {
 }
 
 function createLoginCode (id, cb) {
-  var loginCode = randtoken.generate(config.loginCodes.length)
-  var code = {$push: {'loginCodes': {code: loginCode, created: new Date()}}}
-  var filter = {id: id}
-  Member.findOneAndUpdate(filter, code, function (err, _member) {
+  const loginCode = randtoken.generate(config.loginCodes.length)
+  const code = {$push: {'loginCodes': {code: loginCode, created: new Date()}}}
+  Member.findOneAndUpdate({id: id}, code, function (err, _member) {
     if (err) {
       log.error({err: err, member: id}, 'error creating login code for member')
       return cb(Boom.internal())
@@ -75,9 +73,9 @@ function createLoginCode (id, cb) {
 function get (id, query, cb) {
   cb = cb || query // fields is optional
 
-  var fields = parser(query.fields)
-  var filter = {$or: [{id: id}, {'facebook.id': id}]}
-  Member.findOne(filter, fields, function (err, member) {
+  const fields = parser(query.fields)
+  const filter = {$or: [{id: id}, {'facebook.id': id}]}
+  Member.findOne(filter, fields, (err, member) => {
     if (err) {
       log.error({err: err, member: id}, 'error getting member')
       return cb(Boom.internal())
@@ -93,16 +91,16 @@ function get (id, query, cb) {
 
 function getSubscribers (path, id, query, cb) {
   cb = cb || query
-  var thread = threadFromPath(path, id)
+  const thread = threadFromPath(path, id)
 
-  var filter = {$or: [{'subscriptions.threads': thread}, {'subscriptions.all': true}]}
-  var fields = parser(query.fields)
-  var options = {
+  const filter = {$or: [{'subscriptions.threads': thread}, {'subscriptions.all': true}]}
+  const fields = parser(query.fields)
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
   }
-  Member.find(filter, fields, options, function (err, members) {
+  Member.find(filter, fields, options, (err, members) => {
     if (err) {
       log.error({err: err, thread: thread}, 'error getting members')
       return cb(Boom.internal())
@@ -146,8 +144,7 @@ function list (query, cb) {
 }
 
 function remove (id, cb) {
-  var filter = {id: id}
-  Member.findOneAndRemove(filter, function (err, member) {
+  Member.findOneAndRemove({id: id}, function (err, member) {
     if (err) {
       log.error({err: err, member: id}, 'error deleting member')
       return cb(Boom.internal())

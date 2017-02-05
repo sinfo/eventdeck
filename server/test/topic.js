@@ -1,11 +1,11 @@
-var Lab = require('lab')
-var Code = require('code')
+const Lab = require('lab')
+const Code = require('code')
 
-var server = require('../').hapi
+const server = require('../').hapi
 
-var lab = exports.lab = Lab.script()
+const lab = exports.lab = Lab.script()
 
-var credentials = {
+const credentials = {
   id: 'john.doe',
   name: 'John Doe',
   participations: [{
@@ -14,20 +14,20 @@ var credentials = {
   }]
 }
 
-var topicA = {
+const topicA = {
   text: 'hey',
   kind: 'idea'
 }
 
-var topicAid
+let topicAid
 
-var changesTopicA = {
+const changesTopicA = {
   text: 'Howdy'
 }
 
 lab.experiment('Topic', function () {
   lab.test('Create', function (done) {
-    var options = {
+    const options = {
       method: 'POST',
       url: '/api/topics',
       credentials: credentials,
@@ -35,7 +35,7 @@ lab.experiment('Topic', function () {
     }
 
     server.inject(options, function (response) {
-      var result = response.result
+      const result = response.result
 
       Code.expect(response.statusCode).to.equal(201)
       Code.expect(result).to.be.instanceof(Object)
@@ -49,14 +49,14 @@ lab.experiment('Topic', function () {
   })
 
   lab.test('List all', function (done) {
-    var options = {
+    const options = {
       method: 'GET',
       url: '/api/topics',
       credentials: credentials
     }
 
     server.inject(options, function (response) {
-      var result = response.result
+      const result = response.result
 
       Code.expect(response.statusCode).to.equal(200)
       Code.expect(result).to.be.instanceof(Array)
@@ -68,14 +68,14 @@ lab.experiment('Topic', function () {
   })
 
   lab.test('Get one', function (done) {
-    var options = {
+    const options = {
       method: 'GET',
       url: '/api/topics/' + topicAid,
       credentials: credentials
     }
 
     server.inject(options, function (response) {
-      var result = response.result
+      const result = response.result
 
       Code.expect(response.statusCode).to.equal(200)
       Code.expect(result).to.be.instanceof(Object)
@@ -88,7 +88,7 @@ lab.experiment('Topic', function () {
   })
 
   lab.test('Update', function (done) {
-    var options = {
+    const options = {
       method: 'PUT',
       url: '/api/topics/' + topicAid,
       credentials: credentials,
@@ -96,7 +96,7 @@ lab.experiment('Topic', function () {
     }
 
     server.inject(options, function (response) {
-      var result = response.result
+      const result = response.result
 
       Code.expect(response.statusCode).to.equal(200)
       Code.expect(result).to.be.instanceof(Object)
@@ -108,14 +108,14 @@ lab.experiment('Topic', function () {
   })
 
   lab.test('Delete', function (done) {
-    var options = {
+    const options = {
       method: 'DELETE',
       url: '/api/topics/' + topicAid,
       credentials: credentials
     }
 
     server.inject(options, function (response) {
-      var result = response.result
+      const result = response.result
 
       Code.expect(response.statusCode).to.equal(200)
       Code.expect(result).to.be.instanceof(Object)

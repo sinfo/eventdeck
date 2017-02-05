@@ -1,8 +1,9 @@
-// init http monitoring
-require('pmx').init()
-
 const Hapi = require('hapi')
+const Inert = require('inert')
 const Vision = require('vision')
+const HapiSwagger = require('hapi-swagger')
+const Moonboots = require('moonboots_hapi')
+const HapiAuthCookie = require('hapi-auth-cookie')
 const IO = {server: require('socket.io'), client: require('socket.io-client')}
 const log = require('./helpers/logger')
 const config = require('../config')
@@ -18,9 +19,10 @@ const server = module.exports.hapi = new Hapi.Server()
 server.connection({
   host: config.host,
   port: config.port
-  // TODO: CORS in new Hapi version is disabled - it's needed ?
-  // { cors: config.cors }
 })
+
+// TODO: CORS in new Hapi version is disabled - it's needed ?
+// { cors: config.cors }
 
 require('./db')
 
@@ -43,27 +45,23 @@ server.ext('onPreResponse', function (request, reply) {
   return reply()
 })
 
-// Set view template engine
-server.register(Vision, (err) => {
-  if (err) throw err
-
-  server.views({
-    engines: {
-      hbs: require('handlebars')
-    },
-    path: path.join(__dirname, 'templates')
-  })
-})
-
 server.register([
-    {register: require('hapi-swagger'), options: config.swagger},
-    {register: require('moonboots_hapi'), options: moonbootsConfig},
-    {register: require('hapi-auth-cookie')},
+  Inert,
+  Vision,
+    {register: HapiSwagger, options: config.swagger},
+    {register: Moonboots, options: moonbootsConfig},
+    {register: HapiAuthCookie},
     {register: require('./plugins/images'), options: config.images},
-    {register: require('./plugins/templates'), options: config.templates},
-    {register: require('inert')} ],
+    {register: require('./plugins/templates'), options: config.templates}],
   (err) => {
     if (err) throw err
+
+    server.views({
+      engines: {
+        hbs: require('handlebars')
+      },
+      path: path.join(__dirname, 'templates')
+    })
 
     server.auth.strategy('session', 'cookie', {
       cookie: cookieConfig.name,

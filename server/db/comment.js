@@ -1,6 +1,6 @@
-var mongoose = require('mongoose')
+const mongoose = require('mongoose')
 
-var schema = new mongoose.Schema({
+let schema = new mongoose.Schema({
   thread: String,
   subthread: String,
   member: String,
