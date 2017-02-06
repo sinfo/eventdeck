@@ -17,8 +17,7 @@
   "standard": {
     "ignore": [
       "client/js/templates.js",
-      "client/js/ink-all.js",
-      "server/scripts/*"
+      "client/js/ink-all.js"
     ]
   },
   "pre-commit": [
