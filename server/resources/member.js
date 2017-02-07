@@ -54,7 +54,8 @@ function update (id, member, cb) {
 function createLoginCode (id, cb) {
   const loginCode = randtoken.generate(config.loginCodes.length)
   const code = {$push: {'loginCodes': {code: loginCode, created: new Date()}}}
-  Member.findOneAndUpdate({id: id}, code, function (err, _member) {
+
+  Member.findOneAndUpdate({id: id}, code, {new: true}, (err, _member) => {
     if (err) {
       log.error({err, member: id}, 'error creating login code for member')
       return cb(Boom.internal())
@@ -64,9 +65,13 @@ function createLoginCode (id, cb) {
       return cb(Boom.notFound('member not found'))
     }
 
-    log.info({member: id, loginCode: loginCode}, 'login code created')
+    if (config.isDev) {
+      log.info({member: id, loginCode}, 'login code created')
+    } else {
+      log.info('login code created')
+    }
 
-    cb(null, {member: _member, loginCode: loginCode})
+    cb(null, {member: _member, loginCode})
   })
 }
 
@@ -144,7 +149,7 @@ function list (query, cb) {
 }
 
 function remove (id, cb) {
-  Member.findOneAndRemove({id: id}, function (err, member) {
+  Member.findOneAndRemove({id: id}, (err, member) => {
     if (err) {
       log.error({err, member: id}, 'error deleting member')
       return cb(Boom.internal())
@@ -169,7 +174,7 @@ function search (str, query, cb) {
     sort: parser(query.sort)
   }
 
-  Member.find(filter, fields, options, function (err, exactMembers) {
+  Member.find(filter, fields, options, (err, exactMembers) => {
     if (err) {
       log.error({err, filter}, 'error getting members')
       return cb(Boom.internal())
@@ -188,7 +193,7 @@ function search (str, query, cb) {
       ]
     }
 
-    Member.find(filter, fields, options, function (err, extendedMembers) {
+    Member.find(filter, fields, options, (err, extendedMembers) => {
       if (err) {
         log.error({err, filter}, 'error getting members')
         return cb(Boom.internal())

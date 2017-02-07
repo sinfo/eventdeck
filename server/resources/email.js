@@ -6,7 +6,7 @@ const mgConfig = require('../../config').mailgun
 const MailComposer = require('mailcomposer').MailComposer
 
 const mg = new Mailgun(mgConfig.api)
-const mailcomposer = new MailComposer()
+const mailComposer = new MailComposer()
 
 server.method('email.send', send, {})
 
@@ -25,7 +25,7 @@ function send (message, cb) {
       }
     )
   } else {
-    mailcomposer.setMessageOption({
+    mailComposer.setMessageOption({
       from: mgConfig.email,
       to: message.to,
       cc: message.cc,
@@ -35,7 +35,7 @@ function send (message, cb) {
       html: message.html
     })
 
-    mailcomposer.buildMessage((err, rawBody) => {
+    mailComposer.buildMessage((err, rawBody) => {
       if (err) { return cb(err) }
       mg.sendRaw(mgConfig.email,
         message.to,

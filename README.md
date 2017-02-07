@@ -11,6 +11,6 @@ The backend is based on hapi, and the frontend initially was Angular but we're r
 ### Installation:
   1. Clone the repo: <code>git clone git@github.com:sinfo/eventdeck.git</code>
   2. Enter the directory: <code>cd eventdeck</code>
-  3. Install the dependencies: <code>npm install</code> or <code>npm i</code>
+  3. Install the dependencies: <code>npm install</code> or <code>yarn</code>
   4. Set the environment variables used on <code>config.js</code>
-  5. Start the server: <code>npm start</code>
+  5. Start the server: <code>npm start</code> or <code>yarn start</code>

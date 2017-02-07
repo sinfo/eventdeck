@@ -317,7 +317,7 @@ function decorateWithUnreadStatus (memberId, collection, cb) {
       accessLookup[accesses[i].thread] = accesses[i]
     }
 
-    const accessedThreads = accesses.map(function (o) {
+    const accessedThreads = accesses.map((o) => {
       return o.thread
     })
 

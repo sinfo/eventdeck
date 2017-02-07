@@ -1,9 +1,9 @@
-var Boom = require('boom')
-var server = require('../index').hapi
-var log = require('../helpers/logger')
-var parser = require('../helpers/fieldsParser')
-var Subscription = require('../db/subscription')
-var Member = require('../db/member')
+const Boom = require('boom')
+const server = require('../index').hapi
+const log = require('../helpers/logger')
+const parser = require('../helpers/fieldsParser')
+const Subscription = require('../db/subscription')
+const Member = require('../db/member')
 
 server.method('subscription.create', create, {})
 server.method('subscription.createForCoordinators', createForCoordinators, {})
@@ -13,11 +13,11 @@ server.method('subscription.getByThread', getByThread, {})
 server.method('subscription.remove', remove, {})
 
 function create (thread, memberId, cb) {
-  var subscription = { thread: thread, member: memberId }
+  const subscription = { thread: thread, member: memberId }
 
-  Subscription.create(subscription, function (err, _subscription) {
+  Subscription.create(subscription, (err, _subscription) => {
     if (err) {
-      log.error({err: err, subscription: subscription}, 'error creating subscription')
+      log.error({err, subscription}, 'error creating subscription')
       return cb(Boom.internal())
     }
 
@@ -33,23 +33,23 @@ function createForCoordinators (thread, cb) {
         role: 'coordination'
       }
     }
-  }, function (err, coordinators) {
+  }, (err, coordinators) => {
     if (err) {
-      log.error({err: err, thread: thread}, 'error finding coordinators while creating subscriptions')
+      log.error({err, thread}, 'error finding coordinators while creating subscriptions')
       return cb(Boom.internal())
     }
 
-    var subscriptions = []
+    let subscriptions = []
 
-    coordinators.forEach(function (coordinator) {
-      var subscription = {
-        thread: thread,
+    coordinators.forEach((coordinator) => {
+      const subscription = {
+        thread,
         member: coordinator.id
       }
 
-      Subscription.create(subscription, function (err, _subscription) {
+      Subscription.create(subscription, (err, _subscription) => {
         if (err) {
-          log.error({err: err, subscription: subscription}, 'error creating subscription')
+          log.error({err, subscription}, 'error creating subscription')
           return cb(Boom.internal())
         }
 
@@ -64,8 +64,8 @@ function createForCoordinators (thread, cb) {
 function get (thread, memberId, query, cb) {
   cb = cb || query // fields is optional
 
-  var fields = parser(query.fields)
-  var filter = { member: memberId, thread: thread }
+  const fields = parser(query.fields)
+  const filter = { member: memberId, thread: thread }
 
   Subscription.findOne(filter, fields, function (err, subscription) {
     if (err) {
@@ -78,7 +78,7 @@ function get (thread, memberId, query, cb) {
 }
 
 function remove (thread, memberId, cb) {
-  var filter = { thread: thread, member: memberId }
+  const filter = { thread: thread, member: memberId }
 
   Subscription.findOneAndRemove(filter, function (err, subscription) {
     if (err) {
@@ -96,9 +96,9 @@ function remove (thread, memberId, cb) {
 
 function getByMember (memberId, query, cb) {
   cb = cb || query
-  var filter = {members: {$in: [memberId]}}
-  var fields = query.fields
-  var options = {
+  const filter = {members: {$in: [memberId]}}
+  const fields = query.fields
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
@@ -116,9 +116,9 @@ function getByMember (memberId, query, cb) {
 
 function getByThread (thread, query, cb) {
   cb = cb || query
-  var filter = {thread: thread}
-  var fields = query.fields
-  var options = {
+  const filter = {thread: thread}
+  const fields = query.fields
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)

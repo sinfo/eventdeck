@@ -13,20 +13,19 @@ server.method('chat.message.add', addMessage, {})
 server.method('chat.message.remove', removeMessage, {})
 
 function create (chat, cb) {
-  Chat.create(chat, function (err, _chat) {
+  Chat.create(chat, (err, _chat) => {
     if (err) {
-      log.error({err: err, chat: chat}, 'error creating chat')
+      log.error({err, chat}, 'error creating chat')
       return cb(Boom.internal())
     }
-
     cb(null, _chat)
   })
 }
 
 function update (id, chat, cb) {
-  Chat.findOneAndUpdate({id: id}, chat, (err, _chat) => {
+  Chat.findOneAndUpdate({id: id}, chat, {new: true}, (err, _chat) => {
     if (err) {
-      log.error({err: err, chat: id}, 'error updating chat')
+      log.error({err, chat: id}, 'error updating chat')
       return cb(Boom.internal())
     }
     if (!_chat) {
@@ -44,7 +43,7 @@ function get (id, query, cb) {
 
   Chat.findOne({id: id}, fields, (err, chat) => {
     if (err) {
-      log.error({err: err, chat: id}, 'error getting chat')
+      log.error({err, chat: id}, 'error getting chat')
       return cb(Boom.internal())
     }
     if (!chat) {
@@ -78,7 +77,7 @@ function list (query, cb) {
 function remove (id, cb) {
   Chat.findOneAndRemove({id: id}, (err, chat) => {
     if (err) {
-      log.error({err: err, chat: id}, 'error deleting chat')
+      log.error({err, chat: id}, 'error deleting chat')
       return cb(Boom.internal())
     }
     if (!chat) {
@@ -94,7 +93,7 @@ function addMessage (id, message, cb) {
   const update = {$push: {messages: message}}
   Chat.findOneAndUpdate({id: id}, update, (err, chat) => {
     if (err) {
-      log.error({err: err, chat: id}, 'error adding chat message')
+      log.error({err, chat: id}, 'error adding chat message')
       return cb(Boom.internal())
     }
     if (!chat) {
@@ -110,7 +109,7 @@ function removeMessage (id, message, cb) {
   const update = {$pull: {messages: message}}
   Chat.findOneAndUpdate({id: id}, update, (err, chat) => {
     if (err) {
-      log.error({err: err, chat: id}, 'error removing chat message')
+      log.error({err, chat: id}, 'error removing chat message')
       return cb(Boom.internal())
     }
     if (!chat) {

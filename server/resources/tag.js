@@ -1,9 +1,9 @@
-var Boom = require('boom')
-var slug = require('slug')
-var server = require('../index').hapi
-var log = require('../helpers/logger')
-var parser = require('../helpers/fieldsParser')
-var Tag = require('../db/tag')
+const Boom = require('boom')
+const slug = require('slug')
+const server = require('../index').hapi
+const log = require('../helpers/logger')
+const parser = require('../helpers/fieldsParser')
+const Tag = require('../db/tag')
 
 server.method('tag.create', create, {})
 server.method('tag.update', update, {})
@@ -16,7 +16,7 @@ function create (tag, memberId, cb) {
 
   Tag.create(tag, (err, _tag) => {
     if (err) {
-      log.error({err: err, tag: tag}, 'error creating tag')
+      log.error({err, tag}, 'error creating tag')
       return cb(Boom.internal())
     }
 
@@ -25,10 +25,9 @@ function create (tag, memberId, cb) {
 }
 
 function update (id, tag, cb) {
-  var filter = {id: id}
-  Tag.findOneAndUpdate(filter, tag, {new: true}, (err, _tag) => {
+  Tag.findOneAndUpdate({id: id}, tag, {new: true}, (err, _tag) => {
     if (err) {
-      log.error({err: err, tag: id}, 'error updating tag')
+      log.error({err, tag: id}, 'error updating tag')
       return cb(Boom.internal())
     }
     if (!_tag) {
@@ -42,12 +41,11 @@ function update (id, tag, cb) {
 
 function get (id, query, cb) {
   cb = cb || query // fields is optional
-  var filter = {id: id}
 
-  var fields = parser(query.fields)
-  Tag.findOne(filter, fields, function (err, tag) {
+  const fields = parser(query.fields)
+  Tag.findOne({id: id}, fields, (err, tag) => {
     if (err) {
-      log.error({err: err, tag: id}, 'error getting tag')
+      log.error({err, tag: id}, 'error getting tag')
       return cb(Boom.internal())
     }
     if (!tag) {
@@ -62,17 +60,16 @@ function get (id, query, cb) {
 function list (query, cb) {
   cb = cb || query // fields is optional
 
-  var filter = {}
-  var fields = parser(query.fields)
-  var options = {
+  const fields = parser(query.fields)
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
   }
 
-  Tag.find(filter, fields, options, function (err, companies) {
+  Tag.find({}, fields, options, (err, companies) => {
     if (err) {
-      log.error({err: err}, 'error getting all companies')
+      log.error({err}, 'error getting all companies')
       return cb(Boom.internal())
     }
 
@@ -80,14 +77,13 @@ function list (query, cb) {
   })
 }
 function remove (id, cb) {
-  var filter = {id: id}
-  Tag.findOneAndRemove(filter, function (err, tag) {
+  Tag.findOneAndRemove({id: id}, (err, tag) => {
     if (err) {
-      log.error({err: err, tag: id}, 'error deleting tag')
+      log.error({err, tag: id}, 'error deleting tag')
       return cb(Boom.internal())
     }
     if (!tag) {
-      log.error({err: err, tag: id}, 'error deleting tag')
+      log.error({err, tag: id}, 'error deleting tag')
       return cb(Boom.notFound())
     }
 
