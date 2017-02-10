@@ -1,11 +1,12 @@
-var Lab = require('lab')
-var Code = require('code')
+const Lab = require('lab')
+const Code = require('code')
+const expect = Code.expect
 
-var server = require('../').hapi
+const server = require('../').hapi
 
-var lab = exports.lab = Lab.script()
+const lab = exports.lab = Lab.script()
 
-var memberA = {
+const memberA = {
   id: 'john.doe',
   name: 'John Doe',
   participations: [{
@@ -14,28 +15,19 @@ var memberA = {
   }]
 }
 
-var changesMemberA = {
+const changesMemberA = {
   name: 'Jane Doe'
 }
 
-var credentials = memberA
+const credentials = memberA
 
-lab.experiment('Members', function () {
-  lab.test('Create', function (done) {
-    var options = {
-      method: 'POST',
-      url: '/api/members',
-      credentials: credentials,
-      payload: memberA
-    }
-
-    server.inject(options, function (response) {
-      var result = response.result
-
-      Code.expect(response.statusCode).to.equal(201)
-      Code.expect(result).to.be.instanceof(Object)
-      Code.expect(result.id).to.equal(memberA.id)
-      Code.expect(result.name).to.equal(memberA.name)
+lab.experiment('Members', () => {
+  lab.test('Create', (done) => {
+    server.methods.member.create(memberA, (err, result) => {
+      expect(err).to.be.null()
+      expect(result).to.be.instanceof(Object)
+      expect(result.id).to.equal(memberA.id)
+      expect(result.name).to.equal(memberA.name)
 
       done()
     })
@@ -61,46 +53,46 @@ lab.experiment('Members', function () {
     })
   })
 
-  lab.test('Get me', function (done) {
-    var options = {
+  lab.test('Get me', (done) => {
+    let options = {
       method: 'GET',
       url: '/api/members/me',
       credentials: credentials
     }
 
     server.inject(options, function (response) {
-      var result = response.result
+      let result = response.result
 
-      Code.expect(response.statusCode).to.equal(200)
-      Code.expect(result).to.be.instanceof(Object)
-      Code.expect(result.id).to.equal(credentials.id)
-      Code.expect(result.name).to.equal(credentials.name)
+      expect(response.statusCode).to.equal(200)
+      expect(result).to.be.instanceof(Object)
+      expect(result.id).to.equal(credentials.id)
+      expect(result.name).to.equal(credentials.name)
 
       done()
     })
   })
 
-  lab.test('Get one', function (done) {
-    var options = {
+  lab.test('Get one', (done) => {
+    let options = {
       method: 'GET',
       url: '/api/members/' + memberA.id,
       credentials: credentials
     }
 
     server.inject(options, function (response) {
-      var result = response.result
+      let result = response.result
 
-      Code.expect(response.statusCode).to.equal(200)
-      Code.expect(result).to.be.instanceof(Object)
-      Code.expect(result.id).to.equal(memberA.id)
-      Code.expect(result.name).to.equal(memberA.name)
+      expect(response.statusCode).to.equal(200)
+      expect(result).to.be.instanceof(Object)
+      expect(result.id).to.equal(memberA.id)
+      expect(result.name).to.equal(memberA.name)
 
       done()
     })
   })
 
-  lab.test('Update', function (done) {
-    var options = {
+  lab.test('Update', (done) => {
+    const options = {
       method: 'PUT',
       url: '/api/members/' + memberA.id,
       credentials: credentials,
@@ -108,31 +100,31 @@ lab.experiment('Members', function () {
     }
 
     server.inject(options, function (response) {
-      var result = response.result
+      const result = response.result
 
-      Code.expect(response.statusCode).to.equal(200)
-      Code.expect(result).to.be.instanceof(Object)
-      Code.expect(result.id).to.equal(memberA.id)
-      Code.expect(result.name).to.equal(changesMemberA.name)
+      expect(response.statusCode).to.equal(200)
+      expect(result).to.be.instanceof(Object)
+      expect(result.id).to.equal(memberA.id)
+      expect(result.name).to.equal(changesMemberA.name)
 
       done()
     })
   })
 
-  lab.test('Delete', function (done) {
-    var options = {
+  lab.test('Delete', (done) => {
+    const options = {
       method: 'DELETE',
       url: '/api/members/' + memberA.id,
       credentials: credentials
     }
 
     server.inject(options, function (response) {
-      var result = response.result
+      const result = response.result
 
-      Code.expect(response.statusCode).to.equal(200)
-      Code.expect(result).to.be.instanceof(Object)
-      Code.expect(result.id).to.equal(memberA.id)
-      Code.expect(result.name).to.equal(changesMemberA.name)
+      expect(response.statusCode).to.equal(200)
+      expect(result).to.be.instanceof(Object)
+      expect(result.id).to.equal(memberA.id)
+      expect(result.name).to.equal(changesMemberA.name)
 
       done()
     })

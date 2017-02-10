@@ -11,8 +11,13 @@ JSON2@0.1.0:
   resolved "https://registry.yarnpkg.com/JSON2/-/JSON2-0.1.0.tgz#8d7493040a63d5835af75f47decb83ab6c8c0790"
 
 JSONStream@^1.0.3:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/JSONStream/-/JSONStream-1.2.1.tgz#32aa5790e799481083b49b4b7fa94e23bae69bf9"
+=======
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/JSONStream/-/JSONStream-1.3.0.tgz#680ab9ac6572a8a1a207e0b38721db1c77b215e5"
+>>>>>>> Upgraded to Node 6
   dependencies:
     jsonparse "^1.2.0"
     through ">=2.2.7 <3"
@@ -24,6 +29,16 @@ JSONStream@~0.6.4:
     jsonparse "0.0.5"
     through "~2.2.7"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+JSONStream@~0.7.1:
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/JSONStream/-/JSONStream-0.7.4.tgz#734290e41511eea7c2cfe151fbf9a563a97b9786"
+  dependencies:
+    jsonparse "0.0.5"
+    through ">=2.2.7 <3"
+
+>>>>>>> Upgraded to Node 6
 JSONStream@~0.8.3, JSONStream@~0.8.4:
   version "0.8.4"
   resolved "https://registry.yarnpkg.com/JSONStream/-/JSONStream-0.8.4.tgz#91657dfe6ff857483066132b4618b62e8f4887bd"
@@ -61,12 +76,23 @@ acorn-globals@^1.0.3:
   dependencies:
     acorn "^2.1.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 acorn-jsx@^3.0.0, acorn-jsx@^3.0.1:
+=======
+acorn-jsx@^3.0.0:
+>>>>>>> Upgraded to Node 6
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-3.0.1.tgz#afdf9488fb1ecefc8348f6fb22f464e32a58b36b"
   dependencies:
     acorn "^3.0.4"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+acorn@4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-4.0.4.tgz#17a8d6a7a6c4ef538b814ec9abac2779293bf30a"
+
+>>>>>>> Upgraded to Node 6
 acorn@^1.0.1, acorn@^1.0.3:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-1.2.2.tgz#c8ce27de0acc76d896d2b1fad3df588d9e82f014"
@@ -79,10 +105,13 @@ acorn@^3.0.4, acorn@^3.1.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-3.3.0.tgz#45e37fb39e8da3f25baee3ff5369e2bb5f22017a"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 acorn@^4.0.1:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-4.0.4.tgz#17a8d6a7a6c4ef538b814ec9abac2779293bf30a"
 
+=======
+>>>>>>> Upgraded to Node 6
 addressparser@^0.3.2, addressparser@~0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/addressparser/-/addressparser-0.3.2.tgz#59873f35e8fcf6c7361c10239261d76e15348bb2"
@@ -100,12 +129,21 @@ after@0.8.2:
   resolved "https://registry.yarnpkg.com/after/-/after-0.8.2.tgz#fedb394f9f0e02aa9768e702bda23b505fae7e1f"
 
 ajv-keywords@^1.0.0:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-1.2.0.tgz#676c4f087bfe1e8b12dca6fda2f3c74f417b099c"
 
 ajv@^4.7.0:
   version "4.9.2"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-4.9.2.tgz#3f7dcda95b0c34bceb2d69945117d146219f1a2c"
+=======
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-1.5.1.tgz#314dd0a4b3368fad3dfcdc54ede6171b886daf3c"
+
+ajv@^4.7.0:
+  version "4.11.2"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-4.11.2.tgz#f166c3c11cbc6cb9dcc102a5bcfe5b72c95287e6"
+>>>>>>> Upgraded to Node 6
   dependencies:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
@@ -129,6 +167,16 @@ ammo@2.x.x:
     boom "4.x.x"
     hoek "4.x.x"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+amp-bind@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/amp-bind/-/amp-bind-1.0.1.tgz#985655aaa1c733e877e4a73fea976f985a8d4770"
+  dependencies:
+    amp-is-function "^1.0.0"
+    amp-is-object "^1.0.0"
+
+>>>>>>> Upgraded to Node 6
 amp-clone@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amp-clone/-/amp-clone-1.0.1.tgz#d9053062a75a91d871f12daf5a40b4514949a20a"
@@ -137,7 +185,11 @@ amp-clone@^1.0.1:
     amp-is-array "^1.0.0"
     amp-is-object "^1.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 amp-extend@^1.0.0:
+=======
+amp-extend@^1.0.0, amp-extend@^1.0.1:
+>>>>>>> Upgraded to Node 6
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amp-extend/-/amp-extend-1.0.1.tgz#6c543bee629c116b831857642f0ff940a15ae1ff"
   dependencies:
@@ -151,7 +203,11 @@ amp-is-date@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amp-is-date/-/amp-is-date-1.0.1.tgz#bcac2e9b3853b4f415b0d46c3822819cf3e961ce"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 amp-is-function@^1.0.0:
+=======
+amp-is-function@^1.0.0, amp-is-function@^1.0.1:
+>>>>>>> Upgraded to Node 6
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amp-is-function/-/amp-is-function-1.0.1.tgz#8b5412ff5e61d13a94aa449ac01372ad0d2298c0"
 
@@ -159,7 +215,15 @@ amp-is-object@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amp-is-object/-/amp-is-object-1.0.1.tgz#0a8cb5956b9112a16a73677e8cbad37bba247702"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 amp-result@^1.0.0:
+=======
+amp-is-regexp@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/amp-is-regexp/-/amp-is-regexp-1.0.1.tgz#9c9ed8f29361fb5c8358e0c6f00ad3fe8965769b"
+
+amp-result@^1.0.0, amp-result@^1.0.1:
+>>>>>>> Upgraded to Node 6
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/amp-result/-/amp-result-1.1.0.tgz#abcac38062a044d576ab875b45321b113702a424"
   dependencies:
@@ -175,6 +239,7 @@ ampersand-array-checkbox-view@0.0.4:
     ampersand-view "^7.0.0"
     underscore "^1.7.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 ampersand-array-input-view@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/ampersand-array-input-view/-/ampersand-array-input-view-6.1.0.tgz#a8b825735651c8473f54064eb8d9c3d976fd7995"
@@ -183,6 +248,17 @@ ampersand-array-input-view@^6.1.0:
     ampersand-version "^1.0.2"
     ampersand-view "^10.0.1"
     lodash "^4.15.0"
+=======
+ampersand-array-input-view@^3.0.3:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/ampersand-array-input-view/-/ampersand-array-input-view-3.0.4.tgz#1c23c3d1fc46cab893cc658091a648bbbff2f3ec"
+  dependencies:
+    ampersand-input-view "^2.0.0"
+    ampersand-version "^1.0.0"
+    ampersand-view "^7.0.0"
+    lodash.assign "^3.0.0"
+    lodash.without "^3.1.0"
+>>>>>>> Upgraded to Node 6
 
 ampersand-checkbox-view@^2.0.0, ampersand-checkbox-view@^2.0.2:
   version "2.0.2"
@@ -212,12 +288,15 @@ ampersand-class-extend@^1.0.0, ampersand-class-extend@^1.0.2:
   dependencies:
     lodash.assign "^3.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 ampersand-class-extend@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ampersand-class-extend/-/ampersand-class-extend-2.0.0.tgz#52895ffa59217634a6188fd184b1048f5d808aff"
   dependencies:
     lodash "^4.11.1"
 
+=======
+>>>>>>> Upgraded to Node 6
 ampersand-collection-lodash-mixin@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/ampersand-collection-lodash-mixin/-/ampersand-collection-lodash-mixin-2.0.1.tgz#31d85f39b5969ef7c136e0b5035dbed4511cfd70"
@@ -254,6 +333,7 @@ ampersand-collection-lodash-mixin@^2.0.0:
     lodash.take "^3.0.0"
     lodash.without "^3.1.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 ampersand-collection-lodash-mixin@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/ampersand-collection-lodash-mixin/-/ampersand-collection-lodash-mixin-4.0.0.tgz#0ed047a8e73cb070bc36b678a463e382ac8db6dd"
@@ -268,6 +348,15 @@ ampersand-collection-rest-mixin@^6.0.0:
     ampersand-sync "^5.0.0"
     ampersand-version "^1.0.2"
     lodash "^4.11.1"
+=======
+ampersand-collection-rest-mixin@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/ampersand-collection-rest-mixin/-/ampersand-collection-rest-mixin-3.0.1.tgz#3f71bb792a08a5c0ca5ebe8dc7f0043883065f5e"
+  dependencies:
+    ampersand-sync "^2.0.0"
+    ampersand-version "^1.0.0"
+    extend-object "^1.0.0"
+>>>>>>> Upgraded to Node 6
 
 "ampersand-collection-single-request-mixin@https://github.com/franciscocgoncalves/ampersand-collection-single-request-mixin/tarball/master":
   version "0.0.1"
@@ -277,6 +366,16 @@ ampersand-collection-rest-mixin@^6.0.0:
     ampersand-version "^1.0.0"
     lodash.assign "^3.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+ampersand-collection-underscore-mixin@^1.0.0:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/ampersand-collection-underscore-mixin/-/ampersand-collection-underscore-mixin-1.0.4.tgz#3bd4f0a78654e30fe71fa43793f34ee7dae95f67"
+  dependencies:
+    ampersand-version "^1.0.0"
+    underscore "^1.6.0"
+
+>>>>>>> Upgraded to Node 6
 ampersand-collection-view@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/ampersand-collection-view/-/ampersand-collection-view-1.4.0.tgz#f875162c4b7ffd64c55794e062060681d48bc025"
@@ -290,6 +389,7 @@ ampersand-collection-view@^1.4.0:
     lodash.invoke "^3.1.0"
     lodash.pick "^3.1.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 ampersand-collection-view@^2.0.1:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/ampersand-collection-view/-/ampersand-collection-view-2.0.2.tgz#8990bf81b5a35f3ab87eecffafc61bb2fabe356b"
@@ -300,6 +400,9 @@ ampersand-collection-view@^2.0.1:
     lodash "^4.11.1"
 
 ampersand-collection@^1.3.17:
+=======
+ampersand-collection@^1.3.0, ampersand-collection@^1.3.17:
+>>>>>>> Upgraded to Node 6
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/ampersand-collection/-/ampersand-collection-1.6.1.tgz#430f654cf702e19d1dac6cd211755d503172a0c9"
   dependencies:
@@ -310,6 +413,7 @@ ampersand-collection@^1.3.17:
     lodash.bind "^3.1.0"
     lodash.isarray "^3.0.1"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 ampersand-collection@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ampersand-collection/-/ampersand-collection-2.0.0.tgz#e82dcf3e5a5ad0687fbb381cc9335c647ab749bc"
@@ -319,6 +423,8 @@ ampersand-collection@^2.0.0:
     ampersand-version "^1.0.2"
     lodash "^4.11.1"
 
+=======
+>>>>>>> Upgraded to Node 6
 "ampersand-date-view@https://github.com/sinfo/ampersand-date-view/tarball/master":
   version "0.0.7"
   resolved "https://github.com/sinfo/ampersand-date-view/tarball/master#fdf294d7d476d8566f7282a48c8221ab546eea9d"
@@ -330,16 +436,28 @@ ampersand-collection@^2.0.0:
     underscore "^1.6.0"
 
 ampersand-dom-bindings@^3.5.0:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/ampersand-dom-bindings/-/ampersand-dom-bindings-3.8.0.tgz#f29422b80d5fcb5bd3fd2965a15f8ce16f08937b"
+=======
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/ampersand-dom-bindings/-/ampersand-dom-bindings-3.9.1.tgz#61faefb1a7cd29461db22a4574f1f70b92e410ba"
+>>>>>>> Upgraded to Node 6
   dependencies:
     ampersand-dom "^1.2.5"
     ampersand-version "^1.0.0"
     key-tree-store "^1.2.0"
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
     lodash.partial "^3.1.1"
     matches-selector "^1.0.0"
 
 ampersand-dom@^1.1.0, ampersand-dom@^1.2.1, ampersand-dom@^1.2.5, ampersand-dom@^1.2.7, ampersand-dom@^1.5.0:
+=======
+    lodash "^4.17.4"
+    matches-selector "^1.0.0"
+
+ampersand-dom@^1.1.0, ampersand-dom@^1.2.1, ampersand-dom@^1.2.5, ampersand-dom@^1.2.7:
+>>>>>>> Upgraded to Node 6
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/ampersand-dom/-/ampersand-dom-1.5.0.tgz#78e36f8b38aa5700f1a129d3423560a6c0523808"
   dependencies:
@@ -358,6 +476,7 @@ ampersand-events@^1.0.1, ampersand-events@^1.1.1:
     lodash.once "^3.0.0"
     lodash.uniqueid "^3.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 ampersand-events@^2.0.1:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/ampersand-events/-/ampersand-events-2.0.2.tgz#f402bc2e18305fabd995dbdcd3b7057bbdd7d347"
@@ -366,6 +485,9 @@ ampersand-events@^2.0.1:
     lodash "^4.6.1"
 
 ampersand-form-view@^2.2.0:
+=======
+ampersand-form-view@^2.2.0, ampersand-form-view@^2.4.0:
+>>>>>>> Upgraded to Node 6
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/ampersand-form-view/-/ampersand-form-view-2.4.0.tgz#48956e000d752260398548e7c5583a67f8542b2b"
   dependencies:
@@ -375,6 +497,7 @@ ampersand-form-view@^2.2.0:
     ampersand-version "^1.0.0"
     backbone-events-standalone "0.2.2"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 ampersand-form-view@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/ampersand-form-view/-/ampersand-form-view-7.0.0.tgz#63a71ea3fe9acb36a756659b9ed8ac43c33bbee1"
@@ -383,6 +506,8 @@ ampersand-form-view@^7.0.0:
     ampersand-view "^10.0.1"
     lodash "^4.11.1"
 
+=======
+>>>>>>> Upgraded to Node 6
 ampersand-fullcalendar-view@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/ampersand-fullcalendar-view/-/ampersand-fullcalendar-view-0.0.2.tgz#1ed1d8fb3d7d0edf919f8500c87a6cf345dae358"
@@ -398,6 +523,15 @@ ampersand-infinite-scroll@^0.1.0:
     ampersand-view "^8.0.0"
     lodash.assign "^3.2.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+ampersand-input-view@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/ampersand-input-view/-/ampersand-input-view-2.1.0.tgz#2a867eb57ca51d458551a6f3910430398763b5f2"
+  dependencies:
+    ampersand-view "^7.0.0"
+
+>>>>>>> Upgraded to Node 6
 ampersand-input-view@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/ampersand-input-view/-/ampersand-input-view-3.1.1.tgz#3e5e832e7f373ec5e94c43ea5d6d39c6c91d7c5b"
@@ -414,6 +548,7 @@ ampersand-input-view@^4.0.5:
     ampersand-view "^7.2.1"
     matches-selector "^1.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 ampersand-input-view@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/ampersand-input-view/-/ampersand-input-view-7.0.0.tgz#ab1fb6b022531aed455e6071dcffb484988b11bf"
@@ -423,6 +558,8 @@ ampersand-input-view@^7.0.0:
     ampersand-view "^10.0.0"
     matches-selector "^1.0.0"
 
+=======
+>>>>>>> Upgraded to Node 6
 ampersand-io-collection@^0.1.6:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/ampersand-io-collection/-/ampersand-io-collection-0.1.6.tgz#d3b54697b50cea444ba06c7ff3a83261166f6026"
@@ -446,6 +583,7 @@ ampersand-io@^0.4.2:
     ampersand-class-extend "^1.0.2"
     socket.io-client "^1.3.5"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 ampersand-model@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/ampersand-model/-/ampersand-model-8.0.0.tgz#85240edba92ddad46a85db3acc7ae408dccf57c5"
@@ -454,6 +592,16 @@ ampersand-model@^8.0.0:
     ampersand-sync "^5.0.0"
     ampersand-version "^1.0.2"
     lodash "^4.11.1"
+=======
+ampersand-model@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/ampersand-model/-/ampersand-model-4.1.0.tgz#735f99cbd8851f796436f15a92ad6133d9259b19"
+  dependencies:
+    ampersand-state "^4.4.4"
+    ampersand-sync "^2.0.4"
+    ampersand-version "^1.0.0"
+    underscore "^1.6.0"
+>>>>>>> Upgraded to Node 6
 
 ampersand-pagination-mixin@^0.1.0:
   version "0.1.0"
@@ -470,6 +618,7 @@ ampersand-pikaday-view@0.0.1:
     ampersand-view "^7.0.0"
     pikaday "^1.3.1"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 ampersand-rest-collection@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/ampersand-rest-collection/-/ampersand-rest-collection-6.0.0.tgz#a051267979b2cf7606a38383d9ee96d121a628f3"
@@ -487,6 +636,29 @@ ampersand-router@^4.0.0:
     ampersand-events "^2.0.1"
     ampersand-version "^1.0.0"
     lodash "^4.11.1"
+=======
+ampersand-rest-collection@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/ampersand-rest-collection/-/ampersand-rest-collection-2.0.4.tgz#9b63130938d9ede70374c3d53d83d8267d75ea72"
+  dependencies:
+    ampersand-collection "^1.3.0"
+    ampersand-collection-rest-mixin "^3.0.0"
+    ampersand-collection-underscore-mixin "^1.0.0"
+    ampersand-version "^1.0.0"
+
+ampersand-router@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/ampersand-router/-/ampersand-router-1.0.7.tgz#0a91a8e9f49a7088b37a6aa24a9ad1be14509423"
+  dependencies:
+    amp-bind "^1.0.1"
+    amp-extend "^1.0.1"
+    amp-is-function "^1.0.1"
+    amp-is-regexp "^1.0.1"
+    amp-result "^1.0.1"
+    ampersand-class-extend "^1.0.0"
+    ampersand-version "^1.0.0"
+    backbone-events-standalone "0.2.2"
+>>>>>>> Upgraded to Node 6
 
 ampersand-select-view@^2.2.1, "ampersand-select-view@https://github.com/sinfo/ampersand-select-view/tarball/master":
   version "2.3.0"
@@ -498,7 +670,11 @@ ampersand-select-view@^2.2.1, "ampersand-select-view@https://github.com/sinfo/am
     matches-selector "^1.0.0"
     zuul "^1.16.4"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 ampersand-state@^4.5.2, ampersand-state@^4.5.3:
+=======
+ampersand-state@^4.3.15, ampersand-state@^4.4.4, ampersand-state@^4.5.2, ampersand-state@^4.5.3:
+>>>>>>> Upgraded to Node 6
   version "4.9.1"
   resolved "https://registry.yarnpkg.com/ampersand-state/-/ampersand-state-4.9.1.tgz#8ec482e1308ffc4682987287d753ad2d0368ca3e"
   dependencies:
@@ -523,6 +699,7 @@ ampersand-state@^4.5.2, ampersand-state@^4.5.3:
     lodash.union "^3.1.0"
     lodash.uniqueid "^3.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 ampersand-state@^5.0.1, ampersand-state@^5.0.2:
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/ampersand-state/-/ampersand-state-5.0.2.tgz#16830def866c644ecd21da8c8ba8717aa2b8d23c"
@@ -534,6 +711,9 @@ ampersand-state@^5.0.1, ampersand-state@^5.0.2:
     lodash "^4.11.1"
 
 ampersand-subcollection@^2.0.3:
+=======
+ampersand-subcollection@^2.0.1:
+>>>>>>> Upgraded to Node 6
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/ampersand-subcollection/-/ampersand-subcollection-2.0.3.tgz#a36476fbbbf6be5f38fdf8fd6b62c50f36078641"
   dependencies:
@@ -552,6 +732,7 @@ ampersand-subcollection@^2.0.3:
     lodash.sortby "^3.1.0"
     lodash.union "^3.1.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 ampersand-sync@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/ampersand-sync/-/ampersand-sync-5.0.0.tgz#9db4ee313f289f98522279a9a66d6cae2c7777b1"
@@ -562,6 +743,15 @@ ampersand-sync@^5.0.0:
     qs "^6.1.0"
     request "^2.55.0"
     xhr "^2.0.5"
+=======
+ampersand-sync@^2.0.0, ampersand-sync@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/ampersand-sync/-/ampersand-sync-2.0.4.tgz#3b4144885c85132ab51f4fd1d0239fd9e9cbe00c"
+  dependencies:
+    qs "^1.2.1"
+    underscore "~1.6.0"
+    xhr "^1.10.0"
+>>>>>>> Upgraded to Node 6
 
 ampersand-version@^1.0.0, ampersand-version@^1.0.1, ampersand-version@^1.0.2:
   version "1.0.2"
@@ -570,6 +760,7 @@ ampersand-version@^1.0.0, ampersand-version@^1.0.1, ampersand-version@^1.0.2:
     find-root "^0.1.1"
     through2 "^0.6.3"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 ampersand-view-switcher@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/ampersand-view-switcher/-/ampersand-view-switcher-2.1.0.tgz#e2375b5252f3127d5bc6ddda82c0c12ef3da2206"
@@ -591,6 +782,15 @@ ampersand-view@^10.0.0, ampersand-view@^10.0.1:
     matches-selector "^1.0.0"
 
 ampersand-view@^7.0.0, ampersand-view@^7.2.0, ampersand-view@^7.2.1:
+=======
+ampersand-view-switcher@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/ampersand-view-switcher/-/ampersand-view-switcher-1.1.2.tgz#393db617a4193832bbc94437f1c696e8356e6885"
+  dependencies:
+    ampersand-version "^1.0.0"
+
+ampersand-view@^7.0.0, ampersand-view@^7.2.0, ampersand-view@^7.2.1, ampersand-view@^7.4.2:
+>>>>>>> Upgraded to Node 6
   version "7.4.2"
   resolved "https://registry.yarnpkg.com/ampersand-view/-/ampersand-view-7.4.2.tgz#160cb5f81c89feae82bc6a3e0e61c365061a04c2"
   dependencies:
@@ -647,8 +847,13 @@ ansi-escapes@^1.1.0:
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-1.4.0.tgz#d3a8a83b319aa67793662b13e761c7911422306e"
 
 ansi-regex@^2.0.0:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-2.0.0.tgz#c5061b6e0ef8a81775e50f5d66151bf6bf371107"
+=======
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-2.1.1.tgz#c3b33ab5ee360d86e0e628f0468ae7ef27d654df"
+>>>>>>> Upgraded to Node 6
 
 ansi-styles@^2.2.1:
   version "2.2.1"
@@ -662,8 +867,13 @@ anymatch@^1.3.0:
     micromatch "^2.1.5"
 
 aproba@^1.0.3:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.0.4.tgz#2713680775e7614c8ba186c065d4e2e52d1072c0"
+=======
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.1.1.tgz#95d3600f07710aa0e9298c726ad5ecf2eacbabab"
+>>>>>>> Upgraded to Node 6
 
 archiver@0.10.x:
   version "0.10.1"
@@ -777,8 +987,13 @@ asap@~1.0.0:
   resolved "https://registry.yarnpkg.com/asap/-/asap-1.0.0.tgz#b2a45da5fdfa20b0496fc3768cc27c12fa916a7d"
 
 asn1.js@^4.0.0:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "4.9.0"
   resolved "https://registry.yarnpkg.com/asn1.js/-/asn1.js-4.9.0.tgz#f71a1243f3e79d46d7b07d7fbf4824ee73af054a"
+=======
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/asn1.js/-/asn1.js-4.9.1.tgz#48ba240b45a9280e94748990ba597d216617fd40"
+>>>>>>> Upgraded to Node 6
   dependencies:
     bn.js "^4.0.0"
     inherits "^2.0.1"
@@ -804,12 +1019,15 @@ assert-plus@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/assert-plus/-/assert-plus-1.0.0.tgz#f12e0f3c5d77b0b1cdd9146942e4e96c1e4dd525"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 assert@^1.4.0:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/assert/-/assert-1.4.1.tgz#99912d591836b5a6f5b345c0f07eefc08fc65d91"
   dependencies:
     util "0.10.3"
 
+=======
+>>>>>>> Upgraded to Node 6
 assert@~1.1.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/assert/-/assert-1.1.2.tgz#adaa04c46bb58c6dd1f294da3eb26e6228eb6e44"
@@ -827,8 +1045,13 @@ async-each@^1.0.0:
   resolved "https://registry.yarnpkg.com/async-each/-/async-each-1.0.1.tgz#19d386a1d9edc6e7c1c85d388aedbcc56d33602d"
 
 async@0.9.x, async@~0.9.0:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/async/-/async-0.9.0.tgz#ac3613b1da9bed1b47510bb4651b8931e47146c7"
+=======
+  version "0.9.2"
+  resolved "https://registry.yarnpkg.com/async/-/async-0.9.2.tgz#aea74d5e61c1f899613bf64bda66d4c78f2fd17d"
+>>>>>>> Upgraded to Node 6
 
 async@2.1.4:
   version "2.1.4"
@@ -840,7 +1063,15 @@ async@^0.2.10, async@~0.2.6, async@~0.2.7, async@~0.2.9:
   version "0.2.10"
   resolved "https://registry.yarnpkg.com/async/-/async-0.2.10.tgz#b6bbe0b0674b9d719708ca38de8c237cb526c3d1"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 async@^1.4.0, async@^1.5.2:
+=======
+async@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/async/-/async-0.7.0.tgz#4429e0e62f5de0a54f37458c49f0b897eb52ada5"
+
+async@^1.4.0:
+>>>>>>> Upgraded to Node 6
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
 
@@ -857,8 +1088,13 @@ aws-sign2@~0.6.0:
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.6.0.tgz#14342dd38dbcc94d0e5b87d763cd63612c0e794f"
 
 aws4@^1.2.1:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.5.0.tgz#0a29ffb79c31c9e712eeb087e8e7a64b4a56d755"
+=======
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
+>>>>>>> Upgraded to Node 6
 
 b64@3.x.x:
   version "3.0.2"
@@ -888,6 +1124,7 @@ base64-arraybuffer@0.1.5:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/base64-arraybuffer/-/base64-arraybuffer-0.1.5.tgz#73926771923b5a19747ad666aa5cd4bf9c6e9ce8"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 base64-js@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-0.0.7.tgz#54400dc91d696cec32a8a47902f971522fee8f48"
@@ -896,6 +1133,12 @@ base64-js@^1.0.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.2.0.tgz#a39992d723584811982be5e290bb6a53d86700f1"
 
+=======
+base64-js@0.0.7, base64-js@~0.0.4:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-0.0.7.tgz#54400dc91d696cec32a8a47902f971522fee8f48"
+
+>>>>>>> Upgraded to Node 6
 base64id@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/base64id/-/base64id-1.0.0.tgz#47688cb99bb6804f0e06d3e763b1c32e57d8e6b6"
@@ -905,8 +1148,13 @@ batch@0.5.0:
   resolved "https://registry.yarnpkg.com/batch/-/batch-0.5.0.tgz#fd2e05a7a5d696b4db9314013e285d8ff3557ec3"
 
 bcrypt-pbkdf@^1.0.0:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/bcrypt-pbkdf/-/bcrypt-pbkdf-1.0.0.tgz#3ca76b85241c7170bf7d9703e7b9aa74630040d4"
+=======
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/bcrypt-pbkdf/-/bcrypt-pbkdf-1.0.1.tgz#63bc5dcb61331b92bc05fd528953c33462a06f8d"
+>>>>>>> Upgraded to Node 6
   dependencies:
     tweetnacl "^0.14.3"
 
@@ -1029,8 +1277,13 @@ braces@^1.8.2:
     repeat-element "^1.1.2"
 
 brorand@^1.0.1:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.0.6.tgz#4028706b915f91f7b349a2e0bf3c376039d216e5"
+=======
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.0.7.tgz#6677fa5e4901bdbf9c9ec2a748e28dca407a9bfc"
+>>>>>>> Upgraded to Node 6
 
 browser-pack@^3.2.0:
   version "3.2.0"
@@ -1043,6 +1296,7 @@ browser-pack@^3.2.0:
     through2 "~0.5.1"
     umd "^2.1.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 browser-pack@^6.0.1:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/browser-pack/-/browser-pack-6.0.2.tgz#f86cd6cef4f5300c8e63e07a4d512f65fbff4531"
@@ -1054,11 +1308,31 @@ browser-pack@^6.0.1:
     umd "^3.0.0"
 
 browser-resolve@^1.11.0, browser-resolve@^1.3.0, browser-resolve@^1.7.0:
+=======
+browser-pack@~2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/browser-pack/-/browser-pack-2.0.1.tgz#5d1c527f56c582677411c4db2a128648ff6bf150"
+  dependencies:
+    JSONStream "~0.6.4"
+    combine-source-map "~0.3.0"
+    through "~2.3.4"
+
+browser-resolve@^1.3.0, browser-resolve@^1.7.0:
+>>>>>>> Upgraded to Node 6
   version "1.11.2"
   resolved "https://registry.yarnpkg.com/browser-resolve/-/browser-resolve-1.11.2.tgz#8ff09b0a2c421718a1051c260b32e48f442938ce"
   dependencies:
     resolve "1.1.7"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+browser-resolve@~1.2.2, browser-resolve@~1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/browser-resolve/-/browser-resolve-1.2.4.tgz#59ae7820a82955ecd32f5fb7c468ac21c4723806"
+  dependencies:
+    resolve "0.6.3"
+
+>>>>>>> Upgraded to Node 6
 browserify-aes@^1.0.0, browserify-aes@^1.0.4:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/browserify-aes/-/browserify-aes-1.0.6.tgz#5e7725dbdef1fd5930d4ebab48567ce451c48a0a"
@@ -1101,8 +1375,13 @@ browserify-rsa@^4.0.0:
     randombytes "^2.0.1"
 
 browserify-shim@^3.8.2:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "3.8.12"
   resolved "https://registry.yarnpkg.com/browserify-shim/-/browserify-shim-3.8.12.tgz#e2c97a134c5eb122e2bb4f61707a07f6f73ff092"
+=======
+  version "3.8.13"
+  resolved "https://registry.yarnpkg.com/browserify-shim/-/browserify-shim-3.8.13.tgz#701e5744f1c4a9d62576d61cf304ed97c7289319"
+>>>>>>> Upgraded to Node 6
   dependencies:
     exposify "~0.4.3"
     mothership "~0.2.0"
@@ -1182,6 +1461,7 @@ browserify@6.3.3:
     vm-browserify "~0.0.1"
     xtend "^3.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 browserify@^13.0.0:
   version "13.3.0"
   resolved "https://registry.yarnpkg.com/browserify/-/browserify-13.3.0.tgz#b5a9c9020243f0c70e4675bec8223bc627e415ce"
@@ -1233,6 +1513,60 @@ browserify@^13.0.0:
     util "~0.10.1"
     vm-browserify "~0.0.1"
     xtend "^4.0.0"
+=======
+browserify@^4.2.1:
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/browserify/-/browserify-4.2.3.tgz#0e0d8f98e6df6a664aa2c055120f3848246ee4d0"
+  dependencies:
+    JSONStream "~0.8.3"
+    assert "~1.1.0"
+    browser-pack "~2.0.0"
+    browser-resolve "^1.3.0"
+    browserify-zlib "~0.1.2"
+    buffer "^2.3.0"
+    builtins "~0.0.3"
+    commondir "0.0.1"
+    concat-stream "~1.4.1"
+    console-browserify "^1.1.0"
+    constants-browserify "~0.0.1"
+    crypto-browserify "^2.1.8"
+    deep-equal "~0.2.1"
+    defined "~0.0.0"
+    deps-sort "~0.1.1"
+    derequire "~0.8.0"
+    domain-browser "~1.1.0"
+    duplexer "~0.1.1"
+    events "~1.0.0"
+    glob "~3.2.8"
+    http-browserify "^1.4.0"
+    https-browserify "~0.0.0"
+    inherits "~2.0.1"
+    insert-module-globals "~6.0.0"
+    module-deps "~2.1.1"
+    os-browserify "~0.1.1"
+    parents "~0.0.1"
+    path-browserify "~0.0.0"
+    process "^0.7.0"
+    punycode "~1.2.3"
+    querystring-es3 "~0.2.0"
+    readable-stream "^1.0.27-1"
+    resolve "~0.7.1"
+    shallow-copy "0.0.1"
+    shell-quote "~0.0.1"
+    stream-browserify "^1.0.0"
+    stream-combiner "~0.0.2"
+    string_decoder "~0.0.0"
+    subarg "0.0.1"
+    syntax-error "^1.1.1"
+    through2 "^1.0.0"
+    timers-browserify "^1.0.1"
+    tty-browserify "~0.0.0"
+    umd "~2.1.0"
+    url "~0.10.1"
+    util "~0.10.1"
+    vm-browserify "~0.0.1"
+    xtend "^3.0.0"
+>>>>>>> Upgraded to Node 6
 
 bson@~1.0.4:
   version "1.0.4"
@@ -1258,6 +1592,7 @@ buffer@^2.3.0:
     ieee754 "^1.1.4"
     is-array "^1.0.1"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 buffer@^4.1.0:
   version "4.9.1"
   resolved "https://registry.yarnpkg.com/buffer/-/buffer-4.9.1.tgz#6d1bb601b07a4efced97094132093027c95bc298"
@@ -1265,6 +1600,14 @@ buffer@^4.1.0:
     base64-js "^1.0.2"
     ieee754 "^1.1.4"
     isarray "^1.0.0"
+=======
+buffer@~2.3.2:
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/buffer/-/buffer-2.3.4.tgz#7e4af5a23c15e13fcbfd5c5a1ec974cb61668a4c"
+  dependencies:
+    base64-js "~0.0.4"
+    ieee754 "~1.1.1"
+>>>>>>> Upgraded to Node 6
 
 bufferjs@=1.1.0:
   version "1.1.0"
@@ -1286,10 +1629,13 @@ bufferjs@=1.1.0:
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/buffertools/-/buffertools-2.1.4.tgz#62d4e1584c0090a0c7d3587f25934a84b8b38de4"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
 
+=======
+>>>>>>> Upgraded to Node 6
 builtins@~0.0.3:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/builtins/-/builtins-0.0.7.tgz#355219cd6cf18dbe7c01cc7fd2dce765cfdc549a"
@@ -1326,10 +1672,13 @@ bytes@1, bytes@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-1.0.0.tgz#3569ede8ba34315fab99c3e92cb04c7220de1fa8"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 cached-path-relative@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/cached-path-relative/-/cached-path-relative-1.0.0.tgz#d1094c577fbd9a8b8bd43c96af6188aa205d05f4"
 
+=======
+>>>>>>> Upgraded to Node 6
 call-me-maybe@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/call-me-maybe/-/call-me-maybe-1.0.1.tgz#26d208ea89e37b5cbde60250a15f031c16a4d66b"
@@ -1429,13 +1778,22 @@ cipher-base@^1.0.0, cipher-base@^1.0.1:
   dependencies:
     inherits "^2.0.1"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 circular-json@^0.3.0:
+=======
+circular-json@^0.3.1:
+>>>>>>> Upgraded to Node 6
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/circular-json/-/circular-json-0.3.1.tgz#be8b36aefccde8b3ca7aa2d6afc07a37242c0d2d"
 
 clean-css@^3.1.9:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "3.4.21"
   resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-3.4.21.tgz#2101d5dbd19d63dbc16a75ebd570e7c33948f65b"
+=======
+  version "3.4.24"
+  resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-3.4.24.tgz#89f5a5e9da37ae02394fe049a41388abbe72c3b5"
+>>>>>>> Upgraded to Node 6
   dependencies:
     commander "2.8.x"
     source-map "0.4.x"
@@ -1499,6 +1857,7 @@ combine-source-map@~0.6.1:
     lodash.memoize "~3.0.3"
     source-map "~0.4.2"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 combine-source-map@~0.7.1:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/combine-source-map/-/combine-source-map-0.7.2.tgz#0870312856b307a87cc4ac486f3a9a62aeccc09e"
@@ -1508,6 +1867,8 @@ combine-source-map@~0.7.1:
     lodash.memoize "~3.0.3"
     source-map "~0.5.3"
 
+=======
+>>>>>>> Upgraded to Node 6
 combined-stream@^1.0.5, combined-stream@~1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.5.tgz#938370a57b4a51dea2c77c15d5c5fdf895164009"
@@ -1592,6 +1953,7 @@ concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 concat-stream@^1.4.6, concat-stream@^1.4.7, concat-stream@^1.5.0, concat-stream@~1.5.0, concat-stream@~1.5.1:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/concat-stream/-/concat-stream-1.5.2.tgz#708978624d856af41a5a741defdd261da752c266"
@@ -1599,6 +1961,15 @@ concat-stream@^1.4.6, concat-stream@^1.4.7, concat-stream@^1.5.0, concat-stream@
     inherits "~2.0.1"
     readable-stream "~2.0.0"
     typedarray "~0.0.5"
+=======
+concat-stream@^1.4.6, concat-stream@^1.4.7, concat-stream@^1.5.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/concat-stream/-/concat-stream-1.6.0.tgz#0aac662fd52be78964d5532f694784e70110acf7"
+  dependencies:
+    inherits "^2.0.3"
+    readable-stream "^2.2.2"
+    typedarray "^0.0.6"
+>>>>>>> Upgraded to Node 6
 
 concat-stream@~1.4.1, concat-stream@~1.4.5:
   version "1.4.10"
@@ -1661,6 +2032,7 @@ constants-browserify@~0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/constants-browserify/-/constants-browserify-0.0.1.tgz#92577db527ba6c4cf0a4568d84bc031f441e21f2"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 constants-browserify@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/constants-browserify/-/constants-browserify-1.0.0.tgz#c20b96d8c617748aaf1c16021760cd27fcb8cb75"
@@ -1668,6 +2040,11 @@ constants-browserify@~1.0.0:
 content-disposition@0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/content-disposition/-/content-disposition-0.5.1.tgz#87476c6a67c8daa87e32e87616df883ba7fb071b"
+=======
+content-disposition@0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/content-disposition/-/content-disposition-0.5.2.tgz#0cf68bb9ddf5f2be7961c3a85178cb85dba78cb4"
+>>>>>>> Upgraded to Node 6
 
 content-type@~1.0.2:
   version "1.0.2"
@@ -1788,6 +2165,16 @@ cryptiles@3.x.x:
   dependencies:
     boom "4.x.x"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+crypto-browserify@^2.1.8:
+  version "2.1.10"
+  resolved "https://registry.yarnpkg.com/crypto-browserify/-/crypto-browserify-2.1.10.tgz#4f2ca6311843cf087cdf008e43a4f3686ef6e6bb"
+  dependencies:
+    ripemd160 "0.2.0"
+    sha.js "2.1.6"
+
+>>>>>>> Upgraded to Node 6
 crypto-browserify@^3.0.0:
   version "3.11.0"
   resolved "https://registry.yarnpkg.com/crypto-browserify/-/crypto-browserify-3.11.0.tgz#3652a0906ab9b2a7e0c3ce66a408e957a2485522"
@@ -1826,7 +2213,11 @@ cssesc@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/cssesc/-/cssesc-0.1.0.tgz#c814903e45623371a0477b40109aaafbeeaddbb4"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 cssmin@^0.4.3:
+=======
+cssmin@^0.4.1:
+>>>>>>> Upgraded to Node 6
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/cssmin/-/cssmin-0.4.3.tgz#c9194077e0ebdacd691d5f59015b9d819f38d015"
 
@@ -1979,6 +2370,7 @@ deps-sort@^1.3.5:
     subarg "^1.0.0"
     through2 "^1.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 deps-sort@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/deps-sort/-/deps-sort-2.0.0.tgz#091724902e84658260eb910748cccd1af6e21fb5"
@@ -1987,6 +2379,23 @@ deps-sort@^2.0.0:
     shasum "^1.0.0"
     subarg "^1.0.0"
     through2 "^2.0.0"
+=======
+deps-sort@~0.1.1:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/deps-sort/-/deps-sort-0.1.2.tgz#daa2fb614a17c9637d801e2f55339ae370f3611a"
+  dependencies:
+    JSONStream "~0.6.4"
+    minimist "~0.0.1"
+    through "~2.3.4"
+
+derequire@~0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/derequire/-/derequire-0.8.0.tgz#c1f7f1da2cede44adede047378f03f444e9c4c0d"
+  dependencies:
+    esprima-fb "^3001.1.0-dev-harmony-fb"
+    esrefactor "~0.1.0"
+    estraverse "~1.5.0"
+>>>>>>> Upgraded to Node 6
 
 des.js@^1.0.0:
   version "1.0.0"
@@ -1999,6 +2408,7 @@ destroy@~1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/destroy/-/destroy-1.0.4.tgz#978857442c44749e4206613e37946205826abd80"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 detective@^4.0.0, detective@~4.1.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/detective/-/detective-4.1.1.tgz#9c4bac1e9fb8bb34f7f18cae080ea1d03aff2cda"
@@ -2006,6 +2416,14 @@ detective@^4.0.0, detective@~4.1.0:
     acorn "^1.0.3"
     defined "^1.0.0"
     escodegen "^1.4.1"
+=======
+detective@^4.0.0:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/detective/-/detective-4.3.2.tgz#77697e2e7947ac3fe7c8e26a6d6f115235afa91c"
+  dependencies:
+    acorn "^3.1.0"
+    defined "^1.0.0"
+>>>>>>> Upgraded to Node 6
 
 detective@~3.1.0:
   version "3.1.0"
@@ -2014,6 +2432,17 @@ detective@~3.1.0:
     escodegen "~1.1.0"
     esprima-fb "3001.1.0-dev-harmony-fb"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+detective@~4.1.0:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/detective/-/detective-4.1.1.tgz#9c4bac1e9fb8bb34f7f18cae080ea1d03aff2cda"
+  dependencies:
+    acorn "^1.0.3"
+    defined "^1.0.0"
+    escodegen "^1.4.1"
+
+>>>>>>> Upgraded to Node 6
 diff@3.x.x:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/diff/-/diff-3.2.0.tgz#c9ce393a4b7cbd0b058a725c93df299027868ff9"
@@ -2076,12 +2505,15 @@ duplexer2@0.0.2, duplexer2@~0.0.2:
   dependencies:
     readable-stream "~1.1.9"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 duplexer2@^0.1.2, duplexer2@~0.1.0, duplexer2@~0.1.2:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/duplexer2/-/duplexer2-0.1.4.tgz#8b12dab878c0d69e3e7891051662a32fc6bddcc1"
   dependencies:
     readable-stream "^2.0.2"
 
+=======
+>>>>>>> Upgraded to Node 6
 duplexer@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/duplexer/-/duplexer-0.1.1.tgz#ace6ff808c1ce66b57d1ebf97977acb02334cfc1"
@@ -2110,8 +2542,13 @@ ee-first@1.1.1:
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
 elliptic@^6.0.0:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "6.3.2"
   resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.3.2.tgz#e4c81e0829cf0a65ab70e998b8232723b5c1bc48"
+=======
+  version "6.3.3"
+  resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.3.3.tgz#5482d9646d54bcb89fd7d994fc9e2e9568876e3f"
+>>>>>>> Upgraded to Node 6
   dependencies:
     bn.js "^4.4.0"
     brorand "^1.0.1"
@@ -2143,12 +2580,25 @@ encoding@~0.1, encoding@~0.1.7:
   dependencies:
     iconv-lite "~0.4.13"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 end-of-stream@1.0.0, end-of-stream@^1.0.0:
+=======
+end-of-stream@1.0.0:
+>>>>>>> Upgraded to Node 6
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/end-of-stream/-/end-of-stream-1.0.0.tgz#d4596e702734a93e40e9af864319eabd99ff2f0e"
   dependencies:
     once "~1.3.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+end-of-stream@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/end-of-stream/-/end-of-stream-1.1.0.tgz#e9353258baa9108965efc41cb0ef8ade2f3cfb07"
+  dependencies:
+    once "~1.3.0"
+
+>>>>>>> Upgraded to Node 6
 engine.io-client@1.8.2:
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/engine.io-client/-/engine.io-client-1.8.2.tgz#c38767547f2a7d184f5752f6f0ad501006703766"
@@ -2296,6 +2746,15 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+escope@~0.0.13:
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/escope/-/escope-0.0.16.tgz#418c7a0afca721dafe659193fd986283e746538f"
+  dependencies:
+    estraverse ">= 0.0.2"
+
+>>>>>>> Upgraded to Node 6
 eslint-config-hapi@10.x.x:
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/eslint-config-hapi/-/eslint-config-hapi-10.0.0.tgz#9980affd76103ebc1fec92b45638345db19348f5"
@@ -2318,8 +2777,13 @@ eslint-plugin-hapi@4.x.x:
     no-arrowception "1.x.x"
 
 eslint-plugin-promise@~3.4.0:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-promise/-/eslint-plugin-promise-3.4.0.tgz#6ba9048c2df57be77d036e0c68918bc9b4fc4195"
+=======
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-promise/-/eslint-plugin-promise-3.4.1.tgz#6911a9010bf84e17d82e19e0ab0f80ab3ad6db4c"
+>>>>>>> Upgraded to Node 6
 
 eslint-plugin-react@~6.7.1:
   version "6.7.1"
@@ -2410,6 +2874,7 @@ eslint@~3.10.2:
     text-table "~0.2.0"
     user-home "^2.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 espree@3.x.x:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/espree/-/espree-3.1.4.tgz#0726d7ac83af97a7c8498da9b363a3609d2a68a1"
@@ -2425,6 +2890,16 @@ espree@^3.3.1:
     acorn-jsx "^3.0.0"
 
 esprima-fb@3001.1.0-dev-harmony-fb:
+=======
+espree@3.x.x, espree@^3.3.1:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/espree/-/espree-3.4.0.tgz#41656fa5628e042878025ef467e78f125cb86e1d"
+  dependencies:
+    acorn "4.0.4"
+    acorn-jsx "^3.0.0"
+
+esprima-fb@3001.1.0-dev-harmony-fb, esprima-fb@^3001.1.0-dev-harmony-fb:
+>>>>>>> Upgraded to Node 6
   version "3001.1.0-dev-harmony-fb"
   resolved "https://registry.yarnpkg.com/esprima-fb/-/esprima-fb-3001.0001.0000-dev-harmony-fb.tgz#b77d37abcd38ea0b77426bb8bc2922ce6b426411"
 
@@ -2432,11 +2907,23 @@ esprima@1.2.x, esprima@^1.2.2:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/esprima/-/esprima-1.2.5.tgz#0993502feaf668138325756f30f9a51feeec11e9"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 esprima@^2.5.0, esprima@^2.6.0:
   version "2.7.3"
   resolved "https://registry.yarnpkg.com/esprima/-/esprima-2.7.3.tgz#96e3b70d5779f6ad49cd032673d1c312767ba581"
 
 esprima@~1.0.4:
+=======
+esprima@^2.5.0:
+  version "2.7.3"
+  resolved "https://registry.yarnpkg.com/esprima/-/esprima-2.7.3.tgz#96e3b70d5779f6ad49cd032673d1c312767ba581"
+
+esprima@^3.1.1:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/esprima/-/esprima-3.1.3.tgz#fdca51cee6133895e3c88d535ce49dbff62a4633"
+
+esprima@~1.0.2, esprima@~1.0.4:
+>>>>>>> Upgraded to Node 6
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/esprima/-/esprima-1.0.4.tgz#9f557e08fc3b4d26ece9dd34f8fbf476b62585ad"
 
@@ -2451,13 +2938,34 @@ esrecurse@^4.1.0:
     estraverse "~4.1.0"
     object-assign "^4.0.1"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+esrefactor@~0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/esrefactor/-/esrefactor-0.1.0.tgz#d142795a282339ab81e936b5b7a21b11bf197b13"
+  dependencies:
+    escope "~0.0.13"
+    esprima "~1.0.2"
+    estraverse "~0.0.4"
+
+"estraverse@>= 0.0.2", estraverse@^4.1.1, estraverse@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-4.2.0.tgz#0dee3fed31fcd469618ce7342099fc1afa0bdb13"
+
+>>>>>>> Upgraded to Node 6
 estraverse@^1.9.1:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-1.9.3.tgz#af67f2dc922582415950926091a4005d29c9bb44"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 estraverse@^4.1.1, estraverse@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-4.2.0.tgz#0dee3fed31fcd469618ce7342099fc1afa0bdb13"
+=======
+estraverse@~0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-0.0.4.tgz#01a0932dfee574684a598af5a67c3bf9b6428db2"
+>>>>>>> Upgraded to Node 6
 
 estraverse@~1.5.0:
   version "1.5.1"
@@ -2513,10 +3021,13 @@ events@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/events/-/events-1.0.2.tgz#75849dcfe93d10fb057c30055afdbd51d06a8e24"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 events@~1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/events/-/events-1.1.1.tgz#9ebdb7635ad099c70dcc4c2a1f5004288e8bd924"
 
+=======
+>>>>>>> Upgraded to Node 6
 evp_bytestokey@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/evp_bytestokey/-/evp_bytestokey-1.0.0.tgz#497b66ad9fef65cd7c08a6180824ba1476b66e53"
@@ -2572,12 +3083,21 @@ express@3.4.8:
     send "0.1.4"
 
 express@4.x:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "4.14.0"
   resolved "https://registry.yarnpkg.com/express/-/express-4.14.0.tgz#c1ee3f42cdc891fb3dc650a8922d51ec847d0d66"
   dependencies:
     accepts "~1.3.3"
     array-flatten "1.1.1"
     content-disposition "0.5.1"
+=======
+  version "4.14.1"
+  resolved "https://registry.yarnpkg.com/express/-/express-4.14.1.tgz#646c237f766f148c2120aff073817b9e4d7e0d33"
+  dependencies:
+    accepts "~1.3.3"
+    array-flatten "1.1.1"
+    content-disposition "0.5.2"
+>>>>>>> Upgraded to Node 6
     content-type "~1.0.2"
     cookie "0.3.1"
     cookie-signature "1.0.6"
@@ -2586,19 +3106,32 @@ express@4.x:
     encodeurl "~1.0.1"
     escape-html "~1.0.3"
     etag "~1.7.0"
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
     finalhandler "0.5.0"
+=======
+    finalhandler "0.5.1"
+>>>>>>> Upgraded to Node 6
     fresh "0.3.0"
     merge-descriptors "1.0.1"
     methods "~1.1.2"
     on-finished "~2.3.0"
     parseurl "~1.3.1"
     path-to-regexp "0.1.7"
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
     proxy-addr "~1.1.2"
     qs "6.2.0"
     range-parser "~1.2.0"
     send "0.14.1"
     serve-static "~1.11.1"
     type-is "~1.6.13"
+=======
+    proxy-addr "~1.1.3"
+    qs "6.2.0"
+    range-parser "~1.2.0"
+    send "0.14.2"
+    serve-static "~1.11.2"
+    type-is "~1.6.14"
+>>>>>>> Upgraded to Node 6
     utils-merge "1.0.0"
     vary "~1.1.0"
 
@@ -2634,8 +3167,13 @@ fast-levenshtein@~1.0.0:
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-1.0.7.tgz#0178dcdee023b92905193af0959e8a7639cfdcb9"
 
 fast-levenshtein@~2.0.4:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.5.tgz#bd33145744519ab1c36c3ee9f31f08e9079b67f2"
+=======
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
+>>>>>>> Upgraded to Node 6
 
 favicon-setter@^0.1.1:
   version "0.1.1"
@@ -2706,14 +3244,24 @@ fill-range@^2.1.0:
     repeat-element "^1.1.2"
     repeat-string "^1.5.2"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 finalhandler@0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/finalhandler/-/finalhandler-0.5.0.tgz#e9508abece9b6dba871a6942a1d7911b91911ac7"
+=======
+finalhandler@0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/finalhandler/-/finalhandler-0.5.1.tgz#2c400d8d4530935bc232549c5fa385ec07de6fcd"
+>>>>>>> Upgraded to Node 6
   dependencies:
     debug "~2.2.0"
     escape-html "~1.0.3"
     on-finished "~2.3.0"
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
     statuses "~1.3.0"
+=======
+    statuses "~1.3.1"
+>>>>>>> Upgraded to Node 6
     unpipe "~1.0.0"
 
 find-nearest-file@1.0.0:
@@ -2763,10 +3311,17 @@ firefox-profile@0.2.7:
     xml2js "~0.4.0"
 
 flat-cache@^1.2.1:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-1.2.1.tgz#6c837d6225a7de5659323740b36d5361f71691ff"
   dependencies:
     circular-json "^0.3.0"
+=======
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-1.2.2.tgz#fa86714e72c21db88601761ecf2f555d1abc6b96"
+  dependencies:
+    circular-json "^0.3.1"
+>>>>>>> Upgraded to Node 6
     del "^2.0.2"
     graceful-fs "^4.1.2"
     write "^0.2.1"
@@ -2873,8 +3428,13 @@ fs.realpath@^1.0.0:
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
 
 fsevents@^1.0.0:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "1.0.15"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-1.0.15.tgz#fa63f590f3c2ad91275e4972a6cea545fb0aae44"
+=======
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-1.0.17.tgz#8537f3f12272678765b4fd6528c0f1f66f8f4558"
+>>>>>>> Upgraded to Node 6
   dependencies:
     nan "^2.3.0"
     node-pre-gyp "^0.6.29"
@@ -2896,6 +3456,7 @@ fstream@^1.0.0, fstream@^1.0.2, fstream@~1.0.10:
     mkdirp ">=0.5 0"
     rimraf "2"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 function-bind@^1.0.2:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.0.tgz#16176714c801798e4e8f2cf7f7529467bb4a5771"
@@ -2903,6 +3464,11 @@ function-bind@^1.0.2:
 gauge@~2.7.1:
   version "2.7.2"
   resolved "https://registry.yarnpkg.com/gauge/-/gauge-2.7.2.tgz#15cecc31b02d05345a5d6b0e171cdb3ad2307774"
+=======
+gauge@~2.7.1:
+  version "2.7.3"
+  resolved "https://registry.yarnpkg.com/gauge/-/gauge-2.7.3.tgz#1c23855f962f17b3ad3d0dc7443f304542edfe09"
+>>>>>>> Upgraded to Node 6
   dependencies:
     aproba "^1.0.3"
     console-control-strings "^1.0.0"
@@ -2911,7 +3477,10 @@ gauge@~2.7.1:
     signal-exit "^3.0.0"
     string-width "^1.0.1"
     strip-ansi "^3.0.1"
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
     supports-color "^0.2.0"
+=======
+>>>>>>> Upgraded to Node 6
     wide-align "^1.1.0"
 
 gaze@~1.1.1:
@@ -2957,14 +3526,22 @@ glob-parent@^2.0.0:
   dependencies:
     is-glob "^2.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 glob@3.x, glob@~3.2.6, glob@~3.2.9:
+=======
+glob@3.x, glob@~3.2.6, glob@~3.2.8, glob@~3.2.9:
+>>>>>>> Upgraded to Node 6
   version "3.2.11"
   resolved "https://registry.yarnpkg.com/glob/-/glob-3.2.11.tgz#4a973f635b9190f715d10987d5c00fd2815ebe3d"
   dependencies:
     inherits "2"
     minimatch "0.3"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 glob@7.0.x, glob@^7.0.3:
+=======
+glob@7.0.x:
+>>>>>>> Upgraded to Node 6
   version "7.0.6"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.0.6.tgz#211bafaf49e525b8cd93260d14ab136152b3f57a"
   dependencies:
@@ -3004,7 +3581,11 @@ glob@^6.0.1:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 glob@^7.0.0, glob@^7.0.5, glob@^7.1.0, glob@~7.1.1:
+=======
+glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@~7.1.1:
+>>>>>>> Upgraded to Node 6
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.1.tgz#805211df04faaf1c63a3600306cdf5ade50b2ec8"
   dependencies:
@@ -3100,7 +3681,11 @@ graceful-fs@^3.0.2:
   dependencies:
     natives "^1.1.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 graceful-fs@^4.1.2:
+=======
+graceful-fs@^4.1.11, graceful-fs@^4.1.2:
+>>>>>>> Upgraded to Node 6
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
@@ -3231,12 +3816,15 @@ has-unicode@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/has-unicode/-/has-unicode-2.0.1.tgz#e0e6fe6a28cf51138855e086d1691e771de2a8b9"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 has@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/has/-/has-1.0.1.tgz#8461733f538b0837c9361e39a9ab9e9704dc2f28"
   dependencies:
     function-bind "^1.0.2"
 
+=======
+>>>>>>> Upgraded to Node 6
 hash.js@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/hash.js/-/hash.js-1.0.3.tgz#1332ff00156c0a0ffdd8236013d07b77a0451573"
@@ -3311,10 +3899,13 @@ hooks-fixed@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/hooks-fixed/-/hooks-fixed-1.2.0.tgz#0d2772d4d7d685ff9244724a9f0b5b2559aac96b"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 htmlescape@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/htmlescape/-/htmlescape-1.1.1.tgz#3a03edc2214bca3b66424a3e7959349509cb0351"
 
+=======
+>>>>>>> Upgraded to Node 6
 http-browserify@^1.4.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/http-browserify/-/http-browserify-1.7.0.tgz#33795ade72df88acfbfd36773cefeda764735b20"
@@ -3322,7 +3913,11 @@ http-browserify@^1.4.0:
     Base64 "~0.2.0"
     inherits "~2.0.1"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 http-errors@~1.5.0:
+=======
+http-errors@~1.5.1:
+>>>>>>> Upgraded to Node 6
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/http-errors/-/http-errors-1.5.1.tgz#788c0d2c1de2c81b9e6e8c01843b6b97eb920750"
   dependencies:
@@ -3374,7 +3969,11 @@ iconv-lite@~0.2.11:
   version "0.2.11"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.2.11.tgz#1ce60a3a57864a292d1321ff4609ca4bb965adc8"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 ieee754@^1.1.4:
+=======
+ieee754@^1.1.4, ieee754@~1.1.1:
+>>>>>>> Upgraded to Node 6
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
 
@@ -3383,8 +3982,13 @@ ignore-by-default@^1.0.0:
   resolved "https://registry.yarnpkg.com/ignore-by-default/-/ignore-by-default-1.0.1.tgz#48ca6d72f6c6a3af00a9ad4ae6876be3889e2b09"
 
 ignore@^3.0.9, ignore@^3.2.0:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.2.0.tgz#8d88f03c3002a0ac52114db25d2c673b0bf1e435"
+=======
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.2.2.tgz#1c51e1ef53bab6ddc15db4d9ac4ec139eceb3410"
+>>>>>>> Upgraded to Node 6
 
 imurmurhash@^0.1.4:
   version "0.1.4"
@@ -3420,7 +4024,11 @@ inherits@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-1.0.2.tgz#ca4309dadee6b54cc0b8d247e8d7c7a0975bdc9b"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 inherits@2, inherits@2.0.3, inherits@^2.0.1, inherits@~2.0.0, inherits@~2.0.1:
+=======
+inherits@2, inherits@2.0.3, inherits@^2.0.1, inherits@^2.0.3, inherits@~2.0.0, inherits@~2.0.1:
+>>>>>>> Upgraded to Node 6
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
 
@@ -3444,12 +4052,15 @@ inline-source-map@~0.5.0:
   dependencies:
     source-map "~0.4.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 inline-source-map@~0.6.0:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/inline-source-map/-/inline-source-map-0.6.2.tgz#f9393471c18a79d1724f863fa38b586370ade2a5"
   dependencies:
     source-map "~0.5.3"
 
+=======
+>>>>>>> Upgraded to Node 6
 inquirer@^0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-0.12.0.tgz#1ef2bfd63504df0bc75785fff8c2c41df12f077e"
@@ -3481,6 +4092,7 @@ insert-module-globals@^6.1.0:
     through2 "^1.0.0"
     xtend "^4.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 insert-module-globals@^7.0.0:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/insert-module-globals/-/insert-module-globals-7.0.1.tgz#c03bf4e01cb086d5b5e5ace8ad0afe7889d638c3"
@@ -3493,14 +4105,32 @@ insert-module-globals@^7.0.0:
     process "~0.11.0"
     through2 "^2.0.0"
     xtend "^4.0.0"
+=======
+insert-module-globals@~6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/insert-module-globals/-/insert-module-globals-6.0.0.tgz#ee8aeb9dee16819e33aa14588a558824af0c15dc"
+  dependencies:
+    JSONStream "~0.7.1"
+    concat-stream "~1.4.1"
+    lexical-scope "~1.1.0"
+    process "~0.6.0"
+    through "~2.3.4"
+    xtend "^3.0.0"
+>>>>>>> Upgraded to Node 6
 
 interpret@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.0.1.tgz#d579fb7f693b858004947af39fa0db49f795602c"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 ipaddr.js@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.1.1.tgz#c791d95f52b29c1247d5df80ada39b8a73647230"
+=======
+ipaddr.js@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.2.0.tgz#8aba49c9192799585bdd643e0ccb50e8ae777ba4"
+>>>>>>> Upgraded to Node 6
 
 iron@4.x.x:
   version "4.0.4"
@@ -3562,7 +4192,11 @@ is-fullwidth-code-point@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/is-fullwidth-code-point/-/is-fullwidth-code-point-2.0.0.tgz#a3b30a5c4f199183167aaab93beefae3ddfb654f"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 is-function@^1.0.1, is-function@~1.0.0:
+=======
+is-function@~1.0.0:
+>>>>>>> Upgraded to Node 6
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/is-function/-/is-function-1.0.1.tgz#12cfb98b65b57dd3d193a3121f5f6e2f437602b5"
 
@@ -3739,8 +4373,13 @@ joi@10.0.5:
     topo "2.x.x"
 
 joi@10.x.x, joi@^10.2.0:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "10.2.0"
   resolved "https://registry.yarnpkg.com/joi/-/joi-10.2.0.tgz#2c9dba08240d453e58145667f0d5006de527e328"
+=======
+  version "10.2.2"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-10.2.2.tgz#dc5a792b7b4c6fffa562242a95b55d9d3f077e24"
+>>>>>>> Upgraded to Node 6
   dependencies:
     hoek "4.x.x"
     isemail "2.x.x"
@@ -3761,6 +4400,7 @@ jquery@^2.1.1:
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-2.2.4.tgz#2c89d6889b5eac522a7eea32c14521559c6cbf02"
 
 js-tokens@^3.0.0:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.0.tgz#a2f2a969caae142fb3cd56228358c89366957bd1"
 
@@ -3770,6 +4410,17 @@ js-yaml@3.x, js-yaml@^3.4.6, js-yaml@^3.5.1, js-yaml@^3.6.0:
   dependencies:
     argparse "^1.0.7"
     esprima "^2.6.0"
+=======
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.1.tgz#08e9f132484a2c45a30907e9dc4d5567b7f114d7"
+
+js-yaml@3.x, js-yaml@^3.4.6, js-yaml@^3.5.1, js-yaml@^3.6.0:
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.8.1.tgz#782ba50200be7b9e5a8537001b7804db3ad02628"
+  dependencies:
+    argparse "^1.0.7"
+    esprima "^3.1.1"
+>>>>>>> Upgraded to Node 6
 
 jsbn@~0.1.0:
   version "0.1.0"
@@ -3812,7 +4463,11 @@ json-stable-stringify@~0.0.0:
   dependencies:
     jsonify "~0.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 json-stringify-safe@*, json-stringify-safe@5.x.x, json-stringify-safe@~5.0.0, json-stringify-safe@~5.0.1:
+=======
+json-stringify-safe@5.x.x, json-stringify-safe@~5.0.0, json-stringify-safe@~5.0.1:
+>>>>>>> Upgraded to Node 6
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
 
@@ -3833,12 +4488,21 @@ jsonparse@0.0.5:
   resolved "https://registry.yarnpkg.com/jsonparse/-/jsonparse-0.0.5.tgz#330542ad3f0a654665b778f3eb2d9a9fa507ac64"
 
 jsonparse@^1.2.0:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/jsonparse/-/jsonparse-1.2.0.tgz#5c0c5685107160e72fe7489bddea0b44c2bc67bd"
 
 jsonpointer@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/jsonpointer/-/jsonpointer-4.0.0.tgz#6661e161d2fc445f19f98430231343722e1fcbd5"
+=======
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/jsonparse/-/jsonparse-1.3.0.tgz#85fc245b1d9259acc6941960b905adf64e7de0e8"
+
+jsonpointer@^4.0.0:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/jsonpointer/-/jsonpointer-4.0.1.tgz#4fd92cb34e0e9db3c89c8622ecf51f9b978c6cb9"
+>>>>>>> Upgraded to Node 6
 
 jsprim@^1.2.2:
   version "1.3.1"
@@ -3856,10 +4520,16 @@ jstransformer@0.0.2:
     promise "^6.0.1"
 
 jsx-ast-utils@^1.3.3:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-1.3.4.tgz#0257ed1cc4b1e65b39d7d9940f9fb4f20f7ba0a9"
   dependencies:
     acorn-jsx "^3.0.1"
+=======
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-1.4.0.tgz#5afe38868f56bc8cc7aeaef0100ba8c75bd12591"
+  dependencies:
+>>>>>>> Upgraded to Node 6
     object-assign "^4.1.0"
 
 kareem@1.2.0:
@@ -3908,6 +4578,7 @@ labeled-stream-splicer@^1.0.0:
     isarray "~0.0.1"
     stream-splicer "^1.1.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 labeled-stream-splicer@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/labeled-stream-splicer/-/labeled-stream-splicer-2.0.0.tgz#a52e1d138024c00b86b1c0c91f677918b8ae0a59"
@@ -3916,6 +4587,8 @@ labeled-stream-splicer@^2.0.0:
     isarray "~0.0.1"
     stream-splicer "^2.0.0"
 
+=======
+>>>>>>> Upgraded to Node 6
 latest-version@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/latest-version/-/latest-version-1.0.1.tgz#72cfc46e3e8d1be651e1ebb54ea9f6ea96f374bb"
@@ -3956,6 +4629,15 @@ lexical-scope@^1.2.0:
   dependencies:
     astw "^2.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+lexical-scope@~1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/lexical-scope/-/lexical-scope-1.1.1.tgz#debac1067435f1359d90fcfd9e94bcb2ee47b2bf"
+  dependencies:
+    astw "^2.0.0"
+
+>>>>>>> Upgraded to Node 6
 load-script@0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/load-script/-/load-script-0.0.5.tgz#cbd54b27cd7309902b749640c70e996f4c643b63"
@@ -4554,6 +5236,7 @@ lodash.pairs@^3.0.0:
   dependencies:
     lodash.keys "^3.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 lodash.partial@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/lodash.partial/-/lodash.partial-3.1.1.tgz#ab4a6ab6e32f03ecb1519048cdbae502680053e5"
@@ -4562,6 +5245,8 @@ lodash.partial@^3.1.1:
     lodash._replaceholders "^3.0.0"
     lodash.restparam "^3.0.0"
 
+=======
+>>>>>>> Upgraded to Node 6
 lodash.partition@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/lodash.partition/-/lodash.partition-3.1.1.tgz#43abf35ec944bc507f54af8836641f53c052c8e3"
@@ -4719,9 +5404,15 @@ lodash@^3.10.1:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 lodash@^4.0.0, lodash@^4.11.1, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.3.0, lodash@^4.6.1:
   version "4.17.2"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.2.tgz#34a3055babe04ce42467b607d700072c7ff6bf42"
+=======
+lodash@^4.0.0, lodash@^4.14.0, lodash@^4.17.4, lodash@^4.3.0:
+  version "4.17.4"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
+>>>>>>> Upgraded to Node 6
 
 lodash@~2.1.0:
   version "2.1.0"
@@ -4748,8 +5439,13 @@ lowercase-keys@^1.0.0:
   resolved "https://registry.yarnpkg.com/lowercase-keys/-/lowercase-keys-1.0.0.tgz#4e3366b39e7f5457e35f1324bdf6f88d0bfc7306"
 
 lru-cache@2:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-2.5.2.tgz#1fddad938aae1263ce138680be1b3f591c0ab41c"
+=======
+  version "2.7.3"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-2.7.3.tgz#6d4524e8b955f95d4f5b58851ce21dd72fb4e952"
+>>>>>>> Upgraded to Node 6
 
 lru-cache@4.0.x, lru-cache@^4.0.1:
   version "4.0.2"
@@ -4798,10 +5494,13 @@ matches-selector@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/matches-selector/-/matches-selector-1.0.0.tgz#434833447026a25ea4999edab18e4b8892b25721"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 media-type@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/media-type/-/media-type-0.3.0.tgz#ceff6aa0e3f41a4a4de3d7d6b96eb82ac78d9ee8"
 
+=======
+>>>>>>> Upgraded to Node 6
 media-typer@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.2.0.tgz#d8a065213adfeaa2e76321a2b6dda36ff6335984"
@@ -4855,9 +5554,15 @@ miller-rabin@^4.0.0:
     bn.js "^4.0.0"
     brorand "^1.0.1"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 mime-db@1.x.x, mime-db@~1.25.0:
   version "1.25.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.25.0.tgz#c18dbd7c73a5dbf6f44a024dc0d165a1e7b1c392"
+=======
+mime-db@1.x.x, mime-db@~1.26.0:
+  version "1.26.0"
+  resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.26.0.tgz#eaffcd0e4fc6935cf8134da246e2e6c35305adff"
+>>>>>>> Upgraded to Node 6
 
 mime-db@~1.12.0:
   version "1.12.0"
@@ -4868,10 +5573,17 @@ mime-types@1.0.0:
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-1.0.0.tgz#6a7b4a6af2e7d92f97afe03f047c7801e8f001d2"
 
 mime-types@^2.1.12, mime-types@~2.1.11, mime-types@~2.1.13, mime-types@~2.1.7:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "2.1.13"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.13.tgz#e07aaa9c6c6b9a7ca3012c69003ad25a39e92a88"
   dependencies:
     mime-db "~1.25.0"
+=======
+  version "2.1.14"
+  resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.14.tgz#f7ef7d97583fcaf3b7d282b6f8b5679dab1e94ee"
+  dependencies:
+    mime-db "~1.26.0"
+>>>>>>> Upgraded to Node 6
 
 mime-types@~1.0.1:
   version "1.0.2"
@@ -4959,7 +5671,11 @@ minimatch@^2.0.1, minimatch@^2.0.10:
   dependencies:
     brace-expansion "^1.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 minimist@0.0.8, minimist@~0.0.1:
+=======
+minimist@0.0.8:
+>>>>>>> Upgraded to Node 6
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.8.tgz#857fcabfc3397d2625b8228262e86aa7a011b05d"
 
@@ -4971,6 +5687,13 @@ minimist@^1.1.0, minimist@^1.1.1, minimist@^1.1.3, minimist@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+minimist@~0.0.1, minimist@~0.0.5, minimist@~0.0.7, minimist@~0.0.9:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.10.tgz#de3f98543dbf96082be48ad1a0c7cda836301dcf"
+
+>>>>>>> Upgraded to Node 6
 mkdirp@0.3.5, mkdirp@0.3.x:
   version "0.3.5"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.3.5.tgz#de3e5f8961c88c787ee1368df849ac4413eca8d7"
@@ -4981,6 +5704,22 @@ mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkd
   dependencies:
     minimist "0.0.8"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+module-deps@^1.8.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/module-deps/-/module-deps-1.10.0.tgz#57a9cac9dbd092428ec5249f6cf37fb249d77db6"
+  dependencies:
+    JSONStream "~0.7.1"
+    browser-resolve "~1.2.2"
+    concat-stream "~1.4.1"
+    detective "~3.1.0"
+    minimist "~0.0.5"
+    parents "0.0.2"
+    resolve "~0.6.0"
+    through "~2.3.4"
+
+>>>>>>> Upgraded to Node 6
 module-deps@^3.5.0:
   version "3.9.1"
   resolved "https://registry.yarnpkg.com/module-deps/-/module-deps-3.9.1.tgz#ea75caf9199090d25b0d5512b5acacb96e7f87f3"
@@ -5000,6 +5739,7 @@ module-deps@^3.5.0:
     through2 "^1.0.0"
     xtend "^4.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 module-deps@^4.0.5, module-deps@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/module-deps/-/module-deps-4.0.8.tgz#55fd70623399706c3288bef7a609ff1e8c0ed2bb"
@@ -5019,6 +5759,25 @@ module-deps@^4.0.5, module-deps@^4.0.8:
     subarg "^1.0.0"
     through2 "^2.0.0"
     xtend "^4.0.0"
+=======
+module-deps@~2.1.1:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/module-deps/-/module-deps-2.1.5.tgz#375a9bc804ccd64cebb3c62ee643755f0b3ccf29"
+  dependencies:
+    JSONStream "~0.7.1"
+    browser-resolve "~1.2.4"
+    concat-stream "~1.4.5"
+    detective "~3.1.0"
+    duplexer2 "0.0.2"
+    inherits "~2.0.1"
+    minimist "~0.0.9"
+    parents "0.0.2"
+    readable-stream "^1.0.27-1"
+    resolve "~0.6.3"
+    stream-combiner "~0.1.0"
+    subarg "0.0.1"
+    through2 "~0.4.1"
+>>>>>>> Upgraded to Node 6
 
 moment-timezone@~0.3.0:
   version "0.3.1"
@@ -5049,9 +5808,15 @@ mongodb@2.2.22:
     mongodb-core "2.1.7"
     readable-stream "2.1.5"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 mongoose@^4.8.0:
   version "4.8.0"
   resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-4.8.0.tgz#6941807145b49a6d1a06e35e632e3f11f01bccb0"
+=======
+mongoose@^4.8.1:
+  version "4.8.1"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-4.8.1.tgz#1dbd3014fb39e9344271a53ec5dd741205864aae"
+>>>>>>> Upgraded to Node 6
   dependencies:
     async "2.1.4"
     bson "~1.0.4"
@@ -5060,12 +5825,17 @@ mongoose@^4.8.0:
     mongodb "2.2.22"
     mpath "0.2.1"
     mpromise "0.5.5"
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
     mquery "2.2.0"
+=======
+    mquery "2.2.1"
+>>>>>>> Upgraded to Node 6
     ms "0.7.2"
     muri "1.2.0"
     regexp-clone "0.0.1"
     sliced "1.0.1"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 moonboots@^5.0.0:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/moonboots/-/moonboots-5.0.1.tgz#a87e25c764d545d5318db87647ed1c1d2ad61d72"
@@ -5082,6 +5852,24 @@ moonboots_hapi@^7.0.0:
   resolved "https://registry.yarnpkg.com/moonboots_hapi/-/moonboots_hapi-7.0.0.tgz#2f50e9d35bc14941442be05b7ea382ff7e87cf1a"
   dependencies:
     moonboots "^5.0.0"
+=======
+moonboots@^3.0.0:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/moonboots/-/moonboots-3.0.2.tgz#032b42f0a4732ec7e0fea0ae7b32479a173cb7ea"
+  dependencies:
+    async "^0.7.0"
+    browserify "^4.2.1"
+    bundle-metadata "^1.0.1"
+    cssmin "^0.4.1"
+    module-deps "^1.8.0"
+    uglify-js "^2.4.0"
+
+moonboots_hapi@^4.0.0:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/moonboots_hapi/-/moonboots_hapi-4.0.2.tgz#e06db90bc38de9ebf297bbd084f1f5b6197b404d"
+  dependencies:
+    moonboots "^3.0.0"
+>>>>>>> Upgraded to Node 6
 
 mothership@~0.2.0:
   version "0.2.0"
@@ -5097,9 +5885,15 @@ mpromise@0.5.5:
   version "0.5.5"
   resolved "https://registry.yarnpkg.com/mpromise/-/mpromise-0.5.5.tgz#f5b24259d763acc2257b0a0c8c6d866fd51732e6"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 mquery@2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/mquery/-/mquery-2.2.0.tgz#0d3f86ec61520c3c59b39532d9a0f4cce8aa71a6"
+=======
+mquery@2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/mquery/-/mquery-2.2.1.tgz#aa31076419adce2b06e9757f4cfc5d7f371b47ce"
+>>>>>>> Upgraded to Node 6
   dependencies:
     bluebird "2.10.2"
     debug "2.2.0"
@@ -5142,8 +5936,13 @@ mv@~2:
     rimraf "~2.4.0"
 
 nan@^2.3.0, nan@^2.3.3:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.4.0.tgz#fb3c59d45fe4effe215f0b890f8adf6eb32d2232"
+=======
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.5.1.tgz#d5b01691253326a97a2bbee9e61c55d8d60351e2"
+>>>>>>> Upgraded to Node 6
 
 natives@^1.1.0:
   version "1.1.0"
@@ -5187,8 +5986,13 @@ no-arrowception@1.x.x:
   resolved "https://registry.yarnpkg.com/no-arrowception/-/no-arrowception-1.0.0.tgz#5bf3e95eb9c41b57384a805333daa3b734ee327a"
 
 node-pre-gyp@^0.6.29:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "0.6.32"
   resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.6.32.tgz#fc452b376e7319b3d255f5f34853ef6fd8fe1fd5"
+=======
+  version "0.6.33"
+  resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.6.33.tgz#640ac55198f6a925972e0c16c4ac26a034d5ecc9"
+>>>>>>> Upgraded to Node 6
   dependencies:
     mkdirp "~0.5.1"
     nopt "~3.0.6"
@@ -5242,8 +6046,13 @@ normalize-path@^2.0.1:
   resolved "https://registry.yarnpkg.com/normalize-path/-/normalize-path-2.0.1.tgz#47886ac1662760d4261b7d979d241709d3ce3f7a"
 
 npmlog@^4.0.1:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/npmlog/-/npmlog-4.0.1.tgz#d14f503b4cd79710375553004ba96e6662fbc0b8"
+=======
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/npmlog/-/npmlog-4.0.2.tgz#d03950e0e78ce1527ba26d2a7592e9348ac3e75f"
+>>>>>>> Upgraded to Node 6
   dependencies:
     are-we-there-yet "~1.1.2"
     console-control-strings "~1.1.0"
@@ -5311,6 +6120,13 @@ once@^1.3.0:
   dependencies:
     wrappy "1"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+once@~1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/once/-/once-1.1.1.tgz#9db574933ccb08c3a7614d154032c09ea6f339e7"
+
+>>>>>>> Upgraded to Node 6
 once@~1.3.0, once@~1.3.3:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/once/-/once-1.3.3.tgz#b2e261557ce4c314ec8304f3fa82663e4297ca20"
@@ -5401,8 +6217,13 @@ osenv@0.0.3:
   resolved "https://registry.yarnpkg.com/osenv/-/osenv-0.0.3.tgz#cd6ad8ddb290915ad9e22765576025d411f29cb6"
 
 osenv@^0.1.0:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/osenv/-/osenv-0.1.3.tgz#83cf05c6d6458fc4d5ac6362ea325d92f2754217"
+=======
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/osenv/-/osenv-0.1.4.tgz#42fe6d5953df06c8064be6f176c3d05aaaa34644"
+>>>>>>> Upgraded to Node 6
   dependencies:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.0"
@@ -5422,15 +6243,30 @@ parent-require@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/parent-require/-/parent-require-1.0.0.tgz#746a167638083a860b0eef6732cb27ed46c32977"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 parents@^1.0.0, parents@^1.0.1:
+=======
+parents@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/parents/-/parents-0.0.2.tgz#67147826e497d40759aaf5ba4c99659b6034d302"
+
+parents@^1.0.0:
+>>>>>>> Upgraded to Node 6
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/parents/-/parents-1.0.1.tgz#fedd4d2bf193a77745fe71e371d73c3307d9c751"
   dependencies:
     path-platform "~0.11.15"
 
 parents@~0.0.1:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/parents/-/parents-0.0.2.tgz#67147826e497d40759aaf5ba4c99659b6034d302"
+=======
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/parents/-/parents-0.0.3.tgz#fa212f024d9fa6318dbb6b4ce676c8be493b9c43"
+  dependencies:
+    path-platform "^0.0.1"
+>>>>>>> Upgraded to Node 6
 
 parse-asn1@^5.0.0:
   version "5.0.0"
@@ -5496,6 +6332,13 @@ path-is-inside@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/path-is-inside/-/path-is-inside-1.0.2.tgz#365417dede44430d1c11af61027facf074bdfc53"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+path-platform@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/path-platform/-/path-platform-0.0.1.tgz#b5585d7c3c463d89aa0060d86611cf1afd617e2a"
+
+>>>>>>> Upgraded to Node 6
 path-platform@~0.11.15:
   version "0.11.15"
   resolved "https://registry.yarnpkg.com/path-platform/-/path-platform-0.11.15.tgz#e864217f74c36850f0852b78dc7bf7d4a5721bf2"
@@ -5562,6 +6405,7 @@ pluralize@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-1.2.1.tgz#d1a21483fd22bb41e58a12fa3421823140897c45"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 pmx@^0.3.20:
   version "0.3.31"
   resolved "https://registry.yarnpkg.com/pmx/-/pmx-0.3.31.tgz#d8369bf1817d96a2862c3c55ca55597a34d85d4e"
@@ -5569,6 +6413,8 @@ pmx@^0.3.20:
     debug "*"
     json-stringify-safe "*"
 
+=======
+>>>>>>> Upgraded to Node 6
 podium@^1.2.x:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/podium/-/podium-1.2.5.tgz#87c566c2f0365bcf0a1ec7602c4d01948cdd2ad5"
@@ -5601,6 +6447,13 @@ process-nextick-args@~1.0.6:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-1.0.7.tgz#150e20b756590ad3f91093f25a4f2ad8bff30ba3"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+process@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/process/-/process-0.7.0.tgz#c52208161a34adf3812344ae85d3e6150469389d"
+
+>>>>>>> Upgraded to Node 6
 process@^0.8.0:
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/process/-/process-0.8.0.tgz#7bbaf7187fe6ded3fd5be0cb6103fba9cacb9798"
@@ -5613,6 +6466,13 @@ process@~0.5.1:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/process/-/process-0.5.2.tgz#1638d8a8e34c2f440a91db95ab9aeb677fc185cf"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+process@~0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/process/-/process-0.6.0.tgz#7dd9be80ffaaedd4cb628f1827f1cbab6dc0918f"
+
+>>>>>>> Upgraded to Node 6
 progress@^1.1.8:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/progress/-/progress-1.1.8.tgz#e260c78f6161cdd9b0e56cc3e0a85de17c7a57be"
@@ -5629,12 +6489,21 @@ promise@~2.0:
   dependencies:
     is-promise "~1"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 proxy-addr@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/proxy-addr/-/proxy-addr-1.1.2.tgz#b4cc5f22610d9535824c123aef9d3cf73c40ba37"
   dependencies:
     forwarded "~0.1.0"
     ipaddr.js "1.1.1"
+=======
+proxy-addr@~1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/proxy-addr/-/proxy-addr-1.1.3.tgz#dc97502f5722e888467b3fa2297a7b1ff47df074"
+  dependencies:
+    forwarded "~0.1.0"
+    ipaddr.js "1.2.0"
+>>>>>>> Upgraded to Node 6
 
 ps-tree@^1.0.1:
   version "1.1.0"
@@ -5660,7 +6529,11 @@ punycode@1.3.2:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.3.2.tgz#9653a036fb7c1ee42342f2325cceefea3926c48d"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 punycode@^1.3.2, punycode@^1.4.1:
+=======
+punycode@^1.4.1:
+>>>>>>> Upgraded to Node 6
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
 
@@ -5688,11 +6561,15 @@ qs@6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.2.0.tgz#3b7848c03c2dece69a9522b0fae8c4126d745f3b"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 qs@^6.1.0, qs@~6.3.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.3.0.tgz#f403b264f23bc01228c74131b407f18d5ea5d442"
 
 qs@~1.2.0:
+=======
+qs@^1.2.1, qs@~1.2.0:
+>>>>>>> Upgraded to Node 6
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/qs/-/qs-1.2.2.tgz#19b57ff24dc2a99ce1f8bdf6afcda59f8ef61f88"
 
@@ -5700,6 +6577,13 @@ qs@~2.2.3:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/qs/-/qs-2.2.5.tgz#1088abaf9dcc0ae5ae45b709e6c6b5888b23923c"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+qs@~6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.3.0.tgz#f403b264f23bc01228c74131b407f18d5ea5d442"
+
+>>>>>>> Upgraded to Node 6
 querystring-es3@~0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/querystring-es3/-/querystring-es3-0.2.1.tgz#9ec61f79049875707d69414596fd907a4d711e73"
@@ -5767,6 +6651,7 @@ read-all-stream@^3.0.0:
     pinkie-promise "^2.0.0"
     readable-stream "^2.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 read-only-stream@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/read-only-stream/-/read-only-stream-2.0.0.tgz#2724fd6a8113d73764ac288d4386270c1dbf17f0"
@@ -5774,6 +6659,9 @@ read-only-stream@^2.0.0:
     readable-stream "^2.0.2"
 
 readable-stream@2.1.5, readable-stream@^2.0.0, "readable-stream@^2.0.0 || ^1.1.13", readable-stream@^2.0.2, readable-stream@^2.0.6, readable-stream@^2.1.0, readable-stream@^2.1.5, readable-stream@~2.1.4:
+=======
+readable-stream@2.1.5, readable-stream@~2.1.4:
+>>>>>>> Upgraded to Node 6
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.1.5.tgz#66fa8b720e1438b364681f2ad1a63c618448c9d0"
   dependencies:
@@ -5785,7 +6673,11 @@ readable-stream@2.1.5, readable-stream@^2.0.0, "readable-stream@^2.0.0 || ^1.1.1
     string_decoder "~0.10.x"
     util-deprecate "~1.0.1"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 "readable-stream@>=1.0.33-1 <1.1.0-0", readable-stream@^1.0.33-1, readable-stream@~1.0.17, readable-stream@~1.0.2, readable-stream@~1.0.24, readable-stream@~1.0.26:
+=======
+"readable-stream@>=1.0.33-1 <1.1.0-0", readable-stream@^1.0.27-1, readable-stream@^1.0.33-1, readable-stream@~1.0.17, readable-stream@~1.0.2, readable-stream@~1.0.24, readable-stream@~1.0.26:
+>>>>>>> Upgraded to Node 6
   version "1.0.34"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-1.0.34.tgz#125820e34bc842d2f2aaafafe4c2916ee32c157c"
   dependencies:
@@ -5794,7 +6686,11 @@ readable-stream@2.1.5, readable-stream@^2.0.0, "readable-stream@^2.0.0 || ^1.1.1
     isarray "0.0.1"
     string_decoder "~0.10.x"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 "readable-stream@>=1.1.13-1 <1.2.0-0", readable-stream@^1.0.27-1, readable-stream@^1.1.13, readable-stream@^1.1.13-1, readable-stream@~1.1.11, readable-stream@~1.1.8, readable-stream@~1.1.9:
+=======
+"readable-stream@>=1.1.13-1 <1.2.0-0", readable-stream@^1.1.13, readable-stream@^1.1.13-1, readable-stream@~1.1.11, readable-stream@~1.1.8, readable-stream@~1.1.9:
+>>>>>>> Upgraded to Node 6
   version "1.1.14"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-1.1.14.tgz#7cf4c54ef648e3813084c636dd2079e166c081d9"
   dependencies:
@@ -5803,10 +6699,18 @@ readable-stream@2.1.5, readable-stream@^2.0.0, "readable-stream@^2.0.0 || ^1.1.1
     isarray "0.0.1"
     string_decoder "~0.10.x"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 readable-stream@~2.0.0:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.0.6.tgz#8f90341e68a53ccc928788dacfcd11b36eb9b78e"
   dependencies:
+=======
+readable-stream@^2.0.0, "readable-stream@^2.0.0 || ^1.1.13", readable-stream@^2.0.2, readable-stream@^2.0.6, readable-stream@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.2.2.tgz#a9e6fec3c7dda85f8bb1b3ba7028604556fc825e"
+  dependencies:
+    buffer-shims "^1.0.0"
+>>>>>>> Upgraded to Node 6
     core-util-is "~1.0.0"
     inherits "~2.0.1"
     isarray "~1.0.0"
@@ -5900,7 +6804,11 @@ request@2.11.4:
     form-data "~0.0.3"
     mime "~1.2.7"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 request@^2.55.0, request@^2.79.0:
+=======
+request@^2.79.0:
+>>>>>>> Upgraded to Node 6
   version "2.79.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.79.0.tgz#4dfe5bf6be8b8cdc37fcf93e04b65577722710de"
   dependencies:
@@ -5988,22 +6896,43 @@ resolve-from@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-2.0.0.tgz#9480ab20e94ffa1d9e80a804c7ea147611966b57"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+resolve@0.6.3, resolve@~0.6.0, resolve@~0.6.1, resolve@~0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/resolve/-/resolve-0.6.3.tgz#dd957982e7e736debdf53b58a4dd91754575dd46"
+
+>>>>>>> Upgraded to Node 6
 resolve@0.7.x, resolve@~0.7.1:
   version "0.7.4"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-0.7.4.tgz#395a9ef9e873fbfe12bd14408bd91bb936003d69"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 resolve@1.1.7, resolve@^1.1.3, resolve@^1.1.4, resolve@^1.1.6:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.1.7.tgz#203114d82ad2c5ed9e8e0411b3932875e889e97b"
 
+=======
+resolve@1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.1.7.tgz#203114d82ad2c5ed9e8e0411b3932875e889e97b"
+
+resolve@^1.1.3, resolve@^1.1.6:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.2.0.tgz#9589c3f2f6149d1417a40becc1663db6ec6bc26c"
+
+>>>>>>> Upgraded to Node 6
 resolve@~0.3.0:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-0.3.1.tgz#34c63447c664c70598d1c9b126fc43b2a24310a4"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 resolve@~0.6.1:
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-0.6.3.tgz#dd957982e7e736debdf53b58a4dd91754575dd46"
 
+=======
+>>>>>>> Upgraded to Node 6
 restore-cursor@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/restore-cursor/-/restore-cursor-1.0.1.tgz#34661f46886327fed2991479152252df92daa541"
@@ -6046,6 +6975,13 @@ rimraf@~2.4.0:
   dependencies:
     glob "^6.0.1"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+ripemd160@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/ripemd160/-/ripemd160-0.2.0.tgz#2bf198bde167cacfa51c0a928e84b68bbe171fce"
+
+>>>>>>> Upgraded to Node 6
 ripemd160@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ripemd160/-/ripemd160-1.0.1.tgz#93a4bbd4942bc574b69a8fa57c71de10ecca7d6e"
@@ -6080,8 +7016,13 @@ sax@0.5.x:
   resolved "https://registry.yarnpkg.com/sax/-/sax-0.5.8.tgz#d472db228eb331c2506b0e8c15524adb939d12c1"
 
 sax@>=0.6.0:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.1.tgz#7b8e656190b228e81a66aea748480d828cd2d37a"
+=======
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.2.tgz#fd8631a23bc7826bef5d871bdb87378c95647828"
+>>>>>>> Upgraded to Node 6
 
 seedrandom@2.4.x:
   version "2.4.2"
@@ -6106,9 +7047,15 @@ send@0.1.4:
     mime "~1.2.9"
     range-parser "0.0.4"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 send@0.14.1:
   version "0.14.1"
   resolved "https://registry.yarnpkg.com/send/-/send-0.14.1.tgz#a954984325392f51532a7760760e459598c89f7a"
+=======
+send@0.14.2:
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/send/-/send-0.14.2.tgz#39b0438b3f510be5dc6f667a11f71689368cdeef"
+>>>>>>> Upgraded to Node 6
   dependencies:
     debug "~2.2.0"
     depd "~1.1.0"
@@ -6117,25 +7064,44 @@ send@0.14.1:
     escape-html "~1.0.3"
     etag "~1.7.0"
     fresh "0.3.0"
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
     http-errors "~1.5.0"
     mime "1.3.4"
     ms "0.7.1"
     on-finished "~2.3.0"
     range-parser "~1.2.0"
     statuses "~1.3.0"
+=======
+    http-errors "~1.5.1"
+    mime "1.3.4"
+    ms "0.7.2"
+    on-finished "~2.3.0"
+    range-parser "~1.2.0"
+    statuses "~1.3.1"
+>>>>>>> Upgraded to Node 6
 
 sequence@2.x:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/sequence/-/sequence-2.2.1.tgz#7f5617895d44351c0a047e764467690490a16b03"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 serve-static@~1.11.1:
   version "1.11.1"
   resolved "https://registry.yarnpkg.com/serve-static/-/serve-static-1.11.1.tgz#d6cce7693505f733c759de57befc1af76c0f0805"
+=======
+serve-static@~1.11.2:
+  version "1.11.2"
+  resolved "https://registry.yarnpkg.com/serve-static/-/serve-static-1.11.2.tgz#2cf9889bd4435a320cc36895c9aa57bd662e6ac7"
+>>>>>>> Upgraded to Node 6
   dependencies:
     encodeurl "~1.0.1"
     escape-html "~1.0.3"
     parseurl "~1.3.1"
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
     send "0.14.1"
+=======
+    send "0.14.2"
+>>>>>>> Upgraded to Node 6
 
 set-blocking@~2.0.0:
   version "2.0.0"
@@ -6149,6 +7115,15 @@ setprototypeof@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.0.2.tgz#81a552141ec104b88e89ce383103ad5c66564d08"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+sha.js@2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/sha.js/-/sha.js-2.1.6.tgz#20e6eb81f3e66f081ddf84dd8f0464bea6c02fd4"
+  dependencies:
+    buffer "~2.3.2"
+
+>>>>>>> Upgraded to Node 6
 sha.js@^2.3.6, sha.js@~2.4.4:
   version "2.4.8"
   resolved "https://registry.yarnpkg.com/sha.js/-/sha.js-2.4.8.tgz#37068c2c476b6baf402d14a49c67f597921f634f"
@@ -6189,6 +7164,7 @@ shell-quote@1.4.1:
     array-reduce "~0.0.0"
     jsonify "~0.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 shell-quote@^1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.6.1.tgz#f4781949cce402697127430ea3b3c5476f481767"
@@ -6198,6 +7174,8 @@ shell-quote@^1.6.1:
     array-reduce "~0.0.0"
     jsonify "~0.0.0"
 
+=======
+>>>>>>> Upgraded to Node 6
 shell-quote@~0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-0.0.1.tgz#1a41196f3c0333c482323593d6886ecf153dd986"
@@ -6241,9 +7219,15 @@ slide@^1.1.5:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/slide/-/slide-1.1.6.tgz#56eb027d65b4d2dce6cb2e2d32c4d4afc9e1d707"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 slug@^0.9.1:
   version "0.9.1"
   resolved "https://registry.yarnpkg.com/slug/-/slug-0.9.1.tgz#af08f608a7c11516b61778aa800dce84c518cfda"
+=======
+slug@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/slug/-/slug-0.7.1.tgz#c79cfb4b6f4a88028c915f8b5a14b10881024383"
+>>>>>>> Upgraded to Node 6
   dependencies:
     unicode ">= 0.3.1"
 
@@ -6343,7 +7327,11 @@ source-map@0.4.x, source-map@^0.4.4, source-map@~0.4.0, source-map@~0.4.2:
   dependencies:
     amdefine ">=0.0.4"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 source-map@^0.5.3, source-map@~0.5.1, source-map@~0.5.3:
+=======
+source-map@^0.5.3, source-map@~0.5.1:
+>>>>>>> Upgraded to Node 6
   version "0.5.6"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.6.tgz#75ce38f52bf0733c5a7f0c118d81334a2bb5f412"
 
@@ -6371,8 +7359,13 @@ sprintf-js@~1.0.2:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
 
 sshpk@^1.7.0:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "1.10.1"
   resolved "https://registry.yarnpkg.com/sshpk/-/sshpk-1.10.1.tgz#30e1a5d329244974a1af61511339d595af6638b0"
+=======
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/sshpk/-/sshpk-1.10.2.tgz#d5a804ce22695515638e798dbe23273de070a5fa"
+>>>>>>> Upgraded to Node 6
   dependencies:
     asn1 "~0.2.3"
     assert-plus "^1.0.0"
@@ -6394,9 +7387,15 @@ stack-mapper@0.2.2:
     isarray "0.0.1"
     source-map-cjs "~0.1.31"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 stacktrace-js@defunctzombie/stacktrace.js#07e7b95:
   version "0.6.0"
   resolved "https://codeload.github.com/defunctzombie/stacktrace.js/tar.gz/07e7b95"
+=======
+"stacktrace-js@git+https://github.com/defunctzombie/stacktrace.js#07e7b95":
+  version "0.6.0"
+  resolved "git+https://github.com/defunctzombie/stacktrace.js#07e7b95"
+>>>>>>> Upgraded to Node 6
 
 standard-engine@~5.2.0:
   version "5.2.0"
@@ -6410,8 +7409,13 @@ standard-engine@~5.2.0:
     pkg-config "^1.0.1"
 
 standard-json@^1.0.0:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/standard-json/-/standard-json-1.0.1.tgz#75dd5952c59bb6cb358b136af0633ae3d7f35b6b"
+=======
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/standard-json/-/standard-json-1.0.2.tgz#82dea4a14c78cd9e35d38cde4b88ac6b62596a23"
+>>>>>>> Upgraded to Node 6
   dependencies:
     concat-stream "^1.5.0"
 
@@ -6442,7 +7446,11 @@ statehood@5.x.x:
     items "2.x.x"
     joi "10.x.x"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 "statuses@>= 1.3.1 < 2", statuses@~1.3.0:
+=======
+"statuses@>= 1.3.1 < 2", statuses@~1.3.1:
+>>>>>>> Upgraded to Node 6
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.3.1.tgz#faf51b9eb74aaef3b3acf4ad5f61abf24cb7b93e"
 
@@ -6453,6 +7461,7 @@ stream-browserify@^1.0.0:
     inherits "~2.0.1"
     readable-stream "^1.0.27-1"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 stream-browserify@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/stream-browserify/-/stream-browserify-2.0.1.tgz#66266ee5f9bdb9940a4e4514cafb43bb71e5c9db"
@@ -6467,6 +7476,8 @@ stream-combiner2@^1.1.1:
     duplexer2 "~0.1.0"
     readable-stream "^2.0.2"
 
+=======
+>>>>>>> Upgraded to Node 6
 stream-combiner2@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/stream-combiner2/-/stream-combiner2-1.0.2.tgz#ba72a6b50cbfabfa950fc8bc87604bd01eb60671"
@@ -6474,18 +7485,33 @@ stream-combiner2@~1.0.0:
     duplexer2 "~0.0.2"
     through2 "~0.5.1"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 stream-combiner@~0.0.4:
+=======
+stream-combiner@~0.0.2, stream-combiner@~0.0.4:
+>>>>>>> Upgraded to Node 6
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/stream-combiner/-/stream-combiner-0.0.4.tgz#4d5e433c185261dde623ca3f44c586bcf5c4ad14"
   dependencies:
     duplexer "~0.1.1"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+stream-combiner@~0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/stream-combiner/-/stream-combiner-0.1.0.tgz#0dc389a3c203f8f4d56368f95dde52eb9269b5be"
+  dependencies:
+    duplexer "~0.1.1"
+    through "~2.3.4"
+
+>>>>>>> Upgraded to Node 6
 stream-counter@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/stream-counter/-/stream-counter-0.2.0.tgz#ded266556319c8b0e222812b9cf3b26fa7d947de"
   dependencies:
     readable-stream "~1.1.8"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 stream-http@^2.0.0:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/stream-http/-/stream-http-2.6.3.tgz#4c3ddbf9635968ea2cfd4e48d43de5def2625ac3"
@@ -6496,6 +7522,8 @@ stream-http@^2.0.0:
     to-arraybuffer "^1.0.0"
     xtend "^4.0.0"
 
+=======
+>>>>>>> Upgraded to Node 6
 stream-shift@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/stream-shift/-/stream-shift-1.0.0.tgz#d5c752825e5367e786f78e18e445ea223a155952"
@@ -6511,6 +7539,7 @@ stream-splicer@^1.1.0:
     readable-wrap "^1.0.0"
     through2 "^1.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 stream-splicer@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/stream-splicer/-/stream-splicer-2.0.0.tgz#1b63be438a133e4b671cc1935197600175910d83"
@@ -6518,6 +7547,8 @@ stream-splicer@^2.0.0:
     inherits "^2.0.1"
     readable-stream "^2.0.2"
 
+=======
+>>>>>>> Upgraded to Node 6
 string-length@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/string-length/-/string-length-1.0.1.tgz#56970fb1c38558e9e70b728bf3de269ac45adfac"
@@ -6539,6 +7570,13 @@ string-width@^2.0.0:
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^3.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+string_decoder@~0.0.0:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-0.0.1.tgz#f5472d0a8d1650ec823752d24e6fd627b39bf141"
+
+>>>>>>> Upgraded to Node 6
 string_decoder@~0.10.0, string_decoder@~0.10.x:
   version "0.10.31"
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
@@ -6588,6 +7626,15 @@ stylus@^0.54.5:
     sax "0.5.x"
     source-map "0.1.x"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+subarg@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/subarg/-/subarg-0.0.1.tgz#3d56b07dacfbc45bbb63f7672b43b63e46368e3a"
+  dependencies:
+    minimist "~0.0.7"
+
+>>>>>>> Upgraded to Node 6
 subarg@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/subarg/-/subarg-1.0.0.tgz#f62cf17581e996b48fc965699f54c06ae268b8d2"
@@ -6621,10 +7668,13 @@ superstack@0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/superstack/-/superstack-0.0.4.tgz#6fe87b7913e0fd748ab33e333b5ae87eb020935c"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 supports-color@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-0.2.0.tgz#d92de2694eb3f67323973d7ae3d8b55b4c22190a"
 
+=======
+>>>>>>> Upgraded to Node 6
 supports-color@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
@@ -6763,6 +7813,7 @@ through2@^1.0.0:
     readable-stream ">=1.1.13-1 <1.2.0-0"
     xtend ">=4.0.0 <4.1.0-0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 through2@^2.0.0:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/through2/-/through2-2.0.3.tgz#0004569b37c7c74ba39c43f3ced78d1ad94140be"
@@ -6771,6 +7822,9 @@ through2@^2.0.0:
     xtend "~4.0.1"
 
 through2@~0.4.0:
+=======
+through2@~0.4.0, through2@~0.4.1:
+>>>>>>> Upgraded to Node 6
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/through2/-/through2-0.4.2.tgz#dbf5866031151ec8352bb6c4db64a2292a840b9b"
   dependencies:
@@ -6820,10 +7874,13 @@ to-array@0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/to-array/-/to-array-0.1.4.tgz#17e6c11f73dd4f3d74cda7a4ff3238e9ad9bf890"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 to-arraybuffer@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/to-arraybuffer/-/to-arraybuffer-1.0.1.tgz#7d229b1fcc637e466ca081180836a7aabff83f43"
 
+=======
+>>>>>>> Upgraded to Node 6
 topo@2.x.x:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/topo/-/topo-2.0.2.tgz#cd5615752539057c0dc0491a621c3bc6fbe1d182"
@@ -6873,8 +7930,13 @@ tunnel-agent@~0.4.0, tunnel-agent@~0.4.1:
   resolved "https://registry.yarnpkg.com/tunnel-agent/-/tunnel-agent-0.4.3.tgz#6373db76909fe570e08d73583365ed828a74eeeb"
 
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "0.14.4"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.4.tgz#8c9dbfb52795686f166cd2023794bcf103d13c2b"
+=======
+  version "0.14.5"
+  resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
+>>>>>>> Upgraded to Node 6
 
 type-check@~0.3.1, type-check@~0.3.2:
   version "0.3.2"
@@ -6896,18 +7958,30 @@ type-is@~1.5.1:
     media-typer "0.3.0"
     mime-types "~2.0.9"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 type-is@~1.6.13:
+=======
+type-is@~1.6.14:
+>>>>>>> Upgraded to Node 6
   version "1.6.14"
   resolved "https://registry.yarnpkg.com/type-is/-/type-is-1.6.14.tgz#e219639c17ded1ca0789092dd54a03826b817cb2"
   dependencies:
     media-typer "0.3.0"
     mime-types "~2.1.13"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 typedarray@~0.0.5:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
 uglify-js@^2.4.24, uglify-js@^2.6, uglify-js@^2.6.2:
+=======
+typedarray@^0.0.6, typedarray@~0.0.5:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
+
+uglify-js@^2.4.0, uglify-js@^2.4.24, uglify-js@^2.6:
+>>>>>>> Upgraded to Node 6
   version "2.7.5"
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.7.5.tgz#4612c0c7baaee2ba7c487de4904ae122079f2ca8"
   dependencies:
@@ -6965,10 +8039,13 @@ umd@^2.1.0, umd@~2.1.0:
     through "~2.3.4"
     uglify-js "~2.4.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 umd@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/umd/-/umd-3.0.1.tgz#8ae556e11011f63c2596708a8837259f01b3d60e"
 
+=======
+>>>>>>> Upgraded to Node 6
 undefsafe@0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/undefsafe/-/undefsafe-0.0.3.tgz#ecca3a03e56b9af17385baac812ac83b994a962f"
@@ -6985,6 +8062,13 @@ underscore@, underscore@^1.6.0, underscore@^1.7.0, underscore@^1.8.3:
   version "1.8.3"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
+=======
+underscore@~1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.6.0.tgz#8b38b10cacdef63337b8b24e4ff86d45aea529a8"
+
+>>>>>>> Upgraded to Node 6
 underscore@~1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.7.0.tgz#6bbaf0877500d36be34ecaa584e0db9fef035209"
@@ -7022,6 +8106,7 @@ url@~0.10.1:
     punycode "1.3.2"
     querystring "0.2.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 url@~0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/url/-/url-0.11.0.tgz#3838e97cfc60521eb73c525a8e55bfdd9e2e28f1"
@@ -7029,6 +8114,8 @@ url@~0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
+=======
+>>>>>>> Upgraded to Node 6
 user-home@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/user-home/-/user-home-2.0.0.tgz#9c70bfd8169bc1dcbf48604e0f04b8b49cde9e9f"
@@ -7187,10 +8274,17 @@ wrench@~1.5.1:
   resolved "https://registry.yarnpkg.com/wrench/-/wrench-1.5.9.tgz#411691c63a9b2531b1700267279bdeca23b2142a"
 
 write-file-atomic@^1.1.2:
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/write-file-atomic/-/write-file-atomic-1.2.0.tgz#14c66d4e4cb3ca0565c28cf3b7a6f3e4d5938fab"
   dependencies:
     graceful-fs "^4.1.2"
+=======
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/write-file-atomic/-/write-file-atomic-1.3.1.tgz#7d45ba32316328dd1ec7d90f60ebc0d845bb759a"
+  dependencies:
+    graceful-fs "^4.1.11"
+>>>>>>> Upgraded to Node 6
     imurmurhash "^0.1.4"
     slide "^1.1.5"
 
@@ -7217,6 +8311,7 @@ xdg-basedir@^2.0.0:
   dependencies:
     os-homedir "^1.0.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 xhr@^2.0.5:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/xhr/-/xhr-2.3.3.tgz#ad6b810e0917ce72b5ec704f5d41f1503b8e7524"
@@ -7225,6 +8320,15 @@ xhr@^2.0.5:
     is-function "^1.0.1"
     parse-headers "^2.0.0"
     xtend "^4.0.0"
+=======
+xhr@^1.10.0:
+  version "1.17.1"
+  resolved "https://registry.yarnpkg.com/xhr/-/xhr-1.17.1.tgz#0533349e4a7bb967d0bd878a961d9505f9052dff"
+  dependencies:
+    global "~4.3.0"
+    once "~1.1.1"
+    parse-headers "^2.0.0"
+>>>>>>> Upgraded to Node 6
 
 xml2js@~0.4.0:
   version "0.4.17"
@@ -7249,7 +8353,11 @@ xtend@2.1.2, xtend@~2.1.1:
   dependencies:
     object-keys "~0.4.0"
 
+<<<<<<< f8b947d46b3767602d323505a5efd6f1ee548e43
 "xtend@>=4.0.0 <4.1.0-0", xtend@^4.0.0, xtend@^4.0.1, xtend@~4.0.0, xtend@~4.0.1:
+=======
+"xtend@>=4.0.0 <4.1.0-0", xtend@^4.0.0, xtend@^4.0.1, xtend@~4.0.0:
+>>>>>>> Upgraded to Node 6
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
 

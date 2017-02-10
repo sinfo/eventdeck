@@ -36,7 +36,7 @@ function create (speaker, memberId, cb) {
 function update (id, speaker, cb) {
   speaker.updated = Date.now()
   var filter = {id: id}
-  Speaker.findOneAndUpdate(filter, speaker, function (err, _speaker) {
+  Speaker.findOneAndUpdate(filter, speaker, {new: true}, function (err, _speaker) {
     if (err) {
       log.error({err: err, speaker: id}, 'error updating speaker')
       return cb(Boom.internal())
