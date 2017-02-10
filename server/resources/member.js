@@ -54,8 +54,12 @@ function update (id, member, cb) {
 function createLoginCode (id, cb) {
   const loginCode = randtoken.generate(config.loginCodes.length)
   const code = {$push: {'loginCodes': {code: loginCode, created: new Date()}}}
+<<<<<<< HEAD
 
   Member.findOneAndUpdate({id: id}, code, {new: true}, (err, _member) => {
+=======
+  Member.findOneAndUpdate({id: id}, code, function (err, _member) {
+>>>>>>> Upgraded to Node 6
     if (err) {
       log.error({err, member: id}, 'error creating login code for member')
       return cb(Boom.internal())
@@ -149,7 +153,11 @@ function list (query, cb) {
 }
 
 function remove (id, cb) {
+<<<<<<< HEAD
   Member.findOneAndRemove({id: id}, (err, member) => {
+=======
+  Member.findOneAndRemove({id: id}, function (err, member) {
+>>>>>>> Upgraded to Node 6
     if (err) {
       log.error({err, member: id}, 'error deleting member')
       return cb(Boom.internal())

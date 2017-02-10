@@ -35,7 +35,7 @@ function create (company, memberId, cb) {
 
 function update (id, company, cb) {
   company.updated = Date.now()
-
+  
   Company.findOneAndUpdate({id: id}, company, {new: true}, (err, _company) => {
     if (err) {
       log.error({err, company: id}, 'error updating company')
