@@ -1,9 +1,9 @@
-var Boom = require('boom')
-var server = require('../index').hapi
-var log = require('../helpers/logger')
-var parser = require('../helpers/fieldsParser')
-var threadFromPath = require('../helpers/threadFromPath')
-var Comment = require('../db/comment')
+const Boom = require('boom')
+const server = require('../index').hapi
+const log = require('../helpers/logger')
+const parser = require('../helpers/fieldsParser')
+const threadFromPath = require('../helpers/threadFromPath')
+const Comment = require('../db/comment')
 
 server.method('comment.create', create, {})
 server.method('comment.update', update, {})
@@ -20,7 +20,7 @@ function create (comment, memberId, cb) {
   comment.posted = Date.now()
   comment.updated = Date.now()
 
-  Comment.create(comment, function (err, _comment) {
+  Comment.create(comment, (err, _comment) => {
     if (err) {
       log.error({err: err, comment: comment}, 'error creating comment')
       return cb(Boom.internal())
@@ -32,9 +32,8 @@ function create (comment, memberId, cb) {
 
 function update (id, comment, cb) {
   comment.updated = Date.now()
-  var filter = {_id: id}
 
-  Comment.findOneAndUpdate(filter, comment, function (err, _comment) {
+  Comment.findByIdAndUpdate(id, comment, {new: true}, (err, _comment) => {
     if (err) {
       log.error({err: err, comment: id}, 'error updating comment')
       return cb(Boom.internal())
@@ -50,10 +49,9 @@ function update (id, comment, cb) {
 
 function get (id, query, cb) {
   cb = cb || query
-  var filter = {_id: id}
-  var fields = parser(query.fields)
+  const fields = parser(query.fields)
 
-  Comment.findOne(filter, fields, function (err, comment) {
+  Comment.findById(id, fields, (err, comment) => {
     if (err) {
       log.error({err: err, comment: id}, 'error getting comment')
       return cb(Boom.internal())
@@ -69,14 +67,13 @@ function get (id, query, cb) {
 
 function getByMember (memberId, query, cb) {
   cb = cb || query
-  var filter = {member: memberId}
-  var fields = parser(query.fields)
-  var options = {
+  const fields = parser(query.fields)
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
   }
-  Comment.find(filter, fields, options, function (err, comments) {
+  Comment.find({member: memberId}, fields, options, (err, comments) => {
     if (err) {
       log.error({err: err, member: memberId}, 'error getting comments')
       return cb(Boom.internal())
@@ -88,10 +85,10 @@ function getByMember (memberId, query, cb) {
 
 function getByThread (path, id, query, cb) {
   cb = cb || query
-  var thread = threadFromPath(path, id)
-  var filter = {thread: thread}
-  var fields = parser(query.fields)
-  Comment.find(filter, fields, filter, function (err, comments) {
+  const thread = threadFromPath(path, id)
+  const filter = {thread: thread}
+  const fields = parser(query.fields)
+  Comment.find(filter, fields, filter, (err, comments) => {
     if (err) {
       log.error({err: err, thread: thread}, 'error getting comments')
       return cb(Boom.internal())
@@ -103,10 +100,10 @@ function getByThread (path, id, query, cb) {
 
 function getBySubthread (path, id, query, cb) {
   cb = cb || query
-  var subthread = threadFromPath(path, id)
-  var filter = {subthread: subthread}
-  var fields = parser(query.fields)
-  Comment.find(filter, fields, filter, function (err, comments) {
+  const subthread = threadFromPath(path, id)
+  const filter = {subthread: subthread}
+  const fields = parser(query.fields)
+  Comment.find(filter, fields, filter, (err, comments) => {
     if (err) {
       log.error({err: err, subthread: subthread}, 'error getting comments')
       return cb(Boom.internal())
@@ -119,14 +116,13 @@ function getBySubthread (path, id, query, cb) {
 function list (query, cb) {
   cb = cb || query // fields is optional
 
-  var filter = {}
-  var fields = parser(query.fields)
-  var options = {
+  const fields = parser(query.fields)
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
   }
-  Comment.find(filter, fields, options, function (err, comments) {
+  Comment.find({}, fields, options, (err, comments) => {
     if (err) {
       log.error({err: err}, 'error getting all comments')
       return cb(Boom.internal())
@@ -137,9 +133,7 @@ function list (query, cb) {
 }
 
 function remove (id, cb) {
-  var filter = {_id: id}
-
-  Comment.findOneAndRemove(filter, function (err, comment) {
+  Comment.findByIdAndRemove(id, (err, comment) => {
     if (err) {
       log.error({err: err, comment: id}, 'error deleting comment')
       return cb(Boom.internal())
@@ -154,7 +148,7 @@ function remove (id, cb) {
 }
 
 function removeByThread (path, id, cb) {
-  var thread = ''
+  let thread = ''
   if (typeof (id) === 'function') {
     thread = path
     cb = id
@@ -162,8 +156,8 @@ function removeByThread (path, id, cb) {
     thread = threadFromPath(path, id)
   }
 
-  var filter = {thread: thread}
-  Comment.remove(filter, function (err, comments) {
+  const filter = {thread: thread}
+  Comment.remove(filter, (err, comments) => {
     if (err) {
       log.error({err: err, thread: thread}, 'error getting comments')
       return cb(Boom.internal())

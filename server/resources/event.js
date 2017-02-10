@@ -34,7 +34,7 @@ function create (event, memberId, cb) {
 function update (id, event, cb) {
   event.updated = Date.now()
 
-  eventModel.findOneAndUpdate({id: id}, event, function (err, _event) {
+  eventModel.findOneAndUpdate({id: id}, event, {new: true}, function (err, _event) {
     if (err) {
       log.error({err: err, event: id}, 'error updating event')
       return cb(Boom.internal())

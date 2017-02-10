@@ -36,7 +36,7 @@ function create (company, memberId, cb) {
 function update (id, company, cb) {
   company.updated = Date.now()
 
-  Company.findOneAndUpdate({id: id}, company, function (err, _company) {
+  Company.findOneAndUpdate({id: id}, company, {new: true}, function (err, _company) {
     if (err) {
       log.error({err: err, company: id}, 'error updating company')
       return cb(Boom.internal())
