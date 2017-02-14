@@ -7,6 +7,10 @@ var _ = require('../../helpers/underscore')
 module.exports = PageView.extend({
   pageTitle: 'Add session',
   template: templates.pages.sessions.add,
+  initialize: function () {
+    app.speakers.fetch({ data: { event: app.me.selectedEvent } })
+    app.companies.fetch({ data: { event: app.me.selectedEvent } })
+  },
   subviews: {
     form: {
       container: 'form',
