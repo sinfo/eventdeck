@@ -1,8 +1,8 @@
-var Joi = require('joi')
-var render = require('../../views/session')
-var ical = require('../../helpers/ical')
-var config = require('../../../config')
-var fs = require('fs')
+const Joi = require('joi')
+const render = require('../../views/session')
+const ical = require('../../helpers/ical')
+const config = require('../../../config')
+const fs = require('fs')
 
 exports = module.exports
 
@@ -159,7 +159,7 @@ exports.getIcal = {
   },
   tags: ['api', 'session'],
   handler: function (request, reply) {
-    var icalPath = config.ical.path
+    const icalPath = config.ical.path
 
     fs.exists(icalPath, function (exists) {
       if (exists) {

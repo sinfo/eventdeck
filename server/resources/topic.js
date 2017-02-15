@@ -1,8 +1,8 @@
-var Boom = require('boom')
-var server = require('../index').hapi
-var log = require('../helpers/logger')
-var parser = require('../helpers/fieldsParser')
-var Topic = require('../db/topic')
+const Boom = require('boom')
+const server = require('../index').hapi
+const log = require('../helpers/logger')
+const parser = require('../helpers/fieldsParser')
+const Topic = require('../db/topic')
 
 server.method('topic.create', create, {})
 server.method('topic.update', update, {})
@@ -19,9 +19,9 @@ function create (topic, memberId, cb) {
   topic.updated = Date.now()
   topic.author = memberId
 
-  Topic.create(topic, function (err, _topic) {
+  Topic.create(topic, (err, _topic) => {
     if (err) {
-      log.error({err: err, topic: topic}, 'error creating topic')
+      log.error({err, topic}, 'error creating topic')
       return cb(Boom.internal())
     }
 
@@ -31,10 +31,9 @@ function create (topic, memberId, cb) {
 
 function update (id, topic, cb) {
   topic.updated = Date.now()
-  var filter = { _id: id }
-  Topic.findOneAndUpdate(filter, topic, function (err, _topic) {
+  Topic.findByIdAndUpdate(id, topic, {new: true}, (err, _topic) => {
     if (err) {
-      log.error({err: err, topic: id}, 'error updating topic')
+      log.error({err, topic: id}, 'error updating topic')
       return cb(Boom.internal())
     }
     if (!_topic) {
@@ -48,11 +47,10 @@ function update (id, topic, cb) {
 
 function get (id, query, cb) {
   cb = cb || query // fields is optional
-  var fields = query.fields
-  var filter = { _id: id }
-  Topic.findOne(filter, fields, function (err, topic) {
+  const fields = query.fields
+  Topic.findById(id, fields, (err, topic) => {
     if (err) {
-      log.error({err: err, topic: id}, 'error getting topic')
+      log.error({err, topic: id}, 'error getting topic')
       return cb(Boom.internal())
     }
     if (!topic) {
@@ -67,16 +65,16 @@ function get (id, query, cb) {
 function getByMember (memberId, query, cb) {
   cb = cb || query
 
-  var filter = { targets: { $in: [memberId] } }
-  var fields = query.fields
-  var options = {
+  const filter = { targets: { $in: [memberId] } }
+  const fields = query.fields
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
   }
-  Topic.find(filter, fields, options, function (err, topics) {
+  Topic.find(filter, fields, options, (err, topics) => {
     if (err) {
-      log.error({err: err, member: memberId}, 'error getting topics')
+      log.error({err, member: memberId}, 'error getting topics')
       return cb(Boom.internal())
     }
 
@@ -86,16 +84,16 @@ function getByMember (memberId, query, cb) {
 
 function getByDueDate (start, end, query, cb) {
   cb = cb || query
-  var filter = { duedate: { $gte: start, $lt: end } }
-  var fields = query.fields
-  var options = {
+  const filter = { duedate: { $gte: start, $lt: end } }
+  const fields = query.fields
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
   }
-  Topic.find(filter, fields, options, function (err, topics) {
+  Topic.find(filter, fields, options, (err, topics) => {
     if (err) {
-      log.error({err: err, dates: filter}, 'error getting topics')
+      log.error({err, dates: filter}, 'error getting topics')
       return cb(Boom.internal())
     }
 
@@ -105,16 +103,16 @@ function getByDueDate (start, end, query, cb) {
 
 function getByTag (tagId, query, cb) {
   cb = cb || query
-  var filter = { tags: { $in: [tagId] } }
-  var fields = query.fields
-  var options = {
+  const filter = { tags: { $in: [tagId] } }
+  const fields = query.fields
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
   }
-  Topic.find(filter, fields, options, function (err, topics) {
+  Topic.find(filter, fields, options, (err, topics) => {
     if (err) {
-      log.error({err: err, tag: tagId}, 'error getting topics')
+      log.error({err, tag: tagId}, 'error getting topics')
       return cb(Boom.internal())
     }
 
@@ -125,15 +123,15 @@ function getByTag (tagId, query, cb) {
 function list (query, cb) {
   cb = cb || query // fields is optional
 
-  var filter = {}
-  var fields = parser(query.fields)
-  var options = {
+  const filter = {}
+  const fields = parser(query.fields)
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
   }
 
-  Topic.find(filter, fields, options, function (err, topics) {
+  Topic.find(filter, fields, options, (err, topics) => {
     if (err) {
       log.error({err: err}, 'error getting all topics')
       return cb(Boom.internal())
@@ -144,10 +142,9 @@ function list (query, cb) {
 }
 
 function remove (id, cb) {
-  var filter = { _id: id }
-  Topic.findOneAndRemove(filter, function (err, topic) {
+  Topic.findByIdAndRemove(id, (err, topic) => {
     if (err) {
-      log.error({err: err, topic: id}, 'error deleting topic')
+      log.error({err, topic: id}, 'error deleting topic')
       return cb(Boom.internal())
     }
     if (!topic) {
@@ -162,17 +159,17 @@ function remove (id, cb) {
 function search (str, query, cb) {
   cb = cb || query // fields is optional
 
-  var filter = { name: new RegExp(str, 'i') }
-  var fields = parser(query.fields || 'id,name,kind')
-  var options = {
+  let filter = { name: new RegExp(str, 'i') }
+  const fields = parser(query.fields || 'id,name,kind')
+  const options = {
     skip: query.skip,
     limit: query.limit || 10,
     sort: parser(query.sort)
   }
 
-  Topic.find(filter, fields, options, function (err, exactTopics) {
+  Topic.find(filter, fields, options, (err, exactTopics) => {
     if (err) {
-      log.error({err: err, filter: filter}, 'error getting topics')
+      log.error({err, filter}, 'error getting topics')
       return cb(Boom.internal())
     }
 
@@ -187,9 +184,9 @@ function search (str, query, cb) {
       ]
     }
 
-    Topic.find(filter, fields, options, function (err, extendedTopics) {
+    Topic.find(filter, fields, options, (err, extendedTopics) => {
       if (err) {
-        log.error({err: err, filter: filter}, 'error getting topics')
+        log.error({err, filter}, 'error getting topics')
         return cb(Boom.internal())
       }
 

@@ -1,14 +1,14 @@
-var Boom = require('boom')
-var server = require('../index').hapi
-var log = require('../helpers/logger')
-var threadFromPath = require('../helpers/threadFromPath')
-var Access = require('../db/access')
+const Boom = require('boom')
+const server = require('../index').hapi
+const log = require('../helpers/logger')
+const threadFromPath = require('../helpers/threadFromPath')
+const Access = require('../db/access')
 
 server.method('access.save', save, {})
 server.method('access.get', get, {})
 
 function save (memberId, path, id, cb) {
-  var thread = ''
+  let thread = ''
   if (typeof (id) === 'function') {
     thread = path
     cb = id
@@ -16,16 +16,16 @@ function save (memberId, path, id, cb) {
     thread = threadFromPath(path, id)
   }
 
-  var filter = { member: memberId, thread: thread }
-  var access = {
+  const filter = { member: memberId, thread }
+  const access = {
     member: memberId,
-    thread: thread,
+    thread,
     last: Date.now()
   }
 
-  Access.findOneAndUpdate(filter, access, {upsert: true}, function (err, savedAccess) {
+  Access.findOneAndUpdate(filter, access, {upsert: true}, (err, savedAccess) => {
     if (err) {
-      log.error({err: err, access: access})
+      log.error({err, access})
       return cb(Boom.internal())
     }
 
@@ -34,7 +34,7 @@ function save (memberId, path, id, cb) {
 }
 
 function get (memberId, path, id, cb) {
-  var thread = ''
+  let thread = ''
   if (typeof (id) === 'function') {
     thread = path
     cb = id
@@ -42,11 +42,11 @@ function get (memberId, path, id, cb) {
     thread = threadFromPath(path, id)
   }
 
-  var filter = { member: memberId, thread: thread }
+  const filter = { member: memberId, thread }
 
-  Access.findOne(filter, function (err, savedAccess) {
+  Access.findOne(filter, (err, savedAccess) => {
     if (err) {
-      log.error({err: err, access: filter})
+      log.error({err, access: filter})
       return cb(Boom.internal())
     }
 

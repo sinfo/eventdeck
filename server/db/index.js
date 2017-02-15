@@ -1,15 +1,15 @@
-var mongoose = require('mongoose')
-var mongoUrl = require('../../config').mongo.url
-var log = require('../helpers/logger')
+const mongoose = require('mongoose')
+const mongoUrl = require('../../config').mongo.url
+const log = require('../helpers/logger')
 
 mongoose.connect(mongoUrl)
-var db = mongoose.connection
+const db = mongoose.connection
 
-db.on('error', function (err) {
+db.on('error', (err) => {
   log.error('Connection error:', err)
 })
 
-db.once('open', function () {
+db.once('open', () => {
   log.info('Successfuly connected to mongoDB')
 })
 

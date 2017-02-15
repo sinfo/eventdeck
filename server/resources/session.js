@@ -1,10 +1,10 @@
-var Boom = require('boom')
-var slug = require('slug')
-var server = require('../index').hapi
-var log = require('../helpers/logger')
-var parser = require('../helpers/fieldsParser')
-var Session = require('../db/session')
-var ical = require('../helpers/ical')
+const Boom = require('boom')
+const slug = require('slug')
+const server = require('../index').hapi
+const log = require('../helpers/logger')
+const parser = require('../helpers/fieldsParser')
+const Session = require('../db/session')
+const ical = require('../helpers/ical')
 
 server.method('session.create', create, {})
 server.method('session.update', update, {})
@@ -17,7 +17,7 @@ function create (session, memberId, cb) {
   session.updated = Date.now()
   session.id = slug((session.id || session.name) + '-' + session.event).toLowerCase()
 
-  Session.create(session, function (err, _session) {
+  Session.create(session, (err, _session) => {
     if (err) {
       log.error({err: err, session: session}, 'error creating session')
       return cb(Boom.internal())
@@ -31,8 +31,7 @@ function create (session, memberId, cb) {
 
 function update (id, session, cb) {
   session.updated = Date.now()
-  var filter = {id: id}
-  Session.findOneAndUpdate(filter, session, function (err, _session) {
+  Session.findOneAndUpdate({id: id}, session, {new: true}, (err, _session) => {
     if (err) {
       log.error({err: err, session: id}, 'error updating session')
       return cb(Boom.internal())
@@ -50,10 +49,9 @@ function update (id, session, cb) {
 
 function get (id, query, cb) {
   cb = cb || query
-  var filter = {id: id}
-  var fields = query.fields
+  const fields = query.fields
 
-  Session.findOne(filter, fields, function (err, session) {
+  Session.findOne({id: id}, fields, (err, session) => {
     if (err) {
       log.error({err: err, session: id}, 'error getting session')
       return cb(Boom.internal())
@@ -69,16 +67,16 @@ function get (id, query, cb) {
 
 function list (query, cb) {
   cb = cb || query
-  var filter = {}
-  var fields = query.fields
-  var options = {
+  const filter = {}
+  const fields = query.fields
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
   }
   if (query.event) { filter.event = query.event }
 
-  Session.find(filter, fields, options, function (err, sessions) {
+  Session.find(filter, fields, options, (err, sessions) => {
     if (err) {
       log.error({err: err}, 'error getting all sessions')
       return cb(Boom.internal())
@@ -89,8 +87,7 @@ function list (query, cb) {
 }
 
 function remove (id, cb) {
-  var filter = {id: id}
-  Session.findOneAndRemove(filter, function (err, session) {
+  Session.findOneAndRemove({id: id}, (err, session) => {
     if (err) {
       log.error({err: err, session: id}, 'error deleting session')
       return cb(Boom.internal())
@@ -109,15 +106,15 @@ function remove (id, cb) {
 function search (str, query, cb) {
   cb = cb || query // fields is optional
 
-  var filter = { name: new RegExp(str, 'i') }
-  var fields = parser(query.fields || 'id,name,img')
-  var options = {
+  let filter = { name: new RegExp(str, 'i') }
+  const fields = parser(query.fields || 'id,name,img')
+  const options = {
     skip: query.skip,
     limit: query.limit || 10,
     sort: parser(query.sort)
   }
 
-  Session.find(filter, fields, options, function (err, exactSessions) {
+  Session.find(filter, fields, options, (err, exactSessions) => {
     if (err) {
       log.error({err: err, filter: filter}, 'error getting sessions')
       return cb(Boom.internal())
@@ -135,7 +132,7 @@ function search (str, query, cb) {
       ]
     }
 
-    Session.find(filter, fields, options, function (err, extendedSessions) {
+    Session.find(filter, fields, options, (err, extendedSessions) => {
       if (err) {
         log.error({err: err, filter: filter}, 'error getting sessions')
         return cb(Boom.internal())

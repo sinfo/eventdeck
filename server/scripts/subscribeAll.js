@@ -1,14 +1,14 @@
-var mongoose = require('mongoose')
+const mongoose = require('mongoose')
 
-var Member = require('../db/member')
-var Company = require('../db/company')
-var Topic = require('../db/topic')
-var Speaker = require('../db/speaker')
-var Subscription = require('../db/subscription')
+const Member = require('../db/member')
+const Company = require('../db/company')
+const Topic = require('../db/topic')
+const Speaker = require('../db/speaker')
+const Subscription = require('../db/subscription')
 
 mongoose.connect('mongodb://localhost/deck')
 
-var coordinators
+let coordinators
 
 // TODO creating for all coordinators
 Member.find({

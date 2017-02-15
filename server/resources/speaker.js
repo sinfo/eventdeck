@@ -1,10 +1,10 @@
-var Boom = require('boom')
-var slug = require('slug')
-var server = require('../index').hapi
-var log = require('../helpers/logger')
-var parser = require('../helpers/fieldsParser')
-var Speaker = require('../db/speaker')
-var dupKeyParser = require('../helpers/dupKeyParser')
+const Boom = require('boom')
+const slug = require('slug')
+const server = require('../index').hapi
+const log = require('../helpers/logger')
+const parser = require('../helpers/fieldsParser')
+const Speaker = require('../db/speaker')
+const dupKeyParser = require('../helpers/dupKeyParser')
 
 server.method('speaker.create', create, {})
 server.method('speaker.update', update, {})
@@ -19,14 +19,14 @@ function create (speaker, memberId, cb) {
   speaker.id = slug(speaker.id || speaker.name).toLowerCase()
   speaker.updated = Date.now()
 
-  Speaker.create(speaker, function (err, _speaker) {
+  Speaker.create(speaker, (err, _speaker) => {
     if (err) {
       if (err.code === 11000) {
-        log.warn({err: err, requestedSpeaker: speaker.id}, 'speaker is a duplicate')
+        log.warn({err, requestedSpeaker: speaker.id}, 'speaker is a duplicate')
         return cb(Boom.conflict(dupKeyParser(err.err) + ' is a duplicate'))
       }
 
-      log.error({err: err, speaker: speaker}, 'error creating speaker')
+      log.error({err, speaker: speaker}, 'error creating speaker')
       return cb(Boom.internal())
     }
     cb(null, _speaker.toObject({ getters: true }))
@@ -35,10 +35,9 @@ function create (speaker, memberId, cb) {
 
 function update (id, speaker, cb) {
   speaker.updated = Date.now()
-  var filter = {id: id}
-  Speaker.findOneAndUpdate(filter, speaker, function (err, _speaker) {
+  Speaker.findOneAndUpdate({id: id}, speaker, {new: true}, (err, _speaker) => {
     if (err) {
-      log.error({err: err, speaker: id}, 'error updating speaker')
+      log.error({err, speaker: id}, 'error updating speaker')
       return cb(Boom.internal())
     }
     if (!_speaker) {
@@ -53,11 +52,10 @@ function update (id, speaker, cb) {
 function get (id, query, cb) {
   cb = cb || query // fields is optional
 
-  var fields = parser(query.fields)
-  var filter = {id: id}
-  Speaker.findOne(filter, fields, function (err, speaker) {
+  const fields = parser(query.fields)
+  Speaker.findOne({id: id}, fields, function (err, speaker) {
     if (err) {
-      log.error({err: err, speaker: id}, 'error getting speaker')
+      log.error({err, speaker: id}, 'error getting speaker')
       return cb(Boom.internal())
     }
     if (!speaker) {
@@ -71,16 +69,16 @@ function get (id, query, cb) {
 
 function getByMember (memberId, query, cb) {
   cb = cb || query
-  var filter = { participations: { $elemMatch: { member: memberId } } }
-  var fields = query.fields
-  var options = {
+  const filter = { participations: { $elemMatch: { member: memberId } } }
+  const fields = query.fields
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
   }
-  Speaker.find(filter, fields, options, function (err, speaker) {
+  Speaker.find(filter, fields, options, (err, speaker) => {
     if (err) {
-      log.error({err: err, member: memberId}, 'error getting speaker')
+      log.error({err, member: memberId}, 'error getting speaker')
       return cb(Boom.internal())
     }
 
@@ -90,16 +88,16 @@ function getByMember (memberId, query, cb) {
 
 function getByEvent (eventId, query, cb) {
   cb = cb || query
-  var filter = { participations: { $elemMatch: { event: eventId } } }
-  var fields = query.fields
-  var options = {
+  const filter = { participations: { $elemMatch: { event: eventId } } }
+  const fields = query.fields
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
   }
-  Speaker.find(filter, fields, options, function (err, speaker) {
+  Speaker.find(filter, fields, options, (err, speaker) => {
     if (err) {
-      log.error({err: err, event: eventId}, 'error getting speaker')
+      log.error({err, event: eventId}, 'error getting speaker')
     }
 
     cb(null, speaker)
@@ -108,10 +106,10 @@ function getByEvent (eventId, query, cb) {
 
 function list (query, cb) {
   cb = cb || query
-  var eventsFilter = {}
-  var filter = {}
-  var fields = parser(query.fields)
-  var options = {
+  let eventsFilter = {}
+  let filter = {}
+  const fields = parser(query.fields)
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort),
@@ -132,9 +130,9 @@ function list (query, cb) {
     filter.participations = query.participations ? {$elemMatch: eventsFilter} : {$not: {$elemMatch: eventsFilter}}
   }
 
-  Speaker.find(filter, fields, options, function (err, speaker) {
+  Speaker.find(filter, fields, options, (err, speaker) => {
     if (err) {
-      log.error({err: err}, 'error getting all speaker')
+      log.error({err}, 'error getting all speaker')
       return cb(Boom.internal())
     }
 
@@ -143,14 +141,13 @@ function list (query, cb) {
 }
 
 function remove (id, cb) {
-  var filter = {id: id}
-  Speaker.findOneAndRemove(filter, function (err, speaker) {
+  Speaker.findOneAndRemove({id: id}, (err, speaker) => {
     if (err) {
       log.error({err: err, speaker: id}, 'error deleting speaker')
       return cb(Boom.internal())
     }
     if (!speaker) {
-      log.error({err: err, speaker: id}, 'error deleting speaker')
+      log.error({err, speaker: id}, 'error deleting speaker')
       return cb(Boom.notFound())
     }
 
@@ -161,17 +158,17 @@ function remove (id, cb) {
 function search (str, query, cb) {
   cb = cb || query // fields is optional
 
-  var filter = { name: new RegExp(str, 'i') }
-  var fields = parser(query.fields || 'id,name,img')
-  var options = {
+  let filter = { name: new RegExp(str, 'i') }
+  const fields = parser(query.fields || 'id,name,img')
+  const options = {
     skip: query.skip,
     limit: query.limit || 10,
     sort: parser(query.sort)
   }
 
-  Speaker.find(filter, fields, options, function (err, exactSpeakers) {
+  Speaker.find(filter, fields, options, (err, exactSpeakers) => {
     if (err) {
-      log.error({err: err, filter: filter}, 'error getting speakers')
+      log.error({err, filter}, 'error getting speakers')
       return cb(Boom.internal())
     }
 
@@ -188,9 +185,9 @@ function search (str, query, cb) {
       ]
     }
 
-    Speaker.find(filter, fields, options, function (err, extendedSpeakers) {
+    Speaker.find(filter, fields, options, (err, extendedSpeakers) => {
       if (err) {
-        log.error({err: err, filter: filter}, 'error getting speakers')
+        log.error({err, filter}, 'error getting speakers')
         return cb(Boom.internal())
       }
 

@@ -1,13 +1,12 @@
-var pack = require('./package')
-var path = require('path')
-var bunyanLogentries = require('bunyan-logentries')
+const pack = require('./package')
+const path = require('path')
+const bunyanLogentries = require('bunyan-logentries')
 
-var config = {
+const config = {
   url: process.env.EVENTDECK_URL || 'http://localhost:8080',
   host: process.env.EVENTDECK_HOST || 'localhost',
   port: process.env.EVENTDECK_PORT || 8080,
-  isDev: process.env.NODE_ENV !== 'production',
-  isSecure: process.env.EVENTDECK_IS_SECURE === true || process.env.EVENTDECK_IS_SECURE === 'true'
+  isDev: process.env.NODE_ENV !== 'production'
 }
 
 config.cannon = {
@@ -57,7 +56,9 @@ config.bunyan = {
 
 config.swagger = {
   pathPrefixSize: 2,
-  apiVersion: pack.version,
+  info: {
+    version: pack.version
+  },
   basePath: config.url
 }
 

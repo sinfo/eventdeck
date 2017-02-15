@@ -1,5 +1,5 @@
-var CronJob = require('cron').CronJob
-var reminder = require('./../../resources/reminder')
+const CronJob = require('cron').CronJob
+const reminder = require('./../../resources/reminder')
 
 module.exports = new CronJob({
   cronTime: '00 00 */6 * * *',

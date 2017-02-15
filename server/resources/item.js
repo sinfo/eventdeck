@@ -1,9 +1,9 @@
-var Boom = require('boom')
-var slug = require('slug')
-var server = require('../index').hapi
-var log = require('../helpers/logger')
-var parser = require('../helpers/fieldsParser')
-var Item = require('../db/item')
+const Boom = require('boom')
+const slug = require('slug')
+const server = require('../index').hapi
+const log = require('../helpers/logger')
+const parser = require('../helpers/fieldsParser')
+const Item = require('../db/item')
 
 server.method('item.create', create, {})
 server.method('item.update', update, {})
@@ -16,7 +16,7 @@ function create (item, memberId, cb) {
 
   Item.create(item, function (err, _item) {
     if (err) {
-      log.error({err: err, item: item}, 'error creating item')
+      log.error({err, item: item}, 'error creating item')
       return cb(Boom.internal())
     }
 
@@ -25,11 +25,9 @@ function create (item, memberId, cb) {
 }
 
 function update (id, item, cb) {
-  var filter = { id: id }
-
-  Item.findOneAndUpdate(filter, item, function (err, _item) {
+  Item.findOneAndUpdate({ id: id }, item, {new: true}, (err, _item) => {
     if (err) {
-      log.error({err: err, item: id}, 'error updating item')
+      log.error({err, item: id}, 'error updating item')
       return cb(Boom.internal())
     }
     if (!_item) {
@@ -43,13 +41,11 @@ function update (id, item, cb) {
 
 function get (id, query, cb) {
   cb = cb || query
+  const fields = parser(query.fields)
 
-  var filter = { id: id }
-  var fields = parser(query.fields)
-
-  Item.findOne(filter, fields, function (err, item) {
+  Item.findOne({ id: id }, fields, (err, item) => {
     if (err) {
-      log.error({err: err, item: id}, 'error getting item')
+      log.error({err, item: id}, 'error getting item')
       return cb(Boom.internal())
     }
     if (!item) {
@@ -64,17 +60,16 @@ function get (id, query, cb) {
 function list (query, cb) {
   cb = cb || query // fields is optional
 
-  var filter = {}
-  var fields = parser(query.fields)
-  var options = {
+  const fields = parser(query.fields)
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
   }
 
-  Item.find(filter, fields, options, function (err, items) {
+  Item.find({}, fields, options, (err, items) => {
     if (err) {
-      log.error({err: err}, 'error getting all items')
+      log.error({err}, 'error getting all items')
       return cb(Boom.internal())
     }
 
@@ -83,11 +78,9 @@ function list (query, cb) {
 }
 
 function remove (id, cb) {
-  var filter = { id: id }
-
-  Item.findOneAndRemove(filter, function (err, item) {
+  Item.findOneAndRemove({ id: id }, (err, item) => {
     if (err) {
-      log.error({err: err, item: id}, 'error deleting item')
+      log.error({err, item: id}, 'error deleting item')
       return cb(Boom.internal())
     }
     if (!item) {

@@ -1,5 +1,5 @@
-var server = require('../../index').hapi
-var handlers = require('./handlers')
+const server = require('../../index').hapi
+const handlers = require('./handlers')
 
 server.route({
   method: 'GET',

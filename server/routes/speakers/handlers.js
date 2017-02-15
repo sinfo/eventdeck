@@ -1,5 +1,5 @@
-var Joi = require('joi')
-var render = require('../../views/speaker')
+const Joi = require('joi')
+const render = require('../../views/speaker')
 
 exports = module.exports
 
@@ -148,7 +148,7 @@ exports.list = {
   ],
   handler: function (request, reply) {
     // Because in public views, when an event is selected, we want to address that participation
-    var selectedEvent = request.query && request.query.event
+    const selectedEvent = request.query && request.query.event
     reply(render(request.pre.speakers, request.auth.isAuthenticated && !request.headers['Only-Public'], selectedEvent))
   },
   description: 'Gets all the speakers'

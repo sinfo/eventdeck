@@ -1,9 +1,9 @@
-var Joi = require('joi')
-var companiesRender = require('../../views/company')
-var speakersRender = require('../../views/speaker')
-var membersRender = require('../../views/member')
-var topicsRender = require('../../views/topic')
-var sessionsRender = require('../../views/session')
+const Joi = require('joi')
+const companiesRender = require('../../views/company')
+const speakersRender = require('../../views/speaker')
+const membersRender = require('../../views/member')
+const topicsRender = require('../../views/topic')
+const sessionsRender = require('../../views/session')
 
 exports = module.exports
 

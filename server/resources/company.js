@@ -1,10 +1,10 @@
-var Boom = require('boom')
-var slug = require('slug')
-var server = require('../index').hapi
-var log = require('../helpers/logger')
-var parser = require('../helpers/fieldsParser')
-var Company = require('../db/company')
-var dupKeyParser = require('../helpers/dupKeyParser')
+const Boom = require('boom')
+const slug = require('slug')
+const server = require('../index').hapi
+const log = require('../helpers/logger')
+const parser = require('../helpers/fieldsParser')
+const Company = require('../db/company')
+const dupKeyParser = require('../helpers/dupKeyParser')
 
 server.method('company.create', create, {})
 server.method('company.update', update, {})
@@ -19,14 +19,14 @@ function create (company, memberId, cb) {
   company.id = slug(company.id || company.name).toLowerCase()
   company.updated = Date.now()
 
-  Company.create(company, function (err, _company) {
+  Company.create(company, (err, _company) => {
     if (err) {
       if (err.code === 11000) {
-        log.warn({err: err, requestedCompany: company.id}, 'company is a duplicate')
+        log.warn({err, requestedCompany: company.id}, 'company is a duplicate')
         return cb(Boom.conflict(dupKeyParser(err.err) + ' is a duplicate'))
       }
 
-      log.error({err: err, company: company}, 'error creating company')
+      log.error({err, company}, 'error creating company')
       return cb(Boom.internal())
     }
     cb(null, _company.toObject({ getters: true }))
@@ -36,9 +36,9 @@ function create (company, memberId, cb) {
 function update (id, company, cb) {
   company.updated = Date.now()
 
-  Company.findOneAndUpdate({id: id}, company, function (err, _company) {
+  Company.findOneAndUpdate({id: id}, company, {new: true}, (err, _company) => {
     if (err) {
-      log.error({err: err, company: id}, 'error updating company')
+      log.error({err, company: id}, 'error updating company')
       return cb(Boom.internal())
     }
     if (!_company) {
@@ -53,10 +53,10 @@ function update (id, company, cb) {
 function get (id, query, cb) {
   cb = cb || query // fields is optional
 
-  var fields = parser(query.fields)
-  Company.findOne({id: id}, fields, function (err, company) {
+  const fields = parser(query.fields)
+  Company.findOne({id: id}, fields, (err, company) => {
     if (err) {
-      log.error({err: err, company: id}, 'error getting company')
+      log.error({err, company: id}, 'error getting company')
       return cb(Boom.internal())
     }
     if (!company) {
@@ -71,17 +71,17 @@ function get (id, query, cb) {
 function getByMember (memberId, query, cb) {
   cb = cb || query // fields is optional
 
-  var filter = { participations: { $elemMatch: { member: memberId } } }
-  var fields = parser(query.fields)
-  var options = {
+  const filter = { participations: { $elemMatch: { member: memberId } } }
+  const fields = parser(query.fields)
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
   }
 
-  Company.find(filter, fields, options, function (err, companies) {
+  Company.find(filter, fields, options, (err, companies) => {
     if (err) {
-      log.error({err: err, member: memberId}, 'error getting companies')
+      log.error({err, member: memberId}, 'error getting companies')
       return cb(Boom.internal())
     }
 
@@ -92,17 +92,17 @@ function getByMember (memberId, query, cb) {
 function getByEvent (eventId, query, cb) {
   cb = cb || query // fields is optional
 
-  var filter = { participations: { $elemMatch: { event: eventId } } }
-  var fields = parser(query.fields)
-  var options = {
+  const filter = { participations: { $elemMatch: { event: eventId } } }
+  const fields = parser(query.fields)
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
   }
 
-  Company.find(filter, fields, options, function (err, companies) {
+  Company.find(filter, fields, options, (err, companies) => {
     if (err) {
-      log.error({err: err, event: eventId}, 'error getting companies')
+      log.error({err, event: eventId}, 'error getting companies')
       return cb(Boom.internal())
     }
 
@@ -112,10 +112,10 @@ function getByEvent (eventId, query, cb) {
 
 function list (query, cb) {
   cb = cb || query // fields is optional
-  var eventsFilter = {}
-  var filter = {}
-  var fields = parser(query.fields)
-  var options = {
+  let eventsFilter = {}
+  let filter = {}
+  const fields = parser(query.fields)
+  const options = {
     skip: query.skip,
     limit: query.limit,
     sort: parser(query.sort)
@@ -135,9 +135,9 @@ function list (query, cb) {
     filter.participations = query.participations ? {$elemMatch: eventsFilter} : {$not: {$elemMatch: eventsFilter}}
   }
 
-  Company.find(filter, fields, options, function (err, companies) {
+  Company.find(filter, fields, options, (err, companies) => {
     if (err) {
-      log.error({err: err}, 'error getting all companies')
+      log.error({err}, 'error getting all companies')
       return cb(Boom.internal())
     }
 
@@ -146,9 +146,9 @@ function list (query, cb) {
 }
 
 function remove (id, cb) {
-  Company.findOneAndRemove({id: id}, function (err, company) {
+  Company.findOneAndRemove({id: id}, (err, company) => {
     if (err) {
-      log.error({err: err, company: id}, 'error deleting company')
+      log.error({err, company: id}, 'error deleting company')
       return cb(Boom.internal())
     }
     if (!company) {
@@ -163,9 +163,9 @@ function remove (id, cb) {
 function search (str, query, cb) {
   cb = cb || query // fields is optional
 
-  var filter = { name: new RegExp(str, 'i') }
-  var fields = parser(query.fields || 'id,name,img')
-  var options = {
+  let filter = { name: new RegExp(str, 'i') }
+  const fields = parser(query.fields || 'id,name,img')
+  const options = {
     skip: query.skip,
     limit: query.limit || 10,
     sort: parser(query.sort)
@@ -173,7 +173,7 @@ function search (str, query, cb) {
 
   Company.find(filter, fields, options, function (err, exactCompanies) {
     if (err) {
-      log.error({err: err, filter: filter}, 'error getting companies')
+      log.error({err, filter}, 'error getting companies')
       return cb(Boom.internal())
     }
 
@@ -190,9 +190,9 @@ function search (str, query, cb) {
       ]
     }
 
-    Company.find(filter, fields, options, function (err, extendedCompanies) {
+    Company.find(filter, fields, options, (err, extendedCompanies) => {
       if (err) {
-        log.error({err: err, filter: filter}, 'error getting companies')
+        log.error({err, filter}, 'error getting companies')
         return cb(Boom.internal())
       }
 

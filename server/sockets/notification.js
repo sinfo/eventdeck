@@ -66,7 +66,7 @@ var validators = {
       source: Joi.string().description('The source of the thread'),
       member: Joi.string().description('The member from whom the notification comes'),
       description: Joi.string().description('Description of the notification'),
-      targets: Joi.array().includes(Joi.string()).description('Targets to be notified'),
+      targets: Joi.array().items(Joi.string()).description('Targets to be notified'),
       unread: Joi.boolean(),
       posted: Joi.date()
     })

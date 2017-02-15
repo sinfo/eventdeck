@@ -1,5 +1,5 @@
-var Joi = require('joi')
-var render = require('../../views/tag')
+const Joi = require('joi')
+const render = require('../../views/tag')
 
 exports = module.exports
 

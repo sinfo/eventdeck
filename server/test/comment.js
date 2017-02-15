@@ -1,11 +1,11 @@
-var Lab = require('lab')
-var Code = require('code')
+const Lab = require('lab')
+const Code = require('code')
 
-var server = require('../').hapi
+const server = require('../').hapi
 
-var lab = exports.lab = Lab.script()
+const lab = exports.lab = Lab.script()
 
-var credentials = {
+const credentials = {
   id: 'john.doe',
   name: 'John Doe',
   participations: [{
@@ -14,28 +14,28 @@ var credentials = {
   }]
 }
 
-var commentA = {
+const commentA = {
   thread: 'company-example',
   subthread: 'company-example-subexample',
-  text: 'this is an example of a comentary'
+  text: 'this is an example of a comment'
 }
 
-var changesToA = {
+const changesToA = {
   text: 'This is an example of an example of another example.'
 }
-var commId
+let commId
 
-lab.experiment('Comment', function () {
-  lab.test('Create', function (done) {
-    var options = {
+lab.experiment('Comment', () => {
+  lab.test('Create', (done) => {
+    const options = {
       method: 'POST',
       url: '/api/comments',
       credentials: credentials,
       payload: commentA
     }
 
-    server.inject(options, function (response) {
-      var result = response.result
+    server.inject(options, (response) => {
+      const result = response.result
 
       Code.expect(response.statusCode).to.equal(201)
       Code.expect(result).to.be.instanceof(Object)
@@ -49,15 +49,15 @@ lab.experiment('Comment', function () {
     })
   })
 
-  lab.test('List all', function (done) {
-    var options = {
+  lab.test('List all', (done) => {
+    const options = {
       method: 'GET',
       url: '/api/comments',
       credentials: credentials
     }
 
-    server.inject(options, function (response) {
-      var result = response.result
+    server.inject(options, (response) => {
+      const result = response.result
 
       Code.expect(response.statusCode).to.equal(200)
       Code.expect(result).to.be.instanceof(Array)
@@ -68,15 +68,15 @@ lab.experiment('Comment', function () {
     })
   })
 
-  lab.test('Get one', function (done) {
-    var options = {
+  lab.test('Get one', (done) => {
+    const options = {
       method: 'GET',
       url: '/api/comments/' + commId,
       credentials: credentials
     }
 
-    server.inject(options, function (response) {
-      var result = response.result
+    server.inject(options, (response) => {
+      const result = response.result
 
       Code.expect(response.statusCode).to.equal(200)
       Code.expect(result).to.be.instanceof(Object)
@@ -88,16 +88,16 @@ lab.experiment('Comment', function () {
     })
   })
 
-  lab.test('Update', function (done) {
-    var options = {
+  lab.test('Update', (done) => {
+    const options = {
       method: 'PUT',
       url: '/api/comments/' + commId,
       credentials: credentials,
       payload: changesToA
     }
 
-    server.inject(options, function (response) {
-      var result = response.result
+    server.inject(options, (response) => {
+      const result = response.result
 
       Code.expect(response.statusCode).to.equal(200)
       Code.expect(result).to.be.instanceof(Object)
@@ -109,15 +109,15 @@ lab.experiment('Comment', function () {
     })
   })
 
-  lab.test('Delete', function (done) {
-    var options = {
+  lab.test('Delete', (done) => {
+    const options = {
       method: 'DELETE',
       url: '/api/comments/' + commId,
       credentials: credentials
     }
 
-    server.inject(options, function (response) {
-      var result = response.result
+    server.inject(options, (response) => {
+      const result = response.result
 
       Code.expect(response.statusCode).to.equal(200)
       Code.expect(result).to.be.instanceof(Object)

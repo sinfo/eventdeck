@@ -1,23 +1,32 @@
-// init http monitoring
-require('pmx').init()
+const Hapi = require('hapi')
+const Inert = require('inert')
+const Vision = require('vision')
+const HapiSwagger = require('hapi-swagger')
+const Moonboots = require('moonboots_hapi')
+const HapiAuthCookie = require('hapi-auth-cookie')
+const IO = {server: require('socket.io'), client: require('socket.io-client')}
+const log = require('./helpers/logger')
+const config = require('../config')
+const path = require('path')
+const cookieConfig = config.cookie
+const moonbootsConfig = require('../moonbootsConfig')
 
-var Hapi = require('hapi')
-var IO = {server: require('socket.io'), client: require('socket.io-client')}
-var log = require('./helpers/logger')
-var config = require('../config')
-var path = require('path')
-var cookieConfig = config.cookie
-var moonbootsConfig = require('../moonbootsConfig')
+const cookieName = 'eventdeck-config'
 
-var cookieName = 'eventdeck-config'
+log.info({env: process.env.NODE_ENV}, '### Starting EventDeck ###')
 
-log.error({ env: process.env.NODE_ENV }, '### Starting EventDeck ###')
+const server = module.exports.hapi = new Hapi.Server()
+server.connection({
+  host: config.host,
+  port: config.port
+})
 
-var server = module.exports.hapi = new Hapi.Server(config.host, config.port, { cors: config.cors })
+// TODO: CORS in new Hapi version is disabled - it's needed ?
+// { cors: config.cors }
 
 require('./db')
 
-var internals = {}
+let internals = {}
 // set clientconfig cookie
 internals.configStateConfig = {
   encoding: 'none',
@@ -29,44 +38,44 @@ server.state(cookieName, internals.configStateConfig)
 internals.clientConfig = JSON.stringify(config.client)
 server.ext('onPreResponse', function (request, reply) {
   if (!request.state.config && !request.response.isBoom) {
-    var response = request.response
+    let response = request.response
     return reply(response.state(cookieName, encodeURIComponent(internals.clientConfig)))
   }
 
   return reply()
 })
 
-// Set view template engine
-server.views({
-  engines: {
-    hbs: require('handlebars')
-  },
-  path: path.join(__dirname, 'templates')
-})
-
-server.pack.register([
-  { plugin: require('hapi-swagger'), options: config.swagger },
-  { plugin: require('moonboots_hapi'), options: moonbootsConfig },
-  require('hapi-auth-cookie'),
-  { plugin: require('./plugins/images'), options: config.images },
-  { plugin: require('./plugins/templates'), options: config.templates }
-],
-  function (err) {
+server.register([
+  Inert,
+  Vision,
+    {register: HapiSwagger, options: config.swagger},
+    {register: Moonboots, options: moonbootsConfig},
+    {register: HapiAuthCookie},
+    {register: require('./plugins/images'), options: config.images},
+    {register: require('./plugins/templates'), options: config.templates}],
+  (err) => {
     if (err) throw err
+
+    server.views({
+      engines: {
+        hbs: require('handlebars')
+      },
+      path: path.join(__dirname, 'templates')
+    })
 
     server.auth.strategy('session', 'cookie', {
       cookie: cookieConfig.name,
       password: cookieConfig.password,
       ttl: 2592000000,
       /* appendNext: true,
-        redirectTo: '/login',
-        redirectOnTry: true,
-        isSecure: false,
-        isHttpOnly: false, */
+       redirectTo: '/login',
+       redirectOnTry: true,
+       isSecure: false,
+       isHttpOnly: false, */
       isSecure: false
     })
 
-    var webSocket = {}
+    let webSocket = {}
     webSocket.server = IO.server.listen(server.listener)
     log.info('Websocket server started at: ' + server.info.uri)
     webSocket.client = IO.client('http://localhost:' + server.info.port)
@@ -82,10 +91,10 @@ server.pack.register([
     if (!module.parent) {
       server.start(function () {
         log.info('Server started at: ' + server.info.uri)
-      // var crono  = require('./scripts/crono')
-      // var reminders = require('./resources/reminder')
-      // reminders(null, function(stuff){})
-      // crono.reminder.start()
+        // var crono  = require('./scripts/crono')
+        // var reminders = require('./resources/reminder')
+        // reminders(null, function(stuff){})
+        // crono.reminder.start()
       })
     }
   }
