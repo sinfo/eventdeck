@@ -26,7 +26,7 @@ config.cookie = {
 config.mailgun = {
   email: process.env.EVENTDECK_MAILGUN_EMAIL || 'email@example.com',
   api: process.env.EVENTDECK_MAILGUN_API || 'YOUR MAILGUN KEY',
-  publicApi: process.env.EVENTDECK_MAILGUN_PUBLIC_API || 'YOUR MAILGUN PUBLIC KEY'
+  domain: process.env.EVENTDECK_MAILGUN_DOMAIN || 'sinfo.org'
 }
 
 config.facebook = {
