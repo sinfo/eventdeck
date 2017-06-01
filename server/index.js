@@ -67,7 +67,7 @@ server.pack.register([
     })
 
     var webSocket = {}
-    webSocket.server = IO.server.listen(server.listener)
+    webSocket.server = IO.server.listen(server.listener, {cookie: false})
     log.info('Websocket server started at: ' + server.info.uri)
     webSocket.client = IO.client('http://localhost:' + server.info.port)
     module.exports.socket = webSocket
