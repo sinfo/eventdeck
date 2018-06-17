@@ -33,3 +33,5 @@ client/css/app.css
 
 public/images
 public/ical/ical.ics
+
+env.sh

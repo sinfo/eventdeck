@@ -1,0 +1,452 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>*|MC:SUBJECT|*</title>
+    <style>
+
+        h1, h2, h3, h4, h5, h6, p {
+            font-family: "Tahoma", Verdana, Segoe, sans-serif;
+            text-align: justify;
+            font-size: 13px;
+            color: #545454;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            line-height: 1.5em;
+        }
+
+        h2{ font-weight: 600; }
+
+        h3{ font-weight: 400; }
+
+        #window > tbody {
+            display: block;
+        }
+
+        #window > tbody > tr {
+            display: block;
+            width: 612px;
+        }
+
+        .box {
+            width: 600px;
+            padding: 0;
+        }
+
+        .block {
+            display: block;
+        }
+
+        #top {
+            background: url('http://static.sinfo.org/SINFO_26/TemplateMail/TemplateMail_Oradores-top.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+
+            width: 610px;
+            height: 194px;
+        }
+
+        #middle {
+            background: url('http://static.sinfo.org/SINFO_26/TemplateMail/TemplateMail_Oradores-middle.png');
+            background-size: contain;
+            background-repeat-x: no-repeat;
+            background-repeat-y: repeat;
+        }
+
+        #middle > td {
+            display: block;
+            width: 100%;
+        }
+
+        #bottom {
+            background: url('http://static.sinfo.org/SINFO_26/TemplateMail/TemplateMail_Oradores-bottom.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+
+            height: 358px;
+        }
+
+        #bottom > td {
+            display: block;
+        }
+
+        #bottom-title {
+            width: 300px;
+        }
+
+        .content {
+            width: 455px;
+            margin-left: 12%;
+            margin-right: 12%;
+        }
+
+        #invite-table tr {
+            vertical-align: middle;
+            width: 450px;
+            background-color: #dddddd;
+        }
+
+        #invite-table {
+            padding: 20px 10px;
+        }
+
+        #invite-table td {
+            padding: 0px 10px;
+        }
+
+        .invite-table-section {
+            vertical-align: middle;
+            width: 450px;
+            background-color: #dddddd;
+        }
+
+        .invite-table-title {
+            width: 90px;
+            margin-top: 15px;
+            text-align: right;
+            padding-right: 10px;
+            font-size: 12px;
+        }
+
+        .invite-table-text {
+            margin-top: 15px;
+            width: 270px;
+            line-height: 1em;
+            padding-left: 10px;
+        }
+
+        #visitButtonWrapper {
+            padding-left: 140px;
+        }
+
+        .innerButton{
+            font-weight: bold;
+            display: inline-block;
+            text-decoration: none;
+            color: #FFFFFF;
+            border-radius: 5px;
+            background-color: #02598C;
+            padding: 18px;
+            white-space: nowrap;
+            font-family: "Tahoma", Verdana, Segoe, sans-serif;
+        }
+
+        .speaker {
+            display: inline-block;
+            width: 110px;
+            padding: initial !important;
+        }
+
+        .speaker td {
+            width: 150px;
+        }
+
+        .speaker tr {
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+
+        .speaker td.img-speaker{
+            padding-left: 12px;
+        }
+
+        .speaker h3,
+        .speaker h2{
+            font-size: 9px;
+            text-align: center;
+            white-space: nowrap;
+            margin: 0;
+        }
+
+        .circular{
+            width: 80px;
+            height: 80px;
+            max-height: 110px;
+            border-radius: 55px;
+            -webkit-border-radius: 55px;
+            -moz-border-radius: 55px;
+          }
+
+          #regards {
+            display: block;
+            margin-top: 5px;
+          }
+
+    </style>
+  </head>
+        <body>
+        <center>
+            <table id="window">
+                <tbody style="display: block;">
+                    <tr id="top" class="block" style="display: block;background: url(http://static.sinfo.org/SINFO_26/TemplateMail/TemplateMail_Oradores-top.png);background-size: cover;background-repeat: no-repeat;width: 612px;height: 194px;">
+                        <td class="box" style="width: 600px;padding: 0;"></td>
+                    </tr>
+                    <tr id="middle" class="block" style="display: block;background: url(http://static.sinfo.org/SINFO_26/TemplateMail/TemplateMail_Oradores-middle.png);background-size: contain;background-repeat-x: no-repeat;background-repeat-y: repeat;width: 612px;">
+                        <td class="box" style="width: 100%;padding: 0;display: block;">
+                            <table id="middle-content" class="content block" style="display: block;width: 455px;margin-left: 12%;margin-right: 12%;">
+                                <tbody class="block" style="display: block;">
+                                    <tr class="block" style="display: block;">
+                                        <td class="box" style="width: 600px;padding: 0;">
+                                            <h2 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: justify;font-size: 13px;color: #545454;line-height: 1.5em;font-weight: 600;">Dear {{speaker}},</h2>
+                                            <h3 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: justify;font-size: 13px;color: #545454;line-height: 1.5em;font-weight: 400;">
+                                                I’m {{member}}, a proud member at SINFO.
+                                                On behalf of the team organizing SINFO we would be pleased
+                                                if you would accept our invitation to speak at our event.
+                                            </h3>
+                                            <h3 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: justify;font-size: 13px;color: #545454;line-height: 1.5em;font-weight: 400;">
+                                                SINFO is on its 26th edition and is an event organized by college students
+                                                who have a passion for technology and innovation.
+                                            </h3>
+                                        </td>
+                                    </tr>
+                                    <tr class="block" style="display: block;">
+                                        <td class="invite-outer box" style="width: 600px;padding: 0;">
+                                            <table id="invite-table" style="padding: 20px 10px;">
+                                                <tbody>
+                                                    <tr class="invite-table-section" style="vertical-align: middle;width: 450px;background-color: #dddddd;">
+                                                        <td style="padding: 0px 10px;">
+                                                            <h2 class="invite-table-title" style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: right;font-size: 12px;color: #545454;line-height: 1.5em;font-weight: 600;width: 90px;margin-top: 15px;padding-right: 10px;">Event Name:</h2>
+                                                        </td>
+                                                        <td style="padding: 0px 10px;">
+                                                            <h3 class="invite-table-text" style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: justify;font-size: 13px;color: #545454;line-height: 1em;font-weight: 400;margin-top: 15px;width: 270px;padding-left: 10px;">26th SINFO</h3>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="invite-table-section" style="vertical-align: middle;width: 450px;background-color: #dddddd;">
+                                                        <td style="padding: 0px 10px;">
+                                                            <h2 class="invite-table-title" style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: right;font-size: 12px;color: #545454;line-height: 1.5em;font-weight: 600;width: 90px;margin-top: 15px;padding-right: 10px;">When:</h2>
+                                                        </td>
+                                                        <td style="padding: 0px 10px;">
+                                                            <h3 class="invite-table-text" style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: justify;font-size: 13px;color: #545454;line-height: 1em;font-weight: 400;margin-top: 15px;width: 270px;padding-left: 10px;">The week from February 18th to 22nd, 2018</h3>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="invite-table-section" style="vertical-align: middle;width: 450px;background-color: #dddddd;">
+                                                        <td style="padding: 0px 10px;">
+                                                            <h2 class="invite-table-title" style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: right;font-size: 12px;color: #545454;line-height: 1.5em;font-weight: 600;width: 90px;margin-top: 15px;padding-right: 10px;">Where:</h2>
+                                                        </td>
+                                                        <td style="padding: 0px 10px;">
+                                                            <h3 class="invite-table-text" style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: justify;font-size: 13px;color: #545454;line-height: 1em;font-weight: 400;margin-top: 15px;width: 270px;padding-left: 10px;">
+                                                                Técnico Lisboa (IST - Alameda Campus)
+                                                            </h3>
+                                                            <h3 class="invite-table-text" style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: justify;font-size: 13px;color: #545454;line-height: 1em;font-weight: 400;margin-top: 15px;width: 270px;padding-left: 10px;">
+                                                                Lisbon, Portugal
+                                                            </h3>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr class="block" style="display: block;">
+                                        <td class="box" style="width: 600px;padding: 0;">
+                                            <h3 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: justify;font-size: 13px;color: #545454;line-height: 1.5em;font-weight: 400;">Even though we're a non-funded university event,
+                                                we're fully prepared to cover all travel and lodging expenses.</h3>
+                                            <h3 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: justify;font-size: 13px;color: #545454;line-height: 1.5em;font-weight: 400;">
+                                                {{paragraph}}
+                                            </h3>
+                                        </td>
+                                    </tr>
+                                    <tr class="block" style="display: block;">
+                                        <td class="box" style="width: 600px;padding: 0;">
+                                            <div id="visitButtonWrapper" style="padding-left: 140px;">
+                                                <a class="innerButton" title="Visit SINFO" href="https://www.sinfo.org/" target="_blank" style="font-weight: bold;display: inline-block;text-decoration: none;color: #FFFFFF;border-radius: 5px;background-color: #02598C;padding: 18px;white-space: nowrap;font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;">Visit our website</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td id="bottom-title" style="width: 300px;">
+                                            <h2 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: justify;font-size: 13px;color: #545454;line-height: 1.5em;font-weight: 600;">Previous Speakers</h2>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr id="bottom" class="block" style="display: block;background: url(http://static.sinfo.org/SINFO_26/TemplateMail/TemplateMail_Oradores-bottom.png);background-size: cover;background-repeat: no-repeat;height: 358px;width: 612px;">
+                        <td class="box" style="width: 600px;padding: 0;display: block;">
+                            <table id="bottom-content" class="content block" style="display: block;width: 455px;margin-left: 12%;margin-right: 12%;">
+                                <tbody class="speakers">
+                                    <tr>
+                                        <td class="speaker" style="display: inline-block;width: 110px;padding: initial !important;">
+                                            <table>
+                                                <tbody>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td class="img-speaker" style="width: 150px;padding-left: 12px;">
+                                                            <a href="https://www.youtube.com/watch?v=w7O_y9PKq8c" target="_blank"><img class="circular" src="http://static.sinfo.org/SINFO_24/TemplateMail/ScottChacon.jpg" style="width: 80px;height: 80px;max-height: 110px;border-radius: 55px;-webkit-border-radius: 55px;-moz-border-radius: 55px;"></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td style="width: 150px;">
+                                                            <h2 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: center;font-size: 9px;color: #545454;line-height: 1.5em;font-weight: 600;white-space: nowrap;margin: 0;">Scott Chacon</h2>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td style="width: 150px;">
+                                                            <h3 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: center;font-size: 9px;color: #545454;line-height: 1.5em;font-weight: 400;white-space: nowrap;margin: 0;">Github</h3>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        <td class="speaker" style="display: inline-block;width: 110px;padding: initial !important;">
+                                            <table>
+                                                <tbody>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td class="img-speaker" style="width: 150px;padding-left: 12px;">
+                                                            <a><img class="circular" src="http://static.sinfo.org/SINFO_26/TemplateMail/gregStreet.jpg" style="width: 80px;height: 80px;max-height: 110px;border-radius: 55px;-webkit-border-radius: 55px;-moz-border-radius: 55px;"></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td style="width: 150px;">
+                                                            <h2 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: center;font-size: 9px;color: #545454;line-height: 1.5em;font-weight: 600;white-space: nowrap;margin: 0;">Greg Street</h2>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td style="width: 150px;">
+                                                            <h3 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: center;font-size: 9px;color: #545454;line-height: 1.5em;font-weight: 400;white-space: nowrap;margin: 0;">Riot Games</h3>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        <td class="speaker" style="display: inline-block;width: 110px;padding: initial !important;">
+                                            <table>
+                                                <tbody>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td class="img-speaker" style="width: 150px;padding-left: 12px;">
+                                                            <a href="https://www.youtube.com/watch?v=MVlsOLvBdw4" target="_blank"><img class="circular" src="http://static.sinfo.org/SINFO_24/TemplateMail/PeterSunde.jpg" style="width: 80px;height: 80px;max-height: 110px;border-radius: 55px;-webkit-border-radius: 55px;-moz-border-radius: 55px;"></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td style="width: 150px;">
+                                                            <h2 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: center;font-size: 9px;color: #545454;line-height: 1.5em;font-weight: 600;white-space: nowrap;margin: 0;">Peter Sunde</h2>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td style="width: 150px;">
+                                                            <h3 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: center;font-size: 9px;color: #545454;line-height: 1.5em;font-weight: 400;white-space: nowrap;margin: 0;">The Pirate Bay</h3>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        <td class="speaker" style="display: inline-block;width: 110px;padding: initial !important;">
+                                            <table>
+                                                <tbody>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td class="img-speaker" style="width: 150px;padding-left: 12px;">
+                                                            <a href="https://www.youtube.com/watch?v=tamF4p04bfk" target="_blank"><img class="circular" src="http://static.sinfo.org/SINFO_24/TemplateMail/joel_spolsky.jpg" style="width: 80px;height: 80px;max-height: 110px;border-radius: 55px;-webkit-border-radius: 55px;-moz-border-radius: 55px;"></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td style="width: 150px;">
+                                                            <h2 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: center;font-size: 9px;color: #545454;line-height: 1.5em;font-weight: 600;white-space: nowrap;margin: 0;">Joel Spolsky</h2>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td style="width: 150px;">
+                                                            <h3 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: center;font-size: 9px;color: #545454;line-height: 1.5em;font-weight: 400;white-space: nowrap;margin: 0;">Stack Overflow, Trello</h3>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="speaker" style="display: inline-block;width: 110px;padding: initial !important;">
+                                            <table>
+                                                <tbody>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td class="img-speaker" style="width: 150px;padding-left: 12px;">
+                                                            <a><img class="circular" src="http://static.sinfo.org/SINFO_24/TemplateMail/richard.jpg" style="width: 80px;height: 80px;max-height: 110px;border-radius: 55px;-webkit-border-radius: 55px;-moz-border-radius: 55px;"></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td style="width: 150px;">
+                                                            <h2 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: center;font-size: 9px;color: #545454;line-height: 1.5em;font-weight: 600;white-space: nowrap;margin: 0;">Richard Stallman</h2>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td style="width: 150px;">
+                                                            <h3 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: center;font-size: 9px;color: #545454;line-height: 1.5em;font-weight: 400;white-space: nowrap;margin: 0;">GNU Project</h3>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        <td class="speaker" style="display: inline-block;width: 110px;padding: initial !important;">
+                                            <table>
+                                                <tbody>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td class="img-speaker" style="width: 150px;padding-left: 12px;">
+                                                            <a href="https://www.youtube.com/watch?v=0iQ2qujuu94" target="_blank"><img class="circular" src="http://static.sinfo.org/SINFO_24/TemplateMail/steve.jpg" style="width: 80px;height: 80px;max-height: 110px;border-radius: 55px;-webkit-border-radius: 55px;-moz-border-radius: 55px;"></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td style="width: 150px;">
+                                                            <h2 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: center;font-size: 9px;color: #545454;line-height: 1.5em;font-weight: 600;white-space: nowrap;margin: 0;">Steve Huffman</h2>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td style="width: 150px;">
+                                                            <h3 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: center;font-size: 9px;color: #545454;line-height: 1.5em;font-weight: 400;white-space: nowrap;margin: 0;">Reddit</h3>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        <td class="speaker" style="display: inline-block;width: 110px;padding: initial !important;">
+                                            <table>
+                                                <tbody>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td class="img-speaker" style="width: 150px;padding-left: 12px;">
+                                                            <a><img class="circular" src="http://static.sinfo.org/SINFO_25/TemplateMail/MichelleRobinson.jpg" style="width: 80px;height: 80px;max-height: 110px;border-radius: 55px;-webkit-border-radius: 55px;-moz-border-radius: 55px;"></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td style="width: 150px;">
+                                                            <h2 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: center;font-size: 9px;color: #545454;line-height: 1.5em;font-weight: 600;white-space: nowrap;margin: 0;">Michelle Robinson</h2>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td style="width: 150px;">
+                                                            <h3 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: center;font-size: 9px;color: #545454;line-height: 1.5em;font-weight: 400;white-space: nowrap;margin: 0;">Walt Disney</h3>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        <td class="speaker" style="display: inline-block;width: 110px;padding: initial !important;">
+                                            <table>
+                                                <tbody>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td class="img-speaker" style="width: 150px;padding-left: 12px;">
+                                                            <a><img class="circular" src="http://static.sinfo.org/SINFO_26/TemplateMail/davidAxmark.jpg" style="width: 80px;height: 80px;max-height: 110px;border-radius: 55px;-webkit-border-radius: 55px;-moz-border-radius: 55px;"></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td style="width: 150px;">
+                                                            <h2 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: center;font-size: 9px;color: #545454;line-height: 1.5em;font-weight: 600;white-space: nowrap;margin: 0;">David Axmark</h2>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="display: block;margin: 0;padding: 0;">
+                                                        <td style="width: 150px;">
+                                                            <h3 style="font-family: &quot;Tahoma&quot;, Verdana, Segoe, sans-serif;text-align: center;font-size: 9px;color: #545454;line-height: 1.5em;font-weight: 400;white-space: nowrap;margin: 0;">MySQL</h3>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </center>
+    </body>
+</html>
