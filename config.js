@@ -75,8 +75,9 @@ config.images = {
 }
 
 config.cors = {
-  origin: ['*'],
-  additionalHeaders: ['Only-Public']
+  origin: ['http://localhost:4200'],// ['*'],
+  additionalHeaders: ['Only-Public'],
+  credentials: true
 }
 
 config.ical = {
