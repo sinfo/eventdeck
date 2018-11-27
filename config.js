@@ -76,8 +76,8 @@ config.images = {
 
 config.cors = {
   origin: process.env.NODE_ENV === 'production'
-    ? ['https://www.sinfo.org', 'https://sinfo.org', 'https://deck.sinfo.org', 'https://cannon.sinfo.org', 'https://corlief.sinfo.org']
-    : ['*']
+    ? ['*sinfo.org']
+    : ['http://localhost:*']
 ,
   additionalHeaders: ['Only-Public'],
   credentials: true
