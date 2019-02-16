@@ -35,6 +35,19 @@ function renderObject (model, isAuthenticated, event) {
   }
 
   if (isAuthenticated === false) {
+    var advertisementLvl = undefined
+
+    if (event) {
+      advertisementLvl = model.participations.filter(function (p) {
+        return p.advertisementLvl && p.status === PUBLIC_STATUS && p.event === event
+      })[0].advertisementLvl
+    } else {
+      var filteredParticipations = model.participations.filter(function (p) {
+        return p.advertisementLvl && p.status === PUBLIC_STATUS
+      })
+      advertisementLvl = filteredParticipations[filteredParticipations.length - 1]
+    }
+
     return {
       id: model.id || '',
       thread: model.thread || '',
@@ -43,9 +56,7 @@ function renderObject (model, isAuthenticated, event) {
       description: model.description || '',
       img: model.img || '',
       updated: model.updated || '',
-      advertisementLvl: model.participations.filter(function (p) {
-        return p.advertisementLvl && p.status === PUBLIC_STATUS && p.event === event
-      })[0].advertisementLvl
+      advertisementLvl: advertisementLvl
     }
   }
 
