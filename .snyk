@@ -1,0 +1,62 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.3
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:debug:20170905':
+    - socket.io > socket.io-adapter > socket.io-parser > debug:
+        patched: '2019-05-03T04:31:38.683Z'
+    - ampersand-io > socket.io-client > debug:
+        patched: '2019-05-03T04:31:38.683Z'
+    - ampersand-io-model > ampersand-io > socket.io-client > debug:
+        patched: '2019-05-03T04:31:38.683Z'
+    - ampersand-io-model > ampersand-io > socket.io-client > engine.io-client > debug:
+        patched: '2019-05-03T04:31:38.683Z'
+    - ampersand-io-collection > ampersand-io > socket.io-client > engine.io-client > debug:
+        patched: '2019-05-03T04:31:38.683Z'
+    - ampersand-io > socket.io-client > socket.io-parser > debug:
+        patched: '2019-05-03T04:31:38.683Z'
+    - ampersand-io-collection > ampersand-io > socket.io-client > debug:
+        patched: '2019-05-03T04:31:38.683Z'
+    - ampersand-io-collection > ampersand-io > socket.io-client > socket.io-parser > debug:
+        patched: '2019-05-03T04:31:38.683Z'
+    - ampersand-io-model > ampersand-io > socket.io-client > socket.io-parser > debug:
+        patched: '2019-05-03T04:31:38.683Z'
+    - ampersand-io > socket.io-client > engine.io-client > debug:
+        patched: '2019-05-03T04:31:38.683Z'
+  'npm:hoek:20180212':
+    - hapi > subtext > content > hoek:
+        patched: '2019-05-03T04:31:38.683Z'
+    - hapi > subtext > pez > content > hoek:
+        patched: '2019-05-03T04:31:38.683Z'
+  'npm:mime:20170907':
+    - stylizer > request > form-data > mime:
+        patched: '2019-05-03T04:31:38.683Z'
+  'npm:ms:20170412':
+    - ampersand-io > socket.io-client > debug > ms:
+        patched: '2019-05-03T04:31:38.683Z'
+    - ampersand-io > socket.io-client > engine.io-client > debug > ms:
+        patched: '2019-05-03T04:31:38.683Z'
+    - ampersand-io-collection > ampersand-io > socket.io-client > debug > ms:
+        patched: '2019-05-03T04:31:38.683Z'
+    - ampersand-io-model > ampersand-io > socket.io-client > debug > ms:
+        patched: '2019-05-03T04:31:38.683Z'
+    - ampersand-io-model > ampersand-io > socket.io-client > engine.io-client > debug > ms:
+        patched: '2019-05-03T04:31:38.683Z'
+    - ampersand-io-collection > ampersand-io > socket.io-client > engine.io-client > debug > ms:
+        patched: '2019-05-03T04:31:38.683Z'
+    - ampersand-io > socket.io-client > socket.io-parser > debug > ms:
+        patched: '2019-05-03T04:31:38.683Z'
+    - socket.io > socket.io-adapter > socket.io-parser > debug > ms:
+        patched: '2019-05-03T04:31:38.683Z'
+    - ampersand-io-collection > ampersand-io > socket.io-client > socket.io-parser > debug > ms:
+        patched: '2019-05-03T04:31:38.683Z'
+    - ampersand-io-model > ampersand-io > socket.io-client > socket.io-parser > debug > ms:
+        patched: '2019-05-03T04:31:38.683Z'
+  'npm:uglify-js:20151024':
+    - templatizer > jade > transformers > uglify-js:
+        patched: '2019-05-03T04:31:38.683Z'
+    - moonboots_hapi > moonboots > browserify > umd > ruglify > uglify-js:
+        patched: '2019-05-03T04:31:38.683Z'
+    - moonboots_hapi > moonboots > browserify > umd > uglify-js:
+        patched: '2019-05-03T04:31:38.683Z'
