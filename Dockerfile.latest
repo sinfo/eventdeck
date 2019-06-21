@@ -1,0 +1,6 @@
+FROM node:0.10
+
+WORKDIR /home/node/app
+COPY . .
+
+ENTRYPOINT [ "node", "server/index.js" ]
