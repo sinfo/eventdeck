@@ -96,8 +96,8 @@
     "slug": "^0.7.1",
     "socket.io": "^1.2.0",
     "socket.io-client": "^1.2.0",
-    "stylizer": "^1.2.0",
-    "templatizer": "^1.5.2",
+    "stylizer": "^2.1.1",
+    "templatizer": "^2.0.6",
     "underscore": "^1.6.0"
   },
   "devDependencies": {
