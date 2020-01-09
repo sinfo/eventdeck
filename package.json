@@ -81,7 +81,7 @@
     "hoek": "^2.9.0",
     "icalendar": "^0.7.1",
     "joi": "^4.9.0",
-    "jquery": "^2.1.1",
+    "jquery": "^3.4.1",
     "lout": "^5.1.2",
     "mailcomposer": "~0.2.12",
     "mailgun-js": "git+https://github.com/sinfo/mailgun-js.git",
