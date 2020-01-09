@@ -132,7 +132,9 @@ function list (query, cb) {
   }
 
   if (eventsFilter.event || eventsFilter.member) {
-    filter.participations = query.participations ? {$elemMatch: eventsFilter} : {$not: {$elemMatch: eventsFilter}}
+    filter.participations = query.participations
+      ? { $elemMatch: eventsFilter }
+      : { $not: {$elemMatch: eventsFilter} }
   }
 
   Company.find(filter, fields, options, function (err, companies) {

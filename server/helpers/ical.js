@@ -10,8 +10,9 @@ var ical = {}
 
 ical.generate = function (cb) {
   var ical = new Icalendar.iCalendar() // eslint-disable-line
+  var today = new Date()
 
-  Session.find({}, gotSessions)
+  Session.find({ date: { $gt: today } }, gotSessions)
 
   function gotSessions (error, sessions) {
     if (error) {

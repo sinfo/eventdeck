@@ -13,7 +13,7 @@ module.exports = function render (content, isAuthenticated, event) {
       })
     }
 
-    return content.map(function (model) { return renderObject(model, isAuthenticated) })
+    return content.map(function (model) { return renderObject(model, isAuthenticated, event) })
   } else {
     // Hack, this shouldn't probably be done here, but as all the related logic is here, let's keep on...
     if (isAuthenticated === false) {
@@ -26,15 +26,28 @@ module.exports = function render (content, isAuthenticated, event) {
     }
   }
 
-  return renderObject(content, isAuthenticated)
+  return renderObject(content, isAuthenticated, event)
 }
 
-function renderObject (model, isAuthenticated) {
+function renderObject (model, isAuthenticated, event) {
   if (model.toObject) {
     model = model.toObject({ getters: true })
   }
 
   if (isAuthenticated === false) {
+    var advertisementLvl = undefined
+
+    if (event) {
+      advertisementLvl = model.participations.filter(function (p) {
+        return p.advertisementLvl && p.status === PUBLIC_STATUS && p.event === event
+      })[0].advertisementLvl
+    } else {
+      var filteredParticipations = model.participations.filter(function (p) {
+        return p.advertisementLvl && p.status === PUBLIC_STATUS
+      })
+      advertisementLvl = filteredParticipations[filteredParticipations.length - 1]
+    }
+
     return {
       id: model.id || '',
       thread: model.thread || '',
@@ -43,7 +56,7 @@ function renderObject (model, isAuthenticated) {
       description: model.description || '',
       img: model.img || '',
       updated: model.updated || '',
-      advertisementLvl: model.participations.filter(function (p) { return p.advertisementLvl && p.status === PUBLIC_STATUS })[0].advertisementLvl
+      advertisementLvl: advertisementLvl
     }
   }
 

@@ -69,7 +69,7 @@ server.pack.register([
     var webSocket = {}
     webSocket.server = IO.server.listen(server.listener, {cookie: false})
     log.info('Websocket server started at: ' + server.info.uri)
-    webSocket.client = IO.client('http://localhost:' + server.info.port)
+    webSocket.client = IO.client('http://0.0.0.0:' + server.info.port)
     module.exports.socket = webSocket
     require('./sockets')
     webSocket.client.emit('init', {data: {id: 'toolbot'}}, function () {
