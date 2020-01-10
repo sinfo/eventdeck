@@ -74,7 +74,7 @@
     "domready": "^1.0.5",
     "emailjs": "~0.3.8",
     "favicon-setter": "^0.1.1",
-    "handlebars": "^2.0.0",
+    "handlebars": "^4.5.3",
     "hapi": "^7.5.3",
     "hapi-auth-cookie": "^1.4.2",
     "hapi-swagger": "^0.4.2",
